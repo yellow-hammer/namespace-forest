@@ -1,0 +1,24 @@
+---
+description: Правки XSD и catalog.xml в namespace-forest
+globs: "**/*.xsd,**/catalog.xml"
+alwaysApply: false
+---
+
+# XSD и catalog
+
+## Согласованность
+
+- Схемы в одной версии каталога (**`schemas/2.20`** или **`schemas/2.21`**) должны оставаться **взаимно ссылочно согласованными** (`import` / `include`, target namespace).
+- Не ломать **относительные пути** и **namespace URI**, от которых зависят JAXB binding в md-sparrow и OASIS **catalog**.
+
+## catalog.xml (OASIS XML Catalog)
+
+- Используется при сборке JAXB для перенаправления системных и публичных идентификаторов. Правки только с пониманием последствий для **XJC** в md-sparrow (`-catalog` в задачах).
+- После изменения catalog — проверить **`./gradlew compileJava`** (или полный build) в **md-sparrow** с актуальным `namespace-forest`.
+
+## Объём правок
+
+- Избегать массового переформатирования XSD без функциональной необходимости — усложняет diff и review.
+- Не подменять содержимое схем «надуманными» упрощениями ради удобства генератора — риск расхождения с платформой.
+
+**Эволюция:** `.cursor/rules/evolution-no-legacy.mdc`.

@@ -1,2 +1,10 @@
 .DS_Store
 Thumbs.db
+
+.cursor/plans/
+
+*.epf
+*.ospx
+oscript_modules/
+
+ConfigDumpInfo.xml
