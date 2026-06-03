@@ -1,3 +1,3 @@
 {
-  "_comment": "Ключ — версия платформы (8.3.XX.YYYY), значение — версия формата выгрузки (каталог schemas/<X>, max FormatVersion из xcf-enums.xsd)"
+  "_comment": "версия платформы → версия формата (каталог schemas/<X>)"
 }

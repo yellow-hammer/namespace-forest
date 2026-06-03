@@ -1,27 +1,20 @@
 name: Обновление XSD-схем платформы 1С
 
-# Извлекает XSD-схемы XDTO платформы 1С и коммитит в schemas/<версия-формата>/.
-# Конвейер: yard get → установка платформы → ibcmd (ИБ + конфигурация src/)
-# → ibsrv + curl /hs/xsd/dump → раскладка по файлам → коммит.
-
 on:
   schedule:
-    # Каждый понедельник в 06:00 UTC
     - cron: '0 6 * * 1'
   workflow_dispatch:
     inputs:
       min_version:
-        # 8.3.14 — версия, в которой появился автономный сервер (ibcmd/ibsrv).
-        # Ниже неё извлечение через ibsrv невозможно.
-        description: 'Нижняя граница версии платформы (минимум 8.3.14 — там появился ibsrv)'
+        description: 'Нижняя граница версии платформы'
         required: false
-        default: '8.3.14'
+        default: '8.3.17'
       only_version:
-        description: 'Обработать только одну версию (для теста), например 8.3.27.2170'
+        description: 'Обработать только одну версию, например 8.3.17.2760'
         required: false
         default: ''
       batch_size:
-        description: 'Максимум версий за прогон (укладка в лимит времени job)'
+        description: 'Максимум версий за прогон'
         required: false
         default: '15'
 
@@ -32,11 +25,7 @@ concurrency:
 jobs:
   update-schemas:
     name: Извлечение XSD-схем
-    # Ubuntu 22.04: на нём есть рантайм-пакеты платформы 1С
-    # (libwebkit2gtk-4.0-37 и др.); на 24.04 часть имён изменилась.
     runs-on: ubuntu-22.04
-    # Чуть ниже лимита GitHub (360 мин), чтобы финальный шаг успел отметить
-    # processed-versions.json до жёсткого завершения раннера.
     timeout-minutes: 340
 
     permissions:
@@ -49,26 +38,19 @@ jobs:
           token: ${{ secrets.GITHUB_TOKEN }}
           fetch-depth: 0
 
-      # ── OneScript (setup-onescript иногда не докачивает дистрибутив —
-      #    при сетевом сбое просто перезапустить workflow вручную) ─────────
       - name: Установить OneScript
         uses: otymko/setup-onescript@v1.5.1
         with:
           version: stable
 
-      # ── yard (получение списка версий и скачивание дистрибутивов с 1С) ──
       - name: Установить yard
         run: |
-          # opm из OneScript stable не знает РазработкаЗависитОт в packagedef
-          # yard — обновляем opm до версии с хаба.
           opm install opm
           opm install yard
-          # opm в ovm-окружении не кладёт launcher на PATH — берём yard.os напрямую.
           YARD_OS=$(find "$HOME/.local/share/ovm" -path '*/yard/src/yard.os' 2>/dev/null | head -1)
           if [ -z "$YARD_OS" ]; then echo "ERROR: yard.os не найден"; exit 1; fi
           echo "YARD_OS=$YARD_OS" >> "$GITHUB_ENV"
 
-      # ── Список версий платформы с releases.1c.ru ────────────────────────
       - name: Получить список версий с releases.1c.ru
         env:
           YARD_RELEASES_USER: ${{ secrets.ONEC_LOGIN }}
@@ -77,39 +59,33 @@ jobs:
           oscript "$YARD_OS" releases list \
             --app-filter "Технологическая платформа 8\.[35]$" \
             --output-file /tmp/yard-versions.json
-          python3 -c "
-          import json
-          for app in json.load(open('/tmp/yard-versions.json')):
-              print(f\"  {app.get('Имя','?')}: {len(app.get('Версии', []))} версий\")
-          "
 
-      # ── Отбор версий: >= min_version и ещё не обработаны ────────────────
       - name: Определить новые версии
         id: versions
         env:
-          MIN_VERSION: ${{ inputs.min_version || '8.3.14' }}
+          MIN_VERSION: ${{ inputs.min_version || '8.3.17' }}
           ONLY_VERSION: ${{ inputs.only_version || '' }}
           BATCH_SIZE: ${{ inputs.batch_size || '15' }}
         run: |
           if [ -n "$ONLY_VERSION" ]; then
-            VERSIONS_JSON="[\"$ONLY_VERSION\"]"
+            echo "$ONLY_VERSION" > /tmp/new-versions.txt
           else
-            VERSIONS_JSON=$(python3 scripts/get-new-versions.py \
-              --yard-json /tmp/yard-versions.json \
-              --processed schemas/processed-versions.json \
-              --min-version "$MIN_VERSION" \
-              --limit "$BATCH_SIZE")
+            YARD_JSON=/tmp/yard-versions.json \
+            PROCESSED=schemas/processed-versions.json \
+            MIN_VERSION="$MIN_VERSION" \
+            LIMIT="$BATCH_SIZE" \
+            OUT_FILE=/tmp/new-versions.txt \
+              oscript scripts/select-versions.os
           fi
-          echo "Новые версии: $VERSIONS_JSON"
-          echo "versions=$VERSIONS_JSON" >> "$GITHUB_OUTPUT"
-          COUNT=$(echo "$VERSIONS_JSON" | python3 -c "import sys,json; print(len(json.load(sys.stdin)))")
-          echo "count=$COUNT" >> "$GITHUB_OUTPUT"
+          VERSIONS=$(tr '\n' ' ' < /tmp/new-versions.txt)
+          echo "Новые версии: $VERSIONS"
+          echo "versions=$VERSIONS" >> "$GITHUB_OUTPUT"
+          echo "count=$(echo $VERSIONS | wc -w)" >> "$GITHUB_OUTPUT"
 
       - name: Пропустить если нет новых версий
         if: steps.versions.outputs.count == '0'
         run: echo "Новых версий не найдено."
 
-      # ── Рантайм-зависимости платформы 1С (из onec-docker client/Dockerfile)
       - name: Установить зависимости платформы 1С
         if: steps.versions.outputs.count != '0'
         run: |
@@ -118,21 +94,15 @@ jobs:
             fontconfig libgsf-1-114 libglib2.0-0 libodbc1 libwebkit2gtk-4.0-37 \
             xvfb unzip curl
 
-      # ── Основной цикл: по каждой версии платформы извлечь XSD ───────────
       - name: Обработать версии платформы
         if: steps.versions.outputs.count != '0'
         env:
-          VERSIONS_JSON: ${{ steps.versions.outputs.versions }}
+          VERSIONS: ${{ steps.versions.outputs.versions }}
           YARD_RELEASES_USER: ${{ secrets.ONEC_LOGIN }}
           YARD_RELEASES_PWD: ${{ secrets.ONEC_PASSWORD }}
         run: |
-          # Без pipefail: ниже активно используются конвейеры с | head/| tail,
-          # где head закрывает пайп и даёт SIGPIPE источнику — с pipefail это
-          # ложно валит шаг. Ошибки обрабатываем явными проверками.
           set -u
           REPO_DIR=$(pwd)
-          PROCESSED_FILE="$REPO_DIR/schemas/processed-versions.json"
-          VERSIONS=$(echo "$VERSIONS_JSON" | python3 -c "import sys,json; [print(v) for v in json.load(sys.stdin)]")
 
           git config user.name  "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
@@ -142,31 +112,33 @@ jobs:
             OUTPUT_DIR=$(mktemp -d); chmod 777 "$OUTPUT_DIR"
             DISTR_DIR=$(mktemp -d);  chmod 777 "$DISTR_DIR"
 
-            # ── Скачивание дистрибутива через yard (releases.1c.ru) ─────────
-            # Ключи get: --path (каталог), --version-filter (regex, точки
-            # экранируем), --distr-filter (по заголовку ссылки), --extract.
-            # Портал изредка отдаёт HTTP 500 — ретраим.
-            # Тянем СЕРВЕРНЫЙ дистрибутив (64-bit, DEB-based): в нём есть
-            # ibcmd/ibsrv и движок. У новых версий внутри setup-full*.run,
-            # у старых (8.3.14–8.3.19) — набор .deb (включая server).
             ESCAPED_VERSION=$(echo "$PLATFORM_VERSION" | sed 's/\./\\./g')
+            DISTR_FILTERS=(
+              "[CС]ервер.+\(64-bit\) для DEB-based Linux-систем"
+              "Технологическая платформа.+\(64-bit\) для Linux"
+            )
+            APP_MAJOR=$(echo "$PLATFORM_VERSION" | cut -d. -f1,2)
             STEP_OK=0
-            for ATTEMPT in 1 2 3 4; do
-              if oscript "$YARD_OS" releases get \
-                --app-filter "Технологическая платформа 8\.[35]$" \
-                --version-filter "$ESCAPED_VERSION" \
-                --distr-filter "Сервер 1С:Предприятия \(64\-bit\) для DEB-based Linux-систем\$|Технологическая платформа 1С:Предприятия \(64\-bit\) для Linux\$" \
-                --path "$DISTR_DIR" --download-limit 1 --extract; then
-                STEP_OK=1; break
-              fi
-              echo "Попытка $ATTEMPT не удалась, пауза 30с…"; sleep 30
+            for DF in "${DISTR_FILTERS[@]}"; do
+              for ATTEMPT in 1 2 3; do
+                if oscript "$YARD_OS" releases get \
+                  --app-filter "Технологическая платформа $APP_MAJOR\$" \
+                  --version-filter "$ESCAPED_VERSION" \
+                  --distr-filter "$DF" \
+                  --path "$DISTR_DIR" --download-limit 1 --extract; then
+                  if find "$DISTR_DIR" -type f \( -name '*.run' -o -name '*.deb' \) | grep -q .; then
+                    STEP_OK=1; break
+                  fi
+                fi
+                echo "Попытка $ATTEMPT (фильтр: $DF) — пусто, пауза 20с…"; sleep 20
+              done
+              [ "$STEP_OK" -eq 1 ] && break
             done
             if [ "$STEP_OK" -ne 1 ]; then
               echo "WARN: дистрибутив $PLATFORM_VERSION не скачан, пропускаем"
               rm -rf "$OUTPUT_DIR" "$DISTR_DIR"; continue
             fi
 
-            # ── Установка платформы: setup-full*.run или набор .deb ────────
             echo "Содержимое дистрибутива:"; find "$DISTR_DIR" -type f \( -name '*.run' -o -name '*.deb' \) | sed "s#$DISTR_DIR/##"
             RUN_INSTALLER=$(find "$DISTR_DIR" -name 'setup-full*.run' | head -1)
             if [ -n "$RUN_INSTALLER" ]; then
@@ -195,13 +167,11 @@ jobs:
               rm -rf "$OUTPUT_DIR" "$DISTR_DIR"; continue
             fi
 
-            # ── Пустая файловая ИБ + наша конфигурация (HTTP-сервис) ───────
             DB_DIR=$(mktemp -d); DATA_DIR=$(mktemp -d)
             "$IBCMD" infobase create --db-path="$DB_DIR" >/dev/null 2>&1 || true
             "$IBCMD" infobase config import --db-path="$DB_DIR" "$REPO_DIR/src" 2>&1 | tail -5 || true
             "$IBCMD" infobase config apply --db-path="$DB_DIR" 2>&1 | tail -5 || true
 
-            # ── Автономный сервер ibsrv ────────────────────────────────────
             PORT=8314
             "$IBSRV" --db-path="$DB_DIR" --data="$DATA_DIR" \
               --port=$PORT --config="$REPO_DIR/src/publication.yaml" \
@@ -212,7 +182,6 @@ jobs:
               sleep 2
             done
 
-            # ── Запрос схем: JSON «имя.xsd → текст» ────────────────────────
             JSON_OUT="$OUTPUT_DIR/schemas.json"
             HTTP_CODE=$(curl -s -o "$JSON_OUT" -w '%{http_code}' \
               "http://127.0.0.1:$PORT/hs/xsd/dump" || echo "000")
@@ -224,15 +193,7 @@ jobs:
               rm -rf "$OUTPUT_DIR" "$DISTR_DIR" "$DB_DIR" "$DATA_DIR"; continue
             fi
 
-            # ── JSON → файлы *.xsd ─────────────────────────────────────────
-            python3 - "$JSON_OUT" "$OUTPUT_DIR" <<'PYEOF'
-          import json, sys, pathlib
-          data = json.load(open(sys.argv[1], encoding="utf-8"))
-          outdir = pathlib.Path(sys.argv[2])
-          for name, content in data.items():
-              (outdir / name).write_text(content, encoding="utf-8")
-          print(f"Записано XSD-файлов: {len(data)}")
-          PYEOF
+            JSON_IN="$JSON_OUT" OUT_DIR="$OUTPUT_DIR" oscript scripts/json-to-files.os
             rm -f "$JSON_OUT"
 
             XSD_COUNT=$(find "$OUTPUT_DIR" -name '*.xsd' | wc -l)
@@ -241,8 +202,6 @@ jobs:
               rm -rf "$OUTPUT_DIR" "$DISTR_DIR" "$DB_DIR" "$DATA_DIR"; continue
             fi
 
-            # ── Версия формата = имя каталога schemas/<X> ──────────────────
-            # X = max значение enum FormatVersion в xcf-enums.xsd.
             ENUMS_XSD=$(find "$OUTPUT_DIR" -name '*xcf-enums.xsd' | head -1)
             SCHEMA_VERSION=$(grep -o '<xs:enumeration value="[0-9.]*"' "$ENUMS_XSD" \
               | grep -o '"[0-9.]*"' | tr -d '"' | sort -V | tail -1)
@@ -256,10 +215,8 @@ jobs:
             cp "$OUTPUT_DIR"/*.xsd "$SCHEMA_DIR/"
             rm -rf "$OUTPUT_DIR" "$DISTR_DIR" "$DB_DIR" "$DATA_DIR"
 
-            # Маппинг платформа→формат для финального processed-versions.json.
             echo "$PLATFORM_VERSION $SCHEMA_VERSION" >> /tmp/processed-map.txt
 
-            # ── Коммит только изменившихся схем ────────────────────────────
             git add "schemas/$SCHEMA_VERSION/"
             if git diff --cached --quiet; then
               echo "Схемы формата $SCHEMA_VERSION не изменились."
@@ -269,8 +226,6 @@ jobs:
             fi
           done
 
-      # ── Финал: обновляем processed-versions.json одним коммитом ──────────
-      # always() — чтобы отметить даже версии, обработанные до падения шага.
       - name: Обновить processed-versions.json и push
         if: always() && steps.versions.outputs.count != '0'
         run: |
@@ -278,20 +233,9 @@ jobs:
           git config user.email "github-actions[bot]@users.noreply.github.com"
 
           if [ -s /tmp/processed-map.txt ]; then
-            python3 - <<'PYEOF'
-          import json, pathlib
-          path = pathlib.Path("schemas/processed-versions.json")
-          data = json.loads(path.read_text(encoding="utf-8")) if path.exists() else {}
-          comment = data.pop("_comment", "Ключ — версия платформы (8.3.XX.YYYY), значение — версия формата выгрузки (каталог schemas/<X>, max FormatVersion из xcf-enums.xsd)")
-          for line in open("/tmp/processed-map.txt", encoding="utf-8"):
-              parts = line.split()
-              if len(parts) == 2:
-                  data[parts[0]] = parts[1]
-          ordered = {"_comment": comment}
-          ordered.update({k: v for k, v in sorted(data.items()) if not k.startswith("_")})
-          path.write_text(json.dumps(ordered, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
-          print(f"processed-versions.json: добавлено/обновлено {len(open('/tmp/processed-map.txt').readlines())} версий")
-          PYEOF
+            MAP_FILE=/tmp/processed-map.txt \
+            PROCESSED=schemas/processed-versions.json \
+              oscript scripts/update-processed.os
             git add schemas/processed-versions.json
             if ! git diff --cached --quiet; then
               git commit -m "chore: обновление processed-versions.json"
