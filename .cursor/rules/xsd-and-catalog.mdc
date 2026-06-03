@@ -8,7 +8,7 @@ alwaysApply: false
 
 ## Согласованность
 
-- Схемы в одной версии каталога (**`schemas/2.20`** или **`schemas/2.21`**) должны оставаться **взаимно ссылочно согласованными** (`import` / `include`, target namespace).
+- Схемы в одной версии каталога (**`schemas/2.10`**) должны оставаться **взаимно ссылочно согласованными** (`import` / `include`, target namespace).
 - Не ломать **относительные пути** и **namespace URI**, от которых зависят JAXB binding в md-sparrow и OASIS **catalog**.
 
 ## catalog.xml (OASIS XML Catalog)
