@@ -48,7 +48,7 @@
 			<xs:enumeration value="InvalidPassword"/>
 			<xs:enumeration value="SignatureVerificationError"/>
 			<xs:enumeration value="ConfigurationError"/>
-			<xs:enumeration value="DatabaseSegmentsError"/>
+			<xs:enumeration value="DatabaseTablespaceError"/>
 			<xs:enumeration value="SpeechProcessingError"/>
 			<xs:enumeration value="ForcedShutdown"/>
 			<xs:enumeration value="OtherError"/>
