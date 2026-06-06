@@ -576,6 +576,7 @@
 			<xs:enumeration value="OSBackup"/>
 			<xs:enumeration value="ApplicationUsageStatistics"/>
 			<xs:enumeration value="BarcodeScanning"/>
+			<xs:enumeration value="AllFilesAccess"/>
 		</xs:restriction>
 	</xs:simpleType>
 	<xs:complexType name="MobileApplicationURL">
@@ -722,6 +723,7 @@
 			<xs:enumeration value="Biometrics"/>
 			<xs:enumeration value="BluetoothPrinters"/>
 			<xs:enumeration value="WiFiPrinters"/>
+			<xs:enumeration value="AllFilesAccess"/>
 		</xs:restriction>
 	</xs:simpleType>
 	<xs:complexType name="RequiredPermission">
