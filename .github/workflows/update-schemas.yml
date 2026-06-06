@@ -93,6 +93,10 @@ jobs:
           sudo DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends \
             fontconfig libgsf-1-114 libglib2.0-0 libodbc1 libwebkit2gtk-4.0-37 \
             xvfb unzip curl
+          LE_BASE=http://archive.ubuntu.com/ubuntu/pool/universe/e/enchant/
+          LE_FILE=$(curl -s "$LE_BASE" | grep -oE 'libenchant1c2a_[^"]*_amd64\.deb' | head -1)
+          curl -sL "$LE_BASE$LE_FILE" -o /tmp/libenchant.deb
+          sudo apt-get install -y /tmp/libenchant.deb
 
       - name: Обработать версии платформы
         if: steps.versions.outputs.count != '0'
@@ -101,7 +105,7 @@ jobs:
           YARD_RELEASES_USER: ${{ secrets.ONEC_LOGIN }}
           YARD_RELEASES_PWD: ${{ secrets.ONEC_PASSWORD }}
         run: |
-          set -u
+          set +e
           REPO_DIR=$(pwd)
 
           git config user.name  "github-actions[bot]"
@@ -113,40 +117,45 @@ jobs:
             DISTR_DIR=$(mktemp -d);  chmod 777 "$DISTR_DIR"
 
             ESCAPED_VERSION=$(echo "$PLATFORM_VERSION" | sed 's/\./\\./g')
-            DISTR_FILTERS=(
-              "[CС]ервер.+\(64-bit\) для DEB-based Linux-систем"
-              "Технологическая платформа.+\(64-bit\) для Linux"
-            )
             APP_MAJOR=$(echo "$PLATFORM_VERSION" | cut -d. -f1,2)
+            DISTR_FILTERS=(
+              "[CС]ервер.+\(64-bit\) для DEB-based Linux-систем$"
+              "Технологическая платформа.+\(64-bit\) для Linux$"
+            )
             STEP_OK=0
-            for DF in "${DISTR_FILTERS[@]}"; do
-              for ATTEMPT in 1 2 3; do
-                if oscript "$YARD_OS" releases get \
+            for ATTEMPT in 1 2 3; do
+              for DF in "${DISTR_FILTERS[@]}"; do
+                timeout 900 oscript "$YARD_OS" releases get \
                   --app-filter "Технологическая платформа $APP_MAJOR\$" \
                   --version-filter "$ESCAPED_VERSION" \
                   --distr-filter "$DF" \
-                  --path "$DISTR_DIR" --download-limit 1 --extract; then
-                  if find "$DISTR_DIR" -type f \( -name '*.run' -o -name '*.deb' \) | grep -q .; then
-                    STEP_OK=1; break
-                  fi
+                  --path "$DISTR_DIR" --download-limit 1 --extract || true
+                if find "$DISTR_DIR" -type f \( -name 'setup-full*.run' -o -name '*.deb' \) | grep -q .; then
+                  STEP_OK=1; break
                 fi
-                echo "Попытка $ATTEMPT (фильтр: $DF) — пусто, пауза 20с…"; sleep 20
               done
               [ "$STEP_OK" -eq 1 ] && break
+              echo "Попытка $ATTEMPT — дистрибутив не получен, пауза 20с…"; sleep 20
             done
             if [ "$STEP_OK" -ne 1 ]; then
               echo "WARN: дистрибутив $PLATFORM_VERSION не скачан, пропускаем"
               rm -rf "$OUTPUT_DIR" "$DISTR_DIR"; continue
             fi
 
+            sudo rm -rf /opt/1cv8 /opt/1C 2>/dev/null || true
+
             echo "Содержимое дистрибутива:"; find "$DISTR_DIR" -type f \( -name '*.run' -o -name '*.deb' \) | sed "s#$DISTR_DIR/##"
             RUN_INSTALLER=$(find "$DISTR_DIR" -name 'setup-full*.run' | head -1)
             if [ -n "$RUN_INSTALLER" ]; then
               echo "Установка через .run: $(basename "$RUN_INSTALLER")"
               chmod +x "$RUN_INSTALLER"
-              xvfb-run -a sudo "$RUN_INSTALLER" --mode unattended \
-                --enable-components server,client_full,v8_install_deps \
-                > /tmp/install.log 2>&1 || { echo "ERROR установки:"; tail -30 /tmp/install.log; }
+              for COMPONENTS in server,client_full,v8_install_deps server,client_full; do
+                if timeout 900 xvfb-run -a sudo "$RUN_INSTALLER" --mode unattended \
+                  --enable-components "$COMPONENTS" > /tmp/install.log 2>&1; then
+                  break
+                fi
+                echo "Набор компонентов [$COMPONENTS] отклонён, пробую следующий…"
+              done
             else
               DEBS=$(find "$DISTR_DIR" -name '*.deb' | sort)
               if [ -z "$DEBS" ]; then
@@ -155,22 +164,26 @@ jobs:
                 rm -rf "$OUTPUT_DIR" "$DISTR_DIR"; continue
               fi
               echo "Установка через .deb ($(echo "$DEBS" | wc -l) пакетов)"
-              sudo dpkg -i $DEBS > /tmp/install.log 2>&1 \
-                || sudo apt-get install -f -y >> /tmp/install.log 2>&1 \
+              timeout 600 sudo dpkg -i $DEBS > /tmp/install.log 2>&1 \
+                || timeout 600 sudo apt-get install -f -y >> /tmp/install.log 2>&1 \
                 || { echo "ERROR установки .deb:"; tail -30 /tmp/install.log; }
             fi
 
-            IBCMD=$(find /opt/1cv8 /opt/1C -name 'ibcmd' -type f 2>/dev/null | head -1)
-            IBSRV=$(find /opt/1cv8 /opt/1C -name 'ibsrv' -type f 2>/dev/null | head -1)
+            IBCMD=$(find /opt/1cv8 /opt/1C -name 'ibcmd' -type f 2>/dev/null | sort -V | tail -1)
+            IBSRV=$(find /opt/1cv8 /opt/1C -name 'ibsrv' -type f 2>/dev/null | sort -V | tail -1)
             if [ -z "$IBCMD" ] || [ -z "$IBSRV" ]; then
               echo "ERROR: ibcmd/ibsrv не найдены после установки $PLATFORM_VERSION"
               rm -rf "$OUTPUT_DIR" "$DISTR_DIR"; continue
             fi
 
             DB_DIR=$(mktemp -d); DATA_DIR=$(mktemp -d)
-            "$IBCMD" infobase create --db-path="$DB_DIR" >/dev/null 2>&1 || true
-            "$IBCMD" infobase config import --db-path="$DB_DIR" "$REPO_DIR/src" 2>&1 | tail -5 || true
-            "$IBCMD" infobase config apply --db-path="$DB_DIR" 2>&1 | tail -5 || true
+            DATA_ARG=""
+            if ! timeout 300 "$IBCMD" infobase create --db-path="$DB_DIR" >/dev/null 2>&1; then
+              DATA_ARG="--data=$DATA_DIR"
+              timeout 300 "$IBCMD" infobase create $DATA_ARG --db-path="$DB_DIR" >/dev/null 2>&1 || true
+            fi
+            timeout 300 "$IBCMD" infobase config import $DATA_ARG --db-path="$DB_DIR" "$REPO_DIR/src" 2>&1 | tail -5 || true
+            timeout 300 "$IBCMD" infobase config apply $DATA_ARG --db-path="$DB_DIR" --force 2>&1 | tail -5 || true
 
             PORT=8314
             "$IBSRV" --db-path="$DB_DIR" --data="$DATA_DIR" \
@@ -183,7 +196,7 @@ jobs:
             done
 
             JSON_OUT="$OUTPUT_DIR/schemas.json"
-            HTTP_CODE=$(curl -s -o "$JSON_OUT" -w '%{http_code}' \
+            HTTP_CODE=$(curl -s -m 120 --connect-timeout 10 -o "$JSON_OUT" -w '%{http_code}' \
               "http://127.0.0.1:$PORT/hs/xsd/dump" || echo "000")
             kill "$IBSRV_PID" 2>/dev/null || true
             echo "HTTP /hs/xsd/dump: $HTTP_CODE ($(wc -c < "$JSON_OUT" 2>/dev/null || echo 0) байт)"
@@ -225,6 +238,7 @@ jobs:
               git push origin main || echo "WARN: push не прошёл, повторим в финале"
             fi
           done
+          exit 0
 
       - name: Обновить processed-versions.json и push
         if: always() && steps.versions.outputs.count != '0'
