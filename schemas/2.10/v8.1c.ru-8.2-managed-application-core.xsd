@@ -68,6 +68,7 @@
 			<xs:element name="objectAgentExtensionFirefox" type="xs:string"/>
 			<xs:element name="objectAgentExtensionIE" type="xs:string"/>
 			<xs:element name="objectAgentExtensionSafari" type="xs:string"/>
+			<xs:element name="credAns4" type="xs:string"/>
 		</xs:sequence>
 		<xs:attribute name="confNotSaved" type="xs:boolean"/>
 		<xs:attribute name="noFontsOnServer" type="xs:boolean"/>
