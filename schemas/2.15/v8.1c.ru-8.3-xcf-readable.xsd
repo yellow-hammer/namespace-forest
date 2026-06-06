@@ -171,9 +171,9 @@
 	</xs:complexType>
 	<xs:complexType name="Picture">
 		<xs:choice>
-			<xs:element name="Ref" type="xs:string"/>
-			<xs:element name="Url" type="xs:string"/>
-			<xs:element name="Abs" type="xs:string"/>
+			<xs:element name="Ref" type="xs:string" minOccurs="0"/>
+			<xs:element name="Url" type="xs:string" minOccurs="0"/>
+			<xs:element name="Abs" type="xs:string" minOccurs="0"/>
 			<xs:element name="LoadTransparent" type="xs:boolean"/>
 			<xs:element name="TransparentPixel" type="tns:Point" minOccurs="0"/>
 			<xs:element name="GlyphPoint" type="tns:Point" minOccurs="0"/>
