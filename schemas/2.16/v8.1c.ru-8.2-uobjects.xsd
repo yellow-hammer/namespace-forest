@@ -148,7 +148,7 @@
 				<xs:attribute name="maxCount" type="xs:decimal" default="0"/>
 				<xs:attribute name="fixed" type="xs:boolean" default="false"/>
 				<xs:attribute name="itemType" type="xs:string" use="required"/>
-				<xs:attribute name="lineNoFieldId" type="ns1:CompositeID" use="required"/>
+				<xs:attribute name="lineNoFieldId" type="ns1:CompositeID"/>
 			</xs:extension>
 		</xs:complexContent>
 	</xs:complexType>
