@@ -264,9 +264,9 @@
 		</xs:simpleContent>
 	</xs:complexType>
 	<xs:complexType name="Fragment">
-		<xs:all>
-			<xs:element name="collection" type="tns:CollectionFragment"/>
-		</xs:all>
+		<xs:choice>
+			<xs:element name="collection" type="tns:CollectionFragment" minOccurs="0"/>
+		</xs:choice>
 	</xs:complexType>
 	<xs:complexType name="Structure">
 		<xs:complexContent>

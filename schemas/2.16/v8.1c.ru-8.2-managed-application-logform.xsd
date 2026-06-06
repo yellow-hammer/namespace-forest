@@ -1078,16 +1078,16 @@
 		</xs:sequence>
 	</xs:complexType>
 	<xs:complexType name="ElementsChangesItem">
-		<xs:all>
+		<xs:choice>
 			<xs:element name="guid" type="ns1:UUID"/>
-			<xs:element name="main" type="tns:MainElement"/>
-			<xs:element name="field" type="tns:Field"/>
-			<xs:element name="group" type="tns:Group"/>
-			<xs:element name="table" type="tns:Table"/>
-			<xs:element name="button" type="tns:Button"/>
-			<xs:element name="decoration" type="tns:Decoration"/>
-			<xs:element name="addition" type="tns:Addition"/>
-		</xs:all>
+			<xs:element name="main" type="tns:MainElement" minOccurs="0"/>
+			<xs:element name="field" type="tns:Field" minOccurs="0"/>
+			<xs:element name="group" type="tns:Group" minOccurs="0"/>
+			<xs:element name="table" type="tns:Table" minOccurs="0"/>
+			<xs:element name="button" type="tns:Button" minOccurs="0"/>
+			<xs:element name="decoration" type="tns:Decoration" minOccurs="0"/>
+			<xs:element name="addition" type="tns:Addition" minOccurs="0"/>
+		</xs:choice>
 		<xs:attribute name="type" type="xs:decimal"/>
 		<xs:attribute name="id" type="xs:decimal"/>
 		<xs:attribute name="name" type="xs:string"/>
@@ -1456,14 +1456,14 @@
 		</xs:sequence>
 	</xs:complexType>
 	<xs:complexType name="LogFormUserAddedElement">
-		<xs:all>
-			<xs:element name="fld" type="tns:Field"/>
-			<xs:element name="gr" type="tns:Group"/>
-			<xs:element name="tbl" type="tns:Table"/>
-			<xs:element name="btn" type="tns:Button"/>
-			<xs:element name="decor" type="tns:Decoration"/>
-			<xs:element name="addition" type="tns:Addition"/>
-		</xs:all>
+		<xs:choice>
+			<xs:element name="fld" type="tns:Field" minOccurs="0"/>
+			<xs:element name="gr" type="tns:Group" minOccurs="0"/>
+			<xs:element name="tbl" type="tns:Table" minOccurs="0"/>
+			<xs:element name="btn" type="tns:Button" minOccurs="0"/>
+			<xs:element name="decor" type="tns:Decoration" minOccurs="0"/>
+			<xs:element name="addition" type="tns:Addition" minOccurs="0"/>
+		</xs:choice>
 		<xs:attribute name="pId" type="xs:decimal"/>
 	</xs:complexType>
 	<xs:complexType name="LogFormUserButtonChange">
@@ -1665,18 +1665,18 @@
 	</xs:complexType>
 	<xs:complexType name="Predefined">
 		<xs:choice>
-			<xs:element name="contextMenu" type="tns:Group"/>
-			<xs:element name="contextMenuRef" type="tns:ItemRef"/>
-			<xs:element name="autoCommandBar" type="tns:Group"/>
-			<xs:element name="autoCommandBarRef" type="tns:ItemRef"/>
-			<xs:element name="extTooltip" type="tns:Decoration"/>
-			<xs:element name="extTooltipRef" type="tns:ItemRef"/>
-			<xs:element name="searchStringRepresentation" type="tns:Addition"/>
-			<xs:element name="searchStringRepresentationRef" type="tns:ItemRef"/>
-			<xs:element name="viewStatusRepresentation" type="tns:Addition"/>
-			<xs:element name="viewStatusRepresentationRef" type="tns:ItemRef"/>
-			<xs:element name="searchControl" type="tns:Addition"/>
-			<xs:element name="searchControlRef" type="tns:ItemRef"/>
+			<xs:element name="contextMenu" type="tns:Group" minOccurs="0"/>
+			<xs:element name="contextMenuRef" type="tns:ItemRef" minOccurs="0"/>
+			<xs:element name="autoCommandBar" type="tns:Group" minOccurs="0"/>
+			<xs:element name="autoCommandBarRef" type="tns:ItemRef" minOccurs="0"/>
+			<xs:element name="extTooltip" type="tns:Decoration" minOccurs="0"/>
+			<xs:element name="extTooltipRef" type="tns:ItemRef" minOccurs="0"/>
+			<xs:element name="searchStringRepresentation" type="tns:Addition" minOccurs="0"/>
+			<xs:element name="searchStringRepresentationRef" type="tns:ItemRef" minOccurs="0"/>
+			<xs:element name="viewStatusRepresentation" type="tns:Addition" minOccurs="0"/>
+			<xs:element name="viewStatusRepresentationRef" type="tns:ItemRef" minOccurs="0"/>
+			<xs:element name="searchControl" type="tns:Addition" minOccurs="0"/>
+			<xs:element name="searchControlRef" type="tns:ItemRef" minOccurs="0"/>
 			<xs:element name="predefined" type="tns:Predefined" minOccurs="0" maxOccurs="unbounded"/>
 			<xs:element name="field" type="tns:Field" minOccurs="0" maxOccurs="unbounded"/>
 			<xs:element name="group" type="tns:Group" minOccurs="0" maxOccurs="unbounded"/>

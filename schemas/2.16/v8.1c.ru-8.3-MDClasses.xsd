@@ -883,8 +883,8 @@
 			<xs:element name="ClientManagedApplication" type="xs:boolean"/>
 			<xs:element name="Server" type="xs:boolean"/>
 			<xs:element name="ExternalConnection" type="xs:boolean"/>
-			<xs:element name="ClientOrdinaryApplication" type="xs:boolean"/>
-			<xs:element name="Client" type="xs:boolean"/>
+			<xs:element name="ClientOrdinaryApplication" type="xs:boolean" minOccurs="0"/>
+			<xs:element name="Client" type="xs:boolean" minOccurs="0"/>
 			<xs:element name="ServerCall" type="xs:boolean"/>
 			<xs:element name="Privileged" type="xs:boolean"/>
 			<xs:element name="ReturnValuesReuse" type="ns7:ReturnValuesReuse"/>
@@ -1015,8 +1015,8 @@
 			<xs:element name="ManagedApplicationModule" type="ns8:ExternalProperty"/>
 			<xs:element name="SessionModule" type="ns8:ExternalProperty"/>
 			<xs:element name="ExternalConnectionModule" type="ns8:ExternalProperty"/>
-			<xs:element name="OrdinaryApplicationModule" type="ns8:ExternalProperty"/>
-			<xs:element name="ApplicationModule" type="ns8:ExternalProperty"/>
+			<xs:element name="OrdinaryApplicationModule" type="ns8:ExternalProperty" minOccurs="0"/>
+			<xs:element name="ApplicationModule" type="ns8:ExternalProperty" minOccurs="0"/>
 			<xs:element name="IncludeHelpInContents" type="xs:boolean"/>
 			<xs:element name="Help" type="ns8:ExternalProperty"/>
 			<xs:element name="UseManagedFormInOrdinaryApplication" type="xs:boolean"/>
@@ -1042,11 +1042,11 @@
 			<xs:element name="RequiredMobileApplicationPermissions" type="ns4:RequiredPermissions"/>
 			<xs:element name="UsedMobileApplicationFunctionalities" type="ns4:UsedFunctionality"/>
 			<xs:element name="MobileApplicationURLs" type="ns1:FixedArray"/>
-			<xs:element name="MobileClientSignature" type="ns8:ExternalProperty"/>
-			<xs:element name="MobileClientSign" type="ns8:ExternalProperty"/>
+			<xs:element name="MobileClientSignature" type="ns8:ExternalProperty" minOccurs="0"/>
+			<xs:element name="MobileClientSign" type="ns8:ExternalProperty" minOccurs="0"/>
 			<xs:element name="CommandInterface" type="ns8:ExternalProperty"/>
-			<xs:element name="HomePageWorkArea" type="ns8:ExternalProperty"/>
-			<xs:element name="StartPageWorkingArea" type="ns8:ExternalProperty"/>
+			<xs:element name="HomePageWorkArea" type="ns8:ExternalProperty" minOccurs="0"/>
+			<xs:element name="StartPageWorkingArea" type="ns8:ExternalProperty" minOccurs="0"/>
 			<xs:element name="MainSectionCommandInterface" type="ns8:ExternalProperty"/>
 			<xs:element name="MainSectionPicture" type="ns8:ExternalProperty"/>
 			<xs:element name="ClientApplicationInterface" type="ns8:ExternalProperty"/>
@@ -1065,12 +1065,12 @@
 			<xs:element name="BinaryDataStorageMode" type="ns7:BinaryDataStorageMode"/>
 			<xs:element name="ObjectAutonumerationMode" type="ns7:ObjectAutonumerationMode"/>
 			<xs:element name="ModalityUseMode" type="ns7:ModalityUseMode"/>
-			<xs:element name="SynchronousPlatformExtensionAndAddInCallUseMode" type="ns7:SynchronousPlatformExtensionAndAddInCallUseMode"/>
-			<xs:element name="SynchronousExtensionAndAddInCallUseMode" type="ns7:SynchronousPlatformExtensionAndAddInCallUseMode"/>
+			<xs:element name="SynchronousPlatformExtensionAndAddInCallUseMode" type="ns7:SynchronousPlatformExtensionAndAddInCallUseMode" minOccurs="0"/>
+			<xs:element name="SynchronousExtensionAndAddInCallUseMode" type="ns7:SynchronousPlatformExtensionAndAddInCallUseMode" minOccurs="0"/>
 			<xs:element name="InterfaceCompatibilityMode" type="ns7:InterfaceCompatibilityMode"/>
 			<xs:element name="CompatibilityMode" type="ns7:CompatibilityMode"/>
-			<xs:element name="DefaultConstantsForm" type="ns8:MDObjectRef"/>
-			<xs:element name="DefaultConstantForm" type="ns8:MDObjectRef"/>
+			<xs:element name="DefaultConstantsForm" type="ns8:MDObjectRef" minOccurs="0"/>
+			<xs:element name="DefaultConstantForm" type="ns8:MDObjectRef" minOccurs="0"/>
 			<xs:element name="StandaloneConfigurationRestrictionRoles" type="ns8:MDListType"/>
 			<xs:element name="DatabaseTablespacesUseMode" type="ns7:DatabaseTablespacesUseMode"/>
 		</xs:choice>
@@ -2082,64 +2082,64 @@
 	<xs:complexType name="MetaDataObject">
 		<xs:complexContent>
 			<xs:extension base="ns8:EntityWithVersion">
-				<xs:all>
-					<xs:element name="AccountingRegister" type="tns:AccountingRegister"/>
-					<xs:element name="AccumulationRegister" type="tns:AccumulationRegister"/>
-					<xs:element name="BusinessProcess" type="tns:BusinessProcess"/>
-					<xs:element name="CalculationRegister" type="tns:CalculationRegister"/>
-					<xs:element name="Catalog" type="tns:Catalog"/>
-					<xs:element name="ChartOfAccounts" type="tns:ChartOfAccounts"/>
-					<xs:element name="ChartOfCalculationTypes" type="tns:ChartOfCalculationTypes"/>
-					<xs:element name="ChartOfCharacteristicTypes" type="tns:ChartOfCharacteristicTypes"/>
-					<xs:element name="CommandGroup" type="tns:CommandGroup"/>
-					<xs:element name="CommonAttribute" type="tns:CommonAttribute"/>
-					<xs:element name="CommonCommand" type="tns:CommonCommand"/>
-					<xs:element name="CommonForm" type="tns:CommonForm"/>
-					<xs:element name="CommonModule" type="tns:CommonModule"/>
-					<xs:element name="CommonPicture" type="tns:CommonPicture"/>
-					<xs:element name="CommonTemplate" type="tns:CommonTemplate"/>
-					<xs:element name="Configuration" type="tns:Configuration"/>
-					<xs:element name="Constant" type="tns:Constant"/>
-					<xs:element name="Cube" type="tns:Cube"/>
-					<xs:element name="DataProcessor" type="tns:DataProcessor"/>
-					<xs:element name="DefinedType" type="tns:DefinedType"/>
-					<xs:element name="DimensionTable" type="tns:DimensionTable"/>
-					<xs:element name="Document" type="tns:Document"/>
-					<xs:element name="DocumentJournal" type="tns:DocumentJournal"/>
-					<xs:element name="DocumentNumerator" type="tns:DocumentNumerator"/>
-					<xs:element name="Enum" type="tns:Enum"/>
-					<xs:element name="EventSubscription" type="tns:EventSubscription"/>
-					<xs:element name="ExchangePlan" type="tns:ExchangePlan"/>
-					<xs:element name="ExternalDataProcessor" type="tns:ExternalDataProcessor"/>
-					<xs:element name="ExternalDataSource" type="tns:ExternalDataSource"/>
-					<xs:element name="ExternalReport" type="tns:ExternalReport"/>
-					<xs:element name="FilterCriterion" type="tns:FilterCriterion"/>
-					<xs:element name="Form" type="tns:Form"/>
-					<xs:element name="FunctionalOption" type="tns:FunctionalOption"/>
-					<xs:element name="FunctionalOptionsParameter" type="tns:FunctionalOptionsParameter"/>
-					<xs:element name="HTTPService" type="tns:HTTPService"/>
-					<xs:element name="InformationRegister" type="tns:InformationRegister"/>
-					<xs:element name="IntegrationService" type="tns:IntegrationService"/>
-					<xs:element name="Interface" type="tns:Interface"/>
-					<xs:element name="Language" type="tns:Language"/>
-					<xs:element name="Recalculation" type="tns:Recalculation"/>
-					<xs:element name="Report" type="tns:Report"/>
-					<xs:element name="Role" type="tns:Role"/>
-					<xs:element name="ScheduledJob" type="tns:ScheduledJob"/>
-					<xs:element name="Sequence" type="tns:Sequence"/>
-					<xs:element name="SessionParameter" type="tns:SessionParameter"/>
-					<xs:element name="SettingsStorage" type="tns:SettingsStorage"/>
-					<xs:element name="Style" type="tns:Style"/>
-					<xs:element name="StyleItem" type="tns:StyleItem"/>
-					<xs:element name="Subsystem" type="tns:Subsystem"/>
-					<xs:element name="Table" type="tns:Table"/>
-					<xs:element name="Task" type="tns:Task"/>
-					<xs:element name="Template" type="tns:Template"/>
-					<xs:element name="WSReference" type="tns:WSReference"/>
-					<xs:element name="WebService" type="tns:WebService"/>
-					<xs:element name="XDTOPackage" type="tns:XDTOPackage"/>
-					<xs:element name="Bot" type="tns:Bot"/>
-				</xs:all>
+				<xs:choice>
+					<xs:element name="AccountingRegister" type="tns:AccountingRegister" minOccurs="0"/>
+					<xs:element name="AccumulationRegister" type="tns:AccumulationRegister" minOccurs="0"/>
+					<xs:element name="BusinessProcess" type="tns:BusinessProcess" minOccurs="0"/>
+					<xs:element name="CalculationRegister" type="tns:CalculationRegister" minOccurs="0"/>
+					<xs:element name="Catalog" type="tns:Catalog" minOccurs="0"/>
+					<xs:element name="ChartOfAccounts" type="tns:ChartOfAccounts" minOccurs="0"/>
+					<xs:element name="ChartOfCalculationTypes" type="tns:ChartOfCalculationTypes" minOccurs="0"/>
+					<xs:element name="ChartOfCharacteristicTypes" type="tns:ChartOfCharacteristicTypes" minOccurs="0"/>
+					<xs:element name="CommandGroup" type="tns:CommandGroup" minOccurs="0"/>
+					<xs:element name="CommonAttribute" type="tns:CommonAttribute" minOccurs="0"/>
+					<xs:element name="CommonCommand" type="tns:CommonCommand" minOccurs="0"/>
+					<xs:element name="CommonForm" type="tns:CommonForm" minOccurs="0"/>
+					<xs:element name="CommonModule" type="tns:CommonModule" minOccurs="0"/>
+					<xs:element name="CommonPicture" type="tns:CommonPicture" minOccurs="0"/>
+					<xs:element name="CommonTemplate" type="tns:CommonTemplate" minOccurs="0"/>
+					<xs:element name="Configuration" type="tns:Configuration" minOccurs="0"/>
+					<xs:element name="Constant" type="tns:Constant" minOccurs="0"/>
+					<xs:element name="Cube" type="tns:Cube" minOccurs="0"/>
+					<xs:element name="DataProcessor" type="tns:DataProcessor" minOccurs="0"/>
+					<xs:element name="DefinedType" type="tns:DefinedType" minOccurs="0"/>
+					<xs:element name="DimensionTable" type="tns:DimensionTable" minOccurs="0"/>
+					<xs:element name="Document" type="tns:Document" minOccurs="0"/>
+					<xs:element name="DocumentJournal" type="tns:DocumentJournal" minOccurs="0"/>
+					<xs:element name="DocumentNumerator" type="tns:DocumentNumerator" minOccurs="0"/>
+					<xs:element name="Enum" type="tns:Enum" minOccurs="0"/>
+					<xs:element name="EventSubscription" type="tns:EventSubscription" minOccurs="0"/>
+					<xs:element name="ExchangePlan" type="tns:ExchangePlan" minOccurs="0"/>
+					<xs:element name="ExternalDataProcessor" type="tns:ExternalDataProcessor" minOccurs="0"/>
+					<xs:element name="ExternalDataSource" type="tns:ExternalDataSource" minOccurs="0"/>
+					<xs:element name="ExternalReport" type="tns:ExternalReport" minOccurs="0"/>
+					<xs:element name="FilterCriterion" type="tns:FilterCriterion" minOccurs="0"/>
+					<xs:element name="Form" type="tns:Form" minOccurs="0"/>
+					<xs:element name="FunctionalOption" type="tns:FunctionalOption" minOccurs="0"/>
+					<xs:element name="FunctionalOptionsParameter" type="tns:FunctionalOptionsParameter" minOccurs="0"/>
+					<xs:element name="HTTPService" type="tns:HTTPService" minOccurs="0"/>
+					<xs:element name="InformationRegister" type="tns:InformationRegister" minOccurs="0"/>
+					<xs:element name="IntegrationService" type="tns:IntegrationService" minOccurs="0"/>
+					<xs:element name="Interface" type="tns:Interface" minOccurs="0"/>
+					<xs:element name="Language" type="tns:Language" minOccurs="0"/>
+					<xs:element name="Recalculation" type="tns:Recalculation" minOccurs="0"/>
+					<xs:element name="Report" type="tns:Report" minOccurs="0"/>
+					<xs:element name="Role" type="tns:Role" minOccurs="0"/>
+					<xs:element name="ScheduledJob" type="tns:ScheduledJob" minOccurs="0"/>
+					<xs:element name="Sequence" type="tns:Sequence" minOccurs="0"/>
+					<xs:element name="SessionParameter" type="tns:SessionParameter" minOccurs="0"/>
+					<xs:element name="SettingsStorage" type="tns:SettingsStorage" minOccurs="0"/>
+					<xs:element name="Style" type="tns:Style" minOccurs="0"/>
+					<xs:element name="StyleItem" type="tns:StyleItem" minOccurs="0"/>
+					<xs:element name="Subsystem" type="tns:Subsystem" minOccurs="0"/>
+					<xs:element name="Table" type="tns:Table" minOccurs="0"/>
+					<xs:element name="Task" type="tns:Task" minOccurs="0"/>
+					<xs:element name="Template" type="tns:Template" minOccurs="0"/>
+					<xs:element name="WSReference" type="tns:WSReference" minOccurs="0"/>
+					<xs:element name="WebService" type="tns:WebService" minOccurs="0"/>
+					<xs:element name="XDTOPackage" type="tns:XDTOPackage" minOccurs="0"/>
+					<xs:element name="Bot" type="tns:Bot" minOccurs="0"/>
+				</xs:choice>
 			</xs:extension>
 		</xs:complexContent>
 	</xs:complexType>

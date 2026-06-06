@@ -744,8 +744,8 @@
 	</xs:complexType>
 	<xs:complexType name="Panel">
 		<xs:choice>
-			<xs:element name="uuid" type="ns1:UUID"/>
-			<xs:element name="name" type="xs:string"/>
+			<xs:element name="uuid" type="ns1:UUID" minOccurs="0"/>
+			<xs:element name="name" type="xs:string" minOccurs="0"/>
 			<xs:element name="height" type="xs:decimal" minOccurs="0"/>
 			<xs:element name="kind" type="tns:SectionPanelRepresentation" minOccurs="0"/>
 		</xs:choice>
@@ -765,10 +765,10 @@
 		<xs:attribute name="id" type="ns1:UUID"/>
 	</xs:complexType>
 	<xs:complexType name="PanelLayouter">
-		<xs:all>
-			<xs:element name="panel" type="tns:Panel"/>
-			<xs:element name="group" type="tns:PanelGroup"/>
-		</xs:all>
+		<xs:choice>
+			<xs:element name="panel" type="tns:Panel" minOccurs="0"/>
+			<xs:element name="group" type="tns:PanelGroup" minOccurs="0"/>
+		</xs:choice>
 	</xs:complexType>
 	<xs:complexType name="RefTypeSet">
 		<xs:complexContent>
