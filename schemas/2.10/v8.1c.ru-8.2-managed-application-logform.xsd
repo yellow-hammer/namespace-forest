@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<xs:schema xmlns:ns1="http://v8.1c.ru/8.2/data/spreadsheet" xmlns:ns2="http://v8.1c.ru/8.1/data/ui" xmlns:ns3="http://v8.1c.ru/8.1/data/core" xmlns:ns4="http://v8.1c.ru/8.1/data/enterprise" xmlns:ns5="http://v8.1c.ru/8.2/managed-application/core" xmlns:ns6="http://v8.1c.ru/8.2/uobjects" xmlns:tns="http://v8.1c.ru/8.2/managed-application/logform" xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="http://v8.1c.ru/8.2/managed-application/logform" attributeFormDefault="unqualified" elementFormDefault="qualified">
-	<xs:import namespace="http://v8.1c.ru/8.2/data/spreadsheet"/>
+<xs:schema xmlns:ns1="http://v8.1c.ru/8.1/data/ui" xmlns:ns2="http://v8.1c.ru/8.1/data/core" xmlns:ns3="http://v8.1c.ru/8.2/data/spreadsheet" xmlns:ns4="http://v8.1c.ru/8.1/data/enterprise" xmlns:ns5="http://v8.1c.ru/8.2/managed-application/core" xmlns:ns6="http://v8.1c.ru/8.2/uobjects" xmlns:tns="http://v8.1c.ru/8.2/managed-application/logform" xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="http://v8.1c.ru/8.2/managed-application/logform" attributeFormDefault="unqualified" elementFormDefault="qualified">
 	<xs:import namespace="http://v8.1c.ru/8.1/data/ui"/>
 	<xs:import namespace="http://v8.1c.ru/8.1/data/core"/>
+	<xs:import namespace="http://v8.1c.ru/8.2/data/spreadsheet"/>
 	<xs:import namespace="http://v8.1c.ru/8.1/data/enterprise"/>
 	<xs:import namespace="http://v8.1c.ru/8.2/managed-application/core"/>
 	<xs:import namespace="http://v8.1c.ru/8.2/uobjects"/>
@@ -99,17 +99,17 @@
 	</xs:simpleType>
 	<xs:complexType name="Button">
 		<xs:sequence>
-			<xs:element name="command" type="ns3:CompositeID"/>
+			<xs:element name="command" type="ns2:CompositeID"/>
 			<xs:element name="commandParam"/>
 			<xs:element name="prop" type="tns:DataPath" minOccurs="0"/>
 			<xs:element name="propName" type="xs:string" minOccurs="0"/>
-			<xs:element name="tdp" type="ns3:TypeDescription" minOccurs="0"/>
-			<xs:element name="bkClr" type="ns2:Color" minOccurs="0"/>
-			<xs:element name="txtClr" type="ns2:Color" minOccurs="0"/>
-			<xs:element name="brdClr" type="ns2:Color" minOccurs="0"/>
-			<xs:element name="fnt" type="ns2:Font" minOccurs="0"/>
-			<xs:element name="stcut" type="ns2:ShortCutType" minOccurs="0"/>
-			<xs:element name="pic" type="ns2:Picture" minOccurs="0"/>
+			<xs:element name="tdp" type="ns2:TypeDescription" minOccurs="0"/>
+			<xs:element name="bkClr" type="ns1:Color" minOccurs="0"/>
+			<xs:element name="txtClr" type="ns1:Color" minOccurs="0"/>
+			<xs:element name="brdClr" type="ns1:Color" minOccurs="0"/>
+			<xs:element name="fnt" type="ns1:Font" minOccurs="0"/>
+			<xs:element name="stcut" type="ns1:ShortCutType" minOccurs="0"/>
+			<xs:element name="pic" type="ns1:Picture" minOccurs="0"/>
 			<xs:element name="title" type="xs:string" minOccurs="0"/>
 			<xs:element name="ricm" type="tns:RepresentationInContextMenu" minOccurs="0"/>
 			<xs:element name="predefined" type="tns:Predefined" minOccurs="0" maxOccurs="unbounded"/>
@@ -189,15 +189,15 @@
 	</xs:simpleType>
 	<xs:complexType name="ButtonsGroupData">
 		<xs:sequence>
-			<xs:element name="cmdGroups" type="ns3:CompositeID"/>
+			<xs:element name="cmdGroups" type="ns2:CompositeID"/>
 			<xs:element name="repres" type="tns:ButtonGroupRepresentation"/>
 		</xs:sequence>
 	</xs:complexType>
 	<xs:complexType name="CalendarFieldData">
 		<xs:sequence>
-			<xs:element name="fnt" type="ns2:Font" minOccurs="0"/>
-			<xs:element name="brdClr" type="ns2:Color" minOccurs="0"/>
-			<xs:element name="brd" type="ns2:Border" minOccurs="0"/>
+			<xs:element name="fnt" type="ns1:Font" minOccurs="0"/>
+			<xs:element name="brdClr" type="ns1:Color" minOccurs="0"/>
+			<xs:element name="brd" type="ns1:Border" minOccurs="0"/>
 			<xs:element name="event" type="tns:Event" minOccurs="0" maxOccurs="unbounded"/>
 		</xs:sequence>
 		<xs:attribute name="width" type="xs:decimal"/>
@@ -238,10 +238,10 @@
 	</xs:complexType>
 	<xs:complexType name="CheckBoxFieldData">
 		<xs:sequence>
-			<xs:element name="brdClr" type="ns2:Color" minOccurs="0"/>
-			<xs:element name="bkClr" type="ns2:Color" minOccurs="0"/>
-			<xs:element name="txtClr" type="ns2:Color" minOccurs="0"/>
-			<xs:element name="fnt" type="ns2:Font" minOccurs="0"/>
+			<xs:element name="brdClr" type="ns1:Color" minOccurs="0"/>
+			<xs:element name="bkClr" type="ns1:Color" minOccurs="0"/>
+			<xs:element name="txtClr" type="ns1:Color" minOccurs="0"/>
+			<xs:element name="fnt" type="ns1:Font" minOccurs="0"/>
 		</xs:sequence>
 		<xs:attribute name="checkBoxType" type="tns:CheckBoxType"/>
 		<xs:attribute name="threeState" type="xs:boolean"/>
@@ -295,11 +295,11 @@
 	</xs:simpleType>
 	<xs:complexType name="ColumnsGroupData">
 		<xs:sequence>
-			<xs:element name="headerPic" type="ns2:Picture" minOccurs="0"/>
-			<xs:element name="titleBkClr" type="ns2:Color" minOccurs="0"/>
+			<xs:element name="headerPic" type="ns1:Picture" minOccurs="0"/>
+			<xs:element name="titleBkClr" type="ns1:Color" minOccurs="0"/>
 			<xs:element name="hdProp" type="tns:DataPath" minOccurs="0"/>
 			<xs:element name="hdPropName" type="xs:string" minOccurs="0"/>
-			<xs:element name="hdTdp" type="ns3:TypeDescription" minOccurs="0"/>
+			<xs:element name="hdTdp" type="ns2:TypeDescription" minOccurs="0"/>
 		</xs:sequence>
 		<xs:attribute name="grouping" type="tns:ColumnsGroup"/>
 		<xs:attribute name="showTitle" type="xs:boolean"/>
@@ -312,7 +312,7 @@
 		<xs:sequence>
 			<xs:element name="handlers" type="tns:EventHandlers" maxOccurs="unbounded"/>
 		</xs:sequence>
-		<xs:attribute name="id" type="ns3:CompositeID"/>
+		<xs:attribute name="id" type="ns2:CompositeID"/>
 		<xs:attribute name="name" type="xs:string"/>
 		<xs:attribute name="modifiesData" type="xs:boolean"/>
 		<xs:attribute name="currentRowUse" type="tns:CurrentRowUse"/>
@@ -320,7 +320,7 @@
 	</xs:complexType>
 	<xs:complexType name="CommandsInclusion">
 		<xs:sequence>
-			<xs:element name="uuid" type="ns3:UUID" maxOccurs="unbounded"/>
+			<xs:element name="uuid" type="ns2:UUID" maxOccurs="unbounded"/>
 		</xs:sequence>
 	</xs:complexType>
 	<xs:complexType name="ContextMenuGroupData">
@@ -335,14 +335,14 @@
 	</xs:simpleType>
 	<xs:complexType name="DataPath">
 		<xs:sequence>
-			<xs:element name="id" type="ns3:CompositeID" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="id" type="ns2:CompositeID" minOccurs="0" maxOccurs="unbounded"/>
 		</xs:sequence>
 	</xs:complexType>
 	<xs:complexType name="Decoration">
 		<xs:choice>
-			<xs:element name="txtClr" type="ns2:Color" minOccurs="0"/>
-			<xs:element name="fnt" type="ns2:Font" minOccurs="0"/>
-			<xs:element name="stcut" type="ns2:ShortCutType" minOccurs="0"/>
+			<xs:element name="txtClr" type="ns1:Color" minOccurs="0"/>
+			<xs:element name="fnt" type="ns1:Font" minOccurs="0"/>
+			<xs:element name="stcut" type="ns1:ShortCutType" minOccurs="0"/>
 			<xs:element name="textData" type="tns:TextDecorationData" minOccurs="0"/>
 			<xs:element name="pictureData" type="tns:PictureDecorationData" minOccurs="0"/>
 			<xs:element name="predefined" type="tns:Predefined" minOccurs="0" maxOccurs="unbounded"/>
@@ -420,7 +420,7 @@
 	</xs:complexType>
 	<xs:complexType name="ElementsChangesItem">
 		<xs:choice>
-			<xs:element name="guid" type="ns3:UUID"/>
+			<xs:element name="guid" type="ns2:UUID"/>
 			<xs:element name="main" type="tns:MainElement" minOccurs="0"/>
 			<xs:element name="field" type="tns:Field" minOccurs="0"/>
 			<xs:element name="group" type="tns:Group" minOccurs="0"/>
@@ -439,7 +439,7 @@
 		<xs:sequence>
 			<xs:element name="handlers" type="tns:EventHandlers" maxOccurs="unbounded"/>
 		</xs:sequence>
-		<xs:attribute name="id" type="ns3:UUID"/>
+		<xs:attribute name="id" type="ns2:UUID"/>
 	</xs:complexType>
 	<xs:complexType name="EventHandler">
 		<xs:attribute name="handlerName" type="xs:string"/>
@@ -480,19 +480,19 @@
 			<xs:element name="geographicalMapData" type="tns:GeographicalMapFieldData" minOccurs="0"/>
 			<xs:element name="prop" type="tns:DataPath" minOccurs="0"/>
 			<xs:element name="propName" type="xs:string" minOccurs="0"/>
-			<xs:element name="tdp" type="ns3:TypeDescription" minOccurs="0"/>
+			<xs:element name="tdp" type="ns2:TypeDescription" minOccurs="0"/>
 			<xs:element name="ftProp" type="tns:DataPath" minOccurs="0"/>
 			<xs:element name="ftPropName" type="xs:string" minOccurs="0"/>
-			<xs:element name="ftTdp" type="ns3:TypeDescription" minOccurs="0"/>
-			<xs:element name="headerPic" type="ns2:Picture" minOccurs="0"/>
-			<xs:element name="footerPic" type="ns2:Picture" minOccurs="0"/>
-			<xs:element name="titleTxtClr" type="ns2:Color" minOccurs="0"/>
-			<xs:element name="titleFnt" type="ns2:Font" minOccurs="0"/>
-			<xs:element name="titleBkClr" type="ns2:Color" minOccurs="0"/>
-			<xs:element name="ftrTxtClr" type="ns2:Color" minOccurs="0"/>
-			<xs:element name="ftrBkClr" type="ns2:Color" minOccurs="0"/>
-			<xs:element name="ftrFnt" type="ns2:Font" minOccurs="0"/>
-			<xs:element name="stcut" type="ns2:ShortCutType" minOccurs="0"/>
+			<xs:element name="ftTdp" type="ns2:TypeDescription" minOccurs="0"/>
+			<xs:element name="headerPic" type="ns1:Picture" minOccurs="0"/>
+			<xs:element name="footerPic" type="ns1:Picture" minOccurs="0"/>
+			<xs:element name="titleTxtClr" type="ns1:Color" minOccurs="0"/>
+			<xs:element name="titleFnt" type="ns1:Font" minOccurs="0"/>
+			<xs:element name="titleBkClr" type="ns1:Color" minOccurs="0"/>
+			<xs:element name="ftrTxtClr" type="ns1:Color" minOccurs="0"/>
+			<xs:element name="ftrBkClr" type="ns1:Color" minOccurs="0"/>
+			<xs:element name="ftrFnt" type="ns1:Font" minOccurs="0"/>
+			<xs:element name="stcut" type="ns1:ShortCutType" minOccurs="0"/>
 			<xs:element name="event" type="tns:Event" minOccurs="0" maxOccurs="unbounded"/>
 			<xs:element name="commands" type="tns:CommandsInclusion"/>
 			<xs:element name="predefined" type="tns:Predefined" minOccurs="0" maxOccurs="unbounded"/>
@@ -540,7 +540,7 @@
 	</xs:simpleType>
 	<xs:complexType name="FlowchartFieldData">
 		<xs:sequence>
-			<xs:element name="brdClr" type="ns2:Color" minOccurs="0"/>
+			<xs:element name="brdClr" type="ns1:Color" minOccurs="0"/>
 			<xs:element name="event" type="tns:Event" minOccurs="0" maxOccurs="unbounded"/>
 		</xs:sequence>
 		<xs:attribute name="width" type="xs:decimal"/>
@@ -552,7 +552,7 @@
 		<xs:attribute name="minWidth" type="xs:decimal"/>
 		<xs:attribute name="autoMaxHeight" type="xs:boolean"/>
 		<xs:attribute name="maxHeight" type="xs:decimal"/>
-		<xs:attribute name="useOutput" type="ns2:UseOutput"/>
+		<xs:attribute name="useOutput" type="ns1:UseOutput"/>
 		<xs:attribute name="edit" type="xs:boolean"/>
 		<xs:attribute name="clearEvents" type="xs:boolean"/>
 	</xs:complexType>
@@ -714,10 +714,10 @@
 	</xs:simpleType>
 	<xs:complexType name="FormattedDocFieldData">
 		<xs:sequence>
-			<xs:element name="txtClr" type="ns2:Color" minOccurs="0"/>
-			<xs:element name="bkClr" type="ns2:Color" minOccurs="0"/>
-			<xs:element name="brdClr" type="ns2:Color" minOccurs="0"/>
-			<xs:element name="fnt" type="ns2:Font" minOccurs="0"/>
+			<xs:element name="txtClr" type="ns1:Color" minOccurs="0"/>
+			<xs:element name="bkClr" type="ns1:Color" minOccurs="0"/>
+			<xs:element name="brdClr" type="ns1:Color" minOccurs="0"/>
+			<xs:element name="fnt" type="ns1:Font" minOccurs="0"/>
 		</xs:sequence>
 		<xs:attribute name="width" type="xs:decimal"/>
 		<xs:attribute name="height" type="xs:decimal"/>
@@ -728,7 +728,7 @@
 		<xs:attribute name="minWidth" type="xs:decimal"/>
 		<xs:attribute name="autoMaxHeight" type="xs:boolean"/>
 		<xs:attribute name="maxHeight" type="xs:decimal"/>
-		<xs:attribute name="useOutput" type="ns2:UseOutput"/>
+		<xs:attribute name="useOutput" type="ns1:UseOutput"/>
 	</xs:complexType>
 	<xs:complexType name="FormattedString">
 		<xs:sequence>
@@ -759,7 +759,7 @@
 	</xs:complexType>
 	<xs:complexType name="GeographicalMapFieldData">
 		<xs:sequence>
-			<xs:element name="brdClr" type="ns2:Color" minOccurs="0"/>
+			<xs:element name="brdClr" type="ns1:Color" minOccurs="0"/>
 			<xs:element name="event" type="tns:Event" minOccurs="0" maxOccurs="unbounded"/>
 		</xs:sequence>
 		<xs:attribute name="width" type="xs:decimal"/>
@@ -771,14 +771,14 @@
 		<xs:attribute name="minWidth" type="xs:decimal"/>
 		<xs:attribute name="autoMaxHeight" type="xs:boolean"/>
 		<xs:attribute name="maxHeight" type="xs:decimal"/>
-		<xs:attribute name="useOutput" type="ns2:UseOutput"/>
+		<xs:attribute name="useOutput" type="ns1:UseOutput"/>
 		<xs:attribute name="clearEvents" type="xs:boolean"/>
 	</xs:complexType>
 	<xs:complexType name="Group">
 		<xs:choice>
-			<xs:element name="titleTxtClr" type="ns2:Color" minOccurs="0"/>
-			<xs:element name="titleFnt" type="ns2:Font" minOccurs="0"/>
-			<xs:element name="stcut" type="ns2:ShortCutType" minOccurs="0"/>
+			<xs:element name="titleTxtClr" type="ns1:Color" minOccurs="0"/>
+			<xs:element name="titleFnt" type="ns1:Font" minOccurs="0"/>
+			<xs:element name="stcut" type="ns1:ShortCutType" minOccurs="0"/>
 			<xs:element name="menuData" type="tns:MenuGroupData" minOccurs="0"/>
 			<xs:element name="autoMenuData" type="tns:AutoMenuGroupData" minOccurs="0"/>
 			<xs:element name="subMenuData" type="tns:SubmenuGroupData" minOccurs="0"/>
@@ -820,7 +820,7 @@
 	</xs:complexType>
 	<xs:complexType name="HTMLFieldData">
 		<xs:sequence>
-			<xs:element name="brdClr" type="ns2:Color" minOccurs="0"/>
+			<xs:element name="brdClr" type="ns1:Color" minOccurs="0"/>
 			<xs:element name="event" type="tns:Event" minOccurs="0" maxOccurs="unbounded"/>
 		</xs:sequence>
 		<xs:attribute name="width" type="xs:decimal"/>
@@ -832,7 +832,7 @@
 		<xs:attribute name="minWidth" type="xs:decimal"/>
 		<xs:attribute name="autoMaxHeight" type="xs:boolean"/>
 		<xs:attribute name="maxHeight" type="xs:decimal"/>
-		<xs:attribute name="useOutput" type="ns2:UseOutput"/>
+		<xs:attribute name="useOutput" type="ns1:UseOutput"/>
 		<xs:attribute name="clearEvents" type="xs:boolean"/>
 	</xs:complexType>
 	<xs:simpleType name="HeightControlVariant">
@@ -844,11 +844,11 @@
 	</xs:simpleType>
 	<xs:complexType name="ImageFieldData">
 		<xs:sequence>
-			<xs:element name="picValues" type="ns2:Picture" minOccurs="0"/>
-			<xs:element name="txtClr" type="ns2:Color" minOccurs="0"/>
-			<xs:element name="brdClr" type="ns2:Color" minOccurs="0"/>
-			<xs:element name="fnt" type="ns2:Font" minOccurs="0"/>
-			<xs:element name="brd" type="ns2:Border" minOccurs="0"/>
+			<xs:element name="picValues" type="ns1:Picture" minOccurs="0"/>
+			<xs:element name="txtClr" type="ns1:Color" minOccurs="0"/>
+			<xs:element name="brdClr" type="ns1:Color" minOccurs="0"/>
+			<xs:element name="fnt" type="ns1:Font" minOccurs="0"/>
+			<xs:element name="brd" type="ns1:Border" minOccurs="0"/>
 			<xs:element name="event" type="tns:Event" minOccurs="0" maxOccurs="unbounded"/>
 		</xs:sequence>
 		<xs:attribute name="width" type="xs:decimal"/>
@@ -881,16 +881,16 @@
 			<xs:element name="event" type="tns:Event" minOccurs="0" maxOccurs="unbounded"/>
 			<xs:element name="minVal"/>
 			<xs:element name="maxVal"/>
-			<xs:element name="choiceBtnPic" type="ns2:Picture" minOccurs="0"/>
-			<xs:element name="choiceFormId" type="ns3:UUID"/>
+			<xs:element name="choiceBtnPic" type="ns1:Picture" minOccurs="0"/>
+			<xs:element name="choiceFormId" type="ns2:UUID"/>
 			<xs:element name="choiceParamLinks" type="ns5:ChoiceParameterLinks" minOccurs="0"/>
 			<xs:element name="choiceParams" type="ns5:ChoiceParameters" minOccurs="0"/>
-			<xs:element name="avlTypes" type="ns3:TypeDescription" minOccurs="0"/>
-			<xs:element name="valList" type="ns3:ValueListType"/>
-			<xs:element name="txtClr" type="ns2:Color" minOccurs="0"/>
-			<xs:element name="bkClr" type="ns2:Color" minOccurs="0"/>
-			<xs:element name="brdClr" type="ns2:Color" minOccurs="0"/>
-			<xs:element name="fnt" type="ns2:Font" minOccurs="0"/>
+			<xs:element name="avlTypes" type="ns2:TypeDescription" minOccurs="0"/>
+			<xs:element name="valList" type="ns2:ValueListType"/>
+			<xs:element name="txtClr" type="ns1:Color" minOccurs="0"/>
+			<xs:element name="bkClr" type="ns1:Color" minOccurs="0"/>
+			<xs:element name="brdClr" type="ns1:Color" minOccurs="0"/>
+			<xs:element name="fnt" type="ns1:Font" minOccurs="0"/>
 			<xs:element name="linkByType" type="ns5:TypeLink" minOccurs="0"/>
 		</xs:sequence>
 		<xs:attribute name="width" type="xs:decimal"/>
@@ -964,7 +964,7 @@
 	</xs:simpleType>
 	<xs:complexType name="LFEDataPathRuntimeValue">
 		<xs:sequence>
-			<xs:element name="dataPath" type="ns3:CompositeID" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="dataPath" type="ns2:CompositeID" minOccurs="0" maxOccurs="unbounded"/>
 			<xs:element name="stringDataPath" type="xs:string" minOccurs="0"/>
 		</xs:sequence>
 	</xs:complexType>
@@ -1044,7 +1044,7 @@
 	</xs:complexType>
 	<xs:complexType name="MainElement">
 		<xs:choice>
-			<xs:element name="storage" type="ns3:UUID" minOccurs="0"/>
+			<xs:element name="storage" type="ns2:UUID" minOccurs="0"/>
 			<xs:element name="addProps" type="tns:AddProps" minOccurs="0"/>
 			<xs:element name="event" type="tns:Event" minOccurs="0" maxOccurs="unbounded"/>
 			<xs:element name="commands" type="tns:CommandsInclusion"/>
@@ -1058,7 +1058,7 @@
 			<xs:element name="addition" type="tns:Addition" minOccurs="0" maxOccurs="unbounded"/>
 			<xs:element name="title" type="xs:string" minOccurs="0"/>
 			<xs:element name="formURL" type="xs:string" minOccurs="0"/>
-			<xs:element name="mdcbc" type="ns3:ValueListType"/>
+			<xs:element name="mdcbc" type="ns2:ValueListType"/>
 		</xs:choice>
 		<xs:attribute name="showCloseButton" type="xs:boolean"/>
 		<xs:attribute name="showTitle" type="xs:boolean"/>
@@ -1163,7 +1163,7 @@
 	</xs:simpleType>
 	<xs:complexType name="MenuGroupData">
 		<xs:sequence>
-			<xs:element name="cmdGroups" type="ns3:CompositeID"/>
+			<xs:element name="cmdGroups" type="ns2:CompositeID"/>
 		</xs:sequence>
 		<xs:attribute name="hAlign" type="tns:ItemHorizontalAlignment"/>
 	</xs:complexType>
@@ -1189,11 +1189,11 @@
 	</xs:simpleType>
 	<xs:complexType name="PageGroupData">
 		<xs:sequence>
-			<xs:element name="pic" type="ns2:Picture" minOccurs="0"/>
+			<xs:element name="pic" type="ns1:Picture" minOccurs="0"/>
 			<xs:element name="prop" type="tns:DataPath" minOccurs="0"/>
 			<xs:element name="propName" type="xs:string" minOccurs="0"/>
-			<xs:element name="tdp" type="ns3:TypeDescription" minOccurs="0"/>
-			<xs:element name="bkClr" type="ns2:Color" minOccurs="0"/>
+			<xs:element name="tdp" type="ns2:TypeDescription" minOccurs="0"/>
+			<xs:element name="bkClr" type="ns1:Color" minOccurs="0"/>
 		</xs:sequence>
 		<xs:attribute name="grouping" type="tns:FormChildrenGroup"/>
 		<xs:attribute name="align" type="tns:FormChildrenAlign"/>
@@ -1217,9 +1217,9 @@
 	</xs:complexType>
 	<xs:complexType name="PeriodFieldData">
 		<xs:sequence>
-			<xs:element name="fnt" type="ns2:Font" minOccurs="0"/>
-			<xs:element name="brdClr" type="ns2:Color" minOccurs="0"/>
-			<xs:element name="brd" type="ns2:Border" minOccurs="0"/>
+			<xs:element name="fnt" type="ns1:Font" minOccurs="0"/>
+			<xs:element name="brdClr" type="ns1:Color" minOccurs="0"/>
+			<xs:element name="brd" type="ns1:Border" minOccurs="0"/>
 			<xs:element name="event" type="tns:Event" minOccurs="0" maxOccurs="unbounded"/>
 		</xs:sequence>
 		<xs:attribute name="width" type="xs:decimal"/>
@@ -1235,9 +1235,9 @@
 	</xs:complexType>
 	<xs:complexType name="PictureDecorationData">
 		<xs:sequence>
-			<xs:element name="pic" type="ns2:Picture" minOccurs="0"/>
-			<xs:element name="brdClr" type="ns2:Color" minOccurs="0"/>
-			<xs:element name="brd" type="ns2:Border" minOccurs="0"/>
+			<xs:element name="pic" type="ns1:Picture" minOccurs="0"/>
+			<xs:element name="brdClr" type="ns1:Color" minOccurs="0"/>
+			<xs:element name="brd" type="ns1:Border" minOccurs="0"/>
 			<xs:element name="event" type="tns:Event" minOccurs="0" maxOccurs="unbounded"/>
 		</xs:sequence>
 		<xs:attribute name="hyper" type="xs:boolean"/>
@@ -1305,7 +1305,7 @@
 	</xs:complexType>
 	<xs:complexType name="ProgressBarFieldData">
 		<xs:sequence>
-			<xs:element name="brdClr" type="ns2:Color" minOccurs="0"/>
+			<xs:element name="brdClr" type="ns1:Color" minOccurs="0"/>
 		</xs:sequence>
 		<xs:attribute name="width" type="xs:decimal"/>
 		<xs:attribute name="height" type="xs:decimal"/>
@@ -1326,7 +1326,7 @@
 		<xs:sequence>
 			<xs:element name="savingContent" type="tns:DataPath" minOccurs="0" maxOccurs="unbounded"/>
 		</xs:sequence>
-		<xs:attribute name="id" type="ns3:CompositeID"/>
+		<xs:attribute name="id" type="ns2:CompositeID"/>
 		<xs:attribute name="main" type="xs:boolean"/>
 		<xs:attribute name="storedData" type="xs:boolean"/>
 	</xs:complexType>
@@ -1339,11 +1339,11 @@
 	</xs:simpleType>
 	<xs:complexType name="RadioButtonsData">
 		<xs:sequence>
-			<xs:element name="valList" type="ns3:ValueListType"/>
-			<xs:element name="txtClr" type="ns2:Color" minOccurs="0"/>
-			<xs:element name="fnt" type="ns2:Font" minOccurs="0"/>
-			<xs:element name="brdClr" type="ns2:Color" minOccurs="0"/>
-			<xs:element name="bkClr" type="ns2:Color" minOccurs="0"/>
+			<xs:element name="valList" type="ns2:ValueListType"/>
+			<xs:element name="txtClr" type="ns1:Color" minOccurs="0"/>
+			<xs:element name="fnt" type="ns1:Font" minOccurs="0"/>
+			<xs:element name="brdClr" type="ns1:Color" minOccurs="0"/>
+			<xs:element name="bkClr" type="ns1:Color" minOccurs="0"/>
 		</xs:sequence>
 		<xs:attribute name="radioButtonType" type="tns:RadioButtonType"/>
 		<xs:attribute name="colsCount" type="xs:decimal"/>
@@ -1383,10 +1383,10 @@
 	</xs:simpleType>
 	<xs:complexType name="SearchControlData">
 		<xs:sequence>
-			<xs:element name="bkClr" type="ns2:Color" minOccurs="0"/>
-			<xs:element name="txtClr" type="ns2:Color" minOccurs="0"/>
-			<xs:element name="brdClr" type="ns2:Color" minOccurs="0"/>
-			<xs:element name="fnt" type="ns2:Font" minOccurs="0"/>
+			<xs:element name="bkClr" type="ns1:Color" minOccurs="0"/>
+			<xs:element name="txtClr" type="ns1:Color" minOccurs="0"/>
+			<xs:element name="brdClr" type="ns1:Color" minOccurs="0"/>
+			<xs:element name="fnt" type="ns1:Font" minOccurs="0"/>
 			<xs:element name="event" type="tns:Event" minOccurs="0" maxOccurs="unbounded"/>
 		</xs:sequence>
 		<xs:attribute name="width" type="xs:decimal"/>
@@ -1411,10 +1411,10 @@
 	</xs:simpleType>
 	<xs:complexType name="SearchStringData">
 		<xs:sequence>
-			<xs:element name="bkClr" type="ns2:Color" minOccurs="0"/>
-			<xs:element name="txtClr" type="ns2:Color" minOccurs="0"/>
-			<xs:element name="brdClr" type="ns2:Color" minOccurs="0"/>
-			<xs:element name="fnt" type="ns2:Font" minOccurs="0"/>
+			<xs:element name="bkClr" type="ns1:Color" minOccurs="0"/>
+			<xs:element name="txtClr" type="ns1:Color" minOccurs="0"/>
+			<xs:element name="brdClr" type="ns1:Color" minOccurs="0"/>
+			<xs:element name="fnt" type="ns1:Font" minOccurs="0"/>
 			<xs:element name="event" type="tns:Event" minOccurs="0" maxOccurs="unbounded"/>
 		</xs:sequence>
 		<xs:attribute name="width" type="xs:decimal"/>
@@ -1472,7 +1472,7 @@
 	</xs:simpleType>
 	<xs:complexType name="SpreadsheetFieldData">
 		<xs:sequence>
-			<xs:element name="brdClr" type="ns2:Color" minOccurs="0"/>
+			<xs:element name="brdClr" type="ns1:Color" minOccurs="0"/>
 			<xs:element name="event" type="tns:Event" minOccurs="0" maxOccurs="unbounded"/>
 		</xs:sequence>
 		<xs:attribute name="width" type="xs:decimal"/>
@@ -1491,7 +1491,7 @@
 		<xs:attribute name="blackAndWhite" type="xs:boolean"/>
 		<xs:attribute name="protection" type="xs:boolean"/>
 		<xs:attribute name="selectionMode" type="tns:SelectionShowMode"/>
-		<xs:attribute name="useOutput" type="ns2:UseOutput"/>
+		<xs:attribute name="useOutput" type="ns1:UseOutput"/>
 		<xs:attribute name="edit" type="xs:boolean"/>
 		<xs:attribute name="showGroups" type="xs:boolean"/>
 		<xs:attribute name="startDrag" type="xs:boolean"/>
@@ -1501,15 +1501,15 @@
 		<xs:attribute name="viewScalingMode" type="tns:ViewScalingMode"/>
 		<xs:attribute name="showCellNames" type="xs:boolean"/>
 		<xs:attribute name="showRowAndColumnNames" type="xs:boolean"/>
-		<xs:attribute name="pointerType" type="ns1:SpreadsheetDocumentPointerType"/>
+		<xs:attribute name="pointerType" type="ns3:SpreadsheetDocumentPointerType"/>
 		<xs:attribute name="drawingSelectionMode" type="tns:DrawingSelectionShowMode"/>
 	</xs:complexType>
 	<xs:complexType name="SubmenuGroupData">
 		<xs:sequence>
-			<xs:element name="pic" type="ns2:Picture" minOccurs="0"/>
-			<xs:element name="cmdGroups" type="ns3:CompositeID"/>
-			<xs:element name="bkClr" type="ns2:Color" minOccurs="0"/>
-			<xs:element name="brdClr" type="ns2:Color" minOccurs="0"/>
+			<xs:element name="pic" type="ns1:Picture" minOccurs="0"/>
+			<xs:element name="cmdGroups" type="ns2:CompositeID"/>
+			<xs:element name="bkClr" type="ns1:Color" minOccurs="0"/>
+			<xs:element name="brdClr" type="ns1:Color" minOccurs="0"/>
 		</xs:sequence>
 		<xs:attribute name="repres" type="tns:ButtonRepresentation"/>
 		<xs:attribute name="shape" type="tns:ButtonShape"/>
@@ -1519,17 +1519,17 @@
 		<xs:choice>
 			<xs:element name="prop" type="tns:DataPath" minOccurs="0"/>
 			<xs:element name="propName" type="xs:string" minOccurs="0"/>
-			<xs:element name="tdp" type="ns3:TypeDescription" minOccurs="0"/>
+			<xs:element name="tdp" type="ns2:TypeDescription" minOccurs="0"/>
 			<xs:element name="rowsPicProp" type="tns:DataPath" minOccurs="0"/>
 			<xs:element name="rowsPicPropName" type="xs:string" minOccurs="0"/>
-			<xs:element name="rowsPic" type="ns2:Picture" minOccurs="0"/>
-			<xs:element name="bkClr" type="ns2:Color" minOccurs="0"/>
-			<xs:element name="txtClr" type="ns2:Color" minOccurs="0"/>
-			<xs:element name="brdClr" type="ns2:Color" minOccurs="0"/>
-			<xs:element name="fnt" type="ns2:Font" minOccurs="0"/>
-			<xs:element name="titleTxtClr" type="ns2:Color" minOccurs="0"/>
-			<xs:element name="titleFnt" type="ns2:Font" minOccurs="0"/>
-			<xs:element name="stcut" type="ns2:ShortCutType" minOccurs="0"/>
+			<xs:element name="rowsPic" type="ns1:Picture" minOccurs="0"/>
+			<xs:element name="bkClr" type="ns1:Color" minOccurs="0"/>
+			<xs:element name="txtClr" type="ns1:Color" minOccurs="0"/>
+			<xs:element name="brdClr" type="ns1:Color" minOccurs="0"/>
+			<xs:element name="fnt" type="ns1:Font" minOccurs="0"/>
+			<xs:element name="titleTxtClr" type="ns1:Color" minOccurs="0"/>
+			<xs:element name="titleFnt" type="ns1:Font" minOccurs="0"/>
+			<xs:element name="stcut" type="ns1:ShortCutType" minOccurs="0"/>
 			<xs:element name="addProps" type="tns:AddProps" minOccurs="0"/>
 			<xs:element name="event" type="tns:Event" minOccurs="0" maxOccurs="unbounded"/>
 			<xs:element name="commands" type="tns:CommandsInclusion"/>
@@ -1588,7 +1588,7 @@
 		<xs:attribute name="searchOnInput" type="tns:SearchOnInput"/>
 		<xs:attribute name="initListView" type="tns:TableInitialListView"/>
 		<xs:attribute name="initTreeView" type="tns:TableInitialTreeView"/>
-		<xs:attribute name="useOutput" type="ns2:UseOutput"/>
+		<xs:attribute name="useOutput" type="ns1:UseOutput"/>
 		<xs:attribute name="horStretch" type="xs:boolean"/>
 		<xs:attribute name="verStretch" type="xs:boolean"/>
 		<xs:attribute name="startDrag" type="xs:boolean"/>
@@ -1687,9 +1687,9 @@
 	</xs:simpleType>
 	<xs:complexType name="TextDecorationData">
 		<xs:sequence>
-			<xs:element name="bkClr" type="ns2:Color" minOccurs="0"/>
-			<xs:element name="brdClr" type="ns2:Color" minOccurs="0"/>
-			<xs:element name="brd" type="ns2:Border" minOccurs="0"/>
+			<xs:element name="bkClr" type="ns1:Color" minOccurs="0"/>
+			<xs:element name="brdClr" type="ns1:Color" minOccurs="0"/>
+			<xs:element name="brd" type="ns1:Border" minOccurs="0"/>
 			<xs:element name="event" type="tns:Event" minOccurs="0" maxOccurs="unbounded"/>
 		</xs:sequence>
 		<xs:attribute name="hyper" type="xs:boolean"/>
@@ -1700,10 +1700,10 @@
 	</xs:complexType>
 	<xs:complexType name="TextDocFieldData">
 		<xs:sequence>
-			<xs:element name="txtClr" type="ns2:Color" minOccurs="0"/>
-			<xs:element name="bkClr" type="ns2:Color" minOccurs="0"/>
-			<xs:element name="brdClr" type="ns2:Color" minOccurs="0"/>
-			<xs:element name="fnt" type="ns2:Font" minOccurs="0"/>
+			<xs:element name="txtClr" type="ns1:Color" minOccurs="0"/>
+			<xs:element name="bkClr" type="ns1:Color" minOccurs="0"/>
+			<xs:element name="brdClr" type="ns1:Color" minOccurs="0"/>
+			<xs:element name="fnt" type="ns1:Font" minOccurs="0"/>
 			<xs:element name="event" type="tns:Event" minOccurs="0" maxOccurs="unbounded"/>
 		</xs:sequence>
 		<xs:attribute name="width" type="xs:decimal"/>
@@ -1715,16 +1715,16 @@
 		<xs:attribute name="minWidth" type="xs:decimal"/>
 		<xs:attribute name="autoMaxHeight" type="xs:boolean"/>
 		<xs:attribute name="maxHeight" type="xs:decimal"/>
-		<xs:attribute name="useOutput" type="ns2:UseOutput"/>
+		<xs:attribute name="useOutput" type="ns1:UseOutput"/>
 		<xs:attribute name="clearEvents" type="xs:boolean"/>
 	</xs:complexType>
 	<xs:complexType name="TextFieldData">
 		<xs:sequence>
-			<xs:element name="txtClr" type="ns2:Color" minOccurs="0"/>
-			<xs:element name="bkClr" type="ns2:Color" minOccurs="0"/>
-			<xs:element name="brdClr" type="ns2:Color" minOccurs="0"/>
-			<xs:element name="brd" type="ns2:Border" minOccurs="0"/>
-			<xs:element name="fnt" type="ns2:Font" minOccurs="0"/>
+			<xs:element name="txtClr" type="ns1:Color" minOccurs="0"/>
+			<xs:element name="bkClr" type="ns1:Color" minOccurs="0"/>
+			<xs:element name="brdClr" type="ns1:Color" minOccurs="0"/>
+			<xs:element name="brd" type="ns1:Border" minOccurs="0"/>
+			<xs:element name="fnt" type="ns1:Font" minOccurs="0"/>
 			<xs:element name="event" type="tns:Event" minOccurs="0" maxOccurs="unbounded"/>
 		</xs:sequence>
 		<xs:attribute name="width" type="xs:decimal"/>
@@ -1757,7 +1757,7 @@
 	</xs:simpleType>
 	<xs:complexType name="TrackBarFieldData">
 		<xs:sequence>
-			<xs:element name="brdClr" type="ns2:Color" minOccurs="0"/>
+			<xs:element name="brdClr" type="ns1:Color" minOccurs="0"/>
 		</xs:sequence>
 		<xs:attribute name="width" type="xs:decimal"/>
 		<xs:attribute name="height" type="xs:decimal"/>
@@ -1799,9 +1799,9 @@
 		<xs:sequence>
 			<xs:element name="prop" type="tns:DataPath" minOccurs="0"/>
 			<xs:element name="propName" type="xs:string" minOccurs="0"/>
-			<xs:element name="tdp" type="ns3:TypeDescription" minOccurs="0"/>
-			<xs:element name="bkClr" type="ns2:Color" minOccurs="0"/>
-			<xs:element name="hiddenStateTitleBkClr" type="ns2:Color" minOccurs="0"/>
+			<xs:element name="tdp" type="ns2:TypeDescription" minOccurs="0"/>
+			<xs:element name="bkClr" type="ns1:Color" minOccurs="0"/>
+			<xs:element name="hiddenStateTitleBkClr" type="ns1:Color" minOccurs="0"/>
 		</xs:sequence>
 		<xs:attribute name="grouping" type="tns:FormChildrenGroup"/>
 		<xs:attribute name="align" type="tns:FormChildrenAlign"/>
@@ -1857,14 +1857,14 @@
 	</xs:simpleType>
 	<xs:complexType name="ViewStatusData">
 		<xs:sequence>
-			<xs:element name="bkClr" type="ns2:Color" minOccurs="0"/>
-			<xs:element name="btnClr" type="ns2:Color" minOccurs="0"/>
-			<xs:element name="txtClr" type="ns2:Color" minOccurs="0"/>
-			<xs:element name="titleTxtClr" type="ns2:Color" minOccurs="0"/>
-			<xs:element name="brdClr" type="ns2:Color" minOccurs="0"/>
-			<xs:element name="fnt" type="ns2:Font" minOccurs="0"/>
-			<xs:element name="titleFnt" type="ns2:Font" minOccurs="0"/>
-			<xs:element name="brd" type="ns2:Border" minOccurs="0"/>
+			<xs:element name="bkClr" type="ns1:Color" minOccurs="0"/>
+			<xs:element name="btnClr" type="ns1:Color" minOccurs="0"/>
+			<xs:element name="txtClr" type="ns1:Color" minOccurs="0"/>
+			<xs:element name="titleTxtClr" type="ns1:Color" minOccurs="0"/>
+			<xs:element name="brdClr" type="ns1:Color" minOccurs="0"/>
+			<xs:element name="fnt" type="ns1:Font" minOccurs="0"/>
+			<xs:element name="titleFnt" type="ns1:Font" minOccurs="0"/>
+			<xs:element name="brd" type="ns1:Border" minOccurs="0"/>
 			<xs:element name="event" type="tns:Event" minOccurs="0" maxOccurs="unbounded"/>
 		</xs:sequence>
 		<xs:attribute name="width" type="xs:decimal"/>
