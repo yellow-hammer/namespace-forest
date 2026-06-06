@@ -8,8 +8,8 @@
 	<xs:import namespace="http://v8.1c.ru/8.2/managed-application/core"/>
 	<xs:import namespace="http://v8.1c.ru/8.2/data/bsl"/>
 	<xs:element name="group" type="tns:Group"/>
-	<xs:element name="command" type="tns:Command"/>
 	<xs:element name="section" type="tns:Section"/>
+	<xs:element name="command" type="tns:Command"/>
 	<xs:simpleType name="CommandParameterUseMode">
 		<xs:restriction base="xs:string">
 			<xs:enumeration value="Single"/>
