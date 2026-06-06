@@ -409,6 +409,7 @@
 			<xs:enumeration value="Auto"/>
 			<xs:enumeration value="Rect"/>
 			<xs:enumeration value="Circle"/>
+			<xs:enumeration value="Square"/>
 		</xs:restriction>
 	</xs:simpleType>
 	<xs:simpleType name="InputFieldMultipleValuePictureSize">
