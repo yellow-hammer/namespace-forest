@@ -72,6 +72,7 @@
 			<xs:element name="objectCompInfoExtensionFirefox" type="xs:string"/>
 			<xs:element name="objectCompInfoExtensionIE" type="xs:string"/>
 			<xs:element name="objectCompInfoExtensionSafari" type="xs:string"/>
+			<xs:element name="credAns4" type="xs:string"/>
 		</xs:sequence>
 		<xs:attribute name="confNotSaved" type="xs:boolean"/>
 		<xs:attribute name="noFontsOnServer" type="xs:boolean"/>
