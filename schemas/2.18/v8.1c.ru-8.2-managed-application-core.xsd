@@ -905,6 +905,7 @@
 			<xs:element name="urlExtDataSupport" type="xs:boolean" minOccurs="0"/>
 			<xs:element name="startupErrorProcessingSettings" type="tns:ErrorOnStartupProcessingSettings" minOccurs="0"/>
 			<xs:element name="appVariant" type="xs:string" minOccurs="0"/>
+			<xs:element name="dataZoneStringExclCondOff" type="xs:string" minOccurs="0"/>
 		</xs:sequence>
 		<xs:attribute name="agentVersion" type="xs:string"/>
 		<xs:attribute name="hasConfigExt" type="xs:boolean"/>
