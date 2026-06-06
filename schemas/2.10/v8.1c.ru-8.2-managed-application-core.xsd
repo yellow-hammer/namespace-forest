@@ -72,6 +72,7 @@
 		<xs:attribute name="confNotSaved" type="xs:boolean"/>
 		<xs:attribute name="noFontsOnServer" type="xs:boolean"/>
 		<xs:attribute name="noFontConfigOnServer" type="xs:boolean"/>
+		<xs:attribute name="needUpdateMCSignature" type="xs:boolean"/>
 	</xs:complexType>
 	<xs:simpleType name="ApplicationUsePurpose">
 		<xs:restriction base="xs:string">
@@ -491,6 +492,17 @@
 		<xs:attribute name="weekendOnSet" type="xs:int"/>
 		<xs:attribute name="weekendCease" type="xs:int"/>
 	</xs:complexType>
+	<xs:complexType name="MCDigestDeltaItem">
+		<xs:sequence>
+			<xs:element name="add" type="tns:MCDigestItem" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="ch" type="tns:MCDigestItem" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="del" type="ns3:UUID" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="MCDigestItem">
+		<xs:attribute name="uuid" type="ns3:UUID"/>
+		<xs:attribute name="name" type="xs:NCName"/>
+	</xs:complexType>
 	<xs:simpleType name="MainWindowMode">
 		<xs:restriction base="xs:string">
 			<xs:enumeration value="Normal"/>
@@ -872,6 +884,14 @@
 			<xs:element name="mcDigitalSignature" type="xs:string" minOccurs="0"/>
 			<xs:element name="mcTaskName" type="xs:Name" minOccurs="0"/>
 			<xs:element name="mcTaskSynonym" type="ns3:LocalStringType" minOccurs="0"/>
+			<xs:element name="mcTaskSynonym2" type="xs:Name" minOccurs="0"/>
+			<xs:element name="mcDSAKey" type="xs:Name" minOccurs="0"/>
+			<xs:element name="mcAppName" type="xs:Name" minOccurs="0"/>
+			<xs:element name="mcAppURL" type="xs:Name" minOccurs="0"/>
+			<xs:element name="mcdEnums" type="tns:MCDigestDeltaItem" minOccurs="0"/>
+			<xs:element name="mcdRefs" type="tns:MCDigestDeltaItem" minOccurs="0"/>
+			<xs:element name="mcdRegKeys" type="tns:MCDigestDeltaItem" minOccurs="0"/>
+			<xs:element name="mcdInfoRegKeys" type="tns:MCDigestDeltaItem" minOccurs="0"/>
 		</xs:choice>
 		<xs:attribute name="namespace" type="xs:anyURI"/>
 	</xs:complexType>
