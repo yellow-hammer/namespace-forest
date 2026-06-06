@@ -263,6 +263,7 @@
 			<xs:enumeration value="2.7"/>
 			<xs:enumeration value="2.8"/>
 			<xs:enumeration value="2.9"/>
+			<xs:enumeration value="2.9.1"/>
 			<xs:enumeration value="2.10"/>
 		</xs:restriction>
 	</xs:simpleType>

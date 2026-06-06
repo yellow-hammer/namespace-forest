@@ -180,6 +180,7 @@
 			<xs:element name="right" type="tns:DesktopFormInfo" minOccurs="0" maxOccurs="unbounded"/>
 		</xs:sequence>
 		<xs:attribute name="state" type="xs:decimal"/>
+		<xs:attribute name="commandInterfaceDisplays" type="xs:decimal"/>
 	</xs:complexType>
 	<xs:complexType name="Enum">
 		<xs:complexContent>
