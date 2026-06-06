@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<xs:schema xmlns:ns1="http://v8.1c.ru/8.1/data/core" xmlns:ns2="http://v8.1c.ru/8.1/data/ui" xmlns:ns3="http://v8.1c.ru/8.2/data/bsl" xmlns:ns4="http://v8.1c.ru/8.2/managed-application/core" xmlns:ns5="http://v8.1c.ru/8.2/managed-application/logform" xmlns:ns6="http://v8.1c.ru/8.2/uobjects" xmlns:ns7="http://v8.1c.ru/8.2/managed-application/modules" xmlns:tns="http://v8.1c.ru/8.2/managed-application/cmi" xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="http://v8.1c.ru/8.2/managed-application/cmi" attributeFormDefault="unqualified" elementFormDefault="qualified">
-	<xs:import namespace="http://v8.1c.ru/8.1/data/core"/>
+<xs:schema xmlns:ns1="http://v8.1c.ru/8.1/data/ui" xmlns:ns2="http://v8.1c.ru/8.1/data/core" xmlns:ns3="http://v8.1c.ru/8.2/data/bsl" xmlns:ns4="http://v8.1c.ru/8.2/managed-application/core" xmlns:ns5="http://v8.1c.ru/8.2/managed-application/logform" xmlns:ns6="http://v8.1c.ru/8.2/uobjects" xmlns:ns7="http://v8.1c.ru/8.2/managed-application/modules" xmlns:tns="http://v8.1c.ru/8.2/managed-application/cmi" xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="http://v8.1c.ru/8.2/managed-application/cmi" attributeFormDefault="unqualified" elementFormDefault="qualified">
 	<xs:import namespace="http://v8.1c.ru/8.1/data/ui"/>
+	<xs:import namespace="http://v8.1c.ru/8.1/data/core"/>
 	<xs:import namespace="http://v8.1c.ru/8.2/data/bsl"/>
 	<xs:import namespace="http://v8.1c.ru/8.2/managed-application/core"/>
 	<xs:import namespace="http://v8.1c.ru/8.2/managed-application/logform"/>
@@ -36,20 +36,20 @@
 	</xs:complexType>
 	<xs:complexType name="CommandIDs">
 		<xs:sequence>
-			<xs:element name="id" type="ns1:CompositeID" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="id" type="ns2:CompositeID" minOccurs="0" maxOccurs="unbounded"/>
 		</xs:sequence>
 	</xs:complexType>
 	<xs:complexType name="CommandInfo">
 		<xs:choice>
 			<xs:element name="text" type="xs:string" minOccurs="0"/>
 			<xs:element name="tooltip" type="xs:string" minOccurs="0"/>
-			<xs:element name="pic" type="ns2:Picture" minOccurs="0"/>
+			<xs:element name="pic" type="ns1:Picture" minOccurs="0"/>
 			<xs:element name="picSizeCX" type="xs:decimal" minOccurs="0"/>
 			<xs:element name="picSizeCY" type="xs:decimal" minOccurs="0"/>
-			<xs:element name="shortcut" type="ns2:ShortCutType" minOccurs="0"/>
-			<xs:element name="param" type="ns1:TypeDescription" minOccurs="0"/>
+			<xs:element name="shortcut" type="ns1:ShortCutType" minOccurs="0"/>
+			<xs:element name="param" type="ns2:TypeDescription" minOccurs="0"/>
 		</xs:choice>
-		<xs:attribute name="id" type="ns1:CompositeID" use="required"/>
+		<xs:attribute name="id" type="ns2:CompositeID" use="required"/>
 		<xs:attribute name="nameInt" type="xs:string" use="required"/>
 		<xs:attribute name="nameRus" type="xs:string" use="required"/>
 		<xs:attribute name="md" type="xs:string" use="required"/>
@@ -81,9 +81,9 @@
 	</xs:complexType>
 	<xs:complexType name="CommansShortCutInfo">
 		<xs:sequence>
-			<xs:element name="shortCut" type="ns2:ShortCutType"/>
+			<xs:element name="shortCut" type="ns1:ShortCutType"/>
 			<xs:element name="fragments" type="tns:SubsystemAndPanel" minOccurs="0" maxOccurs="unbounded"/>
-			<xs:element name="commandId" type="ns1:CompositeID"/>
+			<xs:element name="commandId" type="ns2:CompositeID"/>
 		</xs:sequence>
 	</xs:complexType>
 	<xs:complexType name="CommansShortCutInfoVector">
@@ -101,11 +101,11 @@
 	</xs:complexType>
 	<xs:complexType name="FuncMenuCommand">
 		<xs:sequence>
-			<xs:element name="id" type="ns1:CompositeID" minOccurs="0"/>
+			<xs:element name="id" type="ns2:CompositeID" minOccurs="0"/>
 			<xs:element name="url" type="xs:string" minOccurs="0"/>
 			<xs:element name="text" type="xs:string" minOccurs="0"/>
 			<xs:element name="tooltip" type="xs:string" minOccurs="0"/>
-			<xs:element name="picture" type="ns2:Picture" minOccurs="0"/>
+			<xs:element name="picture" type="ns1:Picture" minOccurs="0"/>
 			<xs:element name="important" type="xs:boolean" minOccurs="0"/>
 			<xs:element name="highlight" type="tns:FuncMenuHighlight"/>
 		</xs:sequence>
@@ -113,9 +113,9 @@
 	<xs:complexType name="FuncMenuGroup">
 		<xs:sequence>
 			<xs:element name="type" type="tns:FuncMenuGroupType" minOccurs="0"/>
-			<xs:element name="id" type="ns1:CompositeID" minOccurs="0"/>
+			<xs:element name="id" type="ns2:CompositeID" minOccurs="0"/>
 			<xs:element name="text" type="xs:string" minOccurs="0"/>
-			<xs:element name="picture" type="ns2:Picture" minOccurs="0"/>
+			<xs:element name="picture" type="ns1:Picture" minOccurs="0"/>
 			<xs:element name="newColumn" type="xs:boolean" minOccurs="0"/>
 			<xs:element name="command" type="tns:FuncMenuCommand" minOccurs="0" maxOccurs="unbounded"/>
 			<xs:element name="group" type="tns:FuncMenuGroup" minOccurs="0" maxOccurs="unbounded"/>
@@ -163,18 +163,18 @@
 		<xs:choice>
 			<xs:element name="text" type="xs:string" minOccurs="0"/>
 			<xs:element name="tooltip" type="xs:string" minOccurs="0"/>
-			<xs:element name="pic" type="ns2:Picture" minOccurs="0"/>
+			<xs:element name="pic" type="ns1:Picture" minOccurs="0"/>
 			<xs:element name="picSizeCX" type="xs:decimal" minOccurs="0"/>
 			<xs:element name="picSizeCY" type="xs:decimal" minOccurs="0"/>
 		</xs:choice>
-		<xs:attribute name="id" type="ns1:UUID" use="required"/>
+		<xs:attribute name="id" type="ns2:UUID" use="required"/>
 		<xs:attribute name="cat" type="tns:GroupCategory"/>
 		<xs:attribute name="order" type="xs:decimal"/>
 		<xs:attribute name="kind" type="ns5:ButtonRepresentation"/>
 	</xs:complexType>
 	<xs:complexType name="HandlerInfo">
 		<xs:sequence>
-			<xs:element name="formId" type="ns1:CompositeID"/>
+			<xs:element name="formId" type="ns2:CompositeID"/>
 			<xs:element name="formName" type="xs:string" minOccurs="0"/>
 			<xs:element name="moduleInfo" type="tns:ModuleInfo" minOccurs="0" maxOccurs="unbounded"/>
 			<xs:element name="name" type="xs:string" minOccurs="0"/>
@@ -192,7 +192,7 @@
 	</xs:complexType>
 	<xs:complexType name="HandlerInfoByID">
 		<xs:sequence>
-			<xs:element name="id" type="ns1:CompositeID"/>
+			<xs:element name="id" type="ns2:CompositeID"/>
 			<xs:element name="handleInfo" type="tns:HandlerInfo" minOccurs="0"/>
 		</xs:sequence>
 	</xs:complexType>
@@ -243,17 +243,17 @@
 		<xs:choice>
 			<xs:element name="text" type="xs:string" minOccurs="0"/>
 			<xs:element name="tooltip" type="xs:string" minOccurs="0"/>
-			<xs:element name="pic" type="ns2:Picture" minOccurs="0"/>
+			<xs:element name="pic" type="ns1:Picture" minOccurs="0"/>
 			<xs:element name="picSizeCX" type="xs:decimal" minOccurs="0"/>
 			<xs:element name="picSizeCY" type="xs:decimal" minOccurs="0"/>
 		</xs:choice>
-		<xs:attribute name="id" type="ns1:UUID" use="required"/>
+		<xs:attribute name="id" type="ns2:UUID" use="required"/>
 		<xs:attribute name="name" type="xs:string" use="required"/>
 		<xs:attribute name="helpTopic" type="xs:string" use="required"/>
 	</xs:complexType>
 	<xs:complexType name="SubsystemAndPanel">
 		<xs:sequence>
-			<xs:element name="subsystem" type="ns1:UUID"/>
+			<xs:element name="subsystem" type="ns2:UUID"/>
 			<xs:element name="panel" type="xs:decimal"/>
 		</xs:sequence>
 	</xs:complexType>
