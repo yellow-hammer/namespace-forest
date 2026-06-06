@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<xs:schema xmlns:ns1="http://v8.1c.ru/8.1/data/ui" xmlns:ns2="http://v8.1c.ru/8.1/data/core" xmlns:ns3="http://v8.1c.ru/8.1/data/enterprise" xmlns:ns4="http://v8.1c.ru/8.2/managed-application/core" xmlns:ns5="http://v8.1c.ru/8.2/managed-application/logform" xmlns:ns6="http://v8.1c.ru/8.2/managed-application/cmi" xmlns:ns7="http://v8.1c.ru/8.3/xcf/enums" xmlns:ns8="http://v8.1c.ru/8.3/xcf/readable" xmlns:ns9="http://v8.1c.ru/8.3/xcf/predef" xmlns:tns="http://v8.1c.ru/8.3/MDClasses" xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="http://v8.1c.ru/8.3/MDClasses" attributeFormDefault="unqualified" elementFormDefault="qualified">
-	<xs:import namespace="http://v8.1c.ru/8.1/data/ui"/>
+<xs:schema xmlns:ns1="http://v8.1c.ru/8.1/data/core" xmlns:ns2="http://v8.1c.ru/8.1/data/ui" xmlns:ns3="http://v8.1c.ru/8.1/data/enterprise" xmlns:ns4="http://v8.1c.ru/8.2/managed-application/core" xmlns:ns5="http://v8.1c.ru/8.2/managed-application/logform" xmlns:ns6="http://v8.1c.ru/8.2/managed-application/cmi" xmlns:ns7="http://v8.1c.ru/8.3/xcf/enums" xmlns:ns8="http://v8.1c.ru/8.3/xcf/readable" xmlns:ns9="http://v8.1c.ru/8.3/xcf/predef" xmlns:tns="http://v8.1c.ru/8.3/MDClasses" xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="http://v8.1c.ru/8.3/MDClasses" attributeFormDefault="unqualified" elementFormDefault="qualified">
 	<xs:import namespace="http://v8.1c.ru/8.1/data/core"/>
+	<xs:import namespace="http://v8.1c.ru/8.1/data/ui"/>
 	<xs:import namespace="http://v8.1c.ru/8.1/data/enterprise"/>
 	<xs:import namespace="http://v8.1c.ru/8.2/managed-application/core"/>
 	<xs:import namespace="http://v8.1c.ru/8.2/managed-application/logform"/>
@@ -22,15 +22,15 @@
 	<xs:complexType name="AccountingFlagProperties">
 		<xs:sequence>
 			<xs:element name="Name" type="xs:string"/>
-			<xs:element name="Synonym" type="ns2:LocalStringType"/>
+			<xs:element name="Synonym" type="ns1:LocalStringType"/>
 			<xs:element name="Comment" type="xs:string"/>
 			<xs:element name="ObjectBelonging" type="ns7:ObjectBelonging"/>
-			<xs:element name="ExtendedConfigurationObject" type="ns2:UUID" minOccurs="0"/>
-			<xs:element name="Type" type="ns2:TypeDescription"/>
+			<xs:element name="ExtendedConfigurationObject" type="ns1:UUID" minOccurs="0"/>
+			<xs:element name="Type" type="ns1:TypeDescription"/>
 			<xs:element name="PasswordMode" type="xs:boolean"/>
-			<xs:element name="Format" type="ns2:LocalStringType"/>
-			<xs:element name="EditFormat" type="ns2:LocalStringType"/>
-			<xs:element name="ToolTip" type="ns2:LocalStringType"/>
+			<xs:element name="Format" type="ns1:LocalStringType"/>
+			<xs:element name="EditFormat" type="ns1:LocalStringType"/>
+			<xs:element name="ToolTip" type="ns1:LocalStringType"/>
 			<xs:element name="MarkNegatives" type="xs:boolean"/>
 			<xs:element name="Mask" type="xs:string"/>
 			<xs:element name="MultiLine" type="xs:boolean"/>
@@ -39,7 +39,7 @@
 			<xs:element name="MaxValue"/>
 			<xs:element name="FillFromFillingValue" type="xs:boolean"/>
 			<xs:element name="FillValue"/>
-			<xs:element name="FillChecking" type="ns2:FillChecking"/>
+			<xs:element name="FillChecking" type="ns1:FillChecking"/>
 			<xs:element name="ChoiceFoldersAndItems" type="ns3:FoldersAndItemsUse"/>
 			<xs:element name="ChoiceParameterLinks" type="ns8:ChoiceParameterLinks"/>
 			<xs:element name="ChoiceParameters" type="ns4:ChoiceParameters"/>
@@ -74,10 +74,10 @@
 	<xs:complexType name="AccountingRegisterProperties">
 		<xs:sequence>
 			<xs:element name="Name" type="xs:string"/>
-			<xs:element name="Synonym" type="ns2:LocalStringType"/>
+			<xs:element name="Synonym" type="ns1:LocalStringType"/>
 			<xs:element name="Comment" type="xs:string"/>
 			<xs:element name="ObjectBelonging" type="ns7:ObjectBelonging"/>
-			<xs:element name="ExtendedConfigurationObject" type="ns2:UUID" minOccurs="0"/>
+			<xs:element name="ExtendedConfigurationObject" type="ns1:UUID" minOccurs="0"/>
 			<xs:element name="UseStandardCommands" type="xs:boolean"/>
 			<xs:element name="IncludeHelpInContents" type="xs:boolean"/>
 			<xs:element name="Help" type="ns8:ExternalProperty"/>
@@ -92,9 +92,9 @@
 			<xs:element name="DataLockControlMode" type="ns7:DefaultDataLockControlMode"/>
 			<xs:element name="EnableTotalsSplitting" type="xs:boolean"/>
 			<xs:element name="FullTextSearch" type="ns7:FullTextSearchUsing"/>
-			<xs:element name="ListPresentation" type="ns2:LocalStringType"/>
-			<xs:element name="ExtendedListPresentation" type="ns2:LocalStringType"/>
-			<xs:element name="Explanation" type="ns2:LocalStringType"/>
+			<xs:element name="ListPresentation" type="ns1:LocalStringType"/>
+			<xs:element name="ExtendedListPresentation" type="ns1:LocalStringType"/>
+			<xs:element name="Explanation" type="ns1:LocalStringType"/>
 		</xs:sequence>
 	</xs:complexType>
 	<xs:complexType name="AccumulationRegister">
@@ -120,10 +120,10 @@
 	<xs:complexType name="AccumulationRegisterProperties">
 		<xs:sequence>
 			<xs:element name="Name" type="xs:string"/>
-			<xs:element name="Synonym" type="ns2:LocalStringType"/>
+			<xs:element name="Synonym" type="ns1:LocalStringType"/>
 			<xs:element name="Comment" type="xs:string"/>
 			<xs:element name="ObjectBelonging" type="ns7:ObjectBelonging"/>
-			<xs:element name="ExtendedConfigurationObject" type="ns2:UUID" minOccurs="0"/>
+			<xs:element name="ExtendedConfigurationObject" type="ns1:UUID" minOccurs="0"/>
 			<xs:element name="UseStandardCommands" type="xs:boolean"/>
 			<xs:element name="DefaultListForm" type="ns8:MDObjectRef"/>
 			<xs:element name="AuxiliaryListForm" type="ns8:MDObjectRef"/>
@@ -137,9 +137,9 @@
 			<xs:element name="FullTextSearch" type="ns7:FullTextSearchUsing"/>
 			<xs:element name="EnableTotalsSplitting" type="xs:boolean"/>
 			<xs:element name="Aggregates" type="ns8:ExternalProperty"/>
-			<xs:element name="ListPresentation" type="ns2:LocalStringType"/>
-			<xs:element name="ExtendedListPresentation" type="ns2:LocalStringType"/>
-			<xs:element name="Explanation" type="ns2:LocalStringType"/>
+			<xs:element name="ListPresentation" type="ns1:LocalStringType"/>
+			<xs:element name="ExtendedListPresentation" type="ns1:LocalStringType"/>
+			<xs:element name="Explanation" type="ns1:LocalStringType"/>
 		</xs:sequence>
 	</xs:complexType>
 	<xs:complexType name="AddressingAttribute">
@@ -154,15 +154,15 @@
 	<xs:complexType name="AddressingAttributeProperties">
 		<xs:sequence>
 			<xs:element name="Name" type="xs:string"/>
-			<xs:element name="Synonym" type="ns2:LocalStringType"/>
+			<xs:element name="Synonym" type="ns1:LocalStringType"/>
 			<xs:element name="Comment" type="xs:string"/>
 			<xs:element name="ObjectBelonging" type="ns7:ObjectBelonging"/>
-			<xs:element name="ExtendedConfigurationObject" type="ns2:UUID" minOccurs="0"/>
-			<xs:element name="Type" type="ns2:TypeDescription"/>
+			<xs:element name="ExtendedConfigurationObject" type="ns1:UUID" minOccurs="0"/>
+			<xs:element name="Type" type="ns1:TypeDescription"/>
 			<xs:element name="PasswordMode" type="xs:boolean"/>
-			<xs:element name="Format" type="ns2:LocalStringType"/>
-			<xs:element name="EditFormat" type="ns2:LocalStringType"/>
-			<xs:element name="ToolTip" type="ns2:LocalStringType"/>
+			<xs:element name="Format" type="ns1:LocalStringType"/>
+			<xs:element name="EditFormat" type="ns1:LocalStringType"/>
+			<xs:element name="ToolTip" type="ns1:LocalStringType"/>
 			<xs:element name="MarkNegatives" type="xs:boolean"/>
 			<xs:element name="Mask" type="xs:string"/>
 			<xs:element name="MultiLine" type="xs:boolean"/>
@@ -171,7 +171,7 @@
 			<xs:element name="MaxValue"/>
 			<xs:element name="FillFromFillingValue" type="xs:boolean"/>
 			<xs:element name="FillValue"/>
-			<xs:element name="FillChecking" type="ns2:FillChecking"/>
+			<xs:element name="FillChecking" type="ns1:FillChecking"/>
 			<xs:element name="ChoiceFoldersAndItems" type="ns3:FoldersAndItemsUse"/>
 			<xs:element name="ChoiceParameterLinks" type="ns8:ChoiceParameterLinks"/>
 			<xs:element name="ChoiceParameters" type="ns4:ChoiceParameters"/>
@@ -198,22 +198,22 @@
 	<xs:complexType name="AttributeProperties">
 		<xs:sequence>
 			<xs:element name="Name" type="xs:string" minOccurs="0"/>
-			<xs:element name="Synonym" type="ns2:LocalStringType" minOccurs="0"/>
+			<xs:element name="Synonym" type="ns1:LocalStringType" minOccurs="0"/>
 			<xs:element name="Comment" type="xs:string" minOccurs="0"/>
 			<xs:element name="ObjectBelonging" type="ns7:ObjectBelonging" minOccurs="0"/>
-			<xs:element name="ExtendedConfigurationObject" type="ns2:UUID" minOccurs="0"/>
-			<xs:element name="Type" type="ns2:TypeDescription" minOccurs="0"/>
+			<xs:element name="ExtendedConfigurationObject" type="ns1:UUID" minOccurs="0"/>
+			<xs:element name="Type" type="ns1:TypeDescription" minOccurs="0"/>
 			<xs:element name="PasswordMode" type="xs:boolean" minOccurs="0"/>
-			<xs:element name="Format" type="ns2:LocalStringType" minOccurs="0"/>
-			<xs:element name="EditFormat" type="ns2:LocalStringType" minOccurs="0"/>
-			<xs:element name="ToolTip" type="ns2:LocalStringType" minOccurs="0"/>
+			<xs:element name="Format" type="ns1:LocalStringType" minOccurs="0"/>
+			<xs:element name="EditFormat" type="ns1:LocalStringType" minOccurs="0"/>
+			<xs:element name="ToolTip" type="ns1:LocalStringType" minOccurs="0"/>
 			<xs:element name="MarkNegatives" type="xs:boolean" minOccurs="0"/>
 			<xs:element name="Mask" type="xs:string" minOccurs="0"/>
 			<xs:element name="MultiLine" type="xs:boolean" minOccurs="0"/>
 			<xs:element name="ExtendedEdit" type="xs:boolean" minOccurs="0"/>
 			<xs:element name="MinValue" minOccurs="0"/>
 			<xs:element name="MaxValue" minOccurs="0"/>
-			<xs:element name="FillChecking" type="ns2:FillChecking" minOccurs="0"/>
+			<xs:element name="FillChecking" type="ns1:FillChecking" minOccurs="0"/>
 			<xs:element name="ChoiceFoldersAndItems" type="ns3:FoldersAndItemsUse" minOccurs="0"/>
 			<xs:element name="ChoiceParameterLinks" type="ns8:ChoiceParameterLinks" minOccurs="0"/>
 			<xs:element name="ChoiceParameters" type="ns4:ChoiceParameters" minOccurs="0"/>
@@ -243,10 +243,10 @@
 	<xs:complexType name="BotProperties">
 		<xs:sequence>
 			<xs:element name="Name" type="xs:string"/>
-			<xs:element name="Synonym" type="ns2:LocalStringType"/>
+			<xs:element name="Synonym" type="ns1:LocalStringType"/>
 			<xs:element name="Comment" type="xs:string"/>
 			<xs:element name="ObjectBelonging" type="ns7:ObjectBelonging"/>
-			<xs:element name="ExtendedConfigurationObject" type="ns2:UUID" minOccurs="0"/>
+			<xs:element name="ExtendedConfigurationObject" type="ns1:UUID" minOccurs="0"/>
 			<xs:element name="Predefined" type="xs:boolean"/>
 			<xs:element name="Picture" type="ns8:Picture" minOccurs="0"/>
 			<xs:element name="Module" type="ns8:ExternalProperty"/>
@@ -274,10 +274,10 @@
 	<xs:complexType name="BusinessProcessProperties">
 		<xs:sequence>
 			<xs:element name="Name" type="xs:string"/>
-			<xs:element name="Synonym" type="ns2:LocalStringType"/>
+			<xs:element name="Synonym" type="ns1:LocalStringType"/>
 			<xs:element name="Comment" type="xs:string"/>
 			<xs:element name="ObjectBelonging" type="ns7:ObjectBelonging"/>
-			<xs:element name="ExtendedConfigurationObject" type="ns2:UUID" minOccurs="0"/>
+			<xs:element name="ExtendedConfigurationObject" type="ns1:UUID" minOccurs="0"/>
 			<xs:element name="UseStandardCommands" type="xs:boolean"/>
 			<xs:element name="ObjectModule" type="ns8:ExternalProperty"/>
 			<xs:element name="ManagerModule" type="ns8:ExternalProperty"/>
@@ -297,7 +297,7 @@
 			<xs:element name="ChoiceHistoryOnInput" type="ns5:ChoiceHistoryOnInput"/>
 			<xs:element name="NumberType" type="ns7:BusinessProcessNumberType"/>
 			<xs:element name="NumberLength" type="xs:decimal"/>
-			<xs:element name="NumberAllowedLength" type="ns2:AllowedLength"/>
+			<xs:element name="NumberAllowedLength" type="ns1:AllowedLength"/>
 			<xs:element name="CheckUnique" type="xs:boolean"/>
 			<xs:element name="StandardAttributes" type="ns8:StandardAttributeDescriptions"/>
 			<xs:element name="Characteristics" type="ns8:CharacteristicsDescriptions"/>
@@ -311,11 +311,11 @@
 			<xs:element name="IncludeHelpInContents" type="xs:boolean"/>
 			<xs:element name="Help" type="ns8:ExternalProperty"/>
 			<xs:element name="FullTextSearch" type="ns7:FullTextSearchUsing"/>
-			<xs:element name="ObjectPresentation" type="ns2:LocalStringType"/>
-			<xs:element name="ExtendedObjectPresentation" type="ns2:LocalStringType"/>
-			<xs:element name="ListPresentation" type="ns2:LocalStringType"/>
-			<xs:element name="ExtendedListPresentation" type="ns2:LocalStringType"/>
-			<xs:element name="Explanation" type="ns2:LocalStringType"/>
+			<xs:element name="ObjectPresentation" type="ns1:LocalStringType"/>
+			<xs:element name="ExtendedObjectPresentation" type="ns1:LocalStringType"/>
+			<xs:element name="ListPresentation" type="ns1:LocalStringType"/>
+			<xs:element name="ExtendedListPresentation" type="ns1:LocalStringType"/>
+			<xs:element name="Explanation" type="ns1:LocalStringType"/>
 			<xs:element name="DataHistory" type="ns7:DataHistoryUse"/>
 			<xs:element name="UpdateDataHistoryImmediatelyAfterWrite" type="xs:boolean"/>
 			<xs:element name="ExecuteAfterWriteDataHistoryVersionProcessing" type="xs:boolean"/>
@@ -345,10 +345,10 @@
 	<xs:complexType name="CalculationRegisterProperties">
 		<xs:sequence>
 			<xs:element name="Name" type="xs:string"/>
-			<xs:element name="Synonym" type="ns2:LocalStringType"/>
+			<xs:element name="Synonym" type="ns1:LocalStringType"/>
 			<xs:element name="Comment" type="xs:string"/>
 			<xs:element name="ObjectBelonging" type="ns7:ObjectBelonging"/>
-			<xs:element name="ExtendedConfigurationObject" type="ns2:UUID" minOccurs="0"/>
+			<xs:element name="ExtendedConfigurationObject" type="ns1:UUID" minOccurs="0"/>
 			<xs:element name="UseStandardCommands" type="xs:boolean"/>
 			<xs:element name="DefaultListForm" type="ns8:MDObjectRef"/>
 			<xs:element name="AuxiliaryListForm" type="ns8:MDObjectRef"/>
@@ -366,9 +366,9 @@
 			<xs:element name="StandardAttributes" type="ns8:StandardAttributeDescriptions"/>
 			<xs:element name="DataLockControlMode" type="ns7:DefaultDataLockControlMode"/>
 			<xs:element name="FullTextSearch" type="ns7:FullTextSearchUsing"/>
-			<xs:element name="ListPresentation" type="ns2:LocalStringType"/>
-			<xs:element name="ExtendedListPresentation" type="ns2:LocalStringType"/>
-			<xs:element name="Explanation" type="ns2:LocalStringType"/>
+			<xs:element name="ListPresentation" type="ns1:LocalStringType"/>
+			<xs:element name="ExtendedListPresentation" type="ns1:LocalStringType"/>
+			<xs:element name="Explanation" type="ns1:LocalStringType"/>
 		</xs:sequence>
 	</xs:complexType>
 	<xs:complexType name="Catalog">
@@ -393,10 +393,10 @@
 	<xs:complexType name="CatalogProperties">
 		<xs:sequence>
 			<xs:element name="Name" type="xs:string"/>
-			<xs:element name="Synonym" type="ns2:LocalStringType"/>
+			<xs:element name="Synonym" type="ns1:LocalStringType"/>
 			<xs:element name="Comment" type="xs:string"/>
 			<xs:element name="ObjectBelonging" type="ns7:ObjectBelonging"/>
-			<xs:element name="ExtendedConfigurationObject" type="ns2:UUID" minOccurs="0"/>
+			<xs:element name="ExtendedConfigurationObject" type="ns1:UUID" minOccurs="0"/>
 			<xs:element name="Hierarchical" type="xs:boolean"/>
 			<xs:element name="HierarchyType" type="ns7:HierarchyType"/>
 			<xs:element name="LimitLevelCount" type="xs:boolean"/>
@@ -408,7 +408,7 @@
 			<xs:element name="CodeLength" type="xs:decimal"/>
 			<xs:element name="DescriptionLength" type="xs:decimal"/>
 			<xs:element name="CodeType" type="ns7:CatalogCodeType"/>
-			<xs:element name="CodeAllowedLength" type="ns2:AllowedLength"/>
+			<xs:element name="CodeAllowedLength" type="ns1:AllowedLength"/>
 			<xs:element name="CodeSeries" type="ns7:CatalogCodesSeries"/>
 			<xs:element name="CheckUnique" type="xs:boolean"/>
 			<xs:element name="Autonumbering" type="xs:boolean"/>
@@ -442,11 +442,11 @@
 			<xs:element name="DataLockFields" type="ns8:FieldList"/>
 			<xs:element name="DataLockControlMode" type="ns7:DefaultDataLockControlMode"/>
 			<xs:element name="FullTextSearch" type="ns7:FullTextSearchUsing"/>
-			<xs:element name="ObjectPresentation" type="ns2:LocalStringType"/>
-			<xs:element name="ExtendedObjectPresentation" type="ns2:LocalStringType"/>
-			<xs:element name="ListPresentation" type="ns2:LocalStringType"/>
-			<xs:element name="ExtendedListPresentation" type="ns2:LocalStringType"/>
-			<xs:element name="Explanation" type="ns2:LocalStringType"/>
+			<xs:element name="ObjectPresentation" type="ns1:LocalStringType"/>
+			<xs:element name="ExtendedObjectPresentation" type="ns1:LocalStringType"/>
+			<xs:element name="ListPresentation" type="ns1:LocalStringType"/>
+			<xs:element name="ExtendedListPresentation" type="ns1:LocalStringType"/>
+			<xs:element name="Explanation" type="ns1:LocalStringType"/>
 			<xs:element name="CreateOnInput" type="ns7:CreateOnInput"/>
 			<xs:element name="ChoiceHistoryOnInput" type="ns5:ChoiceHistoryOnInput"/>
 			<xs:element name="DataHistory" type="ns7:DataHistoryUse"/>
@@ -478,10 +478,10 @@
 	<xs:complexType name="ChartOfAccountsProperties">
 		<xs:sequence>
 			<xs:element name="Name" type="xs:string"/>
-			<xs:element name="Synonym" type="ns2:LocalStringType"/>
+			<xs:element name="Synonym" type="ns1:LocalStringType"/>
 			<xs:element name="Comment" type="xs:string"/>
 			<xs:element name="ObjectBelonging" type="ns7:ObjectBelonging"/>
-			<xs:element name="ExtendedConfigurationObject" type="ns2:UUID" minOccurs="0"/>
+			<xs:element name="ExtendedConfigurationObject" type="ns1:UUID" minOccurs="0"/>
 			<xs:element name="UseStandardCommands" type="xs:boolean"/>
 			<xs:element name="IncludeHelpInContents" type="xs:boolean"/>
 			<xs:element name="Help" type="ns8:ExternalProperty"/>
@@ -522,11 +522,11 @@
 			<xs:element name="DataLockControlMode" type="ns7:DefaultDataLockControlMode"/>
 			<xs:element name="FullTextSearch" type="ns7:FullTextSearchUsing"/>
 			<xs:element name="DataHistory" type="ns7:DataHistoryUse"/>
-			<xs:element name="ObjectPresentation" type="ns2:LocalStringType"/>
-			<xs:element name="ExtendedObjectPresentation" type="ns2:LocalStringType"/>
-			<xs:element name="ListPresentation" type="ns2:LocalStringType"/>
-			<xs:element name="ExtendedListPresentation" type="ns2:LocalStringType"/>
-			<xs:element name="Explanation" type="ns2:LocalStringType"/>
+			<xs:element name="ObjectPresentation" type="ns1:LocalStringType"/>
+			<xs:element name="ExtendedObjectPresentation" type="ns1:LocalStringType"/>
+			<xs:element name="ListPresentation" type="ns1:LocalStringType"/>
+			<xs:element name="ExtendedListPresentation" type="ns1:LocalStringType"/>
+			<xs:element name="Explanation" type="ns1:LocalStringType"/>
 			<xs:element name="UpdateDataHistoryImmediatelyAfterWrite" type="xs:boolean"/>
 			<xs:element name="ExecuteAfterWriteDataHistoryVersionProcessing" type="xs:boolean"/>
 		</xs:sequence>
@@ -553,15 +553,15 @@
 	<xs:complexType name="ChartOfCalculationTypesProperties">
 		<xs:sequence>
 			<xs:element name="Name" type="xs:string"/>
-			<xs:element name="Synonym" type="ns2:LocalStringType"/>
+			<xs:element name="Synonym" type="ns1:LocalStringType"/>
 			<xs:element name="Comment" type="xs:string"/>
 			<xs:element name="ObjectBelonging" type="ns7:ObjectBelonging"/>
-			<xs:element name="ExtendedConfigurationObject" type="ns2:UUID" minOccurs="0"/>
+			<xs:element name="ExtendedConfigurationObject" type="ns1:UUID" minOccurs="0"/>
 			<xs:element name="UseStandardCommands" type="xs:boolean"/>
 			<xs:element name="CodeLength" type="xs:decimal"/>
 			<xs:element name="DescriptionLength" type="xs:decimal"/>
 			<xs:element name="CodeType" type="ns7:ChartOfCalculationTypesCodeType"/>
-			<xs:element name="CodeAllowedLength" type="ns2:AllowedLength"/>
+			<xs:element name="CodeAllowedLength" type="ns1:AllowedLength"/>
 			<xs:element name="DefaultPresentation" type="ns7:CalculationTypeMainPresentation"/>
 			<xs:element name="EditType" type="ns7:EditType"/>
 			<xs:element name="QuickChoice" type="xs:boolean"/>
@@ -594,11 +594,11 @@
 			<xs:element name="DataLockFields" type="ns8:FieldList"/>
 			<xs:element name="DataLockControlMode" type="ns7:DefaultDataLockControlMode"/>
 			<xs:element name="FullTextSearch" type="ns7:FullTextSearchUsing"/>
-			<xs:element name="ObjectPresentation" type="ns2:LocalStringType"/>
-			<xs:element name="ExtendedObjectPresentation" type="ns2:LocalStringType"/>
-			<xs:element name="ListPresentation" type="ns2:LocalStringType"/>
-			<xs:element name="ExtendedListPresentation" type="ns2:LocalStringType"/>
-			<xs:element name="Explanation" type="ns2:LocalStringType"/>
+			<xs:element name="ObjectPresentation" type="ns1:LocalStringType"/>
+			<xs:element name="ExtendedObjectPresentation" type="ns1:LocalStringType"/>
+			<xs:element name="ListPresentation" type="ns1:LocalStringType"/>
+			<xs:element name="ExtendedListPresentation" type="ns1:LocalStringType"/>
+			<xs:element name="Explanation" type="ns1:LocalStringType"/>
 			<xs:element name="DataHistory" type="ns7:DataHistoryUse"/>
 			<xs:element name="UpdateDataHistoryImmediatelyAfterWrite" type="xs:boolean"/>
 			<xs:element name="ExecuteAfterWriteDataHistoryVersionProcessing" type="xs:boolean"/>
@@ -626,19 +626,19 @@
 	<xs:complexType name="ChartOfCharacteristicTypesProperties">
 		<xs:sequence>
 			<xs:element name="Name" type="xs:string"/>
-			<xs:element name="Synonym" type="ns2:LocalStringType"/>
+			<xs:element name="Synonym" type="ns1:LocalStringType"/>
 			<xs:element name="Comment" type="xs:string"/>
 			<xs:element name="ObjectBelonging" type="ns7:ObjectBelonging"/>
-			<xs:element name="ExtendedConfigurationObject" type="ns2:UUID" minOccurs="0"/>
+			<xs:element name="ExtendedConfigurationObject" type="ns1:UUID" minOccurs="0"/>
 			<xs:element name="UseStandardCommands" type="xs:boolean"/>
 			<xs:element name="IncludeHelpInContents" type="xs:boolean"/>
 			<xs:element name="Help" type="ns8:ExternalProperty"/>
 			<xs:element name="CharacteristicExtValues" type="ns8:MDObjectRef"/>
-			<xs:element name="Type" type="ns2:TypeDescription"/>
+			<xs:element name="Type" type="ns1:TypeDescription"/>
 			<xs:element name="Hierarchical" type="xs:boolean"/>
 			<xs:element name="FoldersOnTop" type="xs:boolean"/>
 			<xs:element name="CodeLength" type="xs:decimal"/>
-			<xs:element name="CodeAllowedLength" type="ns2:AllowedLength"/>
+			<xs:element name="CodeAllowedLength" type="ns1:AllowedLength"/>
 			<xs:element name="DescriptionLength" type="xs:decimal"/>
 			<xs:element name="CodeSeries" type="ns7:CharacteristicKindCodesSeries"/>
 			<xs:element name="CheckUnique" type="xs:boolean"/>
@@ -673,11 +673,11 @@
 			<xs:element name="DataLockFields" type="ns8:FieldList"/>
 			<xs:element name="DataLockControlMode" type="ns7:DefaultDataLockControlMode"/>
 			<xs:element name="FullTextSearch" type="ns7:FullTextSearchUsing"/>
-			<xs:element name="ObjectPresentation" type="ns2:LocalStringType"/>
-			<xs:element name="ExtendedObjectPresentation" type="ns2:LocalStringType"/>
-			<xs:element name="ListPresentation" type="ns2:LocalStringType"/>
-			<xs:element name="ExtendedListPresentation" type="ns2:LocalStringType"/>
-			<xs:element name="Explanation" type="ns2:LocalStringType"/>
+			<xs:element name="ObjectPresentation" type="ns1:LocalStringType"/>
+			<xs:element name="ExtendedObjectPresentation" type="ns1:LocalStringType"/>
+			<xs:element name="ListPresentation" type="ns1:LocalStringType"/>
+			<xs:element name="ExtendedListPresentation" type="ns1:LocalStringType"/>
+			<xs:element name="Explanation" type="ns1:LocalStringType"/>
 			<xs:element name="DataHistory" type="ns7:DataHistoryUse"/>
 			<xs:element name="UpdateDataHistoryImmediatelyAfterWrite" type="xs:boolean"/>
 			<xs:element name="ExecuteAfterWriteDataHistoryVersionProcessing" type="xs:boolean"/>
@@ -695,10 +695,10 @@
 	<xs:complexType name="ColumnProperties">
 		<xs:sequence>
 			<xs:element name="Name" type="xs:string"/>
-			<xs:element name="Synonym" type="ns2:LocalStringType"/>
+			<xs:element name="Synonym" type="ns1:LocalStringType"/>
 			<xs:element name="Comment" type="xs:string"/>
 			<xs:element name="ObjectBelonging" type="ns7:ObjectBelonging"/>
-			<xs:element name="ExtendedConfigurationObject" type="ns2:UUID" minOccurs="0"/>
+			<xs:element name="ExtendedConfigurationObject" type="ns1:UUID" minOccurs="0"/>
 			<xs:element name="Indexing" type="ns7:Indexing"/>
 			<xs:element name="References" type="ns8:MDListType"/>
 		</xs:sequence>
@@ -724,12 +724,12 @@
 	<xs:complexType name="CommandGroupProperties">
 		<xs:sequence>
 			<xs:element name="Name" type="xs:string"/>
-			<xs:element name="Synonym" type="ns2:LocalStringType"/>
+			<xs:element name="Synonym" type="ns1:LocalStringType"/>
 			<xs:element name="Comment" type="xs:string"/>
 			<xs:element name="ObjectBelonging" type="ns7:ObjectBelonging"/>
-			<xs:element name="ExtendedConfigurationObject" type="ns2:UUID" minOccurs="0"/>
+			<xs:element name="ExtendedConfigurationObject" type="ns1:UUID" minOccurs="0"/>
 			<xs:element name="Representation" type="ns5:ButtonRepresentation"/>
-			<xs:element name="ToolTip" type="ns2:LocalStringType"/>
+			<xs:element name="ToolTip" type="ns1:LocalStringType"/>
 			<xs:element name="Picture" type="ns8:Picture"/>
 			<xs:element name="Category" type="ns4:CommandGroupCategory"/>
 		</xs:sequence>
@@ -737,16 +737,16 @@
 	<xs:complexType name="CommandProperties">
 		<xs:sequence>
 			<xs:element name="Name" type="xs:string" minOccurs="0"/>
-			<xs:element name="Synonym" type="ns2:LocalStringType" minOccurs="0"/>
+			<xs:element name="Synonym" type="ns1:LocalStringType" minOccurs="0"/>
 			<xs:element name="Comment" type="xs:string" minOccurs="0"/>
 			<xs:element name="ObjectBelonging" type="ns7:ObjectBelonging" minOccurs="0"/>
-			<xs:element name="ExtendedConfigurationObject" type="ns2:UUID" minOccurs="0"/>
+			<xs:element name="ExtendedConfigurationObject" type="ns1:UUID" minOccurs="0"/>
 			<xs:element name="Group" type="ns8:IncludeInCommandCategoriesType" minOccurs="0"/>
-			<xs:element name="CommandParameterType" type="ns2:TypeDescription" minOccurs="0"/>
+			<xs:element name="CommandParameterType" type="ns1:TypeDescription" minOccurs="0"/>
 			<xs:element name="ParameterUseMode" type="ns6:CommandParameterUseMode" minOccurs="0"/>
 			<xs:element name="ModifiesData" type="xs:boolean" minOccurs="0"/>
 			<xs:element name="Representation" type="ns5:ButtonRepresentation" minOccurs="0"/>
-			<xs:element name="ToolTip" type="ns2:LocalStringType" minOccurs="0"/>
+			<xs:element name="ToolTip" type="ns1:LocalStringType" minOccurs="0"/>
 			<xs:element name="Picture" type="ns8:Picture" minOccurs="0"/>
 			<xs:element name="Shortcut" type="ns8:ShortCutType" minOccurs="0"/>
 			<xs:element name="CommandModule" type="ns8:ExternalProperty" minOccurs="0"/>
@@ -765,15 +765,15 @@
 	<xs:complexType name="CommonAttributeProperties">
 		<xs:sequence>
 			<xs:element name="Name" type="xs:string"/>
-			<xs:element name="Synonym" type="ns2:LocalStringType"/>
+			<xs:element name="Synonym" type="ns1:LocalStringType"/>
 			<xs:element name="Comment" type="xs:string"/>
 			<xs:element name="ObjectBelonging" type="ns7:ObjectBelonging"/>
-			<xs:element name="ExtendedConfigurationObject" type="ns2:UUID" minOccurs="0"/>
-			<xs:element name="Type" type="ns2:TypeDescription"/>
+			<xs:element name="ExtendedConfigurationObject" type="ns1:UUID" minOccurs="0"/>
+			<xs:element name="Type" type="ns1:TypeDescription"/>
 			<xs:element name="PasswordMode" type="xs:boolean"/>
-			<xs:element name="Format" type="ns2:LocalStringType"/>
-			<xs:element name="EditFormat" type="ns2:LocalStringType"/>
-			<xs:element name="ToolTip" type="ns2:LocalStringType"/>
+			<xs:element name="Format" type="ns1:LocalStringType"/>
+			<xs:element name="EditFormat" type="ns1:LocalStringType"/>
+			<xs:element name="ToolTip" type="ns1:LocalStringType"/>
 			<xs:element name="MarkNegatives" type="xs:boolean"/>
 			<xs:element name="Mask" type="xs:string"/>
 			<xs:element name="MultiLine" type="xs:boolean"/>
@@ -782,7 +782,7 @@
 			<xs:element name="MaxValue"/>
 			<xs:element name="FillFromFillingValue" type="xs:boolean"/>
 			<xs:element name="FillValue"/>
-			<xs:element name="FillChecking" type="ns2:FillChecking"/>
+			<xs:element name="FillChecking" type="ns1:FillChecking"/>
 			<xs:element name="ChoiceFoldersAndItems" type="ns3:FoldersAndItemsUse"/>
 			<xs:element name="ChoiceParameterLinks" type="ns8:ChoiceParameterLinks"/>
 			<xs:element name="ChoiceParameters" type="ns4:ChoiceParameters"/>
@@ -818,19 +818,19 @@
 	<xs:complexType name="CommonCommandProperties">
 		<xs:sequence>
 			<xs:element name="Name" type="xs:string"/>
-			<xs:element name="Synonym" type="ns2:LocalStringType"/>
+			<xs:element name="Synonym" type="ns1:LocalStringType"/>
 			<xs:element name="Comment" type="xs:string"/>
 			<xs:element name="ObjectBelonging" type="ns7:ObjectBelonging"/>
-			<xs:element name="ExtendedConfigurationObject" type="ns2:UUID" minOccurs="0"/>
+			<xs:element name="ExtendedConfigurationObject" type="ns1:UUID" minOccurs="0"/>
 			<xs:element name="Group" type="ns8:IncludeInCommandCategoriesType"/>
 			<xs:element name="Representation" type="ns5:ButtonRepresentation"/>
-			<xs:element name="ToolTip" type="ns2:LocalStringType"/>
+			<xs:element name="ToolTip" type="ns1:LocalStringType"/>
 			<xs:element name="Picture" type="ns8:Picture"/>
 			<xs:element name="Shortcut" type="ns8:ShortCutType"/>
 			<xs:element name="CommandModule" type="ns8:ExternalProperty"/>
 			<xs:element name="IncludeHelpInContents" type="xs:boolean"/>
 			<xs:element name="Help" type="ns8:ExternalProperty"/>
-			<xs:element name="CommandParameterType" type="ns2:TypeDescription"/>
+			<xs:element name="CommandParameterType" type="ns1:TypeDescription"/>
 			<xs:element name="ParameterUseMode" type="ns6:CommandParameterUseMode"/>
 			<xs:element name="ModifiesData" type="xs:boolean"/>
 			<xs:element name="OnMainServerUnavalableBehavior" type="ns5:OnMainServerUnavalableBehavior"/>
@@ -848,18 +848,18 @@
 	<xs:complexType name="CommonFormProperties">
 		<xs:sequence>
 			<xs:element name="Name" type="xs:string"/>
-			<xs:element name="Synonym" type="ns2:LocalStringType"/>
+			<xs:element name="Synonym" type="ns1:LocalStringType"/>
 			<xs:element name="Comment" type="xs:string"/>
 			<xs:element name="ObjectBelonging" type="ns7:ObjectBelonging"/>
-			<xs:element name="ExtendedConfigurationObject" type="ns2:UUID" minOccurs="0"/>
+			<xs:element name="ExtendedConfigurationObject" type="ns1:UUID" minOccurs="0"/>
 			<xs:element name="Form" type="ns8:ExternalProperty"/>
 			<xs:element name="FormType" type="ns7:FormType"/>
 			<xs:element name="IncludeHelpInContents" type="xs:boolean"/>
 			<xs:element name="Help" type="ns8:ExternalProperty"/>
-			<xs:element name="UsePurposes" type="ns2:FixedArray"/>
+			<xs:element name="UsePurposes" type="ns1:FixedArray"/>
 			<xs:element name="UseStandardCommands" type="xs:boolean"/>
-			<xs:element name="ExtendedPresentation" type="ns2:LocalStringType"/>
-			<xs:element name="Explanation" type="ns2:LocalStringType"/>
+			<xs:element name="ExtendedPresentation" type="ns1:LocalStringType"/>
+			<xs:element name="Explanation" type="ns1:LocalStringType"/>
 		</xs:sequence>
 	</xs:complexType>
 	<xs:complexType name="CommonModule">
@@ -874,10 +874,10 @@
 	<xs:complexType name="CommonModuleProperties">
 		<xs:choice>
 			<xs:element name="Name" type="xs:string"/>
-			<xs:element name="Synonym" type="ns2:LocalStringType"/>
+			<xs:element name="Synonym" type="ns1:LocalStringType"/>
 			<xs:element name="Comment" type="xs:string"/>
 			<xs:element name="ObjectBelonging" type="ns7:ObjectBelonging"/>
-			<xs:element name="ExtendedConfigurationObject" type="ns2:UUID" minOccurs="0"/>
+			<xs:element name="ExtendedConfigurationObject" type="ns1:UUID" minOccurs="0"/>
 			<xs:element name="Module" type="ns8:ExternalProperty"/>
 			<xs:element name="Global" type="xs:boolean"/>
 			<xs:element name="ClientManagedApplication" type="xs:boolean"/>
@@ -902,10 +902,10 @@
 	<xs:complexType name="CommonPictureProperties">
 		<xs:sequence>
 			<xs:element name="Name" type="xs:string"/>
-			<xs:element name="Synonym" type="ns2:LocalStringType"/>
+			<xs:element name="Synonym" type="ns1:LocalStringType"/>
 			<xs:element name="Comment" type="xs:string"/>
 			<xs:element name="ObjectBelonging" type="ns7:ObjectBelonging"/>
-			<xs:element name="ExtendedConfigurationObject" type="ns2:UUID" minOccurs="0"/>
+			<xs:element name="ExtendedConfigurationObject" type="ns1:UUID" minOccurs="0"/>
 			<xs:element name="Picture" type="ns8:ExternalProperty"/>
 			<xs:element name="AvailabilityForChoice" type="xs:boolean"/>
 			<xs:element name="AvailabilityForAppearance" type="xs:boolean"/>
@@ -923,10 +923,10 @@
 	<xs:complexType name="CommonTemplateProperties">
 		<xs:sequence>
 			<xs:element name="Name" type="xs:string"/>
-			<xs:element name="Synonym" type="ns2:LocalStringType"/>
+			<xs:element name="Synonym" type="ns1:LocalStringType"/>
 			<xs:element name="Comment" type="xs:string"/>
 			<xs:element name="ObjectBelonging" type="ns7:ObjectBelonging"/>
-			<xs:element name="ExtendedConfigurationObject" type="ns2:UUID" minOccurs="0"/>
+			<xs:element name="ExtendedConfigurationObject" type="ns1:UUID" minOccurs="0"/>
 			<xs:element name="TemplateType" type="ns7:TemplateType"/>
 			<xs:element name="Template" type="ns8:ExternalProperty"/>
 		</xs:sequence>
@@ -996,16 +996,16 @@
 	<xs:complexType name="ConfigurationProperties">
 		<xs:choice>
 			<xs:element name="Name" type="xs:string"/>
-			<xs:element name="Synonym" type="ns2:LocalStringType"/>
+			<xs:element name="Synonym" type="ns1:LocalStringType"/>
 			<xs:element name="Comment" type="xs:string"/>
 			<xs:element name="ConfigurationExtensionPurpose" type="ns7:ConfigurationExtensionPurpose"/>
 			<xs:element name="KeepMappingToExtendedConfigurationObjectsByIDs" type="xs:boolean"/>
 			<xs:element name="ObjectBelonging" type="ns7:ObjectBelonging"/>
-			<xs:element name="ExtendedConfigurationObject" type="ns2:UUID" minOccurs="0"/>
+			<xs:element name="ExtendedConfigurationObject" type="ns1:UUID" minOccurs="0"/>
 			<xs:element name="NamePrefix" type="xs:string"/>
 			<xs:element name="ConfigurationExtensionCompatibilityMode" type="ns7:CompatibilityMode"/>
 			<xs:element name="DefaultRunMode" type="ns4:ClientRunMode"/>
-			<xs:element name="UsePurposes" type="ns2:FixedArray"/>
+			<xs:element name="UsePurposes" type="ns1:FixedArray"/>
 			<xs:element name="ScriptVariant" type="ns7:ScriptVariant"/>
 			<xs:element name="DefaultRoles" type="ns8:MDListType"/>
 			<xs:element name="Vendor" type="xs:string"/>
@@ -1040,7 +1040,7 @@
 			<xs:element name="DefaultCollaborationSystemUsersChoiceForm" type="ns8:MDObjectRef"/>
 			<xs:element name="RequiredMobileApplicationPermissions" type="ns4:RequiredPermissions"/>
 			<xs:element name="UsedMobileApplicationFunctionalities" type="ns4:UsedFunctionality"/>
-			<xs:element name="MobileApplicationURLs" type="ns2:FixedArray"/>
+			<xs:element name="MobileApplicationURLs" type="ns1:FixedArray"/>
 			<xs:element name="MobileClientSign" type="ns8:ExternalProperty"/>
 			<xs:element name="CommandInterface" type="ns8:ExternalProperty"/>
 			<xs:element name="HomePageWorkArea" type="ns8:ExternalProperty" minOccurs="0"/>
@@ -1048,17 +1048,17 @@
 			<xs:element name="MainSectionCommandInterface" type="ns8:ExternalProperty"/>
 			<xs:element name="MainSectionPicture" type="ns8:ExternalProperty"/>
 			<xs:element name="ClientApplicationInterface" type="ns8:ExternalProperty"/>
-			<xs:element name="MainClientApplicationWindowMode" type="ns2:MainClientApplicationWindowMode"/>
+			<xs:element name="MainClientApplicationWindowMode" type="ns1:MainClientApplicationWindowMode"/>
 			<xs:element name="DefaultInterface" type="ns8:MDObjectRef"/>
 			<xs:element name="DefaultStyle" type="ns8:MDObjectRef"/>
 			<xs:element name="DefaultLanguage" type="ns8:MDObjectRef"/>
-			<xs:element name="BriefInformation" type="ns2:LocalStringType"/>
-			<xs:element name="DetailedInformation" type="ns2:LocalStringType"/>
+			<xs:element name="BriefInformation" type="ns1:LocalStringType"/>
+			<xs:element name="DetailedInformation" type="ns1:LocalStringType"/>
 			<xs:element name="Logo" type="ns8:ExternalProperty"/>
 			<xs:element name="Splash" type="ns8:ExternalProperty"/>
-			<xs:element name="Copyright" type="ns2:LocalStringType"/>
-			<xs:element name="VendorInformationAddress" type="ns2:LocalStringType"/>
-			<xs:element name="ConfigurationInformationAddress" type="ns2:LocalStringType"/>
+			<xs:element name="Copyright" type="ns1:LocalStringType"/>
+			<xs:element name="VendorInformationAddress" type="ns1:LocalStringType"/>
+			<xs:element name="ConfigurationInformationAddress" type="ns1:LocalStringType"/>
 			<xs:element name="DataLockControlMode" type="ns7:DefaultDataLockControlMode"/>
 			<xs:element name="ObjectAutonumerationMode" type="ns7:ObjectAutonumerationMode"/>
 			<xs:element name="ModalityUseMode" type="ns7:ModalityUseMode"/>
@@ -1083,26 +1083,26 @@
 	<xs:complexType name="ConstantProperties">
 		<xs:sequence>
 			<xs:element name="Name" type="xs:string"/>
-			<xs:element name="Synonym" type="ns2:LocalStringType"/>
+			<xs:element name="Synonym" type="ns1:LocalStringType"/>
 			<xs:element name="Comment" type="xs:string"/>
 			<xs:element name="ObjectBelonging" type="ns7:ObjectBelonging"/>
-			<xs:element name="ExtendedConfigurationObject" type="ns2:UUID" minOccurs="0"/>
-			<xs:element name="Type" type="ns2:TypeDescription"/>
+			<xs:element name="ExtendedConfigurationObject" type="ns1:UUID" minOccurs="0"/>
+			<xs:element name="Type" type="ns1:TypeDescription"/>
 			<xs:element name="UseStandardCommands" type="xs:boolean"/>
 			<xs:element name="DefaultForm" type="ns8:MDObjectRef"/>
-			<xs:element name="ExtendedPresentation" type="ns2:LocalStringType"/>
-			<xs:element name="Explanation" type="ns2:LocalStringType"/>
+			<xs:element name="ExtendedPresentation" type="ns1:LocalStringType"/>
+			<xs:element name="Explanation" type="ns1:LocalStringType"/>
 			<xs:element name="PasswordMode" type="xs:boolean"/>
-			<xs:element name="Format" type="ns2:LocalStringType"/>
-			<xs:element name="EditFormat" type="ns2:LocalStringType"/>
-			<xs:element name="ToolTip" type="ns2:LocalStringType"/>
+			<xs:element name="Format" type="ns1:LocalStringType"/>
+			<xs:element name="EditFormat" type="ns1:LocalStringType"/>
+			<xs:element name="ToolTip" type="ns1:LocalStringType"/>
 			<xs:element name="MarkNegatives" type="xs:boolean"/>
 			<xs:element name="Mask" type="xs:string"/>
 			<xs:element name="MultiLine" type="xs:boolean"/>
 			<xs:element name="ExtendedEdit" type="xs:boolean"/>
 			<xs:element name="MinValue"/>
 			<xs:element name="MaxValue"/>
-			<xs:element name="FillChecking" type="ns2:FillChecking"/>
+			<xs:element name="FillChecking" type="ns1:FillChecking"/>
 			<xs:element name="ChoiceFoldersAndItems" type="ns3:FoldersAndItemsUse"/>
 			<xs:element name="ChoiceParameterLinks" type="ns8:ChoiceParameterLinks"/>
 			<xs:element name="ChoiceParameters" type="ns4:ChoiceParameters"/>
@@ -1141,20 +1141,20 @@
 	<xs:complexType name="CubeProperties">
 		<xs:sequence>
 			<xs:element name="Name" type="xs:string"/>
-			<xs:element name="Synonym" type="ns2:LocalStringType"/>
+			<xs:element name="Synonym" type="ns1:LocalStringType"/>
 			<xs:element name="Comment" type="xs:string"/>
 			<xs:element name="ObjectBelonging" type="ns7:ObjectBelonging"/>
-			<xs:element name="ExtendedConfigurationObject" type="ns2:UUID" minOccurs="0"/>
+			<xs:element name="ExtendedConfigurationObject" type="ns1:UUID" minOccurs="0"/>
 			<xs:element name="NameInDataSource" type="xs:string"/>
 			<xs:element name="Characteristics" type="ns8:CharacteristicsDescriptions"/>
 			<xs:element name="UseStandardCommands" type="xs:boolean"/>
 			<xs:element name="DefaultRecordForm" type="ns8:MDObjectRef"/>
 			<xs:element name="DefaultListForm" type="ns8:MDObjectRef"/>
-			<xs:element name="RecordPresentation" type="ns2:LocalStringType"/>
-			<xs:element name="ExtendedRecordPresentation" type="ns2:LocalStringType"/>
-			<xs:element name="ListPresentation" type="ns2:LocalStringType"/>
-			<xs:element name="ExtendedListPresentation" type="ns2:LocalStringType"/>
-			<xs:element name="Explanation" type="ns2:LocalStringType"/>
+			<xs:element name="RecordPresentation" type="ns1:LocalStringType"/>
+			<xs:element name="ExtendedRecordPresentation" type="ns1:LocalStringType"/>
+			<xs:element name="ListPresentation" type="ns1:LocalStringType"/>
+			<xs:element name="ExtendedListPresentation" type="ns1:LocalStringType"/>
+			<xs:element name="Explanation" type="ns1:LocalStringType"/>
 			<xs:element name="RecordSetModule" type="ns8:ExternalProperty"/>
 			<xs:element name="ManagerModule" type="ns8:ExternalProperty"/>
 			<xs:element name="IncludeHelpInContents" type="xs:boolean"/>
@@ -1183,10 +1183,10 @@
 	<xs:complexType name="DataProcessorProperties">
 		<xs:sequence>
 			<xs:element name="Name" type="xs:string"/>
-			<xs:element name="Synonym" type="ns2:LocalStringType"/>
+			<xs:element name="Synonym" type="ns1:LocalStringType"/>
 			<xs:element name="Comment" type="xs:string"/>
 			<xs:element name="ObjectBelonging" type="ns7:ObjectBelonging"/>
-			<xs:element name="ExtendedConfigurationObject" type="ns2:UUID" minOccurs="0"/>
+			<xs:element name="ExtendedConfigurationObject" type="ns1:UUID" minOccurs="0"/>
 			<xs:element name="UseStandardCommands" type="xs:boolean"/>
 			<xs:element name="DefaultForm" type="ns8:MDObjectRef"/>
 			<xs:element name="AuxiliaryForm" type="ns8:MDObjectRef"/>
@@ -1194,8 +1194,8 @@
 			<xs:element name="ManagerModule" type="ns8:ExternalProperty"/>
 			<xs:element name="IncludeHelpInContents" type="xs:boolean"/>
 			<xs:element name="Help" type="ns8:ExternalProperty"/>
-			<xs:element name="ExtendedPresentation" type="ns2:LocalStringType"/>
-			<xs:element name="Explanation" type="ns2:LocalStringType"/>
+			<xs:element name="ExtendedPresentation" type="ns1:LocalStringType"/>
+			<xs:element name="Explanation" type="ns1:LocalStringType"/>
 		</xs:sequence>
 	</xs:complexType>
 	<xs:complexType name="DefinedType">
@@ -1210,11 +1210,11 @@
 	<xs:complexType name="DefinedTypeProperties">
 		<xs:sequence>
 			<xs:element name="Name" type="xs:string"/>
-			<xs:element name="Synonym" type="ns2:LocalStringType"/>
+			<xs:element name="Synonym" type="ns1:LocalStringType"/>
 			<xs:element name="Comment" type="xs:string"/>
 			<xs:element name="ObjectBelonging" type="ns7:ObjectBelonging"/>
-			<xs:element name="ExtendedConfigurationObject" type="ns2:UUID" minOccurs="0"/>
-			<xs:element name="Type" type="ns2:TypeDescription"/>
+			<xs:element name="ExtendedConfigurationObject" type="ns1:UUID" minOccurs="0"/>
+			<xs:element name="Type" type="ns1:TypeDescription"/>
 		</xs:sequence>
 	</xs:complexType>
 	<xs:complexType name="Dimension">
@@ -1229,26 +1229,26 @@
 	<xs:complexType name="DimensionProperties">
 		<xs:sequence>
 			<xs:element name="Name" type="xs:string" minOccurs="0"/>
-			<xs:element name="Synonym" type="ns2:LocalStringType" minOccurs="0"/>
+			<xs:element name="Synonym" type="ns1:LocalStringType" minOccurs="0"/>
 			<xs:element name="Comment" type="xs:string" minOccurs="0"/>
 			<xs:element name="ObjectBelonging" type="ns7:ObjectBelonging" minOccurs="0"/>
-			<xs:element name="ExtendedConfigurationObject" type="ns2:UUID" minOccurs="0"/>
-			<xs:element name="Type" type="ns2:TypeDescription" minOccurs="0"/>
+			<xs:element name="ExtendedConfigurationObject" type="ns1:UUID" minOccurs="0"/>
+			<xs:element name="Type" type="ns1:TypeDescription" minOccurs="0"/>
 			<xs:element name="DocumentMap" type="ns8:MDListType" minOccurs="0"/>
 			<xs:element name="RegisterRecordsMap" type="ns8:MDListType" minOccurs="0"/>
 			<xs:element name="RegisterDimension" type="ns8:MDObjectRef" minOccurs="0"/>
 			<xs:element name="LeadingRegisterData" type="ns8:MDListType" minOccurs="0"/>
 			<xs:element name="PasswordMode" type="xs:boolean" minOccurs="0"/>
-			<xs:element name="Format" type="ns2:LocalStringType" minOccurs="0"/>
-			<xs:element name="EditFormat" type="ns2:LocalStringType" minOccurs="0"/>
-			<xs:element name="ToolTip" type="ns2:LocalStringType" minOccurs="0"/>
+			<xs:element name="Format" type="ns1:LocalStringType" minOccurs="0"/>
+			<xs:element name="EditFormat" type="ns1:LocalStringType" minOccurs="0"/>
+			<xs:element name="ToolTip" type="ns1:LocalStringType" minOccurs="0"/>
 			<xs:element name="MarkNegatives" type="xs:boolean" minOccurs="0"/>
 			<xs:element name="Mask" type="xs:string" minOccurs="0"/>
 			<xs:element name="MultiLine" type="xs:boolean" minOccurs="0"/>
 			<xs:element name="ExtendedEdit" type="xs:boolean" minOccurs="0"/>
 			<xs:element name="MinValue" minOccurs="0"/>
 			<xs:element name="MaxValue" minOccurs="0"/>
-			<xs:element name="FillChecking" type="ns2:FillChecking" minOccurs="0"/>
+			<xs:element name="FillChecking" type="ns1:FillChecking" minOccurs="0"/>
 			<xs:element name="ChoiceFoldersAndItems" type="ns3:FoldersAndItemsUse" minOccurs="0"/>
 			<xs:element name="ChoiceParameterLinks" type="ns8:ChoiceParameterLinks" minOccurs="0"/>
 			<xs:element name="ChoiceParameters" type="ns4:ChoiceParameters" minOccurs="0"/>
@@ -1293,10 +1293,10 @@
 	<xs:complexType name="DimensionTableProperties">
 		<xs:sequence>
 			<xs:element name="Name" type="xs:string"/>
-			<xs:element name="Synonym" type="ns2:LocalStringType"/>
+			<xs:element name="Synonym" type="ns1:LocalStringType"/>
 			<xs:element name="Comment" type="xs:string"/>
 			<xs:element name="ObjectBelonging" type="ns7:ObjectBelonging"/>
-			<xs:element name="ExtendedConfigurationObject" type="ns2:UUID" minOccurs="0"/>
+			<xs:element name="ExtendedConfigurationObject" type="ns1:UUID" minOccurs="0"/>
 			<xs:element name="NameInDataSource" type="xs:string"/>
 			<xs:element name="PresentationField" type="ns8:MDObjectRef"/>
 			<xs:element name="HierarchyNameInDataSource" type="xs:string"/>
@@ -1308,11 +1308,11 @@
 			<xs:element name="DefaultObjectForm" type="ns8:MDObjectRef"/>
 			<xs:element name="DefaultListForm" type="ns8:MDObjectRef"/>
 			<xs:element name="DefaultChoiceForm" type="ns8:MDObjectRef"/>
-			<xs:element name="ObjectPresentation" type="ns2:LocalStringType"/>
-			<xs:element name="ExtendedObjectPresentation" type="ns2:LocalStringType"/>
-			<xs:element name="ListPresentation" type="ns2:LocalStringType"/>
-			<xs:element name="ExtendedListPresentation" type="ns2:LocalStringType"/>
-			<xs:element name="Explanation" type="ns2:LocalStringType"/>
+			<xs:element name="ObjectPresentation" type="ns1:LocalStringType"/>
+			<xs:element name="ExtendedObjectPresentation" type="ns1:LocalStringType"/>
+			<xs:element name="ListPresentation" type="ns1:LocalStringType"/>
+			<xs:element name="ExtendedListPresentation" type="ns1:LocalStringType"/>
+			<xs:element name="Explanation" type="ns1:LocalStringType"/>
 			<xs:element name="ObjectModule" type="ns8:ExternalProperty"/>
 			<xs:element name="ManagerModule" type="ns8:ExternalProperty"/>
 			<xs:element name="IncludeHelpInContents" type="xs:boolean"/>
@@ -1359,10 +1359,10 @@
 	<xs:complexType name="DocumentJournalProperties">
 		<xs:sequence>
 			<xs:element name="Name" type="xs:string"/>
-			<xs:element name="Synonym" type="ns2:LocalStringType"/>
+			<xs:element name="Synonym" type="ns1:LocalStringType"/>
 			<xs:element name="Comment" type="xs:string"/>
 			<xs:element name="ObjectBelonging" type="ns7:ObjectBelonging"/>
-			<xs:element name="ExtendedConfigurationObject" type="ns2:UUID" minOccurs="0"/>
+			<xs:element name="ExtendedConfigurationObject" type="ns1:UUID" minOccurs="0"/>
 			<xs:element name="DefaultForm" type="ns8:MDObjectRef"/>
 			<xs:element name="AuxiliaryForm" type="ns8:MDObjectRef"/>
 			<xs:element name="UseStandardCommands" type="xs:boolean"/>
@@ -1371,9 +1371,9 @@
 			<xs:element name="Help" type="ns8:ExternalProperty"/>
 			<xs:element name="ManagerModule" type="ns8:ExternalProperty"/>
 			<xs:element name="StandardAttributes" type="ns8:StandardAttributeDescriptions"/>
-			<xs:element name="ListPresentation" type="ns2:LocalStringType"/>
-			<xs:element name="ExtendedListPresentation" type="ns2:LocalStringType"/>
-			<xs:element name="Explanation" type="ns2:LocalStringType"/>
+			<xs:element name="ListPresentation" type="ns1:LocalStringType"/>
+			<xs:element name="ExtendedListPresentation" type="ns1:LocalStringType"/>
+			<xs:element name="Explanation" type="ns1:LocalStringType"/>
 		</xs:sequence>
 	</xs:complexType>
 	<xs:complexType name="DocumentNumerator">
@@ -1388,13 +1388,13 @@
 	<xs:complexType name="DocumentNumeratorProperties">
 		<xs:sequence>
 			<xs:element name="Name" type="xs:string"/>
-			<xs:element name="Synonym" type="ns2:LocalStringType"/>
+			<xs:element name="Synonym" type="ns1:LocalStringType"/>
 			<xs:element name="Comment" type="xs:string"/>
 			<xs:element name="ObjectBelonging" type="ns7:ObjectBelonging"/>
-			<xs:element name="ExtendedConfigurationObject" type="ns2:UUID" minOccurs="0"/>
+			<xs:element name="ExtendedConfigurationObject" type="ns1:UUID" minOccurs="0"/>
 			<xs:element name="NumberType" type="ns7:DocumentNumberType"/>
 			<xs:element name="NumberLength" type="xs:decimal"/>
-			<xs:element name="NumberAllowedLength" type="ns2:AllowedLength"/>
+			<xs:element name="NumberAllowedLength" type="ns1:AllowedLength"/>
 			<xs:element name="NumberPeriodicity" type="ns7:DocumentNumberPeriodicity"/>
 			<xs:element name="CheckUnique" type="xs:boolean"/>
 		</xs:sequence>
@@ -1402,15 +1402,15 @@
 	<xs:complexType name="DocumentProperties">
 		<xs:sequence>
 			<xs:element name="Name" type="xs:string"/>
-			<xs:element name="Synonym" type="ns2:LocalStringType"/>
+			<xs:element name="Synonym" type="ns1:LocalStringType"/>
 			<xs:element name="Comment" type="xs:string"/>
 			<xs:element name="ObjectBelonging" type="ns7:ObjectBelonging"/>
-			<xs:element name="ExtendedConfigurationObject" type="ns2:UUID" minOccurs="0"/>
+			<xs:element name="ExtendedConfigurationObject" type="ns1:UUID" minOccurs="0"/>
 			<xs:element name="UseStandardCommands" type="xs:boolean"/>
 			<xs:element name="Numerator" type="ns8:MDObjectRef"/>
 			<xs:element name="NumberType" type="ns7:DocumentNumberType"/>
 			<xs:element name="NumberLength" type="xs:decimal"/>
-			<xs:element name="NumberAllowedLength" type="ns2:AllowedLength"/>
+			<xs:element name="NumberAllowedLength" type="ns1:AllowedLength"/>
 			<xs:element name="NumberPeriodicity" type="ns7:DocumentNumberPeriodicity"/>
 			<xs:element name="CheckUnique" type="xs:boolean"/>
 			<xs:element name="Autonumbering" type="xs:boolean"/>
@@ -1443,11 +1443,11 @@
 			<xs:element name="DataLockFields" type="ns8:FieldList"/>
 			<xs:element name="DataLockControlMode" type="ns7:DefaultDataLockControlMode"/>
 			<xs:element name="FullTextSearch" type="ns7:FullTextSearchUsing"/>
-			<xs:element name="ObjectPresentation" type="ns2:LocalStringType"/>
-			<xs:element name="ExtendedObjectPresentation" type="ns2:LocalStringType"/>
-			<xs:element name="ListPresentation" type="ns2:LocalStringType"/>
-			<xs:element name="ExtendedListPresentation" type="ns2:LocalStringType"/>
-			<xs:element name="Explanation" type="ns2:LocalStringType"/>
+			<xs:element name="ObjectPresentation" type="ns1:LocalStringType"/>
+			<xs:element name="ExtendedObjectPresentation" type="ns1:LocalStringType"/>
+			<xs:element name="ListPresentation" type="ns1:LocalStringType"/>
+			<xs:element name="ExtendedListPresentation" type="ns1:LocalStringType"/>
+			<xs:element name="Explanation" type="ns1:LocalStringType"/>
 			<xs:element name="ChoiceHistoryOnInput" type="ns5:ChoiceHistoryOnInput"/>
 			<xs:element name="DataHistory" type="ns7:DataHistoryUse"/>
 			<xs:element name="UpdateDataHistoryImmediatelyAfterWrite" type="xs:boolean"/>
@@ -1475,10 +1475,10 @@
 	<xs:complexType name="EnumProperties">
 		<xs:sequence>
 			<xs:element name="Name" type="xs:string"/>
-			<xs:element name="Synonym" type="ns2:LocalStringType"/>
+			<xs:element name="Synonym" type="ns1:LocalStringType"/>
 			<xs:element name="Comment" type="xs:string"/>
 			<xs:element name="ObjectBelonging" type="ns7:ObjectBelonging"/>
-			<xs:element name="ExtendedConfigurationObject" type="ns2:UUID" minOccurs="0"/>
+			<xs:element name="ExtendedConfigurationObject" type="ns1:UUID" minOccurs="0"/>
 			<xs:element name="UseStandardCommands" type="xs:boolean"/>
 			<xs:element name="StandardAttributes" type="ns8:StandardAttributeDescriptions"/>
 			<xs:element name="Characteristics" type="ns8:CharacteristicsDescriptions"/>
@@ -1489,9 +1489,9 @@
 			<xs:element name="AuxiliaryListForm" type="ns8:MDObjectRef"/>
 			<xs:element name="AuxiliaryChoiceForm" type="ns8:MDObjectRef"/>
 			<xs:element name="ManagerModule" type="ns8:ExternalProperty"/>
-			<xs:element name="ListPresentation" type="ns2:LocalStringType"/>
-			<xs:element name="ExtendedListPresentation" type="ns2:LocalStringType"/>
-			<xs:element name="Explanation" type="ns2:LocalStringType"/>
+			<xs:element name="ListPresentation" type="ns1:LocalStringType"/>
+			<xs:element name="ExtendedListPresentation" type="ns1:LocalStringType"/>
+			<xs:element name="Explanation" type="ns1:LocalStringType"/>
 			<xs:element name="ChoiceHistoryOnInput" type="ns5:ChoiceHistoryOnInput"/>
 		</xs:sequence>
 	</xs:complexType>
@@ -1507,10 +1507,10 @@
 	<xs:complexType name="EnumValueProperties">
 		<xs:sequence>
 			<xs:element name="Name" type="xs:string"/>
-			<xs:element name="Synonym" type="ns2:LocalStringType"/>
+			<xs:element name="Synonym" type="ns1:LocalStringType"/>
 			<xs:element name="Comment" type="xs:string"/>
 			<xs:element name="ObjectBelonging" type="ns7:ObjectBelonging"/>
-			<xs:element name="ExtendedConfigurationObject" type="ns2:UUID" minOccurs="0"/>
+			<xs:element name="ExtendedConfigurationObject" type="ns1:UUID" minOccurs="0"/>
 		</xs:sequence>
 	</xs:complexType>
 	<xs:complexType name="EventSubscription">
@@ -1525,11 +1525,11 @@
 	<xs:complexType name="EventSubscriptionProperties">
 		<xs:sequence>
 			<xs:element name="Name" type="xs:string"/>
-			<xs:element name="Synonym" type="ns2:LocalStringType"/>
+			<xs:element name="Synonym" type="ns1:LocalStringType"/>
 			<xs:element name="Comment" type="xs:string"/>
 			<xs:element name="ObjectBelonging" type="ns7:ObjectBelonging"/>
-			<xs:element name="ExtendedConfigurationObject" type="ns2:UUID" minOccurs="0"/>
-			<xs:element name="Source" type="ns2:TypeDescription"/>
+			<xs:element name="ExtendedConfigurationObject" type="ns1:UUID" minOccurs="0"/>
+			<xs:element name="Source" type="ns1:TypeDescription"/>
 			<xs:element name="Event" type="ns8:AliasedStringType"/>
 			<xs:element name="Handler" type="ns8:MDMethodRef"/>
 		</xs:sequence>
@@ -1556,13 +1556,13 @@
 	<xs:complexType name="ExchangePlanProperties">
 		<xs:sequence>
 			<xs:element name="Name" type="xs:string"/>
-			<xs:element name="Synonym" type="ns2:LocalStringType"/>
+			<xs:element name="Synonym" type="ns1:LocalStringType"/>
 			<xs:element name="Comment" type="xs:string"/>
 			<xs:element name="ObjectBelonging" type="ns7:ObjectBelonging"/>
-			<xs:element name="ExtendedConfigurationObject" type="ns2:UUID" minOccurs="0"/>
+			<xs:element name="ExtendedConfigurationObject" type="ns1:UUID" minOccurs="0"/>
 			<xs:element name="UseStandardCommands" type="xs:boolean"/>
 			<xs:element name="CodeLength" type="xs:decimal"/>
-			<xs:element name="CodeAllowedLength" type="ns2:AllowedLength"/>
+			<xs:element name="CodeAllowedLength" type="ns1:AllowedLength"/>
 			<xs:element name="DescriptionLength" type="xs:decimal"/>
 			<xs:element name="Content" type="ns8:ExternalProperty"/>
 			<xs:element name="DefaultPresentation" type="ns7:DataExchangeMainPresentation"/>
@@ -1593,11 +1593,11 @@
 			<xs:element name="DataLockFields" type="ns8:FieldList"/>
 			<xs:element name="DataLockControlMode" type="ns7:DefaultDataLockControlMode"/>
 			<xs:element name="FullTextSearch" type="ns7:FullTextSearchUsing"/>
-			<xs:element name="ObjectPresentation" type="ns2:LocalStringType"/>
-			<xs:element name="ExtendedObjectPresentation" type="ns2:LocalStringType"/>
-			<xs:element name="ListPresentation" type="ns2:LocalStringType"/>
-			<xs:element name="ExtendedListPresentation" type="ns2:LocalStringType"/>
-			<xs:element name="Explanation" type="ns2:LocalStringType"/>
+			<xs:element name="ObjectPresentation" type="ns1:LocalStringType"/>
+			<xs:element name="ExtendedObjectPresentation" type="ns1:LocalStringType"/>
+			<xs:element name="ListPresentation" type="ns1:LocalStringType"/>
+			<xs:element name="ExtendedListPresentation" type="ns1:LocalStringType"/>
+			<xs:element name="Explanation" type="ns1:LocalStringType"/>
 			<xs:element name="DataHistory" type="ns7:DataHistoryUse"/>
 			<xs:element name="UpdateDataHistoryImmediatelyAfterWrite" type="xs:boolean"/>
 			<xs:element name="ExecuteAfterWriteDataHistoryVersionProcessing" type="xs:boolean"/>
@@ -1615,15 +1615,15 @@
 	<xs:complexType name="ExtDimensionAccountingFlagProperties">
 		<xs:sequence>
 			<xs:element name="Name" type="xs:string"/>
-			<xs:element name="Synonym" type="ns2:LocalStringType"/>
+			<xs:element name="Synonym" type="ns1:LocalStringType"/>
 			<xs:element name="Comment" type="xs:string"/>
 			<xs:element name="ObjectBelonging" type="ns7:ObjectBelonging"/>
-			<xs:element name="ExtendedConfigurationObject" type="ns2:UUID" minOccurs="0"/>
-			<xs:element name="Type" type="ns2:TypeDescription"/>
+			<xs:element name="ExtendedConfigurationObject" type="ns1:UUID" minOccurs="0"/>
+			<xs:element name="Type" type="ns1:TypeDescription"/>
 			<xs:element name="PasswordMode" type="xs:boolean"/>
-			<xs:element name="Format" type="ns2:LocalStringType"/>
-			<xs:element name="EditFormat" type="ns2:LocalStringType"/>
-			<xs:element name="ToolTip" type="ns2:LocalStringType"/>
+			<xs:element name="Format" type="ns1:LocalStringType"/>
+			<xs:element name="EditFormat" type="ns1:LocalStringType"/>
+			<xs:element name="ToolTip" type="ns1:LocalStringType"/>
 			<xs:element name="MarkNegatives" type="xs:boolean"/>
 			<xs:element name="Mask" type="xs:string"/>
 			<xs:element name="MultiLine" type="xs:boolean"/>
@@ -1632,7 +1632,7 @@
 			<xs:element name="MaxValue"/>
 			<xs:element name="FillFromFillingValue" type="xs:boolean"/>
 			<xs:element name="FillValue"/>
-			<xs:element name="FillChecking" type="ns2:FillChecking"/>
+			<xs:element name="FillChecking" type="ns1:FillChecking"/>
 			<xs:element name="ChoiceFoldersAndItems" type="ns3:FoldersAndItemsUse"/>
 			<xs:element name="ChoiceParameterLinks" type="ns8:ChoiceParameterLinks"/>
 			<xs:element name="ChoiceParameters" type="ns4:ChoiceParameters"/>
@@ -1665,10 +1665,10 @@
 	<xs:complexType name="ExternalDataProcessorProperties">
 		<xs:sequence>
 			<xs:element name="Name" type="xs:string" minOccurs="0"/>
-			<xs:element name="Synonym" type="ns2:LocalStringType" minOccurs="0"/>
+			<xs:element name="Synonym" type="ns1:LocalStringType" minOccurs="0"/>
 			<xs:element name="Comment" type="xs:string" minOccurs="0"/>
 			<xs:element name="ObjectBelonging" type="ns7:ObjectBelonging" minOccurs="0"/>
-			<xs:element name="ExtendedConfigurationObject" type="ns2:UUID" minOccurs="0"/>
+			<xs:element name="ExtendedConfigurationObject" type="ns1:UUID" minOccurs="0"/>
 			<xs:element name="DefaultForm" type="ns8:MDObjectRef" minOccurs="0"/>
 			<xs:element name="AuxiliaryForm" type="ns8:MDObjectRef" minOccurs="0"/>
 			<xs:element name="ObjectModule" type="ns8:ExternalProperty" minOccurs="0"/>
@@ -1695,10 +1695,10 @@
 	<xs:complexType name="ExternalDataSourceProperties">
 		<xs:sequence>
 			<xs:element name="Name" type="xs:string"/>
-			<xs:element name="Synonym" type="ns2:LocalStringType"/>
+			<xs:element name="Synonym" type="ns1:LocalStringType"/>
 			<xs:element name="Comment" type="xs:string"/>
 			<xs:element name="ObjectBelonging" type="ns7:ObjectBelonging"/>
-			<xs:element name="ExtendedConfigurationObject" type="ns2:UUID" minOccurs="0"/>
+			<xs:element name="ExtendedConfigurationObject" type="ns1:UUID" minOccurs="0"/>
 			<xs:element name="DataLockControlMode" type="ns7:DefaultDataLockControlMode"/>
 		</xs:sequence>
 	</xs:complexType>
@@ -1723,10 +1723,10 @@
 	<xs:complexType name="ExternalReportProperties">
 		<xs:sequence>
 			<xs:element name="Name" type="xs:string" minOccurs="0"/>
-			<xs:element name="Synonym" type="ns2:LocalStringType" minOccurs="0"/>
+			<xs:element name="Synonym" type="ns1:LocalStringType" minOccurs="0"/>
 			<xs:element name="Comment" type="xs:string" minOccurs="0"/>
 			<xs:element name="ObjectBelonging" type="ns7:ObjectBelonging" minOccurs="0"/>
-			<xs:element name="ExtendedConfigurationObject" type="ns2:UUID" minOccurs="0"/>
+			<xs:element name="ExtendedConfigurationObject" type="ns1:UUID" minOccurs="0"/>
 			<xs:element name="DefaultForm" type="ns8:MDObjectRef" minOccurs="0"/>
 			<xs:element name="AuxiliaryForm" type="ns8:MDObjectRef" minOccurs="0"/>
 			<xs:element name="MainDataCompositionSchema" type="ns8:MDObjectRef" minOccurs="0"/>
@@ -1751,15 +1751,15 @@
 	<xs:complexType name="FieldProperties">
 		<xs:sequence>
 			<xs:element name="Name" type="xs:string"/>
-			<xs:element name="Synonym" type="ns2:LocalStringType"/>
+			<xs:element name="Synonym" type="ns1:LocalStringType"/>
 			<xs:element name="Comment" type="xs:string"/>
 			<xs:element name="ObjectBelonging" type="ns7:ObjectBelonging"/>
-			<xs:element name="ExtendedConfigurationObject" type="ns2:UUID" minOccurs="0"/>
-			<xs:element name="Type" type="ns2:TypeDescription"/>
+			<xs:element name="ExtendedConfigurationObject" type="ns1:UUID" minOccurs="0"/>
+			<xs:element name="Type" type="ns1:TypeDescription"/>
 			<xs:element name="PasswordMode" type="xs:boolean"/>
-			<xs:element name="Format" type="ns2:LocalStringType"/>
-			<xs:element name="EditFormat" type="ns2:LocalStringType"/>
-			<xs:element name="ToolTip" type="ns2:LocalStringType"/>
+			<xs:element name="Format" type="ns1:LocalStringType"/>
+			<xs:element name="EditFormat" type="ns1:LocalStringType"/>
+			<xs:element name="ToolTip" type="ns1:LocalStringType"/>
 			<xs:element name="MarkNegatives" type="xs:boolean"/>
 			<xs:element name="Mask" type="xs:string"/>
 			<xs:element name="MultiLine" type="xs:boolean"/>
@@ -1768,7 +1768,7 @@
 			<xs:element name="MaxValue"/>
 			<xs:element name="FillFromFillingValue" type="xs:boolean"/>
 			<xs:element name="FillValue"/>
-			<xs:element name="FillChecking" type="ns2:FillChecking"/>
+			<xs:element name="FillChecking" type="ns1:FillChecking"/>
 			<xs:element name="ChoiceParameterLinks" type="ns8:ChoiceParameterLinks"/>
 			<xs:element name="ChoiceParameters" type="ns4:ChoiceParameters"/>
 			<xs:element name="QuickChoice" type="ns7:UseQuickChoice"/>
@@ -1799,19 +1799,19 @@
 	<xs:complexType name="FilterCriterionProperties">
 		<xs:sequence>
 			<xs:element name="Name" type="xs:string"/>
-			<xs:element name="Synonym" type="ns2:LocalStringType"/>
+			<xs:element name="Synonym" type="ns1:LocalStringType"/>
 			<xs:element name="Comment" type="xs:string"/>
 			<xs:element name="ObjectBelonging" type="ns7:ObjectBelonging"/>
-			<xs:element name="ExtendedConfigurationObject" type="ns2:UUID" minOccurs="0"/>
-			<xs:element name="Type" type="ns2:TypeDescription"/>
+			<xs:element name="ExtendedConfigurationObject" type="ns1:UUID" minOccurs="0"/>
+			<xs:element name="Type" type="ns1:TypeDescription"/>
 			<xs:element name="UseStandardCommands" type="xs:boolean"/>
 			<xs:element name="Content" type="ns8:MDListType"/>
 			<xs:element name="DefaultForm" type="ns8:MDObjectRef"/>
 			<xs:element name="AuxiliaryForm" type="ns8:MDObjectRef"/>
 			<xs:element name="ManagerModule" type="ns8:ExternalProperty"/>
-			<xs:element name="ListPresentation" type="ns2:LocalStringType"/>
-			<xs:element name="ExtendedListPresentation" type="ns2:LocalStringType"/>
-			<xs:element name="Explanation" type="ns2:LocalStringType"/>
+			<xs:element name="ListPresentation" type="ns1:LocalStringType"/>
+			<xs:element name="ExtendedListPresentation" type="ns1:LocalStringType"/>
+			<xs:element name="Explanation" type="ns1:LocalStringType"/>
 		</xs:sequence>
 	</xs:complexType>
 	<xs:complexType name="Form">
@@ -1826,16 +1826,16 @@
 	<xs:complexType name="FormProperties">
 		<xs:sequence>
 			<xs:element name="Name" type="xs:string" minOccurs="0"/>
-			<xs:element name="Synonym" type="ns2:LocalStringType" minOccurs="0"/>
+			<xs:element name="Synonym" type="ns1:LocalStringType" minOccurs="0"/>
 			<xs:element name="Comment" type="xs:string" minOccurs="0"/>
 			<xs:element name="ObjectBelonging" type="ns7:ObjectBelonging" minOccurs="0"/>
-			<xs:element name="ExtendedConfigurationObject" type="ns2:UUID" minOccurs="0"/>
+			<xs:element name="ExtendedConfigurationObject" type="ns1:UUID" minOccurs="0"/>
 			<xs:element name="Form" type="ns8:ExternalProperty" minOccurs="0"/>
 			<xs:element name="FormType" type="ns7:FormType" minOccurs="0"/>
 			<xs:element name="IncludeHelpInContents" type="xs:boolean" minOccurs="0"/>
 			<xs:element name="Help" type="ns8:ExternalProperty" minOccurs="0"/>
-			<xs:element name="UsePurposes" type="ns2:FixedArray" minOccurs="0"/>
-			<xs:element name="ExtendedPresentation" type="ns2:LocalStringType" minOccurs="0"/>
+			<xs:element name="UsePurposes" type="ns1:FixedArray" minOccurs="0"/>
+			<xs:element name="ExtendedPresentation" type="ns1:LocalStringType" minOccurs="0"/>
 		</xs:sequence>
 	</xs:complexType>
 	<xs:complexType name="Function">
@@ -1850,12 +1850,12 @@
 	<xs:complexType name="FunctionProperties">
 		<xs:sequence>
 			<xs:element name="Name" type="xs:string"/>
-			<xs:element name="Synonym" type="ns2:LocalStringType"/>
+			<xs:element name="Synonym" type="ns1:LocalStringType"/>
 			<xs:element name="Comment" type="xs:string"/>
 			<xs:element name="ObjectBelonging" type="ns7:ObjectBelonging"/>
-			<xs:element name="ExtendedConfigurationObject" type="ns2:UUID" minOccurs="0"/>
+			<xs:element name="ExtendedConfigurationObject" type="ns1:UUID" minOccurs="0"/>
 			<xs:element name="ReturnValue" type="xs:boolean"/>
-			<xs:element name="Type" type="ns2:TypeDescription"/>
+			<xs:element name="Type" type="ns1:TypeDescription"/>
 			<xs:element name="ExpressionInDataSource" type="xs:string"/>
 		</xs:sequence>
 	</xs:complexType>
@@ -1871,10 +1871,10 @@
 	<xs:complexType name="FunctionalOptionProperties">
 		<xs:sequence>
 			<xs:element name="Name" type="xs:string"/>
-			<xs:element name="Synonym" type="ns2:LocalStringType"/>
+			<xs:element name="Synonym" type="ns1:LocalStringType"/>
 			<xs:element name="Comment" type="xs:string"/>
 			<xs:element name="ObjectBelonging" type="ns7:ObjectBelonging"/>
-			<xs:element name="ExtendedConfigurationObject" type="ns2:UUID" minOccurs="0"/>
+			<xs:element name="ExtendedConfigurationObject" type="ns1:UUID" minOccurs="0"/>
 			<xs:element name="Location" type="ns8:MDObjectRef"/>
 			<xs:element name="PrivilegedGetMode" type="xs:boolean"/>
 			<xs:element name="Content" type="ns8:FuncOptionContentType"/>
@@ -1892,10 +1892,10 @@
 	<xs:complexType name="FunctionalOptionsParameterProperties">
 		<xs:sequence>
 			<xs:element name="Name" type="xs:string"/>
-			<xs:element name="Synonym" type="ns2:LocalStringType"/>
+			<xs:element name="Synonym" type="ns1:LocalStringType"/>
 			<xs:element name="Comment" type="xs:string"/>
 			<xs:element name="ObjectBelonging" type="ns7:ObjectBelonging"/>
-			<xs:element name="ExtendedConfigurationObject" type="ns2:UUID" minOccurs="0"/>
+			<xs:element name="ExtendedConfigurationObject" type="ns1:UUID" minOccurs="0"/>
 			<xs:element name="Use" type="ns8:MDListType"/>
 		</xs:sequence>
 	</xs:complexType>
@@ -1917,10 +1917,10 @@
 	<xs:complexType name="HTTPServiceProperties">
 		<xs:sequence>
 			<xs:element name="Name" type="xs:string"/>
-			<xs:element name="Synonym" type="ns2:LocalStringType"/>
+			<xs:element name="Synonym" type="ns1:LocalStringType"/>
 			<xs:element name="Comment" type="xs:string"/>
 			<xs:element name="ObjectBelonging" type="ns7:ObjectBelonging"/>
-			<xs:element name="ExtendedConfigurationObject" type="ns2:UUID" minOccurs="0"/>
+			<xs:element name="ExtendedConfigurationObject" type="ns1:UUID" minOccurs="0"/>
 			<xs:element name="RootURL" type="xs:string"/>
 			<xs:element name="Module" type="ns8:ExternalProperty"/>
 			<xs:element name="ReuseSessions" type="ns7:SessionReuseMode"/>
@@ -1950,10 +1950,10 @@
 	<xs:complexType name="InformationRegisterProperties">
 		<xs:sequence>
 			<xs:element name="Name" type="xs:string"/>
-			<xs:element name="Synonym" type="ns2:LocalStringType"/>
+			<xs:element name="Synonym" type="ns1:LocalStringType"/>
 			<xs:element name="Comment" type="xs:string"/>
 			<xs:element name="ObjectBelonging" type="ns7:ObjectBelonging"/>
-			<xs:element name="ExtendedConfigurationObject" type="ns2:UUID" minOccurs="0"/>
+			<xs:element name="ExtendedConfigurationObject" type="ns1:UUID" minOccurs="0"/>
 			<xs:element name="UseStandardCommands" type="xs:boolean"/>
 			<xs:element name="EditType" type="ns7:EditType"/>
 			<xs:element name="DefaultRecordForm" type="ns8:MDObjectRef"/>
@@ -1972,11 +1972,11 @@
 			<xs:element name="FullTextSearch" type="ns7:FullTextSearchUsing"/>
 			<xs:element name="EnableTotalsSliceFirst" type="xs:boolean"/>
 			<xs:element name="EnableTotalsSliceLast" type="xs:boolean"/>
-			<xs:element name="RecordPresentation" type="ns2:LocalStringType"/>
-			<xs:element name="ExtendedRecordPresentation" type="ns2:LocalStringType"/>
-			<xs:element name="ListPresentation" type="ns2:LocalStringType"/>
-			<xs:element name="ExtendedListPresentation" type="ns2:LocalStringType"/>
-			<xs:element name="Explanation" type="ns2:LocalStringType"/>
+			<xs:element name="RecordPresentation" type="ns1:LocalStringType"/>
+			<xs:element name="ExtendedRecordPresentation" type="ns1:LocalStringType"/>
+			<xs:element name="ListPresentation" type="ns1:LocalStringType"/>
+			<xs:element name="ExtendedListPresentation" type="ns1:LocalStringType"/>
+			<xs:element name="Explanation" type="ns1:LocalStringType"/>
 			<xs:element name="DataHistory" type="ns7:DataHistoryUse"/>
 			<xs:element name="UpdateDataHistoryImmediatelyAfterWrite" type="xs:boolean"/>
 			<xs:element name="ExecuteAfterWriteDataHistoryVersionProcessing" type="xs:boolean"/>
@@ -2004,10 +2004,10 @@
 	<xs:complexType name="IntegrationServiceChannelProperties">
 		<xs:sequence>
 			<xs:element name="Name" type="xs:string"/>
-			<xs:element name="Synonym" type="ns2:LocalStringType"/>
+			<xs:element name="Synonym" type="ns1:LocalStringType"/>
 			<xs:element name="Comment" type="xs:string"/>
 			<xs:element name="ObjectBelonging" type="ns7:ObjectBelonging"/>
-			<xs:element name="ExtendedConfigurationObject" type="ns2:UUID" minOccurs="0"/>
+			<xs:element name="ExtendedConfigurationObject" type="ns1:UUID" minOccurs="0"/>
 			<xs:element name="ExternalIntegrationServiceChannelName" type="xs:string"/>
 			<xs:element name="ReceiveMessageProcessing" type="xs:string"/>
 			<xs:element name="MessageDirection" type="ns7:IntegrationServiceChannelMessageDirection" minOccurs="0"/>
@@ -2022,10 +2022,10 @@
 	<xs:complexType name="IntegrationServiceProperties">
 		<xs:sequence>
 			<xs:element name="Name" type="xs:string"/>
-			<xs:element name="Synonym" type="ns2:LocalStringType"/>
+			<xs:element name="Synonym" type="ns1:LocalStringType"/>
 			<xs:element name="Comment" type="xs:string"/>
 			<xs:element name="ObjectBelonging" type="ns7:ObjectBelonging"/>
-			<xs:element name="ExtendedConfigurationObject" type="ns2:UUID" minOccurs="0"/>
+			<xs:element name="ExtendedConfigurationObject" type="ns1:UUID" minOccurs="0"/>
 			<xs:element name="ExternalIntegrationServiceAddress" type="xs:string"/>
 			<xs:element name="Module" type="ns8:ExternalProperty"/>
 		</xs:sequence>
@@ -2042,10 +2042,10 @@
 	<xs:complexType name="InterfaceProperties">
 		<xs:sequence>
 			<xs:element name="Name" type="xs:string"/>
-			<xs:element name="Synonym" type="ns2:LocalStringType"/>
+			<xs:element name="Synonym" type="ns1:LocalStringType"/>
 			<xs:element name="Comment" type="xs:string"/>
 			<xs:element name="ObjectBelonging" type="ns7:ObjectBelonging"/>
-			<xs:element name="ExtendedConfigurationObject" type="ns2:UUID" minOccurs="0"/>
+			<xs:element name="ExtendedConfigurationObject" type="ns1:UUID" minOccurs="0"/>
 			<xs:element name="Interface" type="ns8:ExternalProperty"/>
 			<xs:element name="Switchable" type="xs:boolean"/>
 		</xs:sequence>
@@ -2062,10 +2062,10 @@
 	<xs:complexType name="LanguageProperties">
 		<xs:sequence>
 			<xs:element name="Name" type="xs:string"/>
-			<xs:element name="Synonym" type="ns2:LocalStringType"/>
+			<xs:element name="Synonym" type="ns1:LocalStringType"/>
 			<xs:element name="Comment" type="xs:string"/>
 			<xs:element name="ObjectBelonging" type="ns7:ObjectBelonging"/>
-			<xs:element name="ExtendedConfigurationObject" type="ns2:UUID" minOccurs="0"/>
+			<xs:element name="ExtendedConfigurationObject" type="ns1:UUID" minOccurs="0"/>
 			<xs:element name="LanguageCode" type="xs:string"/>
 		</xs:sequence>
 	</xs:complexType>
@@ -2073,7 +2073,7 @@
 		<xs:sequence>
 			<xs:element name="InternalInfo" type="ns8:InternalInfo" minOccurs="0"/>
 		</xs:sequence>
-		<xs:attribute name="uuid" type="ns2:UUID" use="required"/>
+		<xs:attribute name="uuid" type="ns1:UUID" use="required"/>
 	</xs:complexType>
 	<xs:complexType name="MetaDataObject">
 		<xs:complexContent>
@@ -2151,10 +2151,10 @@
 	<xs:complexType name="MethodProperties">
 		<xs:sequence>
 			<xs:element name="Name" type="xs:string"/>
-			<xs:element name="Synonym" type="ns2:LocalStringType"/>
+			<xs:element name="Synonym" type="ns1:LocalStringType"/>
 			<xs:element name="Comment" type="xs:string"/>
 			<xs:element name="ObjectBelonging" type="ns7:ObjectBelonging"/>
-			<xs:element name="ExtendedConfigurationObject" type="ns2:UUID" minOccurs="0"/>
+			<xs:element name="ExtendedConfigurationObject" type="ns1:UUID" minOccurs="0"/>
 			<xs:element name="HTTPMethod" type="ns7:HTTPMethod"/>
 			<xs:element name="Handler" type="xs:string"/>
 		</xs:sequence>
@@ -2177,10 +2177,10 @@
 	<xs:complexType name="OperationProperties">
 		<xs:sequence>
 			<xs:element name="Name" type="xs:string"/>
-			<xs:element name="Synonym" type="ns2:LocalStringType"/>
+			<xs:element name="Synonym" type="ns1:LocalStringType"/>
 			<xs:element name="Comment" type="xs:string"/>
 			<xs:element name="ObjectBelonging" type="ns7:ObjectBelonging"/>
-			<xs:element name="ExtendedConfigurationObject" type="ns2:UUID" minOccurs="0"/>
+			<xs:element name="ExtendedConfigurationObject" type="ns1:UUID" minOccurs="0"/>
 			<xs:element name="XDTOReturningValueType" type="xs:QName"/>
 			<xs:element name="Nillable" type="xs:boolean"/>
 			<xs:element name="Transactioned" type="xs:boolean"/>
@@ -2200,10 +2200,10 @@
 	<xs:complexType name="ParameterProperties">
 		<xs:sequence>
 			<xs:element name="Name" type="xs:string"/>
-			<xs:element name="Synonym" type="ns2:LocalStringType"/>
+			<xs:element name="Synonym" type="ns1:LocalStringType"/>
 			<xs:element name="Comment" type="xs:string"/>
 			<xs:element name="ObjectBelonging" type="ns7:ObjectBelonging"/>
-			<xs:element name="ExtendedConfigurationObject" type="ns2:UUID" minOccurs="0"/>
+			<xs:element name="ExtendedConfigurationObject" type="ns1:UUID" minOccurs="0"/>
 			<xs:element name="XDTOValueType" type="xs:QName"/>
 			<xs:element name="Nillable" type="xs:boolean"/>
 			<xs:element name="TransferDirection" type="ns7:TransferDirection"/>
@@ -2227,10 +2227,10 @@
 	<xs:complexType name="RecalculationProperties">
 		<xs:sequence>
 			<xs:element name="Name" type="xs:string"/>
-			<xs:element name="Synonym" type="ns2:LocalStringType"/>
+			<xs:element name="Synonym" type="ns1:LocalStringType"/>
 			<xs:element name="Comment" type="xs:string"/>
 			<xs:element name="ObjectBelonging" type="ns7:ObjectBelonging"/>
-			<xs:element name="ExtendedConfigurationObject" type="ns2:UUID" minOccurs="0"/>
+			<xs:element name="ExtendedConfigurationObject" type="ns1:UUID" minOccurs="0"/>
 			<xs:element name="RecordSetModule" type="ns8:ExternalProperty"/>
 			<xs:element name="DataLockControlMode" type="ns7:DefaultDataLockControlMode"/>
 		</xs:sequence>
@@ -2257,10 +2257,10 @@
 	<xs:complexType name="ReportProperties">
 		<xs:sequence>
 			<xs:element name="Name" type="xs:string"/>
-			<xs:element name="Synonym" type="ns2:LocalStringType"/>
+			<xs:element name="Synonym" type="ns1:LocalStringType"/>
 			<xs:element name="Comment" type="xs:string"/>
 			<xs:element name="ObjectBelonging" type="ns7:ObjectBelonging"/>
-			<xs:element name="ExtendedConfigurationObject" type="ns2:UUID" minOccurs="0"/>
+			<xs:element name="ExtendedConfigurationObject" type="ns1:UUID" minOccurs="0"/>
 			<xs:element name="UseStandardCommands" type="xs:boolean"/>
 			<xs:element name="DefaultForm" type="ns8:MDObjectRef"/>
 			<xs:element name="AuxiliaryForm" type="ns8:MDObjectRef"/>
@@ -2274,8 +2274,8 @@
 			<xs:element name="ManagerModule" type="ns8:ExternalProperty"/>
 			<xs:element name="IncludeHelpInContents" type="xs:boolean"/>
 			<xs:element name="Help" type="ns8:ExternalProperty"/>
-			<xs:element name="ExtendedPresentation" type="ns2:LocalStringType"/>
-			<xs:element name="Explanation" type="ns2:LocalStringType"/>
+			<xs:element name="ExtendedPresentation" type="ns1:LocalStringType"/>
+			<xs:element name="Explanation" type="ns1:LocalStringType"/>
 		</xs:sequence>
 	</xs:complexType>
 	<xs:complexType name="Resource">
@@ -2290,22 +2290,22 @@
 	<xs:complexType name="ResourceProperties">
 		<xs:sequence>
 			<xs:element name="Name" type="xs:string" minOccurs="0"/>
-			<xs:element name="Synonym" type="ns2:LocalStringType" minOccurs="0"/>
+			<xs:element name="Synonym" type="ns1:LocalStringType" minOccurs="0"/>
 			<xs:element name="Comment" type="xs:string" minOccurs="0"/>
 			<xs:element name="ObjectBelonging" type="ns7:ObjectBelonging" minOccurs="0"/>
-			<xs:element name="ExtendedConfigurationObject" type="ns2:UUID" minOccurs="0"/>
-			<xs:element name="Type" type="ns2:TypeDescription" minOccurs="0"/>
+			<xs:element name="ExtendedConfigurationObject" type="ns1:UUID" minOccurs="0"/>
+			<xs:element name="Type" type="ns1:TypeDescription" minOccurs="0"/>
 			<xs:element name="PasswordMode" type="xs:boolean" minOccurs="0"/>
-			<xs:element name="Format" type="ns2:LocalStringType" minOccurs="0"/>
-			<xs:element name="EditFormat" type="ns2:LocalStringType" minOccurs="0"/>
-			<xs:element name="ToolTip" type="ns2:LocalStringType" minOccurs="0"/>
+			<xs:element name="Format" type="ns1:LocalStringType" minOccurs="0"/>
+			<xs:element name="EditFormat" type="ns1:LocalStringType" minOccurs="0"/>
+			<xs:element name="ToolTip" type="ns1:LocalStringType" minOccurs="0"/>
 			<xs:element name="MarkNegatives" type="xs:boolean" minOccurs="0"/>
 			<xs:element name="Mask" type="xs:string" minOccurs="0"/>
 			<xs:element name="MultiLine" type="xs:boolean" minOccurs="0"/>
 			<xs:element name="ExtendedEdit" type="xs:boolean" minOccurs="0"/>
 			<xs:element name="MinValue" minOccurs="0"/>
 			<xs:element name="MaxValue" minOccurs="0"/>
-			<xs:element name="FillChecking" type="ns2:FillChecking" minOccurs="0"/>
+			<xs:element name="FillChecking" type="ns1:FillChecking" minOccurs="0"/>
 			<xs:element name="ChoiceFoldersAndItems" type="ns3:FoldersAndItemsUse" minOccurs="0"/>
 			<xs:element name="ChoiceParameterLinks" type="ns8:ChoiceParameterLinks" minOccurs="0"/>
 			<xs:element name="ChoiceParameters" type="ns4:ChoiceParameters" minOccurs="0"/>
@@ -2337,10 +2337,10 @@
 	<xs:complexType name="RoleProperties">
 		<xs:sequence>
 			<xs:element name="Name" type="xs:string"/>
-			<xs:element name="Synonym" type="ns2:LocalStringType"/>
+			<xs:element name="Synonym" type="ns1:LocalStringType"/>
 			<xs:element name="Comment" type="xs:string"/>
 			<xs:element name="ObjectBelonging" type="ns7:ObjectBelonging"/>
-			<xs:element name="ExtendedConfigurationObject" type="ns2:UUID" minOccurs="0"/>
+			<xs:element name="ExtendedConfigurationObject" type="ns1:UUID" minOccurs="0"/>
 			<xs:element name="Rights" type="ns8:ExternalProperty"/>
 		</xs:sequence>
 	</xs:complexType>
@@ -2356,10 +2356,10 @@
 	<xs:complexType name="ScheduledJobProperties">
 		<xs:sequence>
 			<xs:element name="Name" type="xs:string"/>
-			<xs:element name="Synonym" type="ns2:LocalStringType"/>
+			<xs:element name="Synonym" type="ns1:LocalStringType"/>
 			<xs:element name="Comment" type="xs:string"/>
 			<xs:element name="ObjectBelonging" type="ns7:ObjectBelonging"/>
-			<xs:element name="ExtendedConfigurationObject" type="ns2:UUID" minOccurs="0"/>
+			<xs:element name="ExtendedConfigurationObject" type="ns1:UUID" minOccurs="0"/>
 			<xs:element name="MethodName" type="ns8:MDMethodRef"/>
 			<xs:element name="Description" type="xs:string"/>
 			<xs:element name="Key" type="xs:string"/>
@@ -2388,10 +2388,10 @@
 	<xs:complexType name="SequenceProperties">
 		<xs:sequence>
 			<xs:element name="Name" type="xs:string"/>
-			<xs:element name="Synonym" type="ns2:LocalStringType"/>
+			<xs:element name="Synonym" type="ns1:LocalStringType"/>
 			<xs:element name="Comment" type="xs:string"/>
 			<xs:element name="ObjectBelonging" type="ns7:ObjectBelonging"/>
-			<xs:element name="ExtendedConfigurationObject" type="ns2:UUID" minOccurs="0"/>
+			<xs:element name="ExtendedConfigurationObject" type="ns1:UUID" minOccurs="0"/>
 			<xs:element name="MoveBoundaryOnPosting" type="ns7:MoveBoundaryOnPosting"/>
 			<xs:element name="Documents" type="ns8:MDListType"/>
 			<xs:element name="RegisterRecords" type="ns8:MDListType"/>
@@ -2411,11 +2411,11 @@
 	<xs:complexType name="SessionParameterProperties">
 		<xs:sequence>
 			<xs:element name="Name" type="xs:string"/>
-			<xs:element name="Synonym" type="ns2:LocalStringType"/>
+			<xs:element name="Synonym" type="ns1:LocalStringType"/>
 			<xs:element name="Comment" type="xs:string"/>
 			<xs:element name="ObjectBelonging" type="ns7:ObjectBelonging"/>
-			<xs:element name="ExtendedConfigurationObject" type="ns2:UUID" minOccurs="0"/>
-			<xs:element name="Type" type="ns2:TypeDescription"/>
+			<xs:element name="ExtendedConfigurationObject" type="ns1:UUID" minOccurs="0"/>
+			<xs:element name="Type" type="ns1:TypeDescription"/>
 		</xs:sequence>
 	</xs:complexType>
 	<xs:complexType name="SettingsStorage">
@@ -2437,10 +2437,10 @@
 	<xs:complexType name="SettingsStorageProperties">
 		<xs:sequence>
 			<xs:element name="Name" type="xs:string"/>
-			<xs:element name="Synonym" type="ns2:LocalStringType"/>
+			<xs:element name="Synonym" type="ns1:LocalStringType"/>
 			<xs:element name="Comment" type="xs:string"/>
 			<xs:element name="ObjectBelonging" type="ns7:ObjectBelonging"/>
-			<xs:element name="ExtendedConfigurationObject" type="ns2:UUID" minOccurs="0"/>
+			<xs:element name="ExtendedConfigurationObject" type="ns1:UUID" minOccurs="0"/>
 			<xs:element name="DefaultSaveForm" type="ns8:MDObjectRef"/>
 			<xs:element name="DefaultLoadForm" type="ns8:MDObjectRef"/>
 			<xs:element name="AuxiliarySaveForm" type="ns8:MDObjectRef"/>
@@ -2469,10 +2469,10 @@
 	<xs:complexType name="StyleItemProperties">
 		<xs:sequence>
 			<xs:element name="Name" type="xs:string"/>
-			<xs:element name="Synonym" type="ns2:LocalStringType"/>
+			<xs:element name="Synonym" type="ns1:LocalStringType"/>
 			<xs:element name="Comment" type="xs:string"/>
 			<xs:element name="ObjectBelonging" type="ns7:ObjectBelonging"/>
-			<xs:element name="ExtendedConfigurationObject" type="ns2:UUID" minOccurs="0"/>
+			<xs:element name="ExtendedConfigurationObject" type="ns1:UUID" minOccurs="0"/>
 			<xs:element name="Type" type="ns7:StyleElementType"/>
 			<xs:element name="Value"/>
 		</xs:sequence>
@@ -2480,10 +2480,10 @@
 	<xs:complexType name="StyleProperties">
 		<xs:sequence>
 			<xs:element name="Name" type="xs:string"/>
-			<xs:element name="Synonym" type="ns2:LocalStringType"/>
+			<xs:element name="Synonym" type="ns1:LocalStringType"/>
 			<xs:element name="Comment" type="xs:string"/>
 			<xs:element name="ObjectBelonging" type="ns7:ObjectBelonging"/>
-			<xs:element name="ExtendedConfigurationObject" type="ns2:UUID" minOccurs="0"/>
+			<xs:element name="ExtendedConfigurationObject" type="ns1:UUID" minOccurs="0"/>
 			<xs:element name="Style" type="ns8:ExternalProperty"/>
 		</xs:sequence>
 	</xs:complexType>
@@ -2505,15 +2505,15 @@
 	<xs:complexType name="SubsystemProperties">
 		<xs:sequence>
 			<xs:element name="Name" type="xs:string"/>
-			<xs:element name="Synonym" type="ns2:LocalStringType"/>
+			<xs:element name="Synonym" type="ns1:LocalStringType"/>
 			<xs:element name="Comment" type="xs:string"/>
 			<xs:element name="ObjectBelonging" type="ns7:ObjectBelonging"/>
-			<xs:element name="ExtendedConfigurationObject" type="ns2:UUID" minOccurs="0"/>
+			<xs:element name="ExtendedConfigurationObject" type="ns1:UUID" minOccurs="0"/>
 			<xs:element name="IncludeHelpInContents" type="xs:boolean"/>
 			<xs:element name="Help" type="ns8:ExternalProperty"/>
 			<xs:element name="IncludeInCommandInterface" type="xs:boolean"/>
 			<xs:element name="CommandInterface" type="ns8:ExternalProperty"/>
-			<xs:element name="Explanation" type="ns2:LocalStringType"/>
+			<xs:element name="Explanation" type="ns1:LocalStringType"/>
 			<xs:element name="Picture" type="ns8:Picture"/>
 			<xs:element name="Content" type="ns8:MDListType"/>
 		</xs:sequence>
@@ -2539,10 +2539,10 @@
 	<xs:complexType name="TableProperties">
 		<xs:sequence>
 			<xs:element name="Name" type="xs:string"/>
-			<xs:element name="Synonym" type="ns2:LocalStringType"/>
+			<xs:element name="Synonym" type="ns1:LocalStringType"/>
 			<xs:element name="Comment" type="xs:string"/>
 			<xs:element name="ObjectBelonging" type="ns7:ObjectBelonging"/>
-			<xs:element name="ExtendedConfigurationObject" type="ns2:UUID" minOccurs="0"/>
+			<xs:element name="ExtendedConfigurationObject" type="ns1:UUID" minOccurs="0"/>
 			<xs:element name="TableType" type="ns7:ExternalDataSourceTableType"/>
 			<xs:element name="NameInDataSource" type="xs:string"/>
 			<xs:element name="ExpressionInDataSource" type="xs:string"/>
@@ -2563,13 +2563,13 @@
 			<xs:element name="DefaultRecordForm" type="ns8:MDObjectRef"/>
 			<xs:element name="DefaultListForm" type="ns8:MDObjectRef"/>
 			<xs:element name="DefaultChoiceForm" type="ns8:MDObjectRef"/>
-			<xs:element name="ObjectPresentation" type="ns2:LocalStringType"/>
-			<xs:element name="ExtendedObjectPresentation" type="ns2:LocalStringType"/>
-			<xs:element name="RecordPresentation" type="ns2:LocalStringType"/>
-			<xs:element name="ExtendedRecordPresentation" type="ns2:LocalStringType"/>
-			<xs:element name="ListPresentation" type="ns2:LocalStringType"/>
-			<xs:element name="ExtendedListPresentation" type="ns2:LocalStringType"/>
-			<xs:element name="Explanation" type="ns2:LocalStringType"/>
+			<xs:element name="ObjectPresentation" type="ns1:LocalStringType"/>
+			<xs:element name="ExtendedObjectPresentation" type="ns1:LocalStringType"/>
+			<xs:element name="RecordPresentation" type="ns1:LocalStringType"/>
+			<xs:element name="ExtendedRecordPresentation" type="ns1:LocalStringType"/>
+			<xs:element name="ListPresentation" type="ns1:LocalStringType"/>
+			<xs:element name="ExtendedListPresentation" type="ns1:LocalStringType"/>
+			<xs:element name="Explanation" type="ns1:LocalStringType"/>
 			<xs:element name="ObjectModule" type="ns8:ExternalProperty"/>
 			<xs:element name="RecordSetModule" type="ns8:ExternalProperty"/>
 			<xs:element name="ManagerModule" type="ns8:ExternalProperty"/>
@@ -2602,12 +2602,12 @@
 	<xs:complexType name="TabularSectionProperties">
 		<xs:sequence>
 			<xs:element name="Name" type="xs:string" minOccurs="0"/>
-			<xs:element name="Synonym" type="ns2:LocalStringType" minOccurs="0"/>
+			<xs:element name="Synonym" type="ns1:LocalStringType" minOccurs="0"/>
 			<xs:element name="Comment" type="xs:string" minOccurs="0"/>
 			<xs:element name="ObjectBelonging" type="ns7:ObjectBelonging" minOccurs="0"/>
-			<xs:element name="ExtendedConfigurationObject" type="ns2:UUID" minOccurs="0"/>
-			<xs:element name="ToolTip" type="ns2:LocalStringType" minOccurs="0"/>
-			<xs:element name="FillChecking" type="ns2:FillChecking" minOccurs="0"/>
+			<xs:element name="ExtendedConfigurationObject" type="ns1:UUID" minOccurs="0"/>
+			<xs:element name="ToolTip" type="ns1:LocalStringType" minOccurs="0"/>
+			<xs:element name="FillChecking" type="ns1:FillChecking" minOccurs="0"/>
 			<xs:element name="StandardAttributes" type="ns8:StandardAttributeDescriptions" minOccurs="0"/>
 			<xs:element name="Use" type="ns7:AttributeUse" minOccurs="0"/>
 		</xs:sequence>
@@ -2635,16 +2635,16 @@
 	<xs:complexType name="TaskProperties">
 		<xs:sequence>
 			<xs:element name="Name" type="xs:string"/>
-			<xs:element name="Synonym" type="ns2:LocalStringType"/>
+			<xs:element name="Synonym" type="ns1:LocalStringType"/>
 			<xs:element name="Comment" type="xs:string"/>
 			<xs:element name="ObjectBelonging" type="ns7:ObjectBelonging"/>
-			<xs:element name="ExtendedConfigurationObject" type="ns2:UUID" minOccurs="0"/>
+			<xs:element name="ExtendedConfigurationObject" type="ns1:UUID" minOccurs="0"/>
 			<xs:element name="UseStandardCommands" type="xs:boolean"/>
 			<xs:element name="ObjectModule" type="ns8:ExternalProperty"/>
 			<xs:element name="ManagerModule" type="ns8:ExternalProperty"/>
 			<xs:element name="NumberType" type="ns7:TaskNumberType"/>
 			<xs:element name="NumberLength" type="xs:decimal"/>
-			<xs:element name="NumberAllowedLength" type="ns2:AllowedLength"/>
+			<xs:element name="NumberAllowedLength" type="ns1:AllowedLength"/>
 			<xs:element name="CheckUnique" type="xs:boolean"/>
 			<xs:element name="Autonumbering" type="xs:boolean"/>
 			<xs:element name="TaskNumberAutoPrefix" type="ns7:TaskNumberAutoPrefix"/>
@@ -2674,11 +2674,11 @@
 			<xs:element name="DataLockFields" type="ns8:FieldList"/>
 			<xs:element name="DataLockControlMode" type="ns7:DefaultDataLockControlMode"/>
 			<xs:element name="FullTextSearch" type="ns7:FullTextSearchUsing"/>
-			<xs:element name="ObjectPresentation" type="ns2:LocalStringType"/>
-			<xs:element name="ExtendedObjectPresentation" type="ns2:LocalStringType"/>
-			<xs:element name="ListPresentation" type="ns2:LocalStringType"/>
-			<xs:element name="ExtendedListPresentation" type="ns2:LocalStringType"/>
-			<xs:element name="Explanation" type="ns2:LocalStringType"/>
+			<xs:element name="ObjectPresentation" type="ns1:LocalStringType"/>
+			<xs:element name="ExtendedObjectPresentation" type="ns1:LocalStringType"/>
+			<xs:element name="ListPresentation" type="ns1:LocalStringType"/>
+			<xs:element name="ExtendedListPresentation" type="ns1:LocalStringType"/>
+			<xs:element name="Explanation" type="ns1:LocalStringType"/>
 			<xs:element name="DataHistory" type="ns7:DataHistoryUse"/>
 			<xs:element name="UpdateDataHistoryImmediatelyAfterWrite" type="xs:boolean"/>
 			<xs:element name="ExecuteAfterWriteDataHistoryVersionProcessing" type="xs:boolean"/>
@@ -2696,10 +2696,10 @@
 	<xs:complexType name="TemplateProperties">
 		<xs:sequence>
 			<xs:element name="Name" type="xs:string"/>
-			<xs:element name="Synonym" type="ns2:LocalStringType"/>
+			<xs:element name="Synonym" type="ns1:LocalStringType"/>
 			<xs:element name="Comment" type="xs:string"/>
 			<xs:element name="ObjectBelonging" type="ns7:ObjectBelonging"/>
-			<xs:element name="ExtendedConfigurationObject" type="ns2:UUID" minOccurs="0"/>
+			<xs:element name="ExtendedConfigurationObject" type="ns1:UUID" minOccurs="0"/>
 			<xs:element name="TemplateType" type="ns7:TemplateType"/>
 			<xs:element name="Template" type="ns8:ExternalProperty"/>
 		</xs:sequence>
@@ -2722,10 +2722,10 @@
 	<xs:complexType name="URLTemplateProperties">
 		<xs:sequence>
 			<xs:element name="Name" type="xs:string"/>
-			<xs:element name="Synonym" type="ns2:LocalStringType"/>
+			<xs:element name="Synonym" type="ns1:LocalStringType"/>
 			<xs:element name="Comment" type="xs:string"/>
 			<xs:element name="ObjectBelonging" type="ns7:ObjectBelonging"/>
-			<xs:element name="ExtendedConfigurationObject" type="ns2:UUID" minOccurs="0"/>
+			<xs:element name="ExtendedConfigurationObject" type="ns1:UUID" minOccurs="0"/>
 			<xs:element name="Template" type="xs:string"/>
 		</xs:sequence>
 	</xs:complexType>
@@ -2741,10 +2741,10 @@
 	<xs:complexType name="WSReferenceProperties">
 		<xs:sequence>
 			<xs:element name="Name" type="xs:string"/>
-			<xs:element name="Synonym" type="ns2:LocalStringType"/>
+			<xs:element name="Synonym" type="ns1:LocalStringType"/>
 			<xs:element name="Comment" type="xs:string"/>
 			<xs:element name="ObjectBelonging" type="ns7:ObjectBelonging"/>
-			<xs:element name="ExtendedConfigurationObject" type="ns2:UUID" minOccurs="0"/>
+			<xs:element name="ExtendedConfigurationObject" type="ns1:UUID" minOccurs="0"/>
 			<xs:element name="LocationURL" type="xs:string"/>
 			<xs:element name="WSDefinition" type="ns8:ExternalProperty"/>
 		</xs:sequence>
@@ -2767,10 +2767,10 @@
 	<xs:complexType name="WebServiceProperties">
 		<xs:sequence>
 			<xs:element name="Name" type="xs:string"/>
-			<xs:element name="Synonym" type="ns2:LocalStringType"/>
+			<xs:element name="Synonym" type="ns1:LocalStringType"/>
 			<xs:element name="Comment" type="xs:string"/>
 			<xs:element name="ObjectBelonging" type="ns7:ObjectBelonging"/>
-			<xs:element name="ExtendedConfigurationObject" type="ns2:UUID" minOccurs="0"/>
+			<xs:element name="ExtendedConfigurationObject" type="ns1:UUID" minOccurs="0"/>
 			<xs:element name="Namespace" type="xs:string"/>
 			<xs:element name="Module" type="ns8:ExternalProperty"/>
 			<xs:element name="XDTOPackages" type="ns8:ValueList"/>
@@ -2791,10 +2791,10 @@
 	<xs:complexType name="XDTOPackageProperties">
 		<xs:sequence>
 			<xs:element name="Name" type="xs:string"/>
-			<xs:element name="Synonym" type="ns2:LocalStringType"/>
+			<xs:element name="Synonym" type="ns1:LocalStringType"/>
 			<xs:element name="Comment" type="xs:string"/>
 			<xs:element name="ObjectBelonging" type="ns7:ObjectBelonging"/>
-			<xs:element name="ExtendedConfigurationObject" type="ns2:UUID" minOccurs="0"/>
+			<xs:element name="ExtendedConfigurationObject" type="ns1:UUID" minOccurs="0"/>
 			<xs:element name="Namespace" type="xs:string"/>
 			<xs:element name="Package" type="ns8:ExternalProperty"/>
 		</xs:sequence>

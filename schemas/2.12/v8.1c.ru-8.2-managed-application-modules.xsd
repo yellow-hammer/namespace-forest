@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<xs:schema xmlns:ns1="http://v8.1c.ru/8.2/data/bsl" xmlns:ns2="http://v8.1c.ru/8.1/data/core" xmlns:ns3="http://v8.1c.ru/8.2/managed-application/core" xmlns:tns="http://v8.1c.ru/8.2/managed-application/modules" xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="http://v8.1c.ru/8.2/managed-application/modules" attributeFormDefault="unqualified" elementFormDefault="qualified">
-	<xs:import namespace="http://v8.1c.ru/8.2/data/bsl"/>
+<xs:schema xmlns:ns1="http://v8.1c.ru/8.1/data/core" xmlns:ns2="http://v8.1c.ru/8.2/data/bsl" xmlns:ns3="http://v8.1c.ru/8.2/managed-application/core" xmlns:tns="http://v8.1c.ru/8.2/managed-application/modules" xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="http://v8.1c.ru/8.2/managed-application/modules" attributeFormDefault="unqualified" elementFormDefault="qualified">
 	<xs:import namespace="http://v8.1c.ru/8.1/data/core"/>
+	<xs:import namespace="http://v8.1c.ru/8.2/data/bsl"/>
 	<xs:import namespace="http://v8.1c.ru/8.2/managed-application/core"/>
 	<xs:complexType name="MethodCall">
 		<xs:sequence>
@@ -28,12 +28,12 @@
 	<xs:complexType name="ModuleContentDef">
 		<xs:sequence>
 			<xs:element name="moduleMethods" type="tns:MethodDefs" minOccurs="0"/>
-			<xs:element name="moduleImage" type="ns1:BSLModuleImage" minOccurs="0"/>
+			<xs:element name="moduleImage" type="ns2:BSLModuleImage" minOccurs="0"/>
 		</xs:sequence>
 	</xs:complexType>
 	<xs:complexType name="ModuleDef">
 		<xs:sequence>
-			<xs:element name="image" type="ns1:BSLModuleImage" minOccurs="0"/>
+			<xs:element name="image" type="ns2:BSLModuleImage" minOccurs="0"/>
 			<xs:element name="extension" type="tns:ModuleDef" minOccurs="0" maxOccurs="unbounded"/>
 			<xs:element name="securityInfo" type="xs:string"/>
 		</xs:sequence>
@@ -65,7 +65,7 @@
 	</xs:simpleType>
 	<xs:complexType name="ProcessFormsCloseParam">
 		<xs:sequence>
-			<xs:element name="id" type="ns2:UUID" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="id" type="ns1:UUID" minOccurs="0" maxOccurs="unbounded"/>
 		</xs:sequence>
 	</xs:complexType>
 </xs:schema>
