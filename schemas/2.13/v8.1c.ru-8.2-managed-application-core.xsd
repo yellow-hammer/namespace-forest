@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<xs:schema xmlns:ns1="http://v8.1c.ru/8.1/data/core" xmlns:ns2="http://v8.1c.ru/8.1/data/ui" xmlns:ns3="http://v8.1c.ru/8.2/data/bsl" xmlns:ns4="http://v8.1c.ru/8.1/data/enterprise" xmlns:tns="http://v8.1c.ru/8.2/managed-application/core" xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="http://v8.1c.ru/8.2/managed-application/core" attributeFormDefault="unqualified" elementFormDefault="qualified">
-	<xs:import namespace="http://v8.1c.ru/8.1/data/core"/>
+<xs:schema xmlns:ns1="http://v8.1c.ru/8.1/data/ui" xmlns:ns2="http://v8.1c.ru/8.1/data/core" xmlns:ns3="http://v8.1c.ru/8.2/data/bsl" xmlns:ns4="http://v8.1c.ru/8.1/data/enterprise" xmlns:tns="http://v8.1c.ru/8.2/managed-application/core" xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="http://v8.1c.ru/8.2/managed-application/core" attributeFormDefault="unqualified" elementFormDefault="qualified">
 	<xs:import namespace="http://v8.1c.ru/8.1/data/ui"/>
+	<xs:import namespace="http://v8.1c.ru/8.1/data/core"/>
 	<xs:import namespace="http://v8.1c.ru/8.2/data/bsl"/>
 	<xs:import namespace="http://v8.1c.ru/8.1/data/enterprise"/>
 	<xs:element name="ClientApplicationInterface" type="tns:InterfaceLayouter"/>
@@ -10,7 +10,7 @@
 			<xs:element name="title" type="xs:string"/>
 			<xs:element name="user" type="xs:string"/>
 			<xs:element name="config" type="xs:string"/>
-			<xs:element name="logo" type="ns2:Picture" minOccurs="0"/>
+			<xs:element name="logo" type="ns1:Picture" minOccurs="0"/>
 			<xs:element name="presentation" type="xs:string"/>
 			<xs:element name="runMode" type="xs:string" minOccurs="0"/>
 			<xs:element name="compress" type="xs:string" minOccurs="0"/>
@@ -26,15 +26,15 @@
 	</xs:simpleType>
 	<xs:complexType name="ApplicationInfo">
 		<xs:sequence>
-			<xs:element name="infoBaseInstanceID" type="ns1:UUID"/>
+			<xs:element name="infoBaseInstanceID" type="ns2:UUID"/>
 			<xs:element name="infoBaseAlias" type="xs:string"/>
 			<xs:element name="locale" type="tns:LocaleInfo" minOccurs="0"/>
 			<xs:element name="langs" type="tns:LangSettings"/>
-			<xs:element name="config" type="ns1:ObjectVersion"/>
+			<xs:element name="config" type="ns2:ObjectVersion"/>
 			<xs:element name="types" type="xs:string"/>
-			<xs:element name="user" type="ns1:UUID"/>
+			<xs:element name="user" type="ns2:UUID"/>
 			<xs:element name="rolesID" type="xs:decimal"/>
-			<xs:element name="seance" type="ns1:UUID"/>
+			<xs:element name="seance" type="ns2:UUID"/>
 			<xs:element name="seanceNo" type="xs:decimal"/>
 			<xs:element name="userRunMode" type="xs:decimal"/>
 			<xs:element name="configRunMode" type="xs:decimal"/>
@@ -47,7 +47,7 @@
 			<xs:element name="modalityUseMode" type="xs:decimal"/>
 			<xs:element name="rigthClientsStart" type="xs:decimal"/>
 			<xs:element name="syncCallsUseMode" type="xs:decimal"/>
-			<xs:element name="assemblyVersion" type="ns1:ObjectVersion"/>
+			<xs:element name="assemblyVersion" type="ns2:ObjectVersion"/>
 			<xs:element name="interactiveSecurity" type="xs:boolean"/>
 			<xs:element name="defaultPaperWidth" type="xs:decimal"/>
 			<xs:element name="defaultPaperHeight" type="xs:decimal"/>
@@ -97,7 +97,7 @@
 		<xs:sequence>
 			<xs:element name="name" type="xs:string"/>
 			<xs:element name="mode" type="ns4:LinkedValueChangeMode"/>
-			<xs:element name="pathItem" type="ns1:CompositeID" maxOccurs="unbounded"/>
+			<xs:element name="pathItem" type="ns2:CompositeID" maxOccurs="unbounded"/>
 			<xs:element name="webDataPath" type="xs:string" minOccurs="0"/>
 			<xs:element name="strPath" type="xs:string" minOccurs="0"/>
 		</xs:sequence>
@@ -172,7 +172,7 @@
 		<xs:attribute name="time" type="xs:string"/>
 	</xs:complexType>
 	<xs:complexType name="DateQualifiers">
-		<xs:attribute name="fractions" type="ns1:DateFractions" default="DateTime"/>
+		<xs:attribute name="fractions" type="ns2:DateFractions" default="DateTime"/>
 	</xs:complexType>
 	<xs:complexType name="DesktopFormInfo">
 		<xs:attribute name="id" type="xs:string"/>
@@ -212,7 +212,7 @@
 		</xs:complexContent>
 	</xs:complexType>
 	<xs:complexType name="EnumVal">
-		<xs:attribute name="uuid" type="ns1:UUID"/>
+		<xs:attribute name="uuid" type="ns2:UUID"/>
 		<xs:attribute name="code" type="xs:string"/>
 		<xs:attribute name="presentation" type="xs:string"/>
 	</xs:complexType>
@@ -222,7 +222,7 @@
 		</xs:sequence>
 	</xs:complexType>
 	<xs:complexType name="EnumValue">
-		<xs:attribute name="uuid" type="ns1:UUID" use="required"/>
+		<xs:attribute name="uuid" type="ns2:UUID" use="required"/>
 		<xs:attribute name="code" type="xs:string"/>
 	</xs:complexType>
 	<xs:simpleType name="ErrorMessageDisplayVariant">
@@ -235,7 +235,7 @@
 	</xs:simpleType>
 	<xs:complexType name="ErrorMessageTemplatesCollectionItem">
 		<xs:sequence>
-			<xs:element name="category" type="ns1:ErrorCategory"/>
+			<xs:element name="category" type="ns2:ErrorCategory"/>
 			<xs:element name="messageTemplate" type="tns:ErrorMessageTexts"/>
 		</xs:sequence>
 	</xs:complexType>
@@ -308,7 +308,7 @@
 		<xs:complexContent>
 			<xs:extension base="tns:Type">
 				<xs:sequence>
-					<xs:element name="tdp" type="ns1:TypeDescription" minOccurs="0"/>
+					<xs:element name="tdp" type="ns2:TypeDescription" minOccurs="0"/>
 				</xs:sequence>
 				<xs:attribute name="valueType" type="xs:QName"/>
 			</xs:extension>
@@ -316,7 +316,7 @@
 	</xs:complexType>
 	<xs:complexType name="GlobalSearchFetch">
 		<xs:sequence>
-			<xs:element name="id" type="ns1:UUID"/>
+			<xs:element name="id" type="ns2:UUID"/>
 		</xs:sequence>
 		<xs:attribute name="cancel" type="xs:boolean"/>
 	</xs:complexType>
@@ -332,7 +332,7 @@
 	</xs:complexType>
 	<xs:complexType name="GlobalSearchQuery">
 		<xs:sequence>
-			<xs:element name="id" type="ns1:UUID"/>
+			<xs:element name="id" type="ns2:UUID"/>
 			<xs:element name="item" type="tns:GlobalSearchQueryItem" maxOccurs="unbounded"/>
 		</xs:sequence>
 		<xs:attribute name="pattern" type="xs:string" use="required"/>
@@ -360,7 +360,7 @@
 			<xs:element name="description" type="xs:string" minOccurs="0"/>
 			<xs:element name="descriptionFmt" type="xs:string" minOccurs="0"/>
 			<xs:element name="value"/>
-			<xs:element name="picture" type="ns2:Picture"/>
+			<xs:element name="picture" type="ns1:Picture"/>
 			<xs:element name="actions" type="tns:GlobalSearchResultItemActionCollection"/>
 		</xs:sequence>
 		<xs:attribute name="type" type="tns:StandardGlobalSearchType"/>
@@ -372,7 +372,7 @@
 			<xs:element name="value"/>
 			<xs:element name="text" type="xs:string" minOccurs="0"/>
 			<xs:element name="formatted" type="xs:boolean" minOccurs="0"/>
-			<xs:element name="picture" type="ns2:Picture"/>
+			<xs:element name="picture" type="ns1:Picture"/>
 		</xs:sequence>
 	</xs:complexType>
 	<xs:complexType name="GlobalSearchResultItemActionCollection">
@@ -515,11 +515,11 @@
 		<xs:sequence>
 			<xs:element name="add" type="tns:MCDigestItem" minOccurs="0" maxOccurs="unbounded"/>
 			<xs:element name="ch" type="tns:MCDigestItem" minOccurs="0" maxOccurs="unbounded"/>
-			<xs:element name="del" type="ns1:UUID" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="del" type="ns2:UUID" minOccurs="0" maxOccurs="unbounded"/>
 		</xs:sequence>
 	</xs:complexType>
 	<xs:complexType name="MCDigestItem">
-		<xs:attribute name="uuid" type="ns1:UUID"/>
+		<xs:attribute name="uuid" type="ns2:UUID"/>
 		<xs:attribute name="name" type="xs:NCName"/>
 	</xs:complexType>
 	<xs:simpleType name="MainWindowMode">
@@ -593,8 +593,8 @@
 		</xs:sequence>
 	</xs:complexType>
 	<xs:complexType name="NavigationPoint">
-		<xs:attribute name="fragment" type="ns1:UUID"/>
-		<xs:attribute name="subTheme" type="ns1:CompositeID"/>
+		<xs:attribute name="fragment" type="ns2:UUID"/>
+		<xs:attribute name="subTheme" type="ns2:CompositeID"/>
 	</xs:complexType>
 	<xs:complexType name="NumberQualifiers">
 		<xs:attribute name="length" type="xs:decimal" default="0"/>
@@ -609,25 +609,25 @@
 	</xs:complexType>
 	<xs:complexType name="Panel">
 		<xs:choice>
-			<xs:element name="uuid" type="ns1:UUID" minOccurs="0"/>
+			<xs:element name="uuid" type="ns2:UUID" minOccurs="0"/>
 			<xs:element name="name" type="xs:string" minOccurs="0"/>
 			<xs:element name="height" type="xs:decimal" minOccurs="0"/>
 			<xs:element name="kind" type="tns:SectionPanelRepresentation" minOccurs="0"/>
 		</xs:choice>
-		<xs:attribute name="id" type="ns1:UUID"/>
+		<xs:attribute name="id" type="ns2:UUID"/>
 	</xs:complexType>
 	<xs:complexType name="PanelDef">
 		<xs:sequence>
 			<xs:element name="name" type="xs:string" minOccurs="0"/>
 			<xs:element name="spr" type="tns:SectionPanelRepresentation" minOccurs="0"/>
 		</xs:sequence>
-		<xs:attribute name="id" type="ns1:UUID"/>
+		<xs:attribute name="id" type="ns2:UUID"/>
 	</xs:complexType>
 	<xs:complexType name="PanelGroup">
 		<xs:sequence>
 			<xs:element name="group" type="tns:PanelLayouter" maxOccurs="unbounded"/>
 		</xs:sequence>
-		<xs:attribute name="id" type="ns1:UUID"/>
+		<xs:attribute name="id" type="ns2:UUID"/>
 	</xs:complexType>
 	<xs:complexType name="PanelLayouter">
 		<xs:choice>
@@ -730,13 +730,13 @@
 		<xs:sequence>
 			<xs:element name="permission" type="tns:RequiredMobileApplicationPermissions"/>
 			<xs:element name="use" type="xs:boolean"/>
-			<xs:element name="description" type="ns1:LocalStringType"/>
+			<xs:element name="description" type="ns2:LocalStringType"/>
 		</xs:sequence>
 	</xs:complexType>
 	<xs:complexType name="RequiredPermissionMessage">
 		<xs:sequence>
 			<xs:element name="permission" type="tns:RequiredMobileApplicationPermissionMessages"/>
-			<xs:element name="description" type="ns1:LocalStringType"/>
+			<xs:element name="description" type="ns2:LocalStringType"/>
 		</xs:sequence>
 	</xs:complexType>
 	<xs:complexType name="RequiredPermissions">
@@ -774,7 +774,7 @@
 	<xs:complexType name="SettingsChoice">
 		<xs:sequence>
 			<xs:element name="settingsKey"/>
-			<xs:element name="additionalProperties" type="ns1:Structure" minOccurs="0"/>
+			<xs:element name="additionalProperties" type="ns2:Structure" minOccurs="0"/>
 		</xs:sequence>
 	</xs:complexType>
 	<xs:complexType name="SplashInfo">
@@ -832,14 +832,14 @@
 		<xs:attribute name="agentVersion" type="xs:string"/>
 		<xs:attribute name="hasConfigExt" type="xs:boolean"/>
 		<xs:attribute name="mainWindowMode" type="tns:MainWindowMode"/>
-		<xs:attribute name="infoBaseInstanceID" type="ns1:UUID"/>
+		<xs:attribute name="infoBaseInstanceID" type="ns2:UUID"/>
 		<xs:attribute name="confName" type="xs:string"/>
-		<xs:attribute name="subsystemsPanelVer" type="ns1:UUID"/>
-		<xs:attribute name="foVer" type="ns1:UUID"/>
-		<xs:attribute name="mainWindowOptionsVer" type="ns1:UUID"/>
-		<xs:attribute name="desktopSpliterPosVer" type="ns1:UUID"/>
-		<xs:attribute name="notifyWindowOptionsVer" type="ns1:UUID"/>
-		<xs:attribute name="stateWindowOptionsVer" type="ns1:UUID"/>
+		<xs:attribute name="subsystemsPanelVer" type="ns2:UUID"/>
+		<xs:attribute name="foVer" type="ns2:UUID"/>
+		<xs:attribute name="mainWindowOptionsVer" type="ns2:UUID"/>
+		<xs:attribute name="desktopSpliterPosVer" type="ns2:UUID"/>
+		<xs:attribute name="notifyWindowOptionsVer" type="ns2:UUID"/>
+		<xs:attribute name="stateWindowOptionsVer" type="ns2:UUID"/>
 		<xs:attribute name="commConfName" type="xs:string"/>
 		<xs:attribute name="commConfURL" type="xs:string"/>
 		<xs:attribute name="commProvName" type="xs:string"/>
@@ -882,7 +882,7 @@
 		<xs:sequence>
 			<xs:element name="value"/>
 		</xs:sequence>
-		<xs:attribute name="uuid" type="ns1:CompositeID"/>
+		<xs:attribute name="uuid" type="ns2:CompositeID"/>
 		<xs:attribute name="code" type="xs:string"/>
 		<xs:attribute name="description" type="xs:string"/>
 		<xs:attribute name="kind" type="tns:StyleEntryKind"/>
@@ -896,16 +896,16 @@
 		</xs:restriction>
 	</xs:simpleType>
 	<xs:complexType name="SubsystemVerInfo">
-		<xs:attribute name="id" type="ns1:UUID"/>
-		<xs:attribute name="actionPanelVer" type="ns1:UUID"/>
-		<xs:attribute name="navPanelVer" type="ns1:UUID"/>
+		<xs:attribute name="id" type="ns2:UUID"/>
+		<xs:attribute name="actionPanelVer" type="ns2:UUID"/>
+		<xs:attribute name="navPanelVer" type="ns2:UUID"/>
 	</xs:complexType>
 	<xs:complexType name="SysEnum">
 		<xs:sequence>
 			<xs:element name="values" type="tns:SysEnumValue" minOccurs="0" maxOccurs="unbounded"/>
 		</xs:sequence>
-		<xs:attribute name="factoryClsid" type="ns1:UUID"/>
-		<xs:attribute name="clsid" type="ns1:UUID"/>
+		<xs:attribute name="factoryClsid" type="ns2:UUID"/>
+		<xs:attribute name="clsid" type="ns2:UUID"/>
 		<xs:attribute name="enumName" type="xs:string"/>
 		<xs:attribute name="enumName2" type="xs:string"/>
 		<xs:attribute name="enumName3" type="xs:string"/>
@@ -927,26 +927,26 @@
 		</xs:sequence>
 	</xs:complexType>
 	<xs:complexType name="Type" abstract="true">
-		<xs:attribute name="clsid" type="ns1:UUID" use="required"/>
+		<xs:attribute name="clsid" type="ns2:UUID" use="required"/>
 		<xs:attribute name="table" type="xs:decimal" use="required"/>
 		<xs:attribute name="code" type="xs:NCName"/>
 		<xs:attribute name="extension" type="xs:boolean" default="false"/>
 	</xs:complexType>
 	<xs:complexType name="TypeIDList">
 		<xs:sequence>
-			<xs:element name="type" type="ns1:UUID" maxOccurs="unbounded"/>
+			<xs:element name="type" type="ns2:UUID" maxOccurs="unbounded"/>
 		</xs:sequence>
 	</xs:complexType>
 	<xs:complexType name="TypeLink">
 		<xs:sequence>
-			<xs:element name="pathItem" type="ns1:CompositeID" maxOccurs="unbounded"/>
+			<xs:element name="pathItem" type="ns2:CompositeID" maxOccurs="unbounded"/>
 			<xs:element name="linkItem" type="xs:decimal" minOccurs="0"/>
 			<xs:element name="webDataPath" type="xs:string" minOccurs="0"/>
 			<xs:element name="strPath" type="xs:string" minOccurs="0"/>
 		</xs:sequence>
 	</xs:complexType>
 	<xs:complexType name="TypePresentation">
-		<xs:attribute name="clsid" type="ns1:UUID" use="required"/>
+		<xs:attribute name="clsid" type="ns2:UUID" use="required"/>
 		<xs:attribute name="view" type="xs:string" use="required"/>
 	</xs:complexType>
 	<xs:complexType name="TypePresentations">
@@ -956,17 +956,17 @@
 	</xs:complexType>
 	<xs:complexType name="TypeSet">
 		<xs:sequence>
-			<xs:element name="type" type="ns1:UUID" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="type" type="ns2:UUID" minOccurs="0" maxOccurs="unbounded"/>
 			<xs:element name="string" type="tns:StringQualifiers" minOccurs="0"/>
 			<xs:element name="number" type="tns:NumberQualifiers" minOccurs="0"/>
 			<xs:element name="date" type="tns:DateQualifiers" minOccurs="0"/>
 			<xs:element name="binary" type="tns:BinaryDataQualifiers" minOccurs="0"/>
 		</xs:sequence>
-		<xs:attribute name="clsid" type="ns1:UUID"/>
+		<xs:attribute name="clsid" type="ns2:UUID"/>
 		<xs:attribute name="name" type="xs:QName"/>
 	</xs:complexType>
 	<xs:complexType name="TypeSetDef">
-		<xs:attribute name="clsid" type="ns1:UUID"/>
+		<xs:attribute name="clsid" type="ns2:UUID"/>
 		<xs:attribute name="en" type="xs:NCName"/>
 		<xs:attribute name="ru" type="xs:NCName"/>
 		<xs:attribute name="name" type="xs:QName"/>
@@ -983,7 +983,7 @@
 			<xs:element name="constValueKeys" type="tns:ConstValueKeyTypeSet" minOccurs="0"/>
 			<xs:element name="mcDigitalSignature" type="xs:string" minOccurs="0"/>
 			<xs:element name="mcTaskName" type="xs:Name" minOccurs="0"/>
-			<xs:element name="mcTaskSynonym" type="ns1:LocalStringType" minOccurs="0"/>
+			<xs:element name="mcTaskSynonym" type="ns2:LocalStringType" minOccurs="0"/>
 			<xs:element name="mcTaskSynonym2" type="xs:Name" minOccurs="0"/>
 			<xs:element name="mcDSAKey" type="xs:Name" minOccurs="0"/>
 			<xs:element name="mcAppName" type="xs:Name" minOccurs="0"/>
@@ -997,7 +997,7 @@
 	</xs:complexType>
 	<xs:complexType name="UUIDAndStringsVectorType">
 		<xs:sequence>
-			<xs:element name="UUID" type="ns1:UUID"/>
+			<xs:element name="UUID" type="ns2:UUID"/>
 			<xs:element name="item" type="tns:UserFavoriteItem" minOccurs="0" maxOccurs="unbounded"/>
 		</xs:sequence>
 	</xs:complexType>
