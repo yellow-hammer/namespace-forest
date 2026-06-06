@@ -89,6 +89,7 @@
 			<xs:enumeration value="BarcodeScanning"/>
 			<xs:enumeration value="BackgroundAudioRecording"/>
 			<xs:enumeration value="AllFilesAccess"/>
+			<xs:enumeration value="Videoconferences"/>
 		</xs:restriction>
 	</xs:simpleType>
 	<xs:simpleType name="RequiredMobileApplicationPermissionMessages">
