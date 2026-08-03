@@ -22,6 +22,8 @@ Workflow [`.github/workflows/update-schemas.yml`](.github/workflows/update-schem
 
 Номер каталога — максимум `FormatVersion` из выгруженного `…-xcf-enums.xsd`.
 
+Состав набора задают корневые пакеты в модуле сервиса `ВыгрузкаСхем`: `http://v8.1c.ru/8.3/MDClasses` (объекты метаданных) и `http://v8.1c.ru/8.3/xcf/logform` (содержимое управляемой формы); остальные пакеты платформа подтягивает по зависимостям. Если этот список меняется, ранее собранные каталоги нужно перевыгрузить: ручной запуск workflow с флагом `redump` берёт по старшей версии платформы на каждый формат.
+
 **Секреты** (Settings → Secrets → Actions): `ONEC_LOGIN`, `ONEC_PASSWORD` — учётные данные [releases.1c.ru](https://releases.1c.ru).
 
 Каталог [`src/`](src/) — конфигурация для извлечения схем, не часть набора `schemas/`.
