@@ -1,19 +1,36 @@
 // HTTP-сервис выгрузки XSD-схем платформы 1С.
 // GET /xsd/dump → JSON { "имя.xsd": "<содержимое>", … }.
 
+// Пакеты, с которых начинается модель; остальное платформа подтягивает по зависимостям.
+// MDClasses - объекты метаданных, xcf/logform - содержимое управляемой формы (Ext/Form.xml).
+Функция КорневыеПространстваИмен()
+
+	Возврат СтрРазделить(
+		"http://v8.1c.ru/8.3/MDClasses"
+		+ "," + "http://v8.1c.ru/8.3/xcf/logform",
+		","
+	);
+
+КонецФункции
+
 Функция СхемыGET(Запрос)
 
-	ЧтениеXML = Новый ЧтениеXML;
-	ЧтениеXML.УстановитьСтроку(
-		"<Model xmlns=""http://v8.1c.ru/8.1/xdto"""
+	ТекстМодели = "<Model xmlns=""http://v8.1c.ru/8.1/xdto"""
 		+ " xmlns:xs=""http://www.w3.org/2001/XMLSchema"""
 		+ " xmlns:xsi=""http://www.w3.org/2001/XMLSchema-instance"""
-		+ " xsi:type=""Model"">"
-		+ "<package targetNamespace=""http://v8.1c.ru/8.3/MDClasses"""
-		+          " elementFormQualified=""true"""
-		+          " attributeFormQualified=""false""/>"
-		+ "</Model>"
-	);
+		+ " xsi:type=""Model"">";
+
+	Для Каждого URIПакета Из КорневыеПространстваИмен() Цикл
+		ТекстМодели = ТекстМодели
+			+ "<package targetNamespace=""" + URIПакета + """"
+			+          " elementFormQualified=""true"""
+			+          " attributeFormQualified=""false""/>";
+	КонецЦикла;
+
+	ТекстМодели = ТекстМодели + "</Model>";
+
+	ЧтениеXML = Новый ЧтениеXML;
+	ЧтениеXML.УстановитьСтроку(ТекстМодели);
 
 	МодельXDTO = ФабрикаXDTO.ПрочитатьXML(ЧтениеXML);
 	МояФабрика = Новый ФабрикаXDTO(МодельXDTO);

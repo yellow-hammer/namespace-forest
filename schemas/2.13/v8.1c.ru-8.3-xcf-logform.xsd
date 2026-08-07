@@ -1,0 +1,1309 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:ns1="http://v8.1c.ru/8.1/data/ui" xmlns:ns10="http://v8.1c.ru/8.2/managed-application/dynamic-list-data" xmlns:ns11="http://v8.1c.ru/8.3/xcf/readable" xmlns:ns12="http://v8.1c.ru/8.1/data-composition-system/schema" xmlns:ns2="http://v8.1c.ru/8.1/data/core" xmlns:ns3="http://v8.1c.ru/8.2/data/spreadsheet" xmlns:ns4="http://v8.1c.ru/8.1/data-composition-system/settings" xmlns:ns5="http://v8.1c.ru/8.1/data-composition-system/core" xmlns:ns6="http://v8.1c.ru/8.1/data-composition-system/details" xmlns:ns7="http://v8.1c.ru/8.1/data/enterprise" xmlns:ns8="http://v8.1c.ru/8.2/managed-application/core" xmlns:ns9="http://v8.1c.ru/8.2/managed-application/logform" xmlns:tns="http://v8.1c.ru/8.3/xcf/logform" xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="http://v8.1c.ru/8.3/xcf/logform" attributeFormDefault="unqualified" elementFormDefault="qualified">
+	<xs:import namespace="http://v8.1c.ru/8.1/data/ui"/>
+	<xs:import namespace="http://v8.1c.ru/8.1/data/core"/>
+	<xs:import namespace="http://v8.1c.ru/8.2/data/spreadsheet"/>
+	<xs:import namespace="http://v8.1c.ru/8.1/data-composition-system/settings"/>
+	<xs:import namespace="http://v8.1c.ru/8.1/data-composition-system/core"/>
+	<xs:import namespace="http://v8.1c.ru/8.1/data-composition-system/details"/>
+	<xs:import namespace="http://v8.1c.ru/8.1/data/enterprise"/>
+	<xs:import namespace="http://v8.1c.ru/8.2/managed-application/core"/>
+	<xs:import namespace="http://v8.1c.ru/8.2/managed-application/logform"/>
+	<xs:import namespace="http://v8.1c.ru/8.2/managed-application/dynamic-list-data"/>
+	<xs:import namespace="http://v8.1c.ru/8.3/xcf/readable"/>
+	<xs:import namespace="http://v8.1c.ru/8.1/data-composition-system/schema"/>
+	<xs:element name="Form" type="tns:Form"/>
+	<xs:complexType name="Addition">
+		<xs:complexContent>
+			<xs:extension base="tns:FormItemBase">
+				<xs:sequence>
+					<xs:element name="Source" type="ns9:AdditionSource" minOccurs="0"/>
+					<xs:element name="AdditionSource" type="tns:AdditionSource" minOccurs="0"/>
+					<xs:element name="Visible" type="xs:boolean" default="true" minOccurs="0"/>
+					<xs:element name="UserVisible" type="ns11:AdjustableBoolean" minOccurs="0"/>
+					<xs:element name="Enabled" type="xs:boolean" default="true" minOccurs="0"/>
+					<xs:element name="PlacementArea" type="ns9:MenuElementPlacementArea" default="userCmds" minOccurs="0"/>
+					<xs:element name="Title" type="ns2:LocalStringType" minOccurs="0"/>
+					<xs:element name="ToolTip" type="ns2:LocalStringType" minOccurs="0"/>
+					<xs:element name="ToolTipRepresentation" type="ns9:TooltipRepresentation" default="Auto" minOccurs="0"/>
+					<xs:element name="GroupHorizontalAlign" type="ns9:ItemHorizontalAlignment" default="Auto" minOccurs="0"/>
+					<xs:element name="GroupVerticalAlign" type="ns9:ItemVerticalAlignment" default="Auto" minOccurs="0"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="AdditionSource">
+		<xs:sequence>
+			<xs:element name="Item" type="xs:string"/>
+			<xs:element name="Type" type="ns9:LogFormElementAdditionKind"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="AutoCommandBar">
+		<xs:complexContent>
+			<xs:extension base="tns:GroupBase">
+				<xs:sequence>
+					<xs:element name="HorizontalAlign" type="ns9:ItemHorizontalAlignment" default="Left" minOccurs="0"/>
+					<xs:element name="Autofill" type="xs:boolean" default="true" minOccurs="0"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="Button">
+		<xs:complexContent>
+			<xs:extension base="tns:FormItemBase">
+				<xs:sequence>
+					<xs:element name="Type" type="ns9:ManagedFormButtonType" minOccurs="0"/>
+					<xs:element name="DataPath" type="tns:LFEDataPath" default="" minOccurs="0"/>
+					<xs:element name="CommandName" type="xs:string" default="" minOccurs="0"/>
+					<xs:element name="Parameter" minOccurs="0"/>
+					<xs:element name="Visible" type="xs:boolean" default="true" minOccurs="0"/>
+					<xs:element name="UserVisible" type="ns11:AdjustableBoolean" minOccurs="0"/>
+					<xs:element name="Representation" type="ns9:ButtonRepresentation" default="Auto" minOccurs="0"/>
+					<xs:element name="DefaultButton" type="xs:boolean" default="false" minOccurs="0"/>
+					<xs:element name="SkipOnInput" type="ns9:BWAValue" default="auto" minOccurs="0"/>
+					<xs:element name="Enabled" type="xs:boolean" default="true" minOccurs="0"/>
+					<xs:element name="DefaultItem" type="xs:boolean" default="false" minOccurs="0"/>
+					<xs:element name="OnlyInAllActions" type="ns9:BWAValue" default="auto" minOccurs="0"/>
+					<xs:element name="Width" type="xs:decimal" default="0" minOccurs="0"/>
+					<xs:element name="AutoMaxWidth" type="xs:boolean" default="true" minOccurs="0"/>
+					<xs:element name="MaxWidth" type="xs:decimal" default="0" minOccurs="0"/>
+					<xs:element name="MinWidth" type="xs:decimal" default="0" minOccurs="0"/>
+					<xs:element name="Height" type="xs:decimal" default="0" minOccurs="0"/>
+					<xs:element name="AutoMaxHeight" type="xs:boolean" default="true" minOccurs="0"/>
+					<xs:element name="MaxHeight" type="xs:decimal" default="0" minOccurs="0"/>
+					<xs:element name="HorizontalStretch" type="xs:boolean" default="true" minOccurs="0"/>
+					<xs:element name="VerticalStretch" type="xs:boolean" default="true" minOccurs="0"/>
+					<xs:element name="GroupHorizontalAlign" type="ns9:ItemHorizontalAlignment" default="Auto" minOccurs="0"/>
+					<xs:element name="GroupVerticalAlign" type="ns9:ItemVerticalAlignment" default="Auto" minOccurs="0"/>
+					<xs:element name="PlacementArea" type="ns9:MenuElementPlacementArea" default="userCmds" minOccurs="0"/>
+					<xs:element name="Check" type="xs:boolean" default="false" minOccurs="0"/>
+					<xs:element name="TextColor" type="ns1:Color" default="auto" minOccurs="0"/>
+					<xs:element name="BackColor" type="ns1:Color" default="auto" minOccurs="0"/>
+					<xs:element name="BorderColor" type="ns1:Color" default="auto" minOccurs="0"/>
+					<xs:element name="Font" type="ns1:Font" minOccurs="0"/>
+					<xs:element name="Shortcut" type="ns11:ShortCutType" default="" minOccurs="0"/>
+					<xs:element name="Picture" type="ns11:Picture" minOccurs="0"/>
+					<xs:element name="Title" type="ns2:LocalStringType" minOccurs="0"/>
+					<xs:element name="TitleHeight" type="xs:decimal" default="0" minOccurs="0"/>
+					<xs:element name="ToolTipRepresentation" type="ns9:TooltipRepresentation" default="Auto" minOccurs="0"/>
+					<xs:element name="RepresentationInContextMenu" type="ns9:RepresentationInContextMenu" default="Auto" minOccurs="0"/>
+					<xs:element name="Shape" type="ns9:ButtonShape" default="Auto" minOccurs="0"/>
+					<xs:element name="ShapeRepresentation" type="ns9:ButtonShapeRepresentation" default="Auto" minOccurs="0"/>
+					<xs:element name="PictureLocation" type="ns9:FormButtonPictureLocation" default="Auto" minOccurs="0"/>
+					<xs:element name="LocationInCommandBar" type="ns9:ButtonLocationInCommandBar" default="Auto" minOccurs="0"/>
+					<xs:element name="CommandUniqueness" type="xs:boolean" default="true" minOccurs="0"/>
+					<xs:element name="OnMainServerUnavalableBehavior" type="ns9:OnMainServerUnavalableBehavior" default="Auto" minOccurs="0"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="ButtonGroup">
+		<xs:complexContent>
+			<xs:extension base="tns:GroupBase">
+				<xs:sequence>
+					<xs:element name="CommandSource" type="tns:CommandSourceName" default="" minOccurs="0"/>
+					<xs:element name="PlacementArea" type="ns9:MenuElementPlacementArea" default="userCmds" minOccurs="0"/>
+					<xs:element name="Representation" type="ns9:ButtonGroupRepresentation" default="Auto" minOccurs="0"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="CalendarField">
+		<xs:complexContent>
+			<xs:extension base="tns:Field">
+				<xs:sequence>
+					<xs:element name="Width" type="xs:decimal" default="16" minOccurs="0"/>
+					<xs:element name="AutoMaxWidth" type="xs:boolean" default="true" minOccurs="0"/>
+					<xs:element name="MaxWidth" type="xs:decimal" default="0" minOccurs="0"/>
+					<xs:element name="MinWidth" type="xs:decimal" default="0" minOccurs="0"/>
+					<xs:element name="Height" type="xs:decimal" default="9" minOccurs="0"/>
+					<xs:element name="AutoMaxHeight" type="xs:boolean" default="true" minOccurs="0"/>
+					<xs:element name="MaxHeight" type="xs:decimal" default="0" minOccurs="0"/>
+					<xs:element name="HorizontalStretch" type="xs:boolean" default="true" minOccurs="0"/>
+					<xs:element name="VerticalStretch" type="xs:boolean" default="true" minOccurs="0"/>
+					<xs:element name="SelectionMode" type="ns9:FormDateSelectionMode" default="Single" minOccurs="0"/>
+					<xs:element name="ShowCurrentDate" type="xs:boolean" default="true" minOccurs="0"/>
+					<xs:element name="CalendarNavigation" type="xs:boolean" default="true" minOccurs="0"/>
+					<xs:element name="BeginOfRepresentationPeriod" type="xs:dateTime" minOccurs="0"/>
+					<xs:element name="EndOfRepresentationPeriod" type="xs:dateTime" minOccurs="0"/>
+					<xs:element name="EnableStartDrag" type="xs:boolean" default="false" minOccurs="0"/>
+					<xs:element name="EnableDrag" type="xs:boolean" default="false" minOccurs="0"/>
+					<xs:element name="Font" type="ns1:Font" minOccurs="0"/>
+					<xs:element name="BorderColor" type="ns1:Color" default="auto" minOccurs="0"/>
+					<xs:element name="Border" type="ns1:Border" minOccurs="0"/>
+					<xs:element name="ShowMonthsPanel" type="xs:boolean" default="false" minOccurs="0"/>
+					<xs:element name="WidthInMonths" type="xs:decimal" default="1" minOccurs="0"/>
+					<xs:element name="HeightInMonths" type="xs:decimal" default="1" minOccurs="0"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="ChartField">
+		<xs:complexContent>
+			<xs:extension base="tns:Field">
+				<xs:sequence>
+					<xs:element name="Width" type="xs:decimal" default="50" minOccurs="0"/>
+					<xs:element name="AutoMaxWidth" type="xs:boolean" default="true" minOccurs="0"/>
+					<xs:element name="MaxWidth" type="xs:decimal" default="0" minOccurs="0"/>
+					<xs:element name="MinWidth" type="xs:decimal" default="0" minOccurs="0"/>
+					<xs:element name="Height" type="xs:decimal" default="10" minOccurs="0"/>
+					<xs:element name="AutoMaxHeight" type="xs:boolean" default="true" minOccurs="0"/>
+					<xs:element name="MaxHeight" type="xs:decimal" default="0" minOccurs="0"/>
+					<xs:element name="HorizontalStretch" type="xs:boolean" default="true" minOccurs="0"/>
+					<xs:element name="VerticalStretch" type="xs:boolean" default="true" minOccurs="0"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="CheckBoxField">
+		<xs:complexContent>
+			<xs:extension base="tns:Field">
+				<xs:sequence>
+					<xs:element name="CheckBoxType" type="ns9:CheckBoxType" minOccurs="0"/>
+					<xs:element name="ThreeState" type="xs:boolean" default="false" minOccurs="0"/>
+					<xs:element name="BorderColor" type="ns1:Color" default="auto" minOccurs="0"/>
+					<xs:element name="BackColor" type="ns1:Color" default="auto" minOccurs="0"/>
+					<xs:element name="TextColor" type="ns1:Color" default="auto" minOccurs="0"/>
+					<xs:element name="Font" type="ns1:Font" minOccurs="0"/>
+					<xs:element name="EditFormat" type="ns2:LocalStringType" minOccurs="0"/>
+					<xs:element name="ItemTitleHeight" type="xs:decimal" default="0" minOccurs="0"/>
+					<xs:element name="ItemWidth" type="xs:decimal" default="0" minOccurs="0"/>
+					<xs:element name="ItemHeight" type="xs:decimal" default="0" minOccurs="0"/>
+					<xs:element name="EqualItemsWidth" type="ns9:BWAValue" default="auto" minOccurs="0"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="ChildItems">
+		<xs:choice>
+			<xs:element name="LabelField" type="tns:LabelField" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="LableField" type="tns:LabelField" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="InputField" type="tns:InputField" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="CheckBoxField" type="tns:CheckBoxField" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="PictureField" type="tns:PictureField" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="RadioButtonField" type="tns:RadioButtonField" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="SpreadSheetDocumentField" type="tns:SpreadSheetDocumentField" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="TextDocumentField" type="tns:TextDocumentField" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="CalendarField" type="tns:CalendarField" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="PeriodField" type="tns:PeriodField" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="ProgressBarField" type="tns:ProgressBarField" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="TrackBarField" type="tns:TrackBarField" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="ChartField" type="tns:ChartField" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="GanttChartField" type="tns:GanttChartField" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="DendrogramField" type="tns:DendrogramField" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="GraphicalSchemaField" type="tns:GraphicalSchemaField" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="HTMLDocumentField" type="tns:HTMLDocumentField" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="GeographicalSchemaField" type="tns:GeographicalSchemaField" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="FormattedDocumentField" type="tns:FormattedDocumentField" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="PlannerField" type="tns:PlannerField" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="CommandBar" type="tns:CommandBar" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="AutoCommandBar" type="tns:AutoCommandBar" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="Popup" type="tns:Popup" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="ButtonGroup" type="tns:ButtonGroup" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="ContextMenu" type="tns:ContextMenu" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="ColumnGroup" type="tns:ColumnGroup" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="Pages" type="tns:Pages" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="Page" type="tns:Page" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="UsualGroup" type="tns:UsualGroup" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="Table" type="tns:Table" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="Button" type="tns:Button" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="PictureDecoration" type="tns:PictureDecoration" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="LabelDecoration" type="tns:LabelDecoration" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="LableDecoration" type="tns:LabelDecoration" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="SearchStringAddition" type="tns:SearchStringAddition" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="ViewStatusAddition" type="tns:ViewStatusAddition" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="SearchControlAddition" type="tns:SearchControlAddition" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:choice>
+	</xs:complexType>
+	<xs:complexType name="ColumnGroup">
+		<xs:complexContent>
+			<xs:extension base="tns:GroupBase">
+				<xs:sequence>
+					<xs:element name="Group" type="ns9:ColumnsGroup" default="Vertical" minOccurs="0"/>
+					<xs:element name="ShowTitle" type="xs:boolean" default="true" minOccurs="0"/>
+					<xs:element name="TitleBackColor" type="ns1:Color" default="auto" minOccurs="0"/>
+					<xs:element name="ShowInHeader" type="xs:boolean" default="false" minOccurs="0"/>
+					<xs:element name="HeaderDataPath" type="tns:LFEDataPath" default="" minOccurs="0"/>
+					<xs:element name="HeaderHorizontalAlign" type="ns9:ItemHorizontalAlignment" default="Auto" minOccurs="0"/>
+					<xs:element name="HeaderFormat" type="ns2:LocalStringType" minOccurs="0"/>
+					<xs:element name="HeaderPicture" type="ns11:Picture" minOccurs="0"/>
+					<xs:element name="FixingInTable" type="ns9:FormFixedInTable" default="None" minOccurs="0"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="CommandBar">
+		<xs:complexContent>
+			<xs:extension base="tns:GroupBase">
+				<xs:sequence>
+					<xs:element name="HorizontalLocation" type="ns9:ItemHorizontalAlignment" default="Left" minOccurs="0"/>
+					<xs:element name="CommandSource" type="tns:CommandSourceName" default="" minOccurs="0"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:simpleType name="CommandKind">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="Auto"/>
+			<xs:enumeration value="Added"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="CommandSourceName">
+		<xs:restriction base="xs:string"/>
+	</xs:simpleType>
+	<xs:complexType name="CommandsContent">
+		<xs:sequence>
+			<xs:element name="ExcludedCommand" type="xs:string"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="ContentType">
+		<xs:sequence>
+			<xs:element name="Field" type="tns:LFEDataPath" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="ContextMenu">
+		<xs:complexContent>
+			<xs:extension base="tns:GroupBase">
+				<xs:sequence>
+					<xs:element name="Autofill" type="xs:boolean" default="true" minOccurs="0"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="Decoration">
+		<xs:complexContent>
+			<xs:extension base="tns:FormItemBase">
+				<xs:sequence>
+					<xs:element name="Visible" type="xs:boolean" default="true" minOccurs="0"/>
+					<xs:element name="UserVisible" type="ns11:AdjustableBoolean" minOccurs="0"/>
+					<xs:element name="Enabled" type="xs:boolean" default="true" minOccurs="0"/>
+					<xs:element name="Width" type="xs:decimal" default="0" minOccurs="0"/>
+					<xs:element name="AutoMaxWidth" type="xs:boolean" default="true" minOccurs="0"/>
+					<xs:element name="MaxWidth" type="xs:decimal" default="0" minOccurs="0"/>
+					<xs:element name="MinWidth" type="xs:decimal" default="0" minOccurs="0"/>
+					<xs:element name="Height" type="xs:decimal" default="0" minOccurs="0"/>
+					<xs:element name="AutoMaxHeight" type="xs:boolean" default="true" minOccurs="0"/>
+					<xs:element name="MaxHeight" type="xs:decimal" default="0" minOccurs="0"/>
+					<xs:element name="HorizontalStretch" type="ns9:BWAValue" default="auto" minOccurs="0"/>
+					<xs:element name="VerticalStretch" type="ns9:BWAValue" default="auto" minOccurs="0"/>
+					<xs:element name="SkipOnInput" type="ns9:BWAValue" default="auto" minOccurs="0"/>
+					<xs:element name="TextColor" type="ns1:Color" default="auto" minOccurs="0"/>
+					<xs:element name="Font" type="ns1:Font" minOccurs="0"/>
+					<xs:element name="Shortcut" type="ns11:ShortCutType" default="" minOccurs="0"/>
+					<xs:element name="Title" type="ns11:FormattedStringType" minOccurs="0"/>
+					<xs:element name="ToolTip" type="ns2:LocalStringType" minOccurs="0"/>
+					<xs:element name="ToolTipRepresentation" type="ns9:TooltipRepresentation" default="Auto" minOccurs="0"/>
+					<xs:element name="GroupHorizontalAlign" type="ns9:ItemHorizontalAlignment" default="Auto" minOccurs="0"/>
+					<xs:element name="GroupVerticalAlign" type="ns9:ItemVerticalAlignment" default="Auto" minOccurs="0"/>
+					<xs:element name="OnMainServerUnavalableBehavior" type="ns9:OnMainServerUnavalableBehavior" default="Auto" minOccurs="0"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:simpleType name="DefaultRepresentation">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="Text"/>
+			<xs:enumeration value="Picture"/>
+			<xs:enumeration value="TextPicture"/>
+			<xs:enumeration value="Auto"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:complexType name="DendrogramField">
+		<xs:complexContent>
+			<xs:extension base="tns:Field">
+				<xs:sequence>
+					<xs:element name="Width" type="xs:decimal" default="50" minOccurs="0"/>
+					<xs:element name="AutoMaxWidth" type="xs:boolean" default="true" minOccurs="0"/>
+					<xs:element name="MaxWidth" type="xs:decimal" default="0" minOccurs="0"/>
+					<xs:element name="MinWidth" type="xs:decimal" default="0" minOccurs="0"/>
+					<xs:element name="Height" type="xs:decimal" default="10" minOccurs="0"/>
+					<xs:element name="AutoMaxHeight" type="xs:boolean" default="true" minOccurs="0"/>
+					<xs:element name="MaxHeight" type="xs:decimal" default="0" minOccurs="0"/>
+					<xs:element name="HorizontalStretch" type="xs:boolean" default="true" minOccurs="0"/>
+					<xs:element name="VerticalStretch" type="xs:boolean" default="true" minOccurs="0"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="DynamicList">
+		<xs:sequence>
+			<xs:element name="ManualQuery" type="xs:boolean" default="true" minOccurs="0"/>
+			<xs:element name="DynamicDataRead" type="xs:boolean" default="true" minOccurs="0"/>
+			<xs:element name="AutoFillAvailableFields" type="xs:boolean" default="true" minOccurs="0"/>
+			<xs:element name="QueryText" type="xs:string" default="" minOccurs="0"/>
+			<xs:element name="Field" type="ns12:DataSetField" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="CalculatedField" type="ns12:CalculatedField" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="Parameter" type="ns12:Parameter" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="MainTable" type="ns11:MDObjectRef" default="" minOccurs="0"/>
+			<xs:element name="KeyType" type="ns10:DynamicListKeyType" default="Auto" minOccurs="0"/>
+			<xs:element name="KeyField" type="xs:string" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="AutoSaveUserSettings" type="xs:boolean" default="true" minOccurs="0"/>
+			<xs:element name="GetInvisibleFieldPresentations" type="xs:boolean" default="true" minOccurs="0"/>
+			<xs:element name="ListSettings" type="ns4:Settings" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="Field">
+		<xs:complexContent>
+			<xs:extension base="tns:FormItemBase">
+				<xs:sequence>
+					<xs:element name="DataPath" type="tns:LFEDataPath" default="" minOccurs="0"/>
+					<xs:element name="Visible" type="xs:boolean" default="true" minOccurs="0"/>
+					<xs:element name="UserVisible" type="ns11:AdjustableBoolean" minOccurs="0"/>
+					<xs:element name="DefaultItem" type="xs:boolean" default="false" minOccurs="0"/>
+					<xs:element name="Enabled" type="xs:boolean" default="true" minOccurs="0"/>
+					<xs:element name="ReadOnly" type="xs:boolean" default="false" minOccurs="0"/>
+					<xs:element name="SkipOnInput" type="ns9:BWAValue" default="auto" minOccurs="0"/>
+					<xs:element name="Title" type="ns2:LocalStringType" minOccurs="0"/>
+					<xs:element name="TitleTextColor" type="ns1:Color" default="auto" minOccurs="0"/>
+					<xs:element name="TitleBackColor" type="ns1:Color" default="auto" minOccurs="0"/>
+					<xs:element name="TitleFont" type="ns1:Font" minOccurs="0"/>
+					<xs:element name="TitleLocation" type="ns9:FormElementTitleLocation" default="Auto" minOccurs="0"/>
+					<xs:element name="TitleHeight" type="xs:decimal" default="0" minOccurs="0"/>
+					<xs:element name="ToolTip" type="ns2:LocalStringType" minOccurs="0"/>
+					<xs:element name="ToolTipRepresentation" type="ns9:TooltipRepresentation" default="Auto" minOccurs="0"/>
+					<xs:element name="WarningOnEditRepresentation" type="ns9:WarningOnEditRepresentation" default="Auto" minOccurs="0"/>
+					<xs:element name="WarningOnEdit" type="ns2:LocalStringType" minOccurs="0"/>
+					<xs:element name="Shortcut" type="ns11:ShortCutType" default="" minOccurs="0"/>
+					<xs:element name="CommandSet" type="tns:CommandsContent" minOccurs="0"/>
+					<xs:element name="HorizontalAlign" type="ns9:ItemHorizontalAlignment" default="Auto" minOccurs="0"/>
+					<xs:element name="VerticalAlign" type="ns9:ItemVerticalAlignment" default="Auto" minOccurs="0"/>
+					<xs:element name="GroupHorizontalAlign" type="ns9:ItemHorizontalAlignment" default="Auto" minOccurs="0"/>
+					<xs:element name="GroupVerticalAlign" type="ns9:ItemVerticalAlignment" default="Auto" minOccurs="0"/>
+					<xs:element name="DisplayImportance" type="ns9:DisplayImportance" default="Auto" minOccurs="0"/>
+					<xs:element name="EditMode" type="ns9:TableFieldEditMode" default="EnterOnInput" minOccurs="0"/>
+					<xs:element name="FixingInTable" type="ns9:FormFixedInTable" default="None" minOccurs="0"/>
+					<xs:element name="CellHyperlink" type="xs:boolean" default="false" minOccurs="0"/>
+					<xs:element name="AutoCellHeight" type="xs:boolean" default="false" minOccurs="0"/>
+					<xs:element name="ShowInHeader" type="xs:boolean" default="true" minOccurs="0"/>
+					<xs:element name="HeaderPicture" type="ns11:Picture" minOccurs="0"/>
+					<xs:element name="HeaderHorizontalAlign" type="ns9:ItemHorizontalAlignment" default="Left" minOccurs="0"/>
+					<xs:element name="ShowInFooter" type="xs:boolean" default="true" minOccurs="0"/>
+					<xs:element name="FooterDataPath" type="tns:LFEDataPath" default="" minOccurs="0"/>
+					<xs:element name="FooterText" type="ns2:LocalStringType" minOccurs="0"/>
+					<xs:element name="FooterTextColor" type="ns1:Color" default="auto" minOccurs="0"/>
+					<xs:element name="FooterBackColor" type="ns1:Color" default="auto" minOccurs="0"/>
+					<xs:element name="FooterFont" type="ns1:Font" minOccurs="0"/>
+					<xs:element name="FooterPicture" type="ns11:Picture" minOccurs="0"/>
+					<xs:element name="FooterHorizontalAlign" type="ns9:ItemHorizontalAlignment" default="Auto" minOccurs="0"/>
+					<xs:element name="OnMainServerUnavalableBehavior" type="ns9:OnMainServerUnavalableBehavior" default="Auto" minOccurs="0"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="Form">
+		<xs:complexContent>
+			<xs:extension base="tns:FormVisualEntity">
+				<xs:sequence>
+					<xs:element name="Title" type="ns2:LocalStringType" minOccurs="0"/>
+					<xs:element name="Width" type="xs:decimal" default="0" minOccurs="0"/>
+					<xs:element name="Height" type="xs:decimal" default="0" minOccurs="0"/>
+					<xs:element name="WindowOpeningMode" type="ns9:FormWindowOpeningMode" default="Independent" minOccurs="0"/>
+					<xs:element name="EnterKeyBehavior" type="ns9:FormEnterKeyBehavior" default="ControlNavigation" minOccurs="0"/>
+					<xs:element name="AutoSaveDataInSettings" type="ns9:AutoSaveFormDataInSettings" default="DontUse" minOccurs="0"/>
+					<xs:element name="SaveDataInSettings" type="ns9:SaveFormDataInSettings" default="DontUse" minOccurs="0"/>
+					<xs:element name="SettingsStorage" type="ns11:MDObjectRef" default="" minOccurs="0"/>
+					<xs:element name="AutoTitle" type="xs:boolean" default="true" minOccurs="0"/>
+					<xs:element name="AutoURL" type="xs:boolean" default="true" minOccurs="0"/>
+					<xs:element name="Group" type="ns9:FormChildrenGroup" default="Vertical" minOccurs="0"/>
+					<xs:element name="ChildrenAlign" type="ns9:FormChildrenAlign" default="Auto" minOccurs="0"/>
+					<xs:element name="HorizontalSpacing" type="ns9:FormItemSpacing" default="Auto" minOccurs="0"/>
+					<xs:element name="VerticalSpacing" type="ns9:FormItemSpacing" default="Auto" minOccurs="0"/>
+					<xs:element name="HorizontalAlign" type="ns9:ItemHorizontalAlignment" default="Auto" minOccurs="0"/>
+					<xs:element name="VerticalAlign" type="ns9:ItemVerticalAlignment" default="Auto" minOccurs="0"/>
+					<xs:element name="ChildItemsWidth" type="ns9:FormChildrenWidth" default="Auto" minOccurs="0"/>
+					<xs:element name="AutoFillCheck" type="xs:boolean" default="true" minOccurs="0"/>
+					<xs:element name="Customizable" type="xs:boolean" default="true" minOccurs="0"/>
+					<xs:element name="Enabled" type="xs:boolean" default="true" minOccurs="0"/>
+					<xs:element name="ReadOnly" type="xs:boolean" default="false" minOccurs="0"/>
+					<xs:element name="CommandBarLocation" type="ns9:FormElementCommandBarLocation" default="Auto" minOccurs="0"/>
+					<xs:element name="VerticalScroll" type="ns9:LogFormScrollMode" default="auto" minOccurs="0"/>
+					<xs:element name="ScalingMode" type="ns9:FormBaseFontVariant" default="Auto" minOccurs="0"/>
+					<xs:element name="Scale" type="xs:decimal" default="100" minOccurs="0"/>
+					<xs:element name="ConversationsRepresentation" type="ns9:LogFormShowConversations" default="Auto" minOccurs="0"/>
+					<xs:element name="MobileDeviceCommandBarContent" type="ns11:ValueList" minOccurs="0"/>
+					<xs:element name="CommandSet" type="tns:CommandsContent" minOccurs="0"/>
+					<xs:element name="ShowTitle" type="xs:boolean" default="true" minOccurs="0"/>
+					<xs:element name="ShowCloseButton" type="xs:boolean" default="true" minOccurs="0"/>
+					<xs:element name="CollapseItemsByImportanceVariant" type="ns9:CollapseFormItemsByImportance" default="Auto" minOccurs="0"/>
+					<xs:element name="UseForFoldersAndItems" type="ns7:FoldersAndItemsUse" minOccurs="0"/>
+					<xs:element name="GroupList" type="tns:FormItemRef" minOccurs="0"/>
+					<xs:element name="AutoTime" type="ns7:AutoTimeMode" minOccurs="0"/>
+					<xs:element name="UsePostingMode" type="ns7:PostingModeUse" minOccurs="0"/>
+					<xs:element name="RepostOnWrite" type="xs:boolean" minOccurs="0"/>
+					<xs:element name="ReportResult" type="tns:LFEDataPath" minOccurs="0"/>
+					<xs:element name="DetailsData" type="tns:LFEDataPath" minOccurs="0"/>
+					<xs:element name="ReportFormType" type="ns9:ReportFormType" minOccurs="0"/>
+					<xs:element name="VariantAppearance" type="tns:LFEDataPath" minOccurs="0"/>
+					<xs:element name="AutoShowState" type="ns7:AutoShowStateMode" minOccurs="0"/>
+					<xs:element name="CustomSettingsFolder" type="tns:FormItemRef" minOccurs="0"/>
+					<xs:element name="ReportResultViewMode" type="ns7:ReportResultViewMode" minOccurs="0"/>
+					<xs:element name="ViewModeApplicationOnSetReportResult" type="ns7:ViewModeApplicationOnSetReportResult" minOccurs="0"/>
+					<xs:element name="Attributes" type="tns:FormAttributes" minOccurs="0"/>
+					<xs:element name="Commands" type="tns:FormCommands" minOccurs="0"/>
+					<xs:element name="Parameters" type="tns:FormParameters" minOccurs="0"/>
+					<xs:element name="CommandInterface" type="tns:FormCommandInterface" minOccurs="0"/>
+					<xs:element name="BaseForm" type="tns:Form" minOccurs="0"/>
+				</xs:sequence>
+				<xs:attribute name="version"/>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="FormAttribute">
+		<xs:sequence>
+			<xs:element name="Type" type="ns2:TypeDescription"/>
+			<xs:element name="Title" type="ns2:LocalStringType"/>
+			<xs:element name="View" type="ns11:AdjustableBoolean"/>
+			<xs:element name="Edit" type="ns11:AdjustableBoolean"/>
+			<xs:element name="MainAttribute" type="xs:boolean" default="false"/>
+			<xs:element name="SavedData" type="xs:boolean" default="false"/>
+			<xs:element name="FillCheck" type="ns2:FillChecking" default="DontCheck"/>
+			<xs:element name="UseAlways" type="tns:ContentType"/>
+			<xs:element name="Save" type="tns:ContentType"/>
+			<xs:element name="FunctionalOptions" type="tns:FunctionalOptions"/>
+			<xs:element name="Columns" type="tns:FormAttributeColumns" minOccurs="0"/>
+			<xs:element name="Settings" minOccurs="0"/>
+		</xs:sequence>
+		<xs:attribute name="name" type="xs:string" use="required"/>
+		<xs:attribute name="id" type="xs:decimal" use="required"/>
+	</xs:complexType>
+	<xs:complexType name="FormAttributeAdditionalColumns">
+		<xs:sequence>
+			<xs:element name="Column" type="tns:FormAttributeColumn" maxOccurs="unbounded"/>
+		</xs:sequence>
+		<xs:attribute name="table" type="tns:LFEDataPath" use="required"/>
+	</xs:complexType>
+	<xs:complexType name="FormAttributeColumn">
+		<xs:sequence>
+			<xs:element name="Type" type="ns2:TypeDescription" minOccurs="0"/>
+			<xs:element name="Title" type="ns2:LocalStringType" minOccurs="0"/>
+			<xs:element name="View" type="ns11:AdjustableBoolean" minOccurs="0"/>
+			<xs:element name="Edit" type="ns11:AdjustableBoolean" minOccurs="0"/>
+			<xs:element name="FillCheck" type="ns2:FillChecking" default="DontCheck" minOccurs="0"/>
+			<xs:element name="FunctionalOptions" type="tns:FunctionalOptions" minOccurs="0"/>
+		</xs:sequence>
+		<xs:attribute name="name" type="xs:string" use="required"/>
+		<xs:attribute name="id" type="xs:decimal" use="required"/>
+	</xs:complexType>
+	<xs:complexType name="FormAttributeColumns">
+		<xs:choice>
+			<xs:element name="Column" type="tns:FormAttributeColumn" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="AdditionalColumns" type="tns:FormAttributeAdditionalColumns" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:choice>
+	</xs:complexType>
+	<xs:complexType name="FormAttributes">
+		<xs:sequence>
+			<xs:element name="Attribute" type="tns:FormAttribute" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="ConditionalAppearance" type="ns4:ConditionalAppearance" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="FormChoiceListDesTimeValue">
+		<xs:sequence>
+			<xs:element name="Presentation" type="ns2:LocalStringType"/>
+			<xs:element name="Value"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="FormCommand">
+		<xs:sequence>
+			<xs:element name="Title" type="ns2:LocalStringType"/>
+			<xs:element name="ToolTip" type="ns2:LocalStringType"/>
+			<xs:element name="Use" type="ns11:AdjustableBoolean"/>
+			<xs:element name="Shortcut" type="ns11:ShortCutType" default=""/>
+			<xs:element name="Picture" type="ns11:Picture"/>
+			<xs:element name="Action" type="tns:FormCommandAction"/>
+			<xs:element name="FunctionalOptions" type="tns:FunctionalOptions"/>
+			<xs:element name="Representation" type="tns:DefaultRepresentation" default="Auto"/>
+			<xs:element name="ModifiesSavedData" type="xs:boolean" default="false"/>
+			<xs:element name="CurrentRowUse" type="ns9:CurrentRowUse" default="Auto"/>
+			<xs:element name="AssociatedTableElementId"/>
+		</xs:sequence>
+		<xs:attribute name="name" type="xs:string" use="required"/>
+		<xs:attribute name="id" type="xs:decimal" use="required"/>
+	</xs:complexType>
+	<xs:complexType name="FormCommandAction">
+		<xs:simpleContent>
+			<xs:extension base="xs:string">
+				<xs:attribute name="callType" type="tns:HandlerCallType"/>
+			</xs:extension>
+		</xs:simpleContent>
+	</xs:complexType>
+	<xs:complexType name="FormCommandInterface">
+		<xs:sequence>
+			<xs:element name="NavigationPanel" type="tns:FormCommandInterfaceItems" minOccurs="0"/>
+			<xs:element name="CommandBar" type="tns:FormCommandInterfaceItems" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="FormCommandInterfaceItem">
+		<xs:sequence>
+			<xs:element name="Command" type="xs:string" minOccurs="0"/>
+			<xs:element name="Type" type="tns:CommandKind" minOccurs="0"/>
+			<xs:element name="Attribute" type="tns:LFEDataPath" default="" minOccurs="0"/>
+			<xs:element name="CommandGroup" type="xs:string" default="" minOccurs="0"/>
+			<xs:element name="Index" type="xs:decimal" default="0" minOccurs="0"/>
+			<xs:element name="DefaultVisible" type="xs:boolean" default="true" minOccurs="0"/>
+			<xs:element name="Visible" type="ns11:AdjustableBoolean" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="FormCommandInterfaceItems">
+		<xs:sequence>
+			<xs:element name="Item" type="tns:FormCommandInterfaceItem" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="FormCommands">
+		<xs:sequence>
+			<xs:element name="Command" type="tns:FormCommand" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="FormItemBase">
+		<xs:complexContent>
+			<xs:extension base="tns:FormVisualEntity">
+				<xs:attribute name="id" type="xs:decimal" use="required"/>
+				<xs:attribute name="name" type="xs:string" use="required"/>
+				<xs:attribute name="DisplayImportance" type="ns9:DisplayImportance"/>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="FormItemEvent">
+		<xs:simpleContent>
+			<xs:extension base="xs:string">
+				<xs:attribute name="name" type="xs:string" use="required"/>
+				<xs:attribute name="callType" type="tns:HandlerCallType"/>
+			</xs:extension>
+		</xs:simpleContent>
+	</xs:complexType>
+	<xs:complexType name="FormItemEvents">
+		<xs:sequence>
+			<xs:element name="Event" type="tns:FormItemEvent" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:simpleType name="FormItemRef">
+		<xs:restriction base="ns11:ReferenceType"/>
+	</xs:simpleType>
+	<xs:complexType name="FormParameter">
+		<xs:sequence>
+			<xs:element name="Type" type="ns2:TypeDescription"/>
+			<xs:element name="KeyParameter" type="xs:boolean" default="false"/>
+		</xs:sequence>
+		<xs:attribute name="name" type="xs:string" use="required"/>
+	</xs:complexType>
+	<xs:complexType name="FormParameters">
+		<xs:sequence>
+			<xs:element name="Parameter" type="tns:FormParameter" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="FormVisualEntity">
+		<xs:complexContent>
+			<xs:extension base="tns:PredefinedChildItems">
+				<xs:sequence>
+					<xs:element name="Events" type="tns:FormItemEvents" minOccurs="0"/>
+					<xs:element name="ChildItems" type="tns:ChildItems" minOccurs="0"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="FormattedDocumentField">
+		<xs:complexContent>
+			<xs:extension base="tns:Field">
+				<xs:sequence>
+					<xs:element name="Width" type="xs:decimal" default="50" minOccurs="0"/>
+					<xs:element name="AutoMaxWidth" type="xs:boolean" default="true" minOccurs="0"/>
+					<xs:element name="MaxWidth" type="xs:decimal" default="0" minOccurs="0"/>
+					<xs:element name="MinWidth" type="xs:decimal" default="0" minOccurs="0"/>
+					<xs:element name="Height" type="xs:decimal" default="10" minOccurs="0"/>
+					<xs:element name="AutoMaxHeight" type="xs:boolean" default="true" minOccurs="0"/>
+					<xs:element name="MaxHeight" type="xs:decimal" default="0" minOccurs="0"/>
+					<xs:element name="HorizontalStretch" type="xs:boolean" default="true" minOccurs="0"/>
+					<xs:element name="VerticalStretch" type="xs:boolean" default="true" minOccurs="0"/>
+					<xs:element name="Output" type="ns1:UseOutput" default="Auto" minOccurs="0"/>
+					<xs:element name="TextColor" type="ns1:Color" default="auto" minOccurs="0"/>
+					<xs:element name="BackColor" type="ns1:Color" default="auto" minOccurs="0"/>
+					<xs:element name="BorderColor" type="ns1:Color" default="auto" minOccurs="0"/>
+					<xs:element name="Font" type="ns1:Font" minOccurs="0"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="FunctionalOptions">
+		<xs:sequence>
+			<xs:element name="Item" type="ns11:MDObjectRef" default="" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="GanttChartField">
+		<xs:complexContent>
+			<xs:extension base="tns:Field">
+				<xs:sequence>
+					<xs:element name="Width" type="xs:decimal" default="50" minOccurs="0"/>
+					<xs:element name="AutoMaxWidth" type="xs:boolean" default="true" minOccurs="0"/>
+					<xs:element name="MaxWidth" type="xs:decimal" default="0" minOccurs="0"/>
+					<xs:element name="MinWidth" type="xs:decimal" default="0" minOccurs="0"/>
+					<xs:element name="Height" type="xs:decimal" default="10" minOccurs="0"/>
+					<xs:element name="AutoMaxHeight" type="xs:boolean" default="true" minOccurs="0"/>
+					<xs:element name="MaxHeight" type="xs:decimal" default="0" minOccurs="0"/>
+					<xs:element name="HorizontalStretch" type="xs:boolean" default="true" minOccurs="0"/>
+					<xs:element name="VerticalStretch" type="xs:boolean" default="true" minOccurs="0"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="GeographicalSchemaField">
+		<xs:complexContent>
+			<xs:extension base="tns:Field">
+				<xs:sequence>
+					<xs:element name="Width" type="xs:decimal" default="50" minOccurs="0"/>
+					<xs:element name="AutoMaxWidth" type="xs:boolean" default="true" minOccurs="0"/>
+					<xs:element name="MaxWidth" type="xs:decimal" default="0" minOccurs="0"/>
+					<xs:element name="MinWidth" type="xs:decimal" default="0" minOccurs="0"/>
+					<xs:element name="Height" type="xs:decimal" default="10" minOccurs="0"/>
+					<xs:element name="AutoMaxHeight" type="xs:boolean" default="true" minOccurs="0"/>
+					<xs:element name="MaxHeight" type="xs:decimal" default="0" minOccurs="0"/>
+					<xs:element name="HorizontalStretch" type="xs:boolean" default="true" minOccurs="0"/>
+					<xs:element name="VerticalStretch" type="xs:boolean" default="true" minOccurs="0"/>
+					<xs:element name="Output" type="ns1:UseOutput" default="Auto" minOccurs="0"/>
+					<xs:element name="BorderColor" type="ns1:Color" default="auto" minOccurs="0"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="GraphicalSchemaField">
+		<xs:complexContent>
+			<xs:extension base="tns:Field">
+				<xs:sequence>
+					<xs:element name="Width" type="xs:decimal" default="50" minOccurs="0"/>
+					<xs:element name="AutoMaxWidth" type="xs:boolean" default="true" minOccurs="0"/>
+					<xs:element name="MaxWidth" type="xs:decimal" default="0" minOccurs="0"/>
+					<xs:element name="MinWidth" type="xs:decimal" default="0" minOccurs="0"/>
+					<xs:element name="Height" type="xs:decimal" default="10" minOccurs="0"/>
+					<xs:element name="AutoMaxHeight" type="xs:boolean" default="true" minOccurs="0"/>
+					<xs:element name="MaxHeight" type="xs:decimal" default="0" minOccurs="0"/>
+					<xs:element name="HorizontalStretch" type="xs:boolean" default="true" minOccurs="0"/>
+					<xs:element name="VerticalStretch" type="xs:boolean" default="true" minOccurs="0"/>
+					<xs:element name="Output" type="ns1:UseOutput" default="Auto" minOccurs="0"/>
+					<xs:element name="Edit" type="xs:boolean" default="true" minOccurs="0"/>
+					<xs:element name="BorderColor" type="ns1:Color" default="auto" minOccurs="0"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="GroupBase">
+		<xs:complexContent>
+			<xs:extension base="tns:FormItemBase">
+				<xs:sequence>
+					<xs:element name="Visible" type="xs:boolean" default="true" minOccurs="0"/>
+					<xs:element name="UserVisible" type="ns11:AdjustableBoolean" minOccurs="0"/>
+					<xs:element name="Enabled" type="xs:boolean" default="true" minOccurs="0"/>
+					<xs:element name="ReadOnly" type="xs:boolean" default="false" minOccurs="0"/>
+					<xs:element name="EnableContentChange" type="xs:boolean" default="false" minOccurs="0"/>
+					<xs:element name="Title" type="ns2:LocalStringType" minOccurs="0"/>
+					<xs:element name="TitleTextColor" type="ns1:Color" default="auto" minOccurs="0"/>
+					<xs:element name="TitleFont" type="ns1:Font" minOccurs="0"/>
+					<xs:element name="ToolTip" type="ns2:LocalStringType" minOccurs="0"/>
+					<xs:element name="ToolTipRepresentation" type="ns9:TooltipRepresentation" default="Auto" minOccurs="0"/>
+					<xs:element name="Shortcut" type="ns11:ShortCutType" default="" minOccurs="0"/>
+					<xs:element name="Width" type="xs:decimal" default="0" minOccurs="0"/>
+					<xs:element name="Height" type="xs:decimal" default="0" minOccurs="0"/>
+					<xs:element name="HorizontalStretch" type="ns9:BWAValue" default="auto" minOccurs="0"/>
+					<xs:element name="VerticalStretch" type="ns9:BWAValue" default="auto" minOccurs="0"/>
+					<xs:element name="GroupHorizontalAlign" type="ns9:ItemHorizontalAlignment" default="Auto" minOccurs="0"/>
+					<xs:element name="GroupVerticalAlign" type="ns9:ItemVerticalAlignment" default="Auto" minOccurs="0"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="HTMLDocumentField">
+		<xs:complexContent>
+			<xs:extension base="tns:Field">
+				<xs:sequence>
+					<xs:element name="Width" type="xs:decimal" default="50" minOccurs="0"/>
+					<xs:element name="AutoMaxWidth" type="xs:boolean" default="true" minOccurs="0"/>
+					<xs:element name="MaxWidth" type="xs:decimal" default="0" minOccurs="0"/>
+					<xs:element name="MinWidth" type="xs:decimal" default="0" minOccurs="0"/>
+					<xs:element name="Height" type="xs:decimal" default="10" minOccurs="0"/>
+					<xs:element name="AutoMaxHeight" type="xs:boolean" default="true" minOccurs="0"/>
+					<xs:element name="MaxHeight" type="xs:decimal" default="0" minOccurs="0"/>
+					<xs:element name="HorizontalStretch" type="xs:boolean" default="true" minOccurs="0"/>
+					<xs:element name="VerticalStretch" type="xs:boolean" default="true" minOccurs="0"/>
+					<xs:element name="Output" type="ns1:UseOutput" default="Auto" minOccurs="0"/>
+					<xs:element name="BorderColor" type="ns1:Color" default="auto" minOccurs="0"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:simpleType name="HandlerCallType">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="Before"/>
+			<xs:enumeration value="After"/>
+			<xs:enumeration value="Override"/>
+			<xs:enumeration value="ChangeAndValidate"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:complexType name="InputField">
+		<xs:complexContent>
+			<xs:extension base="tns:Field">
+				<xs:sequence>
+					<xs:element name="Width" type="xs:decimal" default="0" minOccurs="0"/>
+					<xs:element name="AutoMaxWidth" type="xs:boolean" default="true" minOccurs="0"/>
+					<xs:element name="MaxWidth" type="xs:decimal" default="0" minOccurs="0"/>
+					<xs:element name="MinWidth" type="xs:decimal" default="0" minOccurs="0"/>
+					<xs:element name="Height" type="xs:decimal" default="0" minOccurs="0"/>
+					<xs:element name="AutoMaxHeight" type="xs:boolean" default="true" minOccurs="0"/>
+					<xs:element name="MaxHeight" type="xs:decimal" default="0" minOccurs="0"/>
+					<xs:element name="HorizontalStretch" type="ns9:BWAValue" default="auto" minOccurs="0"/>
+					<xs:element name="VerticalStretch" type="ns9:BWAValue" default="auto" minOccurs="0"/>
+					<xs:element name="Wrap" type="xs:boolean" default="true" minOccurs="0"/>
+					<xs:element name="PasswordMode" type="ns9:BWAValue" default="auto" minOccurs="0"/>
+					<xs:element name="MultiLine" type="ns9:BWAValue" default="auto" minOccurs="0"/>
+					<xs:element name="ExtendedEdit" type="ns9:BWAValue" default="auto" minOccurs="0"/>
+					<xs:element name="MarkNegatives" type="ns9:BWAValue" default="auto" minOccurs="0"/>
+					<xs:element name="DropListButton" type="ns9:BWAValue" default="auto" minOccurs="0"/>
+					<xs:element name="ChoiceButton" type="ns9:BWAValue" default="auto" minOccurs="0"/>
+					<xs:element name="ChoiceButtonRepresentation" type="ns9:ChoiceButtonRepresentation" default="Auto" minOccurs="0"/>
+					<xs:element name="ChoiceButtonPicture" type="ns11:Picture" minOccurs="0"/>
+					<xs:element name="ClearButton" type="ns9:BWAValue" default="auto" minOccurs="0"/>
+					<xs:element name="SpinButton" type="ns9:BWAValue" default="auto" minOccurs="0"/>
+					<xs:element name="OpenButton" type="ns9:BWAValue" default="auto" minOccurs="0"/>
+					<xs:element name="CreateButton" type="ns9:BWAValue" default="auto" minOccurs="0"/>
+					<xs:element name="Mask" type="xs:string" default="" minOccurs="0"/>
+					<xs:element name="AutoChoiceIncomplete" type="ns9:BWAValue" minOccurs="0"/>
+					<xs:element name="QuickChoice" type="ns9:BWAValue" minOccurs="0"/>
+					<xs:element name="ChoiceFoldersAndItems" type="ns9:FoldersAndItems" minOccurs="0"/>
+					<xs:element name="Format" type="ns2:LocalStringType" minOccurs="0"/>
+					<xs:element name="EditFormat" type="ns2:LocalStringType" minOccurs="0"/>
+					<xs:element name="AutoMarkIncomplete" type="ns9:BWAValue" default="auto" minOccurs="0"/>
+					<xs:element name="ChooseType" type="xs:boolean" default="true" minOccurs="0"/>
+					<xs:element name="IncompleteChoiceMode" type="ns9:IncompleteItemChoiceMode" default="OnEnterPressed" minOccurs="0"/>
+					<xs:element name="TypeDomainEnabled" type="xs:boolean" default="true" minOccurs="0"/>
+					<xs:element name="TextEdit" type="xs:boolean" default="true" minOccurs="0"/>
+					<xs:element name="EditTextUpdate" type="ns9:EditTextUpdate" default="Auto" minOccurs="0"/>
+					<xs:element name="MinValue" minOccurs="0"/>
+					<xs:element name="MaxValue" minOccurs="0"/>
+					<xs:element name="ChoiceForm" type="ns11:MDObjectRef" default="" minOccurs="0"/>
+					<xs:element name="ChoiceParameterLinks" type="ns11:ChoiceParameterLinks" minOccurs="0"/>
+					<xs:element name="ChoiceParameters" type="ns8:ChoiceParameters" minOccurs="0"/>
+					<xs:element name="AvailableTypes" type="ns2:TypeDescription" minOccurs="0"/>
+					<xs:element name="ListChoiceMode" type="xs:boolean" default="false" minOccurs="0"/>
+					<xs:element name="ChoiceList" type="ns11:ValueList" minOccurs="0"/>
+					<xs:element name="ChoiceListButton" type="ns9:BWAValue" default="auto" minOccurs="0"/>
+					<xs:element name="ChoiceListHeight" type="xs:decimal" default="0" minOccurs="0"/>
+					<xs:element name="DropListWidth" type="xs:decimal" default="0" minOccurs="0"/>
+					<xs:element name="TextColor" type="ns1:Color" default="auto" minOccurs="0"/>
+					<xs:element name="BackColor" type="ns1:Color" default="auto" minOccurs="0"/>
+					<xs:element name="BorderColor" type="ns1:Color" default="auto" minOccurs="0"/>
+					<xs:element name="Font" type="ns1:Font" minOccurs="0"/>
+					<xs:element name="TypeLink" type="ns11:TypeLink" minOccurs="0"/>
+					<xs:element name="HeightControlVariant" type="ns9:HeightControlVariant" default="Auto" minOccurs="0"/>
+					<xs:element name="AutoShowClearButtonMode" type="ns9:AutoShowClearButtonMode" default="Auto" minOccurs="0"/>
+					<xs:element name="AutoShowOpenButtonMode" type="ns9:AutoShowOpenButtonMode" default="Auto" minOccurs="0"/>
+					<xs:element name="AutoCorrectionOnTextInput" type="ns9:AutoCorrectionOnTextInput" default="Auto" minOccurs="0"/>
+					<xs:element name="SpellCheckingOnTextInput" type="ns9:SpellCheckingOnTextInput" default="Auto" minOccurs="0"/>
+					<xs:element name="AutoCapitalizationOnTextInput" type="ns9:AutoCapitalizationOnTextInput" default="Auto" minOccurs="0"/>
+					<xs:element name="SpecialTextInputMode" type="ns9:SpecialTextInputMode" default="Auto" minOccurs="0"/>
+					<xs:element name="OnScreenKeyboardReturnKeyText" type="ns9:OnScreenKeyboardReturnKeyText" default="Auto" minOccurs="0"/>
+					<xs:element name="InputHint" type="ns2:LocalStringType" minOccurs="0"/>
+					<xs:element name="ChoiceHistoryOnInput" type="ns9:ChoiceHistoryOnInput" default="Auto" minOccurs="0"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:simpleType name="LFEDataPath">
+		<xs:restriction base="ns11:DataPath"/>
+	</xs:simpleType>
+	<xs:complexType name="LabelDecoration">
+		<xs:complexContent>
+			<xs:extension base="tns:Decoration">
+				<xs:sequence>
+					<xs:element name="Hyperlink" type="xs:boolean" default="false" minOccurs="0"/>
+					<xs:element name="HorizontalAlign" type="ns9:ItemHorizontalAlignment" default="Left" minOccurs="0"/>
+					<xs:element name="VerticalAlign" type="ns9:ItemVerticalAlignment" default="Auto" minOccurs="0"/>
+					<xs:element name="TitleHeight" type="xs:decimal" default="0" minOccurs="0"/>
+					<xs:element name="BackColor" type="ns1:Color" default="auto" minOccurs="0"/>
+					<xs:element name="BorderColor" type="ns1:Color" default="auto" minOccurs="0"/>
+					<xs:element name="Border" type="ns1:Border" minOccurs="0"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="LabelField">
+		<xs:complexContent>
+			<xs:extension base="tns:Field">
+				<xs:sequence>
+					<xs:element name="Width" type="xs:decimal" default="0" minOccurs="0"/>
+					<xs:element name="AutoMaxWidth" type="xs:boolean" default="true" minOccurs="0"/>
+					<xs:element name="MaxWidth" type="xs:decimal" default="0" minOccurs="0"/>
+					<xs:element name="MinWidth" type="xs:decimal" default="0" minOccurs="0"/>
+					<xs:element name="Height" type="xs:decimal" default="0" minOccurs="0"/>
+					<xs:element name="AutoMaxHeight" type="xs:boolean" default="true" minOccurs="0"/>
+					<xs:element name="MaxHeight" type="xs:decimal" default="0" minOccurs="0"/>
+					<xs:element name="HorizontalStretch" type="ns9:BWAValue" default="auto" minOccurs="0"/>
+					<xs:element name="VerticalStretch" type="ns9:BWAValue" default="auto" minOccurs="0"/>
+					<xs:element name="MarkNegatives" type="ns9:BWAValue" default="auto" minOccurs="0"/>
+					<xs:element name="Format" type="ns2:LocalStringType" minOccurs="0"/>
+					<xs:element name="Hiperlink" type="xs:boolean" default="false" minOccurs="0"/>
+					<xs:element name="PasswordMode" type="ns9:BWAValue" default="auto" minOccurs="0"/>
+					<xs:element name="Border" type="ns1:Border" minOccurs="0"/>
+					<xs:element name="BorderColor" type="ns1:Color" default="auto" minOccurs="0"/>
+					<xs:element name="TextColor" type="ns1:Color" default="auto" minOccurs="0"/>
+					<xs:element name="BackColor" type="ns1:Color" default="auto" minOccurs="0"/>
+					<xs:element name="Font" type="ns1:Font" minOccurs="0"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="Page">
+		<xs:complexContent>
+			<xs:extension base="tns:GroupBase">
+				<xs:sequence>
+					<xs:element name="Picture" type="ns11:Picture" minOccurs="0"/>
+					<xs:element name="Group" type="ns9:FormChildrenGroup" default="Vertical" minOccurs="0"/>
+					<xs:element name="ChildrenAlign" type="ns9:FormChildrenAlign" default="Auto" minOccurs="0"/>
+					<xs:element name="HorizontalSpacing" type="ns9:FormItemSpacing" default="Auto" minOccurs="0"/>
+					<xs:element name="VerticalSpacing" type="ns9:FormItemSpacing" default="Auto" minOccurs="0"/>
+					<xs:element name="HorizontalAlign" type="ns9:ItemHorizontalAlignment" default="Auto" minOccurs="0"/>
+					<xs:element name="VerticalAlign" type="ns9:ItemVerticalAlignment" default="Auto" minOccurs="0"/>
+					<xs:element name="ChildItemsWidth" type="ns9:FormChildrenWidth" default="Auto" minOccurs="0"/>
+					<xs:element name="Format" type="ns2:LocalStringType" minOccurs="0"/>
+					<xs:element name="ShowTitle" type="xs:boolean" default="true" minOccurs="0"/>
+					<xs:element name="TitleDataPath" type="tns:LFEDataPath" default="" minOccurs="0"/>
+					<xs:element name="BackColor" type="ns1:Color" default="auto" minOccurs="0"/>
+					<xs:element name="ScrollOnCompress" type="xs:boolean" default="false" minOccurs="0"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="Pages">
+		<xs:complexContent>
+			<xs:extension base="tns:GroupBase">
+				<xs:sequence>
+					<xs:element name="PagesRepresentation" type="ns9:FormPagesRepresentation" default="TabsOnTop" minOccurs="0"/>
+					<xs:element name="CurrentRowUse" type="ns9:CurrentRowUse" default="DontUse" minOccurs="0"/>
+					<xs:element name="AssociatedTableElementId" minOccurs="0"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="PeriodField">
+		<xs:complexContent>
+			<xs:extension base="tns:Field">
+				<xs:sequence>
+					<xs:element name="Width" type="xs:decimal" default="16" minOccurs="0"/>
+					<xs:element name="AutoMaxWidth" type="xs:boolean" default="true" minOccurs="0"/>
+					<xs:element name="MaxWidth" type="xs:decimal" default="0" minOccurs="0"/>
+					<xs:element name="MinWidth" type="xs:decimal" default="0" minOccurs="0"/>
+					<xs:element name="Height" type="xs:decimal" default="9" minOccurs="0"/>
+					<xs:element name="AutoMaxHeight" type="xs:boolean" default="true" minOccurs="0"/>
+					<xs:element name="MaxHeight" type="xs:decimal" default="0" minOccurs="0"/>
+					<xs:element name="HorizontalStretch" type="xs:boolean" default="true" minOccurs="0"/>
+					<xs:element name="VerticalStretch" type="xs:boolean" default="true" minOccurs="0"/>
+					<xs:element name="Font" type="ns1:Font" minOccurs="0"/>
+					<xs:element name="BorderColor" type="ns1:Color" default="auto" minOccurs="0"/>
+					<xs:element name="Border" type="ns1:Border" minOccurs="0"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="PictureDecoration">
+		<xs:complexContent>
+			<xs:extension base="tns:Decoration">
+				<xs:sequence>
+					<xs:element name="Picture" type="ns11:Picture" minOccurs="0"/>
+					<xs:element name="PictureSize" type="ns9:PictureSize" default="RealSize" minOccurs="0"/>
+					<xs:element name="Hyperlink" type="xs:boolean" default="false" minOccurs="0"/>
+					<xs:element name="Zoomable" type="xs:boolean" default="false" minOccurs="0"/>
+					<xs:element name="ImageScale" type="xs:decimal" default="100" minOccurs="0"/>
+					<xs:element name="NonselectedPictureText" type="ns2:LocalStringType" minOccurs="0"/>
+					<xs:element name="EnableStartDrag" type="xs:boolean" default="false" minOccurs="0"/>
+					<xs:element name="EnableDrag" type="xs:boolean" default="false" minOccurs="0"/>
+					<xs:element name="Border" type="ns1:Border" minOccurs="0"/>
+					<xs:element name="BorderColor" type="ns1:Color" default="auto" minOccurs="0"/>
+					<xs:element name="FileDragMode" type="ns9:FileDragMode" default="AsFileRef" minOccurs="0"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="PictureField">
+		<xs:complexContent>
+			<xs:extension base="tns:Field">
+				<xs:sequence>
+					<xs:element name="Width" type="xs:decimal" default="0" minOccurs="0"/>
+					<xs:element name="AutoMaxWidth" type="xs:boolean" default="true" minOccurs="0"/>
+					<xs:element name="MaxWidth" type="xs:decimal" default="0" minOccurs="0"/>
+					<xs:element name="MinWidth" type="xs:decimal" default="0" minOccurs="0"/>
+					<xs:element name="Height" type="xs:decimal" default="0" minOccurs="0"/>
+					<xs:element name="AutoMaxHeight" type="xs:boolean" default="true" minOccurs="0"/>
+					<xs:element name="MaxHeight" type="xs:decimal" default="0" minOccurs="0"/>
+					<xs:element name="HorizontalStretch" type="xs:boolean" default="true" minOccurs="0"/>
+					<xs:element name="VerticalStretch" type="xs:boolean" default="true" minOccurs="0"/>
+					<xs:element name="PictureSize" type="ns9:PictureSize" default="RealSize" minOccurs="0"/>
+					<xs:element name="Zoomable" type="xs:boolean" default="false" minOccurs="0"/>
+					<xs:element name="ImageScale" type="xs:decimal" default="100" minOccurs="0"/>
+					<xs:element name="Hyperlink" type="xs:boolean" default="false" minOccurs="0"/>
+					<xs:element name="NonselectedPictureText" type="ns2:LocalStringType" minOccurs="0"/>
+					<xs:element name="EnableStartDrag" type="xs:boolean" default="false" minOccurs="0"/>
+					<xs:element name="EnableDrag" type="xs:boolean" default="false" minOccurs="0"/>
+					<xs:element name="ValuesPicture" type="ns11:Picture" minOccurs="0"/>
+					<xs:element name="TextColor" type="ns1:Color" default="auto" minOccurs="0"/>
+					<xs:element name="Border" type="ns1:Border" minOccurs="0"/>
+					<xs:element name="BorderColor" type="ns1:Color" default="auto" minOccurs="0"/>
+					<xs:element name="Font" type="ns1:Font" minOccurs="0"/>
+					<xs:element name="FileDragMode" type="ns9:FileDragMode" default="AsFileRef" minOccurs="0"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="PlannerField">
+		<xs:complexContent>
+			<xs:extension base="tns:Field">
+				<xs:sequence>
+					<xs:element name="Width" type="xs:decimal" default="50" minOccurs="0"/>
+					<xs:element name="AutoMaxWidth" type="xs:boolean" default="true" minOccurs="0"/>
+					<xs:element name="MaxWidth" type="xs:decimal" default="0" minOccurs="0"/>
+					<xs:element name="MinWidth" type="xs:decimal" default="0" minOccurs="0"/>
+					<xs:element name="Height" type="xs:decimal" default="10" minOccurs="0"/>
+					<xs:element name="AutoMaxHeight" type="xs:boolean" default="true" minOccurs="0"/>
+					<xs:element name="MaxHeight" type="xs:decimal" default="0" minOccurs="0"/>
+					<xs:element name="HorizontalStretch" type="xs:boolean" default="true" minOccurs="0"/>
+					<xs:element name="VerticalStretch" type="xs:boolean" default="true" minOccurs="0"/>
+					<xs:element name="EnableStartDrag" type="xs:boolean" default="false" minOccurs="0"/>
+					<xs:element name="EnableDrag" type="xs:boolean" default="false" minOccurs="0"/>
+					<xs:element name="TimeScaleItemHyperlink" type="xs:boolean" default="false" minOccurs="0"/>
+					<xs:element name="DimensionItemHyperlink" type="xs:boolean" default="false" minOccurs="0"/>
+					<xs:element name="WrappedTimeScaleHeaderHyperlink" type="xs:boolean" default="false" minOccurs="0"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="Popup">
+		<xs:complexContent>
+			<xs:extension base="tns:GroupBase">
+				<xs:sequence>
+					<xs:element name="Picture" type="ns11:Picture" minOccurs="0"/>
+					<xs:element name="CommandSource" type="tns:CommandSourceName" default="" minOccurs="0"/>
+					<xs:element name="Representation" type="ns9:ButtonRepresentation" default="Auto" minOccurs="0"/>
+					<xs:element name="PlacementArea" type="ns9:MenuElementPlacementArea" default="userCmds" minOccurs="0"/>
+					<xs:element name="Shape" type="ns9:ButtonShape" default="Auto" minOccurs="0"/>
+					<xs:element name="ShapeRepresentation" type="ns9:ButtonShapeRepresentation" default="Auto" minOccurs="0"/>
+					<xs:element name="BackColor" type="ns1:Color" default="auto" minOccurs="0"/>
+					<xs:element name="BorderColor" type="ns1:Color" default="auto" minOccurs="0"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="PredefinedChildItems">
+		<xs:sequence>
+			<xs:element name="ContextMenu" type="tns:ContextMenu" minOccurs="0"/>
+			<xs:element name="AutoCommandBar" type="tns:AutoCommandBar" minOccurs="0"/>
+			<xs:element name="ExtendedTooltip" type="tns:LabelDecoration" minOccurs="0"/>
+			<xs:element name="SearchStringAddition" type="tns:SearchStringAddition" minOccurs="0"/>
+			<xs:element name="ViewStatusAddition" type="tns:ViewStatusAddition" minOccurs="0"/>
+			<xs:element name="SearchControlAddition" type="tns:SearchControlAddition" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="ProgressBarField">
+		<xs:complexContent>
+			<xs:extension base="tns:Field">
+				<xs:sequence>
+					<xs:element name="Width" type="xs:decimal" default="32" minOccurs="0"/>
+					<xs:element name="AutoMaxWidth" type="xs:boolean" default="true" minOccurs="0"/>
+					<xs:element name="MaxWidth" type="xs:decimal" default="0" minOccurs="0"/>
+					<xs:element name="MinWidth" type="xs:decimal" default="0" minOccurs="0"/>
+					<xs:element name="Height" type="xs:decimal" default="1" minOccurs="0"/>
+					<xs:element name="AutoMaxHeight" type="xs:boolean" default="true" minOccurs="0"/>
+					<xs:element name="MaxHeight" type="xs:decimal" default="0" minOccurs="0"/>
+					<xs:element name="HorizontalStretch" type="xs:boolean" default="true" minOccurs="0"/>
+					<xs:element name="VerticalStretch" type="xs:boolean" default="false" minOccurs="0"/>
+					<xs:element name="MinValue" type="xs:decimal" default="0" minOccurs="0"/>
+					<xs:element name="MaxValue" type="xs:decimal" default="100" minOccurs="0"/>
+					<xs:element name="Orientation" type="ns9:FormElementOrientation" default="Horizontal" minOccurs="0"/>
+					<xs:element name="Representation" type="ns9:FormProgressBarRepresentation" default="Smooth" minOccurs="0"/>
+					<xs:element name="ShowPercent" type="xs:boolean" default="false" minOccurs="0"/>
+					<xs:element name="BorderColor" type="ns1:Color" default="auto" minOccurs="0"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="RadioButtonField">
+		<xs:complexContent>
+			<xs:extension base="tns:Field">
+				<xs:sequence>
+					<xs:element name="RadioButtonType" type="ns9:RadioButtonType" minOccurs="0"/>
+					<xs:element name="ItemWidth" type="xs:decimal" default="0" minOccurs="0"/>
+					<xs:element name="ItemHeight" type="xs:decimal" default="0" minOccurs="0"/>
+					<xs:element name="ItemTitleHeight" type="xs:decimal" default="0" minOccurs="0"/>
+					<xs:element name="ColumnsCount" type="xs:decimal" default="0" minOccurs="0"/>
+					<xs:element name="EqualColumnsWidth" type="ns9:BWAValue" default="auto" minOccurs="0"/>
+					<xs:element name="ChoiceList" type="ns11:ValueList" minOccurs="0"/>
+					<xs:element name="Font" type="ns1:Font" minOccurs="0"/>
+					<xs:element name="TextColor" type="ns1:Color" default="auto" minOccurs="0"/>
+					<xs:element name="BackColor" type="ns1:Color" default="auto" minOccurs="0"/>
+					<xs:element name="BorderColor" type="ns1:Color" default="auto" minOccurs="0"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="SearchControlAddition">
+		<xs:complexContent>
+			<xs:extension base="tns:Addition">
+				<xs:sequence>
+					<xs:element name="Width" type="xs:decimal" default="0"/>
+					<xs:element name="AutoMaxWidth" type="xs:boolean" default="true"/>
+					<xs:element name="MaxWidth" type="xs:decimal" default="0"/>
+					<xs:element name="MinWidth" type="xs:decimal" default="0"/>
+					<xs:element name="HorizontalStretch" type="ns9:BWAValue" default="auto"/>
+					<xs:element name="BackColor" type="ns1:Color" default="auto"/>
+					<xs:element name="TextColor" type="ns1:Color" default="auto"/>
+					<xs:element name="BorderColor" type="ns1:Color" default="auto"/>
+					<xs:element name="Font" type="ns1:Font"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="SearchStringAddition">
+		<xs:complexContent>
+			<xs:extension base="tns:Addition">
+				<xs:sequence>
+					<xs:element name="Width" type="xs:decimal" default="0" minOccurs="0"/>
+					<xs:element name="AutoMaxWidth" type="xs:boolean" default="true" minOccurs="0"/>
+					<xs:element name="MaxWidth" type="xs:decimal" default="0" minOccurs="0"/>
+					<xs:element name="MinWidth" type="xs:decimal" default="0" minOccurs="0"/>
+					<xs:element name="HorizontalStretch" type="ns9:BWAValue" default="auto" minOccurs="0"/>
+					<xs:element name="BackColor" type="ns1:Color" default="auto" minOccurs="0"/>
+					<xs:element name="TextColor" type="ns1:Color" default="auto" minOccurs="0"/>
+					<xs:element name="BorderColor" type="ns1:Color" default="auto" minOccurs="0"/>
+					<xs:element name="Font" type="ns1:Font" minOccurs="0"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="SpreadSheetDocumentField">
+		<xs:complexContent>
+			<xs:extension base="tns:Field">
+				<xs:sequence>
+					<xs:element name="Width" type="xs:decimal" default="50" minOccurs="0"/>
+					<xs:element name="AutoMaxWidth" type="xs:boolean" default="true" minOccurs="0"/>
+					<xs:element name="MaxWidth" type="xs:decimal" default="0" minOccurs="0"/>
+					<xs:element name="MinWidth" type="xs:decimal" default="0" minOccurs="0"/>
+					<xs:element name="Height" type="xs:decimal" default="10" minOccurs="0"/>
+					<xs:element name="AutoMaxHeight" type="xs:boolean" default="true" minOccurs="0"/>
+					<xs:element name="MaxHeight" type="xs:decimal" default="0" minOccurs="0"/>
+					<xs:element name="HorizontalStretch" type="xs:boolean" default="true" minOccurs="0"/>
+					<xs:element name="VerticalStretch" type="xs:boolean" default="true" minOccurs="0"/>
+					<xs:element name="ShowGrid" type="xs:boolean" default="false" minOccurs="0"/>
+					<xs:element name="ShowHeaders" type="xs:boolean" default="false" minOccurs="0"/>
+					<xs:element name="VerticalScrollBar" type="tns:SpreadSheetDocumentScrollBarUse" default="true" minOccurs="0"/>
+					<xs:element name="HorizontalScrollBar" type="tns:SpreadSheetDocumentScrollBarUse" default="true" minOccurs="0"/>
+					<xs:element name="BlackAndWhiteView" type="xs:boolean" default="false" minOccurs="0"/>
+					<xs:element name="Protection" type="xs:boolean" default="false" minOccurs="0"/>
+					<xs:element name="SelectionShowMode" type="ns9:SelectionShowMode" default="Always" minOccurs="0"/>
+					<xs:element name="Output" type="ns1:UseOutput" default="Auto" minOccurs="0"/>
+					<xs:element name="Edit" type="xs:boolean" default="false" minOccurs="0"/>
+					<xs:element name="ShowGroups" type="xs:boolean" default="true" minOccurs="0"/>
+					<xs:element name="EnableStartDrag" type="xs:boolean" default="true" minOccurs="0"/>
+					<xs:element name="EnableDrag" type="xs:boolean" default="true" minOccurs="0"/>
+					<xs:element name="BorderColor" type="ns1:Color" default="auto" minOccurs="0"/>
+					<xs:element name="ViewScalingMode" type="ns9:ViewScalingMode" default="Auto" minOccurs="0"/>
+					<xs:element name="ShowCellNames" type="xs:boolean" default="true" minOccurs="0"/>
+					<xs:element name="ShowRowAndColumnNames" type="xs:boolean" default="true" minOccurs="0"/>
+					<xs:element name="PointerType" type="ns3:SpreadsheetDocumentPointerType" default="Special" minOccurs="0"/>
+					<xs:element name="DrawingSelectionShowMode" type="ns9:DrawingSelectionShowMode" default="Show" minOccurs="0"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:simpleType name="SpreadSheetDocumentScrollBarUse">
+		<xs:union memberTypes="ns9:TableScrollBarUse xs:boolean"/>
+	</xs:simpleType>
+	<xs:complexType name="Table">
+		<xs:complexContent>
+			<xs:extension base="tns:FormItemBase">
+				<xs:sequence>
+					<xs:element name="Representation" type="ns9:TableRepresentation" default="HierarchicalList" minOccurs="0"/>
+					<xs:element name="Visible" type="xs:boolean" default="true" minOccurs="0"/>
+					<xs:element name="UserVisible" type="ns11:AdjustableBoolean" minOccurs="0"/>
+					<xs:element name="CommandBarLocation" type="ns9:FormElementCommandBarLocation" default="Auto" minOccurs="0"/>
+					<xs:element name="Autofill" type="xs:boolean" default="false" minOccurs="0"/>
+					<xs:element name="Enabled" type="xs:boolean" default="true" minOccurs="0"/>
+					<xs:element name="ReadOnly" type="xs:boolean" default="false" minOccurs="0"/>
+					<xs:element name="SkipOnInput" type="ns9:BWAValue" default="auto" minOccurs="0"/>
+					<xs:element name="DefaultItem" type="xs:boolean" default="false" minOccurs="0"/>
+					<xs:element name="ChangeRowSet" type="xs:boolean" default="true" minOccurs="0"/>
+					<xs:element name="ChangeRowOrder" type="xs:boolean" default="true" minOccurs="0"/>
+					<xs:element name="Width" type="xs:decimal" default="0" minOccurs="0"/>
+					<xs:element name="AutoMaxWidth" type="xs:boolean" default="true" minOccurs="0"/>
+					<xs:element name="MaxWidth" type="xs:decimal" default="0" minOccurs="0"/>
+					<xs:element name="MinWidth" type="xs:decimal" default="0" minOccurs="0"/>
+					<xs:element name="Height" type="xs:decimal" default="0" minOccurs="0"/>
+					<xs:element name="AutoMaxHeight" type="xs:boolean" default="true" minOccurs="0"/>
+					<xs:element name="MaxHeight" type="xs:decimal" default="0" minOccurs="0"/>
+					<xs:element name="HeightInTableRows" type="xs:decimal" default="0" minOccurs="0"/>
+					<xs:element name="HeightControlVariant" type="ns9:TableHeightControlVariant" default="Auto" minOccurs="0"/>
+					<xs:element name="AutoMaxRowsCount" type="xs:boolean" minOccurs="0"/>
+					<xs:element name="MaxRowsCount" type="xs:decimal" minOccurs="0"/>
+					<xs:element name="ChoiceMode" type="xs:boolean" default="false" minOccurs="0"/>
+					<xs:element name="MultipleChoice" type="xs:boolean" default="false" minOccurs="0"/>
+					<xs:element name="RowInputMode" type="ns9:TableRowInputMode" default="EndOfList" minOccurs="0"/>
+					<xs:element name="SelectionMode" type="ns9:TableSelectionMode" default="MultiRow" minOccurs="0"/>
+					<xs:element name="RowSelectionMode" type="ns9:TableRowSelectionMode" default="Cell" minOccurs="0"/>
+					<xs:element name="Header" type="xs:boolean" default="true" minOccurs="0"/>
+					<xs:element name="HeaderHeight" type="xs:decimal" default="1" minOccurs="0"/>
+					<xs:element name="Footer" type="xs:boolean" default="false" minOccurs="0"/>
+					<xs:element name="FooterHeight" type="xs:decimal" default="1" minOccurs="0"/>
+					<xs:element name="HorizontalScrollBar" type="ns9:TableScrollBarUse" default="AutoUse" minOccurs="0"/>
+					<xs:element name="VerticalScrollBar" type="ns9:TableScrollBarUse" default="AutoUse" minOccurs="0"/>
+					<xs:element name="HorizontalLines" type="xs:boolean" default="true" minOccurs="0"/>
+					<xs:element name="VerticalLines" type="xs:boolean" default="true" minOccurs="0"/>
+					<xs:element name="FixedLeft" type="xs:decimal" default="4294967295" minOccurs="0"/>
+					<xs:element name="FixedRight" type="xs:decimal" default="4294967295" minOccurs="0"/>
+					<xs:element name="UseAlternationRowColor" type="xs:boolean" default="false" minOccurs="0"/>
+					<xs:element name="AutoInsertNewRow" type="xs:boolean" default="false" minOccurs="0"/>
+					<xs:element name="AutoAddIncomplete" type="ns9:BWAValue" default="auto" minOccurs="0"/>
+					<xs:element name="AutoMarkIncomplete" type="ns9:BWAValue" default="auto" minOccurs="0"/>
+					<xs:element name="SearchOnInput" type="ns9:SearchOnInput" default="Auto" minOccurs="0"/>
+					<xs:element name="InitialListView" type="ns9:TableInitialListView" default="Auto" minOccurs="0"/>
+					<xs:element name="InitialTreeView" type="ns9:TableInitialTreeView" default="NoExpand" minOccurs="0"/>
+					<xs:element name="Output" type="ns1:UseOutput" default="Auto" minOccurs="0"/>
+					<xs:element name="HorizontalStretch" type="xs:boolean" default="true" minOccurs="0"/>
+					<xs:element name="VerticalStretch" type="xs:boolean" default="true" minOccurs="0"/>
+					<xs:element name="EnableStartDrag" type="xs:boolean" default="false" minOccurs="0"/>
+					<xs:element name="EnableDrag" type="xs:boolean" default="false" minOccurs="0"/>
+					<xs:element name="FileDragMode" type="ns9:FileDragMode" default="AsFileRef" minOccurs="0"/>
+					<xs:element name="DataPath" type="tns:LFEDataPath" default="" minOccurs="0"/>
+					<xs:element name="RowPictureDataPath" type="tns:LFEDataPath" default="" minOccurs="0"/>
+					<xs:element name="RowsPicture" type="ns11:Picture" minOccurs="0"/>
+					<xs:element name="TextColor" type="ns1:Color" default="auto" minOccurs="0"/>
+					<xs:element name="BackColor" type="ns1:Color" default="auto" minOccurs="0"/>
+					<xs:element name="BorderColor" type="ns1:Color" default="auto" minOccurs="0"/>
+					<xs:element name="Font" type="ns1:Font" minOccurs="0"/>
+					<xs:element name="Title" type="ns2:LocalStringType" minOccurs="0"/>
+					<xs:element name="TitleHeight" type="xs:decimal" default="0" minOccurs="0"/>
+					<xs:element name="TitleFont" type="ns1:Font" minOccurs="0"/>
+					<xs:element name="TitleTextColor" type="ns1:Color" default="auto" minOccurs="0"/>
+					<xs:element name="TitleLocation" type="ns9:FormElementTitleLocation" default="None" minOccurs="0"/>
+					<xs:element name="Shortcut" type="ns11:ShortCutType" default="" minOccurs="0"/>
+					<xs:element name="CommandSet" type="tns:CommandsContent" minOccurs="0"/>
+					<xs:element name="ToolTip" type="ns2:LocalStringType" minOccurs="0"/>
+					<xs:element name="ToolTipRepresentation" type="ns9:TooltipRepresentation" default="Auto" minOccurs="0"/>
+					<xs:element name="SearchStringLocation" type="ns9:SearchStringLocation" default="Auto" minOccurs="0"/>
+					<xs:element name="ViewStatusLocation" type="ns9:ViewStatusLocation" default="Auto" minOccurs="0"/>
+					<xs:element name="SearchControlLocation" type="ns9:SearchControlLocation" default="Auto" minOccurs="0"/>
+					<xs:element name="GroupHorizontalAlign" type="ns9:ItemHorizontalAlignment" default="Auto" minOccurs="0"/>
+					<xs:element name="GroupVerticalAlign" type="ns9:ItemVerticalAlignment" default="Auto" minOccurs="0"/>
+					<xs:element name="RefreshRequest" type="ns9:RefreshRequestMethod" default="None" minOccurs="0"/>
+					<xs:element name="CurrentRowUse" type="ns9:TableCurrentRowUse" default="Auto" minOccurs="0"/>
+					<xs:element name="BehaviorOnHorizontalCompression" type="ns9:TableBehaviorOnHorizontalCompression" default="Auto" minOccurs="0"/>
+					<xs:element name="ViewMode" type="ns4:DataCompositionSettingsViewMode" minOccurs="0"/>
+					<xs:element name="SettingsNamedItemDetailedRepresentation" type="xs:boolean" minOccurs="0"/>
+					<xs:element name="AutoRefresh" type="xs:boolean" minOccurs="0"/>
+					<xs:element name="AutoRefreshPeriod" type="xs:decimal" minOccurs="0"/>
+					<xs:element name="Period" type="ns2:StandardPeriod" minOccurs="0"/>
+					<xs:element name="ChoiceFoldersAndItems" type="ns7:FoldersAndItemsUse" minOccurs="0"/>
+					<xs:element name="RestoreCurrentRow" type="xs:boolean" minOccurs="0"/>
+					<xs:element name="TopLevelParent" minOccurs="0"/>
+					<xs:element name="ShowRoot" type="xs:boolean" minOccurs="0"/>
+					<xs:element name="AllowRootChoice" type="xs:boolean" minOccurs="0"/>
+					<xs:element name="RowFilter" minOccurs="0"/>
+					<xs:element name="UpdateOnDataChange" type="ns7:UpdateOnDataChange" minOccurs="0"/>
+					<xs:element name="UserSettingsGroup" type="xs:string" minOccurs="0"/>
+					<xs:element name="TreeSpecialSearch" type="xs:boolean" minOccurs="0"/>
+					<xs:element name="OnMainServerUnavalableBehavior" type="ns9:OnMainServerUnavalableBehavior" default="Auto" minOccurs="0"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="TextDocumentField">
+		<xs:complexContent>
+			<xs:extension base="tns:Field">
+				<xs:sequence>
+					<xs:element name="Width" type="xs:decimal" default="50" minOccurs="0"/>
+					<xs:element name="AutoMaxWidth" type="xs:boolean" default="true" minOccurs="0"/>
+					<xs:element name="MaxWidth" type="xs:decimal" default="0" minOccurs="0"/>
+					<xs:element name="MinWidth" type="xs:decimal" default="0" minOccurs="0"/>
+					<xs:element name="Height" type="xs:decimal" default="10" minOccurs="0"/>
+					<xs:element name="AutoMaxHeight" type="xs:boolean" default="true" minOccurs="0"/>
+					<xs:element name="MaxHeight" type="xs:decimal" default="0" minOccurs="0"/>
+					<xs:element name="HorizontalStretch" type="xs:boolean" default="true" minOccurs="0"/>
+					<xs:element name="VerticalStretch" type="xs:boolean" default="true" minOccurs="0"/>
+					<xs:element name="Output" type="ns1:UseOutput" default="Auto" minOccurs="0"/>
+					<xs:element name="TextColor" type="ns1:Color" default="auto" minOccurs="0"/>
+					<xs:element name="BackColor" type="ns1:Color" default="auto" minOccurs="0"/>
+					<xs:element name="BorderColor" type="ns1:Color" default="auto" minOccurs="0"/>
+					<xs:element name="Font" type="ns1:Font" minOccurs="0"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="TrackBarField">
+		<xs:complexContent>
+			<xs:extension base="tns:Field">
+				<xs:sequence>
+					<xs:element name="Width" type="xs:decimal" default="32" minOccurs="0"/>
+					<xs:element name="AutoMaxWidth" type="xs:boolean" default="true" minOccurs="0"/>
+					<xs:element name="MaxWidth" type="xs:decimal" default="0" minOccurs="0"/>
+					<xs:element name="MinWidth" type="xs:decimal" default="0" minOccurs="0"/>
+					<xs:element name="Height" type="xs:decimal" default="2" minOccurs="0"/>
+					<xs:element name="AutoMaxHeight" type="xs:boolean" default="true" minOccurs="0"/>
+					<xs:element name="MaxHeight" type="xs:decimal" default="0" minOccurs="0"/>
+					<xs:element name="HorizontalStretch" type="xs:boolean" default="true" minOccurs="0"/>
+					<xs:element name="VerticalStretch" type="xs:boolean" default="false" minOccurs="0"/>
+					<xs:element name="MinValue" type="xs:decimal" default="0" minOccurs="0"/>
+					<xs:element name="MaxValue" type="xs:decimal" default="100" minOccurs="0"/>
+					<xs:element name="Step" type="xs:decimal" default="1" minOccurs="0"/>
+					<xs:element name="LargeStep" type="xs:decimal" default="10" minOccurs="0"/>
+					<xs:element name="MarkingStep" type="xs:decimal" default="5" minOccurs="0"/>
+					<xs:element name="Orientation" type="ns9:FormElementOrientation" default="Horizontal" minOccurs="0"/>
+					<xs:element name="MarkingAppearance" type="ns9:MarkingStyle" default="BottomRight" minOccurs="0"/>
+					<xs:element name="BorderColor" type="ns1:Color" default="auto" minOccurs="0"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="UsualGroup">
+		<xs:complexContent>
+			<xs:extension base="tns:GroupBase">
+				<xs:sequence>
+					<xs:element name="Group" type="ns9:FormChildrenGroup" default="Vertical" minOccurs="0"/>
+					<xs:element name="ChildrenAlign" type="ns9:FormChildrenAlign" default="Auto" minOccurs="0"/>
+					<xs:element name="HorizontalSpacing" type="ns9:FormItemSpacing" default="Auto" minOccurs="0"/>
+					<xs:element name="VerticalSpacing" type="ns9:FormItemSpacing" default="Auto" minOccurs="0"/>
+					<xs:element name="HorizontalAlign" type="ns9:ItemHorizontalAlignment" default="Auto" minOccurs="0"/>
+					<xs:element name="VerticalAlign" type="ns9:ItemVerticalAlignment" default="Auto" minOccurs="0"/>
+					<xs:element name="Behavior" type="ns9:UsualGroupBehavior" default="Usual" minOccurs="0"/>
+					<xs:element name="CollapsedRepresentationTitle" type="ns2:LocalStringType" minOccurs="0"/>
+					<xs:element name="Collapsed" type="xs:boolean" default="false" minOccurs="0"/>
+					<xs:element name="ControlRepresentation" type="ns9:UsualGroupControlRepresentation" default="TitleHyperlink" minOccurs="0"/>
+					<xs:element name="Representation" type="ns9:UsualGroupRepresentation" default="WeakSeparation" minOccurs="0"/>
+					<xs:element name="ShowLeftMargin" type="xs:boolean" default="true" minOccurs="0"/>
+					<xs:element name="United" type="xs:boolean" default="true" minOccurs="0"/>
+					<xs:element name="ChildItemsWidth" type="ns9:FormChildrenWidth" default="Auto" minOccurs="0"/>
+					<xs:element name="Format" type="ns2:LocalStringType" minOccurs="0"/>
+					<xs:element name="ShowTitle" type="xs:boolean" default="true" minOccurs="0"/>
+					<xs:element name="TitleDataPath" type="tns:LFEDataPath" default="" minOccurs="0"/>
+					<xs:element name="BackColor" type="ns1:Color" default="auto" minOccurs="0"/>
+					<xs:element name="HiddenStateTitleBackColor" type="ns1:Color" default="auto" minOccurs="0"/>
+					<xs:element name="ThroughAlign" type="ns9:UsualGroupThroughAlign" default="Auto" minOccurs="0"/>
+					<xs:element name="CurrentRowUse" type="ns9:CurrentRowUse" default="DontUse" minOccurs="0"/>
+					<xs:element name="AssociatedTableElementId" minOccurs="0"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="ViewStatusAddition">
+		<xs:complexContent>
+			<xs:extension base="tns:Addition">
+				<xs:sequence>
+					<xs:element name="Width" type="xs:decimal" default="0"/>
+					<xs:element name="AutoMaxWidth" type="xs:boolean" default="true"/>
+					<xs:element name="MaxWidth" type="xs:decimal" default="0"/>
+					<xs:element name="MinWidth" type="xs:decimal" default="0"/>
+					<xs:element name="HorizontalStretch" type="ns9:BWAValue" default="auto"/>
+					<xs:element name="HorizontalLocation" type="ns9:ItemHorizontalAlignment" default="Left"/>
+					<xs:element name="BackColor" type="ns1:Color" default="auto"/>
+					<xs:element name="ButtonColor" type="ns1:Color" default="auto"/>
+					<xs:element name="TextColor" type="ns1:Color" default="auto"/>
+					<xs:element name="TitleTextColor" type="ns1:Color" default="auto"/>
+					<xs:element name="BorderColor" type="ns1:Color" default="auto"/>
+					<xs:element name="Font" type="ns1:Font"/>
+					<xs:element name="TitleFont" type="ns1:Font"/>
+					<xs:element name="Border" type="ns1:Border"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+</xs:schema>

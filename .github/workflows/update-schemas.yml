@@ -13,6 +13,11 @@ on:
         description: 'Обработать только одну версию, например 8.3.17.2760'
         required: false
         default: ''
+      redump:
+        description: 'Перевыгрузить уже обработанные форматы (по старшей версии платформы каждого)'
+        required: false
+        type: boolean
+        default: false
       batch_size:
         description: 'Максимум версий за прогон'
         required: false
@@ -65,10 +70,15 @@ jobs:
         env:
           MIN_VERSION: ${{ inputs.min_version || '8.3.17' }}
           ONLY_VERSION: ${{ inputs.only_version || '' }}
+          REDUMP: ${{ inputs.redump && 'true' || '' }}
           BATCH_SIZE: ${{ inputs.batch_size || '15' }}
         run: |
           if [ -n "$ONLY_VERSION" ]; then
             echo "$ONLY_VERSION" > /tmp/new-versions.txt
+          elif [ "$REDUMP" = "true" ]; then
+            PROCESSED=schemas/processed-versions.json \
+            OUT_FILE=/tmp/new-versions.txt \
+              oscript scripts/select-processed.os
           else
             YARD_JSON=/tmp/yard-versions.json \
             PROCESSED=schemas/processed-versions.json \
@@ -235,7 +245,7 @@ jobs:
               echo "Схемы формата $SCHEMA_VERSION не изменились."
             else
               git commit -m "chore: XSD-схемы платформы 1С формата ${SCHEMA_VERSION} (из ${PLATFORM_VERSION})"
-              git push origin main || echo "WARN: push не прошёл, повторим в финале"
+              git push origin "HEAD:$GITHUB_REF_NAME" || echo "WARN: push не прошёл, повторим в финале"
             fi
           done
           exit 0
@@ -256,8 +266,8 @@ jobs:
             fi
           fi
 
-          if git log origin/main..HEAD --oneline 2>/dev/null | grep -q .; then
-            git push origin main
+          if git log "origin/$GITHUB_REF_NAME..HEAD" --oneline 2>/dev/null | grep -q .; then
+            git push origin "HEAD:$GITHUB_REF_NAME"
           else
             echo "Все коммиты уже на origin."
           fi
