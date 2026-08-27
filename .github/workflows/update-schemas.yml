@@ -127,7 +127,9 @@ jobs:
             DISTR_DIR=$(mktemp -d);  chmod 777 "$DISTR_DIR"
 
             ESCAPED_VERSION=$(echo "$PLATFORM_VERSION" | sed 's/\./\\./g')
-            APP_MAJOR=$(echo "$PLATFORM_VERSION" | cut -d. -f1,2)
+            # Фильтры yard - регулярные выражения, поэтому точка экранируется:
+            # без этого 8.3 совпадает с любым символом на месте точки.
+            APP_MAJOR=$(echo "$PLATFORM_VERSION" | cut -d. -f1,2 | sed 's/\./\\./g')
             DISTR_FILTERS=(
               "[CС]ервер.+\(64-bit\) для DEB-based Linux-систем$"
               "Технологическая платформа.+\(64-bit\) для Linux$"
