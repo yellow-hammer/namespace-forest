@@ -156,6 +156,19 @@
 			<xs:enumeration value="Version8_5"/>
 		</xs:restriction>
 	</xs:simpleType>
+	<xs:simpleType name="ClientOSInfo">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="Windows"/>
+			<xs:enumeration value="Linux"/>
+			<xs:enumeration value="MacOS"/>
+			<xs:enumeration value="iOS"/>
+			<xs:enumeration value="Android"/>
+			<xs:enumeration value="WindowsRuntime"/>
+			<xs:enumeration value="LinuxARM64"/>
+			<xs:enumeration value="LinuxE2K"/>
+			<xs:enumeration value="Aurora"/>
+		</xs:restriction>
+	</xs:simpleType>
 	<xs:simpleType name="ComparisonType">
 		<xs:restriction base="xs:string">
 			<xs:enumeration value="Equal"/>
