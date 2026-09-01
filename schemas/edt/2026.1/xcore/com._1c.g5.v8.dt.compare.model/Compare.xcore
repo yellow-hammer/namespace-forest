@@ -1,0 +1,798 @@
+@GenModel(prefix="Compare", loadInitialization="false", literalsInterface="true", nonNLSMarkers="true",
+    copyrightText="Copyright (C) 2017, 1C", updateClasspath="false",
+    featureDelegation="Reflective", rootExtendsClass="com._1c.g5.v8.bm.core.BmObject", rootExtendsInterface="com._1c.g5.v8.bm.core.IBmObject")
+@Ecore(nsPrefix="compare", nsURI="http://g5.1c.ru/v8/dt/compare/model")
+package com._1c.g5.v8.dt.compare.model
+
+import com._1c.g5.v8.dt.compare.model.IMatchingSymlinks
+import com._1c.g5.v8.dt.compare.model.ComparisonFlags
+import com._1c.g5.v8.dt.compare.model.ComparisonTreeNodeReadOnlyChildrenList
+
+import org.eclipse.emf.common.util.EList
+
+type ComparisonFlags wraps ComparisonFlags
+create
+{
+    if (it !== null) ComparisonFlags::fromBase64(it)
+}
+convert
+{
+    if (it !== null) it.toBase64()
+}
+
+interface IMatchingSymlinks wraps IMatchingSymlinks
+{}
+
+type UniqueSymlink wraps UniqueSymlink
+create
+{
+    if (it !== null) UniqueSymlink::fromString(it)
+}
+convert
+{
+    if (it !== null) it.toString()
+}
+
+type CollectionChildrenList wraps EList<? extends CollectionElementComparisonNode>
+
+type FeatureCollectionChildrenList wraps EList<? extends FeatureCollectionElementComparisonNode>
+
+/**
+ * Node of a comparison tree. Nodes are built for model objects or features during the comparison process.
+ */
+abstract class ComparisonNode
+{
+    ComparisonFlags comparisonFlags
+
+    refers TopComparisonNode[] topChildren opposite parent
+    contains ContainmentComparisonNode[] containmentChildren opposite parent
+
+    contains MergeSettings mergeSettings
+
+    // G5V8DT-10450 generalize for 3-way merge case
+    boolean mainObjectToBeDeleted
+    boolean otherObjectToBeAdded
+    // special flag for 2-way comparison tells whether an object or a feature is modified on the other side
+    boolean modifiedOnOther
+    boolean oneSideParent
+
+    op ComparisonNode getParent()
+
+    /**
+     * Returns list of all node's children, containment- and bmTop ones.
+     */
+    op <T extends ComparisonNode> T[] getChildren()
+    {
+        return new ComparisonTreeNodeReadOnlyChildrenList(this)
+    }
+
+    /**
+     * Tells whether the node has its children.
+     */
+    op boolean hasChildren()
+    {
+        return !containmentChildren.isEmpty() || !topChildren.isEmpty()
+    }
+
+    /**
+     * Tells whether the node contains an object only on one side - MAIN or OTHER.
+     */
+    op boolean isOneSideNode()
+
+    /**
+     * Returns comparison side to which node relates.
+     * Non-null only if this is one-side node, see {@link #isOneSideNode()}.
+     */
+    op ComparisonSide getNodeSide()
+
+    /**
+     * Tells whether the node has an object on COMMON_ANCESTOR side
+     */
+    op boolean isAncestorObjectExists()
+}
+
+/**
+ * Symlink nodes are built for objects that have symbolic links.
+ */
+abstract class SymlinkComparisonNode extends MatchedObjectsComparisonNode, IMatchingSymlinks
+{
+    String mainSymlink
+    String otherSymlink
+    String commonAncestorSymlink
+
+    op String getSymlink(ComparisonSide side)
+    {
+        switch (side)
+        {
+            case MAIN:
+                return mainSymlink
+            case OTHER:
+                return otherSymlink
+            case COMMON_ANCESTOR:
+                return commonAncestorSymlink
+        }
+        throw new IllegalArgumentException("Bad comparison side given: " + side)
+    }
+}
+
+/**
+ * A top node corresponds to a triple of objects that can be (re)scheduled for comparison or merge.
+ * Top nodes are stored as BM top objects in the comparison model with FQN generated on the base of the node's symlinks.
+ */
+abstract class TopComparisonNode extends SymlinkComparisonNode
+{
+    refers ComparisonNode parent opposite topChildren
+
+    /**
+     * A list of closest top descendant nodes if traversing down the tree hierarchy.
+     * This is the part of the alternative comparison tree navigation by only top nodes.
+     */
+    refers TopComparisonNode[] topDescendants opposite topAncestor
+
+    /**
+     * A closest parent top node if traversing up the tree hierarchy.
+     * This is the part of the alternative comparison tree navigation by only top nodes.
+     */
+    refers TopComparisonNode topAncestor opposite topDescendants
+
+    ComparisonNodeStatus comparisonStatus
+
+    op boolean isOneSideNode()
+    {
+        return (mainSymlink === null && otherSymlink !== null) || (otherSymlink === null && mainSymlink !== null)
+    }
+
+    op ComparisonSide getNodeSide()
+    {
+        if (!isOneSideNode())
+        {
+            return null
+        }
+        if (mainSymlink !== null)
+        {
+            return ComparisonSide.MAIN
+        }
+        return ComparisonSide.OTHER
+    }
+
+    op boolean isAncestorObjectExists()
+    {
+        return commonAncestorSymlink !== null
+    }
+}
+
+/**
+ * A node related to a triple of top model objects.
+ */
+abstract class TopModelObjectsComparisonNode extends TopComparisonNode
+{}
+
+/**
+ * Containment nodes are built for non-top model objects or features.
+ * Such nodes are stored as BM non-top model objects in the comparison model
+ * and always have {@link TopComparisonNode} parent node at some level of the hierarchy.
+ */
+abstract class ContainmentComparisonNode extends ComparisonNode
+{
+    container ComparisonNode parent opposite containmentChildren
+
+    boolean oneSideNode
+    ComparisonSide origin  // don't use directly, call getNodeSide() instead
+
+    op ComparisonSide getNodeSide()
+    {
+        if (oneSideNode)
+        {
+            return origin
+        }
+        return null
+    }
+}
+
+/**
+ * A root node that lies in the top of the comparison tree hierarchy. All other nodes are descendants of this one.
+ */
+class RootComparisonNode extends TopComparisonNode
+{}
+
+/**
+ * A node related to some external property. The external property is not treated as usual
+ * containment of reference feature, instead it is treated as special single feature type
+ * referenced to a top model object.
+ * 
+ * Example:
+ *   @ExternalProperty
+ *   refers transient Chart chart
+ */
+abstract class ExternalPropertyComparisonNode extends SingleFeatureComparisonNode, TopModelObjectsComparisonNode
+{}
+
+/**
+ * A node related to objects compared as solid resources, not as model objects.
+ * Used for objects for which model comparison is not currently supported.
+ */
+class SolidResourceComparisonNode extends ExternalPropertyComparisonNode
+{
+    String mainQualifyingType
+    String otherQualifyingType
+    String ancestorQualifyingType
+
+    op String getQualifyingType(ComparisonSide side)
+    {
+        switch (side)
+        {
+        case MAIN:
+            return mainQualifyingType
+        case OTHER:
+            return otherQualifyingType
+        case COMMON_ANCESTOR:
+            return ancestorQualifyingType
+        }
+        throw new IllegalArgumentException("Bad comparison side given: " + side)
+    }
+}
+
+/**
+ * A node related to a triple of matched objects.
+ */
+abstract class MatchedObjectsComparisonNode extends ComparisonNode
+{
+    // type (EClass) of matched objects, may be null for single value objects such as String
+    Integer objectsEClassId
+
+    int[] mainPathToTopParent
+    int[] otherPathToTopParent
+    int[] ancestorPathToTopParent
+
+    // objects' Bm Ids
+    Long mainObjectId
+    Long otherObjectId
+    Long ancestorObjectId
+
+    boolean ancestorObjectExists
+
+    op int[] getPathToTopParent(ComparisonSide side)
+    {
+        switch (side)
+        {
+            case MAIN:
+                return mainPathToTopParent
+            case OTHER:
+                return otherPathToTopParent
+            case COMMON_ANCESTOR:
+                return ancestorPathToTopParent
+        }
+        throw new IllegalArgumentException("Bad comparison side given: " + side)
+    }
+
+    op Long getObjectId(ComparisonSide side)
+    {
+        switch (side)
+        {
+            case MAIN:
+                return mainObjectId
+            case OTHER:
+                return otherObjectId
+            case COMMON_ANCESTOR:
+                return ancestorObjectId
+        }
+        throw new IllegalArgumentException("Bad comparison side given: " + side)
+    }
+
+    op void setObjectId(ComparisonSide side, Long objectId)
+    {
+        switch (side)
+        {
+            case MAIN:
+                mainObjectId = objectId
+            case OTHER:
+                otherObjectId = objectId
+            case COMMON_ANCESTOR:
+                ancestorObjectId = objectId
+            default:
+                throw new IllegalArgumentException("Bad comparison side given: " + side)
+        }
+    }
+}
+
+/**
+ * A node related to some feature.
+ */
+abstract class FeatureComparisonNode extends ComparisonNode
+{
+    contains RelatedFeature feature
+}
+
+/**
+ * A node related to a single (non-many) feature.
+ */
+abstract class SingleFeatureComparisonNode extends FeatureComparisonNode, MatchedObjectsComparisonNode
+{}
+
+/**
+ * A node related to some collection.
+ */
+abstract class CollectionComparisonNode extends ComparisonNode
+{
+    op CollectionChildrenList getChildren()
+    {
+        return super.getChildren()
+    }
+}
+
+/**
+ * A node related to some many-feature collection.
+ */
+abstract class FeatureCollectionComparisonNode extends CollectionComparisonNode, FeatureComparisonNode
+{    
+    // for collection, this flag tells whether ancestor parent object containing the collection exists
+    boolean ancestorObjectExists
+
+    op FeatureCollectionChildrenList getChildren()
+    {
+        return super.getChildren() as EList<FeatureCollectionElementComparisonNode>
+    }
+}
+
+/**
+ * A node related to some containment feature, single or many.
+ */
+abstract class ContainmentFeatureComparisonNode extends FeatureComparisonNode
+{}
+
+/**
+ * A node related to some reference (non-containment) feature, single or many.
+ */
+abstract class ReferenceFeatureComparisonNode extends FeatureComparisonNode
+{}
+
+
+/**
+ * A node related to some containment collection.
+ * Example:
+ *   contains EventHandler[] handlers
+ */
+abstract class ContainmentCollectionComparisonNode extends FeatureCollectionComparisonNode, ContainmentFeatureComparisonNode
+{
+    op ContainmentCollectionElementComparisonNode[] getChildren()
+    {
+        return super.getChildren() as EList<ContainmentCollectionElementComparisonNode>
+    }
+}
+
+/**
+ * A node related to some reference collection.
+ * Example:
+ *   refers FunctionalOption[] functionalOptions
+ */
+abstract class ReferenceCollectionComparisonNode extends FeatureCollectionComparisonNode, ReferenceFeatureComparisonNode
+{
+    op ReferenceCollectionElementComparisonNode[] getChildren()
+    {
+        return super.getChildren() as EList<ReferenceCollectionElementComparisonNode>
+    }
+}
+
+/**
+ * A node related to a collection of values.
+ * Example:
+ *   Integer[] values
+ */
+abstract class ValueCollectionComparisonNode extends FeatureCollectionComparisonNode
+{
+    op ValueCollectionElementComparisonNode[] getChildren()
+    {
+        return super.getChildren() as EList<ValueCollectionElementComparisonNode>
+    }
+}
+
+/**
+ * A node related to an element in some collection.
+ */
+abstract class CollectionElementComparisonNode extends MatchedObjectsComparisonNode
+{
+    // Specifies element's index in the collection.
+    // The position may be null only if there is no object on that side.
+    Integer mainPosition
+    Integer otherPosition
+    Integer ancestorPosition
+
+    // Element's position (index) in the collection after being merged.
+    // If the object is going to be removed on merge, it also has the position here:
+    // in that case it corresponds to the position as if the object is not removed.
+    int positionAfterMerge
+
+    // information about left neighbour of this node in the collection
+    contains CollectionElementNeighbour leftNeighbour
+
+    op CollectionComparisonNode getParent()
+
+    op Integer getPosition(ComparisonSide side)
+    {
+        switch (side)
+        {
+            case MAIN:
+                return mainPosition
+            case OTHER:
+                return otherPosition
+            case COMMON_ANCESTOR:
+                return ancestorPosition
+        }
+        throw new IllegalArgumentException("Bad comparison side given: " + side)
+    }
+
+    op void setPosition(ComparisonSide side, Integer position)
+    {
+        switch (side)
+        {
+            case MAIN:
+                 mainPosition = position
+            case OTHER:
+                 otherPosition = position
+            case COMMON_ANCESTOR:
+                 ancestorPosition = position
+            default:
+                throw new IllegalArgumentException("Bad comparison side given: " + side)
+        }
+    }
+}
+
+abstract class FeatureCollectionElementComparisonNode extends CollectionElementComparisonNode
+{
+    // the many-feature of the collection this element lies in
+    contains RelatedFeature parentCollectionFeature
+    
+    op FeatureCollectionComparisonNode getParent()
+}
+
+/**
+ * A node related to a single value.
+ * Example:
+ *   Integer value
+ */
+abstract class SingleValueComparisonNode extends SingleFeatureComparisonNode
+{}
+
+/**
+ * A node related to an element in the collection of single values.
+ */
+abstract class ValueCollectionElementComparisonNode extends FeatureCollectionElementComparisonNode
+{
+    op ValueCollectionComparisonNode getParent()
+}
+
+/**
+ * A node related to a single containment feature.
+ * Example:
+ *   contains ContextMenu contextMenu
+ */
+abstract class SingleContainmentFeatureComparisonNode extends ContainmentFeatureComparisonNode, SingleFeatureComparisonNode
+{}
+
+/**
+ * A node related to an element in the containment collection.
+ */
+abstract class ContainmentCollectionElementComparisonNode extends FeatureCollectionElementComparisonNode
+{
+    op ContainmentCollectionComparisonNode getParent()
+}
+
+/**
+ * A node related to objects referencing to other objects via a single or many reference feature.
+ * See {@link SingleReferenceFeatureComparisonNode}, {@link ReferenceCollectionElementComparisonNode}.
+ */
+abstract class ReferencedObjectsComparisonNode extends MatchedObjectsComparisonNode
+{
+    // matched triple of symlinks to referenced objects
+    UniqueSymlink mainRefSymlink
+    UniqueSymlink otherRefSymlink
+    UniqueSymlink ancestorRefSymlink
+
+    op UniqueSymlink getRefSymlink(ComparisonSide side)
+    {
+        switch (side)
+        {
+           case MAIN:
+                return mainRefSymlink
+            case OTHER:
+                return otherRefSymlink
+            case COMMON_ANCESTOR:
+                return ancestorRefSymlink
+        }
+        throw new IllegalArgumentException("Bad comparison side given: " + side)
+    }
+}
+
+/**
+ * A node related to  single reference (non-containment) feature.
+ * Example:
+ *   refers CommandGroup group
+ */
+abstract class SingleReferenceFeatureComparisonNode extends ReferenceFeatureComparisonNode, SingleFeatureComparisonNode, ReferencedObjectsComparisonNode
+{}
+
+/**
+ * A node related to an element in the reference (non-containment) collection.
+ */
+abstract class ReferenceCollectionElementComparisonNode extends FeatureCollectionElementComparisonNode, ReferencedObjectsComparisonNode
+{
+    op ReferenceCollectionComparisonNode getParent()
+}
+
+class SingleValueImplComparisonNode extends SingleValueComparisonNode, ContainmentComparisonNode
+{}
+
+class ValueCollectionElementImplComparisonNode extends ContainmentComparisonNode, ValueCollectionElementComparisonNode 
+{
+    op ValueCollectionImplComparisonNode getParent()
+    {
+        return super.getParent() as ValueCollectionImplComparisonNode
+    }
+}
+
+class SingleContainmentFeatureImplComparisonNode extends SingleContainmentFeatureComparisonNode, ContainmentComparisonNode
+{}
+
+class ContainmentCollectionElementImplComparisonNode extends ContainmentComparisonNode, ContainmentCollectionElementComparisonNode
+{
+    op ContainmentCollectionImplComparisonNode getParent()
+    {
+        return super.getParent() as ContainmentCollectionImplComparisonNode
+    }
+}
+
+class SingleReferenceFeatureImplComparisonNode extends SingleReferenceFeatureComparisonNode, ContainmentComparisonNode
+{}
+
+class ReferenceCollectionElementImplComparisonNode extends ContainmentComparisonNode, ReferenceCollectionElementComparisonNode
+{
+    op ReferenceCollectionImplComparisonNode getParent()
+    {
+        return super.getParent() as ReferenceCollectionImplComparisonNode
+    }
+}
+
+class ValueCollectionImplComparisonNode extends ValueCollectionComparisonNode, ContainmentComparisonNode
+{}
+
+class ContainmentCollectionImplComparisonNode extends ContainmentCollectionComparisonNode, ContainmentComparisonNode
+{}
+
+class ReferenceCollectionImplComparisonNode extends ReferenceCollectionComparisonNode, ContainmentComparisonNode
+{}
+
+class TextNodeCustomMergeSettings extends CustomMergeSettings
+{
+    /**
+     * If user makes a custom merge with manual fixes in the result module code, store it here.
+     */
+    String customMergeResult
+    /**
+     * If user makes a custom merge with manual fixes in the result module code, store actual merge conflicts.
+     */
+    contains MergeConflict[] mergeConflicts
+}
+
+class MergeConflict
+{
+    int mainOffset
+    int mainLength
+    int otherOffset
+    int otherLength
+    int mergeResultOffset
+    int mergeResultLength
+}
+
+/**
+ * Class to store EStructuralFeature object.
+ */
+class RelatedFeature
+{
+    int featureId
+    int parentFeatureEClassId
+}
+
+/**
+ * Stores information about an element's neighbour in a collection.
+ */
+class CollectionElementNeighbour
+{
+    Long neighbourMainObjectId
+    Long neighbourNodeId
+
+    // filled only for non-containment arrays
+    UniqueSymlink neighbourMainSymlink
+}
+
+/**
+ * Different node implementations can extend their merge settings via this interface.
+ */
+interface CustomMergeSettings
+{}
+
+class MergeSettings
+{
+    /**
+     * The rule to be used during a merge process.
+     * This rule could be changed by the user in case if {@link MergeSettings#isCanBeMerged} is true. The values
+     * for overriding should be taken from the {@link MergeSettings#getAvailableMergeRules}
+     */
+    MergeRule mergeRule
+
+    /**
+     * The default merge rule calculated for the current node during the comparison process.
+     */
+    MergeRule defaultMergeRule
+
+    /**
+     * The list of merge rules available for the node.
+     */
+    MergeRule[] availableMergeRules
+
+    /**
+     * Tells whether the node will be merged during the merge process using the corresponding merge rule.<br>
+     * This setting could be changed by the user in case if {@link MergeSettings#isCanBeMerged} is true.
+     */
+    boolean mustBeMerged
+
+    /**
+     * Tells whether default merge settings obtained during the comparison process can be changed by the user.
+     * In case if overriding is available, the user is able to change the merge flag via {@link MergeSettings#setMustBeMerged} as well
+     * as to select the merge rule ({@link MergeSettings#setMergeRule}) from the available list of rules obtaibable via {@link MergeSettings#getAvailableMergeRules}.
+     */
+    boolean canBeMerged
+    
+    /**
+     * Tells whether "canBeMerged" flag is disabled ("canBeMerged" always false) for this node even if there are
+     * changes in the node.
+     */
+    boolean disableCanBeMerged
+
+    /**
+     * Tells whether the node contains children excluded from merge.
+     * More technically, this flag is true when the node contains canBeMerged-children that are not mustBeMerged.
+     */
+    boolean haveChildrenExcludedFromMerge
+
+    /**
+     * Tells whether the merge rule set by the user and therefore shouldn't be changed
+     * by merge rule's building algorithms.
+     */
+    boolean mergeRuleSetByUser
+
+    /**
+     * The rule to be used for ordering of child elements on merge.
+     * Not null only for comparison nodes that support ordering of their children.
+     */
+    contains OrderRule orderRule
+
+    /**
+     * Additional custom settings that extend standard merge settings for specific node types.
+     */
+    contains CustomMergeSettings customSettings
+
+    /**
+     * Tells whether the current merge rule equals to the default one.
+     */
+    op boolean isDefaultMergeRule()
+    {
+        return mergeRule == getDefaultMergeRule()
+    }
+}
+
+enum ComparisonSide
+{
+    Main,
+    Other,
+    CommonAncestor
+}
+
+enum MergeRule
+{
+    GetFromOther,
+    DoNotMerge,
+    MergePrioritizingMain,
+    MergePrioritizingOther,
+    CustomMerge,
+
+    /**
+     * Used as a flag to run an external merge tool on a comparison node. After it, the rule should be converted
+     * into CustomMerge if the merge using the external tool was successful.
+     */
+    MergeUsingExternalTool
+}
+
+enum ComparisonNodeStatus
+{
+    /**
+     * The node has not yet been compared.
+     */
+    Unfinished,
+
+    /**
+     * The node was compared but at least one of its children (recursively) is not.
+     */
+    HasUnfinishedChildren,
+
+    /**
+     * The node, as well as all of its children (recursively) were compared.
+     */
+    Finished
+}
+
+
+/**
+ * Specifies rule to order elements during the merge process.
+ */
+class OrderRule
+{
+    /**
+     * The side to get elements order from. Can be either {@link ComparisonSide#MAIN} or {@link ComparisonSide#OTHER}.
+     */
+    ComparisonSide orderSide
+
+    /**
+     * Tells whether the order set by the user and therefore shouldn't be changed
+     * by merge settings' building algorithms.
+     */
+    boolean orderSetByUser
+
+    /**
+     * Tells whether the current order side equals to the default one.
+     */
+    op boolean isDefaultOrderSide()
+    {
+        return orderSide == getDefaultOrderSide()
+    }
+
+    /**
+     * Specifies the default order side. Factories that instantiate {@link OrderRule} must set
+     * this side as the default during instance initialization.
+     */
+    op ComparisonSide getDefaultOrderSide()
+    {
+        return ComparisonSide.OTHER
+    }
+}
+
+/*
+ * A special class to get target {@link TopComparisonNode} by OTHER-side symlink if otherSymlink != mainSymlink.
+ */
+class OtherSymlinkTopNodeId
+{
+    long nodeId
+}
+
+/*
+ * A special class to get target {@link TopComparisonNode} by ANCESTOR-side symlink
+ * if it is different from MAIN- and OTHER-side symlinks.
+ */
+class CommonAncestorSymlinkTopNodeId
+{
+    long nodeId
+}
+
+class ManifestComparisonNode extends TopComparisonNode, CollectionComparisonNode
+{
+    op ManifestHeaderComparisonNode[] getChildren()
+    {
+        return super.getChildren()
+    }
+}
+
+class ManifestHeaderComparisonNode extends ContainmentComparisonNode, CollectionElementComparisonNode
+{
+    String headerName
+
+    String mainHeaderValue
+    String otherHeaderValue
+    String ancestorHeaderValue
+
+    op ManifestComparisonNode getParent()
+    {
+        return super.getParent() as ManifestComparisonNode
+    }
+}
+
+class UnsupportedObjectComparisonNode extends TopComparisonNode
+{}

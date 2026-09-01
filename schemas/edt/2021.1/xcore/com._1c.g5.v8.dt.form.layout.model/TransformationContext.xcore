@@ -1,0 +1,1097 @@
+@GenModel(prefix="LayoutTransformationContext", loadInitialization="false", literalsInterface="true", nonNLSMarkers="true",
+	copyrightText="Copyright (C) 2015, 1C LLC", updateClasspath="false", suppressNotification="false")
+@Ecore(nsPrefix="layout", nsURI="http://g5.1c.ru/v8/dt/form.layout.model.transformation.context")
+package com._1c.g5.v8.dt.form.layout.model.transformation.context
+
+import com._1c.g5.v8.dt.form.layout.model.calculation.context.CalendarCalculationContext
+import com._1c.g5.v8.dt.form.layout.model.calculation.context.ChartCalculationContext
+import com._1c.g5.v8.dt.form.layout.model.calculation.context.CheckBoxCalculationContext
+import com._1c.g5.v8.dt.form.layout.model.calculation.context.SwitcherCalculationContext
+import com._1c.g5.v8.dt.form.layout.model.calculation.context.CommandBarCalculationContext
+import com._1c.g5.v8.dt.form.layout.model.calculation.context.DendrogramCalculationContext
+import com._1c.g5.v8.dt.form.layout.model.calculation.context.ElementBaseCalculationContext
+import com._1c.g5.v8.dt.form.layout.model.calculation.context.ElementWithLimitsBaseCalculationContext
+import com._1c.g5.v8.dt.form.layout.model.calculation.context.FlowchartCalculationContext
+import com._1c.g5.v8.dt.form.layout.model.calculation.context.FormButtonCalculationContext
+import com._1c.g5.v8.dt.form.layout.model.calculation.context.FormCalculationContext
+import com._1c.g5.v8.dt.form.layout.model.calculation.context.FormElementBaseCalculationContext
+import com._1c.g5.v8.dt.form.layout.model.calculation.context.FormGroupBaseCalculationContext
+import com._1c.g5.v8.dt.form.layout.model.calculation.context.FormPresElementBaseCalculationContext
+import com._1c.g5.v8.dt.form.layout.model.calculation.context.FormattedDocCalculationContext
+import com._1c.g5.v8.dt.form.layout.model.calculation.context.GanttChartCalculationContext
+import com._1c.g5.v8.dt.form.layout.model.calculation.context.GeographicalMapCalculationContext
+import com._1c.g5.v8.dt.form.layout.model.calculation.context.GroupBaseCalculationContext
+import com._1c.g5.v8.dt.form.layout.model.calculation.context.HTMLCalculationContext
+import com._1c.g5.v8.dt.form.layout.model.calculation.context.ImageCalculationContext
+import com._1c.g5.v8.dt.form.layout.model.calculation.context.InputFieldCalculationContext
+import com._1c.g5.v8.dt.form.layout.model.calculation.context.LogicGroupCalculationContext
+import com._1c.g5.v8.dt.form.layout.model.calculation.context.MoxelCalculationContext
+import com._1c.g5.v8.dt.form.layout.model.calculation.context.PageCalculationContext
+import com._1c.g5.v8.dt.form.layout.model.calculation.context.PagesCalculationContext
+import com._1c.g5.v8.dt.form.layout.model.calculation.context.PanelCalculationContext
+import com._1c.g5.v8.dt.form.layout.model.calculation.context.SeparatePanelCalculationContext
+import com._1c.g5.v8.dt.form.layout.model.calculation.context.FormattedAreaCalculationContext
+import com._1c.g5.v8.dt.form.layout.model.calculation.context.ExternalObjectCalculationContext
+import com._1c.g5.v8.dt.form.layout.model.calculation.context.PeriodCalculationContext
+import com._1c.g5.v8.dt.form.layout.model.calculation.context.PlannerCalculationContext
+import com._1c.g5.v8.dt.form.layout.model.calculation.context.ProgressBarCalculationContext
+import com._1c.g5.v8.dt.form.layout.model.calculation.context.RadioGroupCalculationContext
+import com._1c.g5.v8.dt.form.layout.model.calculation.context.RichElementCalculationContext
+import com._1c.g5.v8.dt.form.layout.model.calculation.context.RootBaseCalculationContext
+import com._1c.g5.v8.dt.form.layout.model.calculation.context.StaticTextCalculationContext
+import com._1c.g5.v8.dt.form.layout.model.calculation.context.TableCalculationContext
+import com._1c.g5.v8.dt.form.layout.model.calculation.context.TableColumnCalculationContext
+import com._1c.g5.v8.dt.form.layout.model.calculation.context.TableColumnsGroupCalculationContext
+import com._1c.g5.v8.dt.form.layout.model.calculation.context.TextDocCalculationContext
+import com._1c.g5.v8.dt.form.layout.model.calculation.context.TrackBarCalculationContext
+import com._1c.g5.v8.dt.form.layout.model.calculation.context.TumblerCalculationContext
+import com._1c.g5.v8.dt.form.layout.model.calculation.context.ViewStatusAdditionCalculationContext
+import com._1c.g5.v8.dt.form.layout.model.calculation.context.LFTargetPlatform
+import com._1c.g5.v8.dt.form.layout.model.description.HippoLayButton
+import com._1c.g5.v8.dt.form.layout.model.description.HippoLayCalendar
+import com._1c.g5.v8.dt.form.layout.model.description.HippoLayChart
+import com._1c.g5.v8.dt.form.layout.model.description.HippoLayCheckBox
+import com._1c.g5.v8.dt.form.layout.model.description.HippoLaySwitcher
+import com._1c.g5.v8.dt.form.layout.model.description.HippoLayCommandBar
+import com._1c.g5.v8.dt.form.layout.model.description.HippoLayDendrogram
+import com._1c.g5.v8.dt.form.layout.model.description.HippoLayEdit
+import com._1c.g5.v8.dt.form.layout.model.description.HippoLayElementBase
+import com._1c.g5.v8.dt.form.layout.model.description.HippoLayFlowchart
+import com._1c.g5.v8.dt.form.layout.model.description.HippoLayForm
+import com._1c.g5.v8.dt.form.layout.model.description.HippoLayFormElementBase
+import com._1c.g5.v8.dt.form.layout.model.description.HippoLayFormGroupBase
+import com._1c.g5.v8.dt.form.layout.model.description.HippoLayFormRichElement
+import com._1c.g5.v8.dt.form.layout.model.description.HippoLayFormattedDoc
+import com._1c.g5.v8.dt.form.layout.model.description.HippoLayGanttChart
+import com._1c.g5.v8.dt.form.layout.model.description.HippoLayGeographicalMap
+import com._1c.g5.v8.dt.form.layout.model.description.HippoLayHTML
+import com._1c.g5.v8.dt.form.layout.model.description.HippoLayImage
+import com._1c.g5.v8.dt.form.layout.model.description.HippoLayLogicGroup
+import com._1c.g5.v8.dt.form.layout.model.description.HippoLayMoxel
+import com._1c.g5.v8.dt.form.layout.model.description.HippoLayPage
+import com._1c.g5.v8.dt.form.layout.model.description.HippoLayPages
+import com._1c.g5.v8.dt.form.layout.model.description.HippoLayPanel
+import com._1c.g5.v8.dt.form.layout.model.description.HippoLaySeparatePanel
+import com._1c.g5.v8.dt.form.layout.model.description.HippoLayFormattedArea
+import com._1c.g5.v8.dt.form.layout.model.description.HippoLayExternalObject
+import com._1c.g5.v8.dt.form.layout.model.description.HippoLayPeriod
+import com._1c.g5.v8.dt.form.layout.model.description.HippoLayPlanner
+import com._1c.g5.v8.dt.form.layout.model.description.HippoLayProgressBar
+import com._1c.g5.v8.dt.form.layout.model.description.HippoLayRadioGroup
+import com._1c.g5.v8.dt.form.layout.model.description.HippoLayStaticText
+import com._1c.g5.v8.dt.form.layout.model.description.HippoLayTable
+import com._1c.g5.v8.dt.form.layout.model.description.HippoLayTableColumnsGroup
+import com._1c.g5.v8.dt.form.layout.model.description.HippoLayTextDoc
+import com._1c.g5.v8.dt.form.layout.model.description.HippoLayTrackBar
+import com._1c.g5.v8.dt.form.layout.model.description.HippoLayTumbler
+import com._1c.g5.v8.dt.form.layout.model.description.HippoLayViewStatus
+import com._1c.g5.v8.dt.form.layout.model.description.HippoLayouterEdge
+import com._1c.g5.v8.dt.form.layout.model.description.ClientInterfaceVariant
+import com._1c.g5.v8.dt.form.model.FormChildrenAlign
+import com._1c.g5.v8.dt.form.model.ItemHorizontalAlignment
+import com._1c.g5.v8.dt.form.model.ItemVerticalAlignment
+import com._1c.g5.v8.dt.form.model.FormItemSpacing
+import com._1c.g5.v8.dt.metadata.mdclass.CompatibilityMode
+import java.util.Map
+import java.util.TreeMap
+import java.util.List
+import com._1c.g5.v8.dt.form.layout.model.platform.IPlatformVisualComputer
+import com._1c.g5.v8.dt.form.layout.model.common.IHippoTransformatorAdditionalInfoProvider
+import com._1c.g5.v8.dt.form.model.FormChildrenGroup
+import com._1c.g5.v8.dt.form.layout.model.platform.color.Color
+import com._1c.g5.v8.dt.form.layout.model.common.Pair
+import com.google.common.base.Objects
+import org.eclipse.core.runtime.Assert
+import com._1c.g5.v8.dt.form.layout.model.description.HippoLayGroupBase
+import org.eclipse.emf.common.util.EMap
+import org.eclipse.emf.common.util.EList
+import com._1c.g5.v8.dt.form.layout.model.platform.font.V8LogFont
+import com._1c.g5.v8.dt.form.layout.model.common.Size
+import com._1c.g5.v8.dt.form.layout.model.transformation.GetVariantAdditionalOptions
+import com._1c.g5.v8.dt.form.layout.model.description.ClientOSInfo
+import com._1c.g5.v8.dt.form.layout.model.platform.font.Font
+import com._1c.g5.v8.dt.form.layout.model.description.IV8Style
+import com._1c.g5.v8.dt.form.layout.model.description.MobilePreviewInfo
+import com._1c.g5.v8.dt.form.layout.model.platform.picture.V8Picture
+import com._1c.g5.v8.dt.form.layout.model.platform.V8PictureProps
+import com._1c.g5.v8.dt.form.layout.model.calculation.CalculateAdditionalOptions
+
+type Font wraps Font
+
+type V8Picture wraps V8Picture
+
+type V8PictureProps wraps V8PictureProps
+
+type GetVariantAdditionalOptions wraps GetVariantAdditionalOptions
+
+type CalculateAdditionalOptions wraps CalculateAdditionalOptions
+
+type V8Font wraps V8LogFont
+
+type Size wraps Size
+
+type Color wraps Color
+
+class PagesChildInfosCacheMapEntry wraps Map$Entry
+{
+	refers HTVariantKey key
+	contains PagesChildInfo[] value
+}
+
+class LimitsCacheMapEntry wraps Map$Entry
+{
+	refers HTVariantKey key
+	refers Estimate value
+}
+
+class CalcVerVariantEstimatesResCacheEntry wraps Map$Entry
+{
+	refers HTVariantKey key
+	refers CalcVerVariantEstimatesRes value
+}
+
+type ChildHorStoredVariants wraps List<ChildHorStoredVariant>
+
+class  ChildHorStoredVariant
+{
+	HorStrategy horStrategy
+	int maxWidth
+}
+
+class ChildHorStoredVariantsCacheEntry wraps Map$Entry
+{
+	refers HTVariantKey key
+	ChildHorStoredVariants value
+}
+
+class VariantEstimateIntResCacheMapEntry wraps Map$Entry
+{
+	refers HTVariantKey key
+	contains VariantEstimateIntRes value
+}
+
+enum HorStrategy 
+{
+	/**
+	 * Компактные подписи для лучшего выравнивания. Не используется в общем цикле размещения.
+	 */
+	eHSAuto = 0,
+	/**
+	 * Компактные подписи для лучшего выравнивания. Не используется в общем цикле размещения.
+	 */
+	eHSCompactTitle = 1,                   
+	/**
+	 * Расширенные подсказки снизу при автоположении (кроме флажков).
+	 */
+    eHSExtTooltipsAtBottom = 2,
+	/**
+	 * Сжимать до рекомендованной ширины. Для растягиваемых элементов до максимума между maxWidth и
+	 * рекомендованной шириной с учётом ограничений растягивания. Для элментов со ступенчатым
+	 * изменением ширины до максимальной ступеньки, меньшей или равной maxWidth.
+	 * Не может быть больше нормальной ширины.
+	 */
+    eHSSmartCompressToRecomendedWidth = 3, 
+	/**
+	 * Сжимать до рекомендованной ширины.
+	 */
+    eHSCompressToRecomendedWidth = 4, 
+	/**
+	 * Вертикальная ориентация групп с авто группировкой, отработанная на более высоком уровне.
+	 */
+    eHSBeforeVerticalGrouping = 5,
+	/**
+	 * Вертикальная ориентация групп с авто группировкой.
+	 */
+    eHSVerticalGrouping = 6,
+	/**
+	 * Отключать выравнивание ширин кнопок.
+	 */
+    eHSDontAlignButtons = 7, 
+	/**
+	 * Сжимать до минимальной ширины. Для растягиваемых элементов до максимума между maxWidth и
+	 * минимальной шириной с учётом ограничений растягивания. Для элментов со ступенчатым
+	 * изменением ширины до максимальной ступеньки, меньшей или равной maxWidth.
+	 * Не может быть больше нормальной ширины.
+	 */
+    eHSSmartCompressToMinWidth = 8, 
+	/**
+	 * Сжимать до минимальной ширины.
+	 */
+    eHSCompressToMinWidth = 9, 
+	/**
+	 * Отключать выравнивание заголовокв полей. В остальном как eHSSmartCompressToMinWidth.
+	 */
+    eHSDontAlignTitles = 10,
+	/**
+	 * Заголовки с автоположением наверх (кроме флажков). В остальном как eHSSmartCompressToMinWidth.
+	 */
+    eHSTitlesOnTop = 11,
+	/**
+	 * Аналогично eHSTitlesOnTop. Используется в группах формы с вертикальной группировкой при
+	 * определении максимаоьной ширины не самых широких элементов.
+	 */
+    eHSTitlesOnTopSecondPhase = 12, 
+	/**
+	 * Сжимать любой ценой. До минимума между maxWidth и минимальной шириной с учётом растягивания.
+	 */
+    eHSCompressWidth = 13 
+}
+
+enum VerStrategy
+{
+	/**
+	 * Всё по умолчанию.
+	 */
+	eVSAuto = 0, 
+	/**
+	 * Сжимать до минимальной высоты. Для растягиваемых элементов до максимума между maxHeight и
+	 * минимальной высотой с учётом ограничений растягивания.
+	 * Не может быть больше нормальной высоты.
+	 */
+    eVSSmartCompressToMinHeight = 1,
+    /**
+     * Сжимать до минимальной высоты.
+     */
+    eVSCompressToMinHeight =2
+}
+
+/**
+ * Результат трансформации.
+ */
+enum HTEVariantCategory
+{
+ 	/**  
+ 	 * Всё хорошо.
+ 	 */
+    eHTEVCStandard = 0,                       
+    /**  Ошибка выравнивания заголовков.  */
+    eHTEVCAlignmentError = 1,                     
+    /** Ширина элемента меньше минимальной.  */
+    eHTEVCWidthError = 2,                         
+    /**  Ширина группы больше заданной.  */
+    eHTEVCGroupWidthError = 3,                    
+    /** Высота группы больше заданной.  */
+    eHTEVCGroupHeightError = 4,                   
+    /** Ширина формы меньше заданной.  */
+    eHTEVCFormWidthError = 5,                     
+    /** Высота формы меньше заданной.  */
+    eHTEVCFormHeightError = 6,                    
+    /** Внутренняя ошибка.  */
+    eHTEVCInternalErrorFunctionNotImplemented = 7 
+}
+
+enum StrategyConstantRange
+{
+    eSCRNone = 0,                                                   // Диапазона нет.
+    eSCRAuto_CompressWidth = 1,                                // Больше или равен eHSAuto и меньше eHSCompressWidth.
+                                                                    // Если элемент возвращает данный диапазон, то в нём не важны
+                                                                    // adaptiveGroupingCount, maxWidth, noExternalAlign.
+    eSCRAuto_SmartCompressToRecomendedWidth = 2,               // Больше или равен eHSAuto и меньше eHSSmartCompressToRecomendedWidth.
+                                                                    // Если элемент возвращает данный диапазон, то в нём не важны 
+                                                                    // adaptiveGroupingCount, maxWidth.
+    eSCRAuto_SmartCompressToRecomendedWidthNoCompactTitle = 4, // Больше или равен eHSAuto и меньше eHSSmartCompressToRecomendedWidth. Но не eHSCompactTitle.
+                                                                    // Если элемент возвращает данный диапазон, то в нём не важны 
+                                                                    // adaptiveGroupingCount, maxWidth.
+    eSCRAuto_SmartCompressToMinWidth = 8,                      // Больше или равен eHSAuto и меньше eHSSmartCompressToMinWidth.
+                                                                    // Если элемент возвращает данный диапазон, то в нём не важны
+                                                                    // adaptiveGroupingCount, maxWidth.
+    eSCRAuto_VerticalGrouping = 16,                             // Больше или равен eHSAuto и меньше eHSVerticalGrouping.
+                                                                    // Если элемент возвращает данный диапазон, то в нём не важны
+                                                                    // adaptiveGroupingCount, maxWidth.
+    eSCRAuto_DontAlignButtons = 32,                             // Больше или равен eHSAuto и меньше eHSDontAlignButtons.
+                                                                    // Если элемент возвращает данный диапазон, то в нём не важны
+                                                                    // adaptiveGroupingCount, maxWidth.
+    eSCRAuto_TitlesOnTop = 64,                                  // Больше или равен eHSAuto и меньше eHSTitlesOnTop.
+                                                                    // Если элемент возвращает данный диапазон, то в нём не важны
+                                                                    // adaptiveGroupingCount, maxWidth, noExternalAlign.
+    eSCRCompressToRecomendedWidth_SmartCompressToMinWidth = 128, // Больше или равен eHSCompressToRecomendedWidth и меньше eHSSmartCompressToMinWidth.
+                                                                    // Если элемент возвращает данный диапазон, то в нём не важны 
+                                                                    // adaptiveGroupingCount, maxWidth.
+    eSCRAuto_CompressToMinHeight = 256                           // Больше или равен eVSAuto и меньше или равен eVSCompressToMinHeight.
+                                                                    // Если элемент возвращает данный диапазон, то в нём не важны 
+                                                                    // maxHeight.
+}
+
+enum ConstantRangesLevel
+{
+    eCRLLevelNone = 0,
+    eCRLLevelSmartCompressToRecomendedWidth = 1,
+    eCRLLevelVerticalGrouping = 2,
+    eCRLLevelDontAlignButtons = 3,
+    eCRLLevelSmartCompressToMinWidth = 4,
+    eCRLLevelTitlesOnTop = 5,
+    eCRLLevelCompressWidth = 6
+}
+
+enum Margin
+{
+    eMTop = 0,
+    eMBottom = 1,
+    eMLeft = 2,
+    eMRight = 3
+}  
+
+class Estimate
+{
+	int width
+	int alignedTitleWidth
+	int height
+	HorStrategy horStrategy
+	VerStrategy verStrategy
+	int adaptiveGroupingCount
+	int maxWidth
+	int maxHeight
+	HTEVariantCategory category
+}
+
+class HTVariantKey
+{
+	int complexKey
+	int maxWidth
+	int maxHeight
+	HorStrategy horStrategy
+    VerStrategy verStrategy
+    int adaptiveGroupingCount
+    boolean noExternalAlign
+    GetVariantAdditionalOptions options
+    
+    op int hashCode()
+    {
+    	return Objects.hashCode(
+			complexKey,
+			maxWidth,
+			maxHeight,
+			horStrategy.getValue(),
+			verStrategy.getValue(),
+			adaptiveGroupingCount,
+			noExternalAlign
+		)
+    }
+    
+    op boolean equals(Object key)
+    {
+		if (key instanceof HTVariantKey) {
+			return key.complexKey == complexKey && key.maxWidth == maxWidth && key.maxHeight == maxHeight &&
+				key.horStrategy.getValue() == horStrategy.getValue() &&
+				key.verStrategy.getValue() == verStrategy.getValue() &&
+				key.adaptiveGroupingCount == adaptiveGroupingCount && key.noExternalAlign == noExternalAlign;
+		}
+		return false;
+    }
+}
+
+class FormElementDimension
+ {
+	int length
+	int minLengthWithNormalPriority
+	int minLengthWithStretchPriority
+	int maxLengthWithNormalPriority
+	int maxLengthWithCompressPriority
+	int narrowStandardLength
+	int wideStandardLength
+	int standardLength
+	boolean hasSlaveColumns
+	int slaveLength
+	int slaveMinLengthWithNormalPriority
+	int slaveMinLengthWithStretchPriority
+	int slaveMaxLengthWithNormalPriority
+	int slaveMaxLengthWithCompressPriority
+	int slavePadding
+	int slaveNarrowStandardLength
+	int slaveWideStandardLength
+	int slaveStandardLength
+}
+
+class ExtDimItem
+{
+	int minLength = "0" // Минимальная длинна.
+	boolean flag = "true" // Участвует в сжатии.
+	boolean noMinLength = "false" // Нельзя использовать минимальную длинну.
+	boolean stepByStepLength = "false" // Длинна изменяется не плавно.
+}
+
+type VisualComputer wraps IPlatformVisualComputer
+
+type  TransformatorAdditionalInfoProvider wraps IHippoTransformatorAdditionalInfoProvider
+
+/**
+ * Base interface of the EDT form layout transformation context.<br>
+ * The transformation phase performs the size adjusting based on settings of the managed form and its structure of elements.
+ * 
+ * @author Alexander Tretyakevich
+ */
+interface RootBaseTransformationContext<T extends HippoLayElementBase, C extends RootBaseCalculationContext>
+{
+	refers T layoutElement
+	refers C calculationContext	
+	refers GroupSimpleChild containmentInfo
+	VisualComputer visualComputer
+	TransformatorAdditionalInfoProvider additionalInfoProvider
+	
+	refers RootBaseTransformationContext<? extends HippoLayElementBase, ? extends RootBaseCalculationContext> parent
+}
+
+interface ElementBaseTransformationContext<T extends HippoLayElementBase, C extends ElementBaseCalculationContext> extends RootBaseTransformationContext<T, C>
+{
+	boolean enableAlignByExternalCondition
+	ClientOSInfo osInfo
+} 
+
+interface FormElementBaseTransformationContext<T extends HippoLayFormElementBase, C extends FormElementBaseCalculationContext> extends ElementBaseTransformationContext<T, C>
+{
+	boolean compat839 
+	boolean keepMinWidth
+}  
+
+interface GroupBaseTransformationContext<T extends HippoLayElementBase, C extends GroupBaseCalculationContext> extends ElementBaseTransformationContext<T, C>
+{
+	contains RootBaseTransformationContext<? extends HippoLayElementBase, ? extends RootBaseCalculationContext>[] children
+	
+	op void addChild(RootBaseTransformationContext<? extends HippoLayElementBase, ? extends RootBaseCalculationContext> child)
+	{
+		children.add(child);
+		child.parent = this;
+	}
+	
+	op void remove(RootBaseTransformationContext<? extends HippoLayElementBase, ? extends RootBaseCalculationContext> child)
+	{
+		if (!children.remove(child))
+		{
+			Assert.isTrue(false);
+		}
+		child.parent = null;
+	} 
+}
+
+// Подчинённый элемент для простых групп.
+class GroupSimpleChild
+{
+}
+
+class Result
+{
+	boolean estimateInit
+	refers Estimate estimate
+	boolean logicRowsHeightInit
+	int logicRowsHeight = "1"
+}
+
+class ResultCacheMapEntry wraps Map$Entry
+{
+	refers HTVariantKey key
+	contains Result value
+}
+
+// Подчинённый элемент для групп с кэшем оценок.
+class GroupCacheableChild extends GroupSimpleChild 
+{
+    int adaptiveGroupingFormGroupLevels
+    contains ResultCacheMapEntry[] resultCache
+    boolean rangesInit
+    int constantRanges
+}
+
+class FormGroupChild extends GroupCacheableChild 
+{
+    boolean leftAlign
+    boolean leftAlignInit
+}
+
+/**
+ *  bool m_limitsConstantRangesInit - boolean limitsConstantRangesInit
+ *  unsigned m_limitsConstantRanges - int limitsConstantRanges
+ *  std::map<HTVariantKey, Estimate> m_limitsCache
+ */
+interface ElementWithLimitsBaseTransformationContext<T extends HippoLayElementBase, C extends ElementWithLimitsBaseCalculationContext> extends RootBaseTransformationContext<T, C> 
+{
+	boolean limitsConstantRangesInit
+	int limitsConstantRanges
+	contains LimitsCacheMapEntry[] limitsCache
+}
+
+// Элемент трасформатора, на каторый не действует стратегия eHSExtTooltipsAtBottom.
+interface INoExtTooltipAtBottomTransformationContext
+{
+	
+}
+
+ // Элемент трасформатора, на каторый не действует стратегия eHSTitlesOnTop.
+interface INoTitlesOnTopTransformationContext
+{
+	
+}
+
+class ChildVerVariant
+{
+	HorStrategy horStrategy = "eHSAuto"
+	VerStrategy verStrategy = "eVSAuto"
+	int adaptiveGroupingCount = "0"
+	int maxWidth = "0"
+	int maxHeight = "0"
+	refers Estimate estimate
+	refers HippoLayElementBase pVariant
+	boolean leftHAlign = "true" // Левое выравнивание дочернего элемента.
+	boolean enableAlign = "true" // Может участвовать в выравнивании.
+	int logicRowsHeight = "0"
+	boolean enableAlignByCondition
+	// Мобильные свойства. ChildVariantMobileProps mobileProps;	
+}
+
+
+type ChildVerVariants wraps List<ChildVerVariant>
+
+class CalcVerVariantEstimatesRes
+{
+	ChildVerVariants childVariants
+	int width = "0"
+	int alignedWidth = "0"
+	int nonAlignedWidth = "0"
+	int alignedTitleWidth = "0"
+	int alignedTitleWidthIndex = "0"
+	int height = "0"
+	HTEVariantCategory maxCatergory = "eHTEVCStandard"
+	int alignedChildrenCount = "0"
+}
+
+
+type CalcVerVariantEstimatesResCache wraps TreeMap<HTVariantKey, CalcVerVariantEstimatesRes>
+
+/**
+ * VerticalAlignment m_curChildrenVAlign - ItemVerticalAlignment curChildrenVAlign TODO move initialization to the transformation phase
+ * LFChildrenAlign m_childrenAlign - FormChildrenAlign childrenAlign TODO initialization form context mnodel and enablement from the strategy
+ * bool m_firstCallOfGetVariantFormGroupBase - Won't be transferred, assertion
+ * IHippoTransformatorMeasurer* m_pMeasurer - Won't be transferred, context of transformation
+ * ILogFormMobileInfoProvider* m_pMobileInfoProvider - Won't be transferred, context of transformation
+ * unsigned m_maxAlignedChildrenCount - int maxAlignedChildrenCount
+ * bool m_curGroupingVertical - boolean curGroupingVertical 
+ * std::wstring m_slaveLogFormElementName - String slaveLogFormElementName
+ * std::wstring m_slaveBaseName - String slaveBaseName
+ * m_slaveHorGrouping - TODO check - it's unclear where is a slaveModel is called - so doesn't clear where this field belongs to
+ * m_childHorStoredVariantsCache - TODO implement cache in the internal state
+ * m_calcVerVariantEstimatesResCache - CalcVerVariantEstimatesResCache calcVerVariantEstimatesResCache
+ * bool m_constantRangesInit - boolean constantRangesInit
+ * unsigned m_constantRanges - int constantRanges    
+ *   
+ */
+interface FormGroupBaseTransformationContext<T extends HippoLayFormGroupBase, C extends FormGroupBaseCalculationContext> extends LayoutVirtualGrid, GroupBaseTransformationContext<T, C> {
+	FormChildrenAlign childrenAlign
+	int maxAlignedChildrenCount
+	boolean curGroupingVertical
+	String slaveLogFormElementName
+	String slaveBaseName
+	boolean slaveEnableExternalAlign
+	
+	contains CalcVerVariantEstimatesResCacheEntry[] calcVerVariantEstimatesResCache 
+	contains ChildHorStoredVariantsCacheEntry[] childHorStoredVariantsCache
+	
+	refers MegaGroupTransformationContext pCB
+	
+	contains MegaGroupTransformationContext megaGroup
+	
+	boolean constantRangesInit
+	int constantRanges
+	boolean verticalGrouping
+} 
+
+interface LayoutVirtualGrid {
+	/**
+      * Получить горизонтальное выравнивание дочерних элементов.
+      */
+	ItemHorizontalAlignment childrenGridHAlign
+        /**
+         * Получить вертикальное выравнивание дочерних элементов.
+         */
+	ItemVerticalAlignment childrenGridVAlign
+}
+
+class VirtualGridSizeInt
+{
+	int width
+	int minWidthWithNormalPriority
+	int minWidthWithStretchPriority
+	int maxWidthWithNormalPriority
+	int maxWidthWithCompressPriority
+	int narrowStandardWidth
+	int wideStandardWidth
+	int standardWidth
+	int height
+	int minHeightWithNormalPriority
+	int minHeightWithStretchPriority
+	int maxHeightWithNormalPriority
+	int maxHeightWithCompressPriority
+	int narrowStandardHeight
+	int wideStandardHeight
+	int standardHeight
+}
+
+class FormTransformationContext extends FormGroupBaseTransformationContext<HippoLayForm, FormCalculationContext>, ElementWithLimitsBaseTransformationContext<HippoLayForm, FormCalculationContext>
+{
+}
+
+class SlaveGroupIndexEntry wraps Map$Entry
+{
+	String key
+	contains VerGroupResult value
+}
+
+type IntPair wraps Pair<Integer, Integer>
+
+class ContextPositionsPair
+{
+	refers ElementBaseTransformationContext<?,?> first
+	contains Positions second
+	
+	op void init()
+	{
+		second = LayoutTransformationContextFactory.eINSTANCE.createPositions();
+	}
+}
+
+// TODO nocase compare!
+class GridPositionsEntry wraps Map$Entry
+{
+	String key
+	IntPair value
+}
+
+type GridPositionsMap wraps EMap<String, Pair<Integer, Integer>>
+
+type ColoredGroupDataList wraps EList<ColoredGroupData>
+
+class VerGroupResult
+{
+   refers RootBaseTransformationContext<?,?> pVerGroup
+   contains ResultCacheMapEntry[] resultCache
+   boolean rangesInit
+   int constantRanges
+}
+
+type ChildrenPath wraps List<Integer>
+
+class IndexEntry wraps Map$Entry
+{
+	String key
+	ChildrenPath value
+}
+
+class Child 
+{
+	boolean ifLeaf // Тип элемента - Простой элемент (в том числе объединённая группа) или делегирующая группа.
+	contains LeafChild leafChild // Простой элемент (в том числе объединённая группа). Используется когда ifLeaf == true.
+	contains DelegateGroupChild delegateGroupChild // Делегирующая группа. Используется когда ifLeaf == false.
+	int index
+	
+	op void init() {
+		leafChild = LayoutTransformationContextFactory.eINSTANCE.createLeafChild();
+		delegateGroupChild = LayoutTransformationContextFactory.eINSTANCE.createDelegateGroupChild();
+	}
+}
+
+    // Делегирующая группа.
+    class DelegateGroupChild
+    {
+        FormChildrenGroup grouping
+        Color backColor
+        contains Child[] children
+        String groupLogFormElementName
+
+// TODO
+//        DelegateGroupChild() :
+//            backColor(Color::eAutoColor, 0)
+//        {
+//        }
+    }
+
+
+class SelfResultCacheEntry wraps Map$Entry
+{
+	refers HTVariantKey key
+	contains Result value
+}
+
+class ColoredGroupData
+{
+	String logFormElementName
+    contains Rect rect
+    Color color
+}
+
+/*class ColoredGroupInfo
+{
+    contains Rect position
+    contains Rect paddingLevels
+}*/
+
+class Rect
+{
+    int top
+    int bottom
+    int left
+    int right
+    
+    op int width()
+    {
+		return right - left;
+	}
+	
+	op int height()
+	{
+		return bottom - top;
+	}
+}
+
+class Positions
+{
+    contains GridPositionsEntry[] gridPositions
+    contains ColoredGroupData[] coloredGroupPositions
+}
+
+class MegaGroupTransformationContext
+{
+	contains SlaveGroupIndexEntry[] slaveGroupIndex
+	contains IndexEntry[] index
+    contains Child[] children
+    GridPositionsMap pCurGridPositions
+    ColoredGroupDataList pCurColoredGroupPositions
+    contains SelfResultCacheEntry[] selfCache
+     
+    refers RootBaseTransformationContext<?,?> pParentElement
+    refers RootBaseTransformationContext<?,?> pInternalVariantBeforeAdapting
+    refers RootBaseTransformationContext<?,?> pInternalVariantAfterAdapting
+    
+    contains GridPositionsEntry[] gridPositionsBeforeAdapting
+    contains ColoredGroupData[] coloredGroupPositionsBeforeAdapting
+    contains GridPositionsEntry[] gridPositionsAfterAdapting
+    contains ColoredGroupData[] coloredGroupPositionsAfterAdapting
+    
+    int slaveVerGroupNumerator
+    
+    contains ContextPositionsPair[] internalVariantsWithAdapting
+    
+	refers HippoLayGroupBase layoutElement
+	VisualComputer visualComputer
+	TransformatorAdditionalInfoProvider additionalInfoProvider
+	
+	//refers RootBaseTransformationContext<? extends HippoLayElementBase, ? extends RootBaseCalculationContext> parent
+    
+    FormChildrenGroup grouping
+    LFTargetPlatform targetPlatform
+    ClientInterfaceVariant interfaceVariant
+    ClientOSInfo osInfo
+    CompatibilityMode compatibilityMode
+    FormItemSpacing horSpacingVariant
+    int horSpacing
+    FormItemSpacing verSpacingVariant
+    int verSpacing
+    FormChildrenAlign childrenAlign
+    ItemHorizontalAlignment hAlign
+    ItemVerticalAlignment vAlign
+    boolean externalTitleAlign
+    int maxTargetWidth
+    int maxTargetHeight
+    boolean adpatedToMobilePlatform
+    
+    CalculateAdditionalOptions options
+    boolean mobileBlockModeEnabled
+    int mobileRowMinHeight
+    int mobileRowMinIndent
+    int mobileRowHorIndent
+    int mobileRowRoundRadius
+}
+
+class LeafChild
+{
+        refers RootBaseTransformationContext<?,?> pLeafChild
+        contains ResultCacheMapEntry[] resultCache
+        boolean rangesInit
+        int constantRanges
+        
+}
+
+/**
+ */
+class InputFieldTransformationContext extends FormElementBaseTransformationContext<HippoLayEdit, InputFieldCalculationContext>
+{
+} 
+
+/**
+ */
+class ImageTransformationContext extends FormElementBaseTransformationContext<HippoLayImage, ImageCalculationContext>
+{
+}
+
+/**
+ */
+class CheckBoxTransformationContext extends FormElementBaseTransformationContext<HippoLayCheckBox, CheckBoxCalculationContext>, INoExtTooltipAtBottomTransformationContext, INoTitlesOnTopTransformationContext
+{
+}
+
+class SwitcherTransformationContext 
+	extends FormElementBaseTransformationContext<HippoLaySwitcher, SwitcherCalculationContext>, INoExtTooltipAtBottomTransformationContext, INoTitlesOnTopTransformationContext
+{
+}
+
+/**
+ */
+class ProgressBarTransformationContext extends FormElementBaseTransformationContext<HippoLayProgressBar, ProgressBarCalculationContext>
+{
+}
+
+/**
+ */
+class TrackBarTransformationContext extends FormElementBaseTransformationContext<HippoLayTrackBar, TrackBarCalculationContext>
+{
+}
+
+/**
+ */
+class TextDocTransformationContext extends FormElementBaseTransformationContext<HippoLayTextDoc, TextDocCalculationContext>
+{
+}
+
+/**
+ */
+class FormButtonTransformationContext extends FormElementBaseTransformationContext<HippoLayButton, FormButtonCalculationContext>, GroupBaseTransformationContext<HippoLayButton, FormButtonCalculationContext>
+{
+}
+
+class PanelTransformationContext extends FormGroupBaseTransformationContext<HippoLayPanel, PanelCalculationContext>, ElementWithLimitsBaseTransformationContext<HippoLayPanel, PanelCalculationContext>
+{
+	int groupWidth
+    int groupHeight
+}
+
+class SeparatePanelTransformationContext
+	extends FormGroupBaseTransformationContext<HippoLaySeparatePanel, SeparatePanelCalculationContext>,
+	ElementWithLimitsBaseTransformationContext<HippoLaySeparatePanel, SeparatePanelCalculationContext>
+{
+	refers HippoLayElementBase pCloseBtnElement
+	
+	int panelWidth
+    int panelHeight
+
+    int leftPadding
+    int topPadding
+    int bottomPadding
+    int leftCloseBtnPadding
+    int rightCloseBtnPadding
+    int topCloseBtnPadding
+    int closeBtnPictWidth
+    int closeBtnPictHeight
+
+    int sumHorIntOffsets
+    int sumVerIntOffsets
+
+    int sumHorExtOffsets
+    int sumVerExtOffsets
+}
+
+class FormattedAreaTransformationContext
+	extends FormGroupBaseTransformationContext<HippoLayFormattedArea, FormattedAreaCalculationContext>,
+	ElementWithLimitsBaseTransformationContext<HippoLayFormattedArea, FormattedAreaCalculationContext>
+{
+}
+
+class ExternalObjectTransformationContext
+	extends ElementBaseTransformationContext<HippoLayExternalObject, ExternalObjectCalculationContext>
+{
+}
+
+class LogicGroupPaddings
+{
+	int leftOutsidePadding
+	int topOutsidePadding
+	int rightOutsidePadding
+	int bottomOutsidePadding
+	int leftBackColorPadding
+	int topBackColorPadding
+	int rightBackColorPadding
+	int bottomBackColorPadding
+	int leftInsidePadding
+	int topInsidePadding
+	int rightInsidePadding
+	int bottomInsidePadding
+	int titleAdditionalInsidePadding
+}
+
+/**
+ * IHippoLayElementPtr m_pLayTitleElement - refers HippoLayElementBase pLayTitleElement
+ * Paddings m_paddings - Paddings paddings
+ * unsigned m_logicGroupConstantRanges - int logicGroupConstantRange
+ * bool m_logicGroupConstantRangesInit - boolean logicGroupConstantRangesInit 
+ */
+class LogicGroupTransformationContext extends FormGroupBaseTransformationContext<HippoLayLogicGroup, LogicGroupCalculationContext>, ElementWithLimitsBaseTransformationContext<HippoLayLogicGroup, LogicGroupCalculationContext>
+{
+	refers HippoLayElementBase pLayTitleElement
+	contains LogicGroupPaddings paddings
+	
+	int logicGroupConstantRanges
+	boolean logicGroupConstantRangesInit
+}
+
+class TumblerTransformationContext extends FormElementBaseTransformationContext<HippoLayTumbler, TumblerCalculationContext> 
+{
+}
+
+class TableTransformationContext extends FormElementBaseTransformationContext<HippoLayTable, TableCalculationContext>, GroupBaseTransformationContext<HippoLayTable, TableCalculationContext> 
+{
+	refers HippoLayElementBase transformedLineEditForm
+	int logicRowsHeight
+}
+
+class TableColumnsGroupTransformationContext extends GroupBaseTransformationContext<HippoLayTableColumnsGroup, TableColumnsGroupCalculationContext> 
+{
+	
+}
+
+class TableColumnTransformationContext extends ElementBaseTransformationContext<HippoLayElementBase, TableColumnCalculationContext>
+{
+}
+
+class ViewStatusAdditionTransformationContext extends FormElementBaseTransformationContext<HippoLayViewStatus, ViewStatusAdditionCalculationContext>
+{
+	
+}
+
+class NonFormattedHeightDescr
+{
+    int width
+    int logicRowsHeight
+    int height
+}
+
+class FormattedHeightDescr
+{
+    int width
+    int logicRowsHeight
+    boolean logicRowsHeightPriority
+    int formattedStringHeight
+}
+
+class StaticTextTransformationContext extends FormElementBaseTransformationContext<HippoLayStaticText, StaticTextCalculationContext>
+{
+    contains NonFormattedHeightDescr[] nonFormattedHeightDescrs
+    contains FormattedHeightDescr[] formattedHeightDescrs
+    boolean recomendedAndMinimumVariantsConsistent
+    int recomendedAndMinimumVariantsWidth
+}
+
+class CommandBarTransformationContext extends ElementBaseTransformationContext<HippoLayCommandBar, CommandBarCalculationContext>
+{
+	
+}
+
+class VariantEstimateIntRes
+{
+    contains Estimate extTooltipEstimate
+    HippoLayouterEdge extTooltipEdge
+
+    contains Estimate titleEstimate
+    HippoLayouterEdge titleEdge
+
+    int width
+    int height
+
+    contains Estimate resEstimate
+
+    HorStrategy extTooltipHorStrategy 
+    VerStrategy extTooltipVerStrategy
+    int extTooltipMaxWidth
+    int extTooltipMaxHeight
+    HorStrategy titleHorStrategy 
+    VerStrategy titleVerStrategy
+    int titleMaxWidth
+    int titleMaxHeight
+    HorStrategy contentHorStrategy 
+    VerStrategy contentVerStrategy
+    int contentMaxWidth
+    int contentMaxHeight
+}
+
+class RichElementTransformationContext extends GroupBaseTransformationContext<HippoLayFormRichElement, RichElementCalculationContext>
+{
+    boolean constantRangesInit
+    int constantRanges
+    contains VariantEstimateIntResCacheMapEntry[] variantEstimateIntResCache
+}
+
+class PagesChildInfo
+{
+    int width
+    HorStrategy horStrategy
+    int adaptiveGroupingCount
+    VerStrategy verStrategy
+    int height
+    HTEVariantCategory category
+    int maxWidth
+    int maxHeight
+}
+
+class PagesTransformationContext extends GroupBaseTransformationContext<HippoLayPages, PagesCalculationContext>, ElementWithLimitsBaseTransformationContext<HippoLayPages, PagesCalculationContext> 
+{
+	contains PagesChildInfosCacheMapEntry[] childInfosCache
+	boolean constantRangesInit
+    int constantRanges
+}
+
+class PageTransformationContext extends FormGroupBaseTransformationContext<HippoLayPage, PageCalculationContext>, ElementWithLimitsBaseTransformationContext<HippoLayPage, PageCalculationContext> 
+{
+	
+}
+
+class RadioGroupTransformationContext extends FormElementBaseTransformationContext<HippoLayRadioGroup, RadioGroupCalculationContext>
+{
+    contains StaticTextTransformationContext[] titleElements
+}
+
+class RadioGroupMobileTransformationContext extends RadioGroupTransformationContext
+{
+}
+
+class FormPresElementBaseTransformationContext<T extends HippoLayFormElementBase, C extends FormPresElementBaseCalculationContext> extends FormElementBaseTransformationContext<T, C> 
+{
+}
+
+class MoxelTransformationContext extends FormPresElementBaseTransformationContext<HippoLayMoxel, MoxelCalculationContext>
+{
+}  
+
+class CalendarTransformationContext extends FormElementBaseTransformationContext<HippoLayCalendar, CalendarCalculationContext>
+{
+}  
+
+class HTMLTransformationContext extends FormPresElementBaseTransformationContext<HippoLayHTML, HTMLCalculationContext>
+{
+}  
+
+class FormattedDocTransformationContext extends FormPresElementBaseTransformationContext<HippoLayFormattedDoc, FormattedDocCalculationContext>
+{
+}  
+
+class PlannerTransformationContext extends FormPresElementBaseTransformationContext<HippoLayPlanner, PlannerCalculationContext>
+{
+}  
+
+class PeriodTransformationContext extends FormElementBaseTransformationContext<HippoLayPeriod, PeriodCalculationContext>
+{
+}  
+
+class ChartTransformationContext extends FormPresElementBaseTransformationContext<HippoLayChart, ChartCalculationContext>
+{
+}  
+
+class GanttChartTransformationContext extends FormPresElementBaseTransformationContext<HippoLayGanttChart, GanttChartCalculationContext>
+{
+}  
+
+class DendrogramTransformationContext extends FormPresElementBaseTransformationContext<HippoLayDendrogram, DendrogramCalculationContext>
+{
+}  
+
+class FlowchartTransformationContext extends FormPresElementBaseTransformationContext<HippoLayFlowchart, FlowchartCalculationContext>
+{
+}  
+
+class GeographicalMapTransformationContext extends FormPresElementBaseTransformationContext<HippoLayGeographicalMap, GeographicalMapCalculationContext>
+{
+}  

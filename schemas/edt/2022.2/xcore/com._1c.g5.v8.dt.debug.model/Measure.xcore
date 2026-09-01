@@ -1,0 +1,46 @@
+@Ecore(nsURI="http://v8.1c.ru/8.3/debugger/debugMeasure")
+@GenModel(nonNLSMarkers="true", copyrightText="Copyright (C) 2014, 1C", updateClasspath="false")
+package com._1c.g5.v8.dt.debug.model.measure
+
+import com._1c.g5.v8.dt.debug.model.core.UUID
+import com._1c.g5.v8.dt.debug.model.base.data.BSLModuleIdInternal
+import com._1c.g5.v8.dt.debug.model.base.data.DebugTargetId
+import java.math.BigDecimal
+
+@ExtendedMetaData(name="PerformanceInfoLine", kind="elementOnly")
+class PerformanceInfoLine {
+	@ExtendedMetaData(kind="element", name="lineNo", namespace="##targetNamespace")
+	BigDecimal[1] lineNo
+	@ExtendedMetaData(kind="element", name="frequency", namespace="##targetNamespace")
+	BigDecimal[1] frequency
+	@ExtendedMetaData(kind="element", name="durability", namespace="##targetNamespace")
+	BigDecimal[1] durability
+	@ExtendedMetaData(kind="element", name="pureDurability", namespace="##targetNamespace")
+	BigDecimal[1] pureDurability
+	@ExtendedMetaData(kind="element", name="serverCallSignal", namespace="##targetNamespace")
+	BigDecimal[1] serverCallSignal
+}
+
+@ExtendedMetaData(name="PerformanceInfoMain", kind="elementOnly")
+class PerformanceInfoMain {
+	@ExtendedMetaData(kind="element", name="targetID", namespace="##targetNamespace")
+	contains DebugTargetId[1] targetID
+	@ExtendedMetaData(kind="element", name="totalDurability", namespace="##targetNamespace")
+	BigDecimal[1] totalDurability
+	@ExtendedMetaData(kind="element", name="totalIndepServerWorkTime", namespace="##targetNamespace")
+	BigDecimal[1] totalIndepServerWorkTime
+	@ExtendedMetaData(kind="element", name="performanceFrequency", namespace="##targetNamespace")
+	BigDecimal[1] performanceFrequency
+	@ExtendedMetaData(kind="element", name="moduleData", namespace="##targetNamespace")
+	contains PerformanceInfoModule[] moduleData
+	@ExtendedMetaData(kind="element", name="sessionID", namespace="##targetNamespace")
+	UUID sessionID
+}
+
+@ExtendedMetaData(name="PerformanceInfoModule", kind="elementOnly")
+class PerformanceInfoModule {
+	@ExtendedMetaData(kind="element", name="moduleID", namespace="##targetNamespace")
+	contains BSLModuleIdInternal[1] moduleID
+	@ExtendedMetaData(kind="element", name="lineInfo", namespace="##targetNamespace")
+	contains PerformanceInfoLine[] lineInfo
+}

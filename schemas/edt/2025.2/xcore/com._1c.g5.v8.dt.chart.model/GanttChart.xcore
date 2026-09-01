@@ -1,0 +1,221 @@
+@GenModel(nonNLSMarkers="true", prefix="GanttChart", copyrightText="Copyright (C) 2015, 1C", literalsInterface="true", updateClasspath="false", featureDelegation="Reflective", rootExtendsClass="com._1c.g5.v8.bm.core.BmObject", rootExtendsInterface="com._1c.g5.v8.bm.core.IBmObject")
+@Ecore(nsPrefix="ganttchart", nsURI="http://g5.1c.ru/v8/dt/ganttchart/model")
+
+package com._1c.g5.v8.dt.ganttchart.model
+
+import com._1c.g5.v8.dt.chart.model.Chart
+import com._1c.g5.v8.dt.chart.model.ChartLine
+import com._1c.g5.v8.dt.chart.model.timescale.TimeScale
+import com._1c.g5.v8.dt.chart.model.timescale.TimeScaleUnitType
+import com._1c.g5.v8.dt.mcore.Color
+import com._1c.g5.v8.dt.mcore.Font
+import com._1c.g5.v8.dt.mcore.LocalStringMapEntry
+import com._1c.g5.v8.dt.mcore.Picture
+import com._1c.g5.v8.dt.mcore.DuallyNamedElement
+
+class SeriesDimensionValue
+{
+    int itemKey
+    int key
+    int parentKey
+    int leftKey
+    int rightKey
+    int extKey
+    // valueKey anyType
+    contains LocalStringMapEntry[] title
+    // details anyType
+    int cacheKey
+    long baseData
+}
+
+class PointDimensionValue extends SeriesDimensionValue
+{
+    contains Font font
+    contains Picture picture
+}
+
+class GanttChartPointValueContent
+{
+    contains Color mainColor
+    contains Color secondColor
+    contains Color backColor
+    contains Color textColor
+}
+
+class ChartPoints
+{
+    boolean testMode
+    contains PointDimensionValue[] value
+    contains GanttChartPointValueContent[] contentCacheItem
+    boolean autoText
+    boolean useValuesReverseBehavior
+}
+
+class GanttChartSeriesValueContent
+{
+    contains Color mainColor
+    contains Color secondColor
+    contains Color hatchBetweenIntervalsColor
+}
+
+class ChartSeries
+{
+    boolean testMode
+    contains SeriesDimensionValue[] value
+    contains GanttChartSeriesValueContent[] contentCacheItem
+    boolean autoText
+    boolean useValuesReverseBehavior
+}
+
+class ChartInterval
+{
+    int itemKey
+    int key
+    com._1c.g5.v8.dt.mcore.Date begin
+    com._1c.g5.v8.dt.mcore.Date end
+    contains LocalStringMapEntry[] text
+    contains Color color
+    int intervalKey
+    contains Color textColor // since 8.3.23
+    // AnyType details
+}
+
+class ChartValue
+{
+    int itemKey
+    int key
+    contains LocalStringMapEntry[] text
+    boolean editFlag
+    contains Color backColor
+    contains Color textColor
+    contains Color mainColor
+    contains Color secondColor
+    // AnyType details
+}
+
+enum GanttChartScaleKeeping
+{
+    Fixed = 0,
+	Period = 1,
+	AllData = 2,
+	Auto = 3
+}
+
+enum GanttChartIntervalRepresentation
+{
+    Flat = 0,
+    ThreeDimensional = 1,
+    Rhomb = 2,
+    Gradient = 3
+}
+
+enum GanttChartVerticalStretch
+{
+    None = 0,
+	StretchRows = 1,
+	StretchRowsAndData = 2
+}
+
+enum GanttChartValueTextRepresentation
+{
+    None = 0,
+	Right = 1
+}
+
+class GanttChartBackgroundIntervals
+{
+    contains Collect collection
+    contains Color[] contentCacheItem
+    int ticks
+}
+
+class Collect
+{
+    contains CollectItem[] items
+    int ticks
+}
+
+class CollectItem
+{
+    com._1c.g5.v8.dt.mcore.Date key
+    com._1c.g5.v8.dt.mcore.Date secondaryDate
+    int cacheKey
+}
+
+class GanttChartLink
+{
+    int curBeginKey
+    int curEndKey
+    int beginKey
+    int endKey
+    GanttChartLinkType linkType
+    contains Color color
+}
+
+enum GanttChartLinkType
+{
+    BeginEnd = 0,
+	BeginBegin = 1,
+	EndBegin = 2,
+	EndEnd = 3
+}
+
+// Варианты отображения элементов при отрисовке
+enum GanttChartShowOnPaint //since 8.3.21
+{
+    Auto = 0,
+    Show = 1,
+    DontShow = 2
+}
+
+// Тип размещения текста диаграммы Ганта
+enum GanttChartTextPlacementType //since 8.3.23
+{
+    Auto = 0,
+    Cut = 1,
+    Wrap = 2
+}
+
+// Отображение текста интервала диаграммы Ганта
+enum GanttChartIntervalTextRepresentation //since 8.3.23
+{
+    Auto = 0,
+    Show = 1,
+    DontShow = 2
+}
+
+class GanttChart
+{
+    contains Chart chart
+    contains ChartPoints points
+    contains ChartSeries series
+    contains ChartInterval[] interval
+    contains ChartValue[] value
+    boolean drawEmpty // showEmptyValues
+    contains TimeScale timeScale
+    GanttChartScaleKeeping keepScaleVariant // scaleKeeping
+    TimeScaleUnitType fixedVariantMeasure // periodicVariantUnit
+    int fixedVariantInterval // periodicVariantRepetition
+    boolean autoFullInterval
+    com._1c.g5.v8.dt.mcore.Date fullIntervalBegin // beginOfWholeInterval
+    com._1c.g5.v8.dt.mcore.Date fullIntervalEnd // endOfWholeInterval
+    com._1c.g5.v8.dt.mcore.Date visualBegin // 
+    GanttChartIntervalRepresentation intervalDrawType
+    double noneVariantChars
+    TimeScaleUnitType noneVariantMeasure
+    GanttChartVerticalStretch verticalStretch
+    boolean verticalScrollEnable
+    GanttChartValueTextRepresentation showValueText // valueTextRepresentation
+    contains LocalStringMapEntry[] extTitle
+    contains Color outboundColor
+    contains GanttChartBackgroundIntervals backIntervals
+    contains GanttChartLink[] link
+    contains Color linksColor
+    contains ChartLine linksLine
+    // contains GanttChartDTDataColumns dtDataColumns //since 8.3.21 //Колонки (Таблица данных). //доступно только в Runtime
+    GanttChartShowOnPaint showPointsText // since 8.3.21
+    GanttChartShowOnPaint showData // since 8.3.21
+    // см. 60003654 boolean predefinedLogFormTableVisible // since 8.3.21 // Отображается ли предопределённая таблица (элемент формы).
+    GanttChartTextPlacementType textPlacement // since 8.3.23
+    GanttChartIntervalTextRepresentation intervalTextRepresentation // since 8.3.23
+}

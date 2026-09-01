@@ -1,0 +1,10 @@
+@GenModel(prefix="DistributionSupportCompare", loadInitialization="false", literalsInterface="true", nonNLSMarkers="true",
+    copyrightText="Copyright (C) 2026, 1C", updateClasspath="false",
+    featureDelegation="Reflective", rootExtendsClass="com._1c.g5.v8.bm.core.BmObject", rootExtendsInterface="com._1c.g5.v8.bm.core.IBmObject")
+@Ecore(nsPrefix="distributionsupportcompare", nsURI="http://g5.1c.ru/v8/dt/distribution/compare")
+package com.e1c.g5.v8.dt.distribution.compare
+
+import com._1c.g5.v8.dt.compare.model.ExternalPropertyComparisonNode
+
+class DistributionSupportComparisonNode extends ExternalPropertyComparisonNode
+{}

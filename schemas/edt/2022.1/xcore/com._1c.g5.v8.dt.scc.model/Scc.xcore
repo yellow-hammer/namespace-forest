@@ -1,0 +1,41 @@
+@GenModel(loadInitialization="false", literalsInterface="true", nonNLSMarkers="true", prefix="StandaloneContent",
+    copyrightText="Copyright (C) 2020, 1C", updateClasspath="false", featureDelegation="Reflective",
+    rootExtendsClass="com._1c.g5.v8.bm.core.BmObject")
+@Ecore(nsPrefix="scc", nsURI="http://g5.1c.ru/v8/dt/scc")
+package com._1c.g5.v8.dt.scc.model
+
+import com._1c.g5.v8.dt.metadata.mdclass.AbstractStandaloneContent
+import com._1c.g5.v8.dt.metadata.mdclass.MdObject
+
+class StandaloneContent extends AbstractStandaloneContent
+{
+    contains StandaloneContentUsedItem[] usedItem
+    contains StandaloneContentUnusedItem[] unusedItem
+    contains StandaloneContentPriorityItem[] priorityItem
+}
+
+interface StandaloneContentMdObjectAware
+{
+    refers MdObject metadata
+}
+
+class StandaloneContentUsedItem extends StandaloneContentMdObjectAware
+{
+    StandaloneContentItemPriority priority //DEPRECATED
+}
+
+class StandaloneContentUnusedItem extends StandaloneContentMdObjectAware
+{
+}
+
+class StandaloneContentPriorityItem extends StandaloneContentMdObjectAware
+{
+    StandaloneContentItemPriority priority
+}
+
+enum StandaloneContentItemPriority
+{
+    Default = 0
+    MainServer = 1
+    LocalServer = 2
+}

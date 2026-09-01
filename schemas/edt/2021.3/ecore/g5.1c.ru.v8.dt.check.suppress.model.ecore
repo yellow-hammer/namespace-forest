@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="ASCII"?>
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="model" nsURI="http://g5.1c.ru/v8/dt/check/suppress/model" nsPrefix="suppress">
+  <eClassifiers xsi:type="ecore:EClass" name="SuppressionMapEntry" instanceClassName="java.util.Map$Entry">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="key" unique="false" eType="//CheckUid"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EBooleanObject"/>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="SuppressionsContainer" abstract="true" interface="true">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="suppressions" upperBound="-1" eType="//SuppressionMapEntry" containment="true" resolveProxies="false"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="suppressed" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EBooleanObject"/>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="SuppressPropertyContainer" abstract="true" interface="true">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="properties" upperBound="-1" eType="//SuppressProperty" containment="true" resolveProxies="false"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="SuppressConfiguration" eSuperTypes="//SuppressionsContainer"/>
+  <eClassifiers xsi:type="ecore:EClass" name="BaseSuppressObject" eSuperTypes="//SuppressionsContainer">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="fqn" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="containments" upperBound="-1" eType="//SuppressContainment" containment="true" resolveProxies="false"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="SuppressGenericObject" eSuperTypes="//BaseSuppressObject"/>
+  <eClassifiers xsi:type="ecore:EClass" name="SuppressContainment" eSuperTypes="//BaseSuppressObject"/>
+  <eClassifiers xsi:type="ecore:EClass" name="SuppressSubsystem" eSuperTypes="//BaseSuppressObject">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="contentSuppressions" upperBound="-1" eType="//SuppressionMapEntry" containment="true" resolveProxies="false"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="SuppressProperty">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="SuppressModule" eSuperTypes="//BaseSuppressObject">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="methods" upperBound="-1" eType="//SuppressMethod" containment="true" resolveProxies="false"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="SuppressMethod" eSuperTypes="//SuppressionsContainer">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EDataType" name="CheckUid" instanceClassName="com.e1c.g5.v8.dt.check.settings.CheckUid"/>
+</ecore:EPackage>

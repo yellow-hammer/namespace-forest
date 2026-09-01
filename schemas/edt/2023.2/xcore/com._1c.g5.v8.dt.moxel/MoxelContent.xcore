@@ -1,0 +1,466 @@
+@GenModel(loadInitialization="false", literalsInterface="true", nonNLSMarkers="true",
+	copyrightText="Copyright (C) 2013, 1C", updateClasspath="false",
+	featureDelegation="Reflective", rootExtendsClass="com._1c.g5.v8.bm.core.BmObject")
+@Ecore(nsPrefix="mxlContent", nsURI="http://g5.1c.ru/v8/dt/moxel/content")
+
+package com._1c.g5.v8.dt.moxel.content
+
+import com._1c.g5.v8.dt.mcore.Color
+import com._1c.g5.v8.dt.mcore.Font
+import com._1c.g5.v8.dt.mcore.LocalStringMapEntry
+import com._1c.g5.v8.dt.mcore.Picture
+
+import com._1c.g5.v8.dt.mcore.TypeDescription
+import com._1c.g5.v8.dt.mcore.Uuid
+import com._1c.g5.v8.dt.mcore.Value
+
+import com._1c.g5.v8.dt.metadata.common.PictureSize
+import com._1c.g5.v8.dt.metadata.common.CellTextPosition
+import com._1c.g5.v8.dt.metadata.common.SpreadsheetDocumentSavedPicturesDensity
+
+import org.eclipse.emf.ecore.EObject
+
+//
+// Базовый тип линии.
+//
+class SpreadsheetLine
+{
+    int width                                       // Толщина линии.
+    boolean gap                                     // Отступ.
+}
+
+//
+// Стиль линии ячейки.
+//
+enum CellLineStyle
+{
+    None = 0
+    Solid = 1
+    Dotted = 2
+    Double = 3
+    ThinDashed = 4
+    ThickDashed = 5
+    LargeDashed = 6
+}
+
+//
+// Тип линии табличного документа.
+//
+class CellLine extends SpreadsheetLine
+{
+    CellLineStyle style                             // Стиль линии.
+}
+
+//
+// Стиль линии рисунка табличного документа.
+//
+ enum DrawingLineStyle
+ {
+    None
+    Solid
+    Dashed
+    Dotted
+    DashDotted
+    DashDottedDotted
+ }
+ 
+//
+// Тип линии рисунка табличного документа.
+//
+class DrawingLine extends SpreadsheetLine
+{
+    DrawingLineStyle style                          // Стиль линии.
+}
+
+//
+// Горизонтальное выравнивание.
+//
+enum HorizontalAlignment
+{
+    Auto = 0                                            // Авто.
+    Left = 1                                            // Влево.
+    Right = 2                                           // Вправо.
+    Center = 3                                          // По центру.
+    Width = 4                                           // По ширине.
+}
+
+//
+// Вертикальное выраванивание.
+//
+enum VerticalAlignment
+{
+    Center = 0                                          // По центру.
+    Top = 1                                             // По верху.
+    Bottom = 2                                          // По низу.
+}
+
+//
+// Шаблон заливки.
+//
+enum Pattern
+{
+    WithoutPattern = 0
+    Solid = 1
+    Pattern1 = 2
+    Pattern2 = 3
+    Pattern3 = 4
+    Pattern4 = 5
+    Pattern5 = 6
+    Pattern6 = 7
+    Pattern7 = 8
+    Pattern8 = 9
+    Pattern9 = 10
+    Pattern10 = 11
+    Pattern11 = 12
+    Pattern12 = 13
+    Pattern13 = 14
+    Pattern14 = 15
+    Pattern15 = 16
+    Pattern16 = 17
+    Pattern17 = 18
+}
+
+//
+// Тип размещения текста.
+//
+enum TextPlacement
+{
+    Auto = 0                                            // Выходить на свободные ячейки.
+    Cut = 1                                             // Обрезать.
+    Block = 2                                           // Забивать.
+    Wrap = 3                                            // Переносить.
+}
+
+//
+// Тип заполнения ячейки.
+//
+enum FillType
+{
+    Text = 0                                            // Текст.
+    Parameter = 1                                       // Параметр.
+    Template = 2                                        // Шаблон.
+}
+
+//
+// Использование расшифровки.
+//
+enum DetailUse
+{
+    Cell = 0                                            // На ячейку.
+    Row = 1                                            // На всю строку.
+    WithoutProcessing = 2                              // Без обработки.
+}
+
+//
+// Режим изменения размера.
+//
+enum SizeChangeMode
+{
+    Normal = 0                                          // Обычное изменение.
+    QuickChange = 1                                     // Быстрое изменение.
+}
+
+//
+// Тип перехода по ячейкам после редактирования. 
+//
+enum SpreadsheetDocumentStepDirectionType
+{
+    ByRows = 0                                          // Переходить по строкам.
+    ByColumns = 1                                      // Переходить по колонкам.
+    WithoutMove = 2                                    // Без перехода.
+}
+
+//
+// Тип направления текста. 
+//
+enum SpreadsheetDocumentTextDirectionType
+{
+    LeftToRight = 0                                   // Слева направо.
+    RightToLeft = 1                                   // Справа налево.
+}
+
+//
+// Локальная строка.
+//
+class LocalString
+{
+    contains LocalStringMapEntry[] content          // Содержимое строки.
+    boolean formattedString 
+}
+
+//
+// Область ячеек табличного документа
+//
+abstract class Area
+{
+    // Пустой класс.
+}
+
+//
+// Properties of entire document
+//
+class SpreadsheetProperties
+{
+	boolean isTemplate
+	boolean totalsRight
+	boolean totalsBelow
+	contains Picture backgroundPicture
+	boolean fixedBackground
+	SpreadsheetDocumentStepDirectionType stepDirection
+	contains Area printArea
+    contains Area repeatRows
+    contains Area repeatColumns
+    SpreadsheetDocumentTextDirectionType textDirection // since 8.3.17
+	boolean saveViewState
+	contains transient CellReference cellReference // only for spreadsheet document instance
+	SpreadsheetDocumentSavedPicturesDensity savedPicturesDensity // since 8.3.22
+}
+
+// Reference to spreadsheet to be used if selection properties
+class CellReference
+{
+	refers EObject[1] spreadsheet // spreadsheet document
+	int rowIndex // row index of top left cell of selection
+	int columnIndex // column index of top left cell of selection
+}
+
+//
+// Базовые форматные свойства, которые есть у всех видов областей ячеек (ячеек/строк/колонок/таблиц)
+//
+class BaseFormattingCellProperties
+{
+    contains unsettable Font font                              // Шрифт.
+    
+    contains unsettable SpreadsheetLine leftBorder             // Линия левой границы. 
+    contains unsettable SpreadsheetLine topBorder              // Линия верхней границы. 
+    contains unsettable SpreadsheetLine rightBorder            // Линия правой границы. 
+    contains unsettable SpreadsheetLine bottomBorder           // Линия нижней границы. 
+    contains unsettable Color borderColor                      // Цвет границы.  
+    
+    unsettable HorizontalAlignment horizontalAlignment         // Горизонтальное выравнивание.
+    unsettable VerticalAlignment verticalAlignment             // Вертикальное выравнивание.
+    
+    contains unsettable Color textColor                        // Цвет текста.
+    contains unsettable Color backColor                        // Цвет фона.
+    contains unsettable Color patternColor                     // Цвет шаблона.
+    unsettable Pattern pattern                                 // Шаблон заливки.
+    
+    unsettable TextPlacement textPlacement                     // Тип размещения текста.
+    unsettable FillType fillType                               // Тип заполнения.    
+    
+    unsettable boolean protection                              // Защита.
+    unsettable int textOrientation                             // Ориентация текста.
+    unsettable DetailUse detailUse                             // Использование расшифровки.
+    unsettable boolean bySelectedColumns                       // По выделенным колонкам.
+    unsettable boolean markNegatives                           // Выделять отрицательные.
+    
+    
+    unsettable boolean hyperlink                               // Гиперссылка.
+    unsettable boolean autoMarkIncomplete                      // Автоматическая отметка незаполненного.
+    unsettable boolean markIncomplete                          // Отметка незаполненного.
+    unsettable int indent                                      // Отступ.
+    unsettable int autoIndent                                  // Автоотступ.
+    
+    contains unsettable LocalString dataFormat                 // Формат данных.
+    contains unsettable LocalString editFormat                 // Формат редактирования.
+    contains unsettable LocalString mask                       // Маска редактирования.
+    
+    unsettable SizeChangeMode sizeChangeMode                   // Режим изменения размера колонки.
+    
+    contains unsettable Picture picture                        // index of in-cell picture
+    unsettable HorizontalAlignment pictureHorizontalAlignment  // in-cell picture's horizontal alignment
+    unsettable VerticalAlignment pictureVerticalAlignment      // in-cell picture's vertical alignment
+    unsettable PictureSize pictureSize                         // in-cell's picture size mode
+    unsettable CellTextPosition textPosition                   // text position relative to in-cell picture
+    
+    // boolean flag that template mode is currently on
+    boolean isTemplateModeOn
+    
+    unsettable String areaName
+    
+    unsettable int marginLeft                                  // отступ слева, since 8.3.22
+    unsettable int marginTop                                   // отступ сверху, since 8.3.22
+    unsettable int marginRight                                 // отступ справа, since 8.3.22
+    unsettable int marginBottom                                // отступ снизу, since 8.3.22
+    
+    contains transient CellReference cellReference
+}
+
+//
+// Свойство области ячеек.
+//
+class CellsProperties extends BaseFormattingCellProperties
+{
+    unsettable boolean containsValue                           // Содержит значение.
+    contains unsettable TypeDescription valueType              // Тип значения.
+    
+    unsettable Uuid controlType                                // Тип элемента управления.
+    
+    contains unsettable LocalString text                       // Текст ячейки.
+    unsettable String parameter                                // Параметр ячейки.
+    
+    unsettable String detailParameter                          // Параметр расшифровки.
+    unsettable String pictureParameter                          // Параметр картинки.
+    
+    contains unsettable Value value								// value
+}
+
+//
+// Свойства колонок и строк.
+//
+class ColumnsRowsProperties extends BaseFormattingCellProperties
+{
+    unsettable boolean keepWithNext                            // Вместе со следующим.
+    unsettable boolean pageBreakBefore                         // Разрыв страницы перед
+    unsettable boolean pageBreakAfter                          // Разрыв страницы после
+}
+
+//
+// Свойства колонок.
+//
+class ColumnsProperties extends ColumnsRowsProperties 
+{
+}
+
+//
+// Свойства строк.
+//
+class RowsProperties extends ColumnsRowsProperties
+{
+}
+
+
+class TableProperties extends BaseFormattingCellProperties
+{
+}
+
+//
+// Базовые форматные свойства, которые есть у всех видов рисунков.
+//
+class BaseDrawingProperties
+{
+    unsettable String name                                     // Имя рисунка.
+    unsettable boolean hyperlink                               // Гиперссылка.
+    unsettable boolean print                                   // Выводить на печать.
+    
+    unsettable String detailParameter                          // Параметр расшифровки.
+    
+    // boolean flag that template mode is currently on
+    boolean isTemplateModeOn
+    
+    contains transient CellReference cellReference
+}
+
+//
+// Свойства рисунка - линия.
+//
+class LineDrawingProperties extends BaseDrawingProperties 
+{
+    contains unsettable SpreadsheetLine line                   // Тип линии. 
+    contains unsettable Color lineColor                        // Цвет линии.  
+}
+
+//
+// Свйойства рисунка с фоном.
+//
+class BaseDrawingWithBackgroundProperties extends LineDrawingProperties
+{
+    contains unsettable Color backColor                        // Цвет фона.
+    contains unsettable Color patternColor                     // Цвет шаблона.
+    unsettable Pattern pattern                                 // Шаблон заливки.
+}
+
+//
+// Свойства рисунка - прямоугольник.
+//
+class RectangleDrawingProperties extends BaseDrawingWithBackgroundProperties
+{
+    unsettable boolean haveLeftBorder                          // Есть левая граница.
+    unsettable boolean haveTopBorder                           // Есть верхняя граница.
+    unsettable boolean haveRightBorder                         // Есть правая граница.
+    unsettable boolean haveBottomBorder                        // Есть нижняя граница                                   
+}
+
+//
+// Свойства рисунка - текст.
+//
+class TextDrawingProperties extends RectangleDrawingProperties
+{
+    contains unsettable Font font                              // Шрифт.
+    
+    unsettable HorizontalAlignment horizontalAlignment         // Горизонтальное выравнивание.
+    unsettable VerticalAlignment verticalAlignment             // Вертикальное выравнивание.
+    
+    contains unsettable Color textColor                        // Цвет текста. Индекс в массиве цветов.
+    
+    unsettable TextPlacement textPlacement                     // Тип размещения текста.
+    unsettable FillType fillType                               // Тип заполнения.
+        
+    unsettable boolean protection                              // Защита.
+    unsettable int textOrientation                             // Ориентация текста.
+
+    unsettable boolean markNegatives                           // Выделять отрицательные.
+    unsettable boolean autoMarkIncomplete                      // Автоматическая отметка незаполненного.
+    unsettable boolean markIncomplete                          // Отметка незаполненного.
+    
+    contains unsettable LocalString dataFormat                 // Формат данных.
+    contains unsettable LocalString editFormat                 // Формат редактирования.
+    contains unsettable LocalString mask                       // Маска редактирования.
+    
+    unsettable boolean autosize                                // Автоматический размер.
+    
+    unsettable boolean containsValue                           // Содержит значение.
+    contains unsettable TypeDescription valueType              // Тип значения.
+    
+    unsettable Uuid controlType                                // Тип элемента управления.
+    
+    contains unsettable LocalString text                       // Текст ячейки.
+    unsettable String parameter                                // Параметр ячейки.
+    
+    unsettable int indent                                      // Отступ
+    unsettable int marginLeft                                  // отступ слева
+    unsettable int marginTop                                   // отступ сверху
+    unsettable int marginRight                                 // отступ справа
+    unsettable int marginBottom                                // отступ снизу
+}
+
+//
+// Свойства рисунка - овал.
+//
+class EllipseDrawingProperties extends BaseDrawingWithBackgroundProperties
+{
+     
+}
+  
+//
+// Свойства рисунка - группировки.
+//
+class GroupDrawingProperties extends BaseDrawingProperties 
+{
+}
+
+//
+// Свойства рисунка - картинка.
+//
+class PictureDrawingProperties extends BaseDrawingWithBackgroundProperties
+{
+	contains unsettable Picture picture
+	unsettable PictureSize pictureSize
+}
+
+//
+// Идентификатор расшифровки компоновки данных.
+//
+class DcsDetailId extends Value
+{
+    int detailId                                    // Идентификатор.
+}
+
+
+enum AreaType
+{
+	GeneralArea,
+	RowsArea = 1,
+	ColumnsArea = 2,
+	RectangleArea = 3
+}

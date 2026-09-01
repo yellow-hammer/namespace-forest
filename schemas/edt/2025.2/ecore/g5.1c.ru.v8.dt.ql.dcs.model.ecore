@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="ASCII"?>
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="model" nsURI="http://g5.1c.ru/v8/dt/ql/dcs/model" nsPrefix="qldcs">
+  <eClassifiers xsi:type="ecore:EClass" name="FilterCompositionDataQuerySchema">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="expressions" upperBound="-1" containment="true" resolveProxies="false">
+      <eType xsi:type="ecore:EClass" href="http://g5.1c.ru/v8/dt/ql/model#//QuerySchemaExpression"/>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="SelectFieldsCompositionDataQuerySchema">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="expressions" upperBound="-1" containment="true" resolveProxies="false">
+      <eType xsi:type="ecore:EClass" href="http://g5.1c.ru/v8/dt/ql/model#//QuerySchemaExpression"/>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="DcsQuerySchemaOperator">
+    <eSuperTypes href="http://g5.1c.ru/v8/dt/ql/model#//QuerySchemaOperator"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="extensions" upperBound="-1" eType="//DcsExtensionPart" containment="true" resolveProxies="false"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="DcsQuerySchemaSelectQuery">
+    <eSuperTypes href="http://g5.1c.ru/v8/dt/ql/model#//QuerySchemaSelectQuery"/>
+    <eOperations name="characteristicsDcs" unique="false" upperBound="-1" eType="//CharacteristicCompositionDataQuerySchema"/>
+    <eOperations name="selectFieldsDcs" unique="false" upperBound="-1" eType="//SelectFieldsCompositionDataQuerySchema"/>
+    <eOperations name="filtersDcs" unique="false" upperBound="-1" eType="//FilterCompositionDataQuerySchema"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="extensions" upperBound="-1" eType="//DcsExtensionPart" containment="true" resolveProxies="false"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="DcsParameterExpression">
+    <eSuperTypes href="http://g5.1c.ru/v8/dt/ql/model#//ParameterExpression"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="DcsExtensionPart" abstract="true"/>
+  <eClassifiers xsi:type="ecore:EClass" name="DcsExtensionPartFilter" eSuperTypes="//DcsExtensionPart">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="filters" eType="//FilterCompositionDataQuerySchema" containment="true" resolveProxies="false"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="DcsExtensionPartSelectFields" eSuperTypes="//DcsExtensionPart">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="fields" eType="//SelectFieldsCompositionDataQuerySchema" containment="true" resolveProxies="false"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="DcsExtensionPartCharacteristics" eSuperTypes="//DcsExtensionPart">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="characteristics" eType="//CharacteristicCompositionDataQuerySchema" containment="true" resolveProxies="false"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="CharacteristicCompositionDataQuerySchema">
+    <eOperations name="getType" unique="false">
+      <eType xsi:type="ecore:EClass" href="g5.1c.ru.v8.dt.mcore.ecore#//TypeDescription"/>
+    </eOperations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="types" upperBound="-1" containment="true" resolveProxies="false">
+      <eType xsi:type="ecore:EClass" href="http://g5.1c.ru/v8/dt/ql/model#//AbstractQuerySchemaTable"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="characteristicTypes" eType="//CharacteristicTypesAndValues" containment="true" resolveProxies="false"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="keyField" containment="true" resolveProxies="false">
+      <eType xsi:type="ecore:EClass" href="http://g5.1c.ru/v8/dt/ql/model#//QuerySchemaExpression"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="nameField" containment="true" resolveProxies="false">
+      <eType xsi:type="ecore:EClass" href="http://g5.1c.ru/v8/dt/ql/model#//QuerySchemaExpression"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="valueTypeField" containment="true" resolveProxies="false">
+      <eType xsi:type="ecore:EClass" href="http://g5.1c.ru/v8/dt/ql/model#//QuerySchemaExpression"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="characteristicValues" eType="//CharacteristicTypesAndValues" containment="true" resolveProxies="false"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="objectField" containment="true" resolveProxies="false">
+      <eType xsi:type="ecore:EClass" href="http://g5.1c.ru/v8/dt/ql/model#//QuerySchemaExpression"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="typeField" containment="true" resolveProxies="false">
+      <eType xsi:type="ecore:EClass" href="http://g5.1c.ru/v8/dt/ql/model#//QuerySchemaExpression"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="valueField" containment="true" resolveProxies="false">
+      <eType xsi:type="ecore:EClass" href="http://g5.1c.ru/v8/dt/ql/model#//QuerySchemaExpression"/>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="CharacteristicTypesAndValues">
+    <eOperations name="isTable" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    </eOperations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="table" containment="true" resolveProxies="false">
+      <eType xsi:type="ecore:EClass" href="http://g5.1c.ru/v8/dt/ql/model#//AbstractQuerySchemaTable"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="query" containment="true" resolveProxies="false">
+      <eType xsi:type="ecore:EClass" href="http://g5.1c.ru/v8/dt/ql/model#//QuerySchemaNestedQuery"/>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="QuerySchemaQueryGroupSourceJoin">
+    <eSuperTypes href="http://g5.1c.ru/v8/dt/ql/model#//AbstractQuerySchemaQuerySourceJoin"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="joins" upperBound="-1" containment="true" resolveProxies="false">
+      <eType xsi:type="ecore:EClass" href="http://g5.1c.ru/v8/dt/ql/model#//QuerySchemaQuerySourceJoin"/>
+    </eStructuralFeatures>
+  </eClassifiers>
+</ecore:EPackage>

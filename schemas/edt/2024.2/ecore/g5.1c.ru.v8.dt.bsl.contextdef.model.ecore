@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="ASCII"?>
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="model" nsURI="http://g5.1c.ru/v8/dt/bsl/contextdef/model" nsPrefix="bslcontextdef">
+  <eClassifiers xsi:type="ecore:EClass" name="BslContextDef">
+    <eSuperTypes href="http://g5.1c.ru/v8/dt/mcore#//ContextDef"/>
+    <eOperations name="allProperties" unique="false" upperBound="-1">
+      <eType xsi:type="ecore:EClass" href="http://g5.1c.ru/v8/dt/mcore#//Property"/>
+    </eOperations>
+    <eOperations name="allMethods" unique="false" upperBound="-1">
+      <eType xsi:type="ecore:EClass" href="http://g5.1c.ru/v8/dt/mcore#//Method"/>
+    </eOperations>
+    <eOperations name="allRefContextDefs" unique="false" upperBound="-1">
+      <eType xsi:type="ecore:EClass" href="http://g5.1c.ru/v8/dt/mcore#//ContextDef"/>
+    </eOperations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="moduleUri" unique="false" eType="//URI"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="globalCommonModule" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="allMethodNames" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="SourceObjectLinkProvider">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="sourceUri" unique="false" eType="//URI"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="BslContextDefMethod">
+    <eSuperTypes href="http://g5.1c.ru/v8/dt/mcore#//Method"/>
+    <eSuperTypes href="#//SourceObjectLinkProvider"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="serverCall" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="deprecated" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="commentLines" unique="false" upperBound="-1" unsettable="true">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="commentLineLocalOffsets" unique="false" upperBound="-1" unsettable="true">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="BslContextDefMockMethod" eSuperTypes="//BslContextDefMethod">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="context">
+      <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/emf/2002/Ecore#//EObject"/>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="BslContextDefProperty">
+    <eSuperTypes href="http://g5.1c.ru/v8/dt/mcore#//Property"/>
+    <eSuperTypes href="#//SourceObjectLinkProvider"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="BslContextDefMockProperty" eSuperTypes="//BslContextDefProperty">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="context">
+      <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/emf/2002/Ecore#//EObject"/>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EDataType" name="URI" instanceClassName="org.eclipse.emf.common.util.URI"/>
+</ecore:EPackage>

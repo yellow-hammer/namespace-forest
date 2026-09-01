@@ -1,0 +1,792 @@
+<?xml version="1.0" encoding="ASCII"?>
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="settings" nsURI="http://g5.1c.ru/v8/dt/data-composition-system/settings" nsPrefix="settings">
+  <eClassifiers xsi:type="ecore:EClass" name="DataCompositionSettings">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="userFields" eType="//DataCompositionUserFields" containment="true" resolveProxies="false"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="selection" eType="//DataCompositionSelectedFields" containment="true" resolveProxies="false"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="filter" eType="//DataCompositionFilter" containment="true" resolveProxies="false"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="dataParameters" eType="//DataCompositionDataParameterValues" containment="true" resolveProxies="false"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="order" eType="//DataCompositionOrder" containment="true" resolveProxies="false"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="conditionalAppearance" eType="//DataCompositionConditionalAppearance" containment="true" resolveProxies="false"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="outputParameters" eType="//DataCompositionOutputParameterValues" containment="true" resolveProxies="false"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="items" upperBound="-1" eType="//StructureItem" containment="true" resolveProxies="false"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="additionalProperties" containment="true" resolveProxies="false">
+      <eType xsi:type="ecore:EClass" href="http://g5.1c.ru/v8/dt/mcore#//Structure"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="itemsViewMode" unique="false" eType="//DataCompositionSettingsItemViewMode" defaultValueLiteral="QuickAccess"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="itemsUserSettingID" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="itemsUserSettingPresentation" containment="true" resolveProxies="false">
+      <eType xsi:type="ecore:EClass" href="g5.1c.ru.v8.dt.data-composition-system.core.ecore#//Presentation"/>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="DataCompositionDataParameterValues">
+    <eSuperTypes href="g5.1c.ru.v8.dt.data-composition-system.core.ecore#//ParameterValues"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="DataCompositionOutputParameterValues">
+    <eSuperTypes href="g5.1c.ru.v8.dt.data-composition-system.core.ecore#//ParameterValues"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="colorPaletteDescription" containment="true" resolveProxies="false">
+      <eType xsi:type="ecore:EClass" href="g5.1c.ru.v8.dt.chart.model.ecore#//ChartColorPaletteDescription"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="referenceBandsColorPaletteDescription" containment="true" resolveProxies="false">
+      <eType xsi:type="ecore:EClass" href="g5.1c.ru.v8.dt.chart.model.ecore#//ChartColorPaletteDescription"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="valuesReferenceLines" containment="true" resolveProxies="false">
+      <eType xsi:type="ecore:EClass" href="g5.1c.ru.v8.dt.chart.model.ecore#//ChartReferenceLines"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="pointsReferenceLines" containment="true" resolveProxies="false">
+      <eType xsi:type="ecore:EClass" href="g5.1c.ru.v8.dt.chart.model.ecore#//ChartReferenceLines"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="valuesReferenceBands" containment="true" resolveProxies="false">
+      <eType xsi:type="ecore:EClass" href="g5.1c.ru.v8.dt.chart.model.ecore#//ChartReferenceBands"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="pointsReferenceBands" containment="true" resolveProxies="false">
+      <eType xsi:type="ecore:EClass" href="g5.1c.ru.v8.dt.chart.model.ecore#//ChartReferenceBands"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="additionalValuesScale" containment="true" resolveProxies="false">
+      <eType xsi:type="ecore:EClass" href="g5.1c.ru.v8.dt.chart.model.ecore#//ChartScale"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="additionalValuesAxis" containment="true" resolveProxies="false">
+      <eType xsi:type="ecore:EClass" href="g5.1c.ru.v8.dt.chart.model.ecore#//ChartAxis"/>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="DataCompositionOrder">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="items" upperBound="-1" eType="//OrderItem" containment="true" resolveProxies="false"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="viewMode" unique="false" eType="//DataCompositionSettingsItemViewMode" defaultValueLiteral="QuickAccess"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="userSettingID" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="userSettingPresentation" containment="true" resolveProxies="false">
+      <eType xsi:type="ecore:EClass" href="g5.1c.ru.v8.dt.data-composition-system.core.ecore#//Presentation"/>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="OrderItem" abstract="true"/>
+  <eClassifiers xsi:type="ecore:EClass" name="DataCompositionOrderItem" eSuperTypes="//OrderItem">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="use" unique="false" defaultValueLiteral="true">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="field" containment="true" resolveProxies="false">
+      <eType xsi:type="ecore:EClass" href="g5.1c.ru.v8.dt.data-composition-system.core.ecore#//DataCompositionField"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="orderType" unique="false">
+      <eType xsi:type="ecore:EEnum" href="g5.1c.ru.v8.dt.data-composition-system.core.ecore#//DataCompositionSortDirection"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="viewMode" unique="false" eType="//DataCompositionSettingsItemViewMode" defaultValueLiteral="QuickAccess"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="DataCompositionAutoOrderItem" eSuperTypes="//OrderItem">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="use" unique="false" defaultValueLiteral="true">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="DataCompositionFilter">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="items" upperBound="-1" eType="//FilterItem" containment="true" resolveProxies="false"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="viewMode" unique="false" eType="//DataCompositionSettingsItemViewMode" defaultValueLiteral="QuickAccess"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="userSettingID" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="userSettingPresentation" containment="true" resolveProxies="false">
+      <eType xsi:type="ecore:EClass" href="g5.1c.ru.v8.dt.data-composition-system.core.ecore#//Presentation"/>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="FilterItem" abstract="true"/>
+  <eClassifiers xsi:type="ecore:EClass" name="DataCompositionFilterItem" eSuperTypes="//FilterItem">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="use" unique="false" defaultValueLiteral="true">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="left" containment="true" resolveProxies="false">
+      <eType xsi:type="ecore:EClass" href="http://g5.1c.ru/v8/dt/mcore#//Value"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="comparisonType" unique="false" eType="//DataCompositionComparisonType"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="right" upperBound="-1" containment="true" resolveProxies="false">
+      <eType xsi:type="ecore:EClass" href="http://g5.1c.ru/v8/dt/mcore#//Value"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="presentation" containment="true" resolveProxies="false">
+      <eType xsi:type="ecore:EClass" href="g5.1c.ru.v8.dt.data-composition-system.core.ecore#//Presentation"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="application" unique="false" eType="//DataCompositionFilterApplicationType"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="viewMode" unique="false" eType="//DataCompositionSettingsItemViewMode" defaultValueLiteral="QuickAccess"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="userSettingID" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="userSettingPresentation" containment="true" resolveProxies="false">
+      <eType xsi:type="ecore:EClass" href="g5.1c.ru.v8.dt.data-composition-system.core.ecore#//Presentation"/>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="DataCompositionFilterItemGroup" eSuperTypes="//FilterItem">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="use" unique="false" defaultValueLiteral="true">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="groupType" unique="false" eType="//DataCompositionFilterItemsGroupType"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="items" upperBound="-1" eType="//FilterItem" containment="true" resolveProxies="false"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="presentation" containment="true" resolveProxies="false">
+      <eType xsi:type="ecore:EClass" href="g5.1c.ru.v8.dt.data-composition-system.core.ecore#//Presentation"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="application" unique="false" eType="//DataCompositionFilterApplicationType"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="viewMode" unique="false" eType="//DataCompositionSettingsItemViewMode" defaultValueLiteral="QuickAccess"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="userSettingID" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="userSettingPresentation" containment="true" resolveProxies="false">
+      <eType xsi:type="ecore:EClass" href="g5.1c.ru.v8.dt.data-composition-system.core.ecore#//Presentation"/>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="DataCompositionSelectedFields">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="items" upperBound="-1" eType="//SelectedItem" containment="true" resolveProxies="false"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="viewMode" unique="false" eType="//DataCompositionSettingsItemViewMode" defaultValueLiteral="QuickAccess"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="userSettingID" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="userSettingPresentation" containment="true" resolveProxies="false">
+      <eType xsi:type="ecore:EClass" href="g5.1c.ru.v8.dt.data-composition-system.core.ecore#//Presentation"/>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="SelectedItem" abstract="true"/>
+  <eClassifiers xsi:type="ecore:EClass" name="DataCompositionSelectedField" eSuperTypes="//SelectedItem">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="use" unique="false" defaultValueLiteral="true">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="field" containment="true" resolveProxies="false">
+      <eType xsi:type="ecore:EClass" href="g5.1c.ru.v8.dt.data-composition-system.core.ecore#//DataCompositionField"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="title" containment="true" resolveProxies="false">
+      <eType xsi:type="ecore:EClass" href="g5.1c.ru.v8.dt.data-composition-system.core.ecore#//Presentation"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="viewMode" unique="false" eType="//DataCompositionSettingsItemViewMode" defaultValueLiteral="QuickAccess"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="DataCompositionSelectedFieldGroup" eSuperTypes="//SelectedItem">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="use" unique="false" defaultValueLiteral="true">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="field" containment="true" resolveProxies="false">
+      <eType xsi:type="ecore:EClass" href="g5.1c.ru.v8.dt.data-composition-system.core.ecore#//DataCompositionField"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="title" containment="true" resolveProxies="false">
+      <eType xsi:type="ecore:EClass" href="g5.1c.ru.v8.dt.data-composition-system.core.ecore#//Presentation"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="items" upperBound="-1" eType="//SelectedItem" containment="true" resolveProxies="false"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="placement" unique="false" eType="//DataCompositionFieldPlacement"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="viewMode" unique="false" eType="//DataCompositionSettingsItemViewMode" defaultValueLiteral="QuickAccess"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="DataCompositionAutoSelectedField" eSuperTypes="//SelectedItem">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="use" unique="false" defaultValueLiteral="true">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="DataCompositionUserFields">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="items" upperBound="-1" eType="//UserField" containment="true" resolveProxies="false"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="UserField" abstract="true">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="use" unique="false" defaultValueLiteral="true">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="dataPath" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="title" containment="true" resolveProxies="false">
+      <eType xsi:type="ecore:EClass" href="g5.1c.ru.v8.dt.data-composition-system.core.ecore#//Presentation"/>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="DataCompositionUserFieldExpression" eSuperTypes="//UserField">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="detailExpression" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="detailExpressionPresentation" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="totalExpression" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="totalExpressionPresentation" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="DataCompositionUserFieldCase" eSuperTypes="//UserField">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="variants" eType="//DataCompositionUserFieldsCaseVariants" containment="true" resolveProxies="false"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="DataCompositionUserFieldsCaseVariants">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="items" upperBound="-1" eType="//DataCompositionUserFieldsVariant" containment="true" resolveProxies="false"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="DataCompositionUserFieldsVariant">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="use" unique="false" defaultValueLiteral="true">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="filter" eType="//DataCompositionFilter" containment="true" resolveProxies="false"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="value" containment="true" resolveProxies="false">
+      <eType xsi:type="ecore:EClass" href="http://g5.1c.ru/v8/dt/mcore#//Value"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="presentationValue" containment="true" resolveProxies="false">
+      <eType xsi:type="ecore:EClass" href="g5.1c.ru.v8.dt.data-composition-system.core.ecore#//Presentation"/>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="StructureItem" abstract="true"/>
+  <eClassifiers xsi:type="ecore:EClass" name="DataCompositionGroup" eSuperTypes="//StructureItem">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="use" unique="false" defaultValueLiteral="true">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="groupFields" eType="//DataCompositionGroupFields" containment="true" resolveProxies="false"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="filter" eType="//DataCompositionFilter" containment="true" resolveProxies="false"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="order" eType="//DataCompositionOrder" containment="true" resolveProxies="false"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="selection" eType="//DataCompositionSelectedFields" containment="true" resolveProxies="false"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="conditionalAppearance" eType="//DataCompositionConditionalAppearance" containment="true" resolveProxies="false"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="outputParameters" eType="//DataCompositionGroupOutputParameterValues" containment="true" resolveProxies="false"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="items" upperBound="-1" eType="//StructureItem" containment="true" resolveProxies="false"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="Id" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="viewMode" unique="false" eType="//DataCompositionSettingsItemViewMode" defaultValueLiteral="QuickAccess"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="userSettingID" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="userSettingPresentation" containment="true" resolveProxies="false">
+      <eType xsi:type="ecore:EClass" href="g5.1c.ru.v8.dt.data-composition-system.core.ecore#//Presentation"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="itemsViewMode" unique="false" eType="//DataCompositionSettingsItemViewMode" defaultValueLiteral="QuickAccess"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="itemsUserSettingID" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="itemsUserSettingPresentation" containment="true" resolveProxies="false">
+      <eType xsi:type="ecore:EClass" href="g5.1c.ru.v8.dt.data-composition-system.core.ecore#//Presentation"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="groupState" unique="false" eType="//DataCompositionSettingsItemState" defaultValueLiteral="Enabled"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="DataCompositionGroupOutputParameterValues">
+    <eSuperTypes href="g5.1c.ru.v8.dt.data-composition-system.core.ecore#//ParameterValues"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="colorPaletteDescription" containment="true" resolveProxies="false">
+      <eType xsi:type="ecore:EClass" href="g5.1c.ru.v8.dt.chart.model.ecore#//ChartColorPaletteDescription"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="referenceBandsColorPaletteDescription" containment="true" resolveProxies="false">
+      <eType xsi:type="ecore:EClass" href="g5.1c.ru.v8.dt.chart.model.ecore#//ChartColorPaletteDescription"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="valuesReferenceLines" containment="true" resolveProxies="false">
+      <eType xsi:type="ecore:EClass" href="g5.1c.ru.v8.dt.chart.model.ecore#//ChartReferenceLines"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="pointsReferenceLines" containment="true" resolveProxies="false">
+      <eType xsi:type="ecore:EClass" href="g5.1c.ru.v8.dt.chart.model.ecore#//ChartReferenceLines"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="valuesReferenceBands" containment="true" resolveProxies="false">
+      <eType xsi:type="ecore:EClass" href="g5.1c.ru.v8.dt.chart.model.ecore#//ChartReferenceBands"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="pointsReferenceBands" containment="true" resolveProxies="false">
+      <eType xsi:type="ecore:EClass" href="g5.1c.ru.v8.dt.chart.model.ecore#//ChartReferenceBands"/>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="DataCompositionTable" eSuperTypes="//StructureItem">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="use" unique="false" defaultValueLiteral="true">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="columns" upperBound="-1" eType="//DataCompositionTableGroup" containment="true" resolveProxies="false"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="rows" upperBound="-1" eType="//DataCompositionTableGroup" containment="true" resolveProxies="false"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="selection" eType="//DataCompositionSelectedFields" containment="true" resolveProxies="false"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="conditionalAppearance" eType="//DataCompositionConditionalAppearance" containment="true" resolveProxies="false"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="outputParameters" eType="//DataCompositionTableOutputParameterValues" containment="true" resolveProxies="false"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="Id" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="viewMode" unique="false" eType="//DataCompositionSettingsItemViewMode" defaultValueLiteral="QuickAccess"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="userSettingID" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="userSettingPresentation" containment="true" resolveProxies="false">
+      <eType xsi:type="ecore:EClass" href="g5.1c.ru.v8.dt.data-composition-system.core.ecore#//Presentation"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="columnsViewMode" unique="false" eType="//DataCompositionSettingsItemViewMode" defaultValueLiteral="QuickAccess"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="columnsUserSettingID" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="columnsUserSettingPresentation" containment="true" resolveProxies="false">
+      <eType xsi:type="ecore:EClass" href="g5.1c.ru.v8.dt.data-composition-system.core.ecore#//Presentation"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="rowsViewMode" unique="false" eType="//DataCompositionSettingsItemViewMode" defaultValueLiteral="QuickAccess"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="rowsUserSettingID" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="rowsUserSettingPresentation" containment="true" resolveProxies="false">
+      <eType xsi:type="ecore:EClass" href="g5.1c.ru.v8.dt.data-composition-system.core.ecore#//Presentation"/>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="DataCompositionTableOutputParameterValues">
+    <eSuperTypes href="g5.1c.ru.v8.dt.data-composition-system.core.ecore#//ParameterValues"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="DataCompositionTableGroup">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="use" unique="false" defaultValueLiteral="true">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="groupFields" eType="//DataCompositionGroupFields" containment="true" resolveProxies="false"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="filter" eType="//DataCompositionFilter" containment="true" resolveProxies="false"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="order" eType="//DataCompositionOrder" containment="true" resolveProxies="false"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="selection" eType="//DataCompositionSelectedFields" containment="true" resolveProxies="false"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="conditionalAppearance" eType="//DataCompositionConditionalAppearance" containment="true" resolveProxies="false"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="outputParameters" eType="//DataCompositionTableGroupOutputParameterValues" containment="true" resolveProxies="false"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="items" upperBound="-1" eType="//DataCompositionTableGroup" containment="true" resolveProxies="false"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="Id" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="viewMode" unique="false" eType="//DataCompositionSettingsItemViewMode" defaultValueLiteral="QuickAccess"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="userSettingID" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="userSettingPresentation" containment="true" resolveProxies="false">
+      <eType xsi:type="ecore:EClass" href="g5.1c.ru.v8.dt.data-composition-system.core.ecore#//Presentation"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="itemsViewMode" unique="false" eType="//DataCompositionSettingsItemViewMode" defaultValueLiteral="QuickAccess"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="itemsUserSettingID" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="itemsUserSettingPresentation" containment="true" resolveProxies="false">
+      <eType xsi:type="ecore:EClass" href="g5.1c.ru.v8.dt.data-composition-system.core.ecore#//Presentation"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="groupState" unique="false" eType="//DataCompositionSettingsItemState" defaultValueLiteral="Enabled"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="DataCompositionTableGroupOutputParameterValues">
+    <eSuperTypes href="g5.1c.ru.v8.dt.data-composition-system.core.ecore#//ParameterValues"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="DataCompositionChart" eSuperTypes="//StructureItem">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="use" unique="false" defaultValueLiteral="true">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="points" upperBound="-1" eType="//DataCompositionChartGroup" containment="true" resolveProxies="false"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="series" upperBound="-1" eType="//DataCompositionChartGroup" containment="true" resolveProxies="false"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="selection" eType="//DataCompositionSelectedFields" containment="true" resolveProxies="false"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="conditionalAppearance" eType="//DataCompositionConditionalAppearance" containment="true" resolveProxies="false"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="outputParameters" eType="//DataCompositionChartOutputParameterValues" containment="true" resolveProxies="false"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="Id" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="viewMode" unique="false" eType="//DataCompositionSettingsItemViewMode" defaultValueLiteral="QuickAccess"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="userSettingID" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="userSettingPresentation" containment="true" resolveProxies="false">
+      <eType xsi:type="ecore:EClass" href="g5.1c.ru.v8.dt.data-composition-system.core.ecore#//Presentation"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="pointsViewMode" unique="false" eType="//DataCompositionSettingsItemViewMode" defaultValueLiteral="QuickAccess"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="pointsUserSettingID" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="pointsUserSettingPresentation" containment="true" resolveProxies="false">
+      <eType xsi:type="ecore:EClass" href="g5.1c.ru.v8.dt.data-composition-system.core.ecore#//Presentation"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="seriesViewMode" unique="false" eType="//DataCompositionSettingsItemViewMode" defaultValueLiteral="QuickAccess"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="seriesUserSettingID" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="seriesUserSettingPresentation" containment="true" resolveProxies="false">
+      <eType xsi:type="ecore:EClass" href="g5.1c.ru.v8.dt.data-composition-system.core.ecore#//Presentation"/>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="DataCompositionChartOutputParameterValues">
+    <eSuperTypes href="g5.1c.ru.v8.dt.data-composition-system.core.ecore#//ParameterValues"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="colorPaletteDescription" containment="true" resolveProxies="false">
+      <eType xsi:type="ecore:EClass" href="g5.1c.ru.v8.dt.chart.model.ecore#//ChartColorPaletteDescription"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="referenceBandsColorPaletteDescription" containment="true" resolveProxies="false">
+      <eType xsi:type="ecore:EClass" href="g5.1c.ru.v8.dt.chart.model.ecore#//ChartColorPaletteDescription"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="valuesReferenceLines" containment="true" resolveProxies="false">
+      <eType xsi:type="ecore:EClass" href="g5.1c.ru.v8.dt.chart.model.ecore#//ChartReferenceLines"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="pointsReferenceLines" containment="true" resolveProxies="false">
+      <eType xsi:type="ecore:EClass" href="g5.1c.ru.v8.dt.chart.model.ecore#//ChartReferenceLines"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="valuesReferenceBands" containment="true" resolveProxies="false">
+      <eType xsi:type="ecore:EClass" href="g5.1c.ru.v8.dt.chart.model.ecore#//ChartReferenceBands"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="pointsReferenceBands" containment="true" resolveProxies="false">
+      <eType xsi:type="ecore:EClass" href="g5.1c.ru.v8.dt.chart.model.ecore#//ChartReferenceBands"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="additionalValuesScale" containment="true" resolveProxies="false">
+      <eType xsi:type="ecore:EClass" href="g5.1c.ru.v8.dt.chart.model.ecore#//ChartScale"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="additionalValuesAxis" containment="true" resolveProxies="false">
+      <eType xsi:type="ecore:EClass" href="g5.1c.ru.v8.dt.chart.model.ecore#//ChartAxis"/>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="DataCompositionChartGroupOutputParameterValues">
+    <eSuperTypes href="g5.1c.ru.v8.dt.data-composition-system.core.ecore#//ParameterValues"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="DataCompositionChartGroup">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="use" unique="false" defaultValueLiteral="true">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="groupFields" eType="//DataCompositionGroupFields" containment="true" resolveProxies="false"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="filter" eType="//DataCompositionFilter" containment="true" resolveProxies="false"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="order" eType="//DataCompositionOrder" containment="true" resolveProxies="false"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="selection" eType="//DataCompositionSelectedFields" containment="true" resolveProxies="false"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="conditionalAppearance" eType="//DataCompositionConditionalAppearance" containment="true" resolveProxies="false"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="outputParameters" eType="//DataCompositionChartGroupOutputParameterValues" containment="true" resolveProxies="false"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="items" upperBound="-1" eType="//DataCompositionChartGroup" containment="true" resolveProxies="false"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="Id" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="viewMode" unique="false" eType="//DataCompositionSettingsItemViewMode" defaultValueLiteral="QuickAccess"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="userSettingID" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="userSettingPresentation" containment="true" resolveProxies="false">
+      <eType xsi:type="ecore:EClass" href="g5.1c.ru.v8.dt.data-composition-system.core.ecore#//Presentation"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="itemsViewMode" unique="false" eType="//DataCompositionSettingsItemViewMode" defaultValueLiteral="QuickAccess"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="itemsUserSettingID" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="itemsUserSettingPresentation" containment="true" resolveProxies="false">
+      <eType xsi:type="ecore:EClass" href="g5.1c.ru.v8.dt.data-composition-system.core.ecore#//Presentation"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="groupState" unique="false" eType="//DataCompositionSettingsItemState" defaultValueLiteral="Enabled"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="DataCompositionNestedObjectSettings" eSuperTypes="//StructureItem">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="use" unique="false" defaultValueLiteral="true">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="objectID" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="settings" eType="//DataCompositionSettings" containment="true" resolveProxies="false"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="Id" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="viewMode" unique="false" eType="//DataCompositionSettingsItemViewMode" defaultValueLiteral="QuickAccess"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="userSettingID" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="userSettingPresentation" containment="true" resolveProxies="false">
+      <eType xsi:type="ecore:EClass" href="g5.1c.ru.v8.dt.data-composition-system.core.ecore#//Presentation"/>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="DataCompositionGroupFields">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="items" upperBound="-1" eType="//GroupItem" containment="true" resolveProxies="false"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="GroupItem" abstract="true"/>
+  <eClassifiers xsi:type="ecore:EClass" name="DataCompositionGroupField" eSuperTypes="//GroupItem">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="use" unique="false" defaultValueLiteral="true">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="field" containment="true" resolveProxies="false">
+      <eType xsi:type="ecore:EClass" href="g5.1c.ru.v8.dt.data-composition-system.core.ecore#//DataCompositionField"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="groupType" unique="false">
+      <eType xsi:type="ecore:EEnum" href="g5.1c.ru.v8.dt.data-composition-system.core.ecore#//DataCompositionGroupType"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="periodAdditionType" unique="false">
+      <eType xsi:type="ecore:EEnum" href="g5.1c.ru.v8.dt.data-composition-system.core.ecore#//DataCompositionPeriodAdditionType"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="periodAdditionBegin" containment="true" resolveProxies="false">
+      <eType xsi:type="ecore:EClass" href="http://g5.1c.ru/v8/dt/mcore#//Value"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="periodAdditionEnd" containment="true" resolveProxies="false">
+      <eType xsi:type="ecore:EClass" href="http://g5.1c.ru/v8/dt/mcore#//Value"/>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="DataCompositionAutoGroupField" eSuperTypes="//GroupItem">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="use" unique="false" defaultValueLiteral="true">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="DataCompositionConditionalAppearance">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="items" upperBound="-1" eType="//DataCompositionConditionalAppearanceItem" containment="true" resolveProxies="false"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="viewMode" unique="false" eType="//DataCompositionSettingsItemViewMode" defaultValueLiteral="QuickAccess"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="userSettingID" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="userSettingPresentation" containment="true" resolveProxies="false">
+      <eType xsi:type="ecore:EClass" href="g5.1c.ru.v8.dt.data-composition-system.core.ecore#//Presentation"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="referenceLineInChart" containment="true" resolveProxies="false">
+      <eType xsi:type="ecore:EClass" href="g5.1c.ru.v8.dt.chart.model.ecore#//ChartReferenceLine"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="referenceBandInChart" containment="true" resolveProxies="false">
+      <eType xsi:type="ecore:EClass" href="g5.1c.ru.v8.dt.chart.model.ecore#//ChartReferenceBand"/>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="DataCompositionConditionalAppearanceItem">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="use" unique="false" defaultValueLiteral="true">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="selection" eType="//DataCompositionAppearanceFields" containment="true" resolveProxies="false"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="filter" eType="//DataCompositionFilter" containment="true" resolveProxies="false"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="appearance" containment="true" resolveProxies="false">
+      <eType xsi:type="ecore:EClass" href="g5.1c.ru.v8.dt.data-composition-system.core.ecore#//DataCompositionAppearance"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="presentation" containment="true" resolveProxies="false">
+      <eType xsi:type="ecore:EClass" href="g5.1c.ru.v8.dt.data-composition-system.core.ecore#//Presentation"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="viewMode" unique="false" eType="//DataCompositionSettingsItemViewMode" defaultValueLiteral="QuickAccess"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="userSettingID" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="userSettingPresentation" containment="true" resolveProxies="false">
+      <eType xsi:type="ecore:EClass" href="g5.1c.ru.v8.dt.data-composition-system.core.ecore#//Presentation"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="useInGroup" unique="false" eType="//DataCompositionConditionalAppearanceUse"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="useInHierarchicalGroup" unique="false" eType="//DataCompositionConditionalAppearanceUse"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="useInOverall" unique="false" eType="//DataCompositionConditionalAppearanceUse"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="useInFieldsHeader" unique="false" eType="//DataCompositionConditionalAppearanceUse"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="useInHeader" unique="false" eType="//DataCompositionConditionalAppearanceUse"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="useInParameters" unique="false" eType="//DataCompositionConditionalAppearanceUse"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="useInFilter" unique="false" eType="//DataCompositionConditionalAppearanceUse"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="useInResourceFieldsHeader" unique="false" eType="//DataCompositionConditionalAppearanceUse"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="useInOverallHeader" unique="false" eType="//DataCompositionConditionalAppearanceUse"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="useInOverallResourceFieldsHeader" unique="false" eType="//DataCompositionConditionalAppearanceUse"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="DataCompositionAppearanceFields">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="items" upperBound="-1" eType="//DataCompositionAppearanceField" containment="true" resolveProxies="false"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="DataCompositionAppearanceField">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="use" unique="false" defaultValueLiteral="true">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="field" containment="true" resolveProxies="false">
+      <eType xsi:type="ecore:EClass" href="g5.1c.ru.v8.dt.data-composition-system.core.ecore#//DataCompositionField"/>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="SettingsParameterValue">
+    <eSuperTypes href="g5.1c.ru.v8.dt.data-composition-system.core.ecore#//DataCompositionParameterValue"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="viewMode" unique="false" eType="//DataCompositionSettingsItemViewMode" defaultValueLiteral="QuickAccess"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="userSettingID" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="userSettingPresentation" containment="true" resolveProxies="false">
+      <eType xsi:type="ecore:EClass" href="g5.1c.ru.v8.dt.data-composition-system.core.ecore#//Presentation"/>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="SettingStructure">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="items" upperBound="-1" eType="//StructureItem" containment="true" resolveProxies="false"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="viewMode" unique="false" eType="//DataCompositionSettingsItemViewMode" defaultValueLiteral="QuickAccess"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="userSettingID" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="DataCompositionUserSettings">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="items" upperBound="-1" containment="true" resolveProxies="false">
+      <eType xsi:type="ecore:EClass" href="http://g5.1c.ru/v8/dt/mcore#//Value"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="additionalProperties" containment="true" resolveProxies="false">
+      <eType xsi:type="ecore:EClass" href="http://g5.1c.ru/v8/dt/mcore#//Structure"/>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="DataCompositionSettingsComposer">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="settings" eType="//DataCompositionSettings" containment="true" resolveProxies="false"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="source" eType="//DataCompositionAvailableSettingsSource" containment="true" resolveProxies="false"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="userSettings" eType="//DataCompositionUserSettings" containment="true" resolveProxies="false"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="fixedSettings" eType="//DataCompositionSettings" containment="true" resolveProxies="false"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="DataCompositionAvailableSettingsSource">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="sourceID" containment="true" resolveProxies="false">
+      <eType xsi:type="ecore:EClass" href="http://g5.1c.ru/v8/dt/mcore#//Value"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="behaviour" unique="false" eType="//AvailableSettingsSourceBehaviour"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="AvailableFields"/>
+  <eClassifiers xsi:type="ecore:EClass" name="AvailableFieldUseRestrictions">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="items" upperBound="-1" eType="//AvailableFieldUseRestriction" containment="true" resolveProxies="false"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="AvailableFieldUseRestriction">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="field" containment="true" resolveProxies="false">
+      <eType xsi:type="ecore:EClass" href="g5.1c.ru.v8.dt.data-composition-system.core.ecore#//DataCompositionField"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="enabled" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="AvailableParameterUseRestrictions">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="items" upperBound="-1" eType="//AvailableParameterUseRestriction" containment="true" resolveProxies="false"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="AvailableParameterUseRestriction">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="parameter" containment="true" resolveProxies="false">
+      <eType xsi:type="ecore:EClass" href="g5.1c.ru.v8.dt.data-composition-system.core.ecore#//DataCompositionParameter"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="enabled" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="SettingsVariant">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="presentation" containment="true" resolveProxies="false">
+      <eType xsi:type="ecore:EClass" href="g5.1c.ru.v8.dt.data-composition-system.core.ecore#//Presentation"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="settings" eType="//DataCompositionSettings" containment="true" resolveProxies="false"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="DataCompositionComparisonType">
+    <eLiterals name="Equal"/>
+    <eLiterals name="NotEqual"/>
+    <eLiterals name="Less"/>
+    <eLiterals name="LessOrEqual"/>
+    <eLiterals name="Greater"/>
+    <eLiterals name="GreaterOrEqual"/>
+    <eLiterals name="Contains"/>
+    <eLiterals name="InList"/>
+    <eLiterals name="InListByHierarchy"/>
+    <eLiterals name="InHierarchy"/>
+    <eLiterals name="NotContains"/>
+    <eLiterals name="NotInList"/>
+    <eLiterals name="NotInListByHierarchy"/>
+    <eLiterals name="NotInHierarchy"/>
+    <eLiterals name="Filled"/>
+    <eLiterals name="NotFilled"/>
+    <eLiterals name="BeginsWith"/>
+    <eLiterals name="NotBeginsWith"/>
+    <eLiterals name="Like"/>
+    <eLiterals name="NotLike"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="DataCompositionFilterItemsGroupType">
+    <eLiterals name="AndGroup"/>
+    <eLiterals name="OrGroup"/>
+    <eLiterals name="NotGroup"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="DataCompositionFieldPlacement">
+    <eLiterals name="Auto"/>
+    <eLiterals name="Horizontally"/>
+    <eLiterals name="Vertically"/>
+    <eLiterals name="SpecialColumn"/>
+    <eLiterals name="Together"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="DataCompositionGroupFieldsPlacement">
+    <eLiterals name="Together"/>
+    <eLiterals name="Separately"/>
+    <eLiterals name="SeparatelyAndInTotalsOnly"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="DataCompositionGroupPlacement">
+    <eLiterals name="Begin"/>
+    <eLiterals name="End"/>
+    <eLiterals name="BeginAndEnd"/>
+    <eLiterals name="None"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="DataCompositionAttributesPlacement">
+    <eLiterals name="WithOwnerField"/>
+    <eLiterals name="Separately"/>
+    <eLiterals name="Together"/>
+    <eLiterals name="SpecialPosition"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="DataCompositionResourcesPlacement">
+    <eLiterals name="Vertically"/>
+    <eLiterals name="Horizontally"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="DataCompositionGroupTemplateType">
+    <eLiterals name="Vertical"/>
+    <eLiterals name="Horizontal"/>
+    <eLiterals name="Auto"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="DataCompositionTextOutputType">
+    <eLiterals name="DontOutput"/>
+    <eLiterals name="Output"/>
+    <eLiterals name="Auto"/>
+    <eLiterals name="OutputFilled"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="DataCompositionChartLegendPlacement">
+    <eLiterals name="None"/>
+    <eLiterals name="Left"/>
+    <eLiterals name="Right"/>
+    <eLiterals name="Top"/>
+    <eLiterals name="Bottom"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="DataCompositionResourcesPlacementInChart">
+    <eLiterals name="Auto"/>
+    <eLiterals name="Series"/>
+    <eLiterals name="Points"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="DataCompositionFilterApplicationType">
+    <eLiterals name="Items"/>
+    <eLiterals name="Hierarchy"/>
+    <eLiterals name="HierarchyOnly"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="DataCompositionSettingsItemViewMode">
+    <eLiterals name="Normal"/>
+    <eLiterals name="QuickAccess" value="1"/>
+    <eLiterals name="Inaccessible" value="2"/>
+    <eLiterals name="Auto" value="3"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="DataCompositionSettingsViewMode">
+    <eLiterals name="All"/>
+    <eLiterals name="QuickAccess"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="DataCompositionComplexSettingsViewMode">
+    <eLiterals name="Show"/>
+    <eLiterals name="DontShow"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="AvailableSettingsSourceBehaviour">
+    <eLiterals name="Usual"/>
+    <eLiterals name="Designer"/>
+    <eLiterals name="UniversalList"/>
+    <eLiterals name="LogFormDesigner"/>
+    <eLiterals name="UniversalListDesigner"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="DataCompositionSettingsItemState">
+    <eLiterals name="Enabled"/>
+    <eLiterals name="Disabled" value="1"/>
+    <eLiterals name="DeletedByUser" value="2"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="DataCompositionResourcesAutoPosition">
+    <eLiterals name="DontUse"/>
+    <eLiterals name="AfterAllFields"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="DataCompositionGroupUseVariant">
+    <eLiterals name="Auto"/>
+    <eLiterals name="AdditionalInformation"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="DataCompositionFixation">
+    <eLiterals name="Auto"/>
+    <eLiterals name="DontUse"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="DataCompositionConditionalAppearanceUse">
+    <eLiterals name="Use"/>
+    <eLiterals name="DontUse"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="DataCompositionPictureOutputType">
+    <eLiterals name="Auto"/>
+    <eLiterals name="DontOutput"/>
+    <eLiterals name="OutputByRef"/>
+    <eLiterals name="OutputByValue"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="DataCompositionDataRelevanceOutputType">
+    <eLiterals name="Auto"/>
+    <eLiterals name="Output"/>
+    <eLiterals name="DontOutput"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="DataCompositionDatabaseCopyOutputType">
+    <eLiterals name="Auto"/>
+    <eLiterals name="Output"/>
+    <eLiterals name="DontOutput"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="SaveDataCompositionAppearance">
+    <eLiterals name="Auto"/>
+    <eLiterals name="ForUser"/>
+    <eLiterals name="ForCurrentResult"/>
+    <eLiterals name="ByKeyForUser"/>
+    <eLiterals name="DontUse"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="DataCompositionSortOutputType">
+    <eLiterals name="Auto"/>
+    <eLiterals name="PictureOutput" value="1"/>
+    <eLiterals name="DontOutput" value="2"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="ResultAutoCompositionOnOpenMode">
+    <eLiterals name="Auto"/>
+    <eLiterals name="Background" value="1"/>
+    <eLiterals name="DontCompose" value="2"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="ResultAutoCompositionOnSettingsChangeMode">
+    <eLiterals name="Auto"/>
+    <eLiterals name="Background" value="1"/>
+    <eLiterals name="DontCompose" value="2"/>
+  </eClassifiers>
+</ecore:EPackage>

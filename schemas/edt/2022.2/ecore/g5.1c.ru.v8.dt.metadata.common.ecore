@@ -1,0 +1,497 @@
+<?xml version="1.0" encoding="ASCII"?>
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="common" nsURI="http://g5.1c.ru/v8/dt/metadata/common" nsPrefix="mdcommon">
+  <eClassifiers xsi:type="ecore:EClass" name="AbstractChoiceParameterLink" abstract="true">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" unique="false" lowerBound="1">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="changeMode" unique="false" eType="//LinkedValueChangeMode"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ChoiceParameterLink" eSuperTypes="//AbstractChoiceParameterLink">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="field" lowerBound="1">
+      <eType xsi:type="ecore:EClass" href="g5.1c.ru.v8.dt.mcore.ecore#//Field"/>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ChoiceParameter">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" unique="false" lowerBound="1">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="value" containment="true" resolveProxies="false">
+      <eType xsi:type="ecore:EClass" href="g5.1c.ru.v8.dt.mcore.ecore#//Value"/>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="AbstractTypeLink" abstract="true">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="linkItem" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="TypeLink" eSuperTypes="//AbstractTypeLink">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="field" lowerBound="1">
+      <eType xsi:type="ecore:EClass" href="g5.1c.ru.v8.dt.mcore.ecore#//Field"/>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="GaugeChartQualityBand">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="begin" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="end" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="backColor" containment="true" resolveProxies="false">
+      <eType xsi:type="ecore:EClass" href="g5.1c.ru.v8.dt.mcore.ecore#//Color"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="text" upperBound="-1" containment="true" resolveProxies="false">
+      <eType xsi:type="ecore:EClass" href="g5.1c.ru.v8.dt.mcore.ecore#//LocalStringMapEntry"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="tooltip" upperBound="-1" containment="true" resolveProxies="false">
+      <eType xsi:type="ecore:EClass" href="g5.1c.ru.v8.dt.mcore.ecore#//LocalStringMapEntry"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="textStr" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="tooltipStr" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="GaugeChartQualityBands">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="items" upperBound="-1" eType="//GaugeChartQualityBand" containment="true" resolveProxies="false"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="useTextStr" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="useTooltipStr" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="GaugeChartQualityBandsValue">
+    <eSuperTypes href="g5.1c.ru.v8.dt.mcore.ecore#//Value"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="value" lowerBound="1" eType="//GaugeChartQualityBands" containment="true" resolveProxies="false"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ChartLineTypeValue">
+    <eSuperTypes href="g5.1c.ru.v8.dt.mcore.ecore#//Value"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" unique="false" eType="//ChartLineType"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="UrlPicture">
+    <eSuperTypes href="g5.1c.ru.v8.dt.mcore.ecore#//PictureDef"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="url" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="AbsPicture">
+    <eSuperTypes href="g5.1c.ru.v8.dt.mcore.ecore#//PictureDef"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="content" unique="false" upperBound="-1">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EByteObject"/>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="RequiredPermission">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="permission" unique="false" eType="//RequiredMobileApplicationPermissions"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="use" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="description" upperBound="-1" containment="true" resolveProxies="false">
+      <eType xsi:type="ecore:EClass" href="g5.1c.ru.v8.dt.mcore.ecore#//LocalStringMapEntry"/>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="UsedFunctionality">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="functionality" upperBound="-1" eType="//UsedFunctionalityFlag" containment="true" resolveProxies="false"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="permissionMessage" upperBound="-1" eType="//RequiredPermissionMessage" containment="true" resolveProxies="false"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="UsedFunctionalityFlag">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="functionality" unique="false" eType="//MobileApplicationFunctionalities"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="use" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="RequiredPermissionMessage">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="permission" unique="false" eType="//RequiredMobileApplicationPermissionMessages"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="description" upperBound="-1" containment="true" resolveProxies="false">
+      <eType xsi:type="ecore:EClass" href="g5.1c.ru.v8.dt.mcore.ecore#//LocalStringMapEntry"/>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="AbstractMobileApplicationUrl"/>
+  <eClassifiers xsi:type="ecore:EClass" name="MobileApplicationUrl" eSuperTypes="//AbstractMobileApplicationUrl">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="baseUrl" unique="false" lowerBound="1">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="useAndroid" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="useIOS" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="useWindows" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="ApplicationUsePurpose">
+    <eLiterals name="PersonalComputer"/>
+    <eLiterals name="MobileDevice" value="1"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="ClientRunMode">
+    <eLiterals name="Auto"/>
+    <eLiterals name="ManagedApplication" value="1"/>
+    <eLiterals name="OrdinaryApplication" value="2"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="AutoTimeMode">
+    <eLiterals name="CurrentOrLast"/>
+    <eLiterals name="DontUse" value="1"/>
+    <eLiterals name="Last" value="2"/>
+    <eLiterals name="First" value="3"/>
+    <eLiterals name="CurrentOrFirst" value="4"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="PostingModeUse">
+    <eLiterals name="Auto"/>
+    <eLiterals name="Regular" value="1"/>
+    <eLiterals name="RealTime" value="2"/>
+    <eLiterals name="Ask" value="3"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="AutoShowStateMode">
+    <eLiterals name="Auto"/>
+    <eLiterals name="DontShow" value="1"/>
+    <eLiterals name="Show" value="2"/>
+    <eLiterals name="ShowOnComposition" value="3"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="FillChecking">
+    <eLiterals name="DontCheck"/>
+    <eLiterals name="ShowError" value="1"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="FoldersAndItemsUse">
+    <eLiterals name="Items"/>
+    <eLiterals name="Folders" value="1"/>
+    <eLiterals name="FoldersAndItems" value="2"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="AllowedLength">
+    <eLiterals name="Fixed"/>
+    <eLiterals name="Variable" value="1"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="MainClientApplicationWindowMode">
+    <eLiterals name="Normal"/>
+    <eLiterals name="Workplace" value="1"/>
+    <eLiterals name="FullscreenWorkplace" value="2"/>
+    <eLiterals name="Kiosk" value="3"/>
+    <eLiterals name="EmbeddedWorkplace" value="4"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="SearchStringModeOnInputByString">
+    <eLiterals name="Begin"/>
+    <eLiterals name="AnyPart" value="1"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="FullTextSearchOnInputByString">
+    <eLiterals name="Use"/>
+    <eLiterals name="DontUse" value="1"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="ChoiceDataGetModeOnInputByString">
+    <eLiterals name="Directly"/>
+    <eLiterals name="Background" value="1"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="LinkedValueChangeMode">
+    <eLiterals name="Clear"/>
+    <eLiterals name="DontChange" value="1"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="ChoiceHistoryOnInput">
+    <eLiterals name="Auto"/>
+    <eLiterals name="DontUse" value="1"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="AccumulationRecordType">
+    <eLiterals name="Receipt"/>
+    <eLiterals name="Expense" value="1"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="AccountingRecordType">
+    <eLiterals name="Debit"/>
+    <eLiterals name="Credit" value="1"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="AccountType">
+    <eLiterals name="Active"/>
+    <eLiterals name="Passive" value="1"/>
+    <eLiterals name="ActivePassive" value="2"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="AccumulationRegisterAggregateUse">
+    <eLiterals name="Auto"/>
+    <eLiterals name="Always" value="1"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="AccumulationRegisterAggregatePeriodicity">
+    <eLiterals name="Nonperiodical"/>
+    <eLiterals name="Auto" value="1"/>
+    <eLiterals name="Day" value="2"/>
+    <eLiterals name="Month" value="3"/>
+    <eLiterals name="Quarter" value="4"/>
+    <eLiterals name="HalfYear" value="5"/>
+    <eLiterals name="Year" value="6"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="OnMainServerUnavalableBehavior">
+    <eLiterals name="Auto"/>
+    <eLiterals name="MakeDisable" value="1"/>
+    <eLiterals name="DontChangeBehavior" value="2"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="HorizontalAlign">
+    <eLiterals name="Left"/>
+    <eLiterals name="Center" value="1"/>
+    <eLiterals name="Right" value="2"/>
+    <eLiterals name="Justify" value="3"/>
+    <eLiterals name="Auto" value="4"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="VerticalAlign">
+    <eLiterals name="Top"/>
+    <eLiterals name="Center"/>
+    <eLiterals name="Bottom"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="SizeChangeMode">
+    <eLiterals name="Normal"/>
+    <eLiterals name="QuickChange"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="ChartType">
+    <eLiterals name="Line"/>
+    <eLiterals name="Step"/>
+    <eLiterals name="Area"/>
+    <eLiterals name="StackedArea"/>
+    <eLiterals name="Column"/>
+    <eLiterals name="StackedColumn"/>
+    <eLiterals name="Column3D"/>
+    <eLiterals name="StackedColumn3D"/>
+    <eLiterals name="Bar"/>
+    <eLiterals name="StackedBar"/>
+    <eLiterals name="Bar3D"/>
+    <eLiterals name="StackedBar3D"/>
+    <eLiterals name="Pie"/>
+    <eLiterals name="Pie3D"/>
+    <eLiterals name="Stock"/>
+    <eLiterals name="OpenHighLowClose"/>
+    <eLiterals name="BarGraph"/>
+    <eLiterals name="CeilGraph"/>
+    <eLiterals name="TapeGraph"/>
+    <eLiterals name="PyramidGraph"/>
+    <eLiterals name="Waterfall"/>
+    <eLiterals name="WireframeSurface"/>
+    <eLiterals name="Surface"/>
+    <eLiterals name="ConvexSurface"/>
+    <eLiterals name="ConcaveSurface"/>
+    <eLiterals name="ShadedSurface"/>
+    <eLiterals name="StackedLine"/>
+    <eLiterals name="NormalizedArea"/>
+    <eLiterals name="NormalizedColumn"/>
+    <eLiterals name="NormalizedColumn3D"/>
+    <eLiterals name="NormalizedBar"/>
+    <eLiterals name="NormalizedBar3D"/>
+    <eLiterals name="Honeycomb"/>
+    <eLiterals name="RadarLine"/>
+    <eLiterals name="RadarArea"/>
+    <eLiterals name="RadarStackedLine"/>
+    <eLiterals name="RadarStackedArea"/>
+    <eLiterals name="RadarNormalizedArea"/>
+    <eLiterals name="Gauge"/>
+    <eLiterals name="Funnel"/>
+    <eLiterals name="Funnel3D"/>
+    <eLiterals name="NormalizedFunnel"/>
+    <eLiterals name="NormalizedFunnel3D"/>
+    <eLiterals name="Scatter"/>
+    <eLiterals name="Bubble"/>
+    <eLiterals name="Donut"/>
+    <eLiterals name="Donut3D"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="ChartLabelType">
+    <eLiterals name="None"/>
+    <eLiterals name="Series"/>
+    <eLiterals name="Value"/>
+    <eLiterals name="Percent"/>
+    <eLiterals name="SeriesPercent"/>
+    <eLiterals name="SeriesValue"/>
+    <eLiterals name="SeriesValuePercent"/>
+    <eLiterals name="ValuePercent"/>
+    <eLiterals name="Point"/>
+    <eLiterals name="PointPercent"/>
+    <eLiterals name="PointValue"/>
+    <eLiterals name="PointValuePercent"/>
+    <eLiterals name="SeriesPoint"/>
+    <eLiterals name="SeriesPointPercent"/>
+    <eLiterals name="SeriesPointValue"/>
+    <eLiterals name="SeriesPointValuePercent"/>
+    <eLiterals name="PointSize"/>
+    <eLiterals name="PointValueSize"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="AutoSeriesSeparation">
+    <eLiterals name="None"/>
+    <eLiterals name="All"/>
+    <eLiterals name="Maximum"/>
+    <eLiterals name="Minimum"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="SpreadsheetDocumentDrawingLineType">
+    <eLiterals name="None"/>
+    <eLiterals name="Solid" value="1"/>
+    <eLiterals name="Dashed" value="2"/>
+    <eLiterals name="Dotted" value="3"/>
+    <eLiterals name="DashDotted" value="4"/>
+    <eLiterals name="DashDottedDotted" value="5"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="ChartLineType">
+    <eLiterals name="None"/>
+    <eLiterals name="Solid" value="1"/>
+    <eLiterals name="Dotted" value="2"/>
+    <eLiterals name="Dashed" value="3"/>
+    <eLiterals name="DashDotted" value="4"/>
+    <eLiterals name="DashDottedDotted" value="5"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="SpreadsheetDocumentCellLineType">
+    <eLiterals name="None"/>
+    <eLiterals name="Solid" value="1"/>
+    <eLiterals name="Dotted" value="2"/>
+    <eLiterals name="Double" value="3"/>
+    <eLiterals name="ThinDashed" value="4"/>
+    <eLiterals name="ThickDashed" value="5"/>
+    <eLiterals name="LargeDashed" value="6"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="GeographicalSchemeLineType">
+    <eLiterals name="None"/>
+    <eLiterals name="Solid" value="1"/>
+    <eLiterals name="Dotted" value="2"/>
+    <eLiterals name="Dashed" value="3"/>
+    <eLiterals name="DashDotted" value="4"/>
+    <eLiterals name="DashDottedDotted" value="5"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="ChartValuesBySeriesConnectionType">
+    <eLiterals name="None"/>
+    <eLiterals name="EdgesConnection"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="ChartSplineMode">
+    <eLiterals name="None"/>
+    <eLiterals name="SmoothCurve"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="ChartSemitransparencyMode">
+    <eLiterals name="DontUse"/>
+    <eLiterals name="Use"/>
+    <eLiterals name="Auto"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="RequiredMobileApplicationPermissions">
+    <eLiterals name="Multimedia"/>
+    <eLiterals name="Location" value="1"/>
+    <eLiterals name="Contacts" value="2"/>
+    <eLiterals name="Calendars" value="3"/>
+    <eLiterals name="Telephony" value="4"/>
+    <eLiterals name="PushNotification" value="5"/>
+    <eLiterals name="LocalNotification" value="6"/>
+    <eLiterals name="Print" value="7"/>
+    <eLiterals name="InAppPurchases" value="8"/>
+    <eLiterals name="Ads" value="9"/>
+    <eLiterals name="BackgroundLocation" value="10"/>
+    <eLiterals name="BackgroundAudioPlayback" value="11"/>
+    <eLiterals name="FileExchangeWithPersonalComputer" value="12"/>
+    <eLiterals name="PermissionGroupPhone" value="13"/>
+    <eLiterals name="PermissionGroupCallLog" value="14"/>
+    <eLiterals name="PermissionGroupSMS" value="15"/>
+    <eLiterals name="CallPhone" value="16"/>
+    <eLiterals name="CallLog" value="17"/>
+    <eLiterals name="HandlePhoneCalls" value="18"/>
+    <eLiterals name="SendSMS" value="19"/>
+    <eLiterals name="ReceiveSMS" value="20"/>
+    <eLiterals name="SMSLog" value="21"/>
+    <eLiterals name="Camera" value="22"/>
+    <eLiterals name="Microphone" value="23"/>
+    <eLiterals name="MusicLibrary" value="24"/>
+    <eLiterals name="PicturesAndVideoLibraries" value="25"/>
+    <eLiterals name="AudioAndVibrationPlayback" value="26"/>
+    <eLiterals name="InstallPackages" value="27"/>
+    <eLiterals name="AllowOSBackup" value="28"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="TransactionsIsolationLevel">
+    <eLiterals name="Automatic"/>
+    <eLiterals name="ReadUncommitted" value="1"/>
+    <eLiterals name="ReadCommitted" value="2"/>
+    <eLiterals name="RepeatableRead" value="3"/>
+    <eLiterals name="Serializable" value="4"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="ReportResultViewMode">
+    <eLiterals name="Auto"/>
+    <eLiterals name="Default" value="1"/>
+    <eLiterals name="Compact" value="2"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="RequiredDataRelevance">
+    <eLiterals name="Auto"/>
+    <eLiterals name="Relevant" value="1"/>
+    <eLiterals name="Any" value="2"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="PictureSize">
+    <eLiterals name="RealSize"/>
+    <eLiterals name="Stretch" value="1"/>
+    <eLiterals name="Proportionally" value="2"/>
+    <eLiterals name="Tile" value="3"/>
+    <eLiterals name="AutoSize" value="4"/>
+    <eLiterals name="RealSizeIgnoreScale" value="5"/>
+    <eLiterals name="AutoSizeIgnoreScale" value="6"/>
+    <eLiterals name="ByFontSize" value="7"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="CellTextPosition">
+    <eLiterals name="Auto"/>
+    <eLiterals name="Left" value="1"/>
+    <eLiterals name="Right" value="2"/>
+    <eLiterals name="Top" value="3"/>
+    <eLiterals name="Bottom" value="4"/>
+    <eLiterals name="OnTop" value="5"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="MobileApplicationFunctionalities">
+    <eLiterals name="Biometrics"/>
+    <eLiterals name="Location" value="1"/>
+    <eLiterals name="BackgroundLocation" value="2"/>
+    <eLiterals name="BluetoothPrinters" value="3"/>
+    <eLiterals name="WiFiPrinters" value="4"/>
+    <eLiterals name="Contacts" value="5"/>
+    <eLiterals name="Calendars" value="6"/>
+    <eLiterals name="PushNotifications" value="7"/>
+    <eLiterals name="LocalNotifications" value="8"/>
+    <eLiterals name="InAppPurchases" value="9"/>
+    <eLiterals name="PersonalComputerFileExchange" value="10"/>
+    <eLiterals name="Ads" value="11"/>
+    <eLiterals name="NumberDialing" value="12"/>
+    <eLiterals name="CallProcessing" value="13"/>
+    <eLiterals name="CallLog" value="14"/>
+    <eLiterals name="AutoSendSMS" value="15"/>
+    <eLiterals name="ReceiveSMS" value="16"/>
+    <eLiterals name="SMSLog" value="17"/>
+    <eLiterals name="Camera" value="18"/>
+    <eLiterals name="Microphone" value="19"/>
+    <eLiterals name="MusicLibrary" value="20"/>
+    <eLiterals name="PictureAndVideoLibraries" value="21"/>
+    <eLiterals name="AudioPlaybackAndVibration" value="22"/>
+    <eLiterals name="BackgroundAudioPlaybackAndVibration" value="23"/>
+    <eLiterals name="InstallPackages" value="24"/>
+    <eLiterals name="OSBackup" value="25"/>
+    <eLiterals name="ApplicationUsageStatistics" value="26"/>
+    <eLiterals name="BarcodeScanning" value="27"/>
+    <eLiterals name="BackgroundAudioRecording" value="28"/>
+    <eLiterals name="AllFilesAccess" value="29"/>
+    <eLiterals name="Videoconferences" value="30"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="RequiredMobileApplicationPermissionMessages">
+    <eLiterals name="Biometrics"/>
+    <eLiterals name="Location" value="1"/>
+    <eLiterals name="BackgroundLocation" value="2"/>
+    <eLiterals name="BluetoothPrinters" value="3"/>
+    <eLiterals name="Contacts" value="4"/>
+    <eLiterals name="Calendars" value="5"/>
+    <eLiterals name="NumberDialing" value="6"/>
+    <eLiterals name="CallProcessing" value="7"/>
+    <eLiterals name="CallLog" value="8"/>
+    <eLiterals name="AutoSendSMS" value="9"/>
+    <eLiterals name="ReceiveSMS" value="10"/>
+    <eLiterals name="SMSLog" value="11"/>
+    <eLiterals name="Camera" value="12"/>
+    <eLiterals name="Microphone" value="13"/>
+    <eLiterals name="MusicLibrary" value="14"/>
+    <eLiterals name="PictureAndVideoLibraries" value="15"/>
+    <eLiterals name="AudioPlaybackAndVibration" value="16"/>
+    <eLiterals name="PermissionGroupPhone" value="17"/>
+    <eLiterals name="PermissionGroupCallLog" value="18"/>
+    <eLiterals name="PermissionGroupSMS" value="19"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="DefaultReportAppearanceTemplate">
+    <eLiterals name="None"/>
+    <eLiterals name="Main" value="1"/>
+    <eLiterals name="Gaudy" value="2"/>
+    <eLiterals name="Sea" value="3"/>
+    <eLiterals name="Arctic" value="4"/>
+    <eLiterals name="Green" value="5"/>
+    <eLiterals name="Antique" value="6"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="SpreadsheetDocumentSavedPicturesDensity">
+    <eLiterals name="Original"/>
+    <eLiterals name="High" value="1"/>
+    <eLiterals name="Medium" value="2"/>
+    <eLiterals name="Low" value="3"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EDataType" name="Shortcut" instanceClassName="java.lang.String"/>
+</ecore:EPackage>

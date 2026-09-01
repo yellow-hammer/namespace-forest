@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="ASCII"?>
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="compare" nsURI="http://g5.1c.ru/v8/dt/distribution/compare" nsPrefix="distributionsupportcompare">
+  <eClassifiers xsi:type="ecore:EClass" name="DistributionSupportComparisonNode">
+    <eSuperTypes href="g5.1c.ru.v8.dt.compare.model.ecore#//ExternalPropertyComparisonNode"/>
+  </eClassifiers>
+</ecore:EPackage>

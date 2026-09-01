@@ -1,0 +1,446 @@
+@Ecore(nsURI="http://v8.1c.ru/8.3/debugger/debugRDBGRequestResponse")
+@GenModel(nonNLSMarkers="true", copyrightText="Copyright (C) 2014, 1C", updateClasspath="false")
+package com._1c.g5.v8.dt.debug.model.rdbg.request.response
+
+import com._1c.g5.v8.dt.debug.model.core.UUID
+import com._1c.g5.v8.dt.debug.model.area.DebugAreaInfo
+import com._1c.g5.v8.dt.debug.model.attach.DebugAutoAttachSettings
+import com._1c.g5.v8.dt.debug.model.base.data.AttachDebugUIResult
+import com._1c.g5.v8.dt.debug.model.base.data.BSLModuleIdInternal
+import com._1c.g5.v8.dt.debug.model.base.data.DbgTargetState
+import com._1c.g5.v8.dt.debug.model.base.data.DbgTargetStateInfo
+import com._1c.g5.v8.dt.debug.model.base.data.DebugStepAction
+import com._1c.g5.v8.dt.debug.model.base.data.DebugTargetId
+import com._1c.g5.v8.dt.debug.model.base.data.DebugTargetIdLight
+import com._1c.g5.v8.dt.debug.model.base.data.StackItemViewInfoData
+import com._1c.g5.v8.dt.debug.model.breakpoints.BPWorkspaceInternal
+import com._1c.g5.v8.dt.debug.model.calculations.CalculationResultBaseData
+import com._1c.g5.v8.dt.debug.model.calculations.CalculationSourceDataStorage
+import com._1c.g5.v8.dt.debug.model.calculations.NewValueInfo
+import com._1c.g5.v8.dt.debug.model.foreground.data.ForegroundWindowData
+import com._1c.g5.v8.dt.debug.model.dbgui.commands.DBGUIExtCmdInfoBase
+import com._1c.g5.v8.dt.debug.model.rte.filter.RteFilterStorage
+import java.math.BigDecimal
+import org.eclipse.emf.ecore.xml.^type.Base64Binary
+
+@ExtendedMetaData(name="HTTPInitialDebugSettingsData", kind="elementOnly")
+class HTTPInitialDebugSettingsData {
+	@ExtendedMetaData(kind="element", name="envStateVersion", namespace="##targetNamespace")
+	UUID envStateVersion
+	@ExtendedMetaData(kind="element", name="breakOnNextLine", namespace="##targetNamespace")
+	unsettable org.eclipse.emf.ecore.xml.^type.Boolean[1] breakOnNextLine = "false"
+	@ExtendedMetaData(kind="element", name="measureMode", namespace="##targetNamespace")
+	UUID measureMode
+	@ExtendedMetaData(kind="element", name="serverIndependentWorkTime", namespace="##targetNamespace")
+	BigDecimal serverIndependentWorkTime
+	@ExtendedMetaData(kind="element", name="bpWorkspace", namespace="##targetNamespace")
+	contains BPWorkspaceInternal bpWorkspace
+	@ExtendedMetaData(kind="element", name="bpVersion", namespace="##targetNamespace")
+	UUID bpVersion
+	@ExtendedMetaData(kind="element", name="rteProcessing", namespace="##targetNamespace")
+	contains RteFilterStorage rteProcessing
+	@ExtendedMetaData(kind="element", name="rteProcVersion", namespace="##targetNamespace")
+	UUID rteProcVersion
+	@ExtendedMetaData(kind="element", name="inacessibleModuleID", namespace="##targetNamespace")
+	contains BSLModuleIdInternal[] inacessibleModuleID
+	@ExtendedMetaData(kind="element", name="inacessibleModuleVersion", namespace="##targetNamespace")
+	UUID inacessibleModuleVersion
+}
+
+@ExtendedMetaData(name="HTTPServerInitialDebugSettingsData", kind="elementOnly")
+class HTTPServerInitialDebugSettingsData extends HTTPInitialDebugSettingsData {
+	@ExtendedMetaData(kind="element", name="debugAreaInfo", namespace="##targetNamespace")
+	contains DebugAreaInfo[] debugAreaInfo
+	@ExtendedMetaData(kind="element", name="autoAttachSettings", namespace="##targetNamespace")
+	contains DebugAutoAttachSettings autoAttachSettings
+}
+
+@ExtendedMetaData(name="MiscRDbgGetAPIVerResponse", kind="elementOnly")
+class MiscRDbgGetAPIVerResponse {
+	@ExtendedMetaData(kind="element", name="version", namespace="##targetNamespace")
+	String[1] version
+}
+
+@ExtendedMetaData(name="RDBGAttachDebugUIRequest", kind="elementOnly")
+class RDBGAttachDebugUIRequest extends RDbgBaseRequest {
+    @ExtendedMetaData(kind="element", name="userName", namespace="##targetNamespace")
+    Base64Binary userName
+	@ExtendedMetaData(kind="element", name="credentials", namespace="##targetNamespace")
+	Base64Binary credentials
+	@ExtendedMetaData(kind="element", name="options", namespace="##targetNamespace")
+	contains DebuggerOptions options
+}
+
+@ExtendedMetaData(name="RDBGAttachDebugUIResponse", kind="elementOnly")
+class RDBGAttachDebugUIResponse {
+	@ExtendedMetaData(kind="element", name="result", namespace="##targetNamespace")
+	unsettable AttachDebugUIResult[1] result
+}
+
+@ExtendedMetaData(name="RDBGAttachDetachDbgTargetResponse", kind="elementOnly")
+class RDBGAttachDetachDbgTargetResponse {
+	@ExtendedMetaData(kind="element", name="result", namespace="##targetNamespace")
+	unsettable org.eclipse.emf.ecore.xml.^type.Boolean[1] result
+}
+
+@ExtendedMetaData(name="RDBGAttachDetachDebugTargetsRequest", kind="elementOnly")
+class RDBGAttachDetachDebugTargetsRequest extends RDbgBaseRequest {
+	@ExtendedMetaData(kind="element", name="attach", namespace="##targetNamespace")
+	unsettable org.eclipse.emf.ecore.xml.^type.Boolean[1] attach = "true"
+	@ExtendedMetaData(kind="element", name="id", namespace="##targetNamespace")
+	contains DebugTargetIdLight[] ^id
+}
+
+@ExtendedMetaData(name="RDbgBaseRequest", kind="elementOnly")
+class RDbgBaseRequest {
+	@ExtendedMetaData(kind="element", name="infoBaseAlias", namespace="##targetNamespace")
+	String[1] infoBaseAlias
+	@ExtendedMetaData(kind="element", name="idOfDebuggerUI", namespace="##targetNamespace")
+	UUID[1] idOfDebuggerUI
+}
+
+@ExtendedMetaData(name="RDBGCheckTerminateAbilityRequest", kind="elementOnly")
+class RDBGCheckTerminateAbilityRequest extends RDbgBaseRequest {
+	@ExtendedMetaData(kind="element", name="id", namespace="##targetNamespace")
+	contains DebugTargetId[1] ^id
+}
+
+@ExtendedMetaData(name="RDBGCheckTerminateAbilityResponse", kind="elementOnly")
+class RDBGCheckTerminateAbilityResponse {
+	@ExtendedMetaData(kind="element", name="result", namespace="##targetNamespace")
+	unsettable org.eclipse.emf.ecore.xml.^type.Boolean[1] result
+}
+
+@ExtendedMetaData(name="RDBGDetachDebugUIRequest", kind="elementOnly")
+class RDBGDetachDebugUIRequest extends RDbgBaseRequest {
+}
+
+@ExtendedMetaData(name="RDBGFinishUpdateIBRequest", kind="elementOnly")
+class RDBGFinishUpdateIBRequest extends RDbgBaseRequest {
+}
+
+@ExtendedMetaData(name="RDBGFinishUpdateIBResponse", kind="elementOnly")
+class RDBGFinishUpdateIBResponse {
+	@ExtendedMetaData(kind="element", name="result", namespace="##targetNamespace")
+	unsettable org.eclipse.emf.ecore.xml.^type.Boolean[1] result
+}
+
+@ExtendedMetaData(name="RDBGStartUpdateIBRequest", kind="elementOnly")
+class RDBGStartUpdateIBRequest extends RDbgBaseRequest {
+}
+
+@ExtendedMetaData(name="RDBGStartUpdateIBResponse", kind="elementOnly")
+class RDBGStartUpdateIBResponse {
+	@ExtendedMetaData(kind="element", name="result", namespace="##targetNamespace")
+	unsettable org.eclipse.emf.ecore.xml.^type.Boolean[1] result
+}
+
+@ExtendedMetaData(name="RDBGDetachDebugUIResponse", kind="elementOnly")
+class RDBGDetachDebugUIResponse {
+	@ExtendedMetaData(kind="element", name="result", namespace="##targetNamespace")
+	unsettable org.eclipse.emf.ecore.xml.^type.Boolean[1] result
+}
+
+@ExtendedMetaData(name="RDBGEvalExprRequest", kind="elementOnly")
+class RDBGEvalExprRequest extends RDbgBaseRequest {
+	@ExtendedMetaData(kind="element", name="calcWaitingTime", namespace="##targetNamespace")
+	BigDecimal[1] calcWaitingTime
+	@ExtendedMetaData(kind="element", name="targetID", namespace="##targetNamespace")
+	contains DebugTargetIdLight[1] targetID
+	@ExtendedMetaData(kind="element", name="expr", namespace="##targetNamespace")
+	contains CalculationSourceDataStorage[] expr
+}
+
+@ExtendedMetaData(name="RDBGEvalExprResponse", kind="elementOnly")
+class RDBGEvalExprResponse {
+	@ExtendedMetaData(kind="element", name="result", namespace="##targetNamespace")
+	contains CalculationResultBaseData[] result
+}
+
+@ExtendedMetaData(name="RDBGEvalLocalVariablesRequest", kind="elementOnly")
+class RDBGEvalLocalVariablesRequest extends RDbgBaseRequest {
+	@ExtendedMetaData(kind="element", name="calcWaitingTime", namespace="##targetNamespace")
+	BigDecimal[1] calcWaitingTime
+	@ExtendedMetaData(kind="element", name="targetID", namespace="##targetNamespace")
+	contains DebugTargetIdLight[1] targetID
+	@ExtendedMetaData(kind="element", name="expr", namespace="##targetNamespace")
+	contains CalculationSourceDataStorage[] expr
+}
+
+@ExtendedMetaData(name="RDBGEvalLocalVariablesResponse", kind="elementOnly")
+class RDBGEvalLocalVariablesResponse {
+	@ExtendedMetaData(kind="element", name="result", namespace="##targetNamespace")
+	contains CalculationResultBaseData result
+}
+
+@ExtendedMetaData(name="RDBGGetAutoAttachSettingsRequest", kind="elementOnly")
+class RDBGGetAutoAttachSettingsRequest extends RDbgBaseRequest {
+}
+
+@ExtendedMetaData(name="RDBGGetAutoAttachSettingsResponse", kind="elementOnly")
+class RDBGGetAutoAttachSettingsResponse {
+	@ExtendedMetaData(kind="element", name="autoAttachSettings", namespace="##targetNamespace")
+	contains DebugAutoAttachSettings autoAttachSettings
+}
+
+@ExtendedMetaData(name="RDBGGetBreakpointsRequest", kind="elementOnly")
+class RDBGGetBreakpointsRequest extends RDbgBaseRequest {
+}
+
+@ExtendedMetaData(name="RDBGGetBreakpointsResponse", kind="elementOnly")
+class RDBGGetBreakpointsResponse {
+	@ExtendedMetaData(kind="element", name="bpWorkspace", namespace="##targetNamespace")
+	contains BPWorkspaceInternal bpWorkspace
+}
+
+@ExtendedMetaData(name="RDBGGetCallStackRequest", kind="elementOnly")
+class RDBGGetCallStackRequest extends RDbgBaseRequest {
+	@ExtendedMetaData(kind="element", name="id", namespace="##targetNamespace")
+	contains DebugTargetIdLight[1] ^id
+}
+
+@ExtendedMetaData(name="RDBGGetCallStackResponse", kind="elementOnly")
+class RDBGGetCallStackResponse {
+	@ExtendedMetaData(kind="element", name="callStack", namespace="##targetNamespace")
+	contains StackItemViewInfoData[] callStack
+}
+
+@ExtendedMetaData(name="RDBGGetDbgAllTargetStatesRequest", kind="elementOnly")
+class RDBGGetDbgAllTargetStatesRequest extends RDbgBaseRequest {
+	@ExtendedMetaData(kind="element", name="degugAreaName", namespace="##targetNamespace")
+	String degugAreaName
+}
+
+@ExtendedMetaData(name="RDBGGetDbgAllTargetStatesResponse", kind="elementOnly")
+class RDBGGetDbgAllTargetStatesResponse {
+	@ExtendedMetaData(kind="element", name="item", namespace="##targetNamespace")
+	contains DbgTargetStateInfo[] item
+}
+
+@ExtendedMetaData(name="RDBGGetDbgTargetStateRequest", kind="elementOnly")
+class RDBGGetDbgTargetStateRequest extends RDbgBaseRequest {
+	@ExtendedMetaData(kind="element", name="id", namespace="##targetNamespace")
+	contains DebugTargetIdLight[1] ^id
+}
+
+@ExtendedMetaData(name="RDBGGetDbgTargetStateResponse", kind="elementOnly")
+class RDBGGetDbgTargetStateResponse {
+	@ExtendedMetaData(kind="element", name="state", namespace="##targetNamespace")
+	unsettable DbgTargetState[1] state
+}
+
+@ExtendedMetaData(name="RDBGGetDebugIDRequest", kind="elementOnly")
+class RDBGGetDebugIDRequest extends RDbgBaseRequest {
+}
+
+@ExtendedMetaData(name="RDBGGetDebugIDResponse", kind="elementOnly")
+class RDBGGetDebugIDResponse {
+	@ExtendedMetaData(kind="element", name="idOfDebugUI", namespace="##targetNamespace")
+	UUID[1] idOfDebugUI
+}
+
+@ExtendedMetaData(name="DebuggerOptions", kind="elementOnly")
+class DebuggerOptions {
+	@ExtendedMetaData(kind="element", name="foregroundAbility", namespace="##targetNamespace")
+	unsettable org.eclipse.emf.ecore.xml.^type.Boolean[1] foregroundAbility = "false"
+}
+
+@ExtendedMetaData(name="RDBGGetInaccessibleModulesRequest", kind="elementOnly")
+class RDBGGetInaccessibleModulesRequest extends RDbgBaseRequest {
+}
+
+@ExtendedMetaData(name="RDBGGetInaccessibleModulesResponse", kind="elementOnly")
+class RDBGGetInaccessibleModulesResponse {
+	@ExtendedMetaData(kind="element", name="moduleID", namespace="##targetNamespace")
+	contains BSLModuleIdInternal[] moduleID
+}
+
+@ExtendedMetaData(name="RDBGGetListOfDebugAreaRequest", kind="elementOnly")
+class RDBGGetListOfDebugAreaRequest extends RDbgBaseRequest {
+}
+
+@ExtendedMetaData(name="RDBGGetListOfDebugAreaResponse", kind="elementOnly")
+class RDBGGetListOfDebugAreaResponse {
+	@ExtendedMetaData(kind="element", name="debugAreaInfo", namespace="##targetNamespace")
+	contains DebugAreaInfo[] debugAreaInfo
+}
+
+@ExtendedMetaData(name="RDBGGetRunTimeErrorProcessingRequest", kind="elementOnly")
+class RDBGGetRunTimeErrorProcessingRequest extends RDbgBaseRequest {
+}
+
+@ExtendedMetaData(name="RDBGGetRunTimeErrorProcessingResponse", kind="elementOnly")
+class RDBGGetRunTimeErrorProcessingResponse {
+	@ExtendedMetaData(kind="element", name="state", namespace="##targetNamespace")
+	contains RteFilterStorage state
+}
+
+@ExtendedMetaData(name="RDBGModifyValueRequest", kind="elementOnly")
+class RDBGModifyValueRequest extends RDbgBaseRequest {
+	@ExtendedMetaData(kind="element", name="targetID", namespace="##targetNamespace")
+	contains DebugTargetIdLight[1] targetID
+	@ExtendedMetaData(kind="element", name="modifyDataPath", namespace="##targetNamespace")
+	contains CalculationSourceDataStorage[1] modifyDataPath
+	@ExtendedMetaData(kind="element", name="newValueInfo", namespace="##targetNamespace")
+	contains NewValueInfo[1] newValueInfo
+	@ExtendedMetaData(kind="element", name="timeout", namespace="##targetNamespace")
+	unsettable BigDecimal[1] timeout = "60000"
+}
+
+@ExtendedMetaData(name="RDBGModifyValueResponse", kind="elementOnly")
+class RDBGModifyValueResponse {
+	@ExtendedMetaData(kind="element", name="processed", namespace="##targetNamespace")
+	unsettable org.eclipse.emf.ecore.xml.^type.Boolean[1] processed = "true"
+	@ExtendedMetaData(kind="element", name="newValueState", namespace="##targetNamespace")
+	contains CalculationResultBaseData[1] newValueState
+	@ExtendedMetaData(kind="element", name="errorDescr", namespace="##targetNamespace")
+	Base64Binary errorDescr
+}
+
+@ExtendedMetaData(name="RDBGSetDebuggerForegroundHelperDataRequest", kind="elementOnly")
+class RDBGSetDebuggerForegroundHelperDataRequest extends RDbgBaseRequest {
+	@ExtendedMetaData(kind="element", name="receiverID", namespace="##targetNamespace")
+	UUID[1] receiverID
+	@ExtendedMetaData(kind="element", name="data", namespace="##targetNamespace")
+	contains ForegroundWindowData[1] data
+}
+
+@ExtendedMetaData(name="RDBGApplyDebuggerForegroundHelperData", kind="elementOnly")
+class RDBGApplyDebuggerForegroundHelperData extends RDbgBaseRequest {
+	@ExtendedMetaData(kind="element", name="targetID", namespace="##targetNamespace")
+	contains DebugTargetId[] targetID
+	@ExtendedMetaData(kind="element", name="data", namespace="##targetNamespace")
+	contains ForegroundWindowData[1] data
+}
+
+@ExtendedMetaData(name="RDBGGetDebugTargetForegroundHelperResponse", kind="elementOnly")
+class RDBGGetDebugTargetForegroundHelperResponse {
+	@ExtendedMetaData(kind="element", name="data", namespace="##targetNamespace")
+	contains ForegroundWindowData data
+}
+
+@ExtendedMetaData(name="RDBGGetDebugTargetForegroundHelperRequest", kind="elementOnly")
+class RDBGGetDebugTargetForegroundHelperRequest extends RDbgBaseRequest {
+	@ExtendedMetaData(kind="element", name="targetID", namespace="##targetNamespace")
+	contains DebugTargetId[] targetID
+}
+
+@ExtendedMetaData(name="RDBGNotifyOnFinishSeanceRequest", kind="elementOnly")
+class RDBGNotifyOnFinishSeanceRequest extends RDbgBaseRequest {
+	@ExtendedMetaData(kind="element", name="seanceID", namespace="##targetNamespace")
+	UUID[] seanceID
+}
+
+@ExtendedMetaData(name="RDBGPingDebugUIRequest", kind="elementOnly")
+class RDBGPingDebugUIRequest extends RDbgBaseRequest {
+	@ExtendedMetaData(kind="element", name="saveDataAsString", namespace="##targetNamespace")
+	unsettable org.eclipse.emf.ecore.xml.^type.Boolean[1] saveDataAsString = "false"
+}
+
+@ExtendedMetaData(name="RDBGPingDebugUIResponse", kind="elementOnly")
+class RDBGPingDebugUIResponse {
+	@ExtendedMetaData(kind="element", name="result", namespace="##targetNamespace")
+	contains DBGUIExtCmdInfoBase[] result
+}
+
+@ExtendedMetaData(name="RDBGSetAutoAttachSettingsRequest", kind="elementOnly")
+class RDBGSetAutoAttachSettingsRequest extends RDbgBaseRequest {
+	@ExtendedMetaData(kind="element", name="autoAttachSettings", namespace="##targetNamespace")
+	contains DebugAutoAttachSettings autoAttachSettings
+}
+
+@ExtendedMetaData(name="RDBGSetBreakpointsRequest", kind="elementOnly")
+class RDBGSetBreakpointsRequest extends RDbgBaseRequest {
+	@ExtendedMetaData(kind="element", name="bpWorkspace", namespace="##targetNamespace")
+	contains BPWorkspaceInternal bpWorkspace
+}
+
+@ExtendedMetaData(name="RDBGGetForegroundHelperDataRequest", kind="elementOnly")
+class RDBGGetForegroundHelperDataRequest extends RDbgBaseRequest {
+	@ExtendedMetaData(kind="element", name="targetID", namespace="##targetNamespace")
+	contains DebugTargetId[1] targetID
+}
+
+@ExtendedMetaData(name="RDBGGetForegroundHelperDataResponse", kind="elementOnly")
+class RDBGGetForegroundHelperDataResponse {
+	@ExtendedMetaData(kind="element", name="data", namespace="##targetNamespace")
+	contains ForegroundWindowData data
+}
+
+@ExtendedMetaData(name="RDBGSetBreamOnNextStatementRequest", kind="elementOnly")
+class RDBGSetBreamOnNextStatementRequest extends RDbgBaseRequest {
+}
+
+@ExtendedMetaData(name="RDBGSetInaccessibleModulesRequest", kind="elementOnly")
+class RDBGSetInaccessibleModulesRequest extends RDbgBaseRequest {
+	@ExtendedMetaData(kind="element", name="moduleID", namespace="##targetNamespace")
+	contains BSLModuleIdInternal[] moduleID
+}
+
+@ExtendedMetaData(name="RDBGSetInitialDebugSettingsRequest", kind="elementOnly")
+class RDBGSetInitialDebugSettingsRequest extends RDbgBaseRequest {
+	@ExtendedMetaData(kind="element", name="data", namespace="##targetNamespace")
+	contains HTTPServerInitialDebugSettingsData data
+}
+
+@ExtendedMetaData(name="RDBGSetListOfDebugAreaRequest", kind="elementOnly")
+class RDBGSetListOfDebugAreaRequest extends RDbgBaseRequest {
+	@ExtendedMetaData(kind="element", name="debugAreaInfo", namespace="##targetNamespace")
+	contains DebugAreaInfo[] debugAreaInfo
+}
+
+@ExtendedMetaData(name="RDBGSetMeasureModeRequest", kind="elementOnly")
+class RDBGSetMeasureModeRequest extends RDbgBaseRequest {
+	@ExtendedMetaData(kind="element", name="measureModeSeanceID", namespace="##targetNamespace")
+	UUID measureModeSeanceID
+}
+
+@ExtendedMetaData(name="RDBGSetRunTimeErrorProcessingRequest", kind="elementOnly")
+class RDBGSetRunTimeErrorProcessingRequest extends RDbgBaseRequest {
+	@ExtendedMetaData(kind="element", name="state", namespace="##targetNamespace")
+	contains RteFilterStorage state
+}
+
+@ExtendedMetaData(name="RDBGSGetDbgTargetsRequest", kind="elementOnly")
+class RDBGSGetDbgTargetsRequest extends RDbgBaseRequest {
+	@ExtendedMetaData(kind="element", name="degugAreaName", namespace="##targetNamespace")
+	String degugAreaName
+}
+
+@ExtendedMetaData(name="RDBGSGetDbgTargetsResponse", kind="elementOnly")
+class RDBGSGetDbgTargetsResponse {
+	@ExtendedMetaData(kind="element", name="id", namespace="##targetNamespace")
+	contains DebugTargetId[] ^id
+}
+
+@ExtendedMetaData(name="RDBGStepRequest", kind="elementOnly")
+class RDBGStepRequest extends RDbgBaseRequest {
+	@ExtendedMetaData(kind="element", name="targetID", namespace="##targetNamespace")
+	contains DebugTargetIdLight[1] targetID
+	@ExtendedMetaData(kind="element", name="action", namespace="##targetNamespace")
+	unsettable DebugStepAction[1] action
+	@ExtendedMetaData(kind="element", name="simple", namespace="##targetNamespace")
+	unsettable org.eclipse.emf.ecore.xml.^type.Boolean[1] simple = "false"
+}
+
+@ExtendedMetaData(name="RDBGStepResponse", kind="elementOnly")
+class RDBGStepResponse {
+	@ExtendedMetaData(kind="element", name="item", namespace="##targetNamespace")
+	contains DbgTargetStateInfo[] item
+}
+
+@ExtendedMetaData(name="RDBGTerminateRequest", kind="elementOnly")
+class RDBGTerminateRequest extends RDbgBaseRequest {
+	@ExtendedMetaData(kind="element", name="targetID", namespace="##targetNamespace")
+	contains DebugTargetId[] targetID
+}
+
+@ExtendedMetaData(name="RDBGRestartRequest", kind="elementOnly")
+class RDBGRestartRequest extends RDbgBaseRequest {
+	@ExtendedMetaData(kind="element", name="targetID", namespace="##targetNamespace")
+	contains DebugTargetId[] targetID
+}
+
+@ExtendedMetaData(name="RDBGTestRequest", kind="empty")
+class RDBGTestRequest {
+}

@@ -1,0 +1,77 @@
+@GenModel(loadInitialization="false", literalsInterface="true", nonNLSMarkers="true", prefix="Cmi",
+	copyrightText="Copyright (C) 2013, 1C", updateClasspath="false",
+	featureDelegation="Reflective", rootExtendsClass="com._1c.g5.v8.bm.core.BmObject")
+@Ecore(nsPrefix="cmi", nsURI="http://g5.1c.ru/v8/dt/cmi")
+package com._1c.g5.v8.dt.cmi.model
+
+import com._1c.g5.v8.dt.mcore.CommandGroup
+import com._1c.g5.v8.dt.mcore.Command
+import com._1c.g5.v8.dt.metadata.mdclass.AbstractCommandInterface
+import com._1c.g5.v8.dt.metadata.mdclass.AdjustableBoolean
+import com._1c.g5.v8.dt.metadata.mdclass.Subsystem
+import org.eclipse.emf.ecore.EDiagnosticChain
+import org.eclipse.emf.ecore.EMap
+import com._1c.g5.v8.dt.cmi.model.impl.CommandInterfaceValidator
+
+class CommandInterface extends AbstractCommandInterface
+{
+    contains CommandsVisibility commandsVisibility
+    contains SubsystemsVisibility subsystemsVisibility
+    contains CommandsPlacement commandsPlacement
+    contains CommandsOrder commandsOrder
+    contains SubsystemsOrder subsystemsOrder
+    
+    op boolean validate(EDiagnosticChain diagnostics, EMap<Object, Object> context)
+    {
+        CommandInterfaceValidator::validate(this, diagnostics, context)
+    }
+}
+
+class CommandsVisibility
+{
+    contains CommandsVisibilityFragment[] visibilityFragments
+}
+
+class SubsystemsVisibility
+{
+    contains SubsystemsVisibilityFragment[] visibilityFragments
+}
+
+class CommandsVisibilityFragment
+{
+    refers Command[1] command
+    contains AdjustableBoolean[1] visible
+}
+
+class SubsystemsVisibilityFragment
+{
+    refers Subsystem[1] subsystem
+    contains AdjustableBoolean[1] visible
+}
+
+class CommandsPlacement
+{
+    contains CommandsPlacementFragment[] placementFragments
+}
+
+class CommandsPlacementFragment
+{
+    refers CommandGroup[1] group
+    refers Command[] commands
+}
+
+class CommandsOrder
+{
+    contains CommandsOrderFragment[] orderFragments
+}
+
+class SubsystemsOrder
+{
+    refers Subsystem[] subsystems
+}
+
+class CommandsOrderFragment
+{
+    refers CommandGroup[1] group
+    refers Command[] commands
+}

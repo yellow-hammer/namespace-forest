@@ -1,0 +1,20 @@
+@GenModel(nonNLSMarkers="true", prefix="XdtoType", literalsInterface="true", copyrightText="Copyright (C) 2016, 1C LLC", updateClasspath="false",
+	featureDelegation="Reflective", rootExtendsClass="com._1c.g5.v8.bm.core.BmObject")
+@Ecore(nsPrefix="xdtoType", nsURI="http://g5.1c.ru/v8/dt/xdto/type/model")
+package com._1c.g5.v8.dt.xdto.^type.model
+
+import com._1c.g5.v8.dt.mcore.Type
+
+abstract class XdtoType extends Type
+{
+	String nsUri
+	String xdtoTypeName	
+}
+
+class XdtoProxyType extends XdtoType
+{
+}
+
+class XdtoRealType extends XdtoType
+{
+}

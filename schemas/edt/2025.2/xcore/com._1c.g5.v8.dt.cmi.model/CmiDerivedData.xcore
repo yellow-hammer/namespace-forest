@@ -1,0 +1,279 @@
+@GenModel(loadInitialization="false", literalsInterface="true", nonNLSMarkers="true", prefix="CmiDerivedData",
+	copyrightText="Copyright (C) 2013, 1C", updateClasspath="false",
+	featureDelegation="Reflective", rootExtendsClass="com._1c.g5.v8.bm.core.BmObject", 
+	rootExtendsInterface="com._1c.g5.v8.bm.core.IBmObject")
+@Ecore(nsPrefix="cmideriveddata", nsURI="http://g5.1c.ru/v8/dt/cmi/deriveddata")
+package com._1c.g5.v8.dt.cmi.model.deriveddata
+
+import com._1c.g5.v8.dt.cmi.model.CommandsOrderFragment
+import com._1c.g5.v8.dt.cmi.model.CommandsVisibilityFragment
+import com._1c.g5.v8.dt.form.model.Form
+import com._1c.g5.v8.dt.mcore.Command
+import com._1c.g5.v8.dt.mcore.CommandGroup
+import com._1c.g5.v8.dt.metadata.mdclass.AdjustableBoolean
+import com._1c.g5.v8.dt.metadata.mdclass.MdObject
+import com._1c.g5.v8.dt.metadata.mdclass.Subsystem
+
+class CommandInterfaceRoot
+{
+	contains ConfigurationCommandInterface configurationCommandInterface
+	contains MainSectionCommandInterface mainSectionCommandInterface
+	contains SubsystemCommandInterface[] allSubsystemCommandInterfaces
+	refers SubsystemCommandInterface[] topLevelSubsystemCommandInterfaces
+	contains FormCommandInterface[] formCommandInterfaces
+	contains CommandContainer detachedCommandContainer
+	contains FormCommandContainer detachedFormCommandContainer
+	contains CommandsByTypeMapEntry[] commandsByType
+	contains TypesByCommandIdMapEntry[] typesByCommandId
+	contains UnresolvedCommandEntry[] unresolvedCommands
+	contains UnresolvedGroupEntry[] unresolvedGroups
+	contains CommandItem[] unresolvedCommandItems
+	contains CommandItemGroup[] unresolvedCommandItemGroups
+	contains UnresolvedSubsystemEntry[] unresolvedSubsystems
+	contains ConfigurationCommandInterfaceItem[] unresolvedConfigurationCommandInterfaceItems
+	contains SubsystemCommandInterface[] unresolvedSubsystemCommandInterface
+}
+
+class ConfigurationCommandInterface
+{
+	boolean itemsOrderCustomized
+	contains ConfigurationCommandInterfaceItem[] items
+}
+
+class AbstractCommandContainer
+{
+	contains DetachedGroupPanel detachedGroupPanel
+	contains ItemByCommandIdMapEntry[] itemByCommandIdMap
+	contains ItemGroupByGroupIdMapEntry[] itemGroupByGroupIdMap
+	refers Command[] commands
+}
+
+class CommandContainer extends AbstractCommandContainer
+{
+	contains NavigationPanel navigationPanel
+	contains ActionPanel actionPanel
+	contains CommandItemGroup unresolvedCommandsGroup
+}
+
+class FormCommandContainer extends AbstractCommandContainer
+{
+	contains FormNavigationPanel navigationPanel
+	contains FormActionPanel actionPanel
+}
+
+class MainSectionCommandInterface extends CommandContainer
+{
+	derived boolean customized get
+	{
+		navigationPanel.customized || actionPanel.customized
+	}
+}
+
+class SubsystemCommandInterface extends CommandContainer
+{
+ 	refers Subsystem subsystem
+ 	boolean subordinateCommandInterfacesOrderCustomized
+ 	refers SubsystemCommandInterface parentCommandInterface
+ 	refers SubsystemCommandInterface[] subordinateCommandInterfaces
+ 	refers MdObject[] commandSources
+}
+
+class FormCommandInterface extends FormCommandContainer
+{
+	refers Form form
+	derived boolean customized get
+	{
+		navigationPanel.customized || actionPanel.customized
+	}
+}
+
+class ConfigurationCommandInterfaceItem
+{
+	refers Subsystem subsystem
+	boolean visibilityCustomized
+	contains AdjustableBoolean visibility
+}
+
+class AbstractPanel
+{
+	boolean customGroupsOrderCustomized
+	contains CustomCommandItemGroup[] customGroups
+}
+
+class DetachedGroupPanel extends AbstractPanel
+{
+}
+
+class NavigationPanel extends AbstractPanel
+{
+	contains CommandItemGroup importantGroup
+	contains CommandItemGroup ordinaryGroup
+	contains CommandItemGroup seeAlsoGroup
+	derived boolean customized get 
+	{
+		for (CustomCommandItemGroup group : customGroups) 
+		{
+			if (group.itemsOrderCustomized)
+				return true
+		}
+
+		importantGroup.itemsOrderCustomized || ordinaryGroup.itemsOrderCustomized || seeAlsoGroup.itemsOrderCustomized ||
+			customGroupsOrderCustomized
+	}
+}
+
+class ActionPanel extends AbstractPanel
+{
+	contains CommandItemGroup createGroup
+	contains CommandItemGroup reportsGroup
+	contains CommandItemGroup toolsGroup
+	derived boolean customized get 
+	{
+		for (CustomCommandItemGroup group : customGroups) 
+		{
+			if (group.itemsOrderCustomized)
+				return true
+		}
+
+		createGroup.itemsOrderCustomized || reportsGroup.itemsOrderCustomized || toolsGroup.itemsOrderCustomized ||
+			customGroupsOrderCustomized
+	}
+}
+
+class FormNavigationPanel extends AbstractPanel
+{
+	contains CommandItemGroup importantGroup
+	contains CommandItemGroup gotoGroup
+	contains CommandItemGroup seeAlsoGroup
+	derived boolean customized get 
+	{
+		for (CustomCommandItemGroup group : customGroups) 
+		{
+			if (group.itemsOrderCustomized)
+				return true
+		}
+
+		importantGroup.itemsOrderCustomized || gotoGroup.itemsOrderCustomized || seeAlsoGroup.itemsOrderCustomized ||
+			customGroupsOrderCustomized
+	}
+}
+
+class FormActionPanel extends AbstractPanel
+{
+	contains CommandItemGroup importantGroup
+	contains CommandItemGroup createBasedOnGroup
+	derived boolean customized get 
+	{
+		for (CustomCommandItemGroup group : customGroups) 
+		{
+			if (group.itemsOrderCustomized)
+				return true
+		}
+
+		importantGroup.itemsOrderCustomized || createBasedOnGroup.itemsOrderCustomized || customGroupsOrderCustomized
+	}
+}
+
+class CommandItemGroup
+{
+	refers CommandGroup commandGroup
+	boolean itemsCustomized
+	boolean itemsOrderCustomized
+	contains CommandsOrderFragment orderFragment
+	contains CommandItem[] items
+
+	derived boolean customized get 
+	{
+		for (CommandItem item : items) 
+		{
+			if (item.visibilityCustomized)
+				return true
+		}
+
+		itemsOrderCustomized
+	}
+
+	op AbstractPanel getPanel() 
+	{
+		eContainer as AbstractPanel
+	}
+}
+
+class CustomCommandItemGroup extends CommandItemGroup
+{
+}
+
+class CommandItem
+{
+ 	refers Command command
+ 	boolean visibilityCustomized
+ 	contains CommandsVisibilityFragment visibilityFragment
+ 	contains AdjustableBoolean visibility
+ 	boolean groupCustomized
+
+	op CommandItemGroup getGroup() 
+	{
+		eContainer as CommandItemGroup
+	}
+}
+
+class ItemByCommandIdMapEntry wraps java.util.Map$Entry
+{
+	Long key
+	refers CommandItem value
+}
+
+class ItemGroupByGroupIdMapEntry wraps java.util.Map$Entry
+{
+	Long key
+	refers CustomCommandItemGroup value
+}
+
+class CommandsByTypeMapEntry wraps java.util.Map$Entry
+{
+	String key
+	refers Command[] value
+}
+
+class TypesByCommandIdMapEntry wraps java.util.Map$Entry
+{
+	Long key
+	String[] value
+}
+
+class UnresolvedCommand extends Command
+{
+	String proxyName
+	refers Command proxyCommand
+	refers CommandGroup commandGroup
+}
+
+class UnresolvedCommandEntry wraps java.util.Map$Entry
+{
+	String key
+	contains UnresolvedCommand value
+}
+
+class UnresolvedGroup extends CommandGroup
+{
+	String proxyName
+	refers CommandGroup proxyCommandGroup
+}
+
+class UnresolvedGroupEntry wraps java.util.Map$Entry
+{
+	String key
+	contains UnresolvedGroup value
+}
+
+class UnresolvedSubsystem extends Subsystem
+{
+	String proxyName
+	refers Subsystem proxySubsystem
+}
+
+class UnresolvedSubsystemEntry wraps java.util.Map$Entry
+{
+	String key
+	contains UnresolvedSubsystem value
+}

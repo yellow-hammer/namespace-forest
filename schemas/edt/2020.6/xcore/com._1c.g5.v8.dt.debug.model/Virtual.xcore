@@ -1,0 +1,12 @@
+@Ecore(nsURI="http://v8.1c.ru/8.2/virtual-resource-system")
+@GenModel(nonNLSMarkers="true", copyrightText="Copyright (C) 2014, 1C", updateClasspath="false")
+package com._1c.g5.v8.dt.debug.model.virtual
+
+import com._1c.g5.v8.dt.debug.model.core.GenericException
+import java.math.BigDecimal
+
+@ExtendedMetaData(name="Exception", kind="elementOnly")
+class Exception extends GenericException {
+	@ExtendedMetaData(kind="attribute", name="reason")
+	BigDecimal reason
+}

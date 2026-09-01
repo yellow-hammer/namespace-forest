@@ -1,0 +1,194 @@
+<?xml version="1.0" encoding="ASCII"?>
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="mdtype" nsURI="http://g5.1c.ru/v8/dt/metadata/mdtype" nsPrefix="mdtype">
+  <eClassifiers xsi:type="ecore:EClass" name="AbstractMdType" abstract="true">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="typeId" unique="false" lowerBound="1">
+      <eType xsi:type="ecore:EDataType" href="g5.1c.ru.v8.dt.mcore.ecore#//Uuid"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="valueTypeId" unique="false" lowerBound="1">
+      <eType xsi:type="ecore:EDataType" href="g5.1c.ru.v8.dt.mcore.ecore#//Uuid"/>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="MdType" abstract="true" eSuperTypes="//AbstractMdType">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="type" transient="true" containment="true" resolveProxies="false">
+      <eType xsi:type="ecore:EClass" href="g5.1c.ru.v8.dt.mcore.ecore#//Type"/>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="MdTypeSet" abstract="true" eSuperTypes="//AbstractMdType">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="typeSet" transient="true" containment="true" resolveProxies="false">
+      <eType xsi:type="ecore:EClass" href="g5.1c.ru.v8.dt.mcore.ecore#//TypeSet"/>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="MdRefType" eSuperTypes="//MdType">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="emptyRef" eType="//EmptyRef" transient="true" containment="true" resolveProxies="false"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="EmptyRef"/>
+  <eClassifiers xsi:type="ecore:EClass" name="MdObjectType" eSuperTypes="//MdType"/>
+  <eClassifiers xsi:type="ecore:EClass" name="MdRowType" eSuperTypes="//MdType"/>
+  <eClassifiers xsi:type="ecore:EClass" name="MdListType" eSuperTypes="//MdType"/>
+  <eClassifiers xsi:type="ecore:EClass" name="MdSelectionType" eSuperTypes="//MdType"/>
+  <eClassifiers xsi:type="ecore:EClass" name="MdManagerType" eSuperTypes="//MdType"/>
+  <eClassifiers xsi:type="ecore:EClass" name="MdValueKeyType" eSuperTypes="//MdType"/>
+  <eClassifiers xsi:type="ecore:EClass" name="MdValueManagerType" eSuperTypes="//MdType"/>
+  <eClassifiers xsi:type="ecore:EClass" name="MdContainerType" eSuperTypes="//MdTypeSet"/>
+  <eClassifiers xsi:type="ecore:EClass" name="MdRecordSetType" eSuperTypes="//MdType"/>
+  <eClassifiers xsi:type="ecore:EClass" name="MdRecordKeyType" eSuperTypes="//MdType"/>
+  <eClassifiers xsi:type="ecore:EClass" name="MdRecalcsType" eSuperTypes="//MdType"/>
+  <eClassifiers xsi:type="ecore:EClass" name="MdRecordManagerType" eSuperTypes="//MdType"/>
+  <eClassifiers xsi:type="ecore:EClass" name="MdUserDefinedType" eSuperTypes="//MdTypeSet"/>
+  <eClassifiers xsi:type="ecore:EClass" name="RoutePointRefType" eSuperTypes="//MdType"/>
+  <eClassifiers xsi:type="ecore:EClass" name="MdDisplacingCalculationTypesType" eSuperTypes="//MdType"/>
+  <eClassifiers xsi:type="ecore:EClass" name="MdDisplacingCalculationTypesRowType" eSuperTypes="//MdType"/>
+  <eClassifiers xsi:type="ecore:EClass" name="MdBaseCalculationTypesType" eSuperTypes="//MdType"/>
+  <eClassifiers xsi:type="ecore:EClass" name="MdBaseCalculationTypesRowType" eSuperTypes="//MdType"/>
+  <eClassifiers xsi:type="ecore:EClass" name="MdLeadingCalculationTypesType" eSuperTypes="//MdType"/>
+  <eClassifiers xsi:type="ecore:EClass" name="MdLeadingCalculationTypesRowType" eSuperTypes="//MdType"/>
+  <eClassifiers xsi:type="ecore:EClass" name="MdRecordType" eSuperTypes="//MdType"/>
+  <eClassifiers xsi:type="ecore:EClass" name="MdExtDimensionTypes" eSuperTypes="//MdType"/>
+  <eClassifiers xsi:type="ecore:EClass" name="MdExtDimensionTypesRow" eSuperTypes="//MdType"/>
+  <eClassifiers xsi:type="ecore:EClass" name="MdExtDimensionsType" eSuperTypes="//MdType"/>
+  <eClassifiers xsi:type="ecore:EClass" name="MdTypes" abstract="true" interface="true"/>
+  <eClassifiers xsi:type="ecore:EClass" name="TabularSectionTypes" eSuperTypes="//MdTypes">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="objectType" lowerBound="1" eType="//MdObjectType" containment="true" resolveProxies="false"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="rowType" lowerBound="1" eType="//MdRowType" containment="true" resolveProxies="false"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="EnumTypes" eSuperTypes="//MdTypes">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="refType" lowerBound="1" eType="//MdRefType" containment="true" resolveProxies="false"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="listType" lowerBound="1" eType="//MdListType" containment="true" resolveProxies="false"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="managerType" lowerBound="1" eType="//MdManagerType" containment="true" resolveProxies="false"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="BasicDbObjectTypes" abstract="true" eSuperTypes="//MdTypes">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="objectType" lowerBound="1" eType="//MdObjectType" containment="true" resolveProxies="false"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="refType" lowerBound="1" eType="//MdRefType" containment="true" resolveProxies="false"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="selectionType" lowerBound="1" eType="//MdSelectionType" containment="true" resolveProxies="false"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="listType" lowerBound="1" eType="//MdListType" containment="true" resolveProxies="false"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="managerType" lowerBound="1" eType="//MdManagerType" containment="true" resolveProxies="false"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="BasicRegisterTypes" abstract="true" eSuperTypes="//MdTypes">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="selectionType" lowerBound="1" eType="//MdSelectionType" containment="true" resolveProxies="false"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="listType" lowerBound="1" eType="//MdListType" containment="true" resolveProxies="false"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="managerType" lowerBound="1" eType="//MdManagerType" containment="true" resolveProxies="false"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="recordSetType" lowerBound="1" eType="//MdRecordSetType" containment="true" resolveProxies="false"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="recordKeyType" lowerBound="1" eType="//MdRecordKeyType" containment="true" resolveProxies="false"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="CatalogTypes" eSuperTypes="//BasicDbObjectTypes"/>
+  <eClassifiers xsi:type="ecore:EClass" name="DocumentTypes" eSuperTypes="//BasicDbObjectTypes"/>
+  <eClassifiers xsi:type="ecore:EClass" name="ChartOfCharacteristicTypesTypes" eSuperTypes="//BasicDbObjectTypes">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="containerType" lowerBound="1" eType="//MdContainerType" containment="true" resolveProxies="false"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="InformationRegisterTypes" eSuperTypes="//BasicRegisterTypes">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="recordType" lowerBound="1" eType="//MdRecordType" containment="true" resolveProxies="false"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="recordManagerType" lowerBound="1" eType="//MdRecordManagerType" containment="true" resolveProxies="false"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="AccumulationRegisterTypes" eSuperTypes="//BasicRegisterTypes">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="recordType" lowerBound="1" eType="//MdRecordType" containment="true" resolveProxies="false"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ConstantTypes" eSuperTypes="//MdTypes">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="managerType" lowerBound="1" eType="//MdManagerType" containment="true" resolveProxies="false"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="valueManagerType" lowerBound="1" eType="//MdValueManagerType" containment="true" resolveProxies="false"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="valueKeyType" eType="//MdValueKeyType" containment="true" resolveProxies="false"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ExchangePlanTypes" eSuperTypes="//BasicDbObjectTypes"/>
+  <eClassifiers xsi:type="ecore:EClass" name="DefinedTypeTypes" eSuperTypes="//MdTypes">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="containerType" lowerBound="1" eType="//MdUserDefinedType" containment="true" resolveProxies="false"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="SequenceTypes" eSuperTypes="//MdTypes">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="recordType" lowerBound="1" eType="//MdRecordType" containment="true" resolveProxies="false"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="managerType" lowerBound="1" eType="//MdManagerType" containment="true" resolveProxies="false"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="recordSetType" lowerBound="1" eType="//MdRecordSetType" containment="true" resolveProxies="false"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="DocumentJournalTypes" eSuperTypes="//MdTypes">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="selectionType" lowerBound="1" eType="//MdSelectionType" containment="true" resolveProxies="false"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="listType" lowerBound="1" eType="//MdListType" containment="true" resolveProxies="false"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="managerType" lowerBound="1" eType="//MdManagerType" containment="true" resolveProxies="false"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ReportTypes" eSuperTypes="//MdTypes">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="objectType" lowerBound="1" eType="//MdObjectType" containment="true" resolveProxies="false"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="managerType" lowerBound="1" eType="//MdManagerType" containment="true" resolveProxies="false"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ExternalReportTypes" eSuperTypes="//MdTypes">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="objectType" lowerBound="1" eType="//MdObjectType" containment="true" resolveProxies="false"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="DataProcessorTypes" eSuperTypes="//MdTypes">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="objectType" lowerBound="1" eType="//MdObjectType" containment="true" resolveProxies="false"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="managerType" lowerBound="1" eType="//MdManagerType" containment="true" resolveProxies="false"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ExternalDataProcessorTypes" eSuperTypes="//MdTypes">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="objectType" lowerBound="1" eType="//MdObjectType" containment="true" resolveProxies="false"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="BusinessProcessTypes" eSuperTypes="//BasicDbObjectTypes">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="routePointRef" lowerBound="1" eType="//RoutePointRefType" containment="true" resolveProxies="false"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="TaskTypes" eSuperTypes="//BasicDbObjectTypes"/>
+  <eClassifiers xsi:type="ecore:EClass" name="FilterCriterionTypes" eSuperTypes="//MdTypes">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="listType" lowerBound="1" eType="//MdListType" containment="true" resolveProxies="false"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="managerType" lowerBound="1" eType="//MdManagerType" containment="true" resolveProxies="false"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="SettingsStorageTypes" eSuperTypes="//MdTypes">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="managerType" lowerBound="1" eType="//MdManagerType" containment="true" resolveProxies="false"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="WSReferenceTypes" eSuperTypes="//MdTypes">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="managerType" lowerBound="1" eType="//MdManagerType" containment="true" resolveProxies="false"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ChartOfAccountsTypes" eSuperTypes="//BasicDbObjectTypes">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="extDimensionTypes" lowerBound="1" eType="//MdExtDimensionTypes" containment="true" resolveProxies="false"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="extDimensionTypesRow" lowerBound="1" eType="//MdExtDimensionTypesRow" containment="true" resolveProxies="false"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ChartOfCalculationTypesTypes" eSuperTypes="//BasicDbObjectTypes">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="displacingCalculationTypesType" lowerBound="1" eType="//MdDisplacingCalculationTypesType" containment="true" resolveProxies="false"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="displacingCalculationTypesRowType" lowerBound="1" eType="//MdDisplacingCalculationTypesRowType" containment="true" resolveProxies="false"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="baseCalculationTypesType" lowerBound="1" eType="//MdBaseCalculationTypesType" containment="true" resolveProxies="false"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="baseCalculationTypesRowType" lowerBound="1" eType="//MdBaseCalculationTypesRowType" containment="true" resolveProxies="false"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="leadingCalculationTypesType" lowerBound="1" eType="//MdLeadingCalculationTypesType" containment="true" resolveProxies="false"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="leadingCalculationTypesRowType" lowerBound="1" eType="//MdLeadingCalculationTypesRowType" containment="true" resolveProxies="false"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="AccountingRegisterTypes" eSuperTypes="//BasicRegisterTypes">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="recordType" lowerBound="1" eType="//MdRecordType" containment="true" resolveProxies="false"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="extDimensionsType" lowerBound="1" eType="//MdExtDimensionsType" containment="true" resolveProxies="false"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="CalculationRegisterTypes" eSuperTypes="//BasicRegisterTypes">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="recordType" lowerBound="1" eType="//MdRecordType" containment="true" resolveProxies="false"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="recalcsType" lowerBound="1" eType="//MdRecalcsType" containment="true" resolveProxies="false"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="RecalculationTypes" eSuperTypes="//MdTypes">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="recordType" lowerBound="1" eType="//MdRecordType" containment="true" resolveProxies="false"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="managerType" lowerBound="1" eType="//MdManagerType" containment="true" resolveProxies="false"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="recordSetType" lowerBound="1" eType="//MdRecordSetType" containment="true" resolveProxies="false"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ExternalDataSourceTypes" eSuperTypes="//MdTypes">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="managerType" lowerBound="1" eType="//MdManagerType" containment="true" resolveProxies="false"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="tablesManagerType" lowerBound="1" eType="//MdManagerType" containment="true" resolveProxies="false"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="cubesManagerType" lowerBound="1" eType="//MdManagerType" containment="true" resolveProxies="false"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="TableTypes" eSuperTypes="//MdTypes">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="refType" lowerBound="1" eType="//MdRefType" containment="true" resolveProxies="false"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="listType" lowerBound="1" eType="//MdListType" containment="true" resolveProxies="false"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="objectType" lowerBound="1" eType="//MdObjectType" containment="true" resolveProxies="false"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="managerType" lowerBound="1" eType="//MdManagerType" containment="true" resolveProxies="false"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="recordManagerType" lowerBound="1" eType="//MdRecordManagerType" containment="true" resolveProxies="false"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="recordSetType" lowerBound="1" eType="//MdRecordSetType" containment="true" resolveProxies="false"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="recordType" lowerBound="1" eType="//MdRecordType" containment="true" resolveProxies="false"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="recordKeyType" lowerBound="1" eType="//MdRecordKeyType" containment="true" resolveProxies="false"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="MdDimensionTablesManagerType" eSuperTypes="//MdType"/>
+  <eClassifiers xsi:type="ecore:EClass" name="CubeTypes" eSuperTypes="//MdTypes">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="managerType" lowerBound="1" eType="//MdManagerType" containment="true" resolveProxies="false"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="listType" lowerBound="1" eType="//MdListType" containment="true" resolveProxies="false"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="recordManagerType" lowerBound="1" eType="//MdRecordManagerType" containment="true" resolveProxies="false"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="recordSetType" lowerBound="1" eType="//MdRecordSetType" containment="true" resolveProxies="false"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="recordType" lowerBound="1" eType="//MdRecordType" containment="true" resolveProxies="false"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="recordKeyType" lowerBound="1" eType="//MdRecordKeyType" containment="true" resolveProxies="false"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="dimensionTablesManagerType" lowerBound="1" eType="//MdDimensionTablesManagerType" containment="true" resolveProxies="false"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="CubeDimensionTableTypes" eSuperTypes="//MdTypes">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="refType" lowerBound="1" eType="//MdRefType" containment="true" resolveProxies="false"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="listType" lowerBound="1" eType="//MdListType" containment="true" resolveProxies="false"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="objectType" lowerBound="1" eType="//MdObjectType" containment="true" resolveProxies="false"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="managerType" lowerBound="1" eType="//MdManagerType" containment="true" resolveProxies="false"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="IntegrationServiceTypes" eSuperTypes="//MdTypes">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="managerType" lowerBound="1" eType="//MdManagerType" containment="true" resolveProxies="false"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="IntegrationServiceChannelTypes" eSuperTypes="//MdTypes">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="managerType" lowerBound="1" eType="//MdManagerType" containment="true" resolveProxies="false"/>
+  </eClassifiers>
+</ecore:EPackage>

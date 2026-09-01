@@ -1,0 +1,330 @@
+<?xml version="1.0" encoding="ASCII"?>
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="model" nsURI="http://g5.1c.ru/v8/dt/form.mapping" nsPrefix="form">
+  <eClassifiers xsi:type="ecore:EClass" name="IMappingModel" abstract="true" interface="true">
+    <eTypeParameters name="TDomain"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="domain" unique="false">
+      <eGenericType eTypeParameter="//IMappingModel/TDomain"/>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="MappingNamed" abstract="true" interface="true">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Path">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="path" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eStructuralFeatures>
+    <eGenericSuperTypes eClassifier="//IMappingModel">
+      <eTypeArguments>
+        <eClassifier xsi:type="ecore:EClass" href="g5.1c.ru.v8.dt.form.ecore#//AbstractDataPath"/>
+      </eTypeArguments>
+    </eGenericSuperTypes>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ItemsHolder" abstract="true" interface="true">
+    <eTypeParameters name="TDomain"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="items" upperBound="-1" eType="//Item" containment="true" resolveProxies="false"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="fixedItemSize" unique="false" defaultValueLiteral="0">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    </eStructuralFeatures>
+    <eGenericSuperTypes eClassifier="//IMappingModel">
+      <eTypeArguments eTypeParameter="//ItemsHolder/TDomain"/>
+    </eGenericSuperTypes>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="FormMapping">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="commandBarStateChangeable" unique="false" defaultValueLiteral="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    </eStructuralFeatures>
+    <eGenericSuperTypes eClassifier="//MappingNamed"/>
+    <eGenericSuperTypes eClassifier="//ItemsHolder">
+      <eTypeArguments>
+        <eClassifier xsi:type="ecore:EClass" href="g5.1c.ru.v8.dt.form.ecore#//Form"/>
+      </eTypeArguments>
+    </eGenericSuperTypes>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Item">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="type" unique="false" eType="//ItemType"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="visible" unique="false" defaultValueLiteral="true">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="path" lowerBound="1" eType="//Path" containment="true" resolveProxies="false"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="command" lowerBound="1" eType="//CommandName" containment="true" resolveProxies="false"/>
+    <eGenericSuperTypes eClassifier="//IMappingModel">
+      <eTypeArguments>
+        <eClassifier xsi:type="ecore:EClass" href="g5.1c.ru.v8.dt.form.ecore#//FormItem"/>
+      </eTypeArguments>
+    </eGenericSuperTypes>
+    <eGenericSuperTypes eClassifier="//MappingNamed"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ItemContainer">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="commandBarStateChangeable" unique="false" defaultValueLiteral="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="contextMenuStateChangeable" unique="false" defaultValueLiteral="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="tooltipStateChangeable" unique="false" defaultValueLiteral="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="viewStatusStateChangeable" unique="false" defaultValueLiteral="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="searchControlStateChangeable" unique="false" defaultValueLiteral="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="searchStringStateChangeable" unique="false" defaultValueLiteral="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="autoTableStateChangeable" unique="false" defaultValueLiteral="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    </eStructuralFeatures>
+    <eGenericSuperTypes eClassifier="//Item"/>
+    <eGenericSuperTypes eClassifier="//ItemsHolder">
+      <eTypeArguments>
+        <eClassifier xsi:type="ecore:EClass" href="g5.1c.ru.v8.dt.form.ecore#//FormItem"/>
+      </eTypeArguments>
+    </eGenericSuperTypes>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="CommandName">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="command" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eStructuralFeatures>
+    <eGenericSuperTypes eClassifier="//IMappingModel">
+      <eTypeArguments>
+        <eClassifier xsi:type="ecore:EClass" href="http://g5.1c.ru/v8/dt/mcore#//Command"/>
+      </eTypeArguments>
+    </eGenericSuperTypes>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ParameterizedCommandMapping">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="attributes" upperBound="-1" eType="//ParameterizedAttributeItem" containment="true" resolveProxies="false"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="tables" upperBound="-1" eType="//ParameterizedTableItem" containment="true" resolveProxies="false"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ParameterizedItem" abstract="true" interface="true">
+    <eTypeParameters name="T"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="commands" upperBound="-1" eType="//ParameterizedCommand" containment="true" resolveProxies="false"/>
+    <eGenericSuperTypes eClassifier="//IMappingModel">
+      <eTypeArguments eTypeParameter="//ParameterizedItem/T"/>
+    </eGenericSuperTypes>
+    <eGenericSuperTypes eClassifier="//MappingNamed"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ParameterizedAttributeItem">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="main" unique="false" defaultValueLiteral="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    </eStructuralFeatures>
+    <eGenericSuperTypes eClassifier="//ParameterizedItem">
+      <eTypeArguments>
+        <eClassifier xsi:type="ecore:EClass" href="g5.1c.ru.v8.dt.form.ecore#//FormAttribute"/>
+      </eTypeArguments>
+    </eGenericSuperTypes>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ParameterizedTableItem">
+    <eGenericSuperTypes eClassifier="//ParameterizedItem">
+      <eTypeArguments>
+        <eClassifier xsi:type="ecore:EClass" href="g5.1c.ru.v8.dt.form.ecore#//Table"/>
+      </eTypeArguments>
+    </eGenericSuperTypes>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ParameterizedCommand">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="paths" upperBound="-1" eType="//ParameterizedCommandPath" containment="true" resolveProxies="false" eOpposite="//ParameterizedCommandPath/command"/>
+    <eGenericSuperTypes eClassifier="//IMappingModel">
+      <eTypeArguments>
+        <eClassifier xsi:type="ecore:EClass" href="http://g5.1c.ru/v8/dt/mcore#//Command"/>
+      </eTypeArguments>
+    </eGenericSuperTypes>
+    <eGenericSuperTypes eClassifier="//MappingNamed"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ParameterizedCommandPath">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="command" eType="//ParameterizedCommand" eOpposite="//ParameterizedCommand/paths"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="mainRef" unique="false" defaultValueLiteral="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="ruPath" eType="//Path" containment="true" resolveProxies="false"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="enPath" eType="//Path" containment="true" resolveProxies="false"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="IndependentCommandMapping" eSuperTypes="//IndependentNodeCotainer"/>
+  <eClassifiers xsi:type="ecore:EClass" name="IndependentNode" abstract="true" interface="true">
+    <eTypeParameters name="T"/>
+    <eGenericSuperTypes eClassifier="//IMappingModel">
+      <eTypeArguments eTypeParameter="//IndependentNode/T"/>
+    </eGenericSuperTypes>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="IndependentNodeCotainer" abstract="true" interface="true">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="nodes" upperBound="-1" containment="true" resolveProxies="false">
+      <eGenericType eClassifier="//IndependentNode">
+        <eTypeArguments/>
+      </eGenericType>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="DesktopNode">
+    <eGenericSuperTypes eClassifier="//IndependentNode">
+      <eTypeArguments>
+        <eClassifier xsi:type="ecore:EClass" href="g5.1c.ru.v8.dt.form.ecore#//Form"/>
+      </eTypeArguments>
+    </eGenericSuperTypes>
+    <eGenericSuperTypes eClassifier="//IndependentNodeCotainer"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="GroupNode">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="commands" upperBound="-1" eType="//IndependentCommand" containment="true" resolveProxies="false" eOpposite="//IndependentCommand/parent"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="type" unique="false" eType="//GroupNodeType"/>
+    <eGenericSuperTypes eClassifier="//IndependentNode">
+      <eTypeArguments>
+        <eClassifier xsi:type="ecore:EClass" href="http://g5.1c.ru/v8/dt/mcore#//CommandGroup"/>
+      </eTypeArguments>
+    </eGenericSuperTypes>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="SubsystemNode">
+    <eGenericSuperTypes eClassifier="//IndependentNode">
+      <eTypeArguments>
+        <eClassifier xsi:type="ecore:EClass" href="http://g5.1c.ru/v8/dt/metadata/mdclass#//Subsystem"/>
+      </eTypeArguments>
+    </eGenericSuperTypes>
+    <eGenericSuperTypes eClassifier="//IndependentNodeCotainer"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="IndependentCommand">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="parent" eType="//GroupNode" eOpposite="//GroupNode/commands"/>
+    <eGenericSuperTypes eClassifier="//IMappingModel">
+      <eTypeArguments>
+        <eClassifier xsi:type="ecore:EClass" href="http://g5.1c.ru/v8/dt/mcore#//Command"/>
+      </eTypeArguments>
+    </eGenericSuperTypes>
+    <eGenericSuperTypes eClassifier="//MappingNamed"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="CommandInterfaceMapping">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="panels" lowerBound="2" upperBound="2" eType="//Panel" containment="true" resolveProxies="false"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="autoCommands" upperBound="-1" eType="//AutoGroupItem"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="persitedAutoCommands" upperBound="-1" eType="//AutoCommandMapEntry" containment="true" resolveProxies="false"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="AutoCommandMapEntry" instanceClassName="java.util.Map$Entry">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="key" unique="false" lowerBound="1">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="value" lowerBound="1">
+      <eType xsi:type="ecore:EClass" href="g5.1c.ru.v8.dt.form.ecore#//FormCommandInterfaceItem"/>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Panel">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="type" unique="false" eType="//PanelType"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="groups" upperBound="-1" eType="//Group" containment="true" resolveProxies="false"/>
+    <eGenericSuperTypes eClassifier="//IMappingModel">
+      <eTypeArguments>
+        <eClassifier xsi:type="ecore:EClass" href="g5.1c.ru.v8.dt.form.ecore#//FormCommandInterfaceItems"/>
+      </eTypeArguments>
+    </eGenericSuperTypes>
+    <eGenericSuperTypes eClassifier="//MappingNamed"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Group">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="type" unique="false" eType="//GroupType"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="items" upperBound="-1" containment="true" resolveProxies="false">
+      <eGenericType eClassifier="//GroupItem">
+        <eTypeArguments/>
+      </eGenericType>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="countAddedItem" unique="false" defaultValueLiteral="0">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    </eStructuralFeatures>
+    <eGenericSuperTypes eClassifier="//IMappingModel">
+      <eTypeArguments>
+        <eClassifier xsi:type="ecore:EClass" href="http://g5.1c.ru/v8/dt/mcore#//CommandGroup"/>
+      </eTypeArguments>
+    </eGenericSuperTypes>
+    <eGenericSuperTypes eClassifier="//MappingNamed"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="GroupItem" abstract="true">
+    <eTypeParameters name="T"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="auto" unique="false" defaultValueLiteral="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="managedPosition" unique="false" defaultValueLiteral="true">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="fullEditingSupport" unique="false" defaultValueLiteral="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="pathRu" lowerBound="1" eType="//Path" containment="true" resolveProxies="false"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="pathEn" lowerBound="1" eType="//Path" containment="true" resolveProxies="false"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="hasPath" unique="false" defaultValueLiteral="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="visibleType" unique="false" eType="//GroupItemVisibleType" defaultValueLiteral="CheckedSame"/>
+    <eGenericSuperTypes eClassifier="//IMappingModel">
+      <eTypeArguments eTypeParameter="//GroupItem/T"/>
+    </eGenericSuperTypes>
+    <eGenericSuperTypes eClassifier="//MappingNamed"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="PersistedGroupItem">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="suppressesItems" unique="false" defaultValueLiteral="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    </eStructuralFeatures>
+    <eGenericSuperTypes eClassifier="//GroupItem">
+      <eTypeArguments>
+        <eClassifier xsi:type="ecore:EClass" href="g5.1c.ru.v8.dt.form.ecore#//FormCommandInterfaceItem"/>
+      </eTypeArguments>
+    </eGenericSuperTypes>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="AutoGroupItem">
+    <eGenericSuperTypes eClassifier="//GroupItem">
+      <eTypeArguments>
+        <eClassifier xsi:type="ecore:EClass" href="http://g5.1c.ru/v8/dt/mcore#//Command"/>
+      </eTypeArguments>
+    </eGenericSuperTypes>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="ItemType">
+    <eLiterals name="Field"/>
+    <eLiterals name="Button" value="1"/>
+    <eLiterals name="Table" value="2"/>
+    <eLiterals name="TableDynamic" value="3"/>
+    <eLiterals name="GroupUsual" value="4"/>
+    <eLiterals name="GroupUsualNotVisual" value="5"/>
+    <eLiterals name="GroupButton" value="6"/>
+    <eLiterals name="GroupColumn" value="7"/>
+    <eLiterals name="GroupCommandBar" value="8"/>
+    <eLiterals name="GroupPage" value="9"/>
+    <eLiterals name="GroupPages" value="10"/>
+    <eLiterals name="GroupPopup" value="11"/>
+    <eLiterals name="DecorationLabel" value="12"/>
+    <eLiterals name="DecorationPicture" value="13"/>
+    <eLiterals name="Tooltip" value="14"/>
+    <eLiterals name="ContextMenu" value="15"/>
+    <eLiterals name="CommandBar" value="16"/>
+    <eLiterals name="Addition" value="17"/>
+    <eLiterals name="SearchControlAddition" value="18"/>
+    <eLiterals name="SearchStringAddition" value="19"/>
+    <eLiterals name="ViewStatusAddition" value="20"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="GroupNodeType">
+    <eLiterals name="Custom"/>
+    <eLiterals name="Important" value="1"/>
+    <eLiterals name="Ordinary" value="2"/>
+    <eLiterals name="SeeAlso" value="3"/>
+    <eLiterals name="Create" value="4"/>
+    <eLiterals name="Tools" value="5"/>
+    <eLiterals name="Reposts" value="6"/>
+    <eLiterals name="FormImportant" value="7"/>
+    <eLiterals name="FormGoTo" value="8"/>
+    <eLiterals name="FormSeeAlso" value="9"/>
+    <eLiterals name="FormActionImportant" value="10"/>
+    <eLiterals name="FormGenerate" value="11"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="PanelType">
+    <eLiterals name="NAVIGATION"/>
+    <eLiterals name="COMMAND_BAR" value="1"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="GroupType">
+    <eLiterals name="COMMON_GROUP"/>
+    <eLiterals name="NAVIGATION_IMPORTANT" value="1"/>
+    <eLiterals name="NAVIGATION_GOTO" value="2"/>
+    <eLiterals name="NAVIGATION_SEE_ALSO" value="3"/>
+    <eLiterals name="COMMAND_BAR_IMPORTANT" value="4"/>
+    <eLiterals name="COMMAND_BAR_GENERATE" value="5"/>
+    <eLiterals name="NAVIGATION_OTHERS" value="6"/>
+    <eLiterals name="COMMAND_BAR_OTHERS" value="7"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="GroupItemVisibleType">
+    <eLiterals name="CheckedSame"/>
+    <eLiterals name="UncheckedSame"/>
+    <eLiterals name="CheckedDifferent"/>
+    <eLiterals name="UncheckedDifferent"/>
+    <eLiterals name="CheckedAuto"/>
+    <eLiterals name="UncheckedAuto"/>
+  </eClassifiers>
+</ecore:EPackage>

@@ -1,0 +1,286 @@
+@GenModel(loadInitialization="false", literalsInterface="true", nonNLSMarkers="true", prefix="Dcs", copyrightText="Copyright (C) 2013, 1C", updateClasspath="false",
+	featureDelegation="Reflective", rootExtendsClass="com._1c.g5.v8.bm.core.BmObject"
+)
+@Ecore(nsPrefix="core", nsURI="http://g5.1c.ru/v8/dt/data-composition-system/core")
+package com._1c.g5.v8.dt.dcs.model.core
+
+import com._1c.g5.v8.dt.mcore.LocalStringMapEntry
+import com._1c.g5.v8.dt.mcore.Value
+import com._1c.g5.v8.dt.mcore.Picture
+import com._1c.g5.v8.dt.metadata.common.LinkedValueChangeMode
+import com._1c.g5.v8.dt.chart.model.ChartScale
+import com._1c.g5.v8.dt.chart.model.ChartAxis
+import com._1c.g5.v8.dt.chart.model.ChartColorPaletteDescription
+import com._1c.g5.v8.dt.chart.model.ChartReferenceLines
+import com._1c.g5.v8.dt.chart.model.ChartReferenceBands
+import com._1c.g5.v8.dt.chart.model.TrendlineArray
+import com._1c.g5.v8.dt.chart.model.ChartReferenceLine
+import com._1c.g5.v8.dt.chart.model.ChartReferenceBand
+import com._1c.g5.v8.dt.chart.model.ChartSeriesGraphicalRepresentationType
+import com._1c.g5.v8.dt.chart.model.ChartSeriesStackType
+import com._1c.g5.v8.dt.chart.model.UsedChartValuesAxis
+
+
+
+// Значения параметров (базовый).
+
+class ParameterValues
+{
+	contains DataCompositionParameterValue[] items // Параметры.
+}
+    
+
+// Значение параметра.
+
+class DataCompositionParameterValue
+{
+	boolean use = "true" // Значение параметра используется.
+    contains DataCompositionParameter parameter // Параметр.
+    contains Value[] values // Значения параметра. Может содержать либо константное значение, либо значение - поле.
+    contains DataCompositionParameterValue[] nestedParameterValues // Вложенные параметры
+}
+
+
+// Параметр компоновки данных.
+
+class DataCompositionParameter extends Value
+{
+	String value
+}
+    
+
+// Поле компоновки данных.
+
+class DataCompositionField extends Value
+{
+	String value
+}
+    
+
+// Идентификатор компоновки данных.
+
+class DataCompositionID
+{
+	String value
+}
+    
+
+// Тип размещения итогов.
+
+enum DataCompositionTotalPlacement
+{
+    Begin,
+    End,
+    BeginAndEnd,
+    None,
+    Auto
+}
+    
+
+// Оформление. См. ОформлениеКомпоновкиДанных
+
+class DataCompositionAppearance extends ParameterValues
+{
+	ChartSeriesGraphicalRepresentationType visualTypeInChart // since 8.3.16
+	ChartSeriesStackType stackTypeInChart                    // since 8.3.16
+	UsedChartValuesAxis usedValueAxisInChart                 // since 8.3.16
+	String stackGroupInChart                                 // since 8.3.16
+}
+
+// Тип упорядочивания.
+
+enum DataCompositionSortDirection
+{
+	Asc,
+    Desc
+}
+    
+
+// Тип группировки.
+
+enum DataCompositionGroupType
+{
+	Items,
+    Hierarchy,
+    HierarchyOnly
+}
+    
+
+// Тип дополнения периода.
+
+enum DataCompositionPeriodAdditionType
+{
+	None,
+    Year,
+    HalfYear,
+    Quarter,
+    Month,
+    TenDays,
+    Week,
+    Day,
+    Hour,
+    Minute,
+    Second,
+    YearSinceBeginOfPeriod,         ///< год с начала периода
+    HalfYearSinceBeginOfPeriod,     ///< полугодие с начала периода
+    QuarterSinceBeginOfPeriod,      ///< квартал с начала периода
+    MonthSinceBeginOfPeriod,        ///< месяц с начала периода
+    WeekSinceBeginOfPeriod,         ///< неделя с начала периода
+    DaySinceBeginOfPeriod,          ///< день с начала периода
+    HourSinceBeginOfPeriod,         ///< час с начала периода
+    MinuteSinceBeginOfPeriod,       ///< минута с начала периода
+    YearSinceBeginOfPeriod445,      ///< год с начала периода 445
+    HalfYearSinceBeginOfPeriod445,  ///< полугодие с начала периода 445
+    QuarterSinceBeginOfPeriod445,   ///< квартал с начала периода 445
+    MonthSinceBeginOfPeriod445      ///< месяц с начала периода 445
+}
+    
+
+// Тип размещения текста системы компоновки данных.
+
+enum DataCompositionTextPlacementType
+{
+	Block,
+    Cut,
+    Wrap,
+    Overflow
+}
+    
+
+// Тип заголовков полей.
+
+enum DataCompositionFieldsTitleType
+{
+	Auto,
+    Full,
+    Short
+}
+    
+    
+class DesignTimeValue
+{
+	String value
+}
+    
+class DesignTimeValueValue extends Value
+{
+	contains DesignTimeValue[1] value
+}    
+
+// Параметры ввода.
+
+class InputParameters extends ParameterValues
+{
+}
+    
+
+// СвязьПоТипуКомпоновкиДанных.
+
+class DataCompositionTypeLink extends Value
+{
+	contains DataCompositionField field // Поле.
+    int linkItem = "0" // Элемент связи. По умолчанию 0.
+}
+    
+
+// Связь параметра выбора значения.
+
+class DataCompositionChoiceParameterLink
+{
+	String name // Имя.
+    contains DataCompositionField field // Поле.
+    LinkedValueChangeMode valueChange = "Clear" // Изменение значения.
+}
+    
+
+// Связи параметров выбора значения.
+
+class DataCompositionChoiceParameterLinks extends Value
+{
+	contains DataCompositionChoiceParameterLink[] items // Элементы
+}
+
+
+// Параметр выбора значения.
+
+class DataCompositionChoiceParameter
+{
+	String name // Имя.
+    contains Value[] value // Значения.
+}
+    
+
+// Параметры выбора значения.
+
+class DataCompositionChoiceParameters extends Value
+{
+	contains DataCompositionChoiceParameter[] items // Элементы.
+}
+
+
+// ИспользованиеПараметраКомпоновкиДанных.
+
+enum DataCompositionParameterUse
+{
+    Always,
+	Auto
+}
+
+// Многоязыковая строка.
+class LocalString extends Value
+{
+    contains LocalStringMapEntry[] content
+}
+
+// Представление.
+class Presentation
+{
+	String value
+    contains LocalString localValue
+}
+
+class ChartScaleValue extends Value
+{
+	contains ChartScale chartScale
+}
+
+// Since 8.3.12
+class ChartColorPaletteDescriptionValue extends Value
+{
+	contains ChartColorPaletteDescription colorPaletteDescription
+}
+// Since 8.3.12
+class ChartReferenceLinesValue extends Value
+{
+	contains ChartReferenceLines chartReferenceLines
+}
+// Since 8.3.12
+class ChartReferenceBandsValue extends Value
+{
+	contains ChartReferenceBands chartReferenceBands
+}
+
+class ChartReferenceLineValue extends Value
+{
+	contains ChartReferenceLine chartReferenceLine
+}
+
+class ChartReferenceBandValue extends Value
+{
+	contains ChartReferenceBand chartReferenceBand
+}
+
+class ChartAxisValue extends Value
+{
+	contains ChartAxis chartAxis
+}
+
+class ChartTrendlinesValue extends Value
+{
+	contains TrendlineArray trendlines
+}
+
+class PictureValue extends Value
+{
+	contains Picture picture
+}

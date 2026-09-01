@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="ASCII"?>
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="model" nsURI="http://g5.1c.ru/v8/dt/bsl/index/model" nsPrefix="bslindex">
+  <eClassifiers xsi:type="ecore:EClass" name="ModuleContextDefIndex">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="contextDef" containment="true" resolveProxies="false">
+      <eType xsi:type="ecore:EClass" href="g5.1c.ru.v8.dt.bsl.contextdef.model.ecore#//BslContextDef"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="methods" upperBound="-1" eType="//ContextDefMethodInfo" containment="true" resolveProxies="false"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="properties" upperBound="-1" eType="//ContextDefPropertyInfo" containment="true" resolveProxies="false"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="typeIndexStore" unique="false" eType="//ByteArray"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ModuleResourceDescriptionIndex">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="resourceDescriptionStore" unique="false" eType="//ByteArray"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="resourceDescriptionReferenceStore" unique="false" eType="//ByteArray"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="importedNames" unique="false" upperBound="-1">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ContextDefItemInfo" abstract="true">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="envs" unique="false" eType="//Environments"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="sourceUri" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ContextDefPropertyInfo" eSuperTypes="//ContextDefItemInfo"/>
+  <eClassifiers xsi:type="ecore:EClass" name="ContextDefMethodInfo" eSuperTypes="//ContextDefItemInfo">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="function" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="serverCall" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="deprecated" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="minParams" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="outParams" unique="false" upperBound="-1">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EDataType" name="ByteArray" instanceClassName="byte[]"/>
+  <eClassifiers xsi:type="ecore:EDataType" name="Environments" instanceClassName="com._1c.g5.v8.dt.mcore.util.Environments"/>
+</ecore:EPackage>

@@ -1,0 +1,261 @@
+@GenModel(prefix="Mapping", loadInitialization="false", literalsInterface="true", nonNLSMarkers="true",
+	copyrightText="Copyright (C) 2015, 1C", updateClasspath="false")
+@Ecore(nsPrefix="form", nsURI="http://g5.1c.ru/v8/dt/form.mapping")
+package com._1c.g5.v8.dt.form.mapping.model
+
+import com._1c.g5.v8.dt.form.model.AbstractDataPath
+import com._1c.g5.v8.dt.form.model.Form
+import com._1c.g5.v8.dt.form.model.FormAttribute
+import com._1c.g5.v8.dt.form.model.FormCommandInterfaceItem
+import com._1c.g5.v8.dt.form.model.FormCommandInterfaceItems
+import com._1c.g5.v8.dt.form.model.FormItem
+import com._1c.g5.v8.dt.form.model.Table
+import com._1c.g5.v8.dt.mcore.Command
+import com._1c.g5.v8.dt.mcore.CommandGroup
+import com._1c.g5.v8.dt.metadata.mdclass.Configuration
+import com._1c.g5.v8.dt.metadata.mdclass.Subsystem
+import org.eclipse.emf.ecore.EObject
+
+interface IMappingModel<TDomain>
+{
+	TDomain domain
+}
+
+interface MappingNamed
+{
+	String name
+}
+
+class Path extends IMappingModel<AbstractDataPath>
+{
+	String path
+}
+
+/* Start form items mapping */
+interface ItemsHolder<TDomain> extends IMappingModel<TDomain>
+{
+	contains Item[] items
+	int fixedItemSize="0"
+}
+
+class FormMapping extends MappingNamed, ItemsHolder<Form>
+{
+	boolean commandBarStateChangeable = "false"
+}
+
+class Item extends IMappingModel<FormItem>, MappingNamed
+{
+	ItemType ^type
+	boolean visible = "true"
+	contains Path[1] path
+	contains CommandName[1] command
+}
+
+class ItemContainer extends Item, ItemsHolder<FormItem>
+{
+	boolean commandBarStateChangeable = "false"
+	boolean contextMenuStateChangeable = "false"
+	boolean tooltipStateChangeable = "false"
+	boolean viewStatusStateChangeable = "false"
+	boolean searchControlStateChangeable = "false"
+	boolean searchStringStateChangeable = "false"
+	boolean autoTableStateChangeable = "false" // since 8.3.21
+}
+
+enum ItemType
+{
+	Field = 0
+	Button = 1
+	Table = 2
+	TableDynamic = 3
+	GroupUsual = 4
+	GroupUsualNotVisual=5
+	GroupButton = 6
+	GroupColumn = 7
+	GroupCommandBar = 8
+	GroupPage = 9
+	GroupPages = 10
+	GroupPopup = 11
+	DecorationLabel = 12
+	DecorationPicture= 13
+	Tooltip = 14
+	ContextMenu = 15
+	CommandBar = 16
+	Addition = 17
+	SearchControlAddition=18
+	SearchStringAddition = 19
+	ViewStatusAddition = 20
+	SelectedItemsActionsPanel = 21
+}
+
+class CommandName extends IMappingModel<Command>
+{
+	String command
+}
+
+/* End form items mapping */
+/* Start form parameterized command mapping */
+class ParameterizedCommandMapping
+{
+	contains ParameterizedAttributeItem[] attributes
+	contains ParameterizedTableItem[] tables
+}
+
+interface ParameterizedItem<T> extends IMappingModel<T>, MappingNamed
+{
+	contains ParameterizedCommand[] commands
+}
+
+class ParameterizedAttributeItem  extends ParameterizedItem<FormAttribute>
+{
+	boolean main = "false"
+}
+
+class ParameterizedTableItem extends ParameterizedItem<Table>
+{
+}
+
+class ParameterizedCommand extends IMappingModel<Command>, MappingNamed
+{
+	contains ParameterizedCommandPath[] paths opposite command
+}
+
+class ParameterizedCommandPath extends IMappingModel<EObject>
+{
+	container ParameterizedCommand command opposite paths
+	boolean mainRef = "false"
+	contains Path ruPath
+	contains Path enPath
+}
+
+/* End  form parameterized command mapping */
+/* Start form unparameterized command mapping */
+class IndependentCommandMapping extends IndependentNodeCotainer
+{
+}
+
+interface IndependentNode<T> extends IMappingModel<T>
+{
+}
+
+interface IndependentNodeCotainer
+{
+	contains IndependentNode<?>[] nodes
+}
+
+class DesktopNode extends IndependentNode<Configuration>, IndependentNodeCotainer
+{
+}
+
+class GroupNode extends IndependentNode<CommandGroup>
+{
+	contains IndependentCommand[] commands opposite parent
+	GroupNodeType ^type
+}
+
+class SubsystemNode extends IndependentNode<Subsystem>, IndependentNodeCotainer
+{
+	
+}
+
+class IndependentCommand extends IMappingModel<Command>, MappingNamed
+{
+	container GroupNode parent opposite commands
+}
+
+enum GroupNodeType
+{
+	Custom = 0
+	Important = 1
+	Ordinary = 2
+	SeeAlso = 3
+	Create = 4
+	Tools = 5
+	Reposts = 6
+	FormImportant = 7
+	FormGoTo = 8
+	FormSeeAlso = 9
+	FormActionImportant = 10
+	FormGenerate = 11
+}
+
+/* End  form unparameterized command mapping */
+
+/* Start form command interface mapping */
+class CommandInterfaceMapping
+{
+	contains Panel[2] panels
+	refers AutoGroupItem[] autoCommands
+	contains AutoCommandMapEntry[] persitedAutoCommands
+}
+
+class AutoCommandMapEntry wraps java.util.Map$Entry
+{
+	String[1] key
+	refers FormCommandInterfaceItem[1] value
+}
+
+
+class Panel extends IMappingModel<FormCommandInterfaceItems>, MappingNamed
+{
+	PanelType ^type
+	contains Group[] groups
+}
+
+class Group extends IMappingModel<CommandGroup>, MappingNamed
+{
+	GroupType ^type
+	contains GroupItem<?>[] items
+	int countAddedItem = "0"
+}
+
+abstract class GroupItem<T> extends IMappingModel<T>, MappingNamed
+{
+	boolean auto = "false"
+	boolean managedPosition = "true"
+	boolean fullEditingSupport = "false"
+	contains Path[1] pathRu
+	contains Path[1] pathEn
+	boolean hasPath = "false"
+	GroupItemVisibleType visibleType = "CheckedSame"
+}
+
+class PersistedGroupItem extends GroupItem<FormCommandInterfaceItem>
+{
+	boolean suppressesItems = "false"
+}
+
+class AutoGroupItem extends GroupItem<Command>
+{
+}
+
+enum PanelType
+{
+	NAVIGATION = 0
+	COMMAND_BAR = 1
+}
+
+enum GroupType
+{
+	COMMON_GROUP = 0
+	NAVIGATION_IMPORTANT = 1
+	NAVIGATION_GOTO = 2
+	NAVIGATION_SEE_ALSO = 3
+	COMMAND_BAR_IMPORTANT = 4
+	COMMAND_BAR_GENERATE = 5
+	
+	NAVIGATION_OTHERS = 6
+	COMMAND_BAR_OTHERS = 7
+}
+
+enum GroupItemVisibleType
+{
+	CheckedSame
+	UncheckedSame
+	CheckedDifferent
+	UncheckedDifferent
+	CheckedAuto
+	UncheckedAuto
+}
+
+/* End form command interface mapping */

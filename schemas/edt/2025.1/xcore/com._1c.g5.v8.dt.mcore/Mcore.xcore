@@ -1,0 +1,1172 @@
+@GenModel(loadInitialization="false", literalsInterface="true", nonNLSMarkers="true",
+    copyrightText="Copyright (C) 2013-2025, 1C", updateClasspath="false", featureDelegation="Reflective",
+    rootExtendsClass="com._1c.g5.v8.bm.core.BmObject")
+@Ecore(nsPrefix="core", nsURI="http://g5.1c.ru/v8/dt/mcore")
+package com._1c.g5.v8.dt.mcore
+
+import java.math.BigDecimal
+import java.util.HashSet
+import java.util.Map$Entry
+import java.util.UUID
+import org.eclipse.emf.ecore.EObject
+import org.eclipse.emf.ecore.EDiagnosticChain
+import org.eclipse.emf.ecore.EMap
+import com._1c.g5.v8.dt.mcore.impl.EnvironmentalExtension
+import com._1c.g5.v8.dt.mcore.impl.FontRefExtension
+import com._1c.g5.v8.dt.mcore.impl.IrresolvableReferenceValueValidator
+import com._1c.g5.v8.dt.mcore.util.CompositeId
+import com._1c.g5.v8.dt.mcore.util.Date
+import com._1c.g5.v8.dt.mcore.util.Environment
+import com._1c.g5.v8.dt.mcore.util.Environments
+import com._1c.g5.v8.dt.mcore.util.McoreTypeSetExtension
+import org.eclipse.emf.common.util.BasicEList
+import org.eclipse.emf.common.util.DelegatingEList.UnmodifiableEList
+import java.util.ArrayList
+import org.eclipse.emf.common.util.Enumerator
+import com._1c.g5.v8.dt.mcore.util.Enumerators
+import org.eclipse.emf.common.util.ECollections
+import com._1c.g5.v8.dt.mcore.util.McoreUtil
+
+annotation "http://www.1c.ru/v8/bm/CollectionItemId" as CollectionItemId
+annotation "http://www.1c.ru/v8/bm/ForceDirectReference" as ForceDirectReference
+
+type Uuid wraps UUID
+create
+{
+    if (it !== null) UUID::fromString(it)
+}
+convert
+{ 
+    if (it !== null) it.toString()
+}
+
+type CompositeId wraps CompositeId
+create
+{
+    if (it !== null) CompositeId::fromString(it)
+}
+convert
+{
+    if (it !== null) it.toString()
+}
+
+type Date wraps Date
+create
+{
+    if (it !== null) Date::fromString(it)
+}
+convert
+{
+    if (it !== null) it.toString()
+}
+
+type Environment wraps Environment
+create
+{
+    if (it !== null) Environment::valueOf(it)
+}
+convert
+{
+    if (it !== null) it.toString()
+}
+
+type Environments wraps Environments
+create
+{
+    if (it !== null) Environments::fromString(it)
+}
+convert
+{
+    if (it !== null) it.toString()
+}
+
+type Enumerator wraps Enumerator
+create
+{
+    if (it !== null) Enumerators::fromString(it)
+}
+convert
+{
+    if (it !== null) Enumerators::toString(it)
+}
+
+abstract class Environmental
+{
+    Environments environments
+    op Environments environments() {
+        EnvironmentalExtension::environments(this)
+    }
+}
+
+// Может использоваться во многих местах
+// (core)
+class LocalStringMapEntry wraps Entry
+{
+    String[1] key
+    String[1] value
+}
+
+class StringKeyAndValue
+{
+    String key
+    String value
+}
+
+abstract class NamedElement
+{
+    String[1] name
+}
+
+abstract class DuallyNamedElement extends NamedElement
+{
+    String nameRu
+}
+
+abstract class VersionedItem
+{
+    String deprecatedSince
+    String compatibilityMode
+    String[] replacedBy
+}
+
+enum InterfaceType
+{
+    Any as "Any"
+    Taxi as "Taxi"
+    Version8_5 as "Version8_5"
+}
+
+abstract class InterfaceDependentItem
+{
+    InterfaceType interfaceType = "Any"
+}
+
+// type ------------------------------------------------------------------------
+abstract class TypeItem extends DuallyNamedElement, Environmental // TODO: TypeSets are not available in bsl maybe TypeItem shouldn't extend Environmental?  
+{
+	CompositeId compositeId
+}
+
+class Type extends TypeItem, VersionedItem, InterfaceDependentItem
+{
+    contains Ctor[] ctors
+    contains ContextDef contextDef
+    contains Event[] events
+    boolean sysEnum
+    boolean createdByNewOperator = "true"
+    refers TypeItem parentType
+    boolean iterable
+    boolean indexAccessible
+    boolean exchangeWithServer
+    contains TypeContainer collectionElementTypes
+    op Event[] allEvents() {
+        val allEvents = new ArrayList<Event>();
+        allEvents.addAll(this.getEvents());
+        for (refContextDef : this.getContextDef().allRefContextDefs()) {
+            if (refContextDef.eContainer() instanceof Type) {
+                val refType = refContextDef.eContainer() as Type;
+                if (refType != this) {
+                    allEvents.addAll(refType.getEvents());
+                }
+            }
+        }
+        return new UnmodifiableEList(allEvents);
+    }
+}
+
+class PromiseType extends Type
+{
+    contains TypeContainer wrapTypes
+    op String getName() {
+        return "Promise"
+    }
+    op String getNameRu() {
+        return "Обещание"
+    }
+    op boolean isSysEnum() {
+        return false
+    }
+    op boolean isCreatedByNewOperator() {
+        return false
+    }
+    op boolean isIterable() {
+        return false
+    }
+    op boolean isIndexAccessible() {
+        return false
+    }
+    op boolean isExchangeWithServer() {
+        return false
+    }
+    op Environments getEnvironments() {
+        return Environments.ALL_CLIENTS.remove(Environment.CLIENT).remove(Environment.EXTERNAL_CONN)
+    }
+    op ContextDef getContextDef() {
+        return McoreUtil.emptyContextDef
+    }
+}
+
+class EmptyContextDef extends ContextDef
+{
+    op Property[] getProperties() {
+        return ECollections.emptyEList
+    }
+    op Method[] getMethods() {
+        return ECollections.emptyEList
+    }
+    op ContextDef[] getRefContextDefs() {
+        return ECollections.emptyEList
+    }
+    op Property[] allProperties() {
+        return ECollections.emptyEList
+    }
+    op Method[] allMethods() {
+        return ECollections.emptyEList
+    }
+    op ContextDef[] allRefContextDefs() {
+        return ECollections.emptyEList
+    }
+}
+
+class Ctor extends VersionedItem, InterfaceDependentItem
+{
+    int minParams // non-negative
+    int maxParams // >= minParams or -1 (unlimited)
+    contains Parameter[] params
+}
+
+class FakeCtor
+{
+    contains FakeParameter[] params
+    String typeName
+}
+
+class FakeParameter
+{
+    String name
+    String[] types
+}
+
+/*
+ * Can handle its own types if it is produced typeset.
+ * To get types of this typeset you should use types(context) method
+ */
+class TypeSet extends TypeItem
+{
+    refers Type[] baseTypes
+    refers Type[] types
+    op Type[] types(EObject context) {
+        return McoreTypeSetExtension::getTypes(context, this)
+    }
+}
+
+class NumberQualifiers
+{
+    @GenModel(documentation="From https://msdn.microsoft.com/en-us/library/ms190476.aspx.\n<br>\n<i>For example, the number 123.45 has a precision of 5 and a scale of 2.</i>\nPrecision is the number of digits in a number.\n<p>\nIn xdto model this is property \"Digits\"")
+    int precision
+    @GenModel(documentation="Scale is the number of digits to the right of the decimal point in a number.\n<i>For example, the number 123.45 has a precision of 5 and a scale of 2.</i>\n<p>\nIn xdto model this is property \"FractionDigits\"")
+    int scale
+    boolean nonNegative
+}
+
+class StringQualifiers
+{
+    int length
+    boolean fixed
+}
+
+enum DateFractions
+{
+    DateTime = 0
+    Date = 1
+    Time = 2
+}
+
+class DateQualifiers
+{
+    DateFractions dateFractions
+}
+
+class BinaryQualifiers
+{
+    int length
+    boolean fixed
+}
+
+class TypeDescription
+{
+    refers TypeItem[] types
+    contains NumberQualifiers numberQualifiers
+    contains StringQualifiers stringQualifiers
+    contains DateQualifiers dateQualifiers
+    contains BinaryQualifiers binaryQualifiers
+}
+
+// TODO
+abstract class Value
+{
+}
+
+class TypeValue extends Value
+{
+    refers TypeItem value
+}
+
+class TypeDescriptionValue extends Value
+{
+    contains TypeDescription value
+}
+
+class UndefinedValue extends Value
+{
+}
+
+class NullValue extends Value
+{
+}
+
+class NumberValue extends Value
+{
+    BigDecimal[1] value
+}
+
+class BooleanValue extends Value
+{
+    boolean value
+}
+
+class StringValue extends Value
+{
+    String[1] value
+}
+
+class DateValue extends Value
+{
+    Date[1] value
+}
+
+class BinaryValue extends Value
+{
+    String[1] value
+}
+
+class ReferenceValue extends Value
+{
+    refers EObject value
+}
+
+class EnumValue extends Value
+{
+    Enumerator[1] value
+}
+
+class SysEnumValue extends Value
+{
+    String value // contains system enumeration type name + dot + enum literal (example: VerticalAlign.Full)
+}
+
+class ColorValue extends Value
+{
+    contains Color[1] value
+}
+
+class FontValue extends Value
+{
+    contains Font[1] value
+}
+
+class LineValue extends Value
+{
+    contains Line[1] value
+}
+
+class BorderValue extends Value
+{
+    contains Border[1] value
+}
+
+class IrresolvableReferenceValue extends Value
+{
+    Uuid[1] refTypeId
+    Uuid[1] instanceId
+    op boolean validate(EDiagnosticChain diagnostics, EMap<Object, Object>context) {
+        IrresolvableReferenceValueValidator::validate(this, diagnostics, context)
+    }
+}
+
+class ValueList extends Value
+{
+    contains Value[] values
+}
+
+class FixedArrayValue extends Value
+{
+    contains Value[] values
+}
+
+class TypedValueListItem
+{
+    contains Value value
+    String presentation
+    int checkState
+    contains Picture picture
+    int Id
+    boolean formatPresentationSpecified
+    String formatPresentation
+}
+
+class TypedValueList extends Value
+{
+    contains TypeDescription[1] valueType
+    contains TypedValueList availableValues
+    int lastId
+    contains TypedValueListItem[] items
+}
+
+class StructureProperty
+{
+    String[1] name
+    contains unsettable Value value
+}
+
+class Structure
+{
+    contains StructureProperty[] property
+}
+
+class UuidValue extends Value
+{
+    Uuid[1] value
+}
+
+class RuntimeValue extends Value
+{
+    String nsUri
+    String prefix
+    String typeName
+    String content
+    contains LocalStringMapEntry[] attributes
+}
+
+// from xdto/core.xsd
+enum StandardBeginningDateVariant
+{
+    Custom = 0
+    BeginningOfThisDay = 1
+    BeginningOfThisWeek = 2
+    BeginningOfThisTenDays = 3
+    BeginningOfThisMonth = 4
+    BeginningOfThisQuarter = 5
+    BeginningOfThisHalfYear = 6
+    BeginningOfThisYear = 7
+    BeginningOfLastDay = 8
+    BeginningOfLastWeek = 9
+    BeginningOfLastTenDays = 10
+    BeginningOfLastMonth = 11
+    BeginningOfLastQuarter = 12
+    BeginningOfLastHalfYear = 13
+    BeginningOfLastYear = 14
+    BeginningOfNextDay = 15
+    BeginningOfNextWeek = 16
+    BeginningOfNextTenDays = 17
+    BeginningOfNextMonth = 18
+    BeginningOfNextQuarter = 19
+    BeginningOfNextHalfYear = 20
+    BeginningOfNextYear = 21
+}
+
+// from xdto/core.xsd
+enum StandardPeriodVariant
+{
+    Custom = 0
+    Today = 1
+    ThisWeek = 2
+    ThisTenDays = 3
+    ThisMonth = 4
+    ThisQuarter = 5
+    ThisHalfYear = 6
+    ThisYear = 7
+    FromBeginningOfThisWeek = 8
+    FromBeginningOfThisTenDays = 9
+    FromBeginningOfThisMonth = 10
+    FromBeginningOfThisQuarter = 11
+    FromBeginningOfThisHalfYear = 12
+    FromBeginningOfThisYear = 13
+    Yesterday = 14
+    LastWeek = 15
+    LastTenDays = 16
+    LastMonth = 17
+    LastQuarter = 18
+    LastHalfYear = 19
+    LastYear = 20
+    LastWeekTillSameWeekDay = 21
+    LastTenDaysTillSameDayNumber = 22
+    LastMonthTillSameDate = 23
+    LastQuarterTillSameDate = 24
+    LastHalfYearTillSameDate = 25
+    LastYearTillSameDate = 26
+    Tomorrow = 27
+    NextWeek = 28
+    NextTenDays =  29
+    NextMonth = 30
+    NextQuarter = 31
+    NextHalfYear = 32
+    NextYear = 33
+    NextWeekTillSameWeekDay = 34
+    NextTenDaysTillSameDayNumber = 35
+    NextMonthTillSameDate = 36
+    NextQuarterTillSameDate = 37
+    NextHalfYearTillSameDate = 38
+    NextYearTillSameDate = 39
+    TillEndOfThisWeek = 40
+    TillEndOfThisTenDays = 41
+    TillEndOfThisMonth = 42
+    TillEndOfThisQuarter = 43
+    TillEndOfThisHalfYear = 44
+    TillEndOfThisYear = 45
+    Last7Days = 46
+    Next7Days = 47
+    Month = 48
+}
+
+// Стандартная дата начала
+class StandardBeginningDate
+{
+    StandardBeginningDateVariant variant = "Custom"
+    Date date
+}
+
+class StandardBeginningDateValue extends Value
+{
+    contains StandardBeginningDate[1] value
+}
+
+// Стандартный период
+class StandardPeriod
+{
+    StandardPeriodVariant variant = "Custom"
+    Date startDate
+    Date endDate
+}
+
+class StandardPeriodValue extends Value
+{
+    contains StandardPeriod[1] value
+}
+
+// context ---------------------------------------------------------------------
+class ContextDef extends Environmental
+{
+    contains Property[] properties
+    contains Method[] methods
+    @ForceDirectReference
+    refers ContextDef[] refContextDefs
+    op Property[] allProperties() {
+        val allProps = new ArrayList<Property>(2 * properties.size)
+        allProps.addAll(properties)
+        for (refCntxDef : allRefContextDefs) {
+            allProps.addAll(refCntxDef.properties)
+        }
+        new UnmodifiableEList(allProps)
+    }
+    op Method[] allMethods() {
+        val allMeths = new ArrayList<Method>(2 * methods.size)
+        allMeths.addAll(methods)
+        for (refCntxDef : allRefContextDefs) {
+            allMeths.addAll(refCntxDef.methods)
+        }
+        new UnmodifiableEList(allMeths)
+    }
+    op ContextDef[] allRefContextDefs() {
+        val allRefCntxDefs = new ArrayList<ContextDef>
+        if (!refContextDefs.empty) {
+            val refCntxDefSet = new HashSet<ContextDef>
+            for (refCntxDef : refContextDefs) {
+                for (refCntxDef2 : refCntxDef.allRefContextDefs) {
+                    if (refCntxDefSet.add(refCntxDef2))
+                        allRefCntxDefs.add(refCntxDef2)
+                }
+                if (refCntxDefSet.add(refCntxDef))
+                    allRefCntxDefs.add(refCntxDef)
+            }
+        }
+        new UnmodifiableEList(allRefCntxDefs)
+    }
+}
+
+class ContextDefWithRefItem extends ContextDef
+{
+    refers Property[] refProperties
+    refers Method[] refMethods
+    op Property[] allProperties() {
+        val items = super.allProperties()
+        val collectionProperties = new ArrayList<Property>(items.size + refProperties.size)
+        collectionProperties.addAll(refProperties)
+        collectionProperties.addAll(items)
+        new UnmodifiableEList(collectionProperties)
+    }
+    op Method[] allMethods() {
+        val items = super.allMethods()
+        val collectionMethods = new ArrayList<Method>(items.size + refMethods.size)
+        collectionMethods.addAll(refMethods)
+        collectionMethods.addAll(items)
+        new UnmodifiableEList(collectionMethods)
+    }
+}
+
+class Property extends DuallyNamedElement, Environmental, VersionedItem, InterfaceDependentItem
+{
+    boolean readable
+    boolean writable
+    boolean dependsOnMetadata
+    contains TypeContainer[1] typeContainer
+    ServerRequest serverRequest
+    op TypeItem[] getTypes() {
+        typeContainer.allTypes()
+    }
+}
+
+abstract class TypeContainer
+{
+    op TypeItem[] allTypes()
+}
+
+class TypeContainerRef extends TypeContainer
+{
+    refers TypeItem[] types
+    op TypeItem[] allTypes() {
+        if (types === null) {
+            return new BasicEList<TypeItem>
+        } else {
+            return types
+        }
+    }
+}
+
+class TypeContainerDef extends TypeContainer
+{
+    contains TypeItem[] types
+    op TypeItem[] allTypes() {
+        if (types === null) {
+            return new BasicEList<TypeItem>
+        } else {
+            return types
+        }
+    }
+}
+
+class DerivedProperty extends Property
+{
+    refers EObject source
+}
+
+class ContainingSourceDerivedProperty extends DerivedProperty
+{
+    contains EObject containingSource
+    op EObject getSource() {
+        return containingSource
+    }
+}
+
+abstract class AbstractMethod extends DuallyNamedElement, VersionedItem, InterfaceDependentItem
+{
+    contains ParamSet[1..*] paramSet
+    boolean retVal
+    refers TypeItem[] retValType
+    op ParamSet actualParamSet(int numParam) {
+        var bestSet = paramSet.get(0)
+        for (ParamSet ^set : paramSet) {
+            if (numParam >= ^set.minParams && (numParam <= ^set.maxParams || ^set.maxParams == -1)) {
+                if (numParam == ^set.minParams)
+                    return ^set
+                else
+                    bestSet = ^set
+            }
+        }
+        return bestSet
+    }
+}
+
+class Method extends AbstractMethod, Environmental
+{
+}
+
+class Event extends AbstractMethod, Environmental
+{
+    boolean serverCallWithContextNotAllowed
+    int order
+    Uuid uuid
+}
+
+class ParamSet
+{
+    int minParams
+    int maxParams
+    contains Parameter[] params
+    ServerRequest serverRequest
+}
+
+class Parameter extends DuallyNamedElement, VersionedItem
+{
+    refers TypeItem[] ^type
+    boolean out
+    boolean defaultValue
+}
+
+class GeneralContextDef extends ContextDef
+{
+}
+
+// fields ----------------------------------------------------------------------
+enum SourceType
+{
+    InputByString
+    ,               //< Поля, участвующие во вводе по строке
+    CharacteristicKind
+    ,          //< Поля, участвующие в видах дополнительных характеристик
+    Characteristic
+    ,              //< Поля, участвующие в дополнительных характеристиках
+    StandardFields
+    ,              //< Поля, свойства которых можно переопределять
+    ChoiceParamLinks
+    ,            //< Поля, участвующие в СвязяхПараметровВыбора и СвязьПоТипу
+    CharacteristicMainFields
+    ,    //< Поля, в типе которых есть тип, порожденный некоторыми объектами МД (Справочники и ПВХ)
+    EDBTableKeyFields
+    ,           //< Поля ключа таблицы внешнего источника данных
+    FieldsForLocking // < Поля, по которым можно блокировать
+}
+
+class Field extends DuallyNamedElement
+{
+    contains TypeDescription[1] ^type
+    boolean readOnly
+    SourceType[] sourceTypes
+    String fieldIdPrefix
+    derived String fieldId get {
+        fieldIdPrefix + ":" + name
+    }
+    int ^id
+}
+
+class DerivedField extends Field
+{
+    refers EObject[1] source
+}
+
+interface FieldSource
+{
+    @CollectionItemId(feature="fieldId")
+    contains transient Field[] fields // inferred
+    refers transient FieldSource[] refFieldSources
+}
+
+interface StandardTabularPartSource
+{
+    contains transient StandardTabularPart[] tabularParts // inferred
+}
+
+class StandardTabularPart extends DuallyNamedElement, FieldSource
+{
+    boolean readOnly
+    int ^id
+}
+
+// command ---------------------------------------------------------------------
+enum ButtonRepresentation
+{
+    Text = 0
+    Picture = 1
+    PictureAndText = 2
+    Auto = 3
+}
+
+// Наверное, только в метаданных
+// Используется в BasicCommand
+// from mngcore/cmi.xsd
+enum CommandParameterUseMode
+{
+    Single = 0
+    Multiple = 1
+}
+
+// Наверное только в метаданных
+// Используется в CommandGroup
+// from mngcore/mngapp.xsd
+enum CommandGroupCategory
+{
+    NavigationPanel = 0
+    ActionsPanel = 1
+    FormNavigationPanel = 2
+    FormCommandBar = 3
+}
+
+abstract class Command
+{
+}
+
+class CommandRef extends Command
+{
+    refers Command[1] command
+}
+
+abstract class CommandGroup
+{
+}
+
+class StandardCommandGroup extends DuallyNamedElement, CommandGroup
+{
+    CommandGroupCategory category
+    int priority
+}
+
+// uiobjects ---------------------------------------------------------------------
+class Point
+{
+    int x
+    int y
+}
+
+abstract class Picture
+{
+}
+
+class PictureRef extends Picture
+{
+    refers Picture[1] picture
+}
+
+abstract class PictureDef extends Picture
+{
+    contains Point glyph
+    contains Point transparentPixel
+}
+
+abstract class Color
+{
+    op int red()
+    op int green()
+    op int blue()
+    op CompositeId compositeId()
+}
+
+class ColorDef extends Color
+{
+    int red
+    int green
+    int blue
+    op int red() {
+        getRed()
+    }
+    op int green() {
+        getGreen()
+    }
+    op int blue() {
+        getBlue()
+    }
+    
+    op CompositeId compositeId() {
+        null
+    }
+}
+
+class ColorRef extends Color
+{
+    refers Color[1] color
+    op int red() {
+        if (color === null) throw new IllegalStateException("Color cannot be null") else color.red()
+    }
+    op int green() {
+        if (color === null) throw new IllegalStateException("Color cannot be null") else color.green()
+    }
+    op int blue() {
+        if (color === null) throw new IllegalStateException("Color cannot be null") else color.blue()
+    }
+    op CompositeId compositeId() {
+        if (color === null) throw new IllegalStateException("Color cannot be null") else color.compositeId()
+    }
+}
+
+abstract class StyleAppearanceItem extends NamedElement
+{
+}
+
+class StyleColor extends StyleAppearanceItem, ColorRef
+{
+	transient CompositeId compositeId
+	op CompositeId compositeId() {
+		getCompositeId()
+	}
+}
+
+class StyleBorder extends StyleAppearanceItem, BorderRef
+{
+}
+
+class StyleFont extends StyleAppearanceItem, FontRef
+{
+	transient CompositeId compositeId
+	op CompositeId compositeId() {
+		getCompositeId()
+	}
+}
+
+abstract class Border
+{
+    op BorderStyle style()
+    op int width()
+    op CompositeId compositeId()
+}
+
+class BorderDef extends Border
+{
+    BorderStyle style
+    int width
+    op BorderStyle style() {
+        getStyle()
+    }
+    op int width() {
+        getWidth()
+    }
+    
+    op CompositeId compositeId() {
+        null
+    }
+}
+
+enum BorderStyle
+{
+    None as "WithoutBorder" = 0
+    Single = 1
+    Double = 200
+    Embossed = 2
+    Indented = 3
+    Underline = 4
+    DoubleUnderline = 5
+    Rounded = 6
+    Overline = 7
+}
+
+class BorderRef extends Border
+{
+    refers Border[1] border
+    op BorderStyle style() {
+        if (border === null) throw new IllegalStateException("Border cannot be null") else border.style()
+    }
+    op int width() {
+        if (border === null) throw new IllegalStateException("Border cannot be null") else border.width()
+    }
+    op CompositeId compositeId() {
+        if (border === null) throw new IllegalStateException("Border cannot be null") else border.compositeId()
+    }
+}
+
+abstract class Font
+{
+    op String faceName()
+    op int height()
+    op float heightF() {
+        height()
+    }
+    op boolean bold()
+    op boolean italic()
+    op boolean underline()
+    op boolean strikeout()
+    op int scale()
+    op CompositeId compositeId()
+}
+
+interface MutableFont
+{
+    op void setFaceName(String faceName)
+    op void setHeight(float height)
+    op void setBold(boolean bold)
+    op void setItalic(boolean italic)
+    op void setUnderline(boolean underline)
+    op void setStrikeout(boolean strikeout)
+    op void setScale(int scale)
+}
+
+class FontDef extends Font, MutableFont
+{
+    String[1] faceName = ""
+    float height
+    boolean bold
+    boolean italic
+    boolean underline
+    boolean strikeout
+    int scale = "100"
+    
+    op String faceName() {
+        getFaceName()
+    }
+    op int height() {
+        (0.5f + getHeight()) as int
+    }
+    op float heightF() {
+        getHeight()
+    }
+    op void setHeight(int height) {
+        this.height = height as float
+    }
+    op boolean bold() {
+        isBold()
+    }
+    op boolean italic() {
+        isItalic()
+    }
+    op boolean underline() {
+        isUnderline()
+    }
+    op boolean strikeout() {
+        isStrikeout()
+    }
+    op int scale() {
+        getScale()
+    }
+    op CompositeId compositeId() {
+        null
+    }
+}
+
+class AutoFont extends Font, MutableFont
+{
+    unsettable String faceName
+    unsettable float height
+    unsettable boolean bold
+    unsettable boolean italic
+    unsettable boolean underline
+    unsettable boolean strikeout
+    unsettable int scale
+    
+    op String faceName() {
+        getFaceName()
+    }
+    op int height() {
+        (0.5f + getHeight()) as int
+    }
+    op float heightF() {
+        getHeight()
+    }
+    op void setHeight(int height) {
+        this.height = height as float
+    }
+    op boolean bold() {
+        isBold()
+    }
+    op boolean italic() {
+        isItalic()
+    }
+    op boolean underline() {
+        isUnderline()
+    }
+    op boolean strikeout() {
+        isStrikeout()
+    }
+    op int scale() {
+        getScale()
+    }
+    op CompositeId compositeId() {
+        null
+    }
+}
+
+class FontRef extends Font, MutableFont
+{
+    refers Font[1] font
+    unsettable String faceName
+    unsettable float height
+    unsettable boolean bold
+    unsettable boolean italic
+    unsettable boolean underline
+    unsettable boolean strikeout
+    unsettable int scale = "100"
+    op String faceName() {
+        FontRefExtension::faceName(this)
+    }
+    op int height() {
+        FontRefExtension::height(this)
+    }
+    op float heightF() {
+        FontRefExtension::heightF(this)
+    }
+    op boolean bold() {
+        FontRefExtension::bold(this)
+    }
+    op boolean italic() {
+        FontRefExtension::italic(this)
+    }
+    op boolean underline() {
+        FontRefExtension::underline(this)
+    }
+    op boolean strikeout() {
+        FontRefExtension::strikeout(this)
+    }
+    op int scale() {
+        FontRefExtension::scale(this)
+    }
+    op CompositeId compositeId() {
+        if (font === null)
+            throw new IllegalStateException("Font cannot be null")
+        else
+            font.compositeId()
+    }
+}
+
+abstract class AbstractLine
+{
+    int width
+    boolean gap
+}
+
+class Line extends AbstractLine
+{
+    contains Value style
+}
+
+// help ------------------------------------------------------------------------
+class Help
+{
+    @CollectionItemId(feature="lang")
+    contains HelpPage[] pages
+}
+
+class HelpPage
+{
+    String lang
+}
+
+// BM Optimizations ------------------------------------------------------------------------
+type List wraps com._1c.g5.v8.dt.mcore.impl.DelegatingRefContextDefEList<ContextDef>
+
+/* 
+ * ContextDef implementation which stores URIs of refContextDefs and resolves them each time they are requested. 
+ */
+class RefContextDelegatingContextDef extends ContextDef
+{
+}
+
+class QName
+{
+    String[1] name
+    String[1] nsUri
+}
+
+class AutoColor extends ColorDef
+{
+}
+
+enum ServerRequest
+{
+    No = 0
+    Yes = 1
+    Possible = 2
+}
+
+class PaletteColor extends StyleAppearanceItem, ColorRef // since 8.5.1
+{
+	transient CompositeId compositeId
+	op CompositeId compositeId() {
+		getCompositeId()
+	}
+}

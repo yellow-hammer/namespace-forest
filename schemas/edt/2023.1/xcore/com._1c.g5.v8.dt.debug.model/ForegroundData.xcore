@@ -1,0 +1,13 @@
+@Ecore(nsURI="http://v8.1c.ru/8.3/debugger/debugForegroundData")
+@GenModel(nonNLSMarkers="true", copyrightText="Copyright (C) 2016, 1C", updateClasspath="false")
+package com._1c.g5.v8.dt.debug.model.foreground.data
+
+@ExtendedMetaData(name="ForegroundWindowData", kind="elementOnly")
+class ForegroundWindowData {
+	@ExtendedMetaData(kind="element", name="computerName", namespace="##targetNamespace")
+	String[1] computerName
+	@ExtendedMetaData(kind="element", name="hwndForeground", namespace="##targetNamespace")
+	String[1] hwndForeground
+	@ExtendedMetaData(kind="element", name="managedWindow", namespace="##targetNamespace")
+	unsettable org.eclipse.emf.ecore.xml.^type.Boolean[1] managedWindow = "false"
+}

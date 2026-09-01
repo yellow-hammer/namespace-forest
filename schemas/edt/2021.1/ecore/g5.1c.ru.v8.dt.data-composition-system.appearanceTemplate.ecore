@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="ASCII"?>
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="appearancetemplate" nsURI="http://g5.1c.ru/v8/dt/data-composition-system/appearanceTemplate" nsPrefix="appearanceTemplate">
+  <eClassifiers xsi:type="ecore:EClass" name="DataCompositionAppearanceTemplate">
+    <eSuperTypes href="g5.1c.ru.v8.dt.data-composition-system.core.ecore#//ParameterValues"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="DataCompositionAppearanceTemplateArea">
+    <eSuperTypes href="http://g5.1c.ru/v8/dt/mcore#//Value"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="items" upperBound="-1" eType="//DataCompositionAppearanceTemplateAreaItem" containment="true" resolveProxies="false"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="DataCompositionAppearanceTemplateAreaItem">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="level" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="appearance" eType="//DataCompositionAppearanceTemplateAppearance" containment="true" resolveProxies="false"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="DataCompositionAppearanceTemplateAppearance">
+    <eSuperTypes href="g5.1c.ru.v8.dt.data-composition-system.core.ecore#//ParameterValues"/>
+  </eClassifiers>
+</ecore:EPackage>

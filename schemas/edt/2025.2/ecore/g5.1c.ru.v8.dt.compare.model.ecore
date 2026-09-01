@@ -1,0 +1,359 @@
+<?xml version="1.0" encoding="ASCII"?>
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="model" nsURI="http://g5.1c.ru/v8/dt/compare/model" nsPrefix="compare">
+  <eClassifiers xsi:type="ecore:EClass" name="IMatchingSymlinks" instanceClassName="com._1c.g5.v8.dt.compare.model.IMatchingSymlinks" abstract="true" interface="true"/>
+  <eClassifiers xsi:type="ecore:EClass" name="ComparisonNode" abstract="true">
+    <eOperations name="getParent" unique="false" eType="//ComparisonNode"/>
+    <eOperations name="getChildren" unique="false" upperBound="-1">
+      <eGenericType eTypeParameter="//ComparisonNode/getChildren/T"/>
+      <eTypeParameters name="T">
+        <eBounds eClassifier="//ComparisonNode"/>
+      </eTypeParameters>
+    </eOperations>
+    <eOperations name="hasChildren" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    </eOperations>
+    <eOperations name="isOneSideNode" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    </eOperations>
+    <eOperations name="getNodeSide" unique="false" eType="//ComparisonSide"/>
+    <eOperations name="isAncestorObjectExists" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    </eOperations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="comparisonFlags" unique="false" eType="//ComparisonFlags"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="topChildren" upperBound="-1" eType="//TopComparisonNode" eOpposite="//TopComparisonNode/parent"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="containmentChildren" upperBound="-1" eType="//ContainmentComparisonNode" containment="true" resolveProxies="false" eOpposite="//ContainmentComparisonNode/parent"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="mergeSettings" eType="//MergeSettings" containment="true" resolveProxies="false"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="mainObjectToBeDeleted" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="otherObjectToBeAdded" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="modifiedOnOther" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="oneSideParent" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="SymlinkComparisonNode" abstract="true" eSuperTypes="//MatchedObjectsComparisonNode //IMatchingSymlinks">
+    <eOperations name="getSymlink" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+      <eParameters name="side" unique="false" eType="//ComparisonSide"/>
+    </eOperations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="mainSymlink" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="otherSymlink" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="commonAncestorSymlink" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="TopComparisonNode" abstract="true" eSuperTypes="//SymlinkComparisonNode">
+    <eOperations name="isOneSideNode" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    </eOperations>
+    <eOperations name="getNodeSide" unique="false" eType="//ComparisonSide"/>
+    <eOperations name="isAncestorObjectExists" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    </eOperations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="parent" eType="//ComparisonNode" eOpposite="//ComparisonNode/topChildren"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="topDescendants" upperBound="-1" eType="//TopComparisonNode" eOpposite="//TopComparisonNode/topAncestor"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="topAncestor" eType="//TopComparisonNode" eOpposite="//TopComparisonNode/topDescendants"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="comparisonStatus" unique="false" eType="//ComparisonNodeStatus"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="mainObjectOnSupport" eType="//ObjectOnSupport" containment="true" resolveProxies="false"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="otherObjectOnSupport" eType="//ObjectOnSupport" containment="true" resolveProxies="false"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="TopModelObjectsComparisonNode" abstract="true" eSuperTypes="//TopComparisonNode"/>
+  <eClassifiers xsi:type="ecore:EClass" name="ContainmentComparisonNode" abstract="true" eSuperTypes="//ComparisonNode">
+    <eOperations name="getNodeSide" unique="false" eType="//ComparisonSide"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="parent" eType="//ComparisonNode" eOpposite="//ComparisonNode/containmentChildren"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="oneSideNode" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="origin" unique="false" eType="//ComparisonSide"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="RootComparisonNode" eSuperTypes="//TopComparisonNode"/>
+  <eClassifiers xsi:type="ecore:EClass" name="ExternalPropertyComparisonNode" abstract="true" eSuperTypes="//SingleFeatureComparisonNode //TopModelObjectsComparisonNode"/>
+  <eClassifiers xsi:type="ecore:EClass" name="SolidResourceComparisonNode" eSuperTypes="//ExternalPropertyComparisonNode">
+    <eOperations name="getQualifyingType" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+      <eParameters name="side" unique="false" eType="//ComparisonSide"/>
+    </eOperations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="mainQualifyingType" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="otherQualifyingType" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="ancestorQualifyingType" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="MatchedObjectsComparisonNode" abstract="true" eSuperTypes="//ComparisonNode">
+    <eOperations name="getPathToTopParent" unique="false" upperBound="-1">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+      <eParameters name="side" unique="false" eType="//ComparisonSide"/>
+    </eOperations>
+    <eOperations name="getObjectId" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//ELongObject"/>
+      <eParameters name="side" unique="false" eType="//ComparisonSide"/>
+    </eOperations>
+    <eOperations name="setObjectId" unique="false">
+      <eParameters name="side" unique="false" eType="//ComparisonSide"/>
+      <eParameters name="objectId" unique="false">
+        <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//ELongObject"/>
+      </eParameters>
+    </eOperations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="objectsEClassId" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EIntegerObject"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="mainPathToTopParent" unique="false" upperBound="-1">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="otherPathToTopParent" unique="false" upperBound="-1">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="ancestorPathToTopParent" unique="false" upperBound="-1">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="mainObjectId" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//ELongObject"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="otherObjectId" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//ELongObject"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="ancestorObjectId" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//ELongObject"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="ancestorObjectExists" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="FeatureComparisonNode" abstract="true" eSuperTypes="//ComparisonNode">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="feature" eType="//RelatedFeature" containment="true" resolveProxies="false"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="SingleFeatureComparisonNode" abstract="true" eSuperTypes="//FeatureComparisonNode //MatchedObjectsComparisonNode"/>
+  <eClassifiers xsi:type="ecore:EClass" name="CollectionComparisonNode" abstract="true" eSuperTypes="//ComparisonNode">
+    <eOperations name="getChildren" unique="false" eType="//CollectionChildrenList"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="FeatureCollectionComparisonNode" abstract="true" eSuperTypes="//CollectionComparisonNode //FeatureComparisonNode">
+    <eOperations name="getChildren" unique="false" eType="//FeatureCollectionChildrenList"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="ancestorObjectExists" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ContainmentFeatureComparisonNode" abstract="true" eSuperTypes="//FeatureComparisonNode"/>
+  <eClassifiers xsi:type="ecore:EClass" name="ReferenceFeatureComparisonNode" abstract="true" eSuperTypes="//FeatureComparisonNode"/>
+  <eClassifiers xsi:type="ecore:EClass" name="ContainmentCollectionComparisonNode" abstract="true" eSuperTypes="//FeatureCollectionComparisonNode //ContainmentFeatureComparisonNode">
+    <eOperations name="getChildren" unique="false" upperBound="-1" eType="//ContainmentCollectionElementComparisonNode"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ReferenceCollectionComparisonNode" abstract="true" eSuperTypes="//FeatureCollectionComparisonNode //ReferenceFeatureComparisonNode">
+    <eOperations name="getChildren" unique="false" upperBound="-1" eType="//ReferenceCollectionElementComparisonNode"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ValueCollectionComparisonNode" abstract="true" eSuperTypes="//FeatureCollectionComparisonNode">
+    <eOperations name="getChildren" unique="false" upperBound="-1" eType="//ValueCollectionElementComparisonNode"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="CollectionElementComparisonNode" abstract="true" eSuperTypes="//MatchedObjectsComparisonNode">
+    <eOperations name="getParent" unique="false" eType="//CollectionComparisonNode"/>
+    <eOperations name="getPosition" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EIntegerObject"/>
+      <eParameters name="side" unique="false" eType="//ComparisonSide"/>
+    </eOperations>
+    <eOperations name="setPosition" unique="false">
+      <eParameters name="side" unique="false" eType="//ComparisonSide"/>
+      <eParameters name="position" unique="false">
+        <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EIntegerObject"/>
+      </eParameters>
+    </eOperations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="mainPosition" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EIntegerObject"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="otherPosition" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EIntegerObject"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="ancestorPosition" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EIntegerObject"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="positionAfterMerge" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="leftNeighbour" eType="//CollectionElementNeighbour" containment="true" resolveProxies="false"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="FeatureCollectionElementComparisonNode" abstract="true" eSuperTypes="//CollectionElementComparisonNode">
+    <eOperations name="getParent" unique="false" eType="//FeatureCollectionComparisonNode"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="parentCollectionFeature" eType="//RelatedFeature" containment="true" resolveProxies="false"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="SingleValueComparisonNode" abstract="true" eSuperTypes="//SingleFeatureComparisonNode"/>
+  <eClassifiers xsi:type="ecore:EClass" name="ValueCollectionElementComparisonNode" abstract="true" eSuperTypes="//FeatureCollectionElementComparisonNode">
+    <eOperations name="getParent" unique="false" eType="//ValueCollectionComparisonNode"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="SingleContainmentFeatureComparisonNode" abstract="true" eSuperTypes="//ContainmentFeatureComparisonNode //SingleFeatureComparisonNode"/>
+  <eClassifiers xsi:type="ecore:EClass" name="ContainmentCollectionElementComparisonNode" abstract="true" eSuperTypes="//FeatureCollectionElementComparisonNode">
+    <eOperations name="getParent" unique="false" eType="//ContainmentCollectionComparisonNode"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ReferencedObjectsComparisonNode" abstract="true" eSuperTypes="//MatchedObjectsComparisonNode">
+    <eOperations name="getRefSymlink" unique="false" eType="//UniqueSymlink">
+      <eParameters name="side" unique="false" eType="//ComparisonSide"/>
+    </eOperations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="mainRefSymlink" unique="false" eType="//UniqueSymlink"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="otherRefSymlink" unique="false" eType="//UniqueSymlink"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="ancestorRefSymlink" unique="false" eType="//UniqueSymlink"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="SingleReferenceFeatureComparisonNode" abstract="true" eSuperTypes="//ReferenceFeatureComparisonNode //SingleFeatureComparisonNode //ReferencedObjectsComparisonNode"/>
+  <eClassifiers xsi:type="ecore:EClass" name="ReferenceCollectionElementComparisonNode" abstract="true" eSuperTypes="//FeatureCollectionElementComparisonNode //ReferencedObjectsComparisonNode">
+    <eOperations name="getParent" unique="false" eType="//ReferenceCollectionComparisonNode"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="SingleValueImplComparisonNode" eSuperTypes="//SingleValueComparisonNode //ContainmentComparisonNode"/>
+  <eClassifiers xsi:type="ecore:EClass" name="ValueCollectionElementImplComparisonNode" eSuperTypes="//ContainmentComparisonNode //ValueCollectionElementComparisonNode">
+    <eOperations name="getParent" unique="false" eType="//ValueCollectionImplComparisonNode"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="SingleContainmentFeatureImplComparisonNode" eSuperTypes="//SingleContainmentFeatureComparisonNode //ContainmentComparisonNode"/>
+  <eClassifiers xsi:type="ecore:EClass" name="ContainmentCollectionElementImplComparisonNode" eSuperTypes="//ContainmentComparisonNode //ContainmentCollectionElementComparisonNode">
+    <eOperations name="getParent" unique="false" eType="//ContainmentCollectionImplComparisonNode"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="SingleReferenceFeatureImplComparisonNode" eSuperTypes="//SingleReferenceFeatureComparisonNode //ContainmentComparisonNode"/>
+  <eClassifiers xsi:type="ecore:EClass" name="ReferenceCollectionElementImplComparisonNode" eSuperTypes="//ContainmentComparisonNode //ReferenceCollectionElementComparisonNode">
+    <eOperations name="getParent" unique="false" eType="//ReferenceCollectionImplComparisonNode"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ValueCollectionImplComparisonNode" eSuperTypes="//ValueCollectionComparisonNode //ContainmentComparisonNode"/>
+  <eClassifiers xsi:type="ecore:EClass" name="ContainmentCollectionImplComparisonNode" eSuperTypes="//ContainmentCollectionComparisonNode //ContainmentComparisonNode"/>
+  <eClassifiers xsi:type="ecore:EClass" name="ReferenceCollectionImplComparisonNode" eSuperTypes="//ReferenceCollectionComparisonNode //ContainmentComparisonNode"/>
+  <eClassifiers xsi:type="ecore:EClass" name="TextNodeCustomMergeSettings" eSuperTypes="//CustomMergeSettings">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="customMergeResult" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="mergeConflicts" upperBound="-1" eType="//MergeConflict" containment="true" resolveProxies="false"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="MergeConflict">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="mainOffset" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="mainLength" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="otherOffset" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="otherLength" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="mergeResultOffset" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="mergeResultLength" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="RelatedFeature">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="featureId" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="parentFeatureEClassId" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="CollectionElementNeighbour">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="neighbourMainObjectId" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//ELongObject"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="neighbourNodeId" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//ELongObject"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="neighbourMainSymlink" unique="false" eType="//UniqueSymlink"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="CustomMergeSettings" abstract="true" interface="true"/>
+  <eClassifiers xsi:type="ecore:EClass" name="MergeSettings">
+    <eOperations name="isDefaultMergeRule" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    </eOperations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="mergeRule" unique="false" eType="//MergeRule"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="defaultMergeRule" unique="false" eType="//MergeRule"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="availableMergeRules" unique="false" upperBound="-1" eType="//MergeRule"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="mustBeMerged" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="canBeMerged" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="haveChildrenExcludedFromMerge" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="mergeRuleSetByUser" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="orderRule" eType="//OrderRule" containment="true" resolveProxies="false"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="customSettings" eType="//CustomMergeSettings" containment="true" resolveProxies="false"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="OrderRule">
+    <eOperations name="isDefaultOrderSide" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    </eOperations>
+    <eOperations name="getDefaultOrderSide" unique="false" eType="//ComparisonSide"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="orderSide" unique="false" eType="//ComparisonSide"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="orderSetByUser" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ObjectOnSupport">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="canBeEdited" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="canBeDeleted" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="OtherSymlinkTopNodeId">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="nodeId" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//ELong"/>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="CommonAncestorSymlinkTopNodeId">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="nodeId" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//ELong"/>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ManifestComparisonNode" eSuperTypes="//TopComparisonNode //CollectionComparisonNode">
+    <eOperations name="getChildren" unique="false" upperBound="-1" eType="//ManifestHeaderComparisonNode"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ManifestHeaderComparisonNode" eSuperTypes="//ContainmentComparisonNode //CollectionElementComparisonNode">
+    <eOperations name="getParent" unique="false" eType="//ManifestComparisonNode"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="headerName" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="mainHeaderValue" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="otherHeaderValue" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="ancestorHeaderValue" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="UnsupportedObjectComparisonNode" eSuperTypes="//TopComparisonNode"/>
+  <eClassifiers xsi:type="ecore:EEnum" name="ComparisonSide">
+    <eLiterals name="Main"/>
+    <eLiterals name="Other"/>
+    <eLiterals name="CommonAncestor"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="MergeRule">
+    <eLiterals name="GetFromOther"/>
+    <eLiterals name="DoNotMerge"/>
+    <eLiterals name="MergePrioritizingMain"/>
+    <eLiterals name="MergePrioritizingOther"/>
+    <eLiterals name="CustomMerge"/>
+    <eLiterals name="MergeUsingExternalTool"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="ComparisonNodeStatus">
+    <eLiterals name="Unfinished"/>
+    <eLiterals name="HasUnfinishedChildren"/>
+    <eLiterals name="Finished"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EDataType" name="ComparisonFlags" instanceClassName="com._1c.g5.v8.dt.compare.model.ComparisonFlags"/>
+  <eClassifiers xsi:type="ecore:EDataType" name="UniqueSymlink" instanceClassName="com._1c.g5.v8.dt.compare.model.UniqueSymlink"/>
+  <eClassifiers xsi:type="ecore:EDataType" name="CollectionChildrenList" instanceTypeName="org.eclipse.emf.common.util.EList&lt;? extends com._1c.g5.v8.dt.compare.model.CollectionElementComparisonNode>"/>
+  <eClassifiers xsi:type="ecore:EDataType" name="FeatureCollectionChildrenList" instanceTypeName="org.eclipse.emf.common.util.EList&lt;? extends com._1c.g5.v8.dt.compare.model.FeatureCollectionElementComparisonNode>"/>
+</ecore:EPackage>

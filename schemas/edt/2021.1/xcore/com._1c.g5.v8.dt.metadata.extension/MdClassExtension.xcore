@@ -1,0 +1,535 @@
+@GenModel(loadInitialization="false", literalsInterface="true", nonNLSMarkers="true", prefix="MdClassExtension",
+    copyrightText="Copyright (C) 2016, 1C", updateClasspath="false", featureDelegation="Reflective",
+    rootExtendsClass="com._1c.g5.v8.bm.core.BmObject", rootExtendsInterface="com._1c.g5.v8.bm.core.IBmObject")
+@Ecore(nsPrefix="mdclassExtension", nsURI="http://g5.1c.ru/v8/dt/metadata/mdclass/extension")
+package com._1c.g5.v8.dt.metadata.mdclass.^extension
+
+import com._1c.g5.v8.dt.metadata.mdclass.ObjectExtension
+import com._1c.g5.v8.dt.metadata.mdclass.^extension.^type.MdPropertyState
+import com._1c.g5.v8.dt.mcore.TypeItem
+import com._1c.g5.v8.dt.mcore.NumberQualifiers
+import com._1c.g5.v8.dt.mcore.StringQualifiers
+import com._1c.g5.v8.dt.mcore.DateQualifiers
+import com._1c.g5.v8.dt.mcore.BinaryQualifiers
+import com._1c.g5.v8.dt.metadata.^extension.util.TypeDescriptionExtensionConverter
+import com._1c.g5.v8.dt.mcore.TypeDescription
+import com._1c.g5.v8.dt.metadata.mdclass.MdProperty
+import com._1c.g5.v8.dt.metadata.mdclass.TypeDescriptionProvider
+
+// Extensoion features with type MdPropertyState are intended to be named exactly as native object features.
+class MdObjectExtension extends ObjectExtension
+{
+    MdPropertyState extendedConfigurationObject
+}
+
+class BasicCommandExtension extends MdObjectExtension
+{
+    MdPropertyState group
+    MdPropertyState commandParameterType
+    MdPropertyState commandModule
+    MdPropertyState picture
+}
+
+class BasicFormExtension extends MdObjectExtension
+{
+    MdPropertyState form
+}
+
+abstract class TypeDescriptionExtensionProvider extends TypeDescriptionProvider
+{
+    op TypeDescription getTypeDescription()
+    {
+        TypeDescriptionExtensionConverter.toTypeDescription(this);
+    }
+}
+
+class BasicFeatureExtension extends MdObjectExtension, TypeDescriptionExtensionProvider
+{
+    MdPropertyState ^type
+    @MdProperty(code = "Type")
+    contains TypeDescriptionExtension typeExtension // since 8.3.18 has new rule for adopting type description
+}
+
+class BasicTabularSectionExtension extends MdObjectExtension
+{
+}
+
+class BasicTemplateExtension extends MdObjectExtension
+{
+    MdPropertyState template
+}
+
+abstract class BasicDbObjectExtension extends MdObjectExtension
+{
+    MdPropertyState objectModule
+    MdPropertyState managerModule
+}
+
+class RoleExtension extends MdObjectExtension
+{
+    MdPropertyState rights
+}
+
+class LanguageExtension extends MdObjectExtension
+{
+    MdPropertyState languageCode
+}
+
+class SessionParameterExtension extends MdObjectExtension, TypeDescriptionExtensionProvider
+{
+    MdPropertyState ^type
+    @MdProperty(code = "Type")
+    contains TypeDescriptionExtension typeExtension // since 8.3.18 has new rule for adopting type description
+}
+
+class CommonModuleExtension extends MdObjectExtension
+{
+    MdPropertyState module
+    MdPropertyState global
+    MdPropertyState clientManagedApplication
+    MdPropertyState server
+    MdPropertyState externalConnection
+    MdPropertyState serverCall
+    MdPropertyState clientOrdinaryApplication
+    MdPropertyState returnValuesReuse
+}
+
+class CommonAttributeExtension extends BasicFeatureExtension
+{
+    MdPropertyState content
+    MdPropertyState autoUse
+    MdPropertyState dataSeparation
+    MdPropertyState separatedDataUse
+}
+
+class CommonFormExtension extends BasicFormExtension
+{
+}
+
+class CommonPictureExtension extends MdObjectExtension
+{
+    MdPropertyState availabilityForChoice
+    MdPropertyState availabilityForAppearance
+}
+
+class CommandGroupExtension extends MdObjectExtension
+{
+    MdPropertyState picture
+    MdPropertyState category
+}
+
+class CatalogExtension extends BasicDbObjectExtension
+{
+    MdPropertyState hierarchical
+    MdPropertyState hierarchyType
+    MdPropertyState owners
+    MdPropertyState codeLength
+    MdPropertyState descriptionLength
+    MdPropertyState codeType
+    MdPropertyState codeAllowedLength
+    MdPropertyState predefined
+    MdPropertyState defaultObjectForm
+    MdPropertyState defaultFolderForm
+    MdPropertyState defaultListForm
+    MdPropertyState defaultChoiceForm
+    MdPropertyState defaultFolderChoiceForm
+}
+
+class DocumentExtension extends BasicDbObjectExtension
+{
+    MdPropertyState numberType
+    MdPropertyState numberLength
+    MdPropertyState numberAllowedLength
+    MdPropertyState defaultObjectForm
+    MdPropertyState defaultListForm
+    MdPropertyState defaultChoiceForm
+    MdPropertyState registerRecords
+}
+
+class DocumentNumeratorExtension extends MdObjectExtension
+{
+    MdPropertyState numberType
+    MdPropertyState numberLength
+    MdPropertyState numberAllowedLength
+}
+
+class ChartOfCharacteristicTypesExtension extends BasicDbObjectExtension, TypeDescriptionExtensionProvider
+{
+    MdPropertyState ^type
+    @MdProperty(code = "Type")
+    contains TypeDescriptionExtension typeExtension // since 8.3.18 has new rule for adopting type description
+    MdPropertyState hierarchical
+    MdPropertyState codeLength
+    MdPropertyState codeAllowedLength
+    MdPropertyState descriptionLength
+    MdPropertyState predefined
+    MdPropertyState defaultObjectForm
+    MdPropertyState defaultFolderForm
+    MdPropertyState defaultListForm
+    MdPropertyState defaultChoiceForm
+    MdPropertyState defaultFolderChoiceForm
+}
+
+class EnumExtension extends MdObjectExtension
+{
+    MdPropertyState defaultListForm
+    MdPropertyState defaultChoiceForm
+    MdPropertyState managerModule
+}
+
+class InformationRegisterExtension extends MdObjectExtension
+{
+    MdPropertyState informationRegisterPeriodicity
+    MdPropertyState writeMode
+    MdPropertyState recordSetModule
+    MdPropertyState managerModule
+    MdPropertyState defaultRecordForm
+    MdPropertyState defaultListForm
+}
+
+class ConfigurationExtension extends MdObjectExtension
+{
+    MdPropertyState defaultRunMode
+    MdPropertyState usePurposes
+    MdPropertyState managedApplicationModule
+    MdPropertyState sessionModule
+    MdPropertyState externalConnectionModule
+    MdPropertyState commandInterface
+    MdPropertyState homePageWorkArea
+    MdPropertyState mainSectionCommandInterface
+    MdPropertyState defaultLanguage
+    MdPropertyState defaultReportForm
+    MdPropertyState defaultReportSettingsForm
+    MdPropertyState defaultReportVariantForm
+    MdPropertyState defaultDynamicListSettingsForm
+    MdPropertyState defaultSearchForm
+    MdPropertyState defaultDataHistoryChangeHistoryForm // since 8.3.13
+    MdPropertyState defaultDataHistoryVersionDataForm // since 8.3.13
+    MdPropertyState defaultDataHistoryVersionDifferencesForm // since 8.3.13
+    MdPropertyState modalityUseMode
+    MdPropertyState synchronousExtensionAndAddInCallUseMode
+    MdPropertyState interfaceCompatibilityMode
+    MdPropertyState compatibilityMode
+    MdPropertyState defaultStyle
+    MdPropertyState mainSectionPicture // since 8.3.13
+    MdPropertyState logo // since 8.3.13
+    MdPropertyState splash // since 8.3.13
+    MdPropertyState defaultRoles // since 8.3.14
+    MdPropertyState briefInformation // since 8.3.13
+    MdPropertyState detailedInformation // since 8.3.13
+    MdPropertyState copyright // since 8.3.13
+    MdPropertyState vendorInformationAddress // since 8.3.13
+    MdPropertyState configurationInformationAddress // since 8.3.13
+}
+
+class StyleItemExtension extends MdObjectExtension
+{
+    MdPropertyState ^type // ???
+    MdPropertyState value
+}
+
+class ExchangePlanExtension extends BasicDbObjectExtension
+{
+    MdPropertyState content
+    MdPropertyState defaultObjectForm
+    MdPropertyState defaultListForm
+    MdPropertyState defaultChoiceForm
+}
+
+class ExchangePlanContentItemExtension extends ObjectExtension
+{
+    MdPropertyState mdObject
+    boolean mdObjectIncluded = "true"
+}
+
+class SubsystemExtension extends MdObjectExtension
+{
+    MdPropertyState commandInterface
+    MdPropertyState picture
+}
+
+class WSReferenceExtension extends MdObjectExtension
+{
+}
+
+class EventSubscriptionExtension extends MdObjectExtension
+{
+    MdPropertyState source
+}
+
+class DefinedTypeExtension extends MdObjectExtension, TypeDescriptionExtensionProvider
+{
+    MdPropertyState ^type
+    @MdProperty(code = "Type")
+    contains TypeDescriptionExtension typeExtension // since 8.3.18 has new rule for adopting type description
+}
+
+class ConstantExtension extends MdObjectExtension, TypeDescriptionExtensionProvider
+{
+    MdPropertyState ^type
+    @MdProperty(code = "Type")
+    contains TypeDescriptionExtension typeExtension // since 8.3.18 has new rule for adopting type description
+    MdPropertyState defaultForm
+    MdPropertyState valueManagerModule
+    MdPropertyState managerModule
+}
+
+class SequenceExtension extends MdObjectExtension
+{
+    MdPropertyState recordSetModule
+}
+
+class SequenceDimensionExtension extends MdObjectExtension, TypeDescriptionExtensionProvider
+{
+    MdPropertyState ^type
+    @MdProperty(code = "Type")
+    contains TypeDescriptionExtension typeExtension // since 8.3.18 has new rule for adopting type description
+}
+
+class DocumentJournalExtension extends MdObjectExtension
+{
+    MdPropertyState registeredDocuments
+    MdPropertyState managerModule
+    MdPropertyState defaultForm
+}
+
+class ReportExtension extends MdObjectExtension
+{
+    MdPropertyState mainDataCompositionSchema
+    MdPropertyState objectModule
+    MdPropertyState managerModule
+    MdPropertyState defaultForm
+    MdPropertyState defaultSettingsForm
+    MdPropertyState defaultVariantForm
+}
+
+class DataProcessorExtension extends MdObjectExtension
+{
+    MdPropertyState defaultForm
+    MdPropertyState objectModule
+    MdPropertyState managerModule
+}
+
+class AccumulationRegisterExtension extends MdObjectExtension
+{
+    MdPropertyState registerType
+    MdPropertyState recordSetModule
+    MdPropertyState managerModule
+    MdPropertyState defaultListForm
+}
+
+class FunctionalOptionExtension extends MdObjectExtension
+{
+    MdPropertyState location
+    MdPropertyState content
+}
+
+class BusinessProcessExtension extends BasicDbObjectExtension
+{
+    MdPropertyState numberLength
+    MdPropertyState numberAllowedLength
+    MdPropertyState task
+    MdPropertyState defaultObjectForm
+    MdPropertyState defaultListForm
+    MdPropertyState defaultChoiceForm
+}
+
+class TaskExtension extends BasicDbObjectExtension
+{
+    MdPropertyState numberLength
+    MdPropertyState numberAllowedLength
+    MdPropertyState descriptionLength
+    MdPropertyState defaultObjectForm
+    MdPropertyState defaultListForm
+    MdPropertyState defaultChoiceForm
+}
+
+class ScheduledJobExtension extends MdObjectExtension
+{
+}
+
+class FunctionalOptionsParameterExtension extends MdObjectExtension
+{
+}
+
+class FilterCriterionExtension extends MdObjectExtension, TypeDescriptionExtensionProvider
+{
+    MdPropertyState ^type
+    @MdProperty(code = "Type")
+    contains TypeDescriptionExtension typeExtension // since 8.3.18 has new rule for adopting type description
+    MdPropertyState content
+    MdPropertyState defaultForm
+    MdPropertyState managerModule
+}
+
+class SettingsStorageExtension extends MdObjectExtension
+{
+    MdPropertyState managerModule
+    MdPropertyState defaultSaveForm
+    MdPropertyState defaultLoadForm
+}
+
+class XDTOPackageExtension extends MdObjectExtension
+{
+    MdPropertyState ^package
+}
+
+class WebServiceExtension extends MdObjectExtension
+{
+    MdPropertyState module
+}
+
+class HTTPServiceExtension extends MdObjectExtension
+{
+    MdPropertyState module
+}
+
+class ExternalDataSourceExtension extends MdObjectExtension
+{
+}
+
+class TableExtension extends MdObjectExtension
+{
+    MdPropertyState tableType
+    MdPropertyState tableDataType
+    MdPropertyState keyFields
+    MdPropertyState objectModule
+    MdPropertyState recordSetModule
+    MdPropertyState managerModule
+    MdPropertyState defaultObjectForm
+    MdPropertyState defaultRecordForm
+    MdPropertyState defaultListForm
+    MdPropertyState defaultChoiceForm
+}
+
+class FieldExtension extends MdObjectExtension, TypeDescriptionExtensionProvider
+{
+    MdPropertyState ^type
+    @MdProperty(code = "Type")
+    contains TypeDescriptionExtension typeExtension // since 8.3.18 has new rule for adopting type description
+}
+
+class CubeExtension extends MdObjectExtension
+{
+    MdPropertyState recordSetModule
+    MdPropertyState managerModule
+    MdPropertyState defaultRecordForm
+    MdPropertyState defaultListForm
+}
+
+class DimensionTableExtension extends MdObjectExtension
+{
+    MdPropertyState objectModule
+    MdPropertyState managerModule
+    MdPropertyState defaultObjectForm
+    MdPropertyState defaultListForm
+    MdPropertyState defaultChoiceForm
+}
+
+class DimensionExtension extends MdObjectExtension, TypeDescriptionExtensionProvider
+{
+    MdPropertyState ^type
+    @MdProperty(code = "Type")
+    contains TypeDescriptionExtension typeExtension // since 8.3.18 has new rule for adopting type description
+}
+
+class ResourceExtension extends MdObjectExtension, TypeDescriptionExtensionProvider
+{
+    MdPropertyState ^type
+    @MdProperty(code = "Type")
+    contains TypeDescriptionExtension typeExtension // since 8.3.18 has new rule for adopting type description
+}
+
+class FunctionExtension extends MdObjectExtension, TypeDescriptionExtensionProvider
+{
+    MdPropertyState ^type
+    @MdProperty(code = "Type")
+    contains TypeDescriptionExtension typeExtension // since 8.3.18 has new rule for adopting type description
+}
+
+class ChartOfAccountsExtension extends BasicDbObjectExtension
+{
+    MdPropertyState codeLength
+    MdPropertyState descriptionLength
+    MdPropertyState predefined
+    MdPropertyState extDimensionTypes // виды субконто
+    MdPropertyState maxExtDimensionCount
+    MdPropertyState defaultObjectForm
+    MdPropertyState defaultListForm
+    MdPropertyState defaultChoiceForm
+}
+
+class ChartOfCalculationTypesExtension extends BasicDbObjectExtension
+{
+    MdPropertyState codeLength
+    MdPropertyState descriptionLength
+    MdPropertyState codeType
+    MdPropertyState codeAllowedLength
+    MdPropertyState predefined
+    MdPropertyState dependenceOnCalculationTypes
+    MdPropertyState actionPeriodUse
+    MdPropertyState defaultObjectForm
+    MdPropertyState defaultListForm
+    MdPropertyState defaultChoiceForm
+}
+
+class AccountingRegisterExtension extends MdObjectExtension
+{
+    MdPropertyState chartOfAccounts
+    MdPropertyState correspondence
+    MdPropertyState periodAdjustmentLength
+    MdPropertyState recordSetModule
+    MdPropertyState managerModule
+    MdPropertyState defaultListForm
+}
+
+class AccountingRegisterDimensionExtension extends BasicFeatureExtension
+{
+    MdPropertyState balance
+}
+
+class CalculationRegisterExtension extends MdObjectExtension
+{
+    MdPropertyState actionPeriod
+    MdPropertyState basePeriod
+    MdPropertyState schedule
+    MdPropertyState recordSetModule
+    MdPropertyState managerModule
+    MdPropertyState defaultListForm
+}
+
+class StyleExtension extends MdObjectExtension
+{
+    MdPropertyState style
+}
+
+class IntegrationServiceExtension extends MdObjectExtension
+{
+    MdPropertyState module
+}
+
+class BotExtension extends MdObjectExtension
+{
+    MdPropertyState module
+    MdPropertyState picture
+}
+
+class TypeDescriptionExtension
+{
+    contains TypeExtension[] types
+    contains NumberQualifiers numberQualifiers
+    contains StringQualifiers stringQualifiers
+    contains DateQualifiers dateQualifiers
+    contains BinaryQualifiers binaryQualifiers
+}
+
+class TypeExtension
+{
+    MdPropertyState state
+    refers TypeItem ^type
+}
+
+class ColumnExtension extends MdObjectExtension
+{
+    MdPropertyState references
+}

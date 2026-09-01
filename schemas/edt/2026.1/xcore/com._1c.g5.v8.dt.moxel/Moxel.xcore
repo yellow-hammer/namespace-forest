@@ -1,0 +1,873 @@
+@GenModel(loadInitialization="false", literalsInterface="true", nonNLSMarkers="true",
+	copyrightText="Copyright (C) 2013, 1C", updateClasspath="false",
+	featureDelegation="Reflective", rootExtendsClass="com._1c.g5.v8.bm.core.BmObject")
+@Ecore(nsPrefix="mxl", nsURI="http://g5.1c.ru/v8/dt/moxel")
+
+package com._1c.g5.v8.dt.moxel
+
+import com._1c.g5.v8.dt.mcore.Picture
+import com._1c.g5.v8.dt.mcore.Color
+import com._1c.g5.v8.dt.mcore.Font
+import com._1c.g5.v8.dt.mcore.Uuid
+import com._1c.g5.v8.dt.mcore.Point
+import com._1c.g5.v8.dt.mcore.Value
+import com._1c.g5.v8.dt.mcore.TypeDescription
+
+import com._1c.g5.v8.dt.moxel.content.SpreadsheetDocumentStepDirectionType
+import com._1c.g5.v8.dt.moxel.content.SpreadsheetDocumentTextDirectionType
+import com._1c.g5.v8.dt.moxel.content.Area
+import com._1c.g5.v8.dt.moxel.content.SpreadsheetLine
+import com._1c.g5.v8.dt.moxel.content.LocalString
+import com._1c.g5.v8.dt.moxel.content.HorizontalAlignment
+import com._1c.g5.v8.dt.moxel.content.VerticalAlignment
+import com._1c.g5.v8.dt.moxel.content.TextPlacement
+import com._1c.g5.v8.dt.moxel.content.Pattern
+import com._1c.g5.v8.dt.moxel.content.FillType
+import com._1c.g5.v8.dt.moxel.content.DetailUse
+import com._1c.g5.v8.dt.moxel.content.SizeChangeMode
+import com._1c.g5.v8.dt.moxel.content.SpreadsheetDocumentEditableCellShowType
+
+import com._1c.g5.v8.dt.metadata.common.PictureSize
+import com._1c.g5.v8.dt.metadata.common.CellTextPosition
+import com._1c.g5.v8.dt.metadata.common.SpreadsheetDocumentSavedPicturesDensity
+import com._1c.g5.v8.dt.metadata.common.SpreadsheetDocumentCellHighlightMode
+
+import org.eclipse.emf.ecore.EObject
+import com._1c.g5.v8.dt.mcore.RuntimeValue
+
+//
+// Табличный документ.
+//
+class SpreadsheetDocument
+{
+    contains LanguageSettings[1] languageSettings   // Языковые настройки.
+
+    refers Columns[1] columns                       // Колонки по умолчанию.
+    contains Columns[] allColumns                   // Все колонки.
+    contains RowMapEntry[] rows                     // Строки.
+    contains Drawing[] drawings                     // Рисунки.
+
+    contains Picture[] pictures                     // Картинки.
+
+    int backPicture                             // Индекс фоновой картинки.
+    boolean fixedBackground                         // Признак того, что фон зафиксирован.
+
+    contains Cell leftHeader                        // Верхний левый колонтитул.
+    contains Cell centerHeader                      // Верхний центральный колонтитул.
+    contains Cell rightHeader                       // Верхний правый колонтитул.
+    contains Cell leftFooter                        // Нижний левый колонтитул.
+    contains Cell centerFooter                      // Нижний центральный колонтитул.
+    contains Cell rightFooter                       // Нижний правый колонтитул.
+
+    boolean templateMode                            // Режим макета.
+    boolean totalsRight // Итоги выводятся справа. - в конфигураторе не сохраняется, в ЕДТ не приходит
+    boolean totalsBelow // Итоги выводятся снизу. - в конфигураторе не сохраняется, в ЕДТ не приходит
+    SpreadsheetDocumentStepDirectionType stepDirection = "ByColumns" // Направление перехода.
+
+    int[1] defaultFormatIndex                       // Индекс формата по умолчанию.
+    int[1] height                                   // Высота таблицы в строках.
+
+    contains RowGroup[] rowGroups                   // Группировка строк.
+    contains ColumnGroup[] columnGroups             // Группировка колонок.
+
+    contains Merge[] merges                         // Объединенные ячейки.
+    contains Merge[] unmerges                       // Разъединенные ячейки.
+    contains RowMerge[] rowMerges                   // Объедиения строк.
+    contains ColumnMerge[] columnMerges             // Объединения колонок.
+
+    contains NamedItemMapItem[] namedItems          // Именованные элементы.
+
+    String pringSettingsName                        // Ключ настроек печати.
+    contains PrintSettings printSettings            // Настройки печати.
+    contains Area printArea                         // Область печати.
+    contains Area repeatRows                        // Строки, повторяемые при печати.
+    contains Area repeatColumns                     // Колонки, повторяемые при печати.
+
+    contains DrawingsDataSource[] drawingDataSources  // Источники данных рисунков.
+
+    contains Color groupsBackColor                  // Цвет фона группировок.
+    contains Color groupsColor                      // Цвет линий группировок.
+    contains Color headersBackColor                 // Цвет фона заголовков.
+    contains Color headersColor                     // Цвет текста заголовков.
+
+    SpreadsheetDocumentTextDirectionType textDirection = "LeftToRight" // Направление текста. since 8.3.17.
+
+    boolean saveViewSettings                        // Нужно сохранять настройки отображения.
+    contains ViewSettings viewSettings              // Настройки отображения.
+    contains EmbeddedTableItem[] embeddedTables     // Встроенные таблицы.
+
+    contains Color[] colors                         // Используемые цвета.
+    contains Font[] fonts                           // Используемые шрифты.
+    contains SpreadsheetLine[] lines                // Линии ячеек и рисунков.
+    contains Format[] formats                       // Используемые форматы.
+
+    boolean readOnly = "false"                      // Признак "только для чтения"
+    boolean trueReadOnly = "false"                  // Признак полностью нередактируемого режима
+
+    contains SpreadsheetDocument baseSheet          // Базовый табличный документ (для расширения).
+	ExtensionAlgorithm extensionMethod = "Merge"    // Алгоритм расширения.
+
+	SpreadsheetDocumentSavedPicturesDensity savedPicturesDensity = "Original" // Плотность сжатия картинок, since 8.3.22
+}
+
+//
+// Языковые настройки табличного документа.
+//
+class LanguageSettings
+{
+    String[1] currentLanguage                       // Текущий язык.
+    String[1] defaultLanguage                       // Язык по умолчанию.
+    contains LanguageInfo[] languages               // Языки.
+    boolean aliasSet = "true"                      // m_aliasSet - always true because m_alias always = 1
+}
+
+//
+// Информация о языке.
+//
+class LanguageInfo
+{
+    String[1] languageId                            // Идентификатор языка.
+    String[1] languageCode                          // Код языка.
+    String description                              // Описание языка.
+}
+
+//
+// Колонки.
+//
+class Columns
+{
+    Uuid columnsId                                  // Идентификатор формта колонок.
+    int formatIndex                                 // Индекс формата колонок по умолчанию.
+    int size                                        // Количество колонок.
+    contains ColumnMapEntry[] columns               // Сами колонки.
+}
+
+//
+// Колонка табличного документа.
+//
+class Column
+{
+    int formatIndex                                 // Индекс формата.
+}
+
+//
+// Элемент карты колонок.
+//
+class ColumnMapEntry wraps java.util.Map$Entry
+{
+    Integer[1] key
+    contains Column[1] value
+}
+
+//
+// Строка табличного документа.
+//
+class Row
+{
+    refers Columns columns                          // Формат колонок для строки.
+    int formatIndex                                 // Индекс формата.
+    contains CellMapEntry[] cells                   // Ячейки.
+}
+
+//
+// Элемент карты строк.
+//
+class RowMapEntry wraps java.util.Map$Entry
+{
+    Integer[1] key
+    contains Row[1] value
+}
+
+//
+// Прямоугольник.
+//
+class Rect
+{
+    int x                                           // Начальная точка.
+    int y                                           // Начальная точка.
+    int width                                       // Ширина.
+    int height                                      // Высота.
+
+    op int normalX() { if (width >= 0) x else x + width }
+    op int normalY() { if (height >= 0) y else y + height }
+    op int normalWidth() { if (width >= 0) width else -width }
+    op int normalHeight() { if (height >= 0) height else -height }
+}
+
+//
+// Координатя точки в табличном документе с привязкой к ячейке.
+//
+class SpreadsheetPoint
+{
+    contains Point[1] cell                          // Адрес ячейки.
+    contains Point[1] offset                        // Смещение в ячейке.
+}
+
+//
+// Прямоугольник табличного документа.
+//
+class SpreadsheetRect
+{
+    contains SpreadsheetPoint[1] begin              // Начальная точка прямоугольника.
+    contains SpreadsheetPoint[1] end                // Конечная точка прямоугольника.
+}
+
+//
+// Тип рисунка табличного документа.
+//
+enum DrawingType
+{
+    Line
+    Rectangle
+    Text
+    Ellipse
+    Picture
+    Object
+    Group
+    Chart
+    GanttChart
+    PivotChart
+    Dendrogram
+    GeographicalSchema
+    Control
+    Comment
+}
+
+//
+// Рисунок табличного документа.
+//
+class Drawing
+{
+    int drawingId                                   // Идентификатор рисунка.
+    int formatIndex                                 // Индекс формата.
+
+    String detailParameter                          // Параметр расшифровки.
+    contains Value detailValue                      // Значение расшифровки.
+
+    contains SpreadsheetRect position               // Положение рисунка.
+    int zOrder                                      // Положение по оси Z
+}
+
+//
+// Рисунок - линия.
+//
+class LineDrawing extends Drawing
+{
+}
+
+//
+// Рисунок - прямоугольник.
+//
+class RectangleDrawing extends Drawing
+{
+}
+
+//
+// Рисунок - овал.
+//
+class EllipseDrawing extends Drawing
+{
+}
+
+//
+// Рисунок - текст.
+//
+class TextDrawing extends RectangleDrawing
+{
+    boolean autosize                                // Автоматический размер.
+
+    // Содержимое. Возможно одно из трех:
+    contains LocalString text                       // Текст ячейки.
+    String parameter                                // Параметр ячейки.
+    contains Value value                            // Значение ячейки.
+}
+
+//
+// Рисунок - примечание.
+//
+class CommentDrawing extends TextDrawing
+{
+	int cellRowIndex								// Индекс строки, из которй ячейка для которой комментарий.
+	int cellColumnIndex								// Индекс колонки, из которой ячейка для которой комментарий.
+}
+
+//
+// Рисунок - картинка.
+//
+class PictureDrawing extends RectangleDrawing
+{
+    PictureSize pictureSize                         // Размер картинки.
+    int pictureIndex                                // Индекс картинки.
+    boolean autosize                                // Автоматический размер.
+}
+
+//
+// Рисунок - объект.
+//
+class ObjectDrawing extends PictureDrawing
+{
+    contains EObject object                         // Объект рисунка. Например, диаграмма.
+}
+
+//
+// Рисунок - диаграмма.
+//
+class ChartDrawing extends ObjectDrawing
+{
+
+}
+
+//
+// Рисунок - диаграмма Ганта.
+//
+class GanttChartDrawing extends ObjectDrawing
+{
+
+}
+
+//
+// Рисунок - сводная диаграмма.
+//
+class PivotChartDrawing extends ObjectDrawing
+{
+
+}
+
+//
+// Рисунок - Дендрограмма.
+//
+class DendrogramDrawing extends ObjectDrawing
+{
+
+}
+
+//
+// Рисунок - географическая схема.
+//
+class GeographicalSchemaDrawing extends ObjectDrawing
+{
+
+}
+
+//
+// Рисунок - объект ActiveX.
+//
+class ControlDrawing extends ObjectDrawing
+{
+
+}
+
+class UnsupportedObjectContent extends RuntimeValue
+{
+
+}
+
+//
+// Рисунок - группа.
+//
+class GroupDrawing extends Drawing
+{
+    contains Drawing[] nestedDrawings               // Вложенные рисунки.
+}
+
+//
+// Элемент карты ячеек.
+//
+class CellMapEntry wraps java.util.Map$Entry
+{
+    Integer[1] key
+    contains Cell[1] value
+}
+
+//
+// Ячейка табличного документа.
+//
+class Cell
+{
+    int formatIndex                                 // Индекс формата.
+
+    // Содержимое. Возможно одно из трех:
+    contains LocalString text                       // Текст ячейки.
+    String parameter                                // Параметр ячейки.
+    contains Value value                            // Значение ячейки.
+
+    String detailParameter                          // Параметр расшифровки.
+    String pictureParameter                         // Picture parameter
+    contains Value detailValue                      // Значение расшифровки.
+
+    contains CommentDrawing noteDrawing             // Рисунок с примечанием.
+
+    contains UnsupportedObjectContent control       //элемент упраления ячейки
+}
+
+
+
+//
+// Тип расположения заголовка группировки.
+//
+enum GroupHeaderPlacement
+{
+    Auto                                            // Авто.
+    Begin                                           // Начало.
+    End                                             // Конец.
+}
+
+//
+// Группировка.
+//
+class Group
+{
+    int begin                                       // Начало группировки. Номер строки или колонки.
+    int end                                         // Конец группировки. Номер строки или колонки.
+    contains LocalString text                       // Текст группировки.
+    boolean opened = "true"                         // Открыта.
+    GroupHeaderPlacement headerPlacement = "Auto"   // Размещение заголовка группировки.
+}
+
+//
+// Группировка строк.
+//
+class RowGroup extends Group
+{
+}
+
+//
+// Группировка колонок.
+//
+class ColumnGroup extends Group
+{
+    refers Columns columns                          // Формат колонок, для которой группировка.
+}
+
+//
+// Объединенные ячейки.
+//
+class Merge
+{
+	Antimerge antimerge = "None"					// исключение из объединения
+    contains Rect[1] position                       // Положение объединения.
+}
+
+//
+// Объединения колонок.
+//
+class ColumnMerge
+{
+    refers Columns columns                          // Колонки, для которых объединение.
+    int begin                                       // Начальная колонка. Включительно.
+    int end                                         // Конечная колонка. Включительно.
+}
+
+//
+// Объединения строк.
+//
+class RowMerge
+{
+    int begin                                       // Начальная строка. Включительно.
+    int end                                         // Конечная строка. Включительно.
+}
+
+//
+// Элемент карты для именованного элемента.
+//
+class NamedItemMapItem wraps java.util.Map$Entry
+{
+    String[1] key
+    contains NamedItem[1] value
+}
+
+//
+// Именованный элемент.
+//
+abstract class NamedItem
+{
+}
+
+//
+// Именованный рисунок.
+//
+class NamedItemDrawing extends NamedItem
+{
+    int drawingId                                   // Идентификатор рисунка, для которого установлено имя.
+}
+
+//
+// Область именованных ячеек.
+//
+class NamedItemCells extends NamedItem
+{
+    contains Area[1] area                           // Область ячеек, для которой установлено имя.
+}
+
+//
+// Область именованной встроенной таблицы.
+//
+class NamedItemEmbeddedTable extends NamedItem
+{
+    contains Area[1] area                           // Область ячеек, для которой установлено имя.
+    int embeddedTableId                             // Идентификатор встроенной таблицы.
+}
+
+//
+// Область источника данных.
+//
+class NamedItemDataSource extends NamedItem
+{
+    contains Area[1] area                           // Область источника.
+}
+
+//
+// Ориентация страницы.
+//
+enum PageOrientation
+{
+    Portrait
+    Landscape
+}
+
+//
+// Точность печати.
+//
+enum PrintAccuracy
+{
+    Auto
+    Accurate
+}
+
+//
+// Тип двусторонней печати.
+//
+enum DuplexPrintingType
+{
+    None
+    FlipPagesLeft
+    FilpPagesUp
+    UsePrinterSettings
+}
+
+//
+// Тип чередования страниц.
+//
+enum PagePlacementAlternation
+{
+    Auto
+    DontUse
+    MirrorOnLeft
+    MirrorOnTop
+}
+
+//
+// Настройки печати.
+//
+class PrintSettings
+{
+    unsettable PageOrientation pageOrientation                 // Ориентация страницы.
+    unsettable int scale                                       // Масштаб печати.
+    unsettable boolean collate                                 // Разбор по копиям.
+    unsettable int copies                                      // Количество копий.
+    unsettable int perPage                                     // Копий на странице.
+    unsettable int topMargin                                   // Отступ сверху от границы листа.
+    unsettable int leftMargin                                  // Отступ слева  от границы листа.
+    unsettable int bottomMargin                                // Отступ снизу от границы листа.
+    unsettable int rightMargin                                 // Отсутп справа от границы листа.
+    unsettable int headerSize                                  // Высота верхнего колонтитула.
+    unsettable int footerSize                                  // Высота нижнего колонтитула.
+    unsettable boolean fitToPage                               // Режим "По ширине".
+    unsettable boolean blackAndWhite                           // Черно/белая печать.
+    unsettable String printerName                              // Имя принтера, на котором печатать.
+    unsettable int paper                                       // Индекс типа бумаги принтера.
+    unsettable String pageSize                                 // Имя типа бумаги.
+    unsettable int paperSource                                 // Индекс истончика бумаги.
+    unsettable float pageWidth                                   // Ширина страницы.
+    unsettable float pageHeight                                  // Высота страницы.
+    unsettable PrintAccuracy printAccuracy                     // Точность печати.
+    unsettable DuplexPrintingType duplexType                   // Режим двусторонней печати.
+    unsettable PagePlacementAlternation pagePlacementAlternation   // Чередование страниц при двусторонней печати.
+    unsettable int firstPageNumber                             // Номер первой страницы
+}
+
+//
+// Прямоугольная область.
+//
+class RectArea extends Area
+{
+    contains Rect position                          // Позиция области.
+    refers Columns columns                          // Формат колонок, для которой область.
+}
+
+//
+// Область строк.
+//
+class RowsArea extends Area
+{
+    int begin                                       // Начальная строка области.
+    int end                                         // Конечная строка области.
+    refers Columns columns                          // Формат колонок, для которой область.
+
+    op int normalBegin() { if (begin < end)  begin else end }
+    op int normalEnd() { if (begin < end)  end else begin }
+}
+
+//
+// Область колонок.
+//
+class ColumnsArea extends Area
+{
+    int begin                                       // Начальная колонка области.
+    int end                                         // Конечная колонка области.
+    refers Columns columns                          // Формат колонок, для которой область.
+
+    op int normalBegin() { if (begin < end)  begin else end }
+    op int normalEnd() { if (begin < end)  end else begin }
+}
+
+//
+// Область - таблица.
+//
+class TableArea extends Area
+{
+    // Пустой класс.
+}
+
+//
+// Источник данных рисунка.
+//
+class DrawingsDataSource
+{
+    int drawingId                                   // Идентификатор рисунка, для которого источник.
+    contains Area[1] area                           // Область, из которой получаются данные.
+}
+
+//
+// Настройки отображения.
+//
+class ViewSettings
+{
+    int currentColumn = "0"                         // Текущая колонка.
+    int currentRow = "0"                            // Текущая строка.
+    contains Area[] selection                       // Текущая область.
+    int[] selectedDrawings                          // Выделенный рисунок.
+
+    int scale = "100"                               // Масштаб.
+
+    boolean showGrid = "true"                       // Отображение сетки.
+    boolean showHeaders = "true"                    // Отображение заголовков.
+    boolean showNames = "false"                     // Отображение именованных областей.
+    boolean showGroups = "true"                     // Отображение группировок.
+    boolean showPageBreaks = "false"                // Отображение разделителей страниц.
+    boolean showNamedRowsAndColumns = "false"       // Отображение именованных строк/колонок.
+    boolean showComments = "false"                  // Отображать примечания.
+    boolean blackAndWhite = "false"                 // Режим черно/белого просмотра.
+
+    int fixedColumn = "0"                           // Количество зафиксированных колонок.
+    refers Columns fixedColumnColumns               // Колонки, для которых зафиксирована колонка.
+    int fixedRow = "0"                              // Количество зафиксированных строк.
+    int fixationPointColumn = "0"                   // Колонка точки фиксации.
+    int fixationPointRow = "0"                      // Строка точки фиксации.
+    int topFixationPointColumn = "0"                // Левая колонка точки фиксации.
+    int topFixationPointRow = "0"                   // Верхняя строка точки фиксации.
+    int screenBeginPointColumn = "0"                // Первая колонка, отображаемая в прокручиваемой области.
+    int screenBeginPointRow = "0"                   // Первая строка, отображаемая в прокручиваемой области.
+
+    String currentLanguage = ""                     // Текущий язык.
+}
+
+//
+// Встроенная таблица.
+//
+class EmbeddedTableItem
+{
+    int tableId                                     // Идентификатор таблицы.
+    contains PivotTable table                       // Сама таблица.
+}
+
+//
+// Сводная таблица.
+//
+class PivotTable
+{
+    boolean showFields                              // Показывать поля.
+    int measuresAxis                                // Ось измерений.
+    int horizontalRows                              // Строк по горизонтали.
+    int verticalRows                                // Строк по вертикали.
+    int horizontalColumns                           // Колонок по горизонтали.
+    int verticalColumns                             // Колонок по вертикали.
+    int horizontalOveralls                          // Итогов по горизонтали.
+    int verticalOveralls                            // Итогов по вертикали.
+    int horizontalFullSize                          // Общий размер по горизонтали.
+    int verticalFullSize                            // Общий размер по вертикали.
+    int horizontalFieldsArea                        // Размер полей по горизонтали.
+    int verticalFieldsArea                          // Размер полей по вертикали.
+    int horizontalEmptyArea                         // Размер пустой области по горизонтали.
+    int verticalEmptyArea                           // Размер пустой области по вертикали.
+    boolean autoFixation                            // Автофиксация.
+    boolean rowsGroupping                           // Группировка по строкам.
+    boolean columnsGroupping                        // Группировка по колонкам.
+    boolean totalRowsOnTop                          // Итоги по строкам в верху.
+    boolean totalColumnsOnLeft                      // Итоги по колонкам слева.
+    DimensionAttributePlacementType dimensionAttributePlacementInRows   // Размещение атрибутов измерений в строках.
+    DimensionAttributePlacementType dimensionAttributePlacementInColumns// Размещение атрибутов измерений в колонках.
+    DimensionPlacementType dimensionsPlacementOnRows    // Размещение измерений в строках.
+    DimensionPlacementType dimensionsPlacementOnColumns // Размещение измерений в колонках.
+    StandardAppearance standardAppearance           // Стандартное оформление.
+    contains SpreadsheetDocument notStandardAppearance // Не стандартное оформление.
+    int horizontalAdditionalSize                    // Дополнительный размер по горизонтали.
+    int verticalAdditionalSize                      // Дополнительный размер по вертикали.
+    PivotTableLinesShowType showLines               // Отображение линий.
+}
+
+//
+// Тип размещения измерений.
+//
+enum DimensionPlacementType
+{
+    Together = 0                                        // Размещение измерений вместе.
+    Separately = 1                                      // Размещение измерений отдельно.
+    SeparatelyAndInTotalsOnly = 2                       // Отдельно и только в итогах.
+}
+
+//
+// Тип размещения атрибутов измерений.
+//
+enum DimensionAttributePlacementType
+{
+    WithDimensions = 0                              // Вместе с измерениями.
+    Separately = 1                                  // Отдельно.
+    Together = 2                                    // Вместе.
+}
+
+//
+// Стандартное оформление.
+//
+enum StandardAppearance
+{
+    None
+    Stone
+    Classic
+    Classic2
+    Classic3
+    Spring
+    Summer
+    Autumn
+    Winter
+    Asphalt
+    Copper
+    Bronze
+    Platinum
+    Silver
+    Turquoise
+    Sand
+    Grass
+    Ice
+    Orange
+    Textile
+    Wood
+    Interface
+}
+
+//
+// Тип отображения линий сводной таблицы.
+//
+enum PivotTableLinesShowType
+{
+    Auto = 0                                            // Авто.
+    Always = 1                                          // Всегда.
+}
+
+//
+// Алгориим расширения табличного документа.
+//
+enum ExtensionAlgorithm
+{
+	Replace
+	Merge
+}
+
+//
+// Формат области табличного документа.
+//
+class Format
+{
+    unsettable int font = "-1"                      // Шрифт.
+
+    unsettable int leftBorder = "-1"                // Линия левой границы. Индекс в массиве линий.
+    unsettable int topBorder = "-1"                 // Линия верхней границы. Индекс в массиве линий.
+    unsettable int rightBorder = "-1"               // Линия правой границы. Индекс в массиве линий.
+    unsettable int bottomBorder = "-1"              // Линия нижней границы. Индекс в массиве линий.
+    unsettable int borderColor = "-1"               // Цвет границы. Индекс в массиве цветов.
+
+    unsettable int height                           // Высота ячейки.
+    unsettable int width                            // Ширина ячейки.
+
+    unsettable HorizontalAlignment horizontalAlignment  // Горизонтальное выравнивание.
+    unsettable VerticalAlignment verticalAlignment  // Вертикальное выравнивание.
+
+    unsettable int textColor = "-1"                 // Цвет текста. Индекс в массиве цветов.
+    unsettable int backColor = "-1"                 // Цвет фона. Индекс в массиве цветов.
+    unsettable int patternColor = "-1"              // Цвет шаблона. Индекс в массиве цветов.
+    unsettable Pattern pattern                      // Шаблон заливки.
+
+    unsettable TextPlacement textPlacement          // Тип размещения текста.
+    unsettable FillType fillType                    // Тип заполнения.
+
+    unsettable boolean protection                   // Защита.
+    unsettable boolean hidden                       // Скрыто.
+    unsettable int textOrientation                  // Ориентация текста.
+    unsettable DetailUse detailUse                  // Использование расшифровки.
+    unsettable boolean bySelectedColumns            // По выделенным колонкам.
+    unsettable boolean markNegatives                // Выделять отрицательные.
+
+    unsettable boolean containsValue                // Содержит значение.
+    contains unsettable TypeDescription valueType   // Тип значения.
+
+    unsettable Uuid controlType                     // Тип элемента управления.
+
+    unsettable boolean hyperlink                    // Гиперссылка.
+    unsettable boolean quickDrag                    // Быстрое перетаскивание.
+    unsettable boolean autoMarkIncomplete           // Автоматическая отметка незаполненного.
+    unsettable boolean markIncomplete               // Отметка незаполненного.
+    unsettable int indent                           // Отступ.
+    unsettable int autoIndent                       // Автоотступ.
+
+    contains unsettable LocalString dataFormat      // Формат данных.
+    contains unsettable LocalString editFormat      // Формат редактирования.
+    contains unsettable LocalString mask            // Маска редактирования.
+
+    unsettable SizeChangeMode sizeChangeMode        // Режим изменения размера колонки.
+
+    unsettable boolean print                        // Выводить на печать.
+    unsettable int drawingBorder = "-1"             // Тип линии рисунка.
+    unsettable boolean drawingHaveLeftBorder        // У рисунка есть граница слева.
+    unsettable boolean drawingHaveTopBorder         // У рисунка есть граница сверху.
+    unsettable boolean drawingHaveRightBorder       // У рисунка есть граница справа.
+    unsettable boolean drawingHaveBottomBorder      // У рисунка есть граница снизу.
+
+    unsettable int pictureIndex = "-1"              // index of in-cell picture
+    unsettable HorizontalAlignment pictureHorizontalAlignment  // in-cell picture's horizontal alignment
+    unsettable VerticalAlignment pictureVerticalAlignment = "Bottom" // in-cell picture's vertical alignment
+    unsettable PictureSize pictureSize = "Proportionally"             // in-cell's picture size mode
+    unsettable CellTextPosition textPosition        // text position relative to in-cell picture
+
+    unsettable boolean autoWidthCalculation // is width calculated automatically
+    unsettable int widthWeightFactor // width weight factor
+
+    unsettable int marginLeft                                  // отступ слева, since 8.3.22
+    unsettable int marginTop                                   // отступ сверху, since 8.3.22
+    unsettable int marginRight                                 // отступ справа, since 8.3.22
+    unsettable int marginBottom                                // отступ снизу, since 8.3.22
+
+    // SpreadsheetDocumentCellHighlightMode РежимПодсветкиЯчейкиТабличногоДокумента
+    unsettable SpreadsheetDocumentCellHighlightMode highlightMode   // since 8.5.1
+    // SpreadsheetDocumentEditableCellShowType ТипОтображенияРедактируемойЯчейкиТабличногоДокумента
+    unsettable SpreadsheetDocumentEditableCellShowType showEditMode // since 8.5.1
+}
+
+//
+// Типы антимержей.
+//
+enum Antimerge
+{
+	None = 0
+	Horizontal = 1
+	Vertical = 2
+}

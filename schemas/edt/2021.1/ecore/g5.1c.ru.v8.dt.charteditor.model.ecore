@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="ASCII"?>
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="model" nsURI="http://g5.1c.ru/v8/dt/charteditor/model" nsPrefix="chartEditor">
+  <eClassifiers xsi:type="ecore:EClass" name="AnyChartRepresentation" abstract="true">
+    <eOperations name="getChart" unique="false" eType="//IBmObject"/>
+    <eOperations name="getExtInfo" unique="false">
+      <eType xsi:type="ecore:EClass" href="g5.1c.ru.v8.dt.form.ecore#//FormAttributeExtInfo"/>
+    </eOperations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="title" eType="//Title" containment="true" resolveProxies="false"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="legend" eType="//Legend" containment="true" resolveProxies="false"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="mainArea" eType="//MainArea" containment="true" resolveProxies="false"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ChartRepresentation" eSuperTypes="//AnyChartRepresentation">
+    <eOperations name="getChart" unique="false" eType="//IBmObject"/>
+    <eOperations name="getExtInfo" unique="false">
+      <eType xsi:type="ecore:EClass" href="g5.1c.ru.v8.dt.form.ecore#//FormAttributeExtInfo"/>
+    </eOperations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="chartExtInfo">
+      <eType xsi:type="ecore:EClass" href="g5.1c.ru.v8.dt.form.ecore#//ChartExtInfo"/>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="DendrogramRepresentation" eSuperTypes="//AnyChartRepresentation">
+    <eOperations name="getChart" unique="false" eType="//IBmObject"/>
+    <eOperations name="getExtInfo" unique="false">
+      <eType xsi:type="ecore:EClass" href="g5.1c.ru.v8.dt.form.ecore#//FormAttributeExtInfo"/>
+    </eOperations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="dendrogramExtInfo">
+      <eType xsi:type="ecore:EClass" href="g5.1c.ru.v8.dt.form.ecore#//DendrogramExtInfo"/>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="GanttChartRepresentation" eSuperTypes="//AnyChartRepresentation">
+    <eOperations name="getChart" unique="false" eType="//IBmObject"/>
+    <eOperations name="getExtInfo" unique="false">
+      <eType xsi:type="ecore:EClass" href="g5.1c.ru.v8.dt.form.ecore#//FormAttributeExtInfo"/>
+    </eOperations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="ganttChartExtInfo">
+      <eType xsi:type="ecore:EClass" href="g5.1c.ru.v8.dt.form.ecore#//GanttChartExtInfo"/>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="AnyChartElement" abstract="true" interface="true">
+    <eOperations name="changeBounds" unique="false">
+      <eParameters name="transaction" unique="false" eType="//IBmTransaction"/>
+      <eParameters name="rect" unique="false">
+        <eType xsi:type="ecore:EClass" href="g5.1c.ru.v8.dt.chart.model.ecore#//DoubleRect"/>
+      </eParameters>
+    </eOperations>
+    <eOperations name="bounds" unique="false">
+      <eType xsi:type="ecore:EClass" href="g5.1c.ru.v8.dt.chart.model.ecore#//DoubleRect"/>
+    </eOperations>
+    <eOperations name="setActualChart" unique="false">
+      <eParameters name="actualChart" unique="false" eType="//IBmObject"/>
+    </eOperations>
+    <eOperations name="getChart" unique="false" eType="//IBmObject"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Title" abstract="true" interface="true" eSuperTypes="//AnyChartElement"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Legend" abstract="true" interface="true" eSuperTypes="//AnyChartElement"/>
+  <eClassifiers xsi:type="ecore:EClass" name="MainArea" abstract="true" interface="true" eSuperTypes="//AnyChartElement"/>
+  <eClassifiers xsi:type="ecore:EClass" name="ChartElement" abstract="true" eSuperTypes="//AnyChartElement">
+    <eOperations name="setActualChart" unique="false">
+      <eParameters name="actualChart" unique="false" eType="//IBmObject"/>
+    </eOperations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="chart">
+      <eType xsi:type="ecore:EClass" href="g5.1c.ru.v8.dt.chart.model.ecore#//Chart"/>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="DendrogramElement" abstract="true" eSuperTypes="//AnyChartElement">
+    <eOperations name="setActualChart" unique="false">
+      <eParameters name="actualChart" unique="false" eType="//IBmObject"/>
+    </eOperations>
+    <eOperations name="getChart" unique="false" eType="//IBmObject"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="dendrogram">
+      <eType xsi:type="ecore:EClass" href="g5.1c.ru.v8.dt.dendrogram.model.ecore#//Dendrogram"/>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="GanttChartElement" abstract="true" eSuperTypes="//AnyChartElement">
+    <eOperations name="setActualChart" unique="false">
+      <eParameters name="actualChart" unique="false" eType="//IBmObject"/>
+    </eOperations>
+    <eOperations name="getChart" unique="false" eType="//IBmObject"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="ganttChart">
+      <eType xsi:type="ecore:EClass" href="g5.1c.ru.v8.dt.ganttchart.model.ecore#//GanttChart"/>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ChartTitle" eSuperTypes="//ChartElement //Title">
+    <eOperations name="changeBounds" unique="false">
+      <eParameters name="transaction" unique="false" eType="//IBmTransaction"/>
+      <eParameters name="rect" unique="false">
+        <eType xsi:type="ecore:EClass" href="g5.1c.ru.v8.dt.chart.model.ecore#//DoubleRect"/>
+      </eParameters>
+    </eOperations>
+    <eOperations name="bounds" unique="false">
+      <eType xsi:type="ecore:EClass" href="g5.1c.ru.v8.dt.chart.model.ecore#//DoubleRect"/>
+    </eOperations>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ChartLegend" eSuperTypes="//ChartElement //Legend">
+    <eOperations name="changeBounds" unique="false">
+      <eParameters name="transaction" unique="false" eType="//IBmTransaction"/>
+      <eParameters name="rect" unique="false">
+        <eType xsi:type="ecore:EClass" href="g5.1c.ru.v8.dt.chart.model.ecore#//DoubleRect"/>
+      </eParameters>
+    </eOperations>
+    <eOperations name="bounds" unique="false">
+      <eType xsi:type="ecore:EClass" href="g5.1c.ru.v8.dt.chart.model.ecore#//DoubleRect"/>
+    </eOperations>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ChartMainArea" eSuperTypes="//ChartElement //MainArea">
+    <eOperations name="changeBounds" unique="false">
+      <eParameters name="transaction" unique="false" eType="//IBmTransaction"/>
+      <eParameters name="rect" unique="false">
+        <eType xsi:type="ecore:EClass" href="g5.1c.ru.v8.dt.chart.model.ecore#//DoubleRect"/>
+      </eParameters>
+    </eOperations>
+    <eOperations name="bounds" unique="false">
+      <eType xsi:type="ecore:EClass" href="g5.1c.ru.v8.dt.chart.model.ecore#//DoubleRect"/>
+    </eOperations>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="DendrogramTitle" eSuperTypes="//DendrogramElement //Title">
+    <eOperations name="changeBounds" unique="false">
+      <eParameters name="transaction" unique="false" eType="//IBmTransaction"/>
+      <eParameters name="rect" unique="false">
+        <eType xsi:type="ecore:EClass" href="g5.1c.ru.v8.dt.chart.model.ecore#//DoubleRect"/>
+      </eParameters>
+    </eOperations>
+    <eOperations name="bounds" unique="false">
+      <eType xsi:type="ecore:EClass" href="g5.1c.ru.v8.dt.chart.model.ecore#//DoubleRect"/>
+    </eOperations>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="DendrogramMainArea" eSuperTypes="//DendrogramElement //MainArea">
+    <eOperations name="changeBounds" unique="false">
+      <eParameters name="transaction" unique="false" eType="//IBmTransaction"/>
+      <eParameters name="rect" unique="false">
+        <eType xsi:type="ecore:EClass" href="g5.1c.ru.v8.dt.chart.model.ecore#//DoubleRect"/>
+      </eParameters>
+    </eOperations>
+    <eOperations name="bounds" unique="false">
+      <eType xsi:type="ecore:EClass" href="g5.1c.ru.v8.dt.chart.model.ecore#//DoubleRect"/>
+    </eOperations>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="GanttChartTitle" eSuperTypes="//GanttChartElement //Title">
+    <eOperations name="changeBounds" unique="false">
+      <eParameters name="transaction" unique="false" eType="//IBmTransaction"/>
+      <eParameters name="rect" unique="false">
+        <eType xsi:type="ecore:EClass" href="g5.1c.ru.v8.dt.chart.model.ecore#//DoubleRect"/>
+      </eParameters>
+    </eOperations>
+    <eOperations name="bounds" unique="false">
+      <eType xsi:type="ecore:EClass" href="g5.1c.ru.v8.dt.chart.model.ecore#//DoubleRect"/>
+    </eOperations>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="GanttChartLegend" eSuperTypes="//GanttChartElement //Legend">
+    <eOperations name="changeBounds" unique="false">
+      <eParameters name="transaction" unique="false" eType="//IBmTransaction"/>
+      <eParameters name="rect" unique="false">
+        <eType xsi:type="ecore:EClass" href="g5.1c.ru.v8.dt.chart.model.ecore#//DoubleRect"/>
+      </eParameters>
+    </eOperations>
+    <eOperations name="bounds" unique="false">
+      <eType xsi:type="ecore:EClass" href="g5.1c.ru.v8.dt.chart.model.ecore#//DoubleRect"/>
+    </eOperations>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="GanttChartMainArea" eSuperTypes="//GanttChartElement //MainArea">
+    <eOperations name="changeBounds" unique="false">
+      <eParameters name="transaction" unique="false" eType="//IBmTransaction"/>
+      <eParameters name="rect" unique="false">
+        <eType xsi:type="ecore:EClass" href="g5.1c.ru.v8.dt.chart.model.ecore#//DoubleRect"/>
+      </eParameters>
+    </eOperations>
+    <eOperations name="bounds" unique="false">
+      <eType xsi:type="ecore:EClass" href="g5.1c.ru.v8.dt.chart.model.ecore#//DoubleRect"/>
+    </eOperations>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EDataType" name="IBmTransaction" instanceClassName="com._1c.g5.v8.bm.core.IBmTransaction"/>
+  <eClassifiers xsi:type="ecore:EDataType" name="IBmObject" instanceClassName="com._1c.g5.v8.bm.core.IBmObject"/>
+</ecore:EPackage>

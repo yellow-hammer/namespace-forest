@@ -1,0 +1,555 @@
+@GenModel(nonNLSMarkers="true", prefix="Common", copyrightText="Copyright (C) 2013, 1C", updateClasspath="false",
+    featureDelegation="Reflective", rootExtendsClass="com._1c.g5.v8.bm.core.BmObject")
+@Ecore(nsPrefix="mdcommon", nsURI="http://g5.1c.ru/v8/dt/metadata/common")
+package com._1c.g5.v8.dt.metadata.common
+
+import com._1c.g5.v8.dt.mcore.Color
+import com._1c.g5.v8.dt.mcore.Field
+import com._1c.g5.v8.dt.mcore.LocalStringMapEntry
+import com._1c.g5.v8.dt.mcore.PictureDef
+import com._1c.g5.v8.dt.mcore.Value
+
+type Shortcut wraps String
+
+// From syntax-helper (mngcore)
+enum ApplicationUsePurpose
+{
+    PersonalComputer = 0
+    MobileDevice = 1
+}
+
+// From mngcore/mngapp.xsd
+enum ClientRunMode
+{
+    Auto = 0
+    ManagedApplication = 1
+    OrdinaryApplication = 2
+}
+
+// from enums/enums.xsd (enums)
+// Наверное, только в метаданных
+enum AutoTimeMode
+{
+    CurrentOrLast = 0
+    DontUse = 1
+    Last = 2
+    First = 3
+    CurrentOrFirst = 4
+}
+
+// from enums/enums.xsd (enums)
+// Наверное, только в метаданных
+enum PostingModeUse
+{
+    Auto = 0
+    Regular = 1
+    RealTime = 2
+    Ask = 3
+}
+
+// from enums/enums.xsd (enums)
+// Наверное, только в метаданных
+enum AutoShowStateMode
+{
+    Auto = 0
+    DontShow = 1
+    Show = 2
+    ShowOnComposition = 3
+}
+
+// from xdto/core.xsd
+// Может использоваться в типах (данных)
+// Используется в StandardAttribute, BasicFeature, BasicTabularSection, Constant
+enum FillChecking
+{
+    DontCheck = 0
+    ShowError = 1
+}
+
+// from enums/enums.xsd
+// Наверное, только в метаданных
+// Используется в BasicFeature, Constant
+enum FoldersAndItemsUse
+{
+    Items = 0
+    Folders = 1
+    FoldersAndItems = 2
+}
+
+// Может использоваться в типах, но пока используется только в метаданных
+// Используется в Catalog, Document, DocumentNumerator и т. п. для обозначения
+// длины кода или номера
+// from xdto/core.xsd
+enum AllowedLength
+{
+    Fixed = 0
+    Variable = 1
+}
+
+// from xdto/core.xsd
+enum MainClientApplicationWindowMode
+{
+    Normal = 0
+    Workplace = 1
+    FullscreenWorkplace = 2
+    Kiosk = 3
+    EmbeddedWorkplace = 4 // since 8.3.16
+}
+
+// From syntax-helper (backend)
+enum SearchStringModeOnInputByString
+{
+    Begin = 0
+    AnyPart = 1
+}
+
+// From syntax-helper (backend)
+enum FullTextSearchOnInputByString
+{
+    Use = 0
+    DontUse = 1
+}
+
+// From syntax-helper (backend)
+enum ChoiceDataGetModeOnInputByString
+{
+    Directly = 0
+    Background = 1
+}
+
+// Группа про Choice Parameter ----------------
+abstract class AbstractChoiceParameterLink
+{
+    String[1] name
+    LinkedValueChangeMode changeMode
+}
+
+// Наверное, только в метаданных
+// Используется в StandardAttribute, BasicFeature, Field, Constant
+// From syntax-helper (mngcore)
+class ChoiceParameterLink extends AbstractChoiceParameterLink
+{
+    refers Field[1] field
+}
+
+// Используется только в AbstractChoiceParameterLink
+// From syntax-helper (enums)
+enum LinkedValueChangeMode
+{
+    Clear = 0
+    DontChange = 1
+}
+
+// Используется там же, где и ChoiceParameterLink
+// From syntax-helper (mngcore)
+class ChoiceParameter
+{
+    String[1] name
+    contains Value value
+}
+
+// --------------------------------------------
+abstract class AbstractTypeLink
+{
+    int linkItem
+}
+
+// Наверное, только в метаданных
+// Используется в StandardAttribute, BasicFeature, Constant
+// From syntax-helper (mngcore)
+class TypeLink extends AbstractTypeLink
+{
+    refers Field[1] field
+}
+
+// System enums used in mdclasses
+// it is MdEnum from 8.3.6
+//enum PredefinedDataUpdate
+//{
+//    AutoUpdate = 1
+//    DontAutoUpdate = 2
+//    Auto = 0
+//}
+enum ChoiceHistoryOnInput
+{
+    Auto = 0
+    DontUse = 1
+}
+
+// from enums/enums.xsd
+enum AccumulationRecordType
+{
+    Receipt = 0
+    Expense = 1
+}
+
+// from enums/enums.xsd
+enum AccountingRecordType
+{
+    Debit = 0
+    Credit = 1
+}
+
+// from enums/enums.xsd
+enum AccountType
+{
+    Active = 0
+    Passive = 1
+    ActivePassive = 2
+}
+
+// from enums/enums.xsd
+// Used in AccumulationRegisterAggregate model
+enum AccumulationRegisterAggregateUse
+{
+    Auto = 0
+    Always = 1
+}
+
+// from enums/enums.xsd
+// Used in AccumulationRegisterAggregate model
+enum AccumulationRegisterAggregatePeriodicity
+{
+    Nonperiodical = 0
+    Auto = 1
+    Day = 2
+    Month = 3
+    Quarter = 4
+    HalfYear = 5
+    Year = 6
+}
+
+// from mngbase/xcf_logform.xsd  // since 8.3.16
+// used in metadata and forms commands
+enum OnMainServerUnavalableBehavior
+{
+    Auto = 0
+    MakeDisable = 1
+    DontChangeBehavior = 2
+}
+
+// from xdto/uiobjects.xsd
+enum HorizontalAlign
+{
+    Left = 0
+    Center = 1
+    Right = 2
+    Justify = 3
+    Auto = 4
+}
+
+// from xdto/uiobjects.xsd
+enum VerticalAlign
+{
+    Top
+    Center
+    Bottom
+}
+
+// from xdto/uiobjects.xsd
+enum SizeChangeMode
+{
+    Normal
+    QuickChange
+}
+
+// from xdto/uiobjects.xsd
+enum ChartType
+{
+    Line
+    Step
+    Area
+    StackedArea
+    Column
+    StackedColumn
+    Column3D
+    StackedColumn3D
+    Bar
+    StackedBar
+    Bar3D
+    StackedBar3D
+    Pie
+    Pie3D
+    Stock
+    OpenHighLowClose
+    BarGraph
+    CeilGraph
+    TapeGraph
+    PyramidGraph
+    Waterfall
+    WireframeSurface
+    Surface
+    ConvexSurface
+    ConcaveSurface
+    ShadedSurface
+    StackedLine
+    NormalizedArea
+    NormalizedColumn
+    NormalizedColumn3D
+    NormalizedBar
+    NormalizedBar3D
+    Honeycomb
+    RadarLine
+    RadarArea
+    RadarStackedLine
+    RadarStackedArea
+    RadarNormalizedArea
+    Gauge
+    Funnel
+    Funnel3D
+    NormalizedFunnel
+    NormalizedFunnel3D
+    Scatter
+    Bubble
+    Donut
+    Donut3D
+}
+
+// from xdto/uiobjects.xsd
+enum ChartLabelType
+{
+    None
+    Series
+    Value
+    Percent
+    SeriesPercent
+    SeriesValue
+    SeriesValuePercent
+    ValuePercent
+    Point
+    PointPercent
+    PointValue
+    PointValuePercent
+    SeriesPoint
+    SeriesPointPercent
+    SeriesPointValue
+    SeriesPointValuePercent
+    PointSize
+    PointValueSize
+}
+
+// from xdto/uiobjects.xsd
+enum AutoSeriesSeparation
+{
+    None
+    All
+    Maximum
+    Minimum
+}
+
+// from xdto/uiobjects.xsd
+enum SpreadsheetDocumentDrawingLineType
+{
+    None = 0
+    Solid = 1
+    Dashed = 2
+    Dotted = 3
+    DashDotted = 4
+    DashDottedDotted = 5
+}
+
+// from xdto/uiobjects.xsd
+enum ChartLineType
+{
+    None = 0
+    Solid = 1
+    Dotted = 2
+    Dashed = 3
+    DashDotted = 4
+    DashDottedDotted = 5
+}
+
+// from xdto/uiobjects.xsd
+enum SpreadsheetDocumentCellLineType
+{
+    None = 0
+    Solid = 1
+    Dotted = 2
+    Double = 3
+    ThinDashed = 4
+    ThickDashed = 5
+    LargeDashed = 6
+}
+
+// from xdto/uiobjects.xsd
+enum GeographicalSchemeLineType
+{
+    None = 0
+    Solid = 1
+    Dotted = 2
+    Dashed = 3
+    DashDotted = 4
+    DashDottedDotted = 5
+}
+
+// from xdto/uiobjects.xsd
+class GaugeChartQualityBand
+{
+    int begin
+    int end
+    contains Color backColor
+    contains LocalStringMapEntry[] text
+    contains LocalStringMapEntry[] tooltip
+    String textStr
+    String tooltipStr
+}
+
+// from xdto/uiobjects.xsd
+class GaugeChartQualityBands
+{
+    contains GaugeChartQualityBand[] items
+    boolean useTextStr
+    boolean useTooltipStr
+}
+
+class GaugeChartQualityBandsValue extends Value
+{
+    contains GaugeChartQualityBands[1] value
+}
+
+// from chart/chart.xsd
+enum ChartValuesBySeriesConnectionType
+{
+    None
+    EdgesConnection
+}
+
+// from chart/chart.xsd
+enum ChartSplineMode
+{
+    None
+    SmoothCurve
+}
+
+// from chart/chart.xsd
+enum ChartSemitransparencyMode
+{
+    DontUse
+    Use
+    Auto
+}
+
+// from mngcore/mngapp.xsd
+enum RequiredMobileApplicationPermissions
+{
+    Multimedia = 0
+    Location = 1
+    Contacts = 2
+    Calendars = 3
+    Telephony = 4
+    PushNotification = 5
+    LocalNotification = 6
+    Print = 7 
+    InAppPurchases = 8
+    Ads = 9// since 8.3.10
+    BackgroundLocation = 10 // since 8.3.11
+    BackgroundAudioPlayback = 11 // since 8.3.11
+    FileExchangeWithPersonalComputer = 12// since 8.3.11
+    
+    PermissionGroupPhone = 13 // since 8.3.15
+    PermissionGroupCallLog = 14 // since 8.3.15
+    PermissionGroupSMS = 15 // since 8.3.15
+
+    CallPhone = 16 // since 8.3.15
+    CallLog = 17 // since 8.3.15
+    HandlePhoneCalls = 18 // since 8.3.15
+    SendSMS = 19 // since 8.3.15
+    ReceiveSMS = 20 // since 8.3.15
+    SMSLog = 21 // since 8.3.15
+    Camera = 22 // since 8.3.15
+    Microphone = 23 // since 8.3.15
+    MusicLibrary = 24 // since 8.3.15
+    PicturesAndVideoLibraries = 25 // since 8.3.15
+    AudioAndVibrationPlayback = 26 // since 8.3.15
+    InstallPackages = 27 // since 8.3.16
+    AllowOSBackup = 28 // since 8.3.16
+}
+
+// EDBEnums.h
+enum TransactionsIsolationLevel
+{
+    Automatic = 0 ///< автоматический
+    ReadUncommitted = 1 ///< чтение незафиксированных
+    ReadCommitted = 2 ///< чтение зафиксированных
+    RepeatableRead = 3 ///< повторяемое чтение
+    Serializable = 4 ///< упорядочиваемость
+}
+
+class ChartLineTypeValue extends Value
+{
+    ChartLineType value
+}
+
+// from enums/enums.xsd
+// since 8.3.13
+enum ReportResultViewMode
+{
+    Auto = 0
+    Default = 1
+    Compact = 2
+}
+
+// from enums/enums.xsd
+// since 8.3.14
+enum RequiredDataRelevance
+{
+    Auto = 0
+    Relevant = 1
+    Any = 2
+}
+
+// moved from MoxelContent.xcore due to pictures support in DCS
+
+//
+// URL-picture.
+//
+class UrlPicture extends PictureDef
+{
+    String url
+}
+
+//
+// Absolute picture .
+//
+class AbsPicture extends PictureDef
+{
+    Byte[] content
+}
+
+//
+// Picture size mode
+//
+enum PictureSize
+{
+    RealSize = 0                                        // Отображение в реальном размере.
+    Stretch = 1                                         // Растягивать.
+    Proportionally = 2                                  // Растягивать пропорционально.
+    Tile = 3                                            // Заполнить.
+    AutoSize = 4                                        // Авто.
+    RealSizeIgnoreScale = 5                             // Отображение в реальном размере, без учета масштаба.
+    AutoSizeIgnoreScale = 6                             // Авто, без учета масштаба.
+}
+
+//
+// Text position relative to in-cell picture
+//
+enum CellTextPosition
+{
+    Auto = 0
+    Left = 1
+    Right = 2
+    Top = 3
+    Bottom = 4
+    OnTop = 5
+}
+
+// 
+// Upgraged mobile permission definition element
+// since 8.3.15
+//
+class RequiredPermission
+{
+    RequiredMobileApplicationPermissions permission
+    boolean use
+    contains LocalStringMapEntry[] description
+}

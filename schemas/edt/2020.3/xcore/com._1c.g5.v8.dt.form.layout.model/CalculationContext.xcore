@@ -1,0 +1,652 @@
+@GenModel(prefix="LayoutCalculationContext", loadInitialization="false", literalsInterface="true", nonNLSMarkers="true",
+	copyrightText="Copyright (C) 2015, 1C LLC", updateClasspath="false", suppressNotification="false")
+@Ecore(nsPrefix="layout", nsURI="http://g5.1c.ru/v8/dt/form.layout.model.calculation.context")
+package com._1c.g5.v8.dt.form.layout.model.calculation.context
+
+import com._1c.g5.v8.dt.form.layout.model.description.HippoLayElementBase
+import com._1c.g5.v8.dt.form.layout.model.description.HippoLayLogicGroup
+import com._1c.g5.v8.dt.form.layout.model.description.HippoLayouterEdge
+import com._1c.g5.v8.dt.form.layout.model.description.ClientInterfaceVariant
+import com._1c.g5.v8.dt.form.model.FormChildrenGroup
+import com._1c.g5.v8.dt.form.model.ItemHorizontalAlignment
+import com._1c.g5.v8.dt.form.model.FormItemSpacing
+import com._1c.g5.v8.dt.form.model.ItemVerticalAlignment
+import com._1c.g5.v8.dt.form.model.FormChildrenAlign
+import com._1c.g5.v8.dt.form.model.TextBreakMode
+import com._1c.g5.v8.dt.form.layout.model.platform.font.Font
+import com._1c.g5.v8.dt.form.layout.model.platform.color.Color
+import com._1c.g5.v8.dt.form.layout.model.description.LogicGroupInternalRepresentation
+import java.util.Map
+import com._1c.g5.v8.dt.form.layout.model.transformation.context.ElementBaseTransformationContext
+import com._1c.g5.v8.dt.form.layout.model.transformation.context.NonFormattedHeightDescr
+import com._1c.g5.v8.dt.metadata.mdclass.CompatibilityMode
+import com._1c.g5.v8.dt.form.layout.model.common.Size
+import com._1c.g5.v8.dt.form.layout.model.calculation.CalculateAdditionalOptions
+import com._1c.g5.v8.dt.form.model.UsualGroupBehavior
+
+type Size wraps Size
+type Font wraps Font
+type Color wraps Color
+type CalculateAdditionalOptions wraps CalculateAdditionalOptions
+
+class StringToElementTransformationContextMapEntry wraps Map$Entry
+{
+	String key
+	contains ElementBaseTransformationContext<?,?> value
+}
+
+/**
+ * Целевые платформы генерации формы.
+ */
+enum LFTargetPlatform 
+{
+	/** Платформа не играет роль. */
+	eLFTPDontSpecific = 0,
+	/** Обычный "C" или веб клиент. */       
+	eLFTPGeneralClient = 1,          
+	/** Мобильная платформа. */
+	eLFTPMobilePlatform = 2,         
+	/** Эмуляция мобильной платформы. */
+	eLFTPMobilePlatformEmulation = 3
+	/** Тонкий клиент на мобильной платформе */
+	eLFTPMobileThinClient = 4
+	/** Эмуляция тонкого клиента на мобильной платформе */
+	eLFTPMobileThinClientEmulation = 5
+}
+
+/**
+ * Отображение закладок
+ */
+enum TabsRepresentationInt
+{
+	None = 0
+	Top
+	Bottom
+	LeftHor
+	RightHor
+	MobileSwipe
+	MobileTop
+	MobileBottom
+	MobileVer
+}
+
+/**
+ * Режим работы группы.
+ */
+enum GroupMode
+{
+	eGMStandard // Обычный режим.
+	eGMSlaveMegaHor // Горизонтальная группа для расчёта мегагруппы.
+	eGMSlaveMegaVer // Вертикальная группа для расчёта мегагруппы.
+}
+
+/**
+ * Base interface of the EDT form layout size calculation context.<br>
+ * The calculation phase performs the size computation and fills the tree-organized context for the next phase (transformation).
+ * 
+ * @author Alexander Tretyakevich
+ */
+interface RootBaseCalculationContext
+{
+}
+
+// IHippoTransformatorContainedElement analog
+interface IContainedElementCalculationContext
+{
+	Font defFont
+}
+
+/**
+ * IHippoLayElementPtr m_pOriginalElement - T layoutElement
+ * IHippoTransformatorElement* m_pParent - LayoutCalculationContext<T> parent
+ * LFTargetPlatform m_targetPlatform - LFTargetPlatform targetPlatform
+ * LFInterfaceVariant m_interfaceVariant - LFInterfaceVariant interfaceVariant
+ * CompatibilityMode compatibilityMode - CompatibilityMode compatibilityMode
+ * unsigned m_minWidthForCompressedElements - minWidthForCompressedElements
+ * uint32_t m_categoriesHolder - TODO check the lifecycle - where it belongs to     
+ */
+interface ElementBaseCalculationContext extends RootBaseCalculationContext
+{
+	LFTargetPlatform targetPlatform = "eLFTPDontSpecific"
+	ClientInterfaceVariant interfaceVariant = "DontSpecific"
+	CompatibilityMode compatibilityMode
+	int minWidthForCompressedElements = "0"
+	boolean adpatedToMobilePlatform
+	CalculateAdditionalOptions options
+}
+
+/**
+ * IHippoLayElementPtr m_pCloneElement - HippoLayElementBase pCloneElement
+ * bool m_firstCallOfGetVariantFormElementBase - Won't transfer, redundant
+ */
+interface FormElementBaseCalculationContext extends ElementBaseCalculationContext
+{
+	refers HippoLayElementBase pCloneElement			
+}
+
+/**
+ * Children m_children - contains RootBaseCalculationContext<? extends HippoLayElementBase>[] children
+ */
+interface GroupBaseCalculationContext extends ElementBaseCalculationContext
+{
+} 
+
+/**
+ *  bool m_limitsConstantRangesInit - Goes to transformation context
+ *  unsigned m_limitsConstantRanges - Goes to transformation context
+ *  std::map<HTVariantKey, Estimate> m_limitsCache - - Goes to transformation context
+ */
+interface ElementWithLimitsBaseCalculationContext extends RootBaseCalculationContext
+{
+	
+}
+
+/** 
+ * Basic set of data for any form group-enabled element (logical group, form, etc).
+ * 
+ * Hippo fields:<br>
+ * LFChildrenGrouping m_originalGrouping - FormChildrenGroup originalGrouping
+ * unsigned m_childrenMaxAdaptiveGroupingFormGroupLevels - int childrenMaxAdaptiveGroupingFormGroupLevels
+ * LFElementSpacing m_horSpacingVariant - FormItemSpacing horSpacingVariant
+ * unsigned m_horSpacing - int horSpacing
+ * LFElementSpacing m_verSpacingVariant - FormItemSpacing verSpacingVariant 
+ * unsigned m_verSpacing - int verSpacing
+ * unsigned m_splitterSize - int splitterSize
+ * HorizontalAlignment m_hAlign - ItemHorizontalAlignment hAlign
+ * VerticalAlignment m_originalVAlign - ItemVerticalAlignment originalVAlign
+ * VerticalAlignment m_curChildrenVAlign - Moved to the transformation context //TODO used in calculation
+ * LFChildrenAlign m_childrenAlign - FormChildrenAlign childrenAlign
+ * unsigned m_iOSGroupHorIndent - Won't transfer at the moment
+ * unsigned m_iOSRowVerIndent - Won't transfer at the moment 
+ * IHippoTransformatorMegaGroupPtr m_pMegaGroup - MegaGroupCalculationContext megaGroup
+ * m_pCB - TODO check what is a callback
+ * bool m_slaveMode = boolean slaveMode
+ *  
+ */
+interface FormGroupBaseCalculationContext extends GroupBaseCalculationContext
+{
+	ItemVerticalAlignment curChildrenVAlign
+	FormChildrenGroup originalGrouping = "Vertical"
+	int childrenMaxAdaptiveGroupingFormGroupLevels
+	FormItemSpacing horSpacingVariant
+	int horSpacing
+	FormItemSpacing verSpacingVariant
+	int verSpacing
+	int splitterSize
+	ItemHorizontalAlignment hAlign
+	ItemVerticalAlignment originalVAlign
+ 	FormChildrenAlign childrenAlign
+
+    GroupMode groupMode = "eGMStandard"
+    boolean slaveEnableExternalAlign
+    boolean slaveEnableSplitters = "true"
+    
+    String slaveLogFormElementName
+    String slaveBaseName
+    boolean slaveHorGrouping = "true"
+    ItemHorizontalAlignment slaveHAlign = "Left"
+    ItemVerticalAlignment slaveVAlign = "Top"
+    FormItemSpacing slaveHorSpacingVariant = "Single"
+    int slaveHorSpacing
+    FormItemSpacing slaveVerSpacingVariant = "Single"
+    int slaveVerSpacing
+    FormChildrenAlign slaveChildrenAlign = "None"
+    boolean slaveGroupVisible = "true"
+    boolean slaveGroupEnabled = "true"
+    int maxTargetWidth 
+}
+
+/**
+ * Size calculation context for the root element of the form.
+ * 
+ * Hippo fields:<br>
+ * m_mainLayouter - moved to the transformation context 
+ * m_formWidth - moved to the transformation context
+ * m_formHeight - moved to the transformation context
+ * m_pLeftCaptionElement - TODO
+ * m_pRightCaptionElement - TODO
+ */
+class FormCalculationContext extends FormGroupBaseCalculationContext, ElementWithLimitsBaseCalculationContext
+{
+	
+}
+
+/**
+ * Font m_defFont - Font defFont TODO need to set the right type of the font
+ */
+class InputFieldCalculationContext extends FormElementBaseCalculationContext, IContainedElementCalculationContext
+{
+} 
+
+/**
+ * unsigned m_logicRowsHeight - int logicRowsHeight 
+ */
+class ImageCalculationContext extends FormElementBaseCalculationContext
+{
+	int logicRowsHeight
+}
+
+/**
+ */
+class CheckBoxCalculationContext extends FormElementBaseCalculationContext
+{
+}
+
+class SwitcherCalculationContext extends CheckBoxCalculationContext
+{
+}
+
+/**
+ * unsigned m_logicRowsHeight - int logicRowsHeight 
+ */
+class ProgressBarCalculationContext extends FormElementBaseCalculationContext
+{
+	int logicRowsHeight
+}
+
+/**
+ * unsigned m_logicRowsHeight - int logicRowsHeight 
+ */
+class TrackBarCalculationContext extends FormElementBaseCalculationContext
+{
+	int logicRowsHeight
+}
+
+/**
+ * unsigned m_logicRowsHeight - int logicRowsHeight 
+ */
+class TextDocCalculationContext extends FormElementBaseCalculationContext
+{
+	int logicRowsHeight
+}
+
+/**
+ * unsigned m_logicRowsHeight - int logicRowsHeight
+ * bool m_supportEqualWidth - boolean supportEqualWidth
+ * unsigned m_equalWidth - int equalWidth 
+ */
+class FormButtonCalculationContext extends FormElementBaseCalculationContext, GroupBaseCalculationContext
+{
+	int logicRowsHeight
+    boolean supportEqualWidth
+    int equalWidth
+}
+
+class PanelCalculationContext extends FormGroupBaseCalculationContext, ElementWithLimitsBaseCalculationContext
+{
+}
+
+class SeparatePanelCalculationContext extends FormGroupBaseCalculationContext, ElementWithLimitsBaseCalculationContext
+{
+}
+
+class FormattedAreaCalculationContext extends FormGroupBaseCalculationContext, ElementWithLimitsBaseCalculationContext
+{
+	boolean firstCallOfGetVariantFormattedArea
+	contains Margins margins
+}
+
+class ExternalObjectCalculationContext extends FormElementBaseCalculationContext
+{
+}
+
+/**
+ * IHippoLayLogicGroup* m_pOriginalLogicGroup - Won't transfer, redundant
+ * bool m_collapsible - boolean collapsible
+ * bool m_collapsed - boolean collapsed
+ * HippoTransformatorGroupCacheableChild m_titleElement; // Элемент заголовка
+ * std::wstring m_originalTitle - String originalTitle
+ * unsigned m_textLength - int textLength
+ * unsigned m_groupWidth - int groupWidth 
+ * unsigned m_groupHeight - int groupHeight
+ * LogicGroupInternalRepresentation m_representation - LogicGroupInternalRepresentation representation
+ * bool m_throughAlign - boolean throughAlign 
+ */
+class LogicGroupCalculationContext extends FormGroupBaseCalculationContext, ElementWithLimitsBaseCalculationContext
+{
+	UsualGroupBehavior behavior
+    boolean collapsed  
+    String originalTitle
+    int textLength
+    int groupWidth
+    int groupHeight
+    boolean throughAlign
+    boolean finalVerGrouping
+    int maxTargetHeight
+    LogicGroupInternalRepresentation representation
+    
+    contains ElementBaseTransformationContext<?,?> titleElement
+    contains ElementBaseTransformationContext<?,?> pPopUpElement
+    
+    //TODO check why we need this
+    refers HippoLayLogicGroup pOriginalLogicGroup
+}
+
+/**
+ * IHippoLayElementPtr m_pCloneElement
+ * std::vector<unsigned> m_widthes - int[] widths
+ * unsigned m_elementHeight - int elementHeight
+ * bool m_equalColumnsWidth - boolean equalColumnsWidth
+ * unsigned m_columnsCount - int columnsCount
+ * unsigned m_multiHeight - int multiHeight
+ * std::vector<double> m_relativeWidth - double[] relativeWidth 
+ * bool m_firstCallOfGetVariantTumbler - Won't transfer, redundant
+ */
+class TumblerCalculationContext extends FormElementBaseCalculationContext
+{
+	Size[] sizes
+	int elementHeight
+	boolean equalColumnsWidth
+	int columnsCount
+	int multiHeight
+	double[] relativeWidth
+	boolean addBorderHeight
+}
+
+class TableCalculationContext extends FormElementBaseCalculationContext, GroupBaseCalculationContext 
+{
+	int logicRowsHeight
+}
+
+/**
+ * IHippoLayElementPtr m_pCloneElement - Won't transfer, redundant
+ * bool m_firstCallOfGetVariantTableColumnsGroup - Won't transfer, redundant
+ *
+ */
+class TableColumnsGroupCalculationContext extends GroupBaseCalculationContext 
+{
+	contains HippoLayElementBase pCloneElement
+}
+
+/**
+ * IHippoLayElementPtr m_pCloneElement
+ * bool m_firstCallOfGetVariantTableColumn - Won't transfer, redundant
+ * unsigned m_addWidth - int addWidth
+ */
+class TableColumnCalculationContext extends ElementBaseCalculationContext 
+{
+	int addWidth
+	contains HippoLayElementBase pCloneElement
+}
+
+class ViewStatusAdditionCalculationContext extends FormElementBaseCalculationContext 
+{
+	
+}
+
+/*
+ * HippoTransformatorMeasurer* m_pMeasurer - Won't transfer, redundant
+ * unsigned m_logicRowsHeight - int logicRowsHeight
+ * unsigned m_formattedStringHeight - int formattedStringHeight
+ * bool m_canSeparate - boolean canSeparate
+ * unsigned m_rowsCnt - int rowsCnt
+ * unsigned m_maxStringWidth - int maxStringWidth
+ * unsigned m_horAdd - int horAdd
+ * unsigned m_verAdd - int verAdd
+ * std::wstring m_curTitleForCalculation - String curTitleForCalculation
+ * bool m_curTitleForCalculationInLines - boolean curTitleForCalculationInLines
+ * std::vector<std::wstring> m_lines;
+ * std::vector<bool> m_hardLines;
+ * bool m_autoWidth;
+ * bool m_firstCallOfGetVariantStaticText;
+ * bool m_recomendedAndMinimumVariantsConsistent;
+ * NonFormattedHeightDescrs m_nonFormattedHeightDescrs;
+ * FormattedHeightDescrs m_formattedHeightDescrs;
+ * bool m_externalTextFlag;
+ * std::wstring m_externalText;
+ * bool m_externalTextForCalculationFlag;
+ * std::wstring m_externalTextForCalculation;
+ * bool m_externalColorFlag;
+ * Color m_externalColor;
+ * bool m_externalFontFlag;
+ * Font m_externalFont;
+ */
+class StaticTextCalculationContext extends FormElementBaseCalculationContext 
+{
+	int logicRowsHeight	
+	boolean logicRowsHeightPriority
+	int formattedStringHeight
+	boolean canSeparate = 'true'
+	int rowsCnt
+	int maxStringWidth
+	int horAdd
+	int verAdd
+	String curTitleForCalculation
+	boolean curTitleForCalculationInLines
+	boolean externalTextFlag
+    String externalText
+    boolean externalTextForCalculationFlag
+    String externalTextForCalculation
+    
+    boolean autoWidth
+	String[] lines
+ 	boolean[] hardLines
+	String[] prevLines
+ 	boolean[] prevHardLines 	
+ 	
+  	boolean externalColorFlag
+  	Color externalColor
+  	boolean externalFontFlag
+  	Font externalFont
+  	
+    boolean originalLengthInDLU
+    TextBreakMode textBreakMode  	
+    int maxWordWidth
+    contains NonFormattedHeightDescr[] nonFormattedHeightDescrs
+    int maxTargetWidth
+	
+	op void setText(String text, boolean forLengthCalculation)
+	{
+	    if (forLengthCalculation)
+	    {
+	        externalTextForCalculationFlag = true;
+	        externalTextForCalculation = text;
+	    }
+	    else
+	    {
+	        externalTextFlag = true;
+	        externalText = text;
+	    }
+	}
+	
+	op void setTextColor(Color clr)
+	{
+    	externalColorFlag = true;
+    	externalColor = clr;
+	}
+
+	op void setFont(Font fnt)
+	{
+	    externalFontFlag = true;
+	    externalFont = fnt;
+	}
+}
+
+class RichElementCalculationContext extends GroupBaseCalculationContext
+{
+    boolean hasTitle
+    boolean hasExtTooltip
+    boolean extTooltipIsButton
+    
+    int titleIndex = "-1"
+    int extTooltipIndex = "-1"
+    int extTooltipPanelIndex = "-1"
+    int contentIndex = "-1"
+    
+    int leftTitleIndent
+    int rightTitleIndent
+    int topTitleIndent
+    int bottomTitleIndent
+    int extTooltipHorIndent
+    int extTooltipVerIndent
+    int topTitleExtIndent
+    int bottomTitleExtIndent
+    int mobileHorIndent
+    int maxWidthForRightExtTooltip
+    boolean firstCallOfGetVariantRichElement
+    int maxTargetHeight
+    int maxTargetWidth
+    FormChildrenAlign parentChildrenAlign
+    HippoLayouterEdge titleEdge
+    HippoLayouterEdge extTooltipEdge
+}
+
+/**
+ *  unsigned m_buttonsCount - int buttonsCount
+ *  unsigned m_columnsCount - int columnsCount
+ *  bool m_firstCallOfGetVariantRadioGruop - won't port - redundant
+ *  TitleElements m_titleElements
+ *  unsigned m_radioElementHeight 
+ *  unsigned m_radioElementWidth;
+ *  unsigned m_titleIndent;
+ *  unsigned m_horSpacing;
+ *  unsigned m_verSpacing;
+ *  Font m_scaledFont;
+ */
+class RadioGroupCalculationContext extends FormElementBaseCalculationContext
+{
+	int buttonsCount
+	int columnsCount
+    int radioElementHeight
+    int radioElementWidth
+    int titleIndent
+    int horSpacing
+    int verSpacing
+    Font scaledFont	
+}
+
+class RadioGroupMobileCalculationContext extends RadioGroupCalculationContext
+{
+}
+
+// TODO define presentation elements
+
+class Margins 
+{
+	int leftMargin
+	int topMargin
+	int rightMargin
+	int bottomMargin
+	int leftPadding
+	int topPadding
+	int rightPadding
+	int bottomPadding
+}
+
+/**
+ * unsigned m_groupWidth;
+ * unsigned m_groupHeight;
+ * LFPanelTabsRepresentation m_representation;
+ * Margins m_margins;
+ * unsigned m_horTabsLength;
+ * bool m_verScroller;
+ * unsigned m_childrenMaxAdaptiveGroupingFormGroupLevels;
+ * bool m_firstCallOfGetVariantPages;
+ * bool m_constantRangesInit;
+ * unsigned m_constantRanges;
+ * ChildInfosCache m_childInfosCache;
+ */
+class PagesCalculationContext extends GroupBaseCalculationContext, ElementWithLimitsBaseCalculationContext 
+{	
+	contains HippoLayElementBase pCloneElement
+	int groupWidth
+ 	int groupHeight
+ 	TabsRepresentationInt representation
+ 	contains Margins margins
+	int horTabsLength
+ 	boolean verScroller
+ 	int childrenMaxAdaptiveGroupingFormGroupLevels
+ 	int horTabsMinHeight
+}
+
+class PagePaddings
+{
+	int leftPadding
+	int topPadding
+	int rightPadding
+	int bottomPadding
+}
+
+/**
+ * unsigned m_groupWidth - int groupWidth
+ * unsigned m_groupHeight - int groupHeight
+ * bool m_noRepresentation - boolean noRepresentation
+ * Paddings m_paddings - 
+ * bool m_firstCallOfGetVariantPage - Won't port, redundant
+ * bool m_scrollOnCompress - boolean scrollOnCompress
+ * unsigned m_minHeight - int minHeight
+ */
+class PageCalculationContext extends FormGroupBaseCalculationContext, ElementWithLimitsBaseCalculationContext 
+{
+ int groupWidth
+ int groupHeight
+ boolean noRepresentation
+ contains PagePaddings paddings
+ boolean scrollOnCompress
+ int minHeight
+}
+
+class CommandBarCalculationContext extends ElementBaseCalculationContext 
+{
+	contains StringToElementTransformationContextMapEntry[] edits
+    boolean autoWidth
+    boolean autoMinWidth
+    //boolean firstCallOfGetVariantCommandBar
+    int recomendedWidth
+    refers HippoLayElementBase pCloneElement
+}
+
+/**
+ * unsigned m_logicRowsHeight - int logicRowsHeight  
+ */
+class FormPresElementBaseCalculationContext extends FormElementBaseCalculationContext 
+{
+	int logicRowsHeight
+}
+
+class MoxelCalculationContext extends FormPresElementBaseCalculationContext
+{
+}  
+
+class CalendarCalculationContext extends FormElementBaseCalculationContext
+{
+	int logicRowsHeight = "8"
+}  
+
+class HTMLCalculationContext extends FormPresElementBaseCalculationContext
+{
+}  
+
+class FormattedDocCalculationContext extends FormPresElementBaseCalculationContext
+{
+}  
+
+class PlannerCalculationContext extends FormPresElementBaseCalculationContext
+{
+}  
+
+class PeriodCalculationContext extends FormElementBaseCalculationContext
+{
+	int logicRowsHeight
+}  
+
+class ChartCalculationContext extends FormPresElementBaseCalculationContext
+{
+}  
+
+class GanttChartCalculationContext extends FormPresElementBaseCalculationContext
+{
+}  
+
+class DendrogramCalculationContext extends FormPresElementBaseCalculationContext
+{
+}  
+
+class FlowchartCalculationContext extends FormPresElementBaseCalculationContext
+{
+}  
+
+class GeographicalMapCalculationContext extends FormPresElementBaseCalculationContext
+{
+}  
+

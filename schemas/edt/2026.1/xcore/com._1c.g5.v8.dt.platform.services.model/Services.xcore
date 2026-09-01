@@ -1,0 +1,617 @@
+@Ecore(nsURI="http://g5.1c.ru/v8/dt/platform/services/model")
+@GenModel(nonNLSMarkers="true", copyrightText="Copyright (C) 2014, 1C", updateClasspath="false",
+	    editDirectory="/com._1c.g5.v8.dt.platform.services.model/xcore-gen",
+        editPluginID="com._1c.g5.v8.dt.platform.services.model", rootImplementsInterface="", booleanFlagsField="")
+package com._1c.g5.v8.dt.platform.services.model
+
+import com.google.common.base.Strings
+import com._1c.g5.v8.dt.mcore.Uuid
+import com._1c.g5.v8.dt.mcore.Value
+import com._1c.g5.v8.dt.platform.services.model.impl.SectionValidator
+import com._1c.g5.v8.dt.platform.services.model.impl.InfobaseReferenceValidator
+import com._1c.g5.v8.dt.platform.services.model.util.PlatformServicesModelUtil
+import com._1c.g5.v8.dt.platform.version.Version
+import com.google.common.collect.Lists
+import org.eclipse.core.resources.IProject
+import org.eclipse.emf.ecore.EDiagnosticChain
+import org.eclipse.emf.ecore.EMap
+import org.eclipse.emf.ecore.EObject
+import java.nio.file.Path
+import java.util.UUID
+import java.util.Locale
+import java.util.List
+import java.net.URI
+
+// Types
+type Locale wraps Locale
+create
+{
+    if (it !== null) {
+    	val parts = it.split('_')
+        if (parts.size == 3)
+    		new Locale(parts.get(0), parts.get(1), parts.get(2))
+    	else if (parts.size == 2)
+    		new Locale(parts.get(0), parts.get(1))
+    	else
+    		new Locale(it)
+    }
+}
+convert
+{
+    if (it !== null) it.toString()
+}
+
+type Version wraps Version
+create
+{
+	 if (it !== null) new Version(it)
+}
+convert
+{
+    if (it !== null) it.toString()
+}
+
+type Path wraps Path
+create
+{
+	 if (it !== null) Path.of(it)
+}
+convert
+{
+    if (it !== null) it.toString()
+}
+
+type URI wraps URI
+create
+{
+     if (it !== null) java.net.URI.create(it)
+}
+convert
+{
+    if (it !== null) it.toString()
+}
+
+type IProject wraps IProject
+
+/* 1C:Enterprise runtime installation model. */
+class RuntimeInstallation
+{
+	Uuid uuid
+	String name
+	/*
+	 * Platform type identifier.
+	 * <p/
+	 * @see com._1c.g5.v8.dt.platform.services.core.runtimes.IRuntimeType
+	 * @see com._1c.g5.v8.dt.platform.services.core.runtimes.IRuntimeTypeRegistry
+	 * @see com._1c.g5.v8.dt.platform.services.core.runtimes.RuntimeInstallations#ENTERPRISE_PLATFORM
+	 * @see com._1c.g5.v8.dt.platform.services.mobile.MobileRuntimeInstallations#MOBILE_PLATFORM
+	 * @see 'com._1c.g5.v8.dt.platform.services.core.runtimeTypes' extension point.
+	 */
+	String typeId
+	Version version
+	int build
+	/*
+	 * Location of the platform installation.
+	 * <p/>
+	 * This is not necessarily a local <code>file://</code> location.
+	 * For example, for standalone server it could be <code>ssh://host:port//path/to/users-data</code>.
+	 * In this case, this runtime installation could be not the real platform installation
+	 * but rather a special virtual reference.
+	 */
+	URI location
+	boolean training = "false"
+	Arch arch = "Undefined"
+	/* Returns the version with build as a {@code String}. */
+	op String getVersionWithBuild() {
+		return VersionWithBuild.toVersionWithBuild(version, build);
+	}
+}
+
+/* Architectory type of application installation. */
+enum Arch
+{
+	Undefined
+	x86
+	x86_64
+}
+
+/* The abstract section of 1C:Enterprise infobase references tree model */
+abstract class Section
+{
+	String name
+	Uuid uuid
+	boolean external = "false"
+	double orderInList = "-1"
+	double orderInTree
+	/* Returns the {@code String} folder of the section. */
+	derived String folder get {
+		val List<String> folderParts = Lists.newArrayList();
+		var EObject parent = eContainer;
+		while (parent !== null) {
+		    if (!(parent instanceof Section)) {
+		        return "/"
+		    }
+			if (!(parent as Section).name.equals("/")) {
+				folderParts.add((parent as Section).name)
+			}
+			parent = parent.eContainer
+			if(parent !== null) folderParts.add("/")
+		}
+		if (folderParts.isEmpty() || (!folderParts.isEmpty() && !folderParts.get(folderParts.size - 1).equals("/"))) {
+			folderParts.add("/")
+		}
+		val StringBuilder result = new StringBuilder()
+		for (String folderPart : Lists.reverse(folderParts)) {
+			result.append(folderPart);
+		}
+		result.toString;
+	}
+	op boolean validate(EDiagnosticChain diagnostics, EMap<Object, Object> context) {
+		SectionValidator::validate(this, diagnostics, context)
+	}
+}
+
+/* The group of the 1C:Enterprise infobase sections. */
+class Group extends Section
+{
+	contains Section[] subsections
+	/* Adds sub-section to this 1C:Enterprise infobase section. */
+	op void addSubsection(Section section) {
+		if (subsections.contains(section)) {
+			val Section otherSection = subsections.get(subsections.indexOf(section));
+			if (section.isExternal() != otherSection.isExternal()) {
+				val UUID uuid = UUID.randomUUID();
+				if (!section.isExternal()) {
+					section.setUuid(uuid);
+				} else {
+					otherSection.setUuid(uuid);
+				}
+				subsections.add(section);
+			}
+		} else {
+			subsections.add(section);
+		}
+	}
+}
+
+/* The 1C:Enterprise infobase reference. Contains description of the infobase. Actuial infobase may or may not exist. */
+class InfobaseReference extends Section
+{
+	contains IConnectionString connectionString
+	UseProxy useProxy
+	String proxyServer
+	Integer proxyPort
+	String proxyUser
+	String proxyPassword
+	ClientConnectionSpeed clientConnectionSpeed
+	Authentication authentication
+	Authentication webserverAuthentication
+	ClientType clientType
+	AppArch appArch
+	ClientType defaultClientType
+	/*
+	 * Platform version to be used to interact with the infobase.
+	 * <p/>
+     * Could be a mask, a full version, null if no preference was specified or some garbage as specified by user.
+	 */
+	String version
+	String defaultVersion
+	String webCommonInfoBaseUrl
+	String additionalParameters
+	/*
+	 * Address to connect to via designer agent protocol in case of web infobase reference
+	 * representing standalone server or cloud infobase.
+	 * <p/>
+	 * Usually has the following form: <code>ssh://host:port//path/to/users-data</code>
+	 */
+	String developmentServer // since 8.3.20
+
+	// HTTPS keys
+	CertificateSourceType httpsCaCertificate
+	CertificateSourceType httpsClientCertificate
+	String httpsClientCertificateFile
+	CertificateSelectType httpsClientCertificateSelectType
+	String httpsClientNssPath
+	String httpsClientNssCertificateName
+	String httpsCaCertificateFile
+
+	// mobile client keys
+	boolean showInList
+	String updateUrl
+	String mobilePublicKey
+
+	/* Returns a type of the infobase for this infobase reference. */
+	derived InfobaseType infobaseType get {
+		if (connectionString instanceof FileConnectionString)
+			InfobaseType.FILE
+		else if (connectionString instanceof ServerConnectionString)
+			InfobaseType.SERVER
+		else if (connectionString instanceof WebServerConnectionString)
+			InfobaseType.WEB
+	}
+
+	/* Validates the infobase reference. */
+	op boolean validate(EDiagnosticChain diagnostics, EMap<Object, Object> context) {
+		InfobaseReferenceValidator::validate(this, diagnostics, context)
+	}
+}
+
+interface IConnectionString
+{
+	op String asConnectionString()
+	op String asCommandOption()
+	op String getCommandParameter()
+}
+
+class FileConnectionString extends IConnectionString
+{
+	String file // path as string
+	op String asConnectionString() {
+		"File=\"" + Strings.nullToEmpty(file) + "\";"
+	}
+	op String asCommandOption() {
+		Strings.nullToEmpty(file);
+	}
+	op String getCommandParameter() {
+		return "F";
+	}
+}
+
+class ServerConnectionString extends IConnectionString
+{
+	String server
+	String reference
+	op String asConnectionString() {
+		"Srvr=\"" + Strings.nullToEmpty(server) + "\";Ref=\"" + Strings.nullToEmpty(reference) + "\";"
+	}
+	op String asCommandOption() {
+		Strings.nullToEmpty(server) + "\\" + Strings.nullToEmpty(reference);
+	}
+	op String getCommandParameter() {
+		return "S";
+	}
+}
+
+class WebServerConnectionString extends IConnectionString
+{
+	String url
+	op String asConnectionString() {
+		"ws=\"" + Strings.nullToEmpty(url) + "\";"
+	}
+	op String asCommandOption() {
+		Strings.nullToEmpty(url);
+	}
+	op String getCommandParameter() {
+		return "WS";
+	}
+}
+
+enum ClientType
+{
+	Auto
+	ThinClient
+	ThickClient
+	WebClient
+}
+
+enum AppArch
+{
+	Auto
+	x86 as "x86"
+	x86_Priority as "x86_prt"
+	x86_64 as "x86_64"
+	x86_64_Priority as "x86_64_prt"
+}
+
+enum UseProxy
+{
+	NotUse = 0
+	AutoConfig = 1
+	ManualConfig = 2
+}
+
+enum Authentication
+{
+	PermitOsAuthentication = 1
+	OnlyPasswordAuthentication = 0
+}
+
+enum ClientLaunchMode
+{
+    Normal
+    Workplace
+    EmbeddedWorkplace
+    FullscreenWorkplace
+    Kiosk
+}
+
+enum ClientConnectionSpeed
+{
+	SelectAtStartup
+	Normal
+	Low
+}
+
+enum CertificateSourceType
+{
+	None
+	File
+	Windows
+	NSS
+}
+
+enum CertificateSelectType
+{
+	Recent
+	Choose
+	Auto
+}
+
+enum InfobaseType
+{
+	File
+	Server
+	Web
+}
+
+// Infobases commands model
+class CreateInfobaseArguments
+{
+	Locale locale = "ru_RU"
+	op String getCommandParameters() {
+		PlatformServicesModelUtil::getCommandParameters(this)
+	}
+}
+
+class CreateServerInfobaseArguments extends CreateInfobaseArguments
+{
+	SecureConnection secureConnection
+	DatabaseType databaseType
+	String databaseServer
+	String databaseName
+	String databaseUser
+	String databasePassword
+	DateShift dateShift = "Disabled"
+	boolean forceCreate
+	boolean lockScheduledJobs
+	op String getCommandParameters() {
+		PlatformServicesModelUtil::getServerCommandParameters(this)
+	}
+}
+
+enum SecureConnection
+{
+	Disabled
+	Connecting
+	Always
+}
+
+enum DatabaseType
+{
+	MsSqlServer as "MSSQLServer"
+	PostgreSql as "PostgreSQL"
+	IbmDb2 as "IBMDB2"
+	OracleDatabase as "OracleDatabase"
+}
+
+enum DateShift
+{
+	Enabled = 2000
+	Disabled = 0
+}
+
+enum InfobaseAccess
+{
+	OS = 0
+	Infobase = 1
+}
+
+// Web servers model
+class WebServer
+{
+	String name
+	String typeId // see 'com._1c.g5.v8.dt.platform.services.core.webServerTypes' extension point
+	Path installLocation
+	Path configLocation
+	Arch arch = "Undefined"
+}
+
+abstract class Publication
+{
+	String[1] name // equals to Alias
+	String[1] location // path as string
+	refers transient WebServer webServer
+	derived PublicationType PublicationType get {
+		if (this instanceof InfobasePublication)
+			PublicationType.INFOBASE
+		else if (this instanceof MobileApplicationPublication)
+			PublicationType.MOBILE_APPLICATION
+		else
+			throw new IllegalStateException("Unsupported type of Publication")
+	}
+}
+
+class InfobasePublication extends Publication
+{
+	String[1] infobaseConnection
+	String tempLocation // path as string
+
+	boolean enable = "true"
+	JobExecution executeScheduledJobs = "On"
+	boolean enableStandardOData = "true"
+	String progressiveWebApplication // since 8.3.18
+	boolean enableSystemAnalytics // since 8.3.18
+
+	String exitUrl
+
+	String distributiveWin32
+	String distributiveWin64
+	String distributiveLinuxDeb32 // since 8.3.18
+	String distributiveLinuxDeb64 // since 8.3.18
+	String distributiveLinuxRpm32 // since 8.3.18
+	String distributiveLinuxRpm64 // since 8.3.18
+	String distributiveMac64
+
+	contains Pool pool
+	contains Debug debug
+	contains OpenId openId
+	contains OpenIdConnect openIdConnect
+	contains OData standardOdata
+	contains WebServices webServices
+	contains HttpServices httpServices
+	contains DataSeparator[] dataSeparators
+}
+
+class MobileApplicationPublication extends Publication
+{
+	boolean publishRunConfiguration
+	String[1] debugUrl
+	derived boolean debugEnabled get {
+		debugUrl !== null
+	}
+}
+
+enum PublicationType
+{
+	Infobase
+	MobileApplication
+}
+
+class Pool
+{
+	int size = "100"
+	int maxAge = "20000" // milisec
+	int attempts = "5"
+	int attemptTimeout = "500" // milisec
+	int waitTimeout = "500" // milisec
+	int serverPingTimeout = "5000" // milisec
+	int serverPingPeriod = "100" // milisec
+}
+
+class DataSeparator
+{
+	boolean specify = "false"
+	boolean safe = "false"
+	String value
+}
+
+class Debug
+{
+	DebugProtocol protocol = "http"
+	boolean enable = "false"
+	String[1] url
+}
+
+enum DebugProtocol
+{
+	tcp
+	http
+}
+
+enum JobExecution
+{
+	on as "On"
+	off as "Off"
+	forced as "Forced"
+}
+
+class OpenId
+{
+	String relyUrl
+	contains OpenIdProvider provider
+
+	derived boolean useAuth get {
+		relyUrl !== null
+	}
+
+	derived boolean useAsProvider get {
+		provider !== null
+	}
+}
+
+class OpenIdProvider
+{
+	String[] returnTo
+	Integer lifetime = "604800"
+}
+
+class OpenIdConnect
+{
+	String providers
+	boolean allowStandardAuthentication
+}
+
+class OData extends SessionReusable
+{
+	boolean enable = "true"
+}
+
+class WebServices
+{
+	boolean enable = "true"
+	boolean pointEnableCommon = "true"
+	boolean publishExtensionsByDefault = "true"
+	contains WebService[] services
+}
+
+class WebService extends SessionReusable
+{
+	String[1] name
+	String alias
+	boolean enable = "true"
+}
+
+class HttpServices
+{
+	boolean publishByDefault = "true"
+	boolean publishExtensionsByDefault = "true"
+	contains HttpService[] services
+}
+
+class HttpService extends SessionReusable
+{
+	String[1] name
+	String[1] rootUrl
+	boolean enable = "true"
+}
+
+class SessionReusable
+{
+	SessionReuseMode reuseSessions = "autouse"
+	Integer maxAge = "20"
+	Integer poolSize = "10"
+	Integer poolTimeout = "5"
+}
+
+enum SessionReuseMode
+{
+	AutoUse as "autouse"
+	DontUse as "dontuse"
+	Use as "use"
+}
+
+// Values
+class ParametrizedValueList extends Value
+{
+	Uuid classId
+	int version
+	int lastId
+	int displacementSize
+	boolean uniqueMode
+	boolean avalivableValuesExists
+	String avalivableValues
+	String pattern
+	contains ValueListItem[] values
+}
+
+class ValueListItem extends Value
+{
+	int ^id
+	int check
+	Uuid classId
+	String title
+	String pictureContent
+	String formattedTitle
+	boolean formattedTitleSpecified
+	refers Value value
+}

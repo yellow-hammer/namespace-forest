@@ -1,0 +1,54 @@
+@Ecore(nsURI="http://v8.1c.ru/8.3/debugger/debugArea")
+@GenModel(nonNLSMarkers="true", copyrightText="Copyright (C) 2014, 1C", updateClasspath="false")
+package com._1c.g5.v8.dt.debug.model.area
+
+import com._1c.g5.v8.dt.debug.model.base.data.DebugTargetType
+import org.eclipse.emf.ecore.EObject
+
+@ExtendedMetaData(name="DebugAreaDSPairInfo", kind="elementOnly")
+class DebugAreaDSPairInfo {
+	@ExtendedMetaData(kind="element", name="name", namespace="##targetNamespace")
+	String[1] name
+	@ExtendedMetaData(kind="element", name="value", namespace="##targetNamespace")
+	contains EObject[1] value
+	@ExtendedMetaData(kind="element", name="use", namespace="##targetNamespace")
+	unsettable Boolean[1] use
+}
+
+@ExtendedMetaData(name="DebugAreaInfo", kind="elementOnly")
+class DebugAreaInfo {
+	@ExtendedMetaData(kind="element", name="name", namespace="##targetNamespace")
+	String[1] name
+	@ExtendedMetaData(kind="element", name="useMaskOfDSArea", namespace="##targetNamespace")
+	unsettable Boolean[1] useMaskOfDSArea
+	@ExtendedMetaData(kind="element", name="dsPairInfo", namespace="##targetNamespace")
+	contains DebugAreaDSPairInfo[] dsPairInfo
+	@ExtendedMetaData(kind="element", name="useMaskOfTargetTypes", namespace="##targetNamespace")
+	unsettable Boolean[1] useMaskOfTargetTypes
+	@ExtendedMetaData(kind="element", name="targetType", namespace="##targetNamespace")
+	DebugTargetType[] targetType
+	@ExtendedMetaData(kind="element", name="useMaskOfUsers", namespace="##targetNamespace")
+	unsettable Boolean[1] useMaskOfUsers
+	@ExtendedMetaData(kind="element", name="userInfo", namespace="##targetNamespace")
+	contains DebugAreaUserInfo[] userInfo
+}
+
+@ExtendedMetaData(name="DebugAreas", kind="elementOnly")
+class DebugAreas {
+	@ExtendedMetaData(kind="element", name="item", namespace="##targetNamespace")
+	contains DebugAreaInfo[] item
+}
+
+@ExtendedMetaData(name="DebugAreaUserInfo", kind="elementOnly")
+class DebugAreaUserInfo {
+	@ExtendedMetaData(kind="element", name="name", namespace="##targetNamespace")
+	unsettable String name = ""
+	@ExtendedMetaData(kind="element", name="use", namespace="##targetNamespace")
+	unsettable Boolean[1] use = "false"
+}
+
+@ExtendedMetaData(name="DebugTargetFilters", kind="elementOnly")
+class DebugTargetFilters {
+	@ExtendedMetaData(kind="element", name="item", namespace="##targetNamespace")
+	contains DebugAreaInfo[] item
+}

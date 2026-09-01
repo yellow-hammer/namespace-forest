@@ -1,0 +1,137 @@
+@GenModel(prefix="DistributionSupport", loadInitialization="false", literalsInterface="true", nonNLSMarkers="true",
+    copyrightText="Copyright (C) 2024, 1C", updateClasspath="false", featureDelegation="Reflective",
+    rootExtendsClass="com._1c.g5.v8.bm.core.BmObject")
+@Ecore(nsPrefix="distributionSupport", nsURI="http://g5.1c.ru/v8/dt/distribution/model")
+package com.e1c.g5.v8.dt.distribution.model
+
+import com._1c.g5.v8.dt.mcore.Uuid
+
+enum ConfigurationFileState
+{
+    /*
+     * Состояние файла конфигурации (с точки зрения разработки / дистрибуции / апдейта)
+     * see ConfigFileState in c++
+     */
+    Normal = 0, // Режим обычной конфигурации.
+    Distributive = 1 // Дистрибутив поставщика.
+}
+
+ enum UserSupportMode
+{
+    ChangesNotAllowed = 0, // eParentMode = 0 // Объект поставщика не редактируется.
+    ChangesAllowed = 1, // eSupportMode // Объект поставщика редактируется с сохранением поддержки.
+    Cancelled = 2 // eNonSupportMode // Объект поставщика снят с поддержки.
+}
+    
+enum ParentSupportMode
+{
+    FreeMode = 0, // Пользователь может менять объект.
+    WarningMode = 1, // Пользователю не рекомендуется менять объект.
+    ProtectMode = 2, // Пользователю запрещено менять объект.
+    NotIncludeInUserConfigByDefault = -1 // По умолчанию не включать в пользовательскую конфигурацию.
+}
+
+class SupportLanguages
+{
+    boolean use //< использовать ключи.
+    String[] languages
+}
+
+class DistributiveMapEntry wraps java.util.Map$Entry
+{
+    /*
+     * Условие поддержки объекта со стороны поставщика
+     */
+    Uuid[1] key 
+    ParentSupportMode[1] value
+}
+
+class ObjectModuleMapEntry wraps java.util.Map$Entry
+{
+    /*
+     * Флаг поставки модуля объекта без исходных текстов
+     */
+    Uuid[1] key
+    Boolean value
+}
+
+class DistributionSupport 
+{
+    int version
+    /*
+     * Дополнительная информация о состоянии файла конфигурации
+     * see IConfigExtInfo
+     */
+    ConfigurationFileState fileState // Текущее состояние файла конфигурации
+    boolean updateAvailable // Флаг допустимости апдейта с помощью данного дистрибутива
+    contains ParentConfigurationInfo[] parentConfigurationInfos // Родительские конфигурации
+    contains DistributiveMapEntry[] distributives // Условия поддержки объекта со стороны поставщика
+    contains ObjectModuleMapEntry[] objectModules // Поставки модуля объекта без исходных текстов
+}
+
+enum ParentConfigurationStoreMode
+{
+    File = 0, // Родительская конфигурация содержится в файле.
+    Self = 1 // Конфигурация сама себе является родительской.
+}
+
+class UserSupportModeRules
+{
+    /*
+     * Правила установки режимов поддержки
+     */ 
+
+    // Новые объекты - Изменения разрешены
+    UserSupportMode newObjectsWithFreeMode// = UserSupportMode.CHANGES_NOT_ALLOWED
+    // Новые объекты - Изменения не рекомендуются
+    UserSupportMode newObjectsWithWarningMode// = UserSupportMode.CHANGES_NOT_ALLOWED
+
+    // Существующие объекты - Идентичные или "Взять от поставщика" - Изменения разрешены
+    boolean existingIdenticalObjectsWithFreeModeKeepMode// = true
+    UserSupportMode existingIdenticalObjectsWithFreeMode// = UserSupportMode.CHANGES_NOT_ALLOWED
+
+    // Существующие объекты - Идентичные или "Взять от поставщика" - Изменения не рекомендуются
+    boolean existingIdenticalObjectsWithWarningModeKeepMode// = true
+    UserSupportMode existingIdenticalObjectsWithWarningMode// = UserSupportMode.CHANGES_NOT_ALLOWED
+
+    // Существующие объекты - Различающиеся и не "Взять от поставщика" - Изменения разрешены
+    boolean existingDifferentObjectsWithFreeModeKeepMode// = true
+    UserSupportMode existingDifferentObjectsWithFreeMode// = UserSupportMode.CHANGES_ALLOWED
+
+    // Существующие объекты - Различающиеся и не "Взять от поставщика" - Изменения не рекомендуются
+    boolean existingDifferentObjectsWithWarningModeKeepMode// = true
+    UserSupportMode existingDifferentObjectsWithWarningMode// = UserSupportMode.CHANGES_ALLOWED
+}
+
+class ParentConfigurationInfo
+{
+    // Информация о родительской конфигурации
+    Uuid[1] ^id // Идентификатор
+    ParentConfigurationStoreMode storeMode // Способ хранения родительской конфигурации
+    
+    String configRelease // Версия конфигурации
+    String providerName // Имя поставщика
+    String configName // Имя конфигурации
+    Uuid configVersion // Текущая версия конфигурации //< Версия как UUID
+    
+    boolean notUsedPresent
+    
+    contains UserSupportModeRules rules // Правила установки режимов поддержки
+    contains SupportLanguages supportLanguages // Языки поддержки
+
+    contains ParentConfigurationInfoItem[] items
+
+    boolean key
+    String[] keyStrings
+
+    boolean edt // special flag to indicate that this entry conforms to EDT library
+}
+
+class ParentConfigurationInfoItem
+{
+    Uuid[1] userId // Id объекта пользователя
+    Uuid[1] parentId // Id объекта поставщика
+    ParentSupportMode parentMode // Условие поддержки объекта со стороны поставщика
+    UserSupportMode userMode // Условие поддержки со стороны пользователя
+    boolean used // Использование правил поддержки (false == снят с поддержки)
+}

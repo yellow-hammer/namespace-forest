@@ -1,0 +1,30 @@
+@GenModel(nonNLSMarkers="true", prefix="V8Help", copyrightText="Copyright (C) 2014, 1C", updateClasspath="false")
+@Ecore(nsPrefix="v8help", nsURI="http://g5.1c.ru/v8/dt/v8help")
+package com._1c.g5.v8.dt.v8help.model
+
+class V8HelpBook
+{
+	String version
+	contains V8HelpAttribute[] attributes
+	contains V8HelpEntry[] entries
+	contains V8HelpPage[] pages
+}
+
+class V8HelpEntry
+{
+	unique String title
+	contains V8HelpEntry[] entries
+	refers V8HelpPage page
+}
+
+class V8HelpPage
+{
+	String host
+	String link
+	refers V8HelpAttribute[] attributes
+}
+
+class V8HelpAttribute
+{
+	String name
+}

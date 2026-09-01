@@ -1,0 +1,248 @@
+@GenModel(nonNLSMarkers="true", prefix="ChartEditor", copyrightText="Copyright (C) 2015, 1C", updateClasspath="false")
+@Ecore(nsPrefix="chartEditor", nsURI="http://g5.1c.ru/v8/dt/charteditor/model")
+package com._1c.g5.v8.dt.form.ui.chart.editor.model
+
+import com._1c.g5.v8.dt.chart.model.Chart
+import com._1c.g5.v8.dt.chart.model.DoubleRect
+import com._1c.g5.v8.dt.dendrogram.model.Dendrogram
+import com._1c.g5.v8.dt.form.model.ChartExtInfo
+import com._1c.g5.v8.dt.form.model.DendrogramExtInfo
+import com._1c.g5.v8.dt.form.model.FormAttributeExtInfo
+import com._1c.g5.v8.dt.form.model.GanttChartExtInfo
+import com._1c.g5.v8.dt.ganttchart.model.GanttChart
+
+import org.eclipse.core.runtime.Assert
+
+type IBmTransaction wraps com._1c.g5.v8.bm.core.IBmTransaction
+type IBmObject wraps com._1c.g5.v8.bm.core.IBmObject
+
+abstract class AnyChartRepresentation
+{
+	contains Title title
+	contains Legend legend
+	contains MainArea mainArea
+
+	op IBmObject getChart()
+	op FormAttributeExtInfo getExtInfo()
+}
+
+class ChartRepresentation extends AnyChartRepresentation
+{
+	refers ChartExtInfo chartExtInfo
+
+	op IBmObject getChart()
+	{
+		return chartExtInfo.chart
+	}
+
+	op FormAttributeExtInfo getExtInfo()
+	{
+		return chartExtInfo
+	}
+}
+
+class DendrogramRepresentation extends AnyChartRepresentation
+{
+	refers DendrogramExtInfo dendrogramExtInfo
+
+	op IBmObject getChart()
+	{
+		return dendrogramExtInfo.dendrogram
+	}
+
+	op FormAttributeExtInfo getExtInfo()
+	{
+		return dendrogramExtInfo
+	}
+}
+
+class GanttChartRepresentation extends AnyChartRepresentation
+{
+	refers GanttChartExtInfo ganttChartExtInfo
+
+	op IBmObject getChart()
+	{
+		return ganttChartExtInfo.ganttChart
+	}
+
+	op FormAttributeExtInfo getExtInfo()
+	{
+		return ganttChartExtInfo
+	}
+}
+
+// element of any chart - Chart, Dendrogram or GanttChart
+interface AnyChartElement
+{
+	op void changeBounds(IBmTransaction transaction, DoubleRect rect)
+	op DoubleRect bounds()
+	op void setActualChart(IBmObject actualChart)	
+	op IBmObject getChart()
+}
+
+interface Title extends AnyChartElement
+{
+}
+
+interface Legend extends AnyChartElement
+{
+}
+
+interface MainArea extends AnyChartElement
+{
+}
+
+abstract class ChartElement extends AnyChartElement
+{
+	refers Chart chart
+
+	op void setActualChart(IBmObject actualChart)
+	{
+		Assert.isLegal(actualChart instanceof Chart)
+		chart = actualChart as Chart
+	}
+}
+
+abstract class DendrogramElement extends AnyChartElement
+{
+	refers Dendrogram dendrogram
+
+	op void setActualChart(IBmObject actualChart)
+	{
+		Assert.isLegal(actualChart instanceof Dendrogram)
+		dendrogram = actualChart as Dendrogram
+	}
+	
+    op IBmObject getChart() 
+    {
+        return dendrogram
+    }
+}
+
+abstract class GanttChartElement extends AnyChartElement
+{
+	refers GanttChart ganttChart
+
+	op void setActualChart(IBmObject actualChart)
+	{
+		Assert.isLegal(actualChart instanceof GanttChart)
+		ganttChart = actualChart as GanttChart
+	}
+	
+	op IBmObject getChart() 
+    {
+        return ganttChart
+    }
+}
+
+class ChartTitle extends ChartElement, Title 
+{
+	op void changeBounds(IBmTransaction transaction, DoubleRect rect)
+	{
+		Assert.isLegal(rect !== null)
+		transaction.toTransactionObject(chart).elementsTitle = rect
+	}
+
+	op DoubleRect bounds()
+	{
+		return chart.elementsTitle	
+	}
+}
+
+class ChartLegend extends ChartElement, Legend
+{
+	op void changeBounds(IBmTransaction transaction, DoubleRect rect)
+	{
+		Assert.isLegal(rect !== null)
+		transaction.toTransactionObject(chart).elementsLegend = rect
+	}
+
+	op DoubleRect bounds()
+	{
+		return chart.elementsLegend	
+	}
+}
+
+class ChartMainArea extends ChartElement, MainArea
+{
+	op void changeBounds(IBmTransaction transaction, DoubleRect rect)
+	{
+		Assert.isLegal(rect !== null)
+		transaction.toTransactionObject(chart).elementsChart = rect
+	}
+
+	op DoubleRect bounds()
+	{
+		return chart.elementsChart	
+	}
+}
+
+class DendrogramTitle extends DendrogramElement, Title
+{
+	op void changeBounds(IBmTransaction transaction, DoubleRect rect)
+	{
+		Assert.isLegal(rect !== null)
+		transaction.toTransactionObject(dendrogram).chart.elementsTitle = rect
+	}
+
+	op DoubleRect bounds()
+	{
+		return dendrogram.chart.elementsTitle
+	}
+}
+
+class DendrogramMainArea extends DendrogramElement, MainArea
+{
+	op void changeBounds(IBmTransaction transaction, DoubleRect rect)
+	{
+		Assert.isLegal(rect !== null)
+		transaction.toTransactionObject(dendrogram).chart.elementsChart = rect
+	}
+
+	op DoubleRect bounds()
+	{
+		return dendrogram.chart.elementsChart
+	}
+}
+
+class GanttChartTitle extends GanttChartElement, Title
+{
+	op void changeBounds(IBmTransaction transaction, DoubleRect rect)
+	{
+		Assert.isLegal(rect !== null)
+		transaction.toTransactionObject(ganttChart).chart.elementsTitle = rect
+	}
+
+	op DoubleRect bounds()
+	{
+		return ganttChart.chart.elementsTitle
+	}
+}
+
+class GanttChartLegend extends GanttChartElement, Legend
+{
+	op void changeBounds(IBmTransaction transaction, DoubleRect rect)
+	{
+		Assert.isLegal(rect !== null)
+		transaction.toTransactionObject(ganttChart).chart.elementsLegend = rect
+	}
+
+	op DoubleRect bounds()
+	{
+		return ganttChart.chart.elementsLegend
+	}
+}
+
+class GanttChartMainArea extends GanttChartElement, MainArea
+{
+	op void changeBounds(IBmTransaction transaction, DoubleRect rect)
+	{
+		Assert.isLegal(rect !== null)
+		transaction.toTransactionObject(ganttChart).chart.elementsChart = rect
+	}
+
+	op DoubleRect bounds()
+	{
+		return ganttChart.chart.elementsChart
+	}
+}

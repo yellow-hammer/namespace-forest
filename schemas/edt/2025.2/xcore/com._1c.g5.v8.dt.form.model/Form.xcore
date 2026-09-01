@@ -1,0 +1,3022 @@
+@GenModel(prefix="Form", loadInitialization="false", literalsInterface="true", nonNLSMarkers="true",
+    copyrightText="Copyright (C) 2013, 1C", updateClasspath="false", featureDelegation="Reflective",
+    rootExtendsClass="com._1c.g5.v8.bm.core.BmObject", rootExtendsInterface="com._1c.g5.v8.bm.core.IBmObject")
+@Ecore(nsPrefix="form", nsURI="http://g5.1c.ru/v8/dt/form")
+package com._1c.g5.v8.dt.form.model
+
+import com._1c.g5.v8.dt.chart.model.Chart
+import com._1c.g5.v8.dt.dcs.model.schema.DataCompositionSchemaCalculatedField
+import com._1c.g5.v8.dt.dcs.model.schema.DataCompositionSchemaParameter
+import com._1c.g5.v8.dt.dcs.model.schema.DataSetField
+import com._1c.g5.v8.dt.dcs.model.settings.DataCompositionConditionalAppearance
+import com._1c.g5.v8.dt.dcs.model.settings.DataCompositionSettings
+import com._1c.g5.v8.dt.dcs.model.settings.DataCompositionSettingsViewMode
+import com._1c.g5.v8.dt.dcs.model.settings.DataCompositionComplexSettingsViewMode
+import com._1c.g5.v8.dt.dendrogram.model.Dendrogram
+import com._1c.g5.v8.dt.form.model.impl.ButtonValidator
+import com._1c.g5.v8.dt.form.model.impl.CalendarFieldValidator
+import com._1c.g5.v8.dt.form.model.impl.CatalogMainItemValidator
+import com._1c.g5.v8.dt.form.model.impl.ChartFieldValidator
+import com._1c.g5.v8.dt.form.model.impl.ChartOfCharacteristicTypesMainItemValidator
+import com._1c.g5.v8.dt.form.model.impl.CheckBoxFieldValidator
+import com._1c.g5.v8.dt.form.model.impl.DataPathValidator
+import com._1c.g5.v8.dt.form.model.impl.DecorationValidator
+import com._1c.g5.v8.dt.form.model.impl.DendrogramFieldValidator
+import com._1c.g5.v8.dt.form.model.impl.DynamicListExtInfoValidator
+import com._1c.g5.v8.dt.form.model.impl.ExtendedTooltipValidator
+import com._1c.g5.v8.dt.form.model.impl.FieldValidator
+import com._1c.g5.v8.dt.form.model.impl.FlowchartFieldValidator
+import com._1c.g5.v8.dt.form.model.impl.FormAttributeAdditionalColumnsValidator
+import com._1c.g5.v8.dt.form.model.impl.FormAttributeValidator
+import com._1c.g5.v8.dt.form.model.impl.FormCommandValidator
+import com._1c.g5.v8.dt.form.model.impl.FormElementDataSourceInfoExtension
+import com._1c.g5.v8.dt.form.model.impl.FormPropertyInfoExtension
+import com._1c.g5.v8.dt.form.model.impl.FormValidator
+import com._1c.g5.v8.dt.form.model.impl.FormattedDocFieldValidator
+import com._1c.g5.v8.dt.form.model.impl.GanttChartFieldValidator
+import com._1c.g5.v8.dt.form.model.impl.GeographicalMapFieldValidator
+import com._1c.g5.v8.dt.form.model.impl.GroupValidator
+import com._1c.g5.v8.dt.form.model.impl.HtmlFieldValidator
+import com._1c.g5.v8.dt.form.model.impl.ImageFieldValidator
+import com._1c.g5.v8.dt.form.model.impl.InputFieldValidator
+import com._1c.g5.v8.dt.form.model.impl.LFCMIFragmentRecordValidator
+import com._1c.g5.v8.dt.form.model.impl.LabelFieldValidator
+import com._1c.g5.v8.dt.form.model.impl.PDFDocumentFieldValidator
+import com._1c.g5.v8.dt.form.model.impl.ProgressBarFieldValidator
+import com._1c.g5.v8.dt.form.model.impl.RadioButtonsFieldValidator
+import com._1c.g5.v8.dt.form.model.impl.SpreadSheetDocFieldValidator
+import com._1c.g5.v8.dt.form.model.impl.TableValidator
+import com._1c.g5.v8.dt.form.model.impl.TextDecorationValidator
+import com._1c.g5.v8.dt.form.model.impl.TextDocFieldValidator
+import com._1c.g5.v8.dt.form.model.impl.TrackBarFieldValidator
+import com._1c.g5.v8.dt.ganttchart.model.GanttChart
+import com._1c.g5.v8.dt.mcore.Border
+import com._1c.g5.v8.dt.mcore.ButtonRepresentation
+import com._1c.g5.v8.dt.mcore.Color
+import com._1c.g5.v8.dt.mcore.Command
+import com._1c.g5.v8.dt.mcore.CommandGroup
+import com._1c.g5.v8.dt.mcore.Date
+import com._1c.g5.v8.dt.mcore.DuallyNamedElement
+import com._1c.g5.v8.dt.mcore.Event
+import com._1c.g5.v8.dt.mcore.FieldSource
+import com._1c.g5.v8.dt.mcore.Font
+import com._1c.g5.v8.dt.mcore.InterfaceType
+import com._1c.g5.v8.dt.mcore.LocalStringMapEntry
+import com._1c.g5.v8.dt.mcore.NamedElement
+import com._1c.g5.v8.dt.mcore.Picture
+import com._1c.g5.v8.dt.mcore.PictureDef
+import com._1c.g5.v8.dt.mcore.StandardPeriod
+import com._1c.g5.v8.dt.mcore.TypeDescription
+import com._1c.g5.v8.dt.mcore.Value
+import com._1c.g5.v8.dt.metadata.common.AbstractChoiceParameterLink
+import com._1c.g5.v8.dt.metadata.common.AbstractTypeLink
+import com._1c.g5.v8.dt.metadata.common.AccountType
+import com._1c.g5.v8.dt.metadata.common.AutoShowStateMode
+import com._1c.g5.v8.dt.metadata.common.AutoTimeMode
+import com._1c.g5.v8.dt.metadata.common.ChoiceParameter
+import com._1c.g5.v8.dt.metadata.common.FillChecking
+import com._1c.g5.v8.dt.metadata.common.FoldersAndItemsUse
+import com._1c.g5.v8.dt.metadata.common.OnMainServerUnavalableBehavior
+import com._1c.g5.v8.dt.metadata.common.PictureSize
+import com._1c.g5.v8.dt.metadata.common.PictureBackgroundShowMode
+import com._1c.g5.v8.dt.metadata.common.PostingModeUse
+import com._1c.g5.v8.dt.metadata.common.ReportResultViewMode
+import com._1c.g5.v8.dt.metadata.common.Shortcut
+import com._1c.g5.v8.dt.metadata.dbview.DbViewDef
+import com._1c.g5.v8.dt.metadata.mdclass.AbstractFlowchart
+import com._1c.g5.v8.dt.metadata.mdclass.AbstractForm
+import com._1c.g5.v8.dt.metadata.mdclass.AbstractGeographicalSchema
+import com._1c.g5.v8.dt.metadata.mdclass.AdjustableBoolean
+import com._1c.g5.v8.dt.metadata.mdclass.BasicForm
+import com._1c.g5.v8.dt.metadata.mdclass.FunctionalOption
+import com._1c.g5.v8.dt.metadata.mdclass.SettingsStorage
+import com._1c.g5.v8.dt.planner.model.PlannerSettings
+import org.eclipse.emf.common.util.DelegatingEList$UnmodifiableEList
+import org.eclipse.emf.ecore.EDiagnosticChain
+import org.eclipse.emf.ecore.EMap
+import org.eclipse.emf.ecore.EObject
+
+annotation "http://www.1c.ru/v8/dt/form/FormProperty" as FormProperty
+annotation "http://www.1c.ru/v8/bm/CollectionItemId" as CollectionItemId
+annotation "http://www.1c.ru/v8/dt/common/ExternalProperty" as ExternalProperty
+
+interface Visible
+{
+    boolean visible
+    unsettable boolean enabled
+    contains AdjustableBoolean[1] userVisible
+}
+
+interface Titled
+{
+    contains LocalStringMapEntry[] title
+}
+
+interface TitleStyle
+{
+    contains Color titleTextColor
+    contains Font titleFont
+}
+
+interface TooltipContainer
+{
+    contains LocalStringMapEntry[] toolTip
+    TooltipRepresentation toolTipRepresentation
+}
+
+interface AdditionSource
+{
+}
+
+interface ExtendedTooltipHolder
+{
+    // predefined elements --------------------------------
+    contains ExtendedTooltip extendedTooltip
+}
+
+//since 8.5.1
+interface SelectedItemsActionsPanelHolder
+{
+    // predefined elements --------------------------------
+    contains transient SelectedItemsActionsPanel selectedItemsActionsPanel // layouter only
+}
+
+//since 8.5.1
+interface RowActionsPanelHolder
+{
+    // predefined elements --------------------------------
+    contains transient RowActionsPanel rowActionsPanel // layouter only
+}
+
+interface ContextMenuHolder
+{
+    // predefined elements --------------------------------
+    contains ContextMenu contextMenu
+}
+
+/* Event handler container is an abstraction that contains collection of event handlers. */
+interface EventHandlerContainer
+{
+    contains EventHandler[] handlers
+}
+
+/* The flag of the user changes being applied to the extension form object property */
+class ExtensionUserChangedPropertyEntry wraps java.util.Map$Entry
+{
+    String[1] key
+    Boolean[1] value
+}
+
+/* Event handler handles some event and contains information about module handler method name. */
+class EventHandler
+{
+    refers Event[1] event
+    String[1] name
+}
+
+/* Event handler extension handles some event and contains information about module handler method name and method call interception type. */
+class EventHandlerExtension extends EventHandler
+{
+    ExtendedMethodCallType callType
+}
+
+/* Command handler container is an abstraction that contains information about command handlers. */
+interface CommandHandlerContainer
+{
+}
+
+/* Form command handler container contains single command handler. */
+class FormCommandHandlerContainer extends CommandHandlerContainer
+{
+    contains CommandHandler handler
+}
+
+/* Form extension command handler container contains collection of command handler. */
+class FormExtensionCommandHandlerContainer extends CommandHandlerContainer
+{
+    contains CommandHandlerExtension[] handlers
+}
+
+/* Command handler handles some command and contains information about module handler method name. */
+class CommandHandler
+{
+    String[1] name
+}
+
+/* Command handler extension handles some command and contains information about module handler method name and method call interception type. */
+class CommandHandlerExtension extends CommandHandler
+{
+    ExtendedMethodCallType callType
+}
+
+interface CommandBarHolder
+{
+    FormElementCommandBarLocation commandBarLocation
+    Boolean showCommandBar // since 8.5.1
+    // predefined elements --------------------------------
+    contains AutoCommandBar autoCommandBar // instead of 'contains PredefinedChildItems predefinedContainedItems'
+    contains transient AutoCommandBar topCommandBar // since 8.5.1
+    contains transient AutoCommandBar bottomCommandBar // since 8.5.1
+    contains transient AutoCommandBar fABCommandBar // since 8.5.1
+}
+
+// since 8.3.21
+interface TableHolder
+{
+    contains Table autoTable
+}
+
+class FormStandardCommand extends DuallyNamedElement, Command
+{
+    String text
+    String tooltip // layouter only
+    Shortcut shortcut // layouter only
+    contains Picture picture
+    boolean defaultCommand // layouter only
+    DefaultRepresentation representation // layouter only
+    boolean important // layouter only
+    boolean modifiesData // layouter only
+    boolean usesExtraParameter // layouter only
+    boolean topFormCommandBar // since 8.5.1, layouter only
+    boolean userVisible // since 8.5.1
+    boolean createButton // since 8.5.1, layouter only
+    CurrentRowUse currentRowUse // since 8.5.1, layouter only
+    SelectedRowsUse selectedRowsUse // since 8.5.1, layouter only
+}
+
+interface FormStandardCommandSource
+{
+    contains transient FormStandardCommand[] commands // inferred
+    refers FormStandardCommand[] excludedCommands // CommandSet
+}
+
+/**
+ * The marker object that points to the command panel of the form command intrerface. Being used
+ * as a standard command source.
+ */
+class FormCommandPanelGlobalCommandSource extends FormStandardCommandSource
+{
+}
+
+class FormCommandInterface
+{
+    contains FormCommandInterfaceItems navigationPanel
+    contains FormCommandInterfaceItems commandBar
+}
+
+interface FormItemContainer extends FormVisualEntity
+{
+    contains FormItem[] items
+}
+
+interface AdditionContainer
+{
+    // predefined elements --------------------------------
+    contains Addition searchStringAddition
+    contains Addition viewStatusAddition
+    contains Addition searchControlAddition
+}
+
+/*
+ * this model it is aggregate origin PredefinedChildItems and origin FormVisualEntity
+ */
+abstract class FormVisualEntity
+{
+    /* Collection of form item extension property user change flags */
+    contains transient ExtensionUserChangedPropertyEntry[] userChangedProperties
+}
+
+type PropertyInfo wraps com._1c.g5.v8.dt.form.model.PropertyInfo
+
+type ElementDataSourceInfo wraps com._1c.g5.v8.dt.form.model.ElementDataSourceInfo
+
+//----Form
+class Form extends Titled, FormVisualEntity, FormItemContainer, CommandBarHolder, EventHandlerContainer,
+      AbstractForm, FieldSource, FormStandardCommandSource, ExtensionAdoptedProperty  // LogForm in xcf_logform.xsd
+{
+    @FormProperty(^id="width[0:max]")
+    int width
+    @FormProperty(^id="height[0:max]")
+    int height
+    FormWindowOpeningMode windowOpeningMode // deprecated since 8.5.1
+    OnFormWindowOpenLockMode onFormWindowOpenLockMode // since 8.5.1
+    FormWindowViewMode windowViewMode // since 8.5.1
+    FormEnterKeyBehavior enterKeyBehavior
+    AutoSaveFormDataInSettings autoSaveDataInSettings
+    SaveFormDataInSettings saveDataInSettings
+    boolean saveWindowSettings // since 8.3.23
+    refers SettingsStorage settingsStorage
+    boolean autoTitle
+    boolean autoUrl
+    FormChildrenGroup group
+    FormChildrenAlign childrenAlign
+    FormItemSpacing horizontalSpacing
+    FormItemSpacing verticalSpacing
+    ItemHorizontalAlignment horizontalAlign
+    ItemVerticalAlignment verticalAlign
+    ChildrenTitleLocation childItemsTitleLocation // since 8.5.1
+    FormChildrenWidth childItemsWidth
+    boolean autoFillCheck
+    boolean allowFormCustomize
+    boolean enabled
+    // boolean readOnly     --runtime
+    LogFormScrollMode verticalScroll
+    FormBaseFontVariant scalingMode
+    double scale = "100" // since 8.3.10
+    boolean showTitle // since 8.3.10, deprecated since 8.5.1
+    ShowTitle851 showTitle851 // since 8.5.1
+    boolean showCloseButton // since 8.3.10
+    FormConversationsRepresentation conversationsRepresentation // since 8.3.10
+    CollapseFormItemsByImportance collapseItemsByImportanceVariant // since 8.3.12
+    contains LocalStringMapEntry[] createButtonsGroupTitle // since 8.5.1
+    contains Picture createButtonsGroupPicture // since 8.5.1
+    contains ValueListItem[] mobileDeviceCommandBarContent // since 8.3.12.1658
+    ClientApplicationFormScaleVariant scaleVariant // since 8.5.1
+    @ExternalProperty
+    refers transient Form baseForm
+    refers transient Form extensionForm // back ref to extension form from base form
+    // #start FormAttributes
+    contains FormAttribute[] attributes
+    @ExternalProperty
+    refers transient DataCompositionConditionalAppearance conditionalAppearance
+    // #end FormAttributes
+    contains FormCommand[] formCommands
+    contains FormParameter[] parameters
+    contains FormCommandInterface[1] commandInterface
+    contains FormExtInfo extInfo
+    contains transient FormCommandPanelGlobalCommandSource commandPanelGlobalCommandSource
+    transient InterfaceType interfaceType = "Any" // since 8.5.1, ui-only
+    op PropertyInfo[] propertyInfos() {
+        return new UnmodifiableEList(FormPropertyInfoExtension::getPropertyInfoBySource(this))
+    }
+    op ElementDataSourceInfo[] elementDataSourceInfos() {
+        return new UnmodifiableEList(FormElementDataSourceInfoExtension::getElementDataSourceInfoBySource(this))
+    }
+    op boolean validate(EDiagnosticChain diagnostics, EMap<Object, Object> context) {
+
+        // TODO add main item validation G5V8DT-2606
+        FormValidator::validate(this, diagnostics, context)
+    }
+}
+
+//---- FormExtInfo
+abstract class FormExtInfo extends ExtInfo, EventHandlerContainer
+{
+}
+
+class DynamicListFormExtInfo extends FormExtInfo // Расширение динамического списка
+{
+    refers Table groupList
+    op boolean validate(EDiagnosticChain diagnostics, EMap<Object, Object> context) {
+        return true // no validation for events
+    }
+}
+
+class ObjectFormExtInfo extends FormExtInfo // Расширение для объектов
+{
+}
+
+class TableObjectFormExtInfo extends FormExtInfo // Расширение для объектных таблиц внешнего источника данных
+{
+}
+
+class TableRecordFormExtInfo extends FormExtInfo // Расширение для таблиц внешнего источника данных
+{
+}
+
+class CubeRecordFormExtInfo extends FormExtInfo // Расширение для куба внешнего источника данных
+{
+}
+
+class CubeRecordSetFormExtInfo extends FormExtInfo // Расширение для куба внешнего источника данных
+{
+}
+
+class CatalogFormExtInfo extends FormExtInfo // Расширение справочника
+{
+    FoldersAndItemsUse useForFoldersAndItems
+    op boolean validate(EDiagnosticChain diagnostics, EMap<Object, Object> context) {
+        CatalogMainItemValidator::validate(this, diagnostics, context)
+    }
+}
+
+class DocumentFormExtInfo extends FormExtInfo // Расширение документа
+{
+    AutoTimeMode autoTime
+    PostingModeUse usePostingMode
+    boolean repostOnWrite
+}
+
+class ChartOfCharacteristicTypesFormExtInfo extends FormExtInfo // Расширение плана видов характеристик
+{
+    FoldersAndItemsUse useForFoldersAndItems
+    op boolean validate(EDiagnosticChain diagnostics, EMap<Object, Object> context) {
+        ChartOfCharacteristicTypesMainItemValidator::validate(this, diagnostics, context)
+    }
+}
+
+class ReportFormExtInfo extends FormExtInfo // Расширение отчетов
+{
+    AutoShowStateMode showState // AutoShowState
+    ReportFormType settingsForm // ReportFormType
+    refers FormAttribute reportResult
+    refers FormAttribute detailsInformation // DetailsData
+    refers FormAttribute currentVariantPresentationField // VariantAppearance
+    refers Group userSettingsGroup // should be LogicalGroup // CustomSettingsFolder
+    ReportResultViewMode reportResultViewMode // since 8.3.13
+    ViewModeApplicationOnSetReportResult viewModeApplicationOnSetReportResult // since 8.3.19
+}
+
+class ConstantsFormExtInfo extends FormExtInfo // Расширение общей формы набора констант
+{
+    op boolean validate(EDiagnosticChain diagnostics, EMap<Object, Object> context) {
+        return true // no validation for events
+    }
+}
+
+class InformationRegisterManagerFormExtInfo extends FormExtInfo // Расширение формы регистра сведений
+{
+    op boolean validate(EDiagnosticChain diagnostics, EMap<Object, Object> context) {
+        return true // no validation for events
+    }
+}
+
+class BusinessProcesFormExtInfo extends FormExtInfo // Расширение формы бизнес процесса
+{
+    op boolean validate(EDiagnosticChain diagnostics, EMap<Object, Object> context) {
+        return true // no validation for events
+    }
+}
+
+class TaskFormExtInfo extends FormExtInfo // Расширение формы задачи
+{
+    op boolean validate(EDiagnosticChain diagnostics, EMap<Object, Object> context) {
+        return true // no validation for events
+    }
+}
+
+class SettingsComposerFormExtInfo extends FormExtInfo // Расширение формы для компановщика настроек
+{
+    refers Group userSettingsGroup // should be LogicalGroup // CustomSettingsFolder
+    op boolean validate(EDiagnosticChain diagnostics, EMap<Object, Object> context) {
+        return true // no validation for events
+    }
+}
+
+class RecordSetFormExtInfo extends FormExtInfo // Расширение формы набора значений
+{
+    op boolean validate(EDiagnosticChain diagnostics, EMap<Object, Object> context) {
+        return true // no validation for events
+    }
+}
+
+//---- END FormExtInfo
+//----END Form
+abstract class AbstractFormAttribute extends NamedElement, Titled
+{
+    int ^id // originally: decimal id
+    contains TypeDescription[1] valueType
+    contains AdjustableBoolean[1] view
+    contains AdjustableBoolean[1] edit
+    FillChecking fillChecking
+    refers FunctionalOption[] functionalOptions
+}
+
+class FormAttribute extends AbstractFormAttribute, ExtensionAdoptedProperty // AttributeType in xcf_logform.xsd
+{
+    contains AbstractDataPath[] notDefaultUseAlwaysAttributes // instead of ContentType[1]  // Колонки атрибута, для которых НЕ установлено 'Использовать всегда'
+    contains AbstractDataPath[] settingsSavedData // instead of ContentType[1]  // Колонки атрибута, для которых установлено 'Сохранение'
+    boolean main // originally MainAttribute
+    boolean savedData
+    contains FormAttributeColumn[] columns // instead of 'contains AttributeColumns[1] columns'
+    @CollectionItemId(feature="tablePath")
+    contains FormAttributeAdditionalColumns[] additionalColumns // ----||-----
+    contains FormAttributeExtInfo extInfo
+    String comment // not supported by Designer. import\export must ignore
+    op boolean validate(EDiagnosticChain diagnostics, EMap<Object, Object> context) {
+        FormAttributeValidator::validate(this, diagnostics, context)
+    }
+}
+
+abstract class AbstractDataPath
+{
+    String[1..*] segments
+    contains transient DataPathReferredObject[] objects
+    op boolean validate(EDiagnosticChain diagnostics, EMap<Object, Object> context) {
+        DataPathValidator::validate(this, diagnostics, context)
+    }
+    op String toString() {
+        "/" + getSegments.join("/") // $NON-NLS-1$ $NON-NLS-2$
+    }
+    // First unresolved data path resides inside of the data path object itself, the remainder is
+    // scattered into extra paths array. This is used to substitute deprected MultiLanguageDataPath
+    // approach which turned out to be inappropriate
+    transient String[] extraPaths
+}
+
+class DataPathReferredObject
+{
+    refers EObject object
+    contains TypeDescription valueType
+    int segmentIdx
+    boolean aggregateFunction
+    boolean index
+    boolean virtual // such referred object does not assume the presence of an object source
+    op boolean validate(EDiagnosticChain diagnostics, EMap<Object, Object> context) {
+        true
+    }
+}
+
+class DataPath extends AbstractDataPath
+{
+}
+
+/*
+ * The Multy language data path implementation.
+ * 
+ * <p>Do not attempt to get access to <code>segments</code> or <code>objects</code> fields
+ * by <code>eGet</code> method, because they are not used in this implementation.
+ * Use {@link #getSegments()}, {@link #getObjects()} or <code>eGet</code> with <code>paths</code>
+ * field and current <code>activeLanguage</code> as index instead. </p>
+ * 
+ * @NotThreadSafe
+ * 
+ * @Deprecated use DataPath
+ */
+class MultiLanguageDataPath extends DataPath
+{
+    int activeLanguage
+    contains AbstractDataPath[] paths
+    op DataPathReferredObject[] getObjects() {
+        if (paths.get(activeLanguage) !== null) {
+            return paths.get(activeLanguage).objects
+        }
+        return null
+    }
+    op String[] getSegments() {
+        if (paths.get(activeLanguage) !== null) {
+            return paths.get(activeLanguage).segments
+        }
+        return null
+    }
+}
+
+class IrresolvableDataPath extends AbstractDataPath
+{
+}
+
+class FormAttributeColumn extends AbstractFormAttribute // AttributeColumn in xcf_logform.xsd
+{
+//    boolean addedFromContext
+}
+
+class FormAttributeAdditionalColumns
+{
+    contains AbstractDataPath[1] tablePath
+    contains FormAttributeColumn[] columns
+    op boolean validate(EDiagnosticChain diagnostics, EMap<Object, Object> context) {
+        FormAttributeAdditionalColumnsValidator::validate(this, diagnostics, context)
+    }
+}
+
+//!!! Attention !!! Add new ExtInfo for FormItem you must add corresponding type to com._1c.g5.v8.dt.form.resource.FormItemInformationService
+abstract class ExtInfo
+{
+}
+
+// FormCommand ----
+class FormCommand extends Command, NamedElement, Titled, ExtensionAdoptedProperty  // LFCommand in xcf_logform.xsd
+{
+    int ^id
+    contains LocalStringMapEntry[] toolTip
+    contains AdjustableBoolean[1] use
+    Shortcut shortcut
+    contains Picture picture
+    contains CommandHandlerContainer action
+    CommandActionPurpose actionPurpose // since 8.5.1
+    refers FunctionalOption[] functionalOptions
+    DefaultRepresentation representation
+    boolean modifiesStoredData
+    CurrentRowUse currentRowUse
+    int associatedTableElementId // deprecated since 8.3.15 - used associatedTableElementId8315
+    contains Value associatedTableElementId8315 // since 8.3.15
+    SelectedRowsUse selectedRowsUse // since 8.5.1
+    String comment // not supported by Designer. import\export must ignore
+    op boolean validate(EDiagnosticChain diagnostics, EMap<Object, Object> context) {
+        FormCommandValidator::validate(this, diagnostics, context)
+    }
+}
+
+// FormParmeter ----
+class FormParameter extends NamedElement, ExtensionAdoptedProperty     // LogFormParameter in xcf_logform.xsd
+{
+    contains TypeDescription[1] valueType
+    boolean keyParameter
+    String comment // not supported by Designer. import\export must ignore
+}
+
+/*
+ * <b>!!! Attention !!!</b> Add new FormItem you must
+ *  1) add corresponding type to com._1c.g5.v8.dt.form.resource.FormItemInformationService
+ *  2) if new FormItem contains ExtInfo you must update method "getExtensionInfo" in com._1c.g5.v8.dt.form.resource.FormItemInformationService
+ *  3) if new FormItem contains ExtInfo you must update method "getBindEvents" in com._1c.g5.v8.dt.form.resource.FormItemInformationService
+ */
+abstract class FormItem extends NamedElement, FormVisualEntity
+{
+    int ^id
+    DisplayImportance displayImportance // since 8.3.12
+    /* form item extension property position change flag */
+    transient boolean positionChanged
+    transient Origin origin // layouter only
+}
+
+// FormItems -----
+/*
+ * Origin GroupBase
+ */
+abstract class Group extends FormItem, FormItemContainer, Visible, Titled, TitleStyle, TooltipContainer
+{
+    boolean readOnly
+    boolean enableContentChange
+    Shortcut shortcut
+    @FormProperty(^id="width[0:max]")
+    int width
+    @FormProperty(^id="height[0:max]")
+    int height
+    @FormProperty(^id="horizontalStretch[enum]")
+    Boolean horizontalStretch
+    @FormProperty(^id="verticalStretch[enum]")
+    Boolean verticalStretch
+    ItemHorizontalAlignment groupHorizontalAlign
+    ItemVerticalAlignment groupVerticalAlign
+    // see m_degeneratable mngcore\src\res\logform.xsd
+    // Used in logical layouter only
+    transient boolean degeneratable
+}
+
+//---GROUPS---
+class ContextMenu extends Group
+{
+    // properties -----------------------------------------
+    boolean autoFill
+}
+
+class AutoCommandBar extends Group
+{
+    // properties -----------------------------------------
+    FormCommandBarAppearanceMode appearanceMode // since 8.5.1
+    ItemHorizontalAlignment horizontalAlign
+    boolean autoFill
+}
+
+// since 8.5.1 - Группа панели действий выделенных строк
+class SelectedItemsActionsPanel extends Group, AdditionContainer
+{
+    // properties -----------------------------------------
+    transient boolean fillStdCommands // layouter only
+    transient ItemHorizontalAlignment horizontalAlign // layouter only
+    transient FormCommandBarAppearanceMode appearanceMode // layouter only
+}
+
+// since 8.5.1 - Группа панели "Действия строк"
+class RowActionsPanel extends Group
+{
+    // properties -----------------------------------------
+    transient boolean fillStdCommands // layouter only
+}
+
+//base form
+class FormGroup extends Group, ExtendedTooltipHolder, ExtensionAdoptedProperty
+{
+    ManagedFormGroupType ^type
+    // extension ------------------------------------------
+    contains GroupExtInfo extInfo
+    op boolean validate(EDiagnosticChain diagnostics, EMap<Object, Object> context) {
+        GroupValidator::validate(this, diagnostics, context)
+    }
+}
+
+// Groups ExtInfo-----
+abstract class GroupExtInfo extends ExtInfo, EventHandlerContainer
+{
+}
+
+class CommandBarExtInfo extends GroupExtInfo
+{
+    ItemHorizontalAlignment horizontalAlign
+    FormCommandBarAppearanceMode appearanceMode // since 8.5.1
+    refers FormStandardCommandSource commandSource
+}
+
+class PopupGroupExtInfo extends GroupExtInfo
+{
+    contains Picture picture
+    ButtonRepresentation representation
+    transient MenuElementPlacementArea placementArea // not user settable
+    refers FormStandardCommandSource commandSource
+    ButtonShape shape
+    ButtonShapeRepresentation shapeRepresentation
+    ButtonImportance importance // since 8.5.1
+    contains Color backColor
+    contains Color borderColor
+}
+
+class ButtonGroupExtInfo extends GroupExtInfo
+{
+    // properties -----------------------------------------
+    refers FormStandardCommandSource commandSource
+    ButtonGroupRepresentation representation
+    transient MenuElementPlacementArea placementArea // not user settable
+}
+
+class ColumnGroupExtInfo extends GroupExtInfo
+{
+    // properties -----------------------------------------
+    @FormProperty(^id="group[columnEnum]")
+    ColumnGrouping group
+    boolean showTitle // since 8.3.10, deprecated since 8.5.1
+    ShowTitle851 showTitle851 // since 8.5.1
+    contains Color titleBackColor
+    boolean showInHeader
+    contains AbstractDataPath headerDataPath
+    ItemHorizontalAlignment headerHorizontalAlign
+    contains LocalStringMapEntry[] headerFormat
+    contains Picture headerPicture
+    FormFixedInTable fixingInTable
+    Boolean showTitleInCard                        // since 8.5.1
+    boolean showInCard                             // since 8.5.1
+    Boolean fixInCard                              // since 8.5.1
+}
+
+class PagesGroupExtInfo extends GroupExtInfo
+{
+    // properties -----------------------------------------
+    FormPagesRepresentation pagesRepresentation
+    CurrentRowUse currentRowUse // since 8.3.12
+    int associatedTableElementId // since 8.3.12, DEPRECATED
+    contains Value associatedTableElementId8315 // Since 8.3.15
+}
+
+class PageGroupExtInfo extends GroupExtInfo
+{
+    // properties -----------------------------------------
+    contains Picture picture
+    @FormProperty(^id="group[childrenEnum]")
+    FormChildrenGroup group
+    FormChildrenAlign childrenAlign
+    FormItemSpacing horizontalSpacing
+    FormItemSpacing verticalSpacing
+    @FormProperty(^id="horizontalAlign[childItems]")
+    ItemHorizontalAlignment horizontalAlign
+    @FormProperty(^id="verticalAlign[childItems]")
+    ItemVerticalAlignment verticalAlign
+    FormChildrenWidth slaveItemsWidth
+    contains LocalStringMapEntry[] format
+    boolean showTitle // deprecated since 8.5.1
+    ShowTitle851 showTitle851 // since 8.5.1
+    contains AbstractDataPath titleDataPath
+    contains Color backColor
+    ChildrenTitleLocation childItemsTitleLocation // since 8.5.1
+    boolean scrollOnCompress // deprecated since 8.5.1
+    Boolean scrollOnCompress851 // since 8.5.1
+}
+
+class UsualGroupExtInfo extends GroupExtInfo
+{
+    // properties -----------------------------------------
+    @FormProperty(^id="group[childrenEnum]")
+    FormChildrenGroup group
+    FormChildrenAlign childrenAlign
+    FormItemSpacing horizontalSpacing
+    FormItemSpacing verticalSpacing
+    @FormProperty(^id="horizontalAlign[childItems]")
+    ItemHorizontalAlignment horizontalAlign
+    @FormProperty(^id="verticalAlign[childItems]")
+    ItemVerticalAlignment verticalAlign
+    UsualGroupBehavior behavior
+    ChildrenTitleLocation childItemsTitleLocation // since 8.5.1
+    Boolean scrollOnCompress // since 8.5.1
+    contains LocalStringMapEntry[] collapsedRepresentationTitle
+    boolean collapsed
+    UsualGroupControlRepresentation controlRepresentation
+    UsualGroupRepresentation representation
+    boolean showAsCard // since 8.5.1
+    boolean hyperlink // since 8.5.1
+    boolean showLeftMargin
+    boolean united
+    FormChildrenWidth slaveItemsWidth // origin name ChildItemsWidth
+    contains LocalStringMapEntry[] format
+    boolean showTitle // deprecated since 8.5.1
+    ShowTitle851 showTitle851 // since 8.5.1
+    contains AbstractDataPath titleDataPath
+    contains Color backColor
+    contains Picture backPicture // since 8.5.1
+    PictureRepresentationEffect backPictureEffect // since 8.5.1
+    CardRepresentationType cardRepresentationType // since 8.5.1
+    UsualGroupThroughAlign throughAlign
+    contains Color hiddenStateTitleBackColor // since 8.3.12
+    CurrentRowUse currentRowUse // since 8.3.12
+    int associatedTableElementId // since 8.3.12, deprecated since 8.3.15
+    contains Value associatedTableElementId8315 // Since 8.3.15
+    refers FormItem collapsedRepresentationItem // since 8.5.1
+}
+
+//----END GROUPS -----
+//---- FIELDS ---ToolTip
+/*
+ * origin name Field
+ */
+abstract class DataItem extends FormItem, NamedElement, Titled, TitleStyle, Visible, ExtensionAdoptedProperty
+{
+    contains AbstractDataPath dataPath
+    boolean defaultItem
+    Boolean skipOnInput
+    contains Color titleBackColor
+    FormElementTitleLocation titleLocation
+    int titleHeight
+    Shortcut shortcut
+}
+
+class Button extends DataItem, ExtendedTooltipHolder
+{
+    ManagedFormButtonType ^type
+    refers Command commandName
+    contains Value parameter // can be ReferenceValue or TypeDescriptionValue
+    ButtonImportance buttonImportance // since 8.5.1
+    ButtonRepresentation representation
+    boolean defaultButton
+    Boolean onlyInAllActions // important
+    @FormProperty(^id="width[0:max]")
+    int width
+    boolean autoMaxWidth
+    int maxWidth
+    int minWidth
+    @FormProperty(^id="height[0:max]")
+    int height
+    boolean autoMaxHeight
+    int maxHeight
+    @FormProperty(^id="horizontalStretch[chbox]")
+    boolean horizontalStretch
+    @FormProperty(^id="verticalStretch[chbox]")
+    boolean verticalStretch
+    ItemHorizontalAlignment groupHorizontalAlign
+    ItemVerticalAlignment groupVerticalAlign
+    // TODO: Check whether this is used in UI and serializable. If not, it should be changed to transient
+    MenuElementPlacementArea placementArea
+    boolean check
+    contains Color textColor
+    contains Color backColor
+    contains Color borderColor
+    contains Font font
+    contains Picture picture
+    TooltipRepresentation toolTipRepresentation
+    RepresentationInContextMenu representationInContextMenu
+    ButtonShape shape
+    ButtonShapeRepresentation shapeRepresentation
+    FormButtonPictureLocation pictureLocation
+    contains Picture backPicture // since 8.5.1
+    PictureRepresentationEffect backPictureEffect // since 8.5.1
+    int pictureHeight // since 8.5.1
+    CardPictureAndTitleAlignVariant cardPictureAndTitleAlign // since 8.5.1
+    ButtonLocationInCommandBar locationInCommandBar // since 8.3.15
+    boolean commandUniqueness = "true" // since 8.3.15
+    OnMainServerUnavalableBehavior onMainServerUnavalableBehavior // since 8.3.16
+    boolean showAsCard // since 8.5.1
+    op boolean validate(EDiagnosticChain diagnostics, EMap<Object, Object> context) {
+        ButtonValidator::validate(this, diagnostics, context)
+    }
+
+    // Used in logical layouter only, e.g. MenuButtonGenerator
+    transient String extName = "" // since 8.5.1
+}
+
+class FormField extends DataItem, FormStandardCommandSource, TitleStyle, TooltipContainer, EventHandlerContainer, ExtendedTooltipHolder, ContextMenuHolder, SelectedItemsActionsPanelHolder, AdditionSource, ExtensionAdoptedProperty
+{
+    // properties -----------------------------------------
+    ManagedFormFieldType ^type
+    boolean readOnly
+    WarningOnEditRepresentation warningOnEditRepresentation
+    contains LocalStringMapEntry[] warningOnEdit
+    Boolean markRequiredComplete // since 8.5.1
+    ItemHorizontalAlignment horizontalAlign
+    ItemVerticalAlignment verticalAlign
+    ItemHorizontalAlignment groupHorizontalAlign
+    ItemVerticalAlignment groupVerticalAlign
+    TableFieldEditMode editMode
+    FormFixedInTable fixingInTable
+    boolean cellHyperlink
+    boolean autoCellHeight
+    boolean showInHeader
+    contains Picture headerPicture
+    ItemHorizontalAlignment headerHorizontalAlign
+    boolean showInFooter
+    contains AbstractDataPath footerDataPath
+    contains LocalStringMapEntry[] footerText
+    contains Color footerTextColor
+    contains Color footerBackColor
+    contains Font footerFont
+    contains Picture footerPicture
+    ItemHorizontalAlignment footerHorizontalAlign
+    OnMainServerUnavalableBehavior onMainServerUnavalableBehavior // since 8.3.16
+    boolean showInCard // since 8.5.1
+    Boolean fixInCard // since 8.5.1
+    WidthVariantInCard widthInCard // since 8.5.1
+    TableCellMarkType cellMark // since 8.5.1
+    AppearanceVariantInCard appearanceInCard // since 8.5.1
+    AutoWidthInTable autoWidthInTable // since 8.5.1
+    Boolean showTitleInCard // since 8.5.1
+    CellHyperlinkRepresentation cellHyperlinkRepresentation // since 8.5.1
+    CellHyperlinkDisplayVariant cellHyperlinkDisplayVariant // since 8.5.1
+    // extension ------------------------------------------
+    contains FieldExtInfo extInfo
+    op boolean validate(EDiagnosticChain diagnostics, EMap<Object, Object> context) {
+        FieldValidator::validate(this, diagnostics, context)
+    }
+}
+
+//-- FieldExtInfoes
+abstract class FieldExtInfo extends ExtInfo, EventHandlerContainer
+{
+}
+
+class InputFieldExtInfo extends FieldExtInfo
+{
+    // properties -----------------------------------------
+    @FormProperty(^id="width[0:max]")
+    int width
+    boolean autoMaxWidth
+    int maxWidth
+    int minWidth
+    @FormProperty(^id="height[0:max]")
+    int height
+    boolean autoMaxHeight
+    int maxHeight
+    @FormProperty(^id="horizontalStretch[enum]")
+    Boolean horizontalStretch
+    @FormProperty(^id="verticalStretch[enum]")
+    Boolean verticalStretch
+    boolean wrap
+    Boolean passwordMode
+    Boolean multiLine
+    Boolean extendedEdit
+    boolean allowInputEmptyMultipleValues // since 8.3.23
+    boolean allowMultipleValuesDuplicates // since 8.3.23
+    boolean extendedEditMultipleValues // since 8.3.23
+    Boolean showCheckBoxesInDropList // since 8.3.23
+    Boolean markNegatives
+    Boolean choiceListButton
+    Boolean dropListButton
+    Boolean choiceButton
+    ChoiceButtonRepresentation choiceButtonRepresentation
+    contains LocalStringMapEntry[] choiceButtonTitle // since 8.5.1
+    FormTimeChoiceMode timeChoiceMode // since 8.5.1
+    contains Picture picture // since 8.5.1
+    contains Picture choiceButtonPicture
+    Boolean clearButton
+    Boolean spinButton
+    Boolean openButton
+    Boolean createButton
+    String mask
+    Boolean autoChoiceIncomplete
+    Boolean quickChoice
+    FoldersAndItems choiceFoldersAndItems
+    contains LocalStringMapEntry[] format
+    contains LocalStringMapEntry[] editFormat
+    boolean listChoiceMode
+    int choiceListHeight
+    Boolean autoMarkIncomplete
+    boolean chooseType
+    IncompleteItemChoiceMode incompleteChoiceMode
+    boolean typeDomainEnabled
+    boolean textEdit
+    EditTextUpdate editTextUpdate
+    @FormProperty(^id="minValue[str]")
+    contains Value minValue
+    @FormProperty(^id="maxValue[str]")
+    contains Value maxValue
+    refers BasicForm choiceForm
+    contains FormChoiceParameterLink[] choiceParameterLinks
+    contains ChoiceParameter[] choiceParameters
+    contains TypeDescription availableTypes
+    // Свойство содержит данные интерфейса ILogFormFieldDataWithValueListPtr
+    contains FormChoiceListDesTimeValue[] choiceList
+    contains Color textColor
+    contains Color backColor
+    contains Color borderColor
+    TextSize textSize // since 8.5.1
+    contains Font font
+    contains Color multipleValuesBackColor // since 8.3.23
+    contains Color multipleValuesTextColor // since 8.3.23
+    contains Font multipleValuesFont // since 8.3.23
+    Boolean multipleValuesHyperlink // since 8.3.23
+    InputFieldMultipleValuePictureSize multipleValuePictureSize // since 8.3.23
+    InputFieldMultipleValuePictureShape multipleValuePictureShape // since 8.3.23
+    contains FormTypeLink typeLink
+    LogFormElementHeightControlVariant heightControlVariant // since 8.3.9
+    AutoShowClearButtonMode autoShowClearButtonMode // since 8.3.9
+    AutoShowOpenButtonMode autoShowOpenButtonMode // since 8.3.9
+    AutoCorrectionOnTextInput autoCorrectionOnTextInput // since 8.3.9
+    SpellCheckingOnTextInput spellCheckingOnTextInput // since 8.3.9
+    AutoCapitalizationOnTextInput autoCapitalizationOnTextInput // since 8.3.9
+    SpecialTextInputMode specialTextInputMode // since 8.3.9
+    AutofillHint autofillHint // since 8.3.23
+    OnScreenKeyboardReturnKeyText onScreenKeyboardReturnKeyText // since 8.3.9
+    contains LocalStringMapEntry[] inputHint
+    contains LocalStringMapEntry[] dropListHint // since 8.5.1
+    contains Picture multipleValuesPicture // since 8.3.23
+    contains AbstractDataPath multipleValueDataPath // since 8.3.23
+    contains AbstractDataPath multipleValuePictureDataPath // since 8.3.23
+    contains AbstractDataPath multipleValuePresentDataPath // since 8.3.23
+    int dropListWidth
+    ChoiceHistoryOnInput choiceHistoryOnInput
+    op boolean validate(EDiagnosticChain diagnostics, EMap<Object, Object> context) {
+        InputFieldValidator::validate(this, diagnostics, context)
+    }
+}
+
+class LabelFieldExtInfo extends FieldExtInfo
+{
+    // properties -----------------------------------------
+    @FormProperty(^id="width[0:max]")
+    int width
+    boolean autoMaxWidth
+    int maxWidth
+    int minWidth
+    @FormProperty(^id="height[0:max]")
+    int height
+    boolean autoMaxHeight
+    int maxHeight
+    @FormProperty(^id="horizontalStretch[enum]")
+    Boolean horizontalStretch
+    @FormProperty(^id="verticalStretch[enum]")
+    Boolean verticalStretch
+    Boolean markNegatives
+    contains LocalStringMapEntry[] format
+    boolean hyperlink
+    Boolean passwordMode
+    contains Border border
+    contains Color borderColor
+    contains Color textColor
+    contains Color backColor
+    contains Font font
+    Boolean useCopy // since 8.5.1
+    op boolean validate(EDiagnosticChain diagnostics, EMap<Object, Object> context) {
+        LabelFieldValidator::validate(this, diagnostics, context)
+    }
+}
+
+class CheckBoxFieldExtInfo extends FieldExtInfo
+{
+    // properties -----------------------------------------
+    CheckBoxKind checkBoxType
+    @FormProperty(^id="tumblerRepresentation")
+    TumblerRepresentation tumblerRepresentation // since 8.5.1, only if Tumbler
+    boolean threeState
+    contains Color borderColor
+    contains Color backColor // only if Tumbler and Switcher
+    contains Color textColor // only if Tumbler and Switcher
+    contains Font font // only if Tumbler and Switcher
+    contains LocalStringMapEntry[] editFormat // only if Tumbler
+    int itemTitleHeight // only if Tumbler
+    int itemWidth // only if Tumbler
+    int itemHeight // only if Tumbler
+    Boolean equalElementsWidth // only if Tumbler
+    @FormProperty(^id="horizontalStretch[enum]")
+    Boolean horizontalStretch  // since 8.5.1, only if Tumbler
+    op boolean validate(EDiagnosticChain diagnostics, EMap<Object, Object> context) {
+        CheckBoxFieldValidator::validate(this, diagnostics, context)
+    }
+}
+
+class ImageFieldExtInfo extends FieldExtInfo
+{
+    // properties -----------------------------------------
+    @FormProperty(^id="width[0:max]")
+    int width
+    boolean autoMaxWidth
+    int maxWidth
+    int minWidth
+    @FormProperty(^id="height[0:max]")
+    int height
+    boolean autoMaxHeight
+    int maxHeight
+    @FormProperty(^id="horizontalStretch[chbox]")
+    boolean horizontalStretch
+    @FormProperty(^id="verticalStretch[chbox]")
+    boolean verticalStretch
+    PictureSize pictureSize
+    PictureBackgroundShowMode backgroundShowMode // since 8.5.1
+    contains Color pictureColor // since 8.5.1
+    boolean zoomable
+    int imageScale = "100" // since 8.3.15  // default 100  // value=[10,400]
+    boolean hyperlink // HyperLink in xcf_logform.xsd
+    contains LocalStringMapEntry[] nonselectedPictureText
+    boolean enableStartDrag
+    boolean enableDrag
+    contains Picture valuesPicture
+    contains Color textColor
+    contains Border border
+    contains Color borderColor
+    contains Font font
+    FileDragMode fileDragMode // since 8.3.13
+    op boolean validate(EDiagnosticChain diagnostics, EMap<Object, Object> context) {
+        ImageFieldValidator::validate(this, diagnostics, context)
+    }
+}
+
+class RadioButtonsFieldExtInfo extends FieldExtInfo
+{
+    // properties -----------------------------------------
+    RadioButtonType radioButtonsType
+    @FormProperty(^id="tumblerRepresentation")
+    TumblerRepresentation tumblerRepresentation // since 8.5.1
+    int itemWidth // only if Tumbler and equalElementsWidth = true
+    int itemHeight // ElementRowsCount in xcf_logform.xsd
+    int itemTitleHeight // only if Tumbler
+    int columnsCount
+    Boolean equalElementsWidth // only if Tumbler
+    contains FormChoiceListDesTimeValue[] choiceList
+    @FormProperty(^id="horizontalStretch[enum]")
+    Boolean horizontalStretch // since 8.5.1
+    contains Font font
+    contains Color textColor
+    contains Color borderColor
+    contains Color backColor // only if Tumbler
+    @FormProperty(^id="orientation")
+    FormElementOrientation orientation // since 8.5.1, for interface mode 8.5 only and radioButtonsType != tumbler
+    op boolean validate(EDiagnosticChain diagnostics, EMap<Object, Object> context) {
+        RadioButtonsFieldValidator::validate(this, diagnostics, context)
+    }
+}
+
+class SpreadSheetDocFieldExtInfo extends FieldExtInfo
+{
+    // properties -----------------------------------------
+    @FormProperty(^id="width[1:max]")
+    int width
+    boolean autoMaxWidth
+    int maxWidth
+    int minWidth
+    @FormProperty(^id="height[1:max]")
+    int height
+    boolean autoMaxHeight
+    int maxHeight
+    @FormProperty(^id="horizontalStretch[chbox]")
+    boolean horizontalStretch
+    @FormProperty(^id="verticalStretch[chbox]")
+    boolean verticalStretch
+    boolean showGrid
+    boolean showHeaders
+    boolean showCellNames // since 8.3.10
+    boolean showRowAndColumnNames // since 8.3.10
+    SpreadsheetDocumentPointerType pointerType // since 8.3.10
+    CellActionsButtonViewMode cellActionsButtonViewMode // since 8.5.1
+    SpreadsheetDocumentMultipleSelectionPanelViewMode spreadsheetDocumentMultipleSelectionPanelViewMode // since 8.5.1
+    SpreadSheetDocumentScrollBarUse verticalScrollBar // changed in 8.3.10
+    SpreadSheetDocumentScrollBarUse horizontalScrollBar // changed in 8.3.10
+    boolean blackAndWhiteView
+    boolean protection
+    SelectionShowMode selectionShowMode
+    DrawingSelectionShowMode drawingSelectionShowMode // since in 8.3.17
+    UseOutput output
+    boolean edit
+    boolean showGroups
+    boolean enableStartDrag
+    boolean enableDrag
+    contains Color borderColor
+    ViewScalingMode viewScalingMode
+    op boolean validate(EDiagnosticChain diagnostics, EMap<Object, Object> context) {
+        SpreadSheetDocFieldValidator::validate(this, diagnostics, context)
+    }
+}
+
+enum SpreadSheetDocumentScrollBarUse    // since 8.3.10
+{
+    DontScroll = 0
+    ScrollAlways = 1
+    ScrollAuto = 2
+}
+
+class TextDocFieldExtInfo extends FieldExtInfo
+{
+    // properties -----------------------------------------
+    @FormProperty(^id="width[1:max]")
+    int width
+    boolean autoMaxWidth
+    int maxWidth
+    int minWidth
+    @FormProperty(^id="height[1:max]")
+    int height
+    boolean autoMaxHeight
+    int maxHeight
+    @FormProperty(^id="horizontalStretch[chbox]")
+    boolean horizontalStretch
+    @FormProperty(^id="verticalStretch[chbox]")
+    boolean verticalStretch
+    UseOutput output
+    contains Color textColor
+    contains Color backColor
+    contains Color borderColor
+    contains Font font
+    op boolean validate(EDiagnosticChain diagnostics, EMap<Object, Object> context) {
+        TextDocFieldValidator::validate(this, diagnostics, context)
+    }
+}
+
+class CalendarFieldExtInfo extends FieldExtInfo
+{
+    // properties -----------------------------------------
+    @FormProperty(^id="width[0:max]")
+    int width
+    boolean autoMaxWidth
+    int maxWidth
+    int minWidth
+    @FormProperty(^id="height[0:max]")
+    int height
+    boolean autoMaxHeight
+    int maxHeight
+    @FormProperty(^id="horizontalStretch[chbox]")
+    boolean horizontalStretch
+    @FormProperty(^id="verticalStretch[chbox]")
+    boolean verticalStretch
+    FormDateSelectionMode selectionMode
+    boolean showCurrentDate
+    boolean calendarNavigation
+    Date beginOfRepresentationPeriod
+    Date endOfRepresentationPeriod
+    boolean enableStartDrag
+    boolean enableDrag
+    contains Font font
+    contains Color borderColor
+    contains Border border
+    boolean showMonthsPanel
+    int widthInMonths
+    int heightInMonths
+    op boolean validate(EDiagnosticChain diagnostics, EMap<Object, Object> context) {
+        CalendarFieldValidator::validate(this, diagnostics, context)
+    }
+}
+
+class ProgressBarFieldExtInfo extends FieldExtInfo
+{
+    // properties -----------------------------------------
+    @FormProperty(^id="width[0:max]")
+    int width
+    boolean autoMaxWidth
+    int maxWidth
+    int minWidth
+    @FormProperty(^id="height[0:max]")
+    int height
+    boolean autoMaxHeight
+    int maxHeight
+    @FormProperty(^id="horizontalStretch[chbox]")
+    boolean horizontalStretch
+    @FormProperty(^id="verticalStretch[chbox]")
+    boolean verticalStretch
+    @FormProperty(^id="minValue[int]")
+    int minValue
+    @FormProperty(^id="maxValue[int]")
+    int maxValue
+    @FormProperty(^id="orientation")
+    FormElementOrientation orientation
+    FormProgressBarRepresentation representation
+    boolean showPercent
+    contains Color borderColor
+    op boolean validate(EDiagnosticChain diagnostics, EMap<Object, Object> context) {
+        ProgressBarFieldValidator::validate(this, diagnostics, context)
+    }
+}
+
+class TrackBarFieldExtInfo extends FieldExtInfo
+{
+    // properties -----------------------------------------
+    @FormProperty(^id="width[0:max]")
+    int width
+    boolean autoMaxWidth
+    int maxWidth
+    int minWidth
+    @FormProperty(^id="height[0:max]")
+    int height
+    boolean autoMaxHeight
+    int maxHeight
+    @FormProperty(^id="horizontalStretch[chbox]")
+    boolean horizontalStretch
+    @FormProperty(^id="verticalStretch[chbox]")
+    boolean verticalStretch
+    @FormProperty(^id="minValue[int]")
+    int minValue
+    @FormProperty(^id="maxValue[int]")
+    int maxValue
+    int step
+    int largeStep
+    int markingStep
+    @FormProperty(^id="orientation")
+    FormElementOrientation orientation
+    MarkingStyle markingAppearance
+    contains Color borderColor
+    op boolean validate(EDiagnosticChain diagnostics, EMap<Object, Object> context) {
+        TrackBarFieldValidator::validate(this, diagnostics, context)
+    }
+}
+
+class ChartFieldExtInfo extends FieldExtInfo
+{
+    // properties -----------------------------------------
+    @FormProperty(^id="width[1:max]")
+    int width
+    boolean autoMaxWidth
+    int maxWidth
+    int minWidth
+    @FormProperty(^id="height[1:max]")
+    int height
+    boolean autoMaxHeight
+    int maxHeight
+    @FormProperty(^id="horizontalStretch[chbox]")
+    boolean horizontalStretch
+    @FormProperty(^id="verticalStretch[chbox]")
+    boolean verticalStretch
+    op boolean validate(EDiagnosticChain diagnostics, EMap<Object, Object> context) {
+        ChartFieldValidator::validate(this, diagnostics, context)
+    }
+}
+
+// since 8.3.21, mngcore/ILogForm.h
+/**
+ * Положение таблицы диаграммы Ганта.
+*/
+enum GanttChartTableLocation
+{
+    Auto = 0 // eGCTLAuto
+    Left = 1 // eGCTLLeft
+    Right = 2 // eGCTLRight
+    None = 3 // eGCTLNone
+}
+
+// since 8.3.23, mngcore/ILogForm.h
+/**
+ * Режим выделения значений диаграммы Ганта.
+*/ 
+enum GanttChartValuesSelectionMode
+{
+    Auto = 0 // eGCVSMAuto
+    Multiple = 1 // eGCVSMMultiValue
+    Single = 2 // eGCVSMSingleValue
+    None = 3 // eGCVSMNone
+}
+
+// since 8.3.23, mngcore/ILogForm.h
+/**
+ * Режим выделения интервалов диаграммы Ганта.
+*/
+enum GanttChartIntervalsSelectionMode
+{
+    Auto = 0 // eGCISMAuto
+    Multiple = 1 // eGCISMMultiValue
+    Single = 2 // eGCISMSingleValue
+    None = 3 // eGCISMNone
+}
+
+class GanttChartFieldExtInfo extends FieldExtInfo, TableHolder
+{
+    // properties -----------------------------------------
+    @FormProperty(^id="width[1:max]")
+    int width
+    boolean autoMaxWidth
+    int maxWidth
+    int minWidth
+    @FormProperty(^id="height[1:max]")
+    int height
+    boolean autoMaxHeight
+    int maxHeight
+    @FormProperty(^id="horizontalStretch[chbox]")
+    boolean horizontalStretch
+    @FormProperty(^id="verticalStretch[chbox]")
+    boolean verticalStretch
+    op boolean validate(EDiagnosticChain diagnostics, EMap<Object, Object> context) {
+        GanttChartFieldValidator::validate(this, diagnostics, context)
+    }
+    GanttChartTableLocation tableLocation // since 8.3.21
+    GanttChartValuesSelectionMode valuesSelectionMode // since 8.3.23
+    GanttChartIntervalsSelectionMode intervalsSelectionMode // since 8.3.23
+    Boolean showHorizontalLinesFlag // since 8.3.23
+    Boolean showVerticalLinesFlag // since 8.3.23
+}
+
+class DendrogramFieldExtInfo extends FieldExtInfo
+{
+    // properties -----------------------------------------
+    @FormProperty(^id="width[1:max]")
+    int width
+    boolean autoMaxWidth
+    int maxWidth
+    int minWidth
+    @FormProperty(^id="height[1:max]")
+    int height
+    boolean autoMaxHeight
+    int maxHeight
+    @FormProperty(^id="horizontalStretch[chbox]")
+    boolean horizontalStretch
+    @FormProperty(^id="verticalStretch[chbox]")
+    boolean verticalStretch
+    op boolean validate(EDiagnosticChain diagnostics, EMap<Object, Object> context) {
+        DendrogramFieldValidator::validate(this, diagnostics, context)
+    }
+}
+
+class FlowchartFieldExtInfo extends FieldExtInfo
+{
+    // properties -----------------------------------------
+    @FormProperty(^id="width[1:max]")
+    int width
+    boolean autoMaxWidth
+    int maxWidth
+    int minWidth
+    @FormProperty(^id="height[1:max]")
+    int height
+    boolean autoMaxHeight
+    int maxHeight
+    @FormProperty(^id="horizontalStretch[chbox]")
+    boolean horizontalStretch
+    @FormProperty(^id="verticalStretch[chbox]")
+    boolean verticalStretch
+    UseOutput output
+    boolean edit
+    contains Color borderColor
+    op boolean validate(EDiagnosticChain diagnostics, EMap<Object, Object> context) {
+        FlowchartFieldValidator::validate(this, diagnostics, context)
+    }
+}
+
+class HtmlFieldExtInfo extends FieldExtInfo
+{
+    // properties -----------------------------------------
+    @FormProperty(^id="width[1:max]")
+    int width
+    boolean autoMaxWidth
+    int maxWidth
+    int minWidth
+    @FormProperty(^id="height[1:max]")
+    int height
+    boolean autoMaxHeight
+    int maxHeight
+    @FormProperty(^id="horizontalStretch[chbox]")
+    boolean horizontalStretch
+    @FormProperty(^id="verticalStretch[chbox]")
+    boolean verticalStretch
+    UseOutput output
+    contains Color borderColor
+    contains Border border // since 8.5.1
+    op boolean validate(EDiagnosticChain diagnostics, EMap<Object, Object> context) {
+        HtmlFieldValidator::validate(this, diagnostics, context)
+    }
+}
+
+class GeographicalMapFieldExtInfo extends FieldExtInfo
+{
+    // properties -----------------------------------------
+    @FormProperty(^id="width[1:max]")
+    int width
+    boolean autoMaxWidth
+    int maxWidth
+    int minWidth
+    @FormProperty(^id="height[1:max]")
+    int height
+    boolean autoMaxHeight
+    int maxHeight
+    @FormProperty(^id="horizontalStretch[chbox]")
+    boolean horizontalStretch
+    @FormProperty(^id="verticalStretch[chbox]")
+    boolean verticalStretch
+    UseOutput output
+    contains Color borderColor
+    op boolean validate(EDiagnosticChain diagnostics, EMap<Object, Object> context) {
+        GeographicalMapFieldValidator::validate(this, diagnostics, context)
+    }
+}
+
+class GeographicalSchemaExtInfo extends FormAttributeExtInfo
+{
+    @ExternalProperty
+    refers transient AbstractGeographicalSchema geographicalSchema
+}
+
+class GraphicalSchemeExtInfo extends FormAttributeExtInfo
+{
+    @ExternalProperty
+    refers transient AbstractFlowchart graphicalScheme
+}
+
+class FormattedDocFieldExtInfo extends FieldExtInfo
+{
+    // properties -----------------------------------------
+    @FormProperty(^id="width[1:max]")
+    int width
+    boolean autoMaxWidth
+    int maxWidth
+    int minWidth
+    @FormProperty(^id="height[1:max]")
+    int height
+    boolean autoMaxHeight
+    int maxHeight
+    @FormProperty(^id="horizontalStretch[chbox]")
+    boolean horizontalStretch
+    @FormProperty(^id="verticalStretch[chbox]")
+    boolean verticalStretch
+    UseOutput output
+    contains Color textColor
+    contains Color backColor
+    contains Color borderColor
+    contains Font font
+    op boolean validate(EDiagnosticChain diagnostics, EMap<Object, Object> context) {
+        FormattedDocFieldValidator::validate(this, diagnostics, context)
+    }
+}
+
+// <!--Поле PDF документа-->
+// From xcf_logform.xsd (LogFormPDFDocumentFieldData)
+// since 8.3.21
+class PDFDocumentFieldExtInfo extends FieldExtInfo, AdditionContainer
+{
+    // properties -----------------------------------------
+    @FormProperty(^id="width[1:max]")
+    int width
+    boolean autoMaxWidth
+    int maxWidth
+    int minWidth
+    @FormProperty(^id="height[1:max]")
+    int height
+    boolean autoMaxHeight
+    int maxHeight
+    @FormProperty(^id="horizontalStretch[chbox]")
+    boolean horizontalStretch
+    @FormProperty(^id="verticalStretch[chbox]")
+    boolean verticalStretch
+    UseOutput output
+    contains Color borderColor
+    int scale // not supported by Designer. import\export must ignore
+    int currentPageNumber // not supported by Designer. import\export must ignore
+    int orientation // not supported by Designer. import\export must ignore
+    ViewStatusLocation viewStatusLocation
+    op boolean validate(EDiagnosticChain diagnostics, EMap<Object, Object> context) {
+        PDFDocumentFieldValidator::validate(this, diagnostics, context)
+    }
+}
+
+//TODO add references
+class PlannerFieldExtInfo extends FieldExtInfo
+{
+    // properties -----------------------------------------
+    @FormProperty(^id="width[1:max]")
+    int width
+    boolean autoMaxWidth
+    int maxWidth
+    int minWidth
+    @FormProperty(^id="height[1:max]")
+    int height
+    boolean autoMaxHeight
+    int maxHeight
+    @FormProperty(^id="horizontalStretch[chbox]")
+    boolean horizontalStretch
+    @FormProperty(^id="verticalStretch[chbox]")
+    boolean verticalStretch
+    boolean enableStartDrag
+    boolean enableDrag
+    boolean timeScaleItemHyperlink // since 8.3.16
+    boolean dimensionItemHyperlink // since 8.3.16
+    boolean wrappedTimeScaleHeaderHyperlink // since 8.3.16
+}
+
+class PlannerExtInfo extends FormAttributeExtInfo
+{
+    @ExternalProperty
+    refers transient PlannerSettings plannerSettings
+}
+
+//TODO add references
+class PeriodFieldExtInfo extends FieldExtInfo
+{
+    // properties -----------------------------------------
+    @FormProperty(^id="width[1:max]")
+    int width
+    boolean autoMaxWidth
+    int maxWidth
+    int minWidth
+    @FormProperty(^id="height[1:max]")
+    int height
+    boolean autoMaxHeight
+    int maxHeight
+    @FormProperty(^id="horizontalStretch[chbox]")
+    boolean horizontalStretch
+    @FormProperty(^id="verticalStretch[chbox]")
+    boolean verticalStretch
+    contains Font font
+    contains Color borderColor
+    contains Border border
+}
+
+//-- END FieldExtInfoes
+class Table extends DataItem, FieldSource, FormStandardCommandSource, AdditionSource, TooltipContainer, FormItemContainer, CommandBarHolder, EventHandlerContainer, AdditionContainer,  ExtendedTooltipHolder, ContextMenuHolder, SelectedItemsActionsPanelHolder, RowActionsPanelHolder
+{
+    // properties -----------------------------------------
+    TableRepresentation representation
+    boolean autoFill
+    boolean readOnly
+    boolean changeRowSet
+    boolean changeRowOrder
+    @FormProperty(^id="width[0:max]")
+    int width
+    boolean autoMaxWidth
+    int maxWidth
+    int minWidth
+    @FormProperty(^id="height[0:max]")
+    int height
+    boolean autoMaxHeight
+    int maxHeight
+    int heightInTableRows
+    LogFormTableHeightControlVariant heightControlVariant // since 8.3.9
+    boolean autoMaxRowsCount // since 8.3.10
+    int maxRowsCount // since 8.3.10
+    boolean choiceMode
+    boolean multipleChoice
+    TableRowInputMode rowInputMode
+    TableSelectionMode selectionMode
+    TableRowSelectionMode rowSelectionMode
+    TableRowActionsShowType rowActionsShowType // since 8.5.1
+    boolean header
+    int headerHeight
+    boolean footer
+    int footerHeight
+    TableScrollBarUse horizontalScrollBar
+    TableScrollBarUse verticalScrollBar
+    boolean horizontalLines // deprecated since 8.5.1
+    boolean verticalLines // deprecated since 8.5.1
+    // long fixedLeft     //  it seems to be runtime
+    // long fixedRight    //  it seems to be runtime
+    boolean useAlternationRowColor // deprecated since 8.5.1
+    Boolean horizontalLinesBWA // since 8.5.1
+    Boolean verticalLinesBWA // since 8.5.1
+    Boolean useAlternationRowColorBWA // since 8.5.1
+    boolean autoInsertNewRow
+    Boolean autoAddIncomplete
+    Boolean autoMarkIncomplete
+    SearchOnInput searchOnInput
+    Boolean markRequiredComplete // since 8.5.1
+    TableInitialListView initialListView
+    TableInitialTreeView initialTreeView
+    TableInitialRowActivation initialRowActivation // since 8.5.1
+    UseOutput output
+    @FormProperty(^id="horizontalStretch[chbox]")
+    boolean horizontalStretch
+    @FormProperty(^id="verticalStretch[chbox]")
+    boolean verticalStretch
+    boolean enableStartDrag
+    boolean enableDrag
+    FileDragMode fileDragMode // since 8.3.13
+    // данные, предоставляемые интерфейсом ILogFormDataElement и ему подобным
+    contains AbstractDataPath rowPictureDataPath
+    contains Picture rowsPicture
+    contains Color textColor
+    contains Color backColor
+    contains Color borderColor
+    contains Font font
+    SaveTableAppearance saveColors // since 8.5.1
+    String iconSaveColorsKey // since 8.5.1
+    String shapeSaveColorsKey // since 8.5.1
+    CellHyperlinksRepresentation cellHyperlinksRepresentation // since 8.5.1, 8.5 mode only
+    SearchStringLocation searchStringLocation
+    ViewStatusLocation viewStatusLocation
+    SearchControlLocation searchControlLocation
+    HierarchyPanelLocation hierarchyPanelLocation // since 8.5.1
+    boolean hierarchyPanelVisible // since 8.5.1
+    boolean verticalScrollPanelVisible // since 8.5.1
+    ItemHorizontalAlignment groupHorizontalAlign
+    ItemVerticalAlignment groupVerticalAlign
+    RefreshRequestMethod refreshRequest
+    TableCurrentRowUse currentRowUse // since 8.3.12
+    TableBehaviorOnHorizontalCompression behaviorOnHorizontalCompression // since 8.3.12
+    CardBehaviorOnVerticalCompression cardBehaviorOnVerticalCompression // since 8.5.1
+    boolean autoMaxCardHeight // since 8.5.1
+    int maxCardHeight // since 8.5.1
+    unsettable DataCompositionSettingsViewMode viewMode
+    unsettable DataCompositionComplexSettingsViewMode complexSettingsViewMode // since 8.5.1
+    unsettable boolean settingsNamedItemDetailedRepresentation
+    contains Value rowFilter
+    OnMainServerUnavalableBehavior onMainServerUnavalableBehavior // since 8.3.16 // all tables! not in extinfo
+    FormTableType mobileDeviceTableType // since 8.5.1 
+    contains TableExtInfo extInfo
+    boolean showCommandBarNeedDereferenced // since 8.5.1
+    op boolean validate(EDiagnosticChain diagnostics, EMap<Object, Object> context) {
+        TableValidator::validate(this, diagnostics, context)
+    }
+}
+
+//---TableExtInfoes
+abstract class TableExtInfo extends ExtInfo, EventHandlerContainer
+{
+}
+
+class DynamicListTableExtInfo extends TableExtInfo
+{
+    boolean autoRefresh
+    int autoRefreshPeriod
+    contains StandardPeriod period
+    FoldersAndItemsUse choiceFoldersAndItems
+    boolean restoreCurrentRow
+    contains Value topLevelParent
+    boolean showRoot
+    boolean allowRootChoice
+    boolean allowGettingCurrentRowURL // since 8.3.21
+    UpdateOnDataChange updateOnDataChange
+    refers Group userSettingsGroup // should be LogicalGroup
+}
+
+//---END TableExtInfoes
+//---END FormData
+//----- Additions
+class Addition extends Titled, Visible, TooltipContainer, FormItem, FormItemContainer, AdditionSource, ExtendedTooltipHolder, ContextMenuHolder, ExtensionAdoptedProperty
+{
+    ManagedFormAdditionType ^type
+    refers AdditionSource source
+    ItemHorizontalAlignment groupHorizontalAlign
+    ItemVerticalAlignment groupVerticalAlign
+    transient MenuElementPlacementArea placementArea // not user settable
+    contains AdditionExtInfo extInfo
+    // Used in logical layouter only, e.g. SearchControlElementAdditionInMenuGenerator/SearchStringElementAdditionInMenuGenerator
+    transient String extLogFormElementName = "" // since 8.5.1
+}
+
+//---- AdditionExtInfoes
+abstract class AdditionExtInfo extends ExtInfo, EventHandlerContainer
+{
+}
+
+class SearchStringAdditionExtInfo extends AdditionExtInfo
+{
+    @FormProperty(^id="width[0:max]")
+    int width
+    boolean autoMaxWidth
+    int maxWidth
+    int minWidth
+    @FormProperty(^id="horizontalStretch[enum]")
+    Boolean horizontalStretch
+    contains Color backColor
+    contains Color textColor
+    contains Color borderColor
+    contains Font font
+}
+
+class ViewStatusAdditionExtInfo extends AdditionExtInfo
+{
+    @FormProperty(^id="width[0:max]")
+    int width
+    boolean autoMaxWidth
+    int maxWidth
+    int minWidth
+    @FormProperty(^id="horizontalStretch[enum]")
+    Boolean horizontalStretch
+    ItemHorizontalAlignment horizontalLocation
+    contains Color backColor
+    contains Color buttonColor
+    contains Color textColor
+    contains Color titleTextColor
+    contains Color borderColor
+    contains Font font
+    contains Font titleFont
+    contains Border border
+}
+
+class SearchControlAdditionExtInfo extends AdditionExtInfo
+{
+    @FormProperty(^id="width[0:max]")
+    int width
+    boolean autoMaxWidth
+    int maxWidth
+    int minWidth
+    @FormProperty(^id="horizontalStretch[enum]")
+    Boolean horizontalStretch
+    contains Color backColor
+    contains Color textColor
+    contains Color borderColor
+    contains Font font
+}
+
+//-----END AdditionExtInfoes
+//-----END Additions
+//-----Decorations
+class Decoration extends FormItem, NamedElement, Titled, Visible, TooltipContainer, ExtendedTooltipHolder, ContextMenuHolder, ExtensionAdoptedProperty
+{
+    // properties -----------------------------------------
+    boolean formatted
+    ManagedFormDecorationType ^type
+    @FormProperty(^id="width[0:max]")
+    int width
+    boolean autoMaxWidth
+    int maxWidth
+    int minWidth
+    @FormProperty(^id="height[0:max]")
+    int height
+    boolean autoMaxHeight
+    int maxHeight
+    @FormProperty(^id="horizontalStretch[enum]")
+    Boolean horizontalStretch
+    @FormProperty(^id="verticalStretch[enum]")
+    Boolean verticalStretch
+    Boolean skipOnInput
+    contains Color textColor
+    contains Font font
+    Shortcut shortcut
+    ItemHorizontalAlignment groupHorizontalAlign
+    ItemVerticalAlignment groupVerticalAlign
+    OnMainServerUnavalableBehavior onMainServerUnavalableBehavior // since 8.3.16
+    // extension ------------------------------------------
+    contains DecorationExtInfo extInfo
+    op boolean validate(EDiagnosticChain diagnostics, EMap<Object, Object> context) {
+        DecorationValidator::validate(this, diagnostics, context)
+    }
+}
+
+//-----DecorationExtInfoes
+abstract class DecorationExtInfo extends ExtInfo, EventHandlerContainer
+{
+}
+
+class ExtendedTooltip extends Decoration
+{
+    op boolean validate(EDiagnosticChain diagnostics, EMap<Object, Object> context) {
+        ExtendedTooltipValidator::validate(this, diagnostics, context)
+    }
+}
+
+class LabelDecorationExtInfo extends DecorationExtInfo
+{
+    // properties -----------------------------------------
+    boolean hyperlink
+    ItemHorizontalAlignment horizontalAlign
+    ItemVerticalAlignment verticalAlign
+    int titleHeight
+    contains Color backColor
+    contains Color borderColor
+    contains Border border
+    op boolean validate(EDiagnosticChain diagnostics, EMap<Object, Object> context) {
+        TextDecorationValidator::validate(this, diagnostics, context)
+    }
+}
+
+class PictureDecorationExtInfo extends DecorationExtInfo
+{
+    // properties -----------------------------------------
+    contains Picture picture
+    boolean hyperlink
+    PictureSize pictureSize
+    PictureBackgroundShowMode backgroundShowMode // since 8.5.1
+    contains Color pictureColor // since 8.5.1
+    boolean zoomable
+    int imageScale = "100" // since 8.3.15 // default 100  // value=[10,400]
+    contains LocalStringMapEntry[] nonselectedPictureText
+    boolean enableStartDrag
+    boolean enableDrag
+    contains Border border
+    contains Color borderColor
+    FileDragMode fileDragMode // since 8.3.13
+}
+
+//-----END DecorationExtInfoes
+//-----END Decorations
+// FormCommandInterfaceItems ----
+// Represents List
+class FormCommandInterfaceItems
+{
+    contains FormCommandInterfaceItem[] cmiFragmentRecord
+}
+
+class FormCommandInterfaceItem
+{
+    refers Command command
+    CommandKind ^type
+    contains AbstractDataPath commandParameter
+    refers CommandGroup group // Can be null when command is autoplaced
+    Integer index // Can be null when command is autoplaced
+    contains AdjustableBoolean userVisible // Can be null when command is autovisible. If null it means that you should export defVisible with 'false' value, else value must be 'true'
+    op boolean validate(EDiagnosticChain diagnostics, EMap<Object, Object> context) {
+        LFCMIFragmentRecordValidator::validate(this, diagnostics, context)
+    }
+}
+
+class FormChoiceListDesTimeValue extends Value // LogFormChoiceListDesTimeValue in xcf_logform
+{
+    contains LocalStringMapEntry[] presentation
+    contains Value[1] value
+    contains Picture picture // since 8.5.1
+}
+
+class ValueListItem extends Value
+{
+    contains LocalStringMapEntry[] presentation
+    int checkState
+    contains Value[1] value
+}
+
+class AccountTypeValue extends Value // used in ChartOfAccounts in type property
+{
+    AccountType value
+}
+
+// ExtInfos -----------------------------------------------
+abstract class FormAttributeExtInfo extends ExtInfo
+{
+}
+
+class DynamicListExtInfo extends FormAttributeExtInfo
+{
+    String queryText
+    refers DbViewDef mainTable
+    boolean dynamicDataRead
+    boolean autoFillAvailableFields // since 8.3.10 - Автоматическое заполнение доступных полей
+    boolean customQuery
+    boolean autoSaveUserSettings
+    boolean getInvisibleFieldPresentations // since 8.3.10 - Получение представлений для невидимых полей
+    contains DataSetField[] fields // since 8.3.19
+    contains DataCompositionSchemaCalculatedField[] calculatedFields // since 8.3.19
+    contains DataCompositionSchemaParameter[] parameters // since 8.3.19
+    @ExternalProperty
+    refers transient DataCompositionSettings listSettings
+    DynamicListKeyType keyType // since 8.3.14
+    String[] keyField // since 8.3.14
+    op boolean validate(EDiagnosticChain diagnostics, EMap<Object, Object> context) {
+        DynamicListExtInfoValidator::validate(this, diagnostics, context)
+    }
+}
+
+class SpreadsheetDocumentExtInfo extends FormAttributeExtInfo
+{
+    @ExternalProperty
+    refers transient EObject spreadsheetData
+}
+
+class ValueListExtInfo extends FormAttributeExtInfo
+{
+    contains TypeDescription itemValueType
+}
+
+class ChartExtInfo extends FormAttributeExtInfo
+{
+    @ExternalProperty
+    refers transient Chart chart
+}
+
+class DendrogramExtInfo extends FormAttributeExtInfo
+{
+    @ExternalProperty
+    refers transient Dendrogram dendrogram
+}
+
+class GanttChartExtInfo extends FormAttributeExtInfo
+{
+    @ExternalProperty
+    refers transient GanttChart ganttChart
+}
+
+// Picture
+class FormPicture extends PictureDef
+{
+}
+
+//Original ChoiceParameterLink refers to field.
+//So we need FormChoiceParameterLink that contains datapath.
+class FormChoiceParameterLink extends AbstractChoiceParameterLink
+{
+    contains AbstractDataPath datapath
+}
+
+class FormTypeLink extends AbstractTypeLink
+{
+    contains AbstractDataPath datapath
+}
+
+// enums from xcf_logform.xsd ----------------------------
+enum CommandActionPurpose // since 8.5.1
+{
+    Usual = 0
+    Create = 1
+    Finish = 2
+}
+
+enum DefaultRepresentation
+{
+    Auto = 0
+    Text = 1
+    Picture = 2
+    TextPicture = 3
+}
+
+enum CommandKind
+{
+    Auto = 0 // Запись об автоматической команде.
+    Added = 1 // Запись о добавленной команде.
+}
+
+// enums from logform.xsd ---------------------------------
+enum ManagedFormFieldType
+{
+    None = 0
+    HTMLDocumentField = 1
+    InputField = 2
+    GeographicalSchemaField = 3
+    GraphicalSchemaField = 4
+    DendrogramField = 5
+    ChartField = 6
+    GanttChartField = 7
+    ProgressBarField = 8
+    CalendarField = 9
+    PictureField = 10
+    LabelField = 11
+    RadioButtonField = 12
+    TrackBarField = 13
+    SpreadsheetDocumentField = 14
+    TextDocumentField = 15
+    CheckBoxField = 16
+    FormattedDocumentField = 17
+    PlannerField = 18
+    PeriodField = 19
+    PDFDocumentField = 20 // since 8.3.21
+}
+
+enum ManagedFormGroupType
+{
+    ButtonGroup = 0
+    ColumnGroup = 1
+    CommandBar = 2
+    UsualGroup = 3
+    Popup = 4
+    Page = 5
+    Pages = 6
+    ContextMenu = 7
+    AutoCommandBar = 8
+    Navigator = 9 // Везде переименован в External, тут оставлен для совместимости.
+    SelectedItemsActionsPanel = 10
+    RowActionsPanel = 11
+}
+
+enum ManagedFormDecorationType
+{
+    Picture = 0
+    Label = 1
+}
+
+enum ManagedFormAdditionType
+{
+    SearchStringAddition = 0
+    ViewStatusAddition = 1
+    SearchControlAddition = 2
+}
+
+enum ChoiceButtonRepresentation
+{
+    Auto = 0
+    ShowInDropList = 1
+    ShowInDropListAndInInputField = 2
+    ShowInInputField = 3
+}
+
+enum FoldersAndItems
+{
+    Auto = 0
+    Items = 1
+    Folders = 2
+    FoldersAndItems = 3
+}
+
+enum FormTimeChoiceMode // since 8.5.1
+{
+    Auto = 0
+    DontChoose = 1
+    CustomTime = 2
+    Interval1Minute = 3
+    Interval5Minutes = 4
+    Interval10Minutes = 5
+    Interval15Minutes = 6
+    Interval15And20Minutes = 7
+    Interval20Minutes = 8
+    Interval30Minutes = 9
+    Interval60Minutes = 10
+}
+
+enum FormWindowOpeningMode // deprecated since 8.5.1
+{
+    Independent = 0
+    LockOwnerWindow = 1
+    LockWholeInterface = 2
+}
+
+enum OnFormWindowOpenLockMode // since 8.5.1
+{
+    Auto = 0
+    DontBlock = 1
+    LockOwner = 2
+    LockWholeInterface = 3
+    Independent = 4 // not used on UI
+    LockOwnerWindow = 5 // not used on UI
+}
+
+enum FormWindowViewMode // since 8.5.1
+{
+    Auto = 0
+    InMainWindow = 1
+    InDialogWindow = 2
+}
+
+enum FormEnterKeyBehavior
+{
+    ControlNavigation = 0
+    DefaultButton = 1
+}
+
+enum AutoSaveFormDataInSettings
+{
+    DontUse = 0
+    Use = 1
+}
+
+enum SaveTableAppearance // since 8.5.1
+{
+    Auto = 0 // eSTAAuto
+    ForUser = 1 // eSTAForUser
+    ByKeyForUser = 2 // eSTAByKeyForUser
+    DontUse = 3 // eSTADontUse
+}
+
+enum CellHyperlinksRepresentation // since 8.5.1
+{
+    Auto = 0
+    AutoForSingle = 1
+    ForAll = 2
+    DontShow = 3
+}
+
+enum CellHyperlinkRepresentation // since 8.5.1
+{
+    Auto = 0
+    Show = 1
+    DontShow = 2
+}
+
+enum CellHyperlinkDisplayVariant // since 8.5.1
+{
+    Auto = 0
+    Always = 1
+    OnRowHover = 2
+}
+
+enum SearchStringLocation
+{
+    Auto = 0
+    None = 1
+    CommandBar = 2
+    Top = 3
+    Bottom = 4
+    FormCaption = 5
+    PullFromTop = 6
+}
+
+enum ViewStatusLocation
+{
+    Auto = 0
+    None = 1
+    Top = 2
+    Bottom = 3
+}
+
+enum SearchControlLocation
+{
+    Auto = 0
+    None = 1
+    CommandBar = 2
+}
+
+enum HierarchyPanelLocation // since 8.5.1
+{
+    Auto = 0
+    None = 1
+}
+
+enum RefreshRequestMethod
+{
+    None = 0
+    PullFromTop = 1
+    PullFromBottom = 2
+    PullFromTopOrBottom = 3
+}
+
+enum ChoiceHistoryOnInput
+{
+    Auto = 0
+    DontUse = 1
+}
+
+enum ViewScalingMode
+{
+    Auto = 0
+    Normal = 1
+    Large = 2
+}
+
+enum SaveFormDataInSettings
+{
+    DontUse = 0
+    UseList = 1
+}
+
+enum FormChildrenGroup
+{
+    Horizontal = 0 // eLFCGHorizontalOld - Horizontal. Deprecated. It's always horizontal for Desktop
+    Auto = 4 // since 8.5.1 - eLFCGAuto (default since 8.5.1) and horizontal if possible for mobile
+    Vertical = 1 // eLFCGVertical
+    HorizontalIfPossible = 2 // eLFCGHorizontalIfPossible (default before 8.5.1)
+    AlwaysHorizontal = 3 // since 8.3.12 - eLFCGAlwaysHorizontal
+    AutoScreenTypeSensitive = 5 // since 8.5.1 - eLFCGAutomaticallyScreenTypeSensitive
+}
+
+enum FormChildrenWidth
+{
+    Auto = 0
+    Equal = 1
+    LeftWide = 2
+    LeftWidest = 3
+    LeftNarrow = 4
+    LeftNarrowest = 5
+}
+
+enum LogFormScrollMode
+{
+    Auto = 0
+    Use = 1
+    UseIfNecessary = 2
+    UseWithoutStretch = 3
+}
+
+enum FormBaseFontVariant
+{
+    Auto = 0
+    Normal = 1
+    Compact = 2
+}
+
+enum FormConversationsRepresentation    // since 8.3.10
+{
+    Auto = 0
+    Show = 1
+    DontShow = 2
+}
+
+enum FormElementCommandBarLocation
+{
+    Auto = 0
+    None = 1
+    Top = 2
+    Bottom = 3
+}
+
+enum ReportFormType
+{
+    Main = 0
+    Settings = 1
+    Variant = 2
+}
+
+enum TooltipRepresentation
+{
+    Auto = 0
+    None = 1
+    Balloon = 2
+    Button = 3
+    ShowAuto = 4
+    ShowTop = 5
+    ShowLeft = 6
+    ShowBottom = 7
+    ShowRight = 8
+}
+
+enum MenuElementPlacementArea
+{
+    MainCmdsLeft = 0 // eMEPAMainCommandsLeftArea // Основная (левая или верхняя) область команд,
+                                                  // заполняемых источником, связанным с группой. 
+    AutoCmds = 1 // eMEPAAutoCommandsArea // Область команд, заполняемых из командного интерфейса.
+    UserCmds = 2 // eMEPAUserCommandsArea // Область пользовательских команд.
+    MainCmdsRight = 3 // eMEPAMainCommandsRightArea // Дополнительная (правая или нижняя) область команд,
+                                                    // заполняемых источником, связанным с группой.
+                                                    // Для совместимости. Сейчас определяется автоматически.
+}
+
+enum FormElementTitleLocation
+{
+    Auto = 0
+    None = 1
+    Left = 2
+    Top = 3
+    Right = 4
+    Bottom = 5
+}
+
+enum FormElementOrientation
+{
+    Horizontal = 0
+    Vertical = 1
+    HorizontalIfPossible = 2 // since 8.5.1, for RadioButtonsFieldExtInfo only
+}
+
+enum WarningOnEditRepresentation
+{
+    Auto = 0
+    Show = 1
+    DontShow = 2
+}
+
+enum ItemHorizontalAlignment
+{
+    Auto = 0
+    Left = 1
+    Center = 2
+    Right = 3
+}
+
+enum ItemVerticalAlignment
+{
+    Auto = 0
+    Top = 1
+    Center = 2
+    Bottom = 3
+}
+
+// Положение заголовков подчиненных элементов.
+enum ChildrenTitleLocation // since 8.5.1
+{
+    Auto = 0 // eLFCTLAuto // Авто
+    Left = 1 // eLFCTLLeft // Слева
+    LeftIfPossible = 2 // eLFCTLLeftIfPossible // СлеваЕслиВозможно
+    Top = 3 // eLFCTLTop // Сверху
+}
+
+enum TableFieldEditMode
+{
+    Directly = 0 // eDirectEdit
+    Enter = 1 // eEnterEdit
+    EnterOnInput = 2 // eOnCharEdit
+    Auto = 3 // eAutoEdit, since 8.5.1
+}
+
+enum TextBreakMode
+{
+    EndEllipsis = 0
+    WordBreak = 1
+    CharBreak = 2
+}
+
+enum FormFixedInTable
+{
+    None = 0
+    Left = 1
+    Right = 2
+}
+
+enum CheckBoxKind
+{
+    Auto = 0
+    CheckBox = 1
+    Tumbler = 2
+    Switcher = 3 // since 8.3.15
+}
+
+enum RadioButtonType
+{
+    Auto = 0
+    RadioButtons = 1
+    Tumbler = 2
+}
+
+enum TumblerRepresentation // since 8.5.1
+{
+    Auto = 0
+    Text = 1
+    Picture = 2
+}
+
+enum TableRepresentation
+{
+    List = 0
+    HierarchicalList = 1
+    Tree = 2
+}
+
+enum TableRowInputMode
+{
+    EndOfList = 0
+    EndOfWindow = 1
+    AfterCurrentRow = 2
+    BeforeCurrentRow = 3
+}
+
+enum TableSelectionMode
+{
+    SingleRow = 0
+    MultiRow = 1
+}
+
+enum TableRowSelectionMode
+{
+    Cell = 0 // default before 8.5.1
+    Row = 1
+    Auto = 2 // since 8.5.1, default
+}
+
+enum TableRowActionsShowType // since 8.5.1
+{
+    Auto = 0
+    DontShow = 1
+    ShowOnHover = 2
+    ShowAlways = 3 // not used on UI
+}
+
+enum TableScrollBarUse
+{
+    DontUse = 0
+    UseAlways = 1
+    AutoUse = 2
+}
+
+enum SearchOnInput
+{
+    Use = 0
+    DontUse = 1
+    Auto = 2
+}
+
+enum TableInitialListView
+{
+    Beginning = 0
+    End = 1
+    Auto = 2
+}
+
+enum TableInitialTreeView
+{
+    NoExpand = 0
+    ExpandTopLevel = 1
+    ExpandAllLevels = 2
+}
+
+enum TableInitialRowActivation // since 8.5.1
+{
+    Auto = 0
+    Activate = 1
+    NoActivate = 2
+}
+
+enum ManagedFormButtonType
+{
+    CommandBarButton = 0 // eBKMenuButton
+    UsualButton = 1 // eBKFormButton
+    Hyperlink = 2 // eBKHyperlinkButton
+    CommandBarHyperlink = 3 // eBKMenuHyperlinkButton
+}
+
+enum ColumnGrouping     // originally ColumnsGroup
+{
+    Horizontal = 0
+    Vertical = 1
+    InCell = 2
+}
+
+// @see src/mngcore/ILogFormCommonTypes.h, src/mngcore/ILogForm.hxx
+enum FormPagesRepresentation
+{
+    None = 0
+    TabsOnTop = 1
+    TabsOnBottom = 2
+    TabsOnLeftHorizontal = 3
+    TabsOnRightHorizontal = 4
+    Swipe = 5
+    Auto = 6 // since 8.3.20
+}
+
+enum FormPagesState
+{
+    Auto = 0 // since 8.3.12
+    TitlesAndCurrentPage = 1 // since 8.3.12
+    Titles = 2
+    CurrentPage = 3
+}
+
+// Отображение группы. LGRepresentation
+enum UsualGroupRepresentation
+{
+    None = 0
+    StrongSeparation = 1
+    WeakSeparation = 2
+    NormalSeparation = 3
+    Auto = 4 // since 8.5.1
+}
+
+enum UsualGroupControlRepresentation
+{
+    TitleHyperlink = 0
+    Picture = 1 // deprecated since 8.5.1
+    Button = 2 // since 8.5.1
+    ButtonInParentElement = 3 // since 8.5.1
+}
+
+// @see src/mngcore/IHippoLayouter.h, src/mngcore/ILogForm.h, src/mngcore/ILogForm.hxx
+enum UsualGroupBehavior
+{
+    Usual = 0
+    Collapsible = 1
+    PopUp = 2 // since 8.3.12
+    Auto = 3 // since 8.3.20
+}
+
+// since 8.5.1
+enum ClientApplicationFormScaleVariant
+{
+    Auto = 0
+    Compact = 1
+    Normal = 2
+    NormalIfPossible = 3
+}
+
+enum IncompleteItemChoiceMode
+{
+    OnEnterPressed = 0
+    OnActivate = 1
+}
+
+enum EditTextUpdate
+{
+    Auto = 0
+    DontUse = 1
+    OnValueChange = 2
+    Always = 3
+}
+
+enum SelectionShowMode
+{
+    WhenActive = 0
+    Always = 1
+    DontShow = 2
+    WhenMultipleCellsSelected = 3
+    WhenMultipleCellsSelectedWhenActive = 4
+}
+
+// РежимОтображенияВыделенияРисунков
+enum DrawingSelectionShowMode // since 8.3.17
+{
+    Show = 0
+    DontShow = 1
+    Auto = 2
+}
+
+enum FormDateSelectionMode
+{
+    Single = 0
+    Multiple = 1
+    Interval = 2
+}
+
+enum FormProgressBarRepresentation
+{
+    Smooth = 0
+    Broken = 1
+    BrokenTilt = 2
+}
+
+enum MarkingStyle
+{
+    DontShow = 0
+    TopLeft = 1
+    BottomRight = 2
+    BothSides = 3
+}
+
+enum ButtonShape
+{
+    Auto = 0
+    Usual = 1
+    Oval = 2
+}
+
+enum ButtonShapeRepresentation
+{
+    Auto = 0
+    Always = 1
+    WhenActive = 2
+    None = 3
+}
+
+// since 8.5.1
+enum ButtonImportance
+{
+    Main = 0 // eBI_Main
+    Normal = 1 // eBI_Standard
+    Supplementary = 2 // eBI_Optional
+}
+
+enum FormButtonPictureLocation
+{
+    Auto = 0
+    Left = 1
+    Right = 2
+    Top = 3 // since 8.5.1
+    Bottom = 4 // since 8.5.1
+}
+
+enum PictureRepresentationEffect // since 8.5.1
+{
+    Auto = 0
+    None = 1
+    Semitransparency = 2
+    SemitransparencyAndBlur = 3
+}
+
+enum CardPictureAndTitleAlignVariant // since 8.5.1
+{
+    Auto = 0
+    LeftHorizontallySidesVertically = 1
+    CenterHorizontallySidesVertically = 2
+    CenterHorizontallyCenterVertically = 3
+}
+
+enum CardRepresentationType // since 8.5.1
+{
+    Usual = 0
+    Group = 1
+}
+
+enum ButtonLocationInCommandBar  // since 8.3.15
+{
+    Auto = 0
+    InAdditionalSubmenu = 1
+    InCommandBar = 2
+    InCommandBarAndInAdditionalSubmenu = 3
+}
+
+enum ButtonGroupRepresentation
+{
+    Auto = 0
+    Usual = 1
+    Compact = 2
+}
+
+// end of enumms from logform.xsd ------------------------------------
+// from uiobjects.xsd ------------------------------------------------
+enum UseOutput
+{
+    Auto = 0
+    Enable = 1
+    Disable = 2
+}
+
+// from enums.xsd ----------------------------------------------------
+enum UpdateOnDataChange
+{
+    Auto = 0
+    DontUpdate = 1
+}
+
+enum FormChildrenAlign
+{
+    Auto = 0
+    None = 1
+    ItemsLeftTitlesLeft = 2
+    ItemsRightTitlesLeft = 3
+    ItemsLeftTitlesRight = 4
+    ItemsRightTitlesRight = 5
+    ItemsAutoTitlesLeft = 6 // since 8.3.10
+}
+
+enum FormItemSpacing
+{
+    Auto = 0
+    None = 1
+    Half = 2
+    Single = 3
+    OneAndHalf = 4
+    Double = 5
+}
+
+// Сквозное выравнивание. LGThroughAlign (mngcore/ILogForm.h)
+enum UsualGroupThroughAlign
+{
+    Use = 0 // eLGTAYes // Да.
+    DontUse = 1 // eLGTANone // Нет.
+    Auto = 2 // eLGTAAuto // В зависимости от отображения.
+}
+
+enum CurrentRowUse
+{
+    Use = 0
+    DontUse = 1
+    Auto = 2 // since 8.3.12
+}
+
+enum SelectedRowsUse
+{
+    Use = 0
+    DontUse = 1
+    Auto = 2
+}
+
+enum RepresentationInContextMenu
+{
+    None = 0
+    AdditionalInContextMenu = 1
+    OnlyInContextMenu = 2
+    Auto = 3
+}
+
+enum ExtendedMethodCallType // HandlerCallType
+{
+    Before = 0
+    After = 1
+    Override = 2
+    ChangeAndValidate = 3 // since 8.3.15
+}
+
+// Вариант управления высотой элемента формы.
+enum LogFormElementHeightControlVariant           // since 8.3.9
+{
+    Auto = 0
+    InFormRows =1
+    ByContent =2
+}
+
+// Вариант управления высотой таблицы.
+enum LogFormTableHeightControlVariant
+{
+    Auto = 0
+    InFormRows = 1
+    InTableRows = 2
+    ByContent = 3
+}
+
+// Режим авто отображения кнопки очистки.
+enum AutoShowClearButtonMode        // since 8.3.9
+{
+    Auto = 0
+    Always = 1
+    FilledOnly = 2
+}
+
+// Режим авто отображения кнопки открытия.
+enum AutoShowOpenButtonMode         // since 8.3.9
+{
+    Auto = 0
+    Always = 1
+    FilledOnly = 2
+}
+
+// Авто исправление текста при вводе.
+enum AutoCorrectionOnTextInput             // since 8.3.9
+{
+    Auto = 0
+    Use = 1
+    DontUse = 2
+}
+
+// Проверка правописания при вводе.
+enum SpellCheckingOnTextInput          // since 8.3.9
+{
+    Auto = 0
+    Use = 1
+    DontUse = 2
+}
+
+//  Авто изменение регистра при вводе.
+enum AutoCapitalizationOnTextInput          // since 8.3.9
+{
+    Auto = 0
+    None = 1
+    Words = 2
+    Sentences = 3
+    AllCharacters = 4
+}
+
+// Тип содержимого строки.
+enum SpecialTextInputMode           // since 8.3.9
+{
+    Auto = 0
+    None = 1
+    DigitsAndPunctuation = 2
+    URL = 3
+    Email = 4
+    PhoneNumber = 5
+    Digits = 6
+}
+
+// Подсказка Автозаполнения Поля Ввода
+enum AutofillHint // since 8.3.23
+{
+    DontUse = 0
+    FullName = 1
+    GivenName = 2
+    FamilyName = 3
+    MiddleName = 4
+    NamePrefix = 5
+    NameSuffix = 6
+    Street = 7
+    City = 8
+    Region = 9
+    Country = 10
+    PostalCode = 11
+    UserName = 12
+    Password = 13
+    NewPassword = 14
+    OneTimeCode = 15
+    Email = 16
+    PhoneNumber = 17
+    CreditCardNumber = 18
+}
+
+enum WidthVariantInCard // since 8.5.1
+{
+    Auto = 0
+    Full = 1
+    Half = 2
+}
+
+enum TableCellMarkType // since 8.5.1
+{
+    None = 0
+    ShapeUnderTextOval = 1
+    IconCircle = 2
+}
+
+enum AppearanceVariantInCard // since 8.5.1
+{
+    Auto = 0
+    Extended = 1
+}
+
+enum AutoWidthInTable // since 8.5.1
+{
+    Auto = 0 // eAWITAuto
+    ByData = 1 // eAWITByData
+    None = 2 // eAWITNone
+    ByDataAndTitle = 3 // eAWITByDataAndTitle
+}
+
+// Размер текста поля ввода
+enum TextSize // since 8.5.1
+{
+    Enlarged = 0
+    Normal = 1
+    Reduced = 2
+}
+
+// Размер картинки множественных значений
+enum InputFieldMultipleValuePictureSize // since 8.3.23
+{
+    Auto = 0
+    Small = 1
+    Medium = 2
+    Large = 3
+}
+
+// Фигура картинки множественных значений
+enum InputFieldMultipleValuePictureShape // since 8.3.23
+{
+    Auto = 0
+    Square = 1
+    Circle = 2
+}
+
+// Текст кнопки Ввод экранной клавиатуры.
+enum OnScreenKeyboardReturnKeyText // since 8.3.9
+{
+    Auto = 0
+    Return = 1
+    Go = 2
+    Join = 3
+    Next = 4
+    Search = 5
+    Send = 6
+    Done = 7
+    Continue = 8
+}
+
+enum SpreadsheetDocumentPointerType // since 8.3.10
+{
+    Regular = 0
+    Special = 1
+}
+
+enum CellActionsButtonViewMode // since 8.5.1
+{
+    Auto = 0
+    DontShow = 1
+    ShowOnHover = 2
+}
+
+enum SpreadsheetDocumentMultipleSelectionPanelViewMode // since 8.5.1
+{
+    Auto = 0
+    DontShow = 1
+    ShowOnMultipleSelection = 2
+    ShowAlways = 3
+}
+
+enum DisplayImportance // since 8.3.12
+{
+    Auto = 0
+    VeryHigh = 1
+    High = 2
+    Usual = 3
+    Low = 4
+    VeryLow = 5
+}
+
+enum FormCommandBarAppearanceMode // since 8.5.1
+{
+    Auto = 0 // eCPAMAuto
+    CommandBar = 1 // eCPAMCommandPanel
+    UsualGroup = 2 // eCPAMUsualGroup
+}
+
+enum TableCurrentRowUse // since 8.3.12
+{
+    Auto = 0
+    Choice = 1
+    SelectionPresentation = 2
+    SelectionPresentationAndChoice = 3
+}
+
+enum TableBehaviorOnHorizontalCompression // since 8.3.12
+{
+    Auto = 0
+    HideItemsByImportance = 1
+    MoveItemsByImportance = 2
+}
+
+enum CardBehaviorOnVerticalCompression // since 8.5.1
+{
+    Auto = 0
+    MoveItemsToSwipeablePages = 1
+    HideItems = 2
+}
+
+enum FormTableType // since 8.5.1
+{
+    Auto = 0
+    List = 1
+    Cards = 2
+}
+
+enum CollapseFormItemsByImportance // since 8.3.12
+{
+    Auto = 0
+    Use = 1
+    DontUse = 2
+}
+
+enum FileDragMode // since 8.3.13
+{
+    AsFile = 0
+    AsFileRef = 1
+}
+
+enum DynamicListKeyType // since 8.3.14
+{
+    Auto = 0
+    FieldValue = 1
+    RowKey = 2
+    RowNumber = 3
+}
+
+enum ViewModeApplicationOnSetReportResult // since 8.3.19
+{
+    Auto = 0
+    Apply = 1
+    DontApply = 2
+}
+
+// see mngcore/ILogForm.h
+enum Origin
+{
+    eSource = 0       // Исходный элемент. Был создан в конфигураторе или конструктором формы.
+    eAutoGenerated = 1    // Автоматически сгенерированный элемент при автозаполнении групп.
+    eAddedFromContext = 2 // Элемент добавлен программно.
+    eAddedFromMainConf = 3 // Элемент добавлен из основной конфигурации.
+}
+
+enum ShowTitle851
+{
+    DontShow as "false" = 0,
+    Show as "true" = 1,
+    Auto as "auto" = 2
+}
+
+abstract class ExtensionAdoptedProperty
+{
+    // NULL for own objects
+    // FALSE for auto-adopted unchanged objects
+    // TRUE for explicitly adopted (or changed) objects
+    transient Boolean adopted
+    transient Boolean unchanged
+}

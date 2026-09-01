@@ -1,0 +1,233 @@
+<?xml version="1.0" encoding="ASCII"?>
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="deriveddata" nsURI="http://g5.1c.ru/v8/dt/cmi/deriveddata" nsPrefix="cmideriveddata">
+  <eClassifiers xsi:type="ecore:EClass" name="CommandInterfaceRoot">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="configurationCommandInterface" eType="//ConfigurationCommandInterface" containment="true" resolveProxies="false"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="mainSectionCommandInterface" eType="//MainSectionCommandInterface" containment="true" resolveProxies="false"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="allSubsystemCommandInterfaces" upperBound="-1" eType="//SubsystemCommandInterface" containment="true" resolveProxies="false"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="topLevelSubsystemCommandInterfaces" upperBound="-1" eType="//SubsystemCommandInterface"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="formCommandInterfaces" upperBound="-1" eType="//FormCommandInterface" containment="true" resolveProxies="false"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="detachedCommandContainer" eType="//CommandContainer" containment="true" resolveProxies="false"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="detachedFormCommandContainer" eType="//FormCommandContainer" containment="true" resolveProxies="false"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="commandsByType" upperBound="-1" eType="//CommandsByTypeMapEntry" containment="true" resolveProxies="false"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="typesByCommandId" upperBound="-1" eType="//TypesByCommandIdMapEntry" containment="true" resolveProxies="false"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="unresolvedCommands" upperBound="-1" eType="//UnresolvedCommandEntry" containment="true" resolveProxies="false"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="unresolvedGroups" upperBound="-1" eType="//UnresolvedGroupEntry" containment="true" resolveProxies="false"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="unresolvedCommandItems" upperBound="-1" eType="//CommandItem" containment="true" resolveProxies="false"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="unresolvedCommandItemGroups" upperBound="-1" eType="//CommandItemGroup" containment="true" resolveProxies="false"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="unresolvedSubsystems" upperBound="-1" eType="//UnresolvedSubsystemEntry" containment="true" resolveProxies="false"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="unresolvedConfigurationCommandInterfaceItems" upperBound="-1" eType="//ConfigurationCommandInterfaceItem" containment="true" resolveProxies="false"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="unresolvedSubsystemCommandInterface" upperBound="-1" eType="//SubsystemCommandInterface" containment="true" resolveProxies="false"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ConfigurationCommandInterface">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="itemsOrderCustomized" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="items" upperBound="-1" eType="//ConfigurationCommandInterfaceItem" containment="true" resolveProxies="false"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="AbstractCommandContainer">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="detachedGroupPanel" eType="//DetachedGroupPanel" containment="true" resolveProxies="false"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="itemByCommandIdMap" upperBound="-1" eType="//ItemByCommandIdMapEntry" containment="true" resolveProxies="false"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="itemGroupByGroupIdMap" upperBound="-1" eType="//ItemGroupByGroupIdMapEntry" containment="true" resolveProxies="false"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="commands" upperBound="-1">
+      <eType xsi:type="ecore:EClass" href="http://g5.1c.ru/v8/dt/mcore#//Command"/>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="CommandContainer" eSuperTypes="//AbstractCommandContainer">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="navigationPanel" eType="//NavigationPanel" containment="true" resolveProxies="false"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="actionPanel" eType="//ActionPanel" containment="true" resolveProxies="false"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="unresolvedCommandsGroup" eType="//CommandItemGroup" containment="true" resolveProxies="false"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="FormCommandContainer" eSuperTypes="//AbstractCommandContainer">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="navigationPanel" eType="//FormNavigationPanel" containment="true" resolveProxies="false"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="actionPanel" eType="//FormActionPanel" containment="true" resolveProxies="false"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="MainSectionCommandInterface" eSuperTypes="//CommandContainer">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="customized" unique="false" changeable="false" volatile="true" transient="true" derived="true">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="SubsystemCommandInterface" eSuperTypes="//CommandContainer">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="subsystem">
+      <eType xsi:type="ecore:EClass" href="http://g5.1c.ru/v8/dt/metadata/mdclass#//Subsystem"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="subordinateCommandInterfacesOrderCustomized" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="parentCommandInterface" eType="//SubsystemCommandInterface"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="subordinateCommandInterfaces" upperBound="-1" eType="//SubsystemCommandInterface"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="commandSources" upperBound="-1">
+      <eType xsi:type="ecore:EClass" href="http://g5.1c.ru/v8/dt/metadata/mdclass#//MdObject"/>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="FormCommandInterface" eSuperTypes="//FormCommandContainer">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="form">
+      <eType xsi:type="ecore:EClass" href="http://g5.1c.ru/v8/dt/form#//Form"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="customized" unique="false" changeable="false" volatile="true" transient="true" derived="true">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ConfigurationCommandInterfaceItem">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="subsystem">
+      <eType xsi:type="ecore:EClass" href="http://g5.1c.ru/v8/dt/metadata/mdclass#//Subsystem"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="visibilityCustomized" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="visibility" containment="true" resolveProxies="false">
+      <eType xsi:type="ecore:EClass" href="http://g5.1c.ru/v8/dt/metadata/mdclass#//AdjustableBoolean"/>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="AbstractPanel">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="customGroupsOrderCustomized" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="customGroups" upperBound="-1" eType="//CustomCommandItemGroup" containment="true" resolveProxies="false"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="DetachedGroupPanel" eSuperTypes="//AbstractPanel"/>
+  <eClassifiers xsi:type="ecore:EClass" name="NavigationPanel" eSuperTypes="//AbstractPanel">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="importantGroup" eType="//CommandItemGroup" containment="true" resolveProxies="false"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="ordinaryGroup" eType="//CommandItemGroup" containment="true" resolveProxies="false"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="seeAlsoGroup" eType="//CommandItemGroup" containment="true" resolveProxies="false"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="customized" unique="false" changeable="false" volatile="true" transient="true" derived="true">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ActionPanel" eSuperTypes="//AbstractPanel">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="createGroup" eType="//CommandItemGroup" containment="true" resolveProxies="false"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="reportsGroup" eType="//CommandItemGroup" containment="true" resolveProxies="false"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="toolsGroup" eType="//CommandItemGroup" containment="true" resolveProxies="false"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="customized" unique="false" changeable="false" volatile="true" transient="true" derived="true">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="FormNavigationPanel" eSuperTypes="//AbstractPanel">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="importantGroup" eType="//CommandItemGroup" containment="true" resolveProxies="false"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="gotoGroup" eType="//CommandItemGroup" containment="true" resolveProxies="false"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="seeAlsoGroup" eType="//CommandItemGroup" containment="true" resolveProxies="false"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="customized" unique="false" changeable="false" volatile="true" transient="true" derived="true">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="FormActionPanel" eSuperTypes="//AbstractPanel">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="importantGroup" eType="//CommandItemGroup" containment="true" resolveProxies="false"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="createBasedOnGroup" eType="//CommandItemGroup" containment="true" resolveProxies="false"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="customized" unique="false" changeable="false" volatile="true" transient="true" derived="true">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="CommandItemGroup">
+    <eOperations name="getPanel" unique="false" eType="//AbstractPanel"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="commandGroup">
+      <eType xsi:type="ecore:EClass" href="http://g5.1c.ru/v8/dt/mcore#//CommandGroup"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="itemsCustomized" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="itemsOrderCustomized" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="orderFragment">
+      <eType xsi:type="ecore:EClass" href="g5.1c.ru.v8.dt.cmi.ecore#//CommandsOrderFragment"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="items" upperBound="-1" eType="//CommandItem" containment="true" resolveProxies="false"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="customized" unique="false" changeable="false" volatile="true" transient="true" derived="true">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="CustomCommandItemGroup" eSuperTypes="//CommandItemGroup"/>
+  <eClassifiers xsi:type="ecore:EClass" name="CommandItem">
+    <eOperations name="getGroup" unique="false" eType="//CommandItemGroup"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="command">
+      <eType xsi:type="ecore:EClass" href="http://g5.1c.ru/v8/dt/mcore#//Command"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="visibilityCustomized" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="visibilityFragment">
+      <eType xsi:type="ecore:EClass" href="g5.1c.ru.v8.dt.cmi.ecore#//CommandsVisibilityFragment"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="visibility" containment="true" resolveProxies="false">
+      <eType xsi:type="ecore:EClass" href="http://g5.1c.ru/v8/dt/metadata/mdclass#//AdjustableBoolean"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="groupCustomized" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ItemByCommandIdMapEntry" instanceClassName="java.util.Map$Entry">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="key" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//ELongObject"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="value" eType="//CommandItem"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ItemGroupByGroupIdMapEntry" instanceClassName="java.util.Map$Entry">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="key" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//ELongObject"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="value" eType="//CustomCommandItemGroup"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="CommandsByTypeMapEntry" instanceClassName="java.util.Map$Entry">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="key" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="value" upperBound="-1">
+      <eType xsi:type="ecore:EClass" href="http://g5.1c.ru/v8/dt/mcore#//Command"/>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="TypesByCommandIdMapEntry" instanceClassName="java.util.Map$Entry">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="key" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//ELongObject"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" unique="false" upperBound="-1">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="UnresolvedCommand">
+    <eSuperTypes href="http://g5.1c.ru/v8/dt/mcore#//Command"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="proxyName" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="proxyCommand">
+      <eType xsi:type="ecore:EClass" href="http://g5.1c.ru/v8/dt/mcore#//Command"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="commandGroup">
+      <eType xsi:type="ecore:EClass" href="http://g5.1c.ru/v8/dt/mcore#//CommandGroup"/>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="UnresolvedCommandEntry" instanceClassName="java.util.Map$Entry">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="key" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="value" eType="//UnresolvedCommand" containment="true" resolveProxies="false"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="UnresolvedGroup">
+    <eSuperTypes href="http://g5.1c.ru/v8/dt/mcore#//CommandGroup"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="proxyName" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="proxyCommandGroup">
+      <eType xsi:type="ecore:EClass" href="http://g5.1c.ru/v8/dt/mcore#//CommandGroup"/>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="UnresolvedGroupEntry" instanceClassName="java.util.Map$Entry">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="key" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="value" eType="//UnresolvedGroup" containment="true" resolveProxies="false"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="UnresolvedSubsystem">
+    <eSuperTypes href="http://g5.1c.ru/v8/dt/metadata/mdclass#//Subsystem"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="proxyName" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="proxySubsystem">
+      <eType xsi:type="ecore:EClass" href="http://g5.1c.ru/v8/dt/metadata/mdclass#//Subsystem"/>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="UnresolvedSubsystemEntry" instanceClassName="java.util.Map$Entry">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="key" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="value" eType="//UnresolvedSubsystem" containment="true" resolveProxies="false"/>
+  </eClassifiers>
+</ecore:EPackage>

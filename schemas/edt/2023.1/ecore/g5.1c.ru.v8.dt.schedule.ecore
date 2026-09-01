@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="ASCII"?>
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="model" nsURI="http://g5.1c.ru/v8/dt/schedule" nsPrefix="schedule">
+  <eClassifiers xsi:type="ecore:EClass" name="Schedule">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="beginDate" unique="false" eType="//Date"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="endDate" unique="false" eType="//Date"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="daysRepeatPeriod" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="beginTime" unique="false" eType="//Time"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="endTime" unique="false" eType="//Time"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="completionTime" unique="false" eType="//Time"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="completionInterval" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="repeatPeriodInDay" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="repeatPause" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="dailySchedules" upperBound="-1" eType="//DailySchedule" containment="true" resolveProxies="false"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="weeksPeriod" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="weekDays" upperBound="7" eType="//WeekDays"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="weekDayInMonth" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="dayInMonth" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="months" upperBound="12" eType="//Months"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="DailySchedule">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="beginTime" unique="false" eType="//Time"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="endTime" unique="false" eType="//Time"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="completionTime" unique="false" eType="//Time"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="completionInterval" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="repeatPeriodInDay" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="repeatPause" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="WeekDays">
+    <eLiterals name="Sunday" literal="Sun"/>
+    <eLiterals name="Monday" value="1" literal="Mon"/>
+    <eLiterals name="Tuesday" value="2" literal="Tue"/>
+    <eLiterals name="Wednesday" value="3" literal="Wed"/>
+    <eLiterals name="Thursday" value="4" literal="Thu"/>
+    <eLiterals name="Friday" value="5" literal="Fri"/>
+    <eLiterals name="Saturday" value="6" literal="Sat"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="Months">
+    <eLiterals name="January" literal="Jan"/>
+    <eLiterals name="February" value="1" literal="Feb"/>
+    <eLiterals name="March" value="2" literal="Mar"/>
+    <eLiterals name="April" value="3" literal="Apr"/>
+    <eLiterals name="May" value="4"/>
+    <eLiterals name="June" value="5" literal="Jun"/>
+    <eLiterals name="July" value="6" literal="Jul"/>
+    <eLiterals name="August" value="7" literal="Aug"/>
+    <eLiterals name="September" value="8" literal="Sep"/>
+    <eLiterals name="October" value="9" literal="Oct"/>
+    <eLiterals name="November" value="10" literal="Nov"/>
+    <eLiterals name="December" value="11" literal="Dec"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EDataType" name="Date" instanceClassName="java.util.Date"/>
+  <eClassifiers xsi:type="ecore:EDataType" name="Time" instanceClassName="java.util.Date"/>
+</ecore:EPackage>

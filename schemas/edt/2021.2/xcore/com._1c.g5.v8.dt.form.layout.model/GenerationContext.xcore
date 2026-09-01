@@ -1,0 +1,694 @@
+@GenModel(prefix="LayoutGenerationContext", loadInitialization="false", literalsInterface="true", nonNLSMarkers="true",
+	copyrightText="Copyright (C) 2015, 1C LLC", updateClasspath="false", suppressNotification="true")
+@Ecore(nsPrefix="layout", nsURI="http://g5.1c.ru/v8/dt/form.layout.model.generation.context")
+package com._1c.g5.v8.dt.form.layout.model.generation.context
+
+import java.util.Map
+import com._1c.g5.v8.dt.form.layout.model.calculation.context.LFTargetPlatform
+import com._1c.g5.v8.dt.form.layout.model.description.ColumnMode
+import com._1c.g5.v8.dt.form.layout.model.description.HippoLayElementBase
+import com._1c.g5.v8.dt.form.layout.model.description.HippoLayouterCategory
+import com._1c.g5.v8.dt.form.layout.model.description.InputByStringRunMode
+import com._1c.g5.v8.dt.form.layout.model.description.LogicGroupInternalRepresentation
+import com._1c.g5.v8.dt.form.layout.model.description.StretchableMode
+import com._1c.g5.v8.dt.form.layout.model.description.HippoLayCommandBarLocation
+import com._1c.g5.v8.dt.form.layout.model.description.ClientInterfaceVariant
+import com._1c.g5.v8.dt.form.layout.model.platform.font.Font
+import com._1c.g5.v8.dt.form.model.Button
+import com._1c.g5.v8.dt.form.model.Decoration
+import com._1c.g5.v8.dt.form.model.FormChildrenAlign
+import com._1c.g5.v8.dt.form.model.FormChildrenGroup
+import com._1c.g5.v8.dt.form.model.FormElementTitleLocation
+import com._1c.g5.v8.dt.form.model.FormGroup
+import com._1c.g5.v8.dt.form.model.FormItemSpacing
+import com._1c.g5.v8.dt.form.model.FormVisualEntity
+import com._1c.g5.v8.dt.form.model.ItemHorizontalAlignment
+import com._1c.g5.v8.dt.form.model.ItemVerticalAlignment
+import com._1c.g5.v8.dt.form.model.LogFormScrollMode
+import com._1c.g5.v8.dt.form.model.SearchControlLocation
+import com._1c.g5.v8.dt.form.model.SearchStringLocation
+import com._1c.g5.v8.dt.form.model.TooltipRepresentation
+import com._1c.g5.v8.dt.form.model.ViewStatusLocation
+import com._1c.g5.v8.dt.form.layout.model.platform.color.Color
+import com._1c.g5.v8.dt.form.layout.model.platform.picture.V8Picture
+import com._1c.g5.v8.dt.form.layout.model.description.HippoLayTable
+import com._1c.g5.v8.dt.form.model.UsualGroupBehavior
+
+type ChildrenArray wraps java.util.ArrayList<ElementBaseGeneratorContext>
+
+type ILogFormAdditionalInfoProvider wraps com._1c.g5.v8.dt.form.layout.model.common.ILogFormAdditionalInfoProvider
+
+type Font wraps Font
+
+type Picture wraps V8Picture
+
+type Color wraps Color
+
+interface IElementGeneratorContext
+{	
+}
+
+interface ElementBaseGeneratorContext extends IElementGeneratorContext
+{
+	//changed type 
+	//refers FormItem pLogFormElement
+	refers FormVisualEntity pLogFormElement
+    refers IElementGeneratorContext pParent
+    LFTargetPlatform targetPlatform
+    ClientInterfaceVariant interfaceVariant
+}
+
+interface ElementWithContextMenuBaseGeneratorContext extends IElementGeneratorContext
+{
+	// changed type
+	// refers ElementBaseGeneratorContext pContextMenu
+	refers ContextMenuGeneratorContext pContextMenu
+}
+
+interface RichElementBaseGeneratorContext extends ElementBaseGeneratorContext, ElementWithContextMenuBaseGeneratorContext
+{
+    FormElementTitleLocation titleLocation
+    String title = ""
+    boolean stretchableTitle
+    Color titleTextColor
+    Font titleFont
+    
+    String tooltip = ""
+    boolean formattedTooltip
+    TooltipRepresentation tooltipRepresentation
+    refers Decoration pExtTooltip
+    
+    // changed type
+    // refers ElementBaseGeneratorContext pHippoGenExtTooltip
+    refers TextDecorationGeneratorContext pHippoGenExtTooltip
+    
+    boolean changedFormattedString
+}
+
+interface RichFieldBaseGeneratorContext extends RichElementBaseGeneratorContext
+{
+	//Empty
+}
+
+interface GroupBaseGeneratorContext extends ElementBaseGeneratorContext
+{
+	boolean compat838
+	boolean compat8319
+	contains ElementBaseGeneratorContext[] children
+    
+    op void addChild(ElementBaseGeneratorContext pChild)
+	{
+	    pChild.setPParent(this);
+    	children.add(pChild);
+    }
+}
+
+interface SlaveElementBaseGeneratorContext extends ElementBaseGeneratorContext
+{
+    boolean slaveMode
+    String slaveLogFormElementName = ""
+    String slaveName = ""
+    String slaveTitle = ""
+    HippoLayouterCategory[] slaveCategories
+    boolean slaveVisible
+    boolean slaveEnabled
+    boolean slaveReadOnly
+    boolean slaveSkipOnInput
+    boolean slaveDefaultControl
+}
+
+interface SlaveFormElementBaseGeneratorContext extends SlaveElementBaseGeneratorContext
+{
+    int slaveWidth
+    int slaveMinWidth
+    int slaveMaxWidth
+    int slaveHeight
+    int slaveMinHeight
+    int slaveMaxHeight
+    StretchableMode slaveStretchableMode
+}
+
+interface SearchStringElementAdditionBaseGeneratorContext
+{
+    Color textColor
+    Color backColor
+    Color borderColor
+    Font font
+}
+
+interface TumblerBaseGeneratorContext extends RichFieldBaseGeneratorContext
+{
+    boolean readOnly
+    String[] titles
+    int columnsCount = "2"
+}
+
+interface ElementWithAutoCommandBarBaseGeneratorContext extends IElementGeneratorContext
+{
+    AutoCommandBarLocation acbLocation
+    // changed type
+    // refers ElementBaseGeneratorContext pAutoCommandBar
+    refers CommandBarGeneratorContext pAutoCommandBar
+}
+
+interface SearchControlElementAdditionBaseGeneratorContext
+{
+	//Empty
+}
+
+interface IExtTooltipGeneratorContext
+{
+	//Empty
+}
+
+interface ICommandBarGeneratorContext
+{
+	//Empty
+}
+
+interface IAutoAdditionsContainerGeneratorContext
+{
+	//Empty
+}
+
+interface IAutoAdditionsProviderGeneratorContext
+{
+	//Empty
+}
+
+interface IMenuElementGeneratorContext
+{
+	//Empty
+}
+
+//done, add
+class InputFieldGeneratorContext extends RichFieldBaseGeneratorContext
+{
+    String formatString = ""
+    String inputHint = ""
+    boolean readOnly
+    boolean typeQuickChoice = "true"
+    QuickChoiceMode_TIP typeQuickChoiceMode
+    InputByStringRunMode inputByStringRunMode
+    boolean finalInputByStringRunMode
+    boolean searchOnInputRightRes
+    boolean searchOnInputRight
+    Boolean choiceHistoryOnInput
+    Boolean enableCreateButton 
+}
+
+//done, add
+class TextFieldGeneratorContext extends RichFieldBaseGeneratorContext
+{
+    String formatString = ""
+}
+
+//done, add
+class ImageFieldGeneratorContext extends RichFieldBaseGeneratorContext
+{
+	String nonSelectedPictureText = ""
+}
+
+//done, add
+class HyperlinkButtonGeneratorContext extends RichElementBaseGeneratorContext
+{
+    //TODO PictureCol* m_pPictureCol;
+    String commandText = ""
+    Picture commandPicture
+    String commandTooltip = ""
+    String commandShortCut = ""
+    boolean canDynamicHeight
+}
+
+//done, add
+class TextDecorationGeneratorContext extends RichElementBaseGeneratorContext, IExtTooltipGeneratorContext
+{
+    ExtTooltipMode extTooltipMode
+    String text = ""
+    boolean formattedString
+    
+    // FROM RichElementBaseGeneratorContext
+    // String tooltip
+    
+    boolean canDynamicHeight
+}
+
+//done, add
+class PictureDecorationGeneratorContext extends RichElementBaseGeneratorContext
+{
+    //TODO contains PictureCol m_pPictureCol
+    String nonselectedPictureText = ""
+    
+    // from RichElementBaseGeneratorContext
+    // String tooltip
+}
+
+//done, add
+class CheckBoxGeneratorContext extends RichFieldBaseGeneratorContext
+{
+	boolean readOnly
+}
+
+class SwitcherGeneratorContext extends RichFieldBaseGeneratorContext
+{
+    boolean readOnly
+}
+
+//done, add
+class SubMenuGeneratorContext extends GroupBaseGeneratorContext, IMenuElementGeneratorContext
+{
+    String title = ""
+    Picture picture
+    String tooltip = ""
+    boolean important
+    boolean compat837
+    boolean compat8310
+}
+
+//done, add
+class FormButtonGeneratorContext extends RichElementBaseGeneratorContext
+{
+    //TODO PictureCol pPictureCol
+    String commandText = ""
+    Picture commandPicture
+    String commandTooltip = ""
+    String commandShortCut = ""
+    boolean compat837
+    boolean compat8310
+}
+
+//done, add
+class ContextMenuGeneratorContext extends GroupBaseGeneratorContext
+{
+	//empty
+}
+
+//done, add
+class MenuButtonGeneratorContext extends ElementBaseGeneratorContext, IMenuElementGeneratorContext
+{
+    //TODO PictureCol pPictureCol
+    String commandText = ""
+    Picture commandPicture
+    String commandTooltip = ""
+    String commandShortCut = ""
+    boolean important
+    boolean compat837
+    boolean compat8310
+}
+
+//done, add
+class PanelGeneratorContext extends GroupBaseGeneratorContext, SlaveFormElementBaseGeneratorContext
+{
+    Color backColor
+    FormChildrenGroup grouping
+    FormItemSpacing horSpacing
+    FormItemSpacing verSpacing
+    FormChildrenAlign childrenAlign
+    ItemHorizontalAlignment horAlgn
+    ItemVerticalAlignment  verAlgn
+    LogFormScrollMode verScrolling = "UseIfNecessary"
+    refers HippoLayElementBase pSlaveElement
+}
+
+//done, add
+class MainElementGeneratorContext extends ElementWithAutoCommandBarBaseGeneratorContext, GroupBaseGeneratorContext
+{
+    boolean generateIntermediateMainLayouter
+    GenerateIntermediateMainLayouter generateIntermediateMainLayouterMode
+    String title = ""
+    FormItemSpacing horSpacing
+    FormItemSpacing verSpacing
+    FormChildrenAlign childrenAlign
+    ItemHorizontalAlignment horAlgn
+    ItemVerticalAlignment verAlgn
+    refers ElementBaseGeneratorContext pIntermediateMainLayouter
+    refers ElementBaseGeneratorContext pNavigator
+    boolean topCB
+    boolean bottomCB
+    refers MobileTransformations pMobileTransformations
+    String leftCaptionCommandText = ""
+    String leftCaptionCommandTooltip = ""
+    String leftCaptionCommandShortCut = ""
+    String defButtonCommandText = ""
+    String defButtonCommandTooltip = ""
+    String defButtonCommandShortCut = ""
+    
+    // changed type
+    // refers ElementBaseGeneratorContext pRightCaptionCommandBar
+    refers CommandBarGeneratorContext pRightCaptionCommandBar
+    
+    //TODO must be called while initializing
+    op void init()
+    {
+    	PNavigator = LayoutGenerationContextFactory.eINSTANCE.createNavigatorGeneratorContext();
+    }
+} 
+
+enum GenerateIntermediateMainLayouter
+{
+	eGIMLAuto = 0
+	eGIMLAlways = 1
+	eGIMLNever = 2
+}
+
+class CommandBarGeneratorContext extends GroupBaseGeneratorContext, ICommandBarGeneratorContext, IAutoAdditionsContainerGeneratorContext
+{
+    String defaultComandSourceName = ""
+    ILogFormAdditionalInfoProvider pProvider
+    String lang = ""
+    int alias
+    
+    //from GroupBaseGeneratorContext
+    //LFTargetPlatform targetPlatform
+    //LFInterfaceVariant interfaceVariant
+    
+    //TODO PictureCol pPictureCol
+    //TODO Style pStyle
+    boolean compat837
+    HippoLayCommandBarLocation location
+}
+
+//done, add
+class RadioGroupGeneratorContext extends RichFieldBaseGeneratorContext
+{
+    boolean readOnly
+    String[] titles
+}
+
+//done, add
+class CheckBoxAsTumblerGeneratorContext extends TumblerBaseGeneratorContext
+{
+	//Empty
+}
+
+//done, add
+class RadioGroupAsTumblerGeneratorContext extends TumblerBaseGeneratorContext
+{
+	//Empty
+}
+
+//done, add
+class NavigatorGeneratorContext extends GroupBaseGeneratorContext
+{
+	//Empty
+}
+
+//done, add
+class ProgressBarGeneratorContext extends RichFieldBaseGeneratorContext
+{
+	//Empty
+}
+
+//done, add
+class TrackBarGeneratorContext extends RichFieldBaseGeneratorContext
+{
+	boolean readOnly
+}
+
+//done, add
+class TextDocFieldGeneratorContext extends RichFieldBaseGeneratorContext
+{
+	boolean readOnly
+}
+
+//done, add
+class LogicGroupGeneratorContext extends GroupBaseGeneratorContext, RichElementBaseGeneratorContext
+{
+    boolean united
+    UsualGroupBehavior behavior
+    String collapsedTitle = ""
+    boolean titleDataFlag
+    int dataLength
+    String formatString = ""
+    LogicGroupInternalRepresentation representation
+    boolean throughAlign
+    FormItemSpacing horSpacing
+    FormItemSpacing verSpacing
+    FormChildrenAlign childrenAlign
+    ItemHorizontalAlignment horAlgn
+    ItemVerticalAlignment verAlgn
+    
+    // from RichElementBaseGeneratorContext
+    //Color titleTextColor
+    //Font titleFont
+    //boolean stretchableTitle
+    //String title
+    //String tooltip
+}
+
+//done, add
+class MenuButtonsGroupGeneratorContext extends GroupBaseGeneratorContext, IMenuElementGeneratorContext
+{
+    boolean important
+    boolean notFirstInGroup
+}
+
+//done, add
+class PageGeneratorContext extends GroupBaseGeneratorContext, RichElementBaseGeneratorContext
+{
+	// from RichElementBaseGeneratorContext
+    //String title
+    //String tooltip
+    
+    int dataLength
+    String formatString = ""
+    FormItemSpacing horSpacing
+    FormItemSpacing verSpacing
+    FormChildrenAlign childrenAlign
+    ItemHorizontalAlignment horAlgn
+    ItemVerticalAlignment verAlgn
+}
+
+//done, add
+class PagesGeneratorContext extends GroupBaseGeneratorContext, RichElementBaseGeneratorContext
+{
+	// from RichElementBaseGeneratorContext
+    //String tooltip
+}
+
+//done, add
+class MoxelGeneratorContext extends RichFieldBaseGeneratorContext
+{
+	boolean readOnly
+}
+
+//done, add
+class CalendarFieldGeneratorContext extends RichFieldBaseGeneratorContext
+{
+	boolean readOnly
+}
+
+//done, add
+class HTMLGeneratorContext extends RichFieldBaseGeneratorContext
+{
+	boolean readOnly
+}
+
+//done, add
+class FormattedDocGeneratorContext extends RichFieldBaseGeneratorContext
+{
+	boolean readOnly
+}
+
+//done, add
+class PlannerGeneratorContext extends RichFieldBaseGeneratorContext
+{
+	boolean readOnly
+}
+
+//done, add
+class PeriodFieldGeneratorContext extends RichFieldBaseGeneratorContext
+{
+	boolean readOnly
+}
+
+//done, add
+class ChartGeneratorContext extends RichFieldBaseGeneratorContext
+{
+	boolean readOnly
+}
+
+//done, add
+class GanttChartGeneratorContext extends RichFieldBaseGeneratorContext
+{
+	boolean readOnly
+}
+
+//done, add
+class DendrogramGeneratorContext extends RichFieldBaseGeneratorContext
+{
+	boolean readOnly
+}
+
+//done, add
+class FlowchartGeneratorContext extends RichFieldBaseGeneratorContext
+{
+	boolean readOnly
+}
+
+//done, add
+class GeographicalMapGeneratorContext extends RichFieldBaseGeneratorContext
+{
+	boolean readOnly
+}
+
+//done, add
+class SearchControlElementAdditionInFormGeneratorContext extends GroupBaseGeneratorContext, RichElementBaseGeneratorContext, SearchControlElementAdditionBaseGeneratorContext
+{
+    //TODO PictureCol* pPictureCol
+    
+    //from RichElementBaseGeneratorContext
+    //String tooltip
+}
+
+//done, add
+class SearchControlElementAdditionInMenuGeneratorContext extends GroupBaseGeneratorContext, IMenuElementGeneratorContext, SearchControlElementAdditionBaseGeneratorContext
+{
+    String tooltip = ""
+    String title = ""
+}
+
+//done, add
+class SearchStringElementAdditionInFormGeneratorContext extends RichElementBaseGeneratorContext, SearchStringElementAdditionBaseGeneratorContext
+{
+	// from RichElementBaseGeneratorContext
+	//String tooltip
+}
+
+//done, add
+class SearchStringElementAdditionInMenuGeneratorContext extends ElementBaseGeneratorContext, SearchStringElementAdditionBaseGeneratorContext, IMenuElementGeneratorContext
+{
+	String tooltip = ""
+}
+
+//done, add
+class TableColumnGeneratorContext extends ElementBaseGeneratorContext, ElementWithContextMenuBaseGeneratorContext
+{
+    ColumnMode mode = "InputField"
+    String title = ""
+    String invisibleTitle = ""
+    String footerText = ""
+    String inputFormatString = ""
+    String formatString = ""
+    String tooltip = ""
+    String inputHint = ""
+    boolean readOnly
+    boolean typeQuickChoice = "true"
+    QuickChoiceMode_TIP typeQuickChoiceMode
+    InputByStringRunMode inputByStringRunMode
+    boolean finalInputByStringRunMode = "true"
+    boolean searchOnInputRightRes
+    boolean searchOnInputRight
+    Boolean choiceHistoryOnInput
+    Boolean enableCreateButton = "false"
+}
+
+//done, add
+class TableColumnsGroupGeneratorContext extends GroupBaseGeneratorContext
+{
+    boolean showHeader
+    String title = ""
+    String tooltip = ""
+    String formatString = ""
+}
+
+//done, add
+class TableGeneratorContext extends GroupBaseGeneratorContext, ElementWithAutoCommandBarBaseGeneratorContext, RichElementBaseGeneratorContext, IAutoAdditionsProviderGeneratorContext
+{
+    boolean readOnly
+    boolean inplaceEdit
+    boolean ULType
+    SearchStringLocation searchStringLocation = "None"
+    refers ElementBaseGeneratorContext pSearchString
+    ViewStatusLocation viewStatusLocation = "None"
+    refers ElementBaseGeneratorContext pViewStatus
+    SearchControlLocation searchControlLocation = "None"
+    contains ElementBaseGeneratorContext[] lineEditFormFields
+    FormItemSpacing horizontalSpacing
+    FormItemSpacing verticalSpacing
+    ItemHorizontalAlignment horizontalAlign
+    FormChildrenAlign childrenAlign
+    
+    op void addLineEditFormField(ElementBaseGeneratorContext lineEditFormField) 
+    {
+    	lineEditFormFields.add(lineEditFormField);
+    	lineEditFormField.PParent = this
+    }
+}
+
+//done, add
+class ViewStatusRepresentationElementAdditionInFormGeneratorContext extends RichElementBaseGeneratorContext
+{
+	// from RichElementBaseGeneratorContext
+	// String tooltip
+}
+
+class HippoGeneratorContext
+{	
+    //TODO ILogFormEditHelper pHelper
+    int alias
+    String lang = ""
+    // TODO pMobileInfoProvider - support mobile in G5V8DT-8638
+    LFTargetPlatform targetPlatform
+    ClientInterfaceVariant interfaceVariant
+    ILogFormAdditionalInfoProvider pProvider
+    refers MainElementGeneratorContext pHippoGeneratorMainElement
+    boolean mobilePlatform
+    refers MobileTransformations mobileTransformations
+
+    contains LongHippoLayTableMapEntry[] tables
+    contains LongFormVisualMapEntry[] logFormIndexById
+    contains StringFormVisualMapEntry[] logFormIndexByName
+}
+
+class LongHippoLayTableMapEntry wraps Map$Entry
+{
+	Long key
+	refers HippoLayTable value
+}
+
+class LongFormVisualMapEntry wraps Map$Entry
+{
+	Long key
+	refers FormVisualEntity value
+}
+
+class StringFormVisualMapEntry wraps Map$Entry
+{
+	String key
+	refers FormVisualEntity value
+}
+
+class MobileTransformations
+{
+    boolean searchDefaultButton = "false"
+    refers Button pDefaultButton
+    boolean generateCloseButton = "false"
+    refers Button pCloseButton
+    boolean searchTopCommandBar = "false"
+    refers FormGroup pTopCommandBar
+}
+
+//TODO from TypeInfoProvider.h
+enum QuickChoiceMode_TIP
+{
+    Soft_FromForm = 0
+    Soft_InList = 1
+    Hard_FromForm = 2
+    Hard_InList = 3
+}
+
+//TODO from HippoGeneratorElementWithAutoCommandBarBase
+enum AutoCommandBarLocation
+{
+    None = 0
+    Top = 1
+    Bottom = 2
+}
+
+enum ExtTooltipMode
+{
+	None = 0
+	ShowInForm = 1
+	PopUp = 2
+}

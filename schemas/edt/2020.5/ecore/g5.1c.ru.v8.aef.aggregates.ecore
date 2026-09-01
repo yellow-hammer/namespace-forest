@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="ASCII"?>
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="viewmodel" nsURI="http://g5.1c.ru/v8/aef/aggregates" nsPrefix="AggregatesAefViewModel">
+  <eClassifiers xsi:type="ecore:EClass" name="AggregatesTableViewModel">
+    <eSuperTypes href="g5.1c.ru.v8.aef.standard.ecore#//ControlViewModel"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="columns" upperBound="-1" eType="//AggregatesTableColumnViewModel" containment="true" resolveProxies="false"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="input" upperBound="-1" eType="//AggregateTableItemViewModel" containment="true" resolveProxies="false"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="AggregatesTableColumnViewModel">
+    <eSuperTypes href="g5.1c.ru.v8.aef.ecore#//IViewModel"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="header" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="AggregateTableItemViewModel">
+    <eSuperTypes href="g5.1c.ru.v8.aef.ecore#//IViewModel"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="stateImageId" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="stateMessage" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="use" unique="false" defaultValueLiteral="Auto">
+      <eType xsi:type="ecore:EEnum" href="http://g5.1c.ru/v8/dt/metadata/common#//AccumulationRegisterAggregateUse"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="periodicity" unique="false" defaultValueLiteral="Auto">
+      <eType xsi:type="ecore:EEnum" href="http://g5.1c.ru/v8/dt/metadata/common#//AccumulationRegisterAggregatePeriodicity"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="dimensionNames" unique="false" upperBound="-1">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eStructuralFeatures>
+  </eClassifiers>
+</ecore:EPackage>

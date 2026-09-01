@@ -1,0 +1,85 @@
+@GenModel(
+	nonNLSMarkers="true",
+	prefix="TimeScale",
+	copyrightText="Copyright (C) 2017, 1C",
+	literalsInterface="true",
+	updateClasspath="false",
+	featureDelegation="Reflective",
+	rootExtendsClass="com._1c.g5.v8.bm.core.BmObject",
+	rootExtendsInterface="com._1c.g5.v8.bm.core.IBmObject")
+@Ecore(nsPrefix="timescale", nsURI="http://g5.1c.ru/v8/dt/chart/model/timescale")
+
+package com._1c.g5.v8.dt.chart.model.timescale
+
+import com._1c.g5.v8.dt.chart.model.ChartLine
+import com._1c.g5.v8.dt.mcore.Color
+import com._1c.g5.v8.dt.mcore.LocalStringMapEntry
+
+enum TimeScaleUnitType
+{
+	Second = 5,
+	Minute = 10,
+	Hour = 20,
+	Day = 30,
+	Week = 40,
+	Month = 50,
+	Quarter = 60,
+	Year = 70
+}
+
+enum TimeScalePosition
+{
+	Top = 0,
+	Bottom = 1,
+	Left = 2,
+	Right = 3
+}
+
+enum TimeScaleDayFormat
+{
+	MonthDay = 1,
+	WeekDay = 2,
+	MonthDayWeekDay = 3,
+	WeekDayMonthDay = 4
+}
+
+class TimeScaleLabel
+{
+	com._1c.g5.v8.dt.mcore.Date key
+	contains LocalStringMapEntry[] text
+	//details anyType
+	contains Color lineColor
+	contains Color textColor
+	boolean textFormatted // since 8.3.18
+}
+
+class TimeScaleLabels
+{
+	contains TimeScaleLabel[] labels
+	int ticks
+}
+
+class TimeScaleLevel
+{
+	TimeScaleUnitType measure
+	int interval
+	boolean show
+	contains ChartLine line
+	contains Color scaleColor
+	TimeScaleDayFormat dayFormatRule
+	contains LocalStringMapEntry[] format
+	contains TimeScaleLabels labels
+	contains Color backColor
+	contains Color textColor
+	boolean showPereodicalLabels
+}
+
+class TimeScale
+{
+	TimeScalePosition placement
+	contains TimeScaleLevel[] levels
+	boolean transparent
+	contains Color backColor
+	contains Color textColor
+	int currentLevel
+}

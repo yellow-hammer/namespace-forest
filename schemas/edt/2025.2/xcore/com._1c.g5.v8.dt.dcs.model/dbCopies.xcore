@@ -1,0 +1,31 @@
+@GenModel(loadInitialization="false", literalsInterface="true", nonNLSMarkers="true", prefix="DcsDbCopies",
+    copyrightText="Copyright (C) 2020, 1C", updateClasspath="false", featureDelegation="Reflective",
+    rootExtendsClass="com._1c.g5.v8.bm.core.BmObject")
+@Ecore(nsPrefix="dbCopies", nsURI="http://g5.1c.ru/v8/dt/data-composition-system/dbcopies")
+package com._1c.g5.v8.dt.dcs.model.dbcopies
+
+import com._1c.g5.v8.dt.mcore.Value
+
+// Since 8.3.19
+class UsedDatabaseCopiesValue extends Value
+{
+    contains UsedDatabaseCopies value
+}
+
+class UsedDatabaseCopies
+{
+    contains UsedDatabaseCopy[] items
+}
+
+class UsedDatabaseCopy
+{
+    String name
+}
+
+enum DatabaseCopiesUse
+{
+    Auto, // Авто
+    UseCopiesOnly, // ИспользоватьТолькоКопии
+    PreferUseCopies, // ИспользоватьПреимущественноКопии
+    DontUseCopies // НеИспользоватьКопии
+}

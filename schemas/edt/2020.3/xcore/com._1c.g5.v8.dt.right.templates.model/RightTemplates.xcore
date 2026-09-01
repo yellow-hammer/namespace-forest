@@ -1,0 +1,119 @@
+@GenModel(loadInitialization="false", literalsInterface="true", nonNLSMarkers="true", prefix="Rt", copyrightText="Copyright (C) 2014, 1C", updateClasspath="false")
+@Ecore(nsPrefix="rt", nsURI="http://g5.1c.ru/v8/dt/right/templates/model")
+
+package com._1c.g5.v8.dt.right.templates.model
+
+class RootTemplate
+{
+	int maxParamValue
+	contains Template template
+}
+
+class Template
+{
+	contains Statement[] statements
+}
+
+abstract class Statement
+{
+}
+
+class TextStatement extends Statement
+{
+	String content
+}
+
+class IfStatement extends Statement
+{
+    contains Conditional[1] ifPart
+    contains Conditional[] elsIfParts
+    contains Template elseTemplate
+}
+
+class Conditional
+{
+    contains Expression[1] predicate
+    contains Template template
+}
+
+abstract class Expression
+{
+}
+
+class OuterParameter extends Expression
+{
+	String name
+}
+
+abstract class Function extends Expression
+{
+	contains Expression[] params
+}
+
+class TemplateParameter extends Function
+{
+	TemplateParameterType ^type
+}
+
+enum TemplateParameterType
+{
+	Parameter
+	CurrentTable
+	CurrentTableName
+	CurrentAccessRightName
+	WrongType
+}
+
+class StrContains extends Function
+{
+}
+
+class BinaryExpression extends Expression
+{
+    BinaryOperation operation
+    contains Expression[1] left
+    contains Expression[1] right
+}
+
+enum BinaryOperation
+{
+    OR          // e1 OR e2
+    AND         // e1 AND e2
+    LT          // e1 < e2
+    LE          // e1 <= e2
+    EQ          // e1 = e2
+    GE          // e1 >= e2
+    GT          // e1 > e2
+    NE          // e1 <> e2
+    PLUS        // e1 + e2
+}
+
+class UnaryExpression extends Expression
+{
+    UnaryOperation operation
+    contains Expression[1] operand
+}
+
+enum UnaryOperation
+{
+    NOT         // NOT e
+}
+
+abstract class Literal extends Expression
+{
+}
+
+class BooleanLiteral extends Literal
+{
+    boolean isTrue
+}
+
+class NumberLiteral extends Literal
+{
+    String[1] value
+}
+
+class StringLiteral extends Literal
+{
+    String content
+}

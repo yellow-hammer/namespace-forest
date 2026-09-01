@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="ASCII"?>
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="viewModels" nsURI="http://g5.1c.ru/v8/aef" nsPrefix="Aef">
+  <eClassifiers xsi:type="ecore:EClass" name="IViewModel" abstract="true" interface="true">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="eventChannel" unique="false" eType="//IEventChannel"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="parent" eType="//IContainerViewModel" eOpposite="//IContainerViewModel/children"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="IContainerViewModel" abstract="true" interface="true" eSuperTypes="//IViewModel">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="children" upperBound="-1" eType="//IViewModel" containment="true" resolveProxies="false" eOpposite="//IViewModel/parent"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="IControlViewModel" abstract="true" interface="true" eSuperTypes="//IViewModel"/>
+  <eClassifiers xsi:type="ecore:EClass" name="IContainerControlViewModel" abstract="true" interface="true" eSuperTypes="//IControlViewModel //IContainerViewModel"/>
+  <eClassifiers xsi:type="ecore:EClass" name="IDialogViewModel" abstract="true" interface="true" eSuperTypes="//IContainerViewModel"/>
+  <eClassifiers xsi:type="ecore:EClass" name="IAefLayoutData" abstract="true" interface="true"/>
+  <eClassifiers xsi:type="ecore:EClass" name="IAefLayout" abstract="true" interface="true"/>
+  <eClassifiers xsi:type="ecore:EDataType" name="IEventChannel" instanceClassName="com._1c.g5.aef2.events.IEventChannel"/>
+</ecore:EPackage>

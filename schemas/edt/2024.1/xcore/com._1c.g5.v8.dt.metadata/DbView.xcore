@@ -1,0 +1,451 @@
+@GenModel(nonNLSMarkers="true", prefix="DbView", copyrightText="Copyright (C) 2013, 1C", updateClasspath="false",
+	featureDelegation="Reflective", rootExtendsClass="com._1c.g5.v8.bm.core.BmObject"
+)
+@Ecore(nsPrefix="dbview", nsURI="http://g5.1c.ru/v8/dt/metadata/dbview")
+package com._1c.g5.v8.dt.metadata.dbview
+
+import com._1c.g5.v8.bm.core.IBmObject
+import com._1c.g5.v8.dt.mcore.DuallyNamedElement
+import com._1c.g5.v8.dt.mcore.TypeDescription
+import com._1c.g5.v8.dt.metadata.PresentationAdapterProvider
+import java.util.ArrayList
+import org.eclipse.emf.common.util.DelegatingEList$UnmodifiableEList
+import org.eclipse.emf.ecore.EObject
+import org.eclipse.emf.ecore.EStructuralFeature
+import com._1c.g5.v8.dt.internal.metadata.DbViewExtension
+
+annotation "http://www.1c.ru/v8/bm/ForceDirectReference" as ForceDirectReference
+
+abstract class DbViewElement extends DuallyNamedElement
+{
+    refers EObject mdObject
+    
+    op String getPresentation(String languageCode)
+    {
+        var presentationAdapter = PresentationAdapterProvider::getPresentationAdapter(this as IBmObject)
+        if (presentationAdapter !== null)
+            return presentationAdapter.getPresentation(this as IBmObject, languageCode)
+        return null        
+    }
+}
+
+interface Table
+{
+    contains DbViewFieldDef[] fields
+}
+
+/*
+ * Virtual database table
+ */
+abstract class DbViewDef extends DbViewElement, Table
+{
+    boolean invisible
+    refers DbViewFieldDef[] orderFields
+}
+
+class DbObjectDef
+{
+    @ForceDirectReference
+    refers DbViewFieldDef[1] recordRefField
+    @ForceDirectReference
+    refers DbViewFieldDef markToDeleteField
+    @ForceDirectReference
+    refers DbViewFieldDef postedField
+    @ForceDirectReference
+    refers DbViewFieldDef presentationField
+    @ForceDirectReference
+    refers DbViewFieldDef versionField
+}
+
+class DbNonObjectDef
+{
+    @ForceDirectReference
+    refers DbViewFieldDef[] keyFields
+    @ForceDirectReference
+    refers DbViewFieldDef recorderField
+}
+
+class HierarchicalDef
+{
+    @ForceDirectReference
+    refers DbViewFieldDef parentField
+    @ForceDirectReference
+    refers DbViewFieldDef isFolderField
+    int levelsLimit  
+}
+
+class OwnedTableDef
+{
+    @ForceDirectReference
+    refers DbViewFieldDef[] ownerFields
+}
+
+class DbViewSortInfo {
+    @ForceDirectReference
+    refers DbViewFieldDef[] prefixOrderFields
+    @ForceDirectReference
+    refers DbViewFieldDef[] prefixHierarchicalOrderFields
+    @ForceDirectReference
+    refers DbViewFieldDef[] defOrderFields
+    @ForceDirectReference
+    refers DbViewFieldDef[] suffixOrderFields
+    @ForceDirectReference
+    refers DbViewFieldDef[] suffixHierarchicalOrderFields
+}
+
+/*
+ * Real database table
+ */
+class DbViewTableDef extends DbViewDef
+{
+    contains DbObjectDef dbObjectDef
+    contains DbNonObjectDef dbNonObjectDef
+    contains HierarchicalDef hierarchicalDef
+    contains OwnedTableDef ownedTableDef
+    contains DbViewSortInfo dbViewSortInfo
+}
+
+type Resource wraps org.eclipse.emf.ecore.resource.Resource 
+
+/*
+ * DbViewTableDef for an extension project with fields being combined 
+ */
+class ExtendedDbViewTableDef extends DbViewTableDef
+{
+    volatile transient DbViewFieldDefList combinedFields
+    refers transient DbViewTableDef source
+        
+    op DbViewFieldDef[] getFields()
+    {
+        DbViewExtension.getCombinedFields(this)
+    }    
+    
+    op Resource eResource()
+    {
+        source.eResource
+    }
+    
+    op EObject eContainer()
+    {
+        source.eContainer();
+    }
+
+    op EStructuralFeature eContainingFeature()
+    {
+        source.eContainingFeature();
+    }
+    
+    op Object eGet(EStructuralFeature feature)
+    {
+        DbViewExtension.eGet(feature, this)
+    } 
+    
+    op String getName()
+    {
+        source.name
+    }
+    
+    op String getNameRu()
+    {
+        source.nameRu
+    }           
+    
+    op EObject getMdObject()
+    {
+        source.mdObject
+    }
+}
+
+class ExtendedDbViewFieldTableDef extends DbViewFieldTableDef
+{
+    volatile transient DbViewFieldDefList combinedFields
+    refers transient DbViewFieldTableDef source
+    
+    op DbViewFieldDef[] getFields()
+    {
+        DbViewExtension.getCombinedFields(this)
+    }
+
+    op Resource eResource()
+    {
+        source.eResource
+    }
+
+    op EObject eContainer()
+    {
+        source.eContainer();
+    }
+    
+    op EStructuralFeature eContainingFeature()
+    {
+        source.eContainingFeature();
+    }
+    
+    op Object eGet(EStructuralFeature feature)
+    {
+        DbViewExtension.eGet(feature, this)
+    } 
+    
+    op String getName()
+    {
+        source.name
+    }
+    
+    op String getNameRu()
+    {
+        source.nameRu
+    }
+    
+    op EObject getMdObject()
+    {
+        source.mdObject
+    }                               
+}
+
+/*
+ * Database view based on SELECT
+ * 
+ * <br><b>!!! Attention
+ *     <br>if you're creating elements of this class 
+ * 	       <br>1) you MUST change method "getDbViewSelectDef" in class "com._1c.g5.v8.dt.ql.resource.DynamicDbViewFieldComputer"
+ *         <br>2) you MUST add new state in "com._1c.g5.v8.dt.ql.resource.DbViewVirtualFieldProcessor"
+ * <br><b>!!! Attention
+ */
+class DbViewSelectDef extends DbViewDef
+{
+    contains DbViewSelectParamDef[] params
+}
+
+class DbViewSelectParamDef extends DuallyNamedElement
+{
+    int kind  = '1'
+    refers DbViewFieldDef[] fieldRefs
+    contains DbViewFieldDef[] fieldDefs
+    contains DbViewSelectParamVariant[] variants    
+    contains TypeDescription ^type
+    
+    op DbViewFieldDef[] fields()
+    {
+    	val allFields = new ArrayList<DbViewFieldDef>();
+    	allFields.addAll(this.fieldRefs);
+    	allFields.addAll(this.fieldDefs);
+    	return new UnmodifiableEList(allFields);
+    }
+}
+
+enum DbViewSelectParamKind
+{
+    SelectParamValue = 1 //< Значене любого типа
+    SelectParamVariant = 2 //< Один из возможных вариантов заданных термами
+    SelectParamWhere = 4 //< Условие
+    SelectParamFieldList = 8 //< Список полей
+    SelectParamValueList = 16 //< Список значений
+    SelectParamOrder = 32 //< Упорядочивание
+    SelectParamTop = 64 //< Ограничение количества записей, используется вместе с eSelectParamValue
+    SelectParamBeginPeriod = 128 //< НачалоПериода, должен присутствовать вместе с eSelectParamEndPeriod
+    SelectParamEndPeriod = 256 //< КонецПериода, должен присутствовать вместе с eSelectParamBeginPeriod
+}
+
+class DbViewSelectParamVariant extends DuallyNamedElement
+{
+}
+
+
+// Виды ролей полей представления
+enum DbViewFieldRoleKind
+{
+	FieldRoleOrdinary      = 1	 //    eFieldRoleOrdinary      = 0x001,    ///< Никакой особой роли нет
+    FieldRoleDimension     = 2	 //    eFieldRoleDimension     = 0x002,    ///< Измерение
+    FieldRolePeriodBalance = 4 	 //    eFieldRolePeriodBalance = 0x004,    ///< Период
+    FieldRoleBeginBalance  = 8	 //    eFieldRoleBeginBalance  = 0x008,    ///< Начальный остаток
+    FieldRoleEndBalance    = 16	 //    eFieldRoleEndBalance    = 0x010,    ///< Конечный остаток
+    FieldRoleBalanceDt     = 32	 //    eFieldRoleBalanceDt     = 0x020,    ///< Остаток Дт
+    FieldRoleBalanceCt     = 64	 //    eFieldRoleBalanceCt     = 0x040,    ///< Остаток Кт
+    FieldRoleTurnover	   = 128 //    eFieldRoleTurnover      = 0x080,    ///< Оборот
+    FieldRoleSkipNull      = 256 //    eFieldRoleSkipNull      = 0x100,    ///< Пропускать NULL'ы
+    FieldRoleNotSorted     = 512 //    eFieldRoleNotSorted     = 0x200,    ///< Поле не сортируется
+    FieldRoleMainPeriod    = 1024//    eFieldRoleMainPeriod    = 0x400,    ///< Основной период (для указания пользователем) м.б. только один
+    FieldRoleUnstable      = 2048//    eFieldRoleUnstable      = 0x800,    ///< Значение поля в параметре виртуальной таблицы  может отличаться от значения выдаваемого самой таблицей. Имеет смысл только для виртуальных таблиц
+}
+
+enum DbViewFieldPeriodType
+{
+	MainPeriod 		 // eFPTMainPeriod, // Главный период. Должен быть один. Например, ПериодСекунда или Период
+    SpecifyPeriod    // eFPTSpecifyPeriod // Уточняющий период. Например, Регистратор и номер строки. В случае выбора, должен обязательно быть выбран главный период 
+    AdditionalPeriod // eFPTAdditionalPeriod, // Дополнительный период. Например, ПериодГод
+}
+    
+class DbViewFieldRole
+{
+	int roleMask = '1'	// FieldRoleOrdinary		///< Маска ролей
+	refers DbViewFieldDef periodParentField 		///< Идентификатор поля период, которое данное поле детализирует как период
+    refers DbViewFieldDef balanceLinkField  		///< Идентификатор поля по связи начальный-конечный остаток
+    refers DbViewFieldDef dtctLinkField     		///< Идентификатор поля по связи Дт-Кт остаток
+    refers DbViewFieldDef accKindLinkField  		///< Идентификатор поля по связи вид счета
+    refers DbViewFieldDef accLinkField      		///< Идентификатор поля по связи счет
+    refers DbViewFieldDef accKindField      		///< Идентификатор поля вид счета в таблице плана счетов
+    DbViewFieldPeriodType periodType = 'MainPeriod' ///< Тип периода
+    int periodNumber = '0'						    ///< Номер периода, начиная с 1. Например, НомерСтроки - 1, Регистратор - 2, Период - 3
+}
+
+/*
+ * Field in virtual table
+ */
+abstract class DbViewFieldDef extends DbViewElement
+{
+	contains TypeDescription ^type
+	contains DbViewFieldRole fieldRole
+	refers EObject presentationSource
+}
+
+type DbViewFieldDefList wraps java.util.List<DbViewFieldDef> 
+
+/*
+ * Real field
+ */
+class DbViewFieldFieldDef extends DbViewFieldDef
+{
+}
+
+/*
+ * Real field with period source
+ */
+class DbViewFieldFieldDefWithPeriod extends DbViewFieldFieldDef
+{
+    refers EObject periodSource
+}
+
+/*
+ * Table in a field
+ */
+class DbViewFieldTableDef extends DbViewFieldDef, Table
+{
+}
+
+class DbViewVirtualFieldDef extends DbViewFieldFieldDef
+{
+}
+
+//TODO if you add new metadata object having database table we should add its service keyword to com._1c.g5.v8.dt.md.resource.DbViewTerms
+abstract class BasicDbViewDefs
+{
+    contains DbViewTableDef[1] mainView
+}
+
+abstract class ChangeableDbViewDefs extends BasicDbViewDefs
+{
+    contains DbViewDef changeView
+}
+
+class EnumDbViewDefs extends BasicDbViewDefs
+{
+}
+
+class CatalogDbViewDefs extends ChangeableDbViewDefs
+{
+}
+
+class DocumentDbViewDefs extends ChangeableDbViewDefs
+{
+}
+
+class ChartOfCharacteristicTypesDbViewDefs extends ChangeableDbViewDefs
+{
+}
+
+class InformationRegisterDbViewDefs extends ChangeableDbViewDefs
+{
+    contains DbViewSelectDef sliceSelectViewFirst
+    contains DbViewSelectDef sliceSelectViewLast
+}
+
+class ExchangePlanDbViewDefs extends BasicDbViewDefs
+{
+}
+
+class ConstantDbViewDefs extends ChangeableDbViewDefs
+{
+}
+
+class ConstantsDbViewDefs
+{
+    contains DbViewSelectDef allConstantsSelectView
+} 
+
+class SequenceDbViewDefs extends ChangeableDbViewDefs
+{
+    contains DbViewTableDef boundaryView    
+}
+
+class DocumentJournalDbViewDefs extends BasicDbViewDefs
+{
+}
+
+class AccumulationRegisterbViewDefs extends ChangeableDbViewDefs
+{
+    contains DbViewSelectDef balanceSelectView
+    contains DbViewSelectDef turnoverSelectView
+    contains DbViewSelectDef balanceAndTurnoverSelectView
+}
+
+class BusinessProcessDbViewDefs extends ChangeableDbViewDefs
+{
+	contains DbViewTableDef routePointView
+}
+
+class TaskDbViewDefs extends ChangeableDbViewDefs
+{
+	contains DbViewSelectDef bpTaskAddressingSelectView
+}
+
+class FilterCriterionDbViewDefs
+{
+    contains DbViewSelectDef filterCriterionSelectView
+}
+
+class ChartOfAccountsDbViewDefs extends ChangeableDbViewDefs
+{
+}
+
+class ChartOfCalculationTypesDbViewDefs extends ChangeableDbViewDefs
+{
+}
+
+class AccountingRegisterDbViewDefs extends ChangeableDbViewDefs
+{
+    contains DbViewSelectDef balanceSelectView
+    contains DbViewSelectDef turnoverSelectView
+    contains DbViewSelectDef balanceAndTurnoverSelectView
+    // таблица значений доп измерений (Субконто)
+    contains DbViewTableDef extDimensionsView
+    // таблица оборотов Дт/Кт
+    contains DbViewSelectDef drCrTurnoverSelectView
+    // таблица проводок (Движения с субконто)
+    contains DbViewSelectDef recordsWithExtDimensionSelectView
+}
+
+class CalculationRegisterDbViewDefs extends ChangeableDbViewDefs
+{
+	contains DbViewSelectDef actionPeriodSelectView
+	contains DbViewSelectDef scheduleDataSelectView
+	contains DbViewSelectDef[] baseSelectViews
+}
+
+class RecalculationDbViewDefs extends ChangeableDbViewDefs
+{
+}
+
+class TableDbViewDefs extends BasicDbViewDefs
+{
+	
+}
+
+class CubeDbViewDefs extends BasicDbViewDefs
+{
+	
+}
+
+class DimensionTableDbViewDefs extends BasicDbViewDefs
+{
+	
+}

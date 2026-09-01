@@ -1,0 +1,58 @@
+@Ecore(nsURI="http://v8.1c.ru/8.3/debugger/debugRTEInfo")
+@GenModel(nonNLSMarkers="true", copyrightText="Copyright (C) 2014, 1C", updateClasspath="false")
+package com._1c.g5.v8.dt.debug.model.rte.info
+
+import com._1c.g5.v8.dt.debug.model.core.GenericException
+import com._1c.g5.v8.dt.debug.model.base.data.BSLModuleIdInternal
+import com._1c.g5.v8.dt.debug.model.base.data.StackItemViewInfoData
+import org.eclipse.emf.ecore.xml.^type.Base64Binary
+import java.math.BigDecimal
+
+@ExtendedMetaData(name="CheckBPCondErrorInfo", kind="elementOnly")
+class CheckBPCondErrorInfo {
+	@ExtendedMetaData(kind="element", name="bpCondition", namespace="##targetNamespace")
+	String[1] bpCondition
+	@ExtendedMetaData(kind="element", name="exception", namespace="##targetNamespace")
+	contains GenericException exception
+	@ExtendedMetaData(kind="element", name="moduleID", namespace="##targetNamespace")
+	contains BSLModuleIdInternal moduleID
+	@ExtendedMetaData(kind="element", name="lineNo", namespace="##targetNamespace")
+	unsettable BigDecimal[1] lineNo = "0"
+}
+
+@ExtendedMetaData(name="ErrorType")
+enum ErrorType {
+	Unknown
+	BSLCompile = 1
+	BSLRuntime = 2
+	BreakpointBSLCompile = 3
+	BreakpointBSLRuntime = 4
+}
+
+@ ExtendedMetaData ( name = "ErrorType:Object" , baseType = "ErrorType" ) type ErrorTypeObject wraps org.eclipse.emf.common.util.Enumerator
+
+@ExtendedMetaData(name="ErrorViewInfoData", kind="elementOnly")
+class ErrorViewInfoData {
+	@ExtendedMetaData(kind="element", name="errorType", namespace="##targetNamespace")
+	unsettable ErrorType[1] errorType
+	@ExtendedMetaData(kind="element", name="exception", namespace="##targetNamespace")
+	contains GenericException exception
+	@ExtendedMetaData(kind="element", name="moduleID", namespace="##targetNamespace")
+	contains BSLModuleIdInternal moduleID
+	@ExtendedMetaData(kind="element", name="moduleName", namespace="##targetNamespace")
+	String[1] moduleName
+	@ExtendedMetaData(kind="element", name="lineNo", namespace="##targetNamespace")
+	BigDecimal[1] lineNo
+	@ExtendedMetaData(kind="element", name="descr", namespace="##targetNamespace")
+	Base64Binary[1] descr
+	@ExtendedMetaData(kind="element", name="srcLine", namespace="##targetNamespace")
+	String[1] srcLine
+	@ExtendedMetaData(kind="element", name="posInLine", namespace="##targetNamespace")
+	BigDecimal[1] posInLine
+	@ExtendedMetaData(kind="element", name="presentation", namespace="##targetNamespace")
+	Base64Binary[1] presentation
+	@ExtendedMetaData(kind="element", name="longPresentation", namespace="##targetNamespace")
+	Base64Binary[1] longPresentation
+	@ExtendedMetaData(kind="element", name="callStack", namespace="##targetNamespace")
+	contains StackItemViewInfoData[] callStack
+}

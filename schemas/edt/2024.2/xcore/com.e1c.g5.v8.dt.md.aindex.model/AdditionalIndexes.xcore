@@ -1,0 +1,34 @@
+@GenModel(prefix="AdditionalIndexes", copyrightText="Copyright (C) 2024, 1C", nonNLSMarkers="true",
+    loadInitialization="false", literalsInterface="true", updateClasspath="false", featureDelegation="Reflective",
+    rootExtendsClass="com._1c.g5.v8.bm.core.BmObject", rootExtendsInterface="com._1c.g5.v8.bm.core.IBmObject")
+@Ecore(nsPrefix="aindex", nsURI="http://g5.1c.ru/v8/dt/md/aindex")
+package com.e1c.g5.v8.dt.md.aindex.model
+
+import com._1c.g5.v8.dt.metadata.externalProperties.AbstractAdditionalIndexes
+
+import com._1c.g5.v8.dt.metadata.dbview.Table
+import com._1c.g5.v8.dt.mcore.Uuid
+import org.eclipse.emf.ecore.EObject
+
+class AdditionalIndexes extends AbstractAdditionalIndexes
+{
+    contains AdditionalIndex[] indexes
+}
+
+class AdditionalIndex
+{
+    Uuid ^id
+    String name
+    refers Table table
+    contains IndexField[] indexedFields
+    contains IndexField[] additionalFields
+}
+
+class IndexField
+{
+    String path
+    transient String name
+    transient String nameRu
+    refers transient EObject source
+}
+

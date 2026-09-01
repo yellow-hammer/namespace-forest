@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="ASCII"?>
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="model" nsURI="http://g5.1c.ru/v8/dt/platform/model" nsPrefix="platform">
+  <eClassifiers xsi:type="ecore:EClass" name="PlatformBorder">
+    <eSuperTypes href="g5.1c.ru.v8.dt.mcore.ecore#//NamedElement"/>
+    <eSuperTypes href="g5.1c.ru.v8.dt.mcore.ecore#//BorderDef"/>
+    <eOperations name="style" unique="false">
+      <eType xsi:type="ecore:EEnum" href="g5.1c.ru.v8.dt.mcore.ecore#//BorderStyle"/>
+    </eOperations>
+    <eOperations name="width" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    </eOperations>
+    <eOperations name="compositeId" unique="false">
+      <eType xsi:type="ecore:EDataType" href="g5.1c.ru.v8.dt.mcore.ecore#//CompositeId"/>
+    </eOperations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="compositeId" unique="false">
+      <eType xsi:type="ecore:EDataType" href="g5.1c.ru.v8.dt.mcore.ecore#//CompositeId"/>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="PlatformFont">
+    <eSuperTypes href="g5.1c.ru.v8.dt.mcore.ecore#//NamedElement"/>
+    <eSuperTypes href="g5.1c.ru.v8.dt.mcore.ecore#//FontDef"/>
+    <eOperations name="faceName" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eOperations>
+    <eOperations name="bold" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    </eOperations>
+    <eOperations name="italic" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    </eOperations>
+    <eOperations name="underline" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    </eOperations>
+    <eOperations name="strikeout" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    </eOperations>
+    <eOperations name="scale" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    </eOperations>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="PlatformFontRef">
+    <eSuperTypes href="g5.1c.ru.v8.dt.mcore.ecore#//NamedElement"/>
+    <eSuperTypes href="g5.1c.ru.v8.dt.mcore.ecore#//FontRef"/>
+    <eOperations name="faceName" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eOperations>
+    <eOperations name="height" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    </eOperations>
+    <eOperations name="bold" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    </eOperations>
+    <eOperations name="italic" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    </eOperations>
+    <eOperations name="underline" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    </eOperations>
+    <eOperations name="strikeout" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    </eOperations>
+    <eOperations name="scale" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    </eOperations>
+    <eOperations name="compositeId" unique="false">
+      <eType xsi:type="ecore:EDataType" href="g5.1c.ru.v8.dt.mcore.ecore#//CompositeId"/>
+    </eOperations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="compositeId" unique="false">
+      <eType xsi:type="ecore:EDataType" href="g5.1c.ru.v8.dt.mcore.ecore#//CompositeId"/>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="SystemFont">
+    <eSuperTypes href="g5.1c.ru.v8.dt.mcore.ecore#//NamedElement"/>
+    <eSuperTypes href="g5.1c.ru.v8.dt.mcore.ecore#//Font"/>
+    <eOperations name="faceName" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eOperations>
+    <eOperations name="height" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    </eOperations>
+    <eOperations name="bold" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    </eOperations>
+    <eOperations name="italic" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    </eOperations>
+    <eOperations name="underline" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    </eOperations>
+    <eOperations name="strikeout" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    </eOperations>
+    <eOperations name="scale" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    </eOperations>
+    <eOperations name="compositeId" unique="false">
+      <eType xsi:type="ecore:EDataType" href="g5.1c.ru.v8.dt.mcore.ecore#//CompositeId"/>
+    </eOperations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="compositeId" unique="false">
+      <eType xsi:type="ecore:EDataType" href="g5.1c.ru.v8.dt.mcore.ecore#//CompositeId"/>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="PlatformColor">
+    <eSuperTypes href="g5.1c.ru.v8.dt.mcore.ecore#//NamedElement"/>
+    <eSuperTypes href="g5.1c.ru.v8.dt.mcore.ecore#//ColorDef"/>
+    <eOperations name="red" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    </eOperations>
+    <eOperations name="green" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    </eOperations>
+    <eOperations name="blue" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    </eOperations>
+    <eOperations name="compositeId" unique="false">
+      <eType xsi:type="ecore:EDataType" href="g5.1c.ru.v8.dt.mcore.ecore#//CompositeId"/>
+    </eOperations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="compositeId" unique="false">
+      <eType xsi:type="ecore:EDataType" href="g5.1c.ru.v8.dt.mcore.ecore#//CompositeId"/>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="SystemColor">
+    <eSuperTypes href="g5.1c.ru.v8.dt.mcore.ecore#//NamedElement"/>
+    <eSuperTypes href="g5.1c.ru.v8.dt.mcore.ecore#//Color"/>
+    <eOperations name="red" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    </eOperations>
+    <eOperations name="green" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    </eOperations>
+    <eOperations name="blue" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    </eOperations>
+    <eOperations name="compositeId" unique="false">
+      <eType xsi:type="ecore:EDataType" href="g5.1c.ru.v8.dt.mcore.ecore#//CompositeId"/>
+    </eOperations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="compositeId" unique="false">
+      <eType xsi:type="ecore:EDataType" href="g5.1c.ru.v8.dt.mcore.ecore#//CompositeId"/>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="PlatformPicture">
+    <eSuperTypes href="g5.1c.ru.v8.dt.mcore.ecore#//DuallyNamedElement"/>
+    <eSuperTypes href="g5.1c.ru.v8.dt.mcore.ecore#//PictureDef"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="compositeId" unique="false">
+      <eType xsi:type="ecore:EDataType" href="g5.1c.ru.v8.dt.mcore.ecore#//CompositeId"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="url" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="pictureUsing" unique="false" eType="//PlatformPictureUsing"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="PlatformPictureUsing">
+    <eLiterals name="Normal"/>
+    <eLiterals name="Version81"/>
+    <eLiterals name="Version82"/>
+    <eLiterals name="Version82Rich"/>
+  </eClassifiers>
+</ecore:EPackage>

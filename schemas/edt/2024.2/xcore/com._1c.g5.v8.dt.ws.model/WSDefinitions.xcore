@@ -1,0 +1,74 @@
+@GenModel(loadInitialization="false", literalsInterface="true", nonNLSMarkers="true", prefix="WsDefinitions", copyrightText="Copyright (C) 2013, 1C", updateClasspath="false")
+@Ecore(nsPrefix="wsdefinitions", nsURI="http://g5.1c.ru/v8/dt/ws/wsdefinitions")
+package com._1c.g5.v8.dt.ws.wsdefinitions.model
+
+import com._1c.g5.v8.dt.xdto.model.InnerModel
+import com._1c.g5.v8.dt.mcore.QName
+
+// This model represents web service definition is generated from wsdl
+// This model is only for view purposes 
+
+// 
+// Name - Represents names in XML. 
+//        A Name is a token that begins with a letter, underscore, or colon and continues 
+//        with name characters (letters, digits, and other characters). 
+//        This data type is derived from token
+//
+// NCName - Represents noncolonized names. This data type is the same as NAME, 
+//          except it cannot begin with a colon. This data type is derived from NAME
+//
+// QName - Represents a qualified name. A qualified name is composed of a prefix 
+//         and a local name separated by a colon. Both the prefix and local names 
+//         must be an NCName. The prefix must be associated with a namespace URI reference, 
+//         using a namespace declaration.
+
+type NCName wraps String
+
+class WSDefinitions
+{
+	contains InnerModel model
+	contains Service[] services
+	String documentation
+}
+
+class Service
+{
+	String namespace
+	NCName name //xsd:NCName
+	contains Endpoint[] endpoints
+	String documentation
+}
+
+class Endpoint
+{
+	NCName name //xsd:NCName
+	contains Operation[1..*] operations
+	String documentation
+	boolean soap
+}
+
+class Operation
+{
+	NCName name //xsd:NCName
+	String documentation
+	boolean retValNillable
+	String retValDoc
+	contains QName retValType //xsd:QName
+	contains Parameter[] parameters
+}
+
+class Parameter
+{
+	NCName name //xsd:NCName
+	contains QName ^type //xsd:QName
+	Direction direction 
+	boolean nillable
+	String documentation
+}
+
+enum Direction
+{
+	In = 0
+	Out = 1
+	InOut = 2
+}

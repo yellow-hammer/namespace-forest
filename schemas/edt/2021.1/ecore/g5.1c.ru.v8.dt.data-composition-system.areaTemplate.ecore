@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="ASCII"?>
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="areaTemplate" nsURI="http://g5.1c.ru/v8/dt/data-composition-system/areaTemplate" nsPrefix="areaTemplate">
+  <eClassifiers xsi:type="ecore:EClass" name="DataCompositionAreaTemplate">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="items" upperBound="-1" eType="//AreaTemplateItem" containment="true" resolveProxies="false"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="AreaTemplateItem" abstract="true"/>
+  <eClassifiers xsi:type="ecore:EClass" name="DataCompositionAreaTemplateTableRow" eSuperTypes="//AreaTemplateItem">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="cells" upperBound="-1" eType="//DataCompositionAreaTemplateTableCell" containment="true" resolveProxies="false"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="tableID" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="DataCompositionAreaTemplateTableCell">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="item" upperBound="-1" eType="//TemplateItem" containment="true" resolveProxies="false"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="appearance" eType="//DataCompositionAreaTemplateTableCellAppearance" containment="true" resolveProxies="false"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="appIndex" unique="false" defaultValueLiteral="0">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="DataCompositionAreaTemplateTableCellAppearance">
+    <eSuperTypes href="g5.1c.ru.v8.dt.data-composition-system.core.ecore#//ParameterValues"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="DataCompositionAreaTemplateChartGroupAppearance">
+    <eSuperTypes href="g5.1c.ru.v8.dt.data-composition-system.core.ecore#//ParameterValues"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="referenceLineInChart" containment="true" resolveProxies="false">
+      <eType xsi:type="ecore:EClass" href="g5.1c.ru.v8.dt.chart.model.ecore#//ChartReferenceLine"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="referenceBandInChart" containment="true" resolveProxies="false">
+      <eType xsi:type="ecore:EClass" href="g5.1c.ru.v8.dt.chart.model.ecore#//ChartReferenceBand"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="visualTypeInChart" unique="false">
+      <eType xsi:type="ecore:EEnum" href="g5.1c.ru.v8.dt.chart.model.ecore#//ChartSeriesGraphicalRepresentationType"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="stackTypeInChart" unique="false">
+      <eType xsi:type="ecore:EEnum" href="g5.1c.ru.v8.dt.chart.model.ecore#//ChartSeriesStackType"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="usedValueAxisInChart" unique="false">
+      <eType xsi:type="ecore:EEnum" href="g5.1c.ru.v8.dt.chart.model.ecore#//UsedChartValuesAxis"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="stackGroupInChart" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="DataCompositionAreaTemplateChartResourceAppearance">
+    <eSuperTypes href="g5.1c.ru.v8.dt.data-composition-system.core.ecore#//ParameterValues"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="DataCompositionAreaTemplateChartAppearance">
+    <eSuperTypes href="g5.1c.ru.v8.dt.data-composition-system.core.ecore#//ParameterValues"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="colorPaletteDescription" containment="true" resolveProxies="false">
+      <eType xsi:type="ecore:EClass" href="g5.1c.ru.v8.dt.chart.model.ecore#//ChartColorPaletteDescription"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="referenceBandsColorPaletteDescription" containment="true" resolveProxies="false">
+      <eType xsi:type="ecore:EClass" href="g5.1c.ru.v8.dt.chart.model.ecore#//ChartColorPaletteDescription"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="valuesReferenceLines" containment="true" resolveProxies="false">
+      <eType xsi:type="ecore:EClass" href="g5.1c.ru.v8.dt.chart.model.ecore#//ChartReferenceLines"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="pointsReferenceLines" containment="true" resolveProxies="false">
+      <eType xsi:type="ecore:EClass" href="g5.1c.ru.v8.dt.chart.model.ecore#//ChartReferenceLines"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="valuesReferenceBands" containment="true" resolveProxies="false">
+      <eType xsi:type="ecore:EClass" href="g5.1c.ru.v8.dt.chart.model.ecore#//ChartReferenceBands"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="pointsReferenceBands" containment="true" resolveProxies="false">
+      <eType xsi:type="ecore:EClass" href="g5.1c.ru.v8.dt.chart.model.ecore#//ChartReferenceBands"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="additionalValuesScale" containment="true" resolveProxies="false">
+      <eType xsi:type="ecore:EClass" href="g5.1c.ru.v8.dt.chart.model.ecore#//ChartScale"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="additionalValuesAxis" containment="true" resolveProxies="false">
+      <eType xsi:type="ecore:EClass" href="g5.1c.ru.v8.dt.chart.model.ecore#//ChartAxis"/>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="TemplateItem" abstract="true"/>
+  <eClassifiers xsi:type="ecore:EClass" name="DataCompositionAreaTemplateField" eSuperTypes="//TemplateItem">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="value" containment="true" resolveProxies="false">
+      <eType xsi:type="ecore:EClass" href="http://g5.1c.ru/v8/dt/mcore#//Value"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="appearance" eType="//DataCompositionAreaTemplateFieldAppearance" containment="true" resolveProxies="false"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="DataCompositionAreaTemplateFieldAppearance">
+    <eSuperTypes href="g5.1c.ru.v8.dt.data-composition-system.core.ecore#//ParameterValues"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="DataCompositionAreaTemplateChartGroupTemplate">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="value" containment="true" resolveProxies="false">
+      <eType xsi:type="ecore:EClass" href="http://g5.1c.ru/v8/dt/mcore#//Value"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="appearance" eType="//DataCompositionAreaTemplateChartGroupAppearance" containment="true" resolveProxies="false"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="presentation" containment="true" resolveProxies="false">
+      <eType xsi:type="ecore:EClass" href="http://g5.1c.ru/v8/dt/mcore#//Value"/>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="DataCompositionAreaTemplateChartResourceTemplate">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="resourceValue" upperBound="-1" containment="true" resolveProxies="false">
+      <eType xsi:type="ecore:EClass" href="http://g5.1c.ru/v8/dt/mcore#//Value"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="appearance" eType="//DataCompositionAreaTemplateChartResourceAppearance" containment="true" resolveProxies="false"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="DataCompositionAreaTemplateChartTemplate">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="appearance" eType="//DataCompositionAreaTemplateChartAppearance" containment="true" resolveProxies="false"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="AreaTemplateParameter" abstract="true">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="DataCompositionExpressionAreaParameter" eSuperTypes="//AreaTemplateParameter">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="expression" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="DataCompositionDetailsAreaParameter" eSuperTypes="//AreaTemplateParameter">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="fieldExpression" upperBound="-1" eType="//DataCompositionDetailsAreaParameterFieldExpression" containment="true" resolveProxies="false"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="mainAction" unique="false" defaultValueLiteral="None">
+      <eType xsi:type="ecore:EEnum" href="g5.1c.ru.v8.dt.data-composition-system.details.ecore#//DataCompositionDetailsProcessingAction"/>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="DataCompositionDetailsAreaParameterFieldExpression">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="field" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="expression" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ValueCollectionHeaderCell">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="name" containment="true" resolveProxies="false">
+      <eType xsi:type="ecore:EClass" href="http://g5.1c.ru/v8/dt/mcore#//Value"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="title" containment="true" resolveProxies="false">
+      <eType xsi:type="ecore:EClass" href="g5.1c.ru.v8.dt.data-composition-system.core.ecore#//Presentation"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="valueType" containment="true" resolveProxies="false">
+      <eType xsi:type="ecore:EClass" href="http://g5.1c.ru/v8/dt/mcore#//TypeDescription"/>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ValueCollectionCell">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="value" containment="true" resolveProxies="false">
+      <eType xsi:type="ecore:EClass" href="http://g5.1c.ru/v8/dt/mcore#//Value"/>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ValueCollectionTemplate">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="cell" upperBound="-1" eType="//ValueCollectionCell" containment="true" resolveProxies="false"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ValueCollectionHeaderTemplate">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="cell" upperBound="-1" eType="//ValueCollectionHeaderCell" containment="true" resolveProxies="false"/>
+  </eClassifiers>
+</ecore:EPackage>

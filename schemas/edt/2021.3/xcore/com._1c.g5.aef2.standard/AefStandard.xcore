@@ -1,0 +1,558 @@
+@GenModel(loadInitialization="false", literalsInterface="true", nonNLSMarkers="true", prefix="AefStandard",
+    copyrightText="Copyright (C) 2015, 1C", updateClasspath="false")
+@Ecore(nsPrefix="AefStandard", nsURI="http://g5.1c.ru/v8/aef/standard")
+package com._1c.g5.aef2.standard.viewModels
+
+import com._1c.g5.aef2.viewModels.IControlViewModel
+import com._1c.g5.aef2.viewModels.IContainerControlViewModel
+import com._1c.g5.aef2.viewModels.IViewModel
+import com._1c.g5.aef2.viewModels.IContainerViewModel
+import com._1c.g5.aef2.standard.providers.IAefTreeContentProvider
+import com._1c.g5.aef2.standard.providers.IAefTableContentProvider
+import org.eclipse.core.runtime.IStatus
+import com._1c.g5.aef2.viewModels.IDialogViewModel
+import com._1c.g5.aef2.viewModels.IAefLayoutData
+import com._1c.g5.aef2.viewModels.IAefLayout
+import java.util.Comparator
+
+type IAefTreeContentProvider<T> wraps IAefTreeContentProvider
+
+type IAefTableContentProvider<T> wraps IAefTableContentProvider
+
+type IStatus wraps IStatus
+
+type Comparator wraps Comparator<Object>
+
+/* AEF grid data. */
+class AefGridLayoutData extends IAefLayoutData
+{
+	int verticalAlignment = "2" // Center
+	int horizontalAlignment = "1" // Begining
+	int widthHint = "-1" // Default
+	int heightHint = "-1" // Default
+	int horizontalIndent = "0"
+	int verticalIndent = "0"
+	int horizontalSpan = "1"
+	int verticalSpan = "1"
+	boolean grabExcessHorizontalSpace = "false"
+	boolean grabExcessVerticalSpace = "false"
+	int minimumWidth = "0"
+	int minimumHeight = "0"
+	boolean exclude = "false"
+}
+
+/* AEF grid layout. */
+class AefGridLayout extends IAefLayout
+{
+	int numColumns = "1"
+	boolean makeColumnsEqualWidth = "false"
+	int marginWidth = "5"
+	int marginHeight = "5"
+	int marginLeft = "0"
+	int marginTop = "0"
+	int marginRight = "0"
+	int marginBottom = "0"
+	int horizontalSpacing = "5"
+	int verticalSpacing = "5"
+	/* Indicates to use specific optimized 2-column layout */
+	boolean useOptimizedLayout = "true"
+	/* First column width for optimized layout */
+	int optimizedLayoutWidth = "200"
+}
+
+/* Special AEF layout data. Contains no data. Indicates to use the control original layout data.*/
+class NoChangeLayoutData extends IAefLayoutData
+{
+}
+
+/* Special AEF layout. Contains no data. Indicates to use the control original layout.*/
+class NoChangeLayout extends IAefLayout
+{
+}
+
+/* Base class for control view models. */
+abstract class ControlViewModel extends IControlViewModel
+{
+	/* Control enable state. */
+	boolean enabled = "true"
+	/* Status of the model state */
+	IStatus status
+	/* Control contexts for key bindings etc. */
+	String[] contexts
+	/* The layout data */
+	refers IAefLayoutData layoutData
+	/* Control editable state. */
+	boolean editable = "true"
+	/* Apply control value change variant:
+	 * <ul>
+     * <li>{@link ApllyControlValueChange#ON_MODIFY} value will change on
+     * every modification,
+     * </li>
+     * <li>{@link ApllyControlValueChange#ON_FOCUS_LOST} only on focus lost
+     * or 'Return' key is pressed.
+     * </li>
+     * </ul>
+	 */
+	ValueChangeApply applyValueChange = "ON_MODIFY"
+	/* The status of the external validation */
+	contains ExternalValidationStatus externalValidationStatus
+}
+
+/* The dialog view model. */
+class DialogViewModel extends IDialogViewModel
+{
+	/* The title of the dialog. */
+	String title
+	/* The height of the dialog. */
+	int height
+	/* The width of the dialog. */
+	int width
+	/* The resizable flag. */
+	boolean resizable
+	/* The async dialog creation flag */
+    boolean asyncDialog
+	/* The 'ok' button enabled state. */
+	boolean okButtonEnabled = "true"
+	/* Currently active child view model. */
+	refers IViewModel activeChildViewModel
+}
+
+/* Base class for composite controls view models. */
+abstract class CompositeControlViewModel extends ControlViewModel, IContainerControlViewModel
+{
+}
+
+/* Container control view model.  */
+class ContainerViewModel extends IContainerViewModel
+{
+}
+
+/* Composite control view model. */
+class CompositeViewModel extends CompositeControlViewModel
+{
+	/* The layout for the composite */
+	refers IAefLayout layout
+	/* Indicates to use double buffer */
+	boolean doubleBuffered
+}
+
+class ScrolledCompositeViewModel extends CompositeViewModel
+{
+}
+
+class ScrolledCompositeContentViewModel extends CompositeViewModel
+{
+}
+
+/* Section control view model. */
+class SectionViewModel extends CompositeViewModel
+{
+	/* The collapsible flag. */
+	boolean collapsible
+	/* The title of the section. */
+	String title
+	/* The action items. */
+	contains SectionActionItemViewModel[] actionItems
+	/* The optional id of the toolbar to populate contributed actions with. */
+	String toolbarId
+	/* The initial expansion state of the section. It is used only if the section is 'collapsible' */
+	boolean initialExpansionState = "true"
+}
+
+/** Section item view model. */
+class SectionActionItemViewModel extends ItemViewModel
+{
+	/* Tooltip text. */
+	String tooltip
+	/* Enabled state. */
+	boolean enabled = "true"
+}
+
+/* Field control view model. */
+class FieldViewModel extends ContainerViewModel
+{
+}
+
+/* Label control view model. */
+class LabelViewModel extends ControlViewModel
+{
+	/* Label text. */
+	String text
+}
+
+/* Button control view model. */
+class ButtonViewModel extends ControlViewModel
+{
+	/* Button text. */
+	String text
+}
+
+/* Image button control view model. */
+class ImageButtonViewModel extends ButtonViewModel
+{
+	/* Button image. */
+	Object image
+}
+
+/* Text control view model. */
+class TextViewModel extends ControlViewModel
+{
+	/* Control text. */
+	String text
+}
+
+/*
+ * The basic item for view. Represents one element in views like
+ * lists, combos etc.
+ */
+class ItemViewModel extends IViewModel
+{
+	/* Item text */
+	String text
+	/* Item image */
+	Object icon
+}
+
+/* Combo control view model. */
+class ComboViewModel extends ControlViewModel
+{
+	/* Combo items. */
+	contains ComboItemViewModel[] items
+	/* Selected combo item or {@code null} if nothing is selected. */
+	refers ComboItemViewModel selectedItem
+	/* If {@code true}, the text representing the selected item may be edited
+	 * for quick search in the combo list */
+	boolean quickSearchAllowed
+	/* The text used for quick search. Used when {@link quickSearchAllowed} is {@code true} */
+	String quickSearchText
+}
+
+/* Combo item view model. */
+class ComboItemViewModel extends ItemViewModel
+{
+}
+
+/* Combo control view model. */
+class ComboLabelViewModel extends LabelViewModel
+{
+    /* Combo items. */
+    contains ComboItemViewModel[] items
+    /* Selected combo item or {@code null} if nothing is selected. */
+    refers ComboItemViewModel selectedItem
+}
+
+/* Checkable label control view model. */
+class CheckableLabelViewModel extends LabelViewModel
+{
+	/* Check state. */
+	boolean checked
+}
+
+
+/* Checkbox control view model. */
+class CheckboxViewModel extends ControlViewModel
+{
+	/* Check state. */
+	boolean checked
+	/* The text of the checkbox. Set the value if the text at the right
+	 * is needed. */
+	String text
+}
+
+/* Abstract spinner control view model*/
+abstract class AbstractSpinnerViewModel extends ControlViewModel
+{
+	/* Minimum value */
+	int min
+	/* Maximum value */
+	int max
+}
+
+/* Spinner control view model*/
+class SpinnerViewModel extends AbstractSpinnerViewModel
+{
+	/* Value */
+	int value
+}
+
+/* Abstract spinner control view model for long */
+abstract class AbstractLongSpinnerViewModel extends ControlViewModel
+{
+	/* Minimum value */
+	long min
+	/* Maximum value */
+	long max
+}
+
+/* Spinner control view model for long */
+class LongSpinnerViewModel extends AbstractLongSpinnerViewModel
+{
+	/* Value */
+	long value
+}
+
+/* Spinner control view model for big decimal */
+class BigDecimalSpinnerViewModel extends ControlViewModel
+{
+	/* Minimum value */
+	BigDecimal min
+	/* Maximum value */
+	BigDecimal max
+	/* Value */
+	BigDecimal value
+}
+
+/* Abstract spinner control view model for double */
+abstract class AbstractDoubleSpinnerViewModel extends ControlViewModel
+{
+	/* Minimum value */
+	double min
+	/* Maximum value */
+	double max
+}
+
+/* Spinner control view model for double */
+class DoubleSpinnerViewModel extends AbstractDoubleSpinnerViewModel
+{
+	/* Value */
+	double value
+}
+
+/* Radio group control view model. */
+class RadioGroupViewModel extends ControlViewModel
+{
+	/* The radio group text */
+	String text
+	/* Radio items. */
+	contains RadioGroupItemViewModel[] items
+	/* Selected radio item or {@code null} if nothing is selected. */
+	refers RadioGroupItemViewModel selectedItem
+}
+
+/* Radio item view model. */
+class RadioGroupItemViewModel extends ItemViewModel
+{
+	/* The item enablement state */
+	boolean enabled = "true"
+}
+
+/* The separator view model. */
+class SeparatorViewModel extends ControlViewModel
+{
+	/* If {@code true} the separator is horizontal. Otherwise - it is vertical. */
+	boolean horizontal = "true"
+}
+
+/* Check state for items.
+ *  @see TreeItemViewModel
+ */
+enum CheckState
+{
+	/* The item is checked. */
+	CHECKED
+	/* The item is unchecked. */
+	UNCHECKED
+	/* The item is in grayed state. */
+	GRAYED
+	/* The item is not available for checking. */
+	NO_CHECK
+}
+
+/* The checked item view model. */
+class CheckedItemViewModel extends ItemViewModel
+{
+	/* Check state of the item. */
+	CheckState checkState
+	/* Indicates whether view item is editable (inline editing in cells) */
+	boolean editable = "true"
+	/* Indicates whether view item is bold */
+	boolean bold
+}
+
+/* The tree item view model. */
+class TreeItemViewModel extends CheckedItemViewModel
+{
+}
+
+/*
+ * The contract for tree input.
+ */
+interface ITreeInput
+{
+}
+
+/* The abstract view model for trees and tables. */
+abstract class StructuredViewModel extends ControlViewModel
+{
+	/* Indicates to display or not the search box. */
+	boolean searchBoxVisible = "true"
+	/* The id for saving search history. */
+	String searchHistoryId = "com._1c.g5.aef2.standard.SearchHistoryStateNode"
+	/* The image key prefix for caching images. */
+	String imageKeyPrefix = "default"
+	/* Indicates whether images should be shown in the default column */
+	boolean showImages = "true"
+	/* Indicates whether checkboxes should be shown in the default column */
+	boolean showCheckboxes = "true"
+	/* Multiselection. */
+	boolean multi
+	/* Empty choice allowed */
+	boolean emptyChoiceAllowed
+	/* The header title. */
+	String header
+	/* Show lines in view. */
+	boolean showLines
+	/* Show checked items with bold font. */
+	boolean bold
+	/* Show context menu in view. */
+	boolean showContextMenu
+	/* Comparator for view elements. */
+	Comparator comparator
+}
+
+/* The view model for trees. */
+class TreeViewModel extends StructuredViewModel 
+{
+	/* Tree input. */
+	contains ITreeInput input
+	/* Selected item. */
+	refers TreeItemViewModel selectedItem
+	/* Expand level. */
+	int expandLevel = "1"
+	/* Multiselection in subtree */
+	boolean subtreeMulti
+}
+
+/* The static item for static tree input. */
+class StaticTreeItemViewModel extends TreeItemViewModel
+{
+	/* Children of the item. */
+	contains StaticTreeItemViewModel[] children
+}
+
+/* The static tree input.  */
+class StaticTreeInput extends ITreeInput
+{
+	/* Root items. */
+	contains StaticTreeItemViewModel[] roots
+}
+
+/* The dynamic input with the content provider. */
+class DynamicTreeInput<T extends TreeItemViewModel> extends ITreeInput
+{
+	/* The content provider */
+	IAefTreeContentProvider<T> contentProvider
+}
+
+/* Link control view model. */
+class LinkViewModel extends ControlViewModel
+{
+	/* Link text. */
+	String text
+	/* Is link text underlined. */
+	boolean underlined
+}
+
+/* The table item view model. */
+class TableItemViewModel extends CheckedItemViewModel
+{
+}
+
+/*
+ * The contract for table input.
+ */
+interface ITableInput
+{
+}
+
+/* The view model for table. */
+class TableViewModel extends StructuredViewModel
+{
+	/* Table input. */
+	contains ITableInput input
+}
+
+class StaticTableItemViewModel extends TableItemViewModel
+{
+}
+
+/* The static table input.  */
+class StaticTableInput extends ITableInput
+{
+	/* Items. */
+	contains StaticTableItemViewModel[] items
+}
+
+/* The dynamic input with the content provider. */
+class DynamicTableInput<T extends TableItemViewModel> extends ITableInput
+{
+	/* The content provider */
+	IAefTableContentProvider<T> contentProvider
+}
+
+/* .
+ *  Apply control value change variants.
+ */
+enum ValueChangeApply
+{
+	/* Apply change when control value is modified */
+	ON_MODIFY
+	/* Apply change when control focus is lost */
+	ON_FOCUS_LOST
+}
+
+/*
+ * The status severity of the external validation  
+ */
+enum ExternalValidationStatusSeverity
+{
+	NONE = 0
+	TRIVIAL = 1
+	MINOR = 2
+	MAJOR = 3
+	BLOCKER = 4
+	CRITICAL = 5
+	ERROR = 6
+}
+
+/*
+ * The external validation status entry
+ */
+class ExternalValidationStatusEntry
+{
+	/* The status severity */
+	ExternalValidationStatusSeverity severity
+	/* The status message */
+	String message
+}
+
+/*
+ * The external validation status
+ */
+class ExternalValidationStatus
+{
+	/* The status entries */
+	contains ExternalValidationStatusEntry[] entries
+	/* The accumulated status severity */
+	derived ExternalValidationStatusSeverity severity get 
+	{
+		var max = ExternalValidationStatusSeverity.NONE
+		for (ExternalValidationStatusEntry entry : entries) 
+		{
+			if (entry.severity.ordinal > max.ordinal) 
+			{
+				max = entry.severity
+			}
+		}
+		return max
+	}
+	/* The accumulated status message */
+	derived String message get 
+	{
+		if (entries.empty || severity == ExternalValidationStatusSeverity.NONE) 
+		{
+			return ""
+		}
+		return String.join("\n", entries.map[message])
+	}
+}

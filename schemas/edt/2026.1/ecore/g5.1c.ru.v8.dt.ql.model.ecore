@@ -1,0 +1,482 @@
+<?xml version="1.0" encoding="ASCII"?>
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="model" nsURI="http://g5.1c.ru/v8/dt/ql/model" nsPrefix="ql">
+  <eClassifiers xsi:type="ecore:EClass" name="QuerySchema">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="queries" upperBound="-1" eType="//AbstractQuerySchemaQuery" containment="true" resolveProxies="false"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="AbstractQuerySchemaDbView" abstract="true"/>
+  <eClassifiers xsi:type="ecore:EClass" name="DbViewFromQuery">
+    <eSuperTypes href="g5.1c.ru.v8.dt.metadata.dbview.ecore#//DbViewDef"/>
+    <eSuperTypes href="#//AbstractQuerySchemaDbView"/>
+    <eOperations name="getActualFields" unique="false" upperBound="-1">
+      <eType xsi:type="ecore:EClass" href="g5.1c.ru.v8.dt.metadata.dbview.ecore#//DbViewFieldDef"/>
+    </eOperations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="originalDbView" transient="true">
+      <eType xsi:type="ecore:EClass" href="g5.1c.ru.v8.dt.metadata.dbview.ecore#//DbViewDef"/>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="DbViewNestedTableFromQuery">
+    <eSuperTypes href="g5.1c.ru.v8.dt.metadata.dbview.ecore#//DbViewFieldFieldDef"/>
+    <eSuperTypes href="#//DbViewFromQuery"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="DbViewOuterParamTable" eSuperTypes="//DbViewDescriptionTempTable"/>
+  <eClassifiers xsi:type="ecore:EClass" name="DbViewDescriptionTempTable">
+    <eSuperTypes href="g5.1c.ru.v8.dt.metadata.dbview.ecore#//DbViewDef"/>
+    <eSuperTypes href="#//AbstractQuerySchemaDbView"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="DbViewFieldFieldDefFromQuery">
+    <eSuperTypes href="g5.1c.ru.v8.dt.metadata.dbview.ecore#//DbViewFieldFieldDef"/>
+    <eSuperTypes href="#//AbstractQuerySchemaDbView"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="UnresolvedDbView">
+    <eSuperTypes href="g5.1c.ru.v8.dt.metadata.dbview.ecore#//DbViewDef"/>
+    <eSuperTypes href="#//AbstractQuerySchemaDbView"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="AbstractQuerySchemaQuery" abstract="true"/>
+  <eClassifiers xsi:type="ecore:EClass" name="AbstractQuerySchemaTable" abstract="true">
+    <eOperations name="getFullTableName" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eOperations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="tableName" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="tableDbView" transient="true">
+      <eType xsi:type="ecore:EClass" href="g5.1c.ru.v8.dt.metadata.dbview.ecore#//DbViewElement"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="computeDbView">
+      <eType xsi:type="ecore:EClass" href="g5.1c.ru.v8.dt.metadata.dbview.ecore#//DbViewElement"/>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="SinglePartQuerySchemaTable" eSuperTypes="//AbstractQuerySchemaTable">
+    <eOperations name="getFullTableName" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eOperations>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="MultiPartQuerySchemaTable" eSuperTypes="//AbstractQuerySchemaTable">
+    <eOperations name="getFullTableName" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eOperations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="parentTable" eType="//AbstractQuerySchemaTable" containment="true" resolveProxies="false"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="AbstractQuerySchemaPresentation" abstract="true">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="presentation" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="QuerySchemaDropTableQuery" eSuperTypes="//AbstractQuerySchemaQuery">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="table" eType="//AbstractQuerySchemaTable" containment="true" resolveProxies="false"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="QuerySchemaSelectQuery" eSuperTypes="//AbstractQuerySchemaQuery">
+    <eOperations name="getPlacementTable" unique="false" eType="//AbstractQuerySchemaTable"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="dbViewByThis" eType="//DbViewFromQuery" transient="true" containment="true" resolveProxies="false"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="autoOrder" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="commonTotals" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="orderExpressions" upperBound="-1" eType="//QuerySchemaOrderExpression" containment="true" resolveProxies="false"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="operators" upperBound="-1" eType="//QuerySchemaOperator" containment="true" resolveProxies="false"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="indexSets" upperBound="-1" eType="//QuerySchemaIndexSets" containment="true" resolveProxies="false"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="totalExpressions" upperBound="-1" eType="//QuerySchemaExpression" containment="true" resolveProxies="false"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="totalControlPoints" upperBound="-1" eType="//QuerySchemaTotalControlPoint" containment="true" resolveProxies="false"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="QuerySchemaIndexSets">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="indexes" upperBound="-1" eType="//QuerySchemaExpression" containment="true" resolveProxies="false"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="unique" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="QuerySchemaOrderExpression">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="desc" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="hierarchy" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="item" eType="//QuerySchemaExpression" containment="true" resolveProxies="false"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="direction" unique="false" eType="//QuerySchemaOrderDirection" changeable="false" volatile="true" transient="true" derived="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="QuerySchemaOperator">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="dbViewByFrom" upperBound="-1" transient="true" containment="true" resolveProxies="false">
+      <eType xsi:type="ecore:EClass" href="g5.1c.ru.v8.dt.metadata.dbview.ecore#//DbViewDef"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="dbViewByFields" upperBound="-1" transient="true" containment="true" resolveProxies="false">
+      <eType xsi:type="ecore:EClass" href="g5.1c.ru.v8.dt.metadata.dbview.ecore#//DbViewDef"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="descriptionTempTable" upperBound="-1" eType="//DbViewDescriptionTempTable" transient="true" containment="true" resolveProxies="false"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="flagUnionType" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="flagUnionTypeAll" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="unionType" unique="false" eType="//QuerySchemaUnionType" changeable="false" volatile="true" transient="true" derived="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="placementTable" eType="//AbstractQuerySchemaTable" containment="true" resolveProxies="false"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="addTempTable" eType="//AbstractQuerySchemaTable" containment="true" resolveProxies="false"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="grouping" upperBound="-1" eType="//QuerySchemaExpression" containment="true" resolveProxies="false"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="groupingSets" upperBound="-1" eType="//QuerySchemaGroupingSets" containment="true" resolveProxies="false"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="getRecordsCount" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="selectDistinct" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="selectForUpdate" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="selectAllowed" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="filters" eType="//QuerySchemaExpression" containment="true" resolveProxies="false"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="havingExpression" eType="//QuerySchemaExpression" containment="true" resolveProxies="false"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="tablesForUpdate" upperBound="-1" eType="//QuerySchemaTableForUpdate" containment="true" resolveProxies="false"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="sources" upperBound="-1" eType="//QuerySchemaSource" containment="true" resolveProxies="false"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="selectFields" upperBound="-1" eType="//QuerySchemaExpression" containment="true" resolveProxies="false"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="QuerySchemaGroupingSets">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="grouping" upperBound="-1" eType="//QuerySchemaExpression" containment="true" resolveProxies="false"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="QuerySchemaTableForUpdate">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="table" eType="//AbstractQuerySchemaTable" containment="true" resolveProxies="false"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="QuerySchemaExpression">
+    <eOperations name="getType" unique="false">
+      <eType xsi:type="ecore:EClass" href="g5.1c.ru.v8.dt.mcore.ecore#//TypeDescription"/>
+      <eParameters name="checker" unique="false" eType="//CheckerExpression"/>
+    </eOperations>
+    <eOperations name="isAggregateFunction" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    </eOperations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="computeAlias" unique="false" transient="true">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="alias" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="expression" eType="//AbstractExpression" containment="true" resolveProxies="false"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="QuerySchemaSource">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="source" eType="//AbstractQuerySchemaSource" containment="true" resolveProxies="false"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="joins" upperBound="-1" eType="//AbstractQuerySchemaQuerySourceJoin" containment="true" resolveProxies="false"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="AbstractQuerySchemaSource" abstract="true">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="computeAlias" unique="false" transient="true">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="alias" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="AbstractQuerySchemaQuerySourceJoin" abstract="true"/>
+  <eClassifiers xsi:type="ecore:EClass" name="QuerySchemaQuerySourceJoin" eSuperTypes="//AbstractQuerySchemaQuerySourceJoin">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="joinType" unique="false" eType="//QuerySchemaJoinType"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="condition" eType="//QuerySchemaExpression" containment="true" resolveProxies="false"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="source" eType="//QuerySchemaSource" containment="true" resolveProxies="false"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="QuerySchemaNestedQuery" eSuperTypes="//AbstractQuerySchemaSource">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="query" eType="//QuerySchemaSelectQuery" containment="true" resolveProxies="false"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="QuerySchemaTable" eSuperTypes="//AbstractQuerySchemaSource">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="table" eType="//AbstractQuerySchemaTable" containment="true" resolveProxies="false"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="parameters" upperBound="-1" eType="//QuerySchemaTableParameter" containment="true" resolveProxies="false"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="QuerySchemaTableParameter">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="expression" eType="//QuerySchemaExpression" containment="true" resolveProxies="false"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="expressionDcs" upperBound="-1" eType="//QuerySchemaExpression" containment="true" resolveProxies="false"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="QuerySchemaTempTableDescription" eSuperTypes="//AbstractQuerySchemaSource">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="table" eType="//ParameterExpression" containment="true" resolveProxies="false"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="QuerySchemaTotalControlPoint">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="only" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="hierarchy" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="periods" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="expression" eType="//QuerySchemaExpression" containment="true" resolveProxies="false"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="controlPointType" unique="false" eType="//QuerySchemaControlPointType" changeable="false" volatile="true" transient="true" derived="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="computeColumnName" unique="false" transient="true">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="columnName" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="periodAdditionType" unique="false" eType="//QuerySchemaPeriodAdditionType"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="periodAdditionBegin" eType="//QuerySchemaExpression" containment="true" resolveProxies="false"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="periodAdditionEnd" eType="//QuerySchemaExpression" containment="true" resolveProxies="false"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="AbstractExpression" abstract="true"/>
+  <eClassifiers xsi:type="ecore:EClass" name="ALiteralsExpression" abstract="true" eSuperTypes="//AbstractExpression"/>
+  <eClassifiers xsi:type="ecore:EClass" name="AOperatorsExpression" abstract="true" eSuperTypes="//AbstractExpression"/>
+  <eClassifiers xsi:type="ecore:EClass" name="AUnaryOperatorsExpression" abstract="true" eSuperTypes="//AOperatorsExpression">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="expression" eType="//AbstractExpression" containment="true" resolveProxies="false"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ABinaryOperatorsExpression" abstract="true" eSuperTypes="//AOperatorsExpression">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="left" eType="//AbstractExpression" containment="true" resolveProxies="false"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="right" eType="//AbstractExpression" containment="true" resolveProxies="false"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="FunctionInvocationExpression" eSuperTypes="//AbstractExpression">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="functionType" eType="//FunctionExpression"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="params" upperBound="-1" eType="//AbstractExpression" containment="true" resolveProxies="false"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="distinct" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="FunctionExpression">
+    <eSuperTypes href="#//AbstractExpression"/>
+    <eSuperTypes href="g5.1c.ru.v8.dt.mcore.ecore#//DuallyNamedElement"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="distinct" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="aggregate" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="minNumParams" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="maxNumParams" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="allowedPeriodType" unique="false" upperBound="-1">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="returnType">
+      <eType xsi:type="ecore:EClass" href="g5.1c.ru.v8.dt.mcore.ecore#//TypeDescription"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="paramTypes" upperBound="-1">
+      <eType xsi:type="ecore:EClass" href="g5.1c.ru.v8.dt.mcore.ecore#//TypeDescription"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="additionalParam" unique="false" eType="//AdditionalExpressionChecker"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="DerivedFunctionExpression" eSuperTypes="//FunctionExpression">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="source">
+      <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/emf/2002/Ecore#//EObject"/>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="BooleanLiteralExpression" eSuperTypes="//ALiteralsExpression">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="true" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="NumberLiteralExpression" eSuperTypes="//ALiteralsExpression">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="intPart" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="fractionPart" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="StringLiteralExpression" eSuperTypes="//ALiteralsExpression">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="content" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="DateLiteralExpression" eSuperTypes="//ALiteralsExpression">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="year" eType="//AbstractExpression" containment="true" resolveProxies="false"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="month" eType="//AbstractExpression" containment="true" resolveProxies="false"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="day" eType="//AbstractExpression" containment="true" resolveProxies="false"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="hour" eType="//AbstractExpression" containment="true" resolveProxies="false"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="minute" eType="//AbstractExpression" containment="true" resolveProxies="false"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="second" eType="//AbstractExpression" containment="true" resolveProxies="false"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="TypeLiteralExpression" eSuperTypes="//ALiteralsExpression">
+    <eOperations name="getType" unique="false">
+      <eType xsi:type="ecore:EClass" href="g5.1c.ru.v8.dt.mcore.ecore#//Type"/>
+    </eOperations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="table" eType="//AbstractQuerySchemaTable" containment="true" resolveProxies="false"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ParameterExpression" eSuperTypes="//ALiteralsExpression">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="UndefinedLiteralExpression" eSuperTypes="//ALiteralsExpression"/>
+  <eClassifiers xsi:type="ecore:EClass" name="NullLiteralExpression" eSuperTypes="//ALiteralsExpression"/>
+  <eClassifiers xsi:type="ecore:EClass" name="ValueLiteralExpression" eSuperTypes="//ALiteralsExpression">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="values" eType="//ACommonExpression" containment="true" resolveProxies="false"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ALogicalUnaryOperatorExpression" abstract="true" eSuperTypes="//AUnaryOperatorsExpression"/>
+  <eClassifiers xsi:type="ecore:EClass" name="ALogicalBinaryOperatorExpression" abstract="true" eSuperTypes="//ABinaryOperatorsExpression"/>
+  <eClassifiers xsi:type="ecore:EClass" name="LogicalANDOperatorExpression" eSuperTypes="//ALogicalBinaryOperatorExpression"/>
+  <eClassifiers xsi:type="ecore:EClass" name="LogicalOROperatorExpression" eSuperTypes="//ALogicalBinaryOperatorExpression"/>
+  <eClassifiers xsi:type="ecore:EClass" name="LogicalNOTOperatorExpression" eSuperTypes="//ALogicalUnaryOperatorExpression"/>
+  <eClassifiers xsi:type="ecore:EClass" name="LogicalCompareOperatorExpression" eSuperTypes="//ALogicalBinaryOperatorExpression">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="compareType" unique="false" eType="//LogicalCompareType"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="IsNullOperatorExpression" eSuperTypes="//ALogicalUnaryOperatorExpression">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="isNot" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="VerbalOperatorExpression" eSuperTypes="//ALogicalBinaryOperatorExpression">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="type" unique="false" eType="//VerbalOperatorType"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="not" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="LikeExpression" eSuperTypes="//AbstractExpression">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="literal" eType="//AbstractExpression" containment="true" resolveProxies="false"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="escape" eType="//AbstractExpression" containment="true" resolveProxies="false"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="InExpression" eSuperTypes="//AbstractExpression">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="hierarchy" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="expression" upperBound="-1" eType="//AbstractExpression" containment="true" resolveProxies="false"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="query" eType="//QuerySchemaNestedQuery" containment="true" resolveProxies="false"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="BetweenExpression" eSuperTypes="//AbstractExpression">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="firstExpression" eType="//AbstractExpression" containment="true" resolveProxies="false"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="secondExpression" eType="//AbstractExpression" containment="true" resolveProxies="false"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="LinkExpression" eSuperTypes="//AbstractExpression">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="table" eType="//AbstractQuerySchemaTable" containment="true" resolveProxies="false"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="CaseOperationExpression" eSuperTypes="//AOperatorsExpression">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="body" upperBound="-1" eType="//CaseBody" containment="true" resolveProxies="false"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="expression" eType="//AbstractExpression" containment="true" resolveProxies="false"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="elseExpression" eType="//AbstractExpression" containment="true" resolveProxies="false"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="CaseBody" eSuperTypes="//AbstractExpression">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="when" eType="//AbstractExpression" containment="true" resolveProxies="false"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="then" eType="//AbstractExpression" containment="true" resolveProxies="false"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="CastOperationExpression" eSuperTypes="//AOperatorsExpression">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="expression" eType="//AbstractExpression" containment="true" resolveProxies="false"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="typeCast" eType="//ACastingType" containment="true" resolveProxies="false"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ACastingType" abstract="true"/>
+  <eClassifiers xsi:type="ecore:EClass" name="CastingBooleanType" eSuperTypes="//ACastingType"/>
+  <eClassifiers xsi:type="ecore:EClass" name="CastingNumberType" eSuperTypes="//ACastingType">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="length" eType="//AbstractExpression" containment="true" resolveProxies="false"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="precision" eType="//AbstractExpression" containment="true" resolveProxies="false"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="CastingStringType" eSuperTypes="//ACastingType">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="length" eType="//AbstractExpression" containment="true" resolveProxies="false"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="CastingDateType" eSuperTypes="//ACastingType"/>
+  <eClassifiers xsi:type="ecore:EClass" name="CastingTableType" eSuperTypes="//ACastingType">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="table" eType="//AbstractQuerySchemaTable" containment="true" resolveProxies="false"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ACommonUnaryOperatorExpression" abstract="true" eSuperTypes="//AUnaryOperatorsExpression"/>
+  <eClassifiers xsi:type="ecore:EClass" name="ACommonBinaryOperatorExpression" abstract="true" eSuperTypes="//ABinaryOperatorsExpression"/>
+  <eClassifiers xsi:type="ecore:EClass" name="CommonUnaryNegOperatorExpression" eSuperTypes="//ACommonUnaryOperatorExpression">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="negative" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="CommonAddOperatorExpression" eSuperTypes="//ACommonBinaryOperatorExpression"/>
+  <eClassifiers xsi:type="ecore:EClass" name="CommonSubOperatorExpression" eSuperTypes="//ACommonBinaryOperatorExpression"/>
+  <eClassifiers xsi:type="ecore:EClass" name="CommonMultiOperatorExpression" eSuperTypes="//ACommonBinaryOperatorExpression"/>
+  <eClassifiers xsi:type="ecore:EClass" name="CommonDevOperatorExpression" eSuperTypes="//ACommonBinaryOperatorExpression"/>
+  <eClassifiers xsi:type="ecore:EClass" name="ACommonExpression" abstract="true" eSuperTypes="//AbstractExpression"/>
+  <eClassifiers xsi:type="ecore:EClass" name="CommonExpression" abstract="true" eSuperTypes="//ACommonExpression">
+    <eOperations name="getFullContent" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eOperations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="content" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="itemDbView" transient="true">
+      <eType xsi:type="ecore:EClass" href="g5.1c.ru.v8.dt.metadata.dbview.ecore#//DbViewElement"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="computeDbView">
+      <eType xsi:type="ecore:EClass" href="g5.1c.ru.v8.dt.metadata.dbview.ecore#//DbViewElement"/>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="SinglePartCommonExpression" eSuperTypes="//CommonExpression">
+    <eOperations name="getFullContent" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eOperations>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="MultiPartCommonExpression" eSuperTypes="//CommonExpression">
+    <eOperations name="getFullContent" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eOperations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="sourceTable" eType="//CommonExpression" containment="true" resolveProxies="false"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="NestedTableExpression" eSuperTypes="//ACommonExpression">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="table" eType="//CommonExpression" containment="true" resolveProxies="false"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="fieldsName" upperBound="-1" eType="//QuerySchemaExpression" containment="true" resolveProxies="false"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="NestedTableAllFieldsExpression" eSuperTypes="//ACommonExpression">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="table" eType="//CommonExpression" containment="true" resolveProxies="false"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="FieldWithCasting" eSuperTypes="//AbstractExpression">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="table" eType="//ACommonExpression" containment="true" resolveProxies="false"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="castOperation" eType="//CastOperationExpression" containment="true" resolveProxies="false"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="allFields" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="itemDbView" transient="true">
+      <eType xsi:type="ecore:EClass" href="g5.1c.ru.v8.dt.metadata.dbview.ecore#//DbViewElement"/>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="StarExpression" eSuperTypes="//AbstractExpression"/>
+  <eClassifiers xsi:type="ecore:EClass" name="EmptyExpression" eSuperTypes="//AbstractExpression"/>
+  <eClassifiers xsi:type="ecore:EClass" name="CompoundExpression" eSuperTypes="//AbstractExpression">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="head" eType="//AbstractExpression" containment="true" resolveProxies="false"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="tail" upperBound="-1" eType="//AbstractExpression" containment="true" resolveProxies="false"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="BracketCommonExpression" eSuperTypes="//AbstractExpression">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="bracketPart" eType="//AbstractExpression" containment="true" resolveProxies="false"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="commonExpression" eType="//ACommonExpression" containment="true" resolveProxies="false"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="allFields" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="QuerySchemaOrderDirection">
+    <eLiterals name="Ascending"/>
+    <eLiterals name="HierarchyAscending"/>
+    <eLiterals name="Descending"/>
+    <eLiterals name="HierarchyDescending"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="QuerySchemaUnionType">
+    <eLiterals name="Union"/>
+    <eLiterals name="UnionAll"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="QuerySchemaJoinType">
+    <eLiterals name="Inner"/>
+    <eLiterals name="LeftOuter"/>
+    <eLiterals name="FullOuter"/>
+    <eLiterals name="RightOuter"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="QuerySchemaControlPointType">
+    <eLiterals name="Items"/>
+    <eLiterals name="Hierarchy"/>
+    <eLiterals name="HierarchyOnly"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="QuerySchemaPeriodAdditionType">
+    <eLiterals name="WithoutAdditions"/>
+    <eLiterals name="Year"/>
+    <eLiterals name="TenDays"/>
+    <eLiterals name="Day"/>
+    <eLiterals name="Quarter"/>
+    <eLiterals name="Month"/>
+    <eLiterals name="Minute"/>
+    <eLiterals name="Week"/>
+    <eLiterals name="HalfYear"/>
+    <eLiterals name="Second"/>
+    <eLiterals name="Hour"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="LogicalCompareType">
+    <eLiterals name="Less"/>
+    <eLiterals name="Equal"/>
+    <eLiterals name="More"/>
+    <eLiterals name="LessEqual"/>
+    <eLiterals name="MoreEqual"/>
+    <eLiterals name="NotEqual"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="VerbalOperatorType">
+    <eLiterals name="Like"/>
+    <eLiterals name="In"/>
+    <eLiterals name="Between"/>
+    <eLiterals name="Refs"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EDataType" name="CheckerExpression" instanceClassName="com._1c.g5.v8.dt.ql.typesystem.IExpressionTypeChecker"/>
+  <eClassifiers xsi:type="ecore:EDataType" name="AdditionalExpressionChecker" instanceClassName="com._1c.g5.v8.dt.ql.typesystem.IAdditionalExpressionChecker"/>
+</ecore:EPackage>

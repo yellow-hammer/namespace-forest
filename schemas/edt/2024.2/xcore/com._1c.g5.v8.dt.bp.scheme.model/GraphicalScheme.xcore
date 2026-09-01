@@ -1,0 +1,335 @@
+@GenModel(loadInitialization="false", literalsInterface="true",  nonNLSMarkers="true", copyrightText="Copyright (C) 2017, 1C LLC", 
+    updateClasspath="false", featureDelegation="Reflective", rootExtendsClass="com._1c.g5.v8.bm.core.BmObject")
+@Ecore(nsPrefix="sch", nsURI="http://g5.1c.ru/v8/dt/graphicalscheme")
+package com._1c.g5.v8.dt.bp.scheme.model 
+
+import java.util.UUID
+import com._1c.g5.v8.dt.metadata.mdclass.AbstractFlowchart
+import com._1c.g5.v8.dt.mcore.Color
+import com._1c.g5.v8.dt.mcore.Font
+import com._1c.g5.v8.dt.metadata.common.HorizontalAlign
+import com._1c.g5.v8.dt.metadata.common.VerticalAlign
+import com._1c.g5.v8.dt.mcore.Picture
+import com._1c.g5.v8.dt.mcore.AbstractLine
+import com._1c.g5.v8.dt.mcore.LocalStringMapEntry
+import com._1c.g5.v8.dt.mcore.Event
+import com._1c.g5.v8.dt.mcore.PictureDef
+import com._1c.g5.v8.dt.metadata.mdclass.BusinessProcess
+import com._1c.g5.v8.dt.metadata.mdclass.AddressingAttribute
+import com._1c.g5.v8.dt.mcore.Value
+
+class GraphicalScheme extends AbstractFlowchart
+{
+	contains Color backColor
+	boolean gridEnabled = "true"
+	GraphicalSchemeGridDrawMode drawGridMode = "Lines"
+	int gridHorizontalStep = "20"
+	int gridVerticalStep = "20"
+	contains PrintPropItem[] printPropItems
+	contains GraphicalSchemeItem[] items
+	UUID bpUUID = ""             // uses in form attribute ext info
+	UseOutput useOutput = "Auto" // uses in form attribute ext info
+}
+
+class GraphicalSchemeItem
+{
+	GraphicalSchemeItemType itemType
+	int ^id
+	String name
+	contains LocalStringMapEntry[] title
+	contains LocalStringMapEntry[] toolTip
+	int tabOrder
+	contains Color backColor
+	contains Color textColor
+	contains Color lineColor
+	int groupNumber
+	int zOrder
+	boolean hyperlink = "false"
+	boolean transparent = "false"
+	contains Font font
+	HorizontalAlign horizontalAlign = "Center"
+	VerticalAlign verticalAlign = "Center"
+	GraphicalSchemePictureLocation pictureLocation = "Left" //Used only in Figure, exporst in connector line too
+	contains GraphicalSchemeLine line
+	UUID pointUUID = ""                                     // uses in form attribute ext info
+	int passageState										// uses in form attribute ext info
+	contains EventHandler[] eventHandlers
+	int tableCode											// uses in form attribute ext info
+	//bpPointValue 											// don't know where using this && no type (<xs:element name="bpPointValue" minOccurs="0" maxOccurs="1" />)
+	String currentLanguage								    // uses in form attribute ext info
+}
+
+class GraphicalSchemeFigure extends GraphicalSchemeItem
+{
+	contains Bounds bounds
+	contains Picture picture
+	GraphicalSchemePictureStyle pictureSize = "AutoSize"
+}
+
+class GraphicalSchemeDecoration extends GraphicalSchemeFigure
+{
+	GraphicalSchemeShapes shape = "Block"
+	int flipMode								
+	int angle
+}
+
+class GraphicalSchemeSwitch extends GraphicalSchemeFigure
+{
+	contains Case[] cases
+}
+
+class GraphicalSchemeSubProcess extends GraphicalSchemeFigure
+{
+	UUID subprocessUUID = "00000000-0000-0000-0000-000000000000" // uses in form attribute ext info
+	String taskDescription
+	refers BusinessProcess subprocess
+}
+
+class GraphicalSchemeActivity extends GraphicalSchemeFigure
+{
+	String taskDescription
+	boolean addressingZoneDivideValid
+	int addressingZondeDivideYPosition
+	String explanation
+	boolean group
+	contains SchemeItemAddressingAttribute[] addressingAttributes
+}
+
+class GraphicalSchemeCondition extends GraphicalSchemeFigure
+{
+	int truePortIndex
+	int falsePortIndex
+}
+
+class GraphicalSchemeConnection extends GraphicalSchemeItem
+{
+	contains Point[] points
+	int sourceItemId
+	String sourceItemName
+	int sourcePortIndex
+	int targetItemId
+	String targetItemName
+	int targetPortIndex
+	boolean decorativeLine
+	GraphicalSchemeConnectionTextLocation textLocation = "FirstSegment"
+	ArrowStyle beginArrow
+	ArrowStyle endArrow = "Blank"
+	contains Segment[] userSegments
+}
+
+class GraphicalSchemeLine extends AbstractLine
+{
+	GraphicalSchemeLineType style = "Solid"
+}
+
+class SchemeItemAddressingAttribute
+{
+	refers AddressingAttribute ref
+	contains Value value 
+}
+
+class PrintPropItem
+{
+	String key
+	String value
+}
+
+class Bounds
+{
+	int x
+	int y
+	int width
+	int height
+}
+
+class Point
+{
+	int x
+	int y
+}
+
+class Segment
+{
+	int ^id
+	int startX
+	int startY
+	int endX
+	int endY
+	int index
+}
+
+class Case
+{
+	String name
+	contains LocalStringMapEntry[] description
+	contains Color backColor
+}
+
+class EventHandler
+{
+	refers Event[1] event
+	String[1] name = ""
+}
+
+// Picture
+class GraphicalSchemePicture extends PictureDef
+{
+	String content
+	transient String fileExtension
+}
+
+enum GraphicalSchemeItemType
+{
+	Decoration = 0		 	///< декорация
+	ConnectionLine = 1		///< соединительная линия
+	Start = 2				///< точка старта БП
+	Completion = 3			///< точка завершения БП 
+	Condition = 4			///< точка бинарного условия 
+	Activity = 5			///< ТочкаДействия
+	Switch = 6				///< N-арный переход
+	Split = 7				///< Разделение
+	Join = 8				///< Слияние
+	Processing = 9			///< Точка Обработки
+	SubBusinessProcess = 10	///< Вложенный процесс
+	
+	Dummy = 99              // special type for dummy figures, see com._1c.g5.v8.dt.bp.scheme.framework.model.DummyEntity  
+}
+
+enum GraphicalSchemeLineType
+{
+	None = 0
+	Solid = 1
+	Dashed = 2
+	Dotted = 3
+	DashDotted = 4
+	DashDottedDotted = 5
+}
+
+enum GraphicalSchemeGridDrawMode
+{
+	None = 0  ///< не рисовать сетку
+	Dots = 1  ///< рисовать точки
+	Chess = 2 ///< рисовать шахматную сетку
+	Lines = 3 ///< рисовать линии
+}
+
+enum GraphicalSchemePictureLocation
+{
+	Left = 1
+	Top = 2
+	Right = 3
+	Bottom = 4
+	Center = 5
+}
+
+enum GraphicalSchemePictureStyle
+{
+	RealSize = 0
+	Stretch = 1
+	Proportionally = 2
+	Tile = 3
+	AutoSize = 4
+	ByFontSize = 5
+}
+
+enum GraphicalSchemeShapes
+{
+	None = 0
+	File = 1
+	Folder = 2
+	RightArrow = 3
+	LeftArrow = 4 
+	UpArrow = 5 
+	DownArrow = 6 
+	LeftRightArrow = 7 
+	UpDownArrow = 8 
+	VerticalBrackets = 9
+	HorizontalBrackets = 10 
+	Document = 11
+	Block = 12
+	Ellipse = 13
+}
+
+enum GraphicalSchemeConnectionTextLocation
+{
+	FirstSegment = 0
+	Middle = 1
+}
+
+enum ArrowStyle
+{
+	None = 0
+	Filled = 1
+	Blank = 2
+}
+
+enum UseOutput
+{
+	Auto = 0
+	Enable = 1
+	Disable = 2
+}
+
+enum GraphicalSchemaPrintParameters
+{
+	Paper = 0
+	PageOrientation = 1
+	Scale = 2
+	Collate = 3
+	Copies = 4
+	PerPage = 5
+	TopMargin = 6
+	LeftMargin = 7
+	BottomMargin = 8
+	RightMargin = 9
+	Header = 10
+	Footer = 11
+	FitToPage = 12
+	BlackAndWhite = 13
+	Printer = 14
+	PaperSource = 15
+	FitPageMode = 16
+	DuplexPrinting = 17
+	PageMargin = 18
+}
+
+enum FitPageMode
+{
+    Auto = 0
+    PageWidth = 1
+    Proportionally = 2
+}
+
+enum PageOrientation
+{
+    Portrait = 1
+    Landscape = 2
+}
+
+enum DuplexPrintingType
+{
+    None = 1
+    FlipPagesLeft = 2
+    FlipPagesUp = 3
+    UsePrinterSettings = 4
+}
+
+enum PagePlacementAlternation
+{
+    Auto = 0
+    DontUse = 1
+    MirrorOnLeft = 2
+    MirrorOnTop = 3
+}
+
+type UUID wraps UUID
+create {
+	if (it.empty)
+	{
+		UUID.randomUUID();
+	}
+	else
+	{
+		UUID.fromString(it);
+	}
+}

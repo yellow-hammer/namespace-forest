@@ -1,0 +1,33 @@
+@Ecore(nsURI="http://v8.1c.ru/8.1/data/core")
+@GenModel(nonNLSMarkers="true", copyrightText="Copyright (C) 2014, 1C", updateClasspath="false")
+package com._1c.g5.v8.dt.debug.model.core
+
+import org.eclipse.emf.ecore.xml.^type.Base64Binary
+
+@ ExtendedMetaData ( name = "UUID" , baseType = "http://www.eclipse.org/emf/2003/XMLType#string" , pattern = "[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}" ) type UUID wraps String
+
+@ ExtendedMetaData ( name = "ObjectVersion" , baseType = "http://www.eclipse.org/emf/2003/XMLType#string" , pattern = "[0-9a-fA-F]{40}" ) type ObjectVersion wraps String
+
+@ExtendedMetaData(name="GenericException", kind="elementOnly")
+abstract class GenericException {
+	@ExtendedMetaData(kind="element", name="descr", namespace="##targetNamespace")
+	String[1] descr
+	@ExtendedMetaData(kind="element", name="inner", namespace="##targetNamespace")
+	contains GenericException inner
+	@ExtendedMetaData(kind="element", name="category", namespace="##targetNamespace")
+	String category
+	@ExtendedMetaData(kind="element", name="uiHelperUUID", namespace="##targetNamespace")
+    UUID uiHelperUUID
+    @ExtendedMetaData(kind="element", name="creationStack", namespace="##targetNamespace")
+    String creationStack
+	@ExtendedMetaData(kind="attribute", name="clsid")
+	UUID[1] clsid
+	@ExtendedMetaData(kind="attribute", name="encoded")
+	unsettable Boolean encoded = "false"
+}
+
+@ExtendedMetaData(name="Exception", kind="elementOnly")
+class Exception extends GenericException {
+	@ExtendedMetaData(kind="element", name="data", namespace="##targetNamespace")
+	Base64Binary data
+}

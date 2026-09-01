@@ -1,0 +1,4657 @@
+@GenModel(loadInitialization="false", literalsInterface="true", nonNLSMarkers="true", prefix="MdClass",
+    copyrightText="Copyright (C) 2014, 1C", updateClasspath="false",
+    featureDelegation="Reflective", rootExtendsClass="com._1c.g5.v8.bm.core.BmObject")
+@Ecore(nsPrefix="mdclass", nsURI="http://g5.1c.ru/v8/dt/metadata/mdclass")
+package com._1c.g5.v8.dt.metadata.mdclass
+
+import com._1c.g5.v8.dt.bsl.model.Module
+import com._1c.g5.v8.dt.mcore.ButtonRepresentation
+import com._1c.g5.v8.dt.mcore.Command
+import com._1c.g5.v8.dt.mcore.CommandGroupCategory
+import com._1c.g5.v8.dt.mcore.CommandParameterUseMode
+import com._1c.g5.v8.dt.mcore.ContextDef
+import com._1c.g5.v8.dt.mcore.DuallyNamedElement
+import com._1c.g5.v8.dt.mcore.Event
+import com._1c.g5.v8.dt.mcore.DerivedField
+import com._1c.g5.v8.dt.mcore.FieldSource
+import com._1c.g5.v8.dt.mcore.Help
+import com._1c.g5.v8.dt.mcore.LocalStringMapEntry
+import com._1c.g5.v8.dt.mcore.Picture
+import com._1c.g5.v8.dt.mcore.PictureDef
+import com._1c.g5.v8.dt.mcore.QName
+import com._1c.g5.v8.dt.mcore.StandardTabularPartSource
+import com._1c.g5.v8.dt.mcore.StyleAppearanceItem
+import com._1c.g5.v8.dt.mcore.TypeDescription
+import com._1c.g5.v8.dt.mcore.TypeItem
+import com._1c.g5.v8.dt.mcore.Uuid
+import com._1c.g5.v8.dt.mcore.Value
+import com._1c.g5.v8.dt.mcore.NumberQualifiers
+import com._1c.g5.v8.dt.mcore.StringQualifiers
+import com._1c.g5.v8.dt.mcore.DateQualifiers
+import com._1c.g5.v8.dt.mcore.BinaryQualifiers
+import com._1c.g5.v8.dt.mcore.TypeContainerRef
+import com._1c.g5.v8.dt.metadata.common.AbstractMobileApplicationUrl
+import com._1c.g5.v8.dt.metadata.common.AccountType
+import com._1c.g5.v8.dt.metadata.common.AllowedLength
+import com._1c.g5.v8.dt.metadata.common.ApplicationUsePurpose
+import com._1c.g5.v8.dt.metadata.common.ChoiceDataGetModeOnInputByString
+import com._1c.g5.v8.dt.metadata.common.ChoiceHistoryOnInput
+import com._1c.g5.v8.dt.metadata.common.ChoiceParameter
+import com._1c.g5.v8.dt.metadata.common.ChoiceParameterLink
+import com._1c.g5.v8.dt.metadata.common.ClientRunMode
+import com._1c.g5.v8.dt.metadata.common.DefaultReportAppearanceTemplate
+import com._1c.g5.v8.dt.metadata.common.FillChecking
+import com._1c.g5.v8.dt.metadata.common.FoldersAndItemsUse
+import com._1c.g5.v8.dt.metadata.common.FullTextSearchOnInputByString
+import com._1c.g5.v8.dt.metadata.common.MainClientApplicationWindowMode
+import com._1c.g5.v8.dt.metadata.common.OnMainServerUnavalableBehavior
+import com._1c.g5.v8.dt.metadata.common.RequiredMobileApplicationPermissions
+import com._1c.g5.v8.dt.metadata.common.RequiredPermission
+import com._1c.g5.v8.dt.metadata.common.SearchStringModeOnInputByString
+import com._1c.g5.v8.dt.metadata.common.Shortcut
+import com._1c.g5.v8.dt.metadata.common.TransactionsIsolationLevel
+import com._1c.g5.v8.dt.metadata.common.TypeLink
+import com._1c.g5.v8.dt.metadata.common.UsedFunctionality
+import com._1c.g5.v8.dt.metadata.dbview.AccountingRegisterDbViewDefs
+import com._1c.g5.v8.dt.metadata.dbview.AccumulationRegisterbViewDefs
+import com._1c.g5.v8.dt.metadata.dbview.BusinessProcessDbViewDefs
+import com._1c.g5.v8.dt.metadata.dbview.CalculationRegisterDbViewDefs
+import com._1c.g5.v8.dt.metadata.dbview.CatalogDbViewDefs
+import com._1c.g5.v8.dt.metadata.dbview.ChartOfAccountsDbViewDefs
+import com._1c.g5.v8.dt.metadata.dbview.ChartOfCalculationTypesDbViewDefs
+import com._1c.g5.v8.dt.metadata.dbview.ChartOfCharacteristicTypesDbViewDefs
+import com._1c.g5.v8.dt.metadata.dbview.ConstantDbViewDefs
+import com._1c.g5.v8.dt.metadata.dbview.ConstantsDbViewDefs
+import com._1c.g5.v8.dt.metadata.dbview.CubeDbViewDefs
+import com._1c.g5.v8.dt.metadata.dbview.DimensionTableDbViewDefs
+import com._1c.g5.v8.dt.metadata.dbview.DocumentDbViewDefs
+import com._1c.g5.v8.dt.metadata.dbview.DocumentJournalDbViewDefs
+import com._1c.g5.v8.dt.metadata.dbview.EnumDbViewDefs
+import com._1c.g5.v8.dt.metadata.dbview.ExchangePlanDbViewDefs
+import com._1c.g5.v8.dt.metadata.dbview.FilterCriterionDbViewDefs
+import com._1c.g5.v8.dt.metadata.dbview.InformationRegisterDbViewDefs
+import com._1c.g5.v8.dt.metadata.dbview.RecalculationDbViewDefs
+import com._1c.g5.v8.dt.metadata.dbview.SequenceDbViewDefs
+import com._1c.g5.v8.dt.metadata.dbview.TableDbViewDefs
+import com._1c.g5.v8.dt.metadata.dbview.TaskDbViewDefs
+import com._1c.g5.v8.dt.metadata.mdclass.impl.AccountingRegisterValidator
+import com._1c.g5.v8.dt.metadata.mdclass.impl.AccumulationRegisterValidator
+import com._1c.g5.v8.dt.metadata.mdclass.impl.BasicCommandValidator
+import com._1c.g5.v8.dt.metadata.mdclass.impl.BasicFeatureValidator
+import com._1c.g5.v8.dt.metadata.mdclass.impl.BasicTabularSectionValidator
+import com._1c.g5.v8.dt.metadata.mdclass.impl.BusinessProcessValidator
+import com._1c.g5.v8.dt.metadata.mdclass.impl.CalculationRegisterValidator
+import com._1c.g5.v8.dt.metadata.mdclass.impl.CatalogValidator
+import com._1c.g5.v8.dt.metadata.mdclass.impl.CharacteristicsDescriptionValidator
+import com._1c.g5.v8.dt.metadata.mdclass.impl.ChartOfAccountsValidator
+import com._1c.g5.v8.dt.metadata.mdclass.impl.ChartOfCalculationTypesValidator
+import com._1c.g5.v8.dt.metadata.mdclass.impl.ChartOfCharacteristicTypesValidator
+import com._1c.g5.v8.dt.metadata.mdclass.impl.ColumnValidator
+import com._1c.g5.v8.dt.metadata.mdclass.impl.CommonAttributeValidator
+import com._1c.g5.v8.dt.metadata.mdclass.impl.CommonModuleValidator
+import com._1c.g5.v8.dt.metadata.mdclass.impl.ConfigurationValidator
+import com._1c.g5.v8.dt.metadata.mdclass.impl.ConstantValidator
+import com._1c.g5.v8.dt.metadata.mdclass.impl.DataProcessorValidator
+import com._1c.g5.v8.dt.metadata.mdclass.impl.DataSeparatorValidator
+import com._1c.g5.v8.dt.metadata.mdclass.impl.DefinedTypeValidator
+import com._1c.g5.v8.dt.metadata.mdclass.impl.DocumentJournalValidator
+import com._1c.g5.v8.dt.metadata.mdclass.impl.DocumentNumeratorValidator
+import com._1c.g5.v8.dt.metadata.mdclass.impl.DocumentValidator
+import com._1c.g5.v8.dt.metadata.mdclass.impl.EventSubscriptionValidator
+import com._1c.g5.v8.dt.metadata.mdclass.impl.ExchangePlanContentItemValidator
+import com._1c.g5.v8.dt.metadata.mdclass.impl.ExchangePlanValidator
+import com._1c.g5.v8.dt.metadata.mdclass.impl.ExternalDataProcessorValidator
+import com._1c.g5.v8.dt.metadata.mdclass.impl.ExternalReportValidator
+import com._1c.g5.v8.dt.metadata.mdclass.impl.FilterCriterionValidator
+import com._1c.g5.v8.dt.metadata.mdclass.impl.FunctionalOptionValidator
+import com._1c.g5.v8.dt.metadata.mdclass.impl.FunctionalOptionsParameterValidator
+import com._1c.g5.v8.dt.metadata.mdclass.impl.HTTPServiceValidator
+import com._1c.g5.v8.dt.metadata.mdclass.impl.InformationRegisterValidator
+import com._1c.g5.v8.dt.metadata.mdclass.impl.LanguageValidator
+import com._1c.g5.v8.dt.metadata.mdclass.impl.MethodValidator
+import com._1c.g5.v8.dt.metadata.mdclass.impl.PredefinedItemValidator
+import com._1c.g5.v8.dt.metadata.mdclass.impl.ReportValidator
+import com._1c.g5.v8.dt.metadata.mdclass.impl.ScheduledJobValidator
+import com._1c.g5.v8.dt.metadata.mdclass.impl.SequenceDimensionValidator
+import com._1c.g5.v8.dt.metadata.mdclass.impl.SequenceValidator
+import com._1c.g5.v8.dt.metadata.mdclass.impl.SessionParameterValidator
+import com._1c.g5.v8.dt.metadata.mdclass.impl.StyleItemValidator
+import com._1c.g5.v8.dt.metadata.mdclass.impl.TaskValidator
+import com._1c.g5.v8.dt.metadata.mdclass.impl.URLTemplateValidator
+import com._1c.g5.v8.dt.metadata.mdclass.impl.WSReferenceValidator
+import com._1c.g5.v8.dt.metadata.mdclass.impl.WebServiceOperationValidator
+import com._1c.g5.v8.dt.metadata.mdclass.impl.WebServiceValidator
+import com._1c.g5.v8.dt.metadata.mdclass.impl.XDTOPackageValidator
+import com._1c.g5.v8.dt.metadata.mdtype.AccountingRegisterTypes
+import com._1c.g5.v8.dt.metadata.mdtype.AccumulationRegisterTypes
+import com._1c.g5.v8.dt.metadata.mdtype.BusinessProcessTypes
+import com._1c.g5.v8.dt.metadata.mdtype.CalculationRegisterTypes
+import com._1c.g5.v8.dt.metadata.mdtype.CatalogTypes
+import com._1c.g5.v8.dt.metadata.mdtype.ChartOfAccountsTypes
+import com._1c.g5.v8.dt.metadata.mdtype.ChartOfCalculationTypesTypes
+import com._1c.g5.v8.dt.metadata.mdtype.ChartOfCharacteristicTypesTypes
+import com._1c.g5.v8.dt.metadata.mdtype.ConstantTypes
+import com._1c.g5.v8.dt.metadata.mdtype.CubeDimensionTableTypes
+import com._1c.g5.v8.dt.metadata.mdtype.CubeTypes
+import com._1c.g5.v8.dt.metadata.mdtype.DataProcessorTypes
+import com._1c.g5.v8.dt.metadata.mdtype.DefinedTypeTypes
+import com._1c.g5.v8.dt.metadata.mdtype.DocumentJournalTypes
+import com._1c.g5.v8.dt.metadata.mdtype.DocumentTypes
+import com._1c.g5.v8.dt.metadata.mdtype.EnumTypes
+import com._1c.g5.v8.dt.metadata.mdtype.ExchangePlanTypes
+import com._1c.g5.v8.dt.metadata.mdtype.ExternalDataProcessorTypes
+import com._1c.g5.v8.dt.metadata.mdtype.ExternalDataSourceTypes
+import com._1c.g5.v8.dt.metadata.mdtype.ExternalReportTypes
+import com._1c.g5.v8.dt.metadata.mdtype.FilterCriterionTypes
+import com._1c.g5.v8.dt.metadata.mdtype.InformationRegisterTypes
+import com._1c.g5.v8.dt.metadata.mdtype.RecalculationTypes
+import com._1c.g5.v8.dt.metadata.mdtype.ReportTypes
+import com._1c.g5.v8.dt.metadata.mdtype.SequenceTypes
+import com._1c.g5.v8.dt.metadata.mdtype.SettingsStorageTypes
+import com._1c.g5.v8.dt.metadata.mdtype.TableTypes
+import com._1c.g5.v8.dt.metadata.mdtype.TabularSectionTypes
+import com._1c.g5.v8.dt.metadata.mdtype.TaskTypes
+import com._1c.g5.v8.dt.metadata.mdtype.WSReferenceTypes
+import com._1c.g5.v8.dt.metadata.mdtype.IntegrationServiceTypes
+import com._1c.g5.v8.dt.metadata.mdtype.IntegrationServiceChannelTypes
+import com._1c.g5.v8.dt.schedule.model.Schedule
+import com._1c.g5.v8.dt.ws.wsdefinitions.model.WSDefinitions
+import org.eclipse.emf.common.util.EList
+import org.eclipse.emf.ecore.EDiagnosticChain
+import org.eclipse.emf.ecore.EMap
+import org.eclipse.emf.ecore.EObject
+import com._1c.g5.v8.dt.metadata.mdclass.util.TypeDescriptionProviderUtil
+import com._1c.g5.v8.dt.internal.metadata.MdContextDefExtension
+import com._1c.g5.v8.bm.integration.FunctionalModelExtensionProvider
+import com._1c.g5.v8.dt.metadata.mdclass.util.IMdDbViewFieldDefExtension
+import com._1c.g5.v8.dt.metadata.common.AllowedIncomingShareRequestType
+
+
+annotation "http://www.1c.ru/v8/dt/metadata/MdClass" as MdClass
+annotation "http://www.1c.ru/v8/dt/metadata/MdProperty" as MdProperty
+annotation "http://www.1c.ru/v8/dt/metadata/MdEnum" as MdEnum
+annotation "http://www.1c.ru/v8/dt/common/ExternalProperty" as ExternalProperty
+
+
+// from xcf_readable.xsd ---------------------------------------------
+class AdjustableBoolean
+{
+    boolean common
+    contains ForRoleType[] ^for
+}
+
+class ForRoleType
+{
+    boolean value
+    refers Role[1] role
+}
+
+// Standard commands
+class StandardCommand extends DuallyNamedElement, Command
+{
+    refers com._1c.g5.v8.dt.mcore.CommandGroup group
+    contains AdjustableBoolean visible
+    contains TypeDescription commandParameterType
+}
+
+interface StandardCommandSource
+{
+    contains transient StandardCommand[] standardCommands    // inferred
+}
+
+interface SupportFilterCriterion
+{
+    op TypeItem selectCriterionTypeRef()
+}
+
+// since 8.3.11
+interface DataHistorySupport
+{
+    @MdProperty(^id = "9288A8ED-B259-46D0-A8E3-70D87956FF2D")
+    DataHistoryUse dataHistory
+}
+
+// From syntax-helper
+class CharacteristicsDescription
+{
+    refers MdObject characteristicTypes
+    refers com._1c.g5.v8.dt.mcore.Field keyField
+    refers com._1c.g5.v8.dt.mcore.Field typesFilterField
+    contains Value typesFilterValue
+    String dataPathField //since 8.3.19
+    refers com._1c.g5.v8.dt.mcore.Field multipleValuesUseField //since 8.3.21
+    refers MdObject characteristicValues
+    refers com._1c.g5.v8.dt.mcore.Field objectField
+    refers com._1c.g5.v8.dt.mcore.Field typeField
+    refers com._1c.g5.v8.dt.mcore.Field valueField
+    refers com._1c.g5.v8.dt.mcore.Field multipleValuesKeyField //since 8.3.21
+    refers com._1c.g5.v8.dt.mcore.Field multipleValuesOrderField //since 8.3.21
+
+    op boolean validate(EDiagnosticChain diagnostics, EMap<Object, Object> context)
+    {
+        CharacteristicsDescriptionValidator::validate(this, diagnostics, context)
+    }
+}
+
+// TODO
+// From syntax-helper (backend)
+class StandardAttribute extends DataHistorySupport
+{
+    String[1] name
+    contains LocalStringMapEntry[] synonym
+    String comment
+    contains LocalStringMapEntry[] toolTip
+    UseQuickChoice quickChoice
+    boolean fillFromFillingValue
+    contains Value fillValue
+    FillChecking fillChecking
+    contains ChoiceParameterLink[] choiceParameterLinks
+    contains ChoiceParameter[] choiceParameters
+    contains TypeLink linkByType
+    FullTextSearchUsing fullTextSearch
+    boolean passwordMode
+    contains LocalStringMapEntry[] format
+    contains LocalStringMapEntry[] editFormat
+    String mask
+    boolean multiLine
+    boolean extendedEdit
+    contains Value minValue
+    contains Value maxValue
+    boolean markNegatives
+    CreateOnInput createOnInput
+    refers BasicForm choiceForm
+    ChoiceHistoryOnInput choiceHistoryOnInput
+}
+
+
+// From syntax-helper
+class StandardTabularSectionDescription
+{
+    String[1] name
+    contains LocalStringMapEntry[] synonym
+    String comment
+    contains LocalStringMapEntry[] toolTip
+    FillChecking fillChecking
+    contains StandardAttribute[] standardAttributes
+}
+
+// TODO
+// From syntax-helper
+class CommonAttributeContentItem
+{
+    refers MdObject[1] metadata  // Object in xcf_readable.xsd
+    CommonAttributeUse use
+    refers MdObject conditionalSeparation // SeparateCondition in xcf_readable.xsd
+}
+
+// From syntax-helper
+//enum AutoChangeRecord
+//{
+//    Deny = 0
+//    Allow = 1
+//}
+
+// TODO
+// From syntax-helper
+//class ExchangePlanContentItem
+//{
+//    refers MdObject[1] metadata   // object in xcf_readable.xsd
+//    AutoChangeRecord autoRecord   // AutoRegistration in xcf_readable.xsd
+//}
+
+class AbstractCommandInterface
+{
+}
+
+class AbstractMobileClientSign
+{
+}
+
+// since 8.3.16
+class AbstractStandaloneContent
+{
+}
+
+class BasicMobileClientSign extends AbstractMobileClientSign
+{
+    String digest
+    String publicKey
+}
+
+class MobileClientSign extends BasicMobileClientSign
+{
+    contains MobileClientDigestTypes digestTypes
+}
+
+class MobileClientDigestData
+{
+    Uuid uuid
+    String name
+}
+
+class MobileClientDigestTypes
+{
+    contains MobileClientDigestData[] mcdEnums
+    contains MobileClientDigestData[] mcdRefs
+    contains MobileClientDigestData[] mcdRegKeys
+    contains MobileClientDigestData[] mcdInfoRegKeys
+}
+
+class ConvertedMobileClientSign extends MobileClientSign
+{
+    boolean converted
+}
+
+class AbstractClientApplicationInterface
+{
+}
+
+
+class AbstractFlowchart
+{
+}
+
+class AbstractForm
+{
+    contains transient ContextDef[1] formContext
+
+    @ExternalProperty
+    refers transient Module module
+    refers transient Event[] formEvents
+
+    refers transient BasicForm mdForm
+}
+
+class MdPicture extends PictureDef
+{
+}
+
+// mdenums ---------------------------------------------------------------------
+
+@MdEnum(^id = "012475fc-2a05-4a99-bb64-8e8394a2ad81")
+enum CommonAttributeSeparatedDataUse
+{
+    Independently = 0
+    IndependentlyAndSimultaneously = 1
+}
+
+@MdEnum(^id = "f1372bed-7ffb-4f84-b317-83c00d0e95bc")
+enum BusinessProcessNumberType
+{
+    Number = 0
+    String = 1
+}
+
+@MdEnum(^id = "4f4073cb-6cbe-42f4-aff8-fc179505358b")
+enum BusinessProcessNumberPeriodicity
+{
+    Nonperiodical = 0
+    Year = 1
+    Quarter = 2
+    Month = 3
+    Day = 4
+}
+
+@MdEnum(^id = "37f2faa0-b276-11d4-9435-004095e12fc7")
+enum CatalogCodeType
+{
+    Number = 0
+    String = 1
+}
+
+@MdEnum(^id = "abbad29f-a25c-436e-947c-d32de05f54fb")
+enum RealTimePosting
+{
+    Allow = 0
+    Deny = 1
+}
+
+@MdEnum(^id = "ae311358-20d7-42ce-aa76-a9faf0eb308c")
+enum MoveBoundaryOnPosting
+{
+    Move = 0
+    DontMove = 1
+}
+
+@MdEnum(^id = "fc9c3c17-9c5d-4a2d-9053-626a3aa485b5")
+enum CharacteristicKindCodesSeries
+{
+    WholeCharacteristicKind = 0
+    WithinSubordination = 1
+}
+
+@MdEnum(^id = "8b807700-5b06-476f-a933-6ef7dcbf1cdd")
+enum CalculationTypeMainPresentation
+{
+    AsCode = 0
+    AsDescription = 1
+}
+
+@MdEnum(^id = "1db52f37-439a-46ec-ac07-5ecdafd67c03")
+enum ObjectAutonumerationMode
+{
+    AutoFree = 0
+    NotAutoFree = 1
+}
+
+@MdEnum(^id = "b00c1c32-be72-41d4-b45e-c18e4b9994e7")
+enum TaskNumberAutoPrefix
+{
+    BusinessProcessNumber = 0
+    DontUse = 1
+}
+
+@MdEnum(^id = "d41e6558-481a-48de-960c-130f3e86febc")
+enum RegisterRecordsWritingOnPost
+{
+    WriteSelected = 0
+    WriteModified = 1
+}
+
+@MdEnum(^id = "957b956c-b215-415a-9f0d-cfaab664d6b7")
+enum ObjectBelonging
+{
+    Native = 0
+    Adopted = 1
+}
+
+@MdEnum(^id = "6eb6a0cf-3721-49fc-936a-4fd20fce2141")
+enum ConfigurationExtensionPurpose
+{
+    Patch
+    Customization
+    AddOn
+}
+
+@MdEnum(^id = "b7b7d7f8-11dc-4e0b-9d72-7ec6cc040eef")
+enum DefaultDataLockControlMode
+{
+    Automatic = 0
+    Managed = 1
+    AutomaticAndManaged = 2
+}
+
+@MdEnum(^id = "1b17f5d6-53f8-4fd8-9b58-71523a02eef6") 
+enum BinaryDataStorageMode
+{
+    DontUse = 0
+    Use = 1
+}
+
+@MdEnum(^id = "5f92aff1-fcb7-4c4f-8743-62bfe7276bb5")
+enum CommonAttributeAutoUse
+{
+    Use = 0
+    DontUse = 1
+}
+
+@MdEnum(^id = "82285566-14fa-48ab-84ec-5bb38e9d9fa7")
+enum HierarchyType
+{
+    HierarchyFoldersAndItems = 0
+    HierarchyOfItems = 1
+}
+
+@MdEnum(^id = "81ba9521-7fa7-4322-9e01-4f1fd5942c33")
+enum ScriptVariant
+{
+    English = 0
+    Russian = 1
+}
+
+@MdEnum(^id = "955c2d70-5f42-46b2-9cea-38f00aab9815")
+enum DocumentNumberType
+{
+    Number = 0
+    String = 1
+}
+
+@MdEnum(^id = "cab319ad-716c-4d9e-9240-639aab7e9ac0")
+enum ChoiceMode
+{
+    FromForm = 0
+    QuickChoice = 1
+    BothWays = 2
+}
+
+@MdEnum(^id = "d5af85e7-4724-4e28-80b8-3c418e5671ca")
+enum ExternalDataSourceTableDataType
+{
+    ObjectData = 0
+    NonobjectData = 1
+}
+
+@MdEnum(^id = "86291b39-fb63-4276-99cf-ebd578567bbc")
+enum CharOfAccountCodeSeries
+{
+    WholeChartOfAccounts = 0
+    WithinSubordination = 1
+}
+
+@MdEnum(^id = "22d0a341-d3ae-4460-9a21-1ceff77ea276")
+enum AccountMainPresentation
+{
+    AsCode = 0
+    AsDescription = 1
+}
+
+@MdEnum(^id = "a70b7dd7-4eb1-4ed1-bbe9-246866b07dd7")
+enum ReturnValuesReuse
+{
+    DontUse = 0
+    DuringRequest = 1
+    DuringSession = 2
+}
+
+@MdEnum(^id = "7bd003b5-fce4-470a-867f-75dfe9c652b1")
+enum SessionReuseMode
+{
+    DontUse = 0
+    Use = 1
+    AutoUse = 2
+}
+
+@MdEnum(^id = "b2651331-f945-4106-88f1-df0d113ea527")
+enum TransferDirection
+{
+    In = 0
+    Out = 1
+    InOut = 2
+}
+
+@MdEnum(^id = "8f2918a4-a230-4af8-bfa8-23653d3b1687")
+enum CommonAttributeUse
+{
+    Auto = 0
+    Use = 1
+    DontUse = 2
+}
+
+@MdEnum(^id = "3b8e6bdd-d648-49d5-af2f-d46d84f87dd5")
+enum FullTextSearchUsing
+{
+    DontUse = 0
+    Use = 1
+}
+
+@MdEnum(^id = "4d5fc7d7-ae4f-4806-85d8-385a39c5f2df")
+enum ChartOfCalculationTypesCodeType
+{
+    Number = 0
+    String = 1
+}
+
+@MdEnum(^id = "6b36a200-1957-11d6-a3c7-0050bae0a776")
+enum Indexing
+{
+    DontIndex = 0
+    Index = 1
+    IndexWithAdditionalOrder = 2
+}
+
+@MdEnum(^id = "1368c762-6688-4075-940c-fc005293854c")
+enum PredefinedDataUpdate
+{
+    Auto = 0
+    AutoUpdate = 1
+    DontAutoUpdate = 2
+}
+
+@MdEnum(^id = "876565a8-6e64-4a25-bfb7-2575b694e82c")
+enum CommonAttributeDataSeparation
+{
+    Separate = 0
+    DontUse = 1
+}
+
+@MdEnum(^id = "8e2af494-8b1d-437b-ad0e-7f5155ceee34")
+enum CommonAttributeAuthenticationSeparation
+{
+    Separate = 1
+    DontUse = 0
+}
+
+@MdEnum(^id = "6caab274-5dee-46c7-8ded-ff037206d2b8")
+enum CommonAttributeExtensionSeparation
+{
+    Separate = 1
+    DontUse = 0
+}
+
+@MdEnum(^id = "a0f68524-03ef-4938-a2ba-432e2f7c86ad")
+enum HTTPMethod
+{
+    GET = 3
+    PUT = 14
+    POST = 11
+    DELETE = 2
+    PATCH = 10
+    MERGE = 6
+    OPTIONS = 9
+    TRACE = 15
+    CONNECT = 0
+    PROPFIND = 12
+    PROPPATCH = 13
+    MOVE = 8
+    COPY = 1
+    LOCK = 5
+    UNLOCK = 16
+    MKCOL = 7
+    Any = 1000
+}
+
+@MdEnum(^id = "baa56fa0-1f2a-11d6-a3c7-0050bae0a776")
+enum RegisterRecordsDeletion
+{
+    AutoDeleteOnUnpost = 2
+    AutoDelete = 0
+    AutoDeleteOff = 1
+}
+
+@MdEnum(^id = "0e408769-1090-405d-b0d3-2c0b47ba215d")
+enum StyleElementType
+{
+    Color = 0
+    Font = 1
+    Border = 2
+}
+
+@MdEnum(^id = "e76f6229-09ff-4290-931c-4096a045f409")
+enum SynchronousPlatformExtensionAndAddInCallUseMode
+{
+    Use = 0
+    UseWithWarnings = 1
+    DontUse = 2
+}
+
+@MdEnum(^id = "cf4abea0-37b2-11d4-940f-008048da11f9")
+enum CatalogCodesSeries
+{
+    WholeCatalog = 0
+    WithinSubordination = 1
+    WithinOwnerSubordination = 2
+}
+
+@MdEnum(^id = "cf4abea1-37b2-11d4-940f-008048da11f9")
+enum EditType
+{
+    InList = 0
+    InDialog = 1
+    BothWays = 2
+}
+
+@MdEnum(^id = "58cb5832-3f9d-47b8-8055-d8ef4421d987")
+enum TaskMainPresentation
+{
+    AsNumber = 0
+    AsDescription = 1
+}
+
+@MdEnum(^id = "a8024559-0f1c-4406-939f-49b3cb749f91")
+enum DocumentNumberPeriodicity
+{
+    Nonperiodical = 0
+    Year = 1
+    Quarter = 2
+    Month = 3
+    Day = 4
+}
+
+@MdEnum(^id = "55dd3cce-c9ad-4afa-873b-29343454e7d0")
+enum CharacteristicTypeMainPresentation
+{
+    AsCode = 0
+    AsDescription = 1
+}
+
+@MdEnum(^id = "ece7441d-08fc-475c-baa5-be4ecb307103")
+enum ModalityUseMode
+{
+    Use = 0
+    UseWithWarnings = 1
+    DontUse = 2
+}
+
+@MdEnum(^id = "57b6cabd-60a1-4294-9ab2-124fc995d1f3")
+enum TemplateType
+{
+    SpreadsheetDocument = 0
+    BinaryData = 1
+    ActiveDocument = 2
+    HTMLDocument = 3
+    TextDocument = 4
+    GeographicalSchema = 5
+    GraphicalSchema = 8
+    DataCompositionSchema = 6
+    DataCompositionAppearanceTemplate = 7
+    AddIn = 9
+}
+
+@MdEnum(^id = "ad3615c5-aae6-4725-89be-91827523abd9")
+enum CreateOnInput
+{
+    Auto = 0
+    DontUse = 1
+    Use = 2
+}
+
+@MdEnum(^id = "11b16680-1f28-11d6-a3c7-0050bae0a776")
+enum Posting
+{
+    Allow = 0
+    Deny = 1
+}
+
+@MdEnum(^id = "ee41e431-e400-4367-8b5a-700c92712f7d")
+enum SubordinationUse
+{
+    ToItems = 0
+    ToFolders = 1
+    ToFoldersAndItems = 2
+}
+
+@MdEnum(^id = "0b482b62-1ce6-47af-84ab-b8b5ed1d74c6")
+enum ChartOfCalculationTypesBaseUse
+{
+    DontUse = 0
+    OnActionPeriod = 1
+    OnRegistrationPeriod = 2
+}
+
+@MdEnum(^id = "c2264fde-a6da-4f54-a559-f6748058638c")
+enum DataExchangeMainPresentation
+{
+    AsCode = 0
+    AsDescription = 1
+}
+
+@MdEnum(^id = "ac2c46c6-90f7-43a0-9be9-57a2b218a907")
+enum ExternalDataSourceTableType
+{
+    Table = 0
+    Expression = 1
+}
+
+@MdEnum(^id = "38fc2020-f658-11d5-a3c7-0050bae0a776")
+enum InformationRegisterPeriodicity
+{
+    Nonperiodical = 0
+    RecorderPosition = 6
+    Second = 5
+    Day = 4
+    Month = 3
+    Quarter = 2
+    Year = 1
+}
+
+@MdEnum(^id = "854ffb60-24fe-4623-a384-47a2a39b6560")
+enum TaskNumberType
+{
+    Number = 0
+    String = 1
+}
+
+@MdEnum(^id = "9cd510d2-abfc-11d4-9434-004095e12fc7")
+enum CatalogMainPresentation
+{
+    AsCode = 0
+    AsDescription = 1
+}
+
+@MdEnum(^id = "381d7bf5-800e-4931-9ff5-cb6634a0556b") // sence 8.3.23
+enum DatabaseTablespacesUseMode
+{
+    DontUse = 0
+    Use = 1
+}
+
+@MdEnum(^id = "881683fb-79f6-4ce9-be9d-a777275ea39f")
+enum CompatibilityMode
+{
+    // by convention we use version as compatibility mode name to have easy way to parse it for comparing
+    Version8_3_24 as "8.3.24" = 80324
+    Version8_3_23 as "8.3.23" = 80323
+    Version8_3_22 as "8.3.22" = 80322
+    Version8_3_21 as "8.3.21" = 80321
+    Version8_3_20 as "8.3.20" = 80320
+    Version8_3_19 as "8.3.19" = 80319
+    Version8_3_18 as "8.3.18" = 80318
+    Version8_3_17 as "8.3.17" = 80317
+    Version8_3_16 as "8.3.16" = 80316
+    Version8_3_15 as "8.3.15" = 80315
+    Version8_3_14 as "8.3.14" = 80314
+    Version8_3_13 as "8.3.13" = 80313
+    Version8_3_12 as "8.3.12" = 80312
+    Version8_3_11 as "8.3.11" = 80311
+    Version8_3_10 as "8.3.10" = 80310
+    Version8_3_9 as "8.3.9" = 80309
+    Version8_3_8 as "8.3.8" = 80308
+    Version8_3_7 as "8.3.7" = 80307
+    Version8_3_6 as "8.3.6" = 80306
+    Version8_3_5 as "8.3.5" = 80305
+    Version8_3_4 as "8.3.4" = 80304
+    Version8_3_3 as "8.3.3" = 80303
+    Version8_3_2 as "8.3.2" = 80302
+    Version8_3_1 as "8.3.1" = 80301
+    Version8_2_16 as "8.2.16" = 80214
+    Version8_2_13 as "8.2.13" = 2
+    Version8_1 as "8.1.0" = 1
+}
+
+@MdEnum(^id = "75382d60-3ffd-11d6-a3c7-0050bae0a776")
+enum AccumulationRegisterType
+{
+    Balance = 0
+    Turnovers = 1
+}
+
+@MdEnum(^id = "ace3fd07-11b2-477e-ab7f-36f0ea37c8dd")
+enum UseQuickChoice
+{
+    Auto = 2
+    Use = 1
+    DontUse = 0
+}
+
+@MdEnum(^id = "ed50380d-9325-4ca7-9f06-9e30fbde7b6b")
+enum CommonAttributeUsersSeparation
+{
+    Separate = 1
+    DontUse = 0
+}
+
+@MdEnum(^id = "f8b292cf-0fca-4960-a2ff-12ebd3ad349e")
+enum InterfaceCompatibilityMode
+{
+    Taxi = 3
+    TaxiEnableVersion8_2 = 2
+    Version8_2EnableTaxi = 1
+    Version8_2 = 0
+}
+
+@MdEnum(^id = "bef65c81-c58b-482d-9267-e7a26f1f96e3")
+enum SequenceFilling
+{
+    AutoFill = 0
+    AutoFillOff = 1
+}
+
+@MdEnum(^id = "a37b703f-9a92-4f6c-9303-7459432d1480")
+enum CalculationRegisterPeriodicity
+{
+    Year = 0
+    Quarter = 1
+    Month = 2
+    Day = 3
+}
+
+@MdEnum(^id = "6e8e3740-0f2c-11d6-a3c7-0050bae0a776")
+enum RegisterWriteMode
+{
+    Independent = 0
+    RecorderSubordinate = 1
+}
+
+@MdEnum(^id = "37f2fa98-b276-11d4-9435-004095e12fc7")
+enum AttributeUse
+{
+    ForItem = 0
+    ForFolder = 1
+    ForFolderAndItem = 2
+}
+
+@MdEnum(^id = "b5fdf93a-40ea-4fc2-8911-2cb676377eff")
+enum FormType
+{
+    Ordinary = 0
+    Managed = 1
+}
+
+@MdEnum(^id = "d46ea122-3201-4e5e-bed4-e669c63463c8")
+enum DataHistoryUse
+{
+    DontUse = 0
+    Use = 1
+}
+
+// object extension -----------------------------------------------------------
+
+abstract class ObjectExtension
+{
+    // content is specified in implementations
+}
+
+abstract class TypeDescriptionProvider
+{
+    op TypeDescription getTypeDescription()
+    {
+        TypeDescriptionProviderUtil.INSTANCE.getTypeDescription(this)
+    }
+}
+
+// mdclasses -------------------------------------------------------------------
+
+abstract class MdObject
+{
+    Uuid[1] uuid
+    @MdProperty(^id = "cf4abea2-37b2-11d4-940f-008048da11f9")
+    String[1] name
+    @MdProperty(^id = "cf4abea3-37b2-11d4-940f-008048da11f9")
+    contains LocalStringMapEntry[] synonym
+    @MdProperty(^id = "cf4abea4-37b2-11d4-940f-008048da11f9")
+    String comment
+    @MdProperty(^id = "19744814-daec-423b-8269-995b53ebe0ec")
+    ObjectBelonging objectBelonging
+    @MdProperty(^id = "9595ddd6-e72c-47ad-a156-672db811628c")
+    Uuid extendedConfigurationObject
+
+    contains ObjectExtension ^extension
+}
+
+abstract class BasicCommand extends MdObject, com._1c.g5.v8.dt.mcore.Command
+{
+    @MdProperty(^id = "482411f7-457f-4889-a7c9-9adbfb1c7bd4")
+    refers com._1c.g5.v8.dt.mcore.CommandGroup[1] group
+    @MdProperty(^id = "7d14f63a-87e8-4188-a28b-02da93f6bcbd")
+    contains TypeDescription commandParameterType
+    @MdProperty(^id = "5aa63d14-f91f-4329-9cc2-03d9dfd84146")
+    CommandParameterUseMode parameterUseMode
+    @MdProperty(^id = "39588d76-1919-4761-a171-771b67b44ee8")
+    boolean modifiesData
+    @MdProperty(^id = "a5085b15-9218-4da8-b2e1-3c5d357b9f82")
+    ButtonRepresentation representation
+    @MdProperty(^id = "4c3288f7-2704-4f31-9bf3-4b8e8e080682")
+    contains LocalStringMapEntry[] toolTip
+    @MdProperty(^id = "58e51e5d-aee0-41ea-89c0-b0962a74d237")
+    contains Picture picture
+    @MdProperty(^id = "7f647b00-8821-4452-b29c-0e953d757fde")
+    Shortcut shortcut
+    @MdProperty(^id = "4994a976-b6d8-4efa-9484-2891e0d31f80") // since 8.3.16
+    OnMainServerUnavalableBehavior onMainServerUnavalableBehavior
+    @ExternalProperty
+    @MdProperty(^id = "078a6af8-d22c-4248-9c33-7e90075a3d2c")
+    refers transient Module[1] commandModule
+
+    op boolean validate(EDiagnosticChain diagnostics, EMap<Object, Object> context)
+    {
+        BasicCommandValidator::validate(this, diagnostics, context)
+    }
+}
+
+abstract class BasicForm extends MdObject
+{
+    @ExternalProperty
+    @MdProperty(^id = "32e087ab-1491-49b6-aba7-43571b41ac2b")
+    refers transient AbstractForm[1] form
+    @MdProperty(^id = "e3331ed0-3854-478d-b6b5-4f14acdd6edb")
+    FormType formType = "Managed"
+    @MdProperty(^id = "1f2b167a-25fe-4f47-8710-933567dfa7d9")
+    boolean includeHelpInContents
+    @MdProperty(^id = "038b5c85-fb1c-4082-9c4c-e69f8928bf3a")
+    contains Help help
+    @MdProperty(^id = "da648ef9-2f12-418f-8e2f-8956bc10a66f")
+    ApplicationUsePurpose[] usePurposes
+    @ExternalProperty
+    @MdProperty(^id = "00146f2b-297f-48f4-a024-3cbe4bf05120")
+    refers transient EObject suppressObject
+}
+
+abstract class BasicFeature extends MdObject, TypeDescriptionProvider
+{
+    @MdProperty(^id = "b1053250-abe6-11d4-9434-004095e12fc7", code = "Type")
+    contains TypeDescription[1] ^type
+    @MdProperty(^id = "90ae4b5d-e0fd-49ef-a008-d67c1e75038c")
+    boolean passwordMode
+    @MdProperty(^id = "580c29e2-8af4-4258-882a-7cf8073e61c8")
+    contains LocalStringMapEntry[] format
+    @MdProperty(^id = "88149a78-9448-4767-867b-0e650d165d2e")
+    contains LocalStringMapEntry[] editFormat
+    @MdProperty(^id = "4690ff70-e3fa-4914-9127-6a9acc5fc949")
+    contains LocalStringMapEntry[] toolTip
+    @MdProperty(^id = "b02800e9-a8d1-42ab-9a12-f673e92be968")
+    boolean markNegatives
+    @MdProperty(^id = "f49e4ced-4033-4e6c-8755-9fbaaccd6078")
+    String mask
+    @MdProperty(^id = "2bbba66b-fabf-4863-8ba3-54b3c64c896e")
+    boolean multiLine
+    @MdProperty(^id = "4de03908-56f4-4396-a61e-17253afca9ac")
+    boolean extendedEdit
+    @MdProperty(^id = "c65a541f-0b91-4f33-bc88-fbaaa57f9992")
+    contains Value minValue
+    @MdProperty(^id = "3eaf5a8b-06d6-47b0-ac7d-a9698247f499")
+    contains Value maxValue
+    @MdProperty(^id = "2723eb98-b4c1-498a-a6f3-70444757902f")
+    FillChecking fillChecking
+    @MdProperty(^id = "c421d5c6-dcd9-4e28-9a35-0b2f4d66bef0")
+    FoldersAndItemsUse choiceFoldersAndItems
+    @MdProperty(^id = "e3da683b-c54a-457a-a243-b9b4f9bf76dd")
+    contains ChoiceParameterLink[] choiceParameterLinks
+    @MdProperty(^id = "fcf503b8-1c06-454a-970c-06413e64aee5")
+    contains ChoiceParameter[] choiceParameters
+    @MdProperty(^id = "6e3a1131-37a3-4da5-8895-572d9d0c9db6")
+    UseQuickChoice quickChoice
+    @MdProperty(^id = "33c74a4d-561f-4bc0-9eaa-8d21c893c0a9")
+    CreateOnInput createOnInput
+    @MdProperty(^id = "6c4f7074-e7d4-48eb-b31b-132873666262")
+    refers BasicForm choiceForm
+    @MdProperty(^id = "1183c14f-f814-49c6-9233-a3c26b3f64cf")
+    contains TypeLink linkByType
+
+    op boolean validate(EDiagnosticChain diagnostics, EMap<Object, Object> context)
+    {
+        BasicFeatureValidator::validate(this, diagnostics, context)
+    }
+}
+
+abstract class BasicTabularSection extends MdObject, FieldSource
+{
+    @MdProperty(^id = "4690ff70-e3fa-4914-9127-6a9acc5fc949")
+    contains LocalStringMapEntry[] toolTip
+    @MdProperty(^id = "2723eb98-b4c1-498a-a6f3-70444757902f")
+    FillChecking fillChecking
+    @MdProperty(^id = "03f171e8-326f-41c6-9fa5-932a0b12cddf")
+    contains StandardAttribute[] standardAttributes
+
+    op boolean validate(EDiagnosticChain diagnostics, EMap<Object, Object> context)
+    {
+        BasicTabularSectionValidator::validate(this, diagnostics, context)
+    }
+}
+
+abstract class BasicTemplate extends MdObject
+{
+    @MdProperty(^id = "84bb2ea5-9bcf-47e8-9d48-1b72249944a9")
+    TemplateType templateType
+    @ExternalProperty
+    @MdProperty(^id = "8eb4fad1-1fa6-403e-970f-2c12dbb43e23")
+    refers transient EObject[1] template
+
+    @ExternalProperty
+    @MdProperty(^id = "07aa73ed-9e65-49c1-a6ca-f852cbb72b3f")
+    refers transient EObject suppressObject
+}
+
+abstract class BasicDbObject extends MdObject, FieldSource, StandardCommandSource
+{
+    @MdProperty(^id = "d7be18bc-9899-48dd-8100-92dafc4dedea")
+    boolean useStandardCommands
+    @MdProperty(^id = "b28cb2f0-9b2a-4784-bd09-2cb60497027f")
+    refers com._1c.g5.v8.dt.mcore.Field[] inputByString
+    @MdProperty(^id = "5bd5743d-bf9a-43bc-b7a9-c1a0b5984f78")
+    SearchStringModeOnInputByString searchStringModeOnInputByString
+    @MdProperty(^id = "9221cdfb-8935-49e7-9b1a-0b24d205297c")
+    FullTextSearchOnInputByString fullTextSearchOnInputByString
+    @MdProperty(^id = "d80df833-0fcb-49e6-91c9-dda7ea01c2a5")
+    ChoiceDataGetModeOnInputByString choiceDataGetModeOnInputByString
+    @ExternalProperty
+    @MdProperty(^id = "a637f77f-3840-441d-a1c3-699c8c5cb7e0")
+    refers transient Module objectModule
+    @ExternalProperty
+    @MdProperty(^id = "d1b64a2c-8078-4982-8190-8f81aefda192")
+    refers transient Module managerModule
+    @MdProperty(^id = "03f171e8-326f-41c6-9fa5-932a0b12cddf")
+    contains StandardAttribute[] standardAttributes
+    @MdProperty(^id = "97fc573f-64e4-46df-b464-077a96d76122")
+    contains CharacteristicsDescription[] characteristics
+    @MdProperty(^id = "a1f564fd-c8e2-4aea-9e6e-2ee5fd5c2ed4")
+    refers MdObject[] basedOn
+    @MdProperty(^id = "33c74a4d-561f-4bc0-9eaa-8d21c893c0a9")
+    CreateOnInput createOnInput
+    @MdProperty(^id = "1f2b167a-25fe-4f47-8710-933567dfa7d9")
+    boolean includeHelpInContents
+    @MdProperty(^id = "038b5c85-fb1c-4082-9c4c-e69f8928bf3a")
+    contains Help help
+    @MdProperty(^id = "130bff15-88ce-4f99-8610-abb4a300ebb0")
+    refers com._1c.g5.v8.dt.mcore.Field[] dataLockFields
+    @MdProperty(^id = "09c14dad-bd23-4d30-9c09-20ca3e5cd9f0")
+    DefaultDataLockControlMode dataLockControlMode
+    @MdProperty(^id = "d4232326-022b-421e-b6d3-88e418f74327")
+    FullTextSearchUsing fullTextSearch
+    @MdProperty(^id = "d79e10d1-ebb6-46c3-a053-55c3b7248b7e")
+    contains LocalStringMapEntry[] objectPresentation
+    @MdProperty(^id = "3613fe2b-442b-4723-a0dd-4bad030dcfa5")
+    contains LocalStringMapEntry[] extendedObjectPresentation
+    @MdProperty(^id = "b894dce6-9f10-45d6-958f-45993525a044")
+    contains LocalStringMapEntry[] listPresentation
+    @MdProperty(^id = "97f5ad64-29e4-410f-8ead-ec0dd5c5e58d")
+    contains LocalStringMapEntry[] extendedListPresentation
+    @MdProperty(^id = "719346a1-02d5-4311-a141-4d22470a7ac3")
+    contains LocalStringMapEntry[] explanation
+    @ExternalProperty
+    @MdProperty(^id = "05628bbc-2417-11eb-adc1-0242ac120002")
+    refers transient EObject suppressObject
+}
+
+abstract class DbObjectAttribute extends BasicFeature
+{
+    @MdProperty(^id = "2c8143d5-4248-4c43-8bfb-307c0be2e415")
+    boolean fillFromFillingValue
+    @MdProperty(^id = "e6b3f5f3-bdf3-4ad0-bc60-7323b3feb208")
+    contains Value fillValue
+    @MdProperty(^id = "a93a67a0-1955-11d6-a3c7-0050bae0a776")
+    Indexing indexing
+    @MdProperty(^id = "d4232326-022b-421e-b6d3-88e418f74327")
+    FullTextSearchUsing fullTextSearch
+}
+
+abstract class HierarchicalDbObjectAttribute extends DbObjectAttribute
+{
+    @MdProperty(^id = "37f2fa99-b276-11d4-9435-004095e12fc7")
+    AttributeUse use
+}
+
+abstract class DbObjectTabularSection extends BasicTabularSection
+{
+    contains TabularSectionTypes[1] producedTypes
+
+    @MdClass(^id = "888744e1-b616-11d4-9436-004095e12fc7", code = "Attribute", code_ru = "Реквизит")
+    contains TabularSectionAttribute[] attributes
+}
+
+abstract class HierarchicalDbObjectTabularSection extends DbObjectTabularSection
+{
+    @MdProperty(^id = "37f2fa99-b276-11d4-9435-004095e12fc7")
+    AttributeUse use
+}
+
+abstract class BasicRegister extends MdObject, FieldSource, StandardCommandSource
+{
+    @ExternalProperty
+    @MdProperty(^id = "df090bd2-f7e0-4c4c-bdb6-8b01bd2d6565")
+    refers transient EObject suppressObject
+}
+
+abstract class RegisterAttribute extends BasicFeature
+{
+    @MdProperty(^id = "a93a67a0-1955-11d6-a3c7-0050bae0a776")
+    Indexing indexing
+    @MdProperty(^id = "d4232326-022b-421e-b6d3-88e418f74327")
+    FullTextSearchUsing fullTextSearch
+}
+
+abstract class RegisterDimension extends BasicFeature
+{
+    @MdProperty(^id = "3b7bfe00-0b71-11d6-a3c7-0050bae0a776")
+    boolean denyIncompleteValues
+    @MdProperty(^id = "a93a67a0-1955-11d6-a3c7-0050bae0a776")
+    Indexing indexing
+    @MdProperty(^id = "d4232326-022b-421e-b6d3-88e418f74327")
+    FullTextSearchUsing fullTextSearch
+}
+
+abstract class RegisterResource extends BasicFeature
+{
+    @MdProperty(^id = "d4232326-022b-421e-b6d3-88e418f74327")
+    FullTextSearchUsing fullTextSearch
+}
+
+interface CatalogOwner extends BasicDbObject
+{
+}
+
+interface FullTextSearchDictionarySource extends MdObject
+{
+}
+
+@MdClass(^id = "3daea016-69b7-4ed4-9453-127911372fe6", code_ru = "Макет")
+class Template extends BasicTemplate
+{
+}
+
+@MdClass(^id = "888744e1-b616-11d4-9436-004095e12fc7", code = "Attribute", code_ru = "Реквизит")
+class TabularSectionAttribute extends BasicFeature, DataHistorySupport
+{
+    @MdProperty(^id = "7ba608f2-e654-42a3-8885-334fe88ca910")
+    ChoiceHistoryOnInput choiceHistoryOnInput
+    @MdProperty(^id = "a93a67a0-1955-11d6-a3c7-0050bae0a776")
+    Indexing indexing
+    @MdProperty(^id = "d4232326-022b-421e-b6d3-88e418f74327")
+    FullTextSearchUsing fullTextSearch
+}
+
+@MdClass(^id = "2f1a5187-fb0e-4b05-9489-dc5dd6412348", code_ru = "ОбщаяКоманда")
+class CommonCommand extends BasicCommand
+{
+    @MdProperty(^id = "1f2b167a-25fe-4f47-8710-933567dfa7d9")
+    boolean includeHelpInContents
+    @MdProperty(^id = "038b5c85-fb1c-4082-9c4c-e69f8928bf3a")
+    contains Help help
+    @ExternalProperty
+    @MdProperty(^id = "9885aeff-a1aa-4f00-947e-1a0e7156a113")
+    refers transient EObject suppressObject
+}
+
+class AbstractRoleDescription
+{
+}
+
+@MdClass(^id = "09736b02-9cac-4e3f-b4f7-d3e9576ab948", code_ru = "Роль")
+class Role extends MdObject
+{
+    @ExternalProperty
+    @MdProperty(^id = "3245b9fe-57f9-43dc-9c11-030f0617ce16")
+    refers transient AbstractRoleDescription rights
+    @ExternalProperty
+    @MdProperty(^id = "495795cf-08ed-4bce-a9cf-04aa58335631")
+    refers transient EObject suppressObject
+}
+
+@MdClass(^id = "9cd510ce-abfc-11d4-9434-004095e12fc7", code_ru = "Язык" )
+class Language extends MdObject
+{
+    @MdProperty(^id = "4b2a2bcf-a845-41ba-a03d-05b09a2c6c11")
+    String languageCode
+
+    op boolean validate(EDiagnosticChain diagnostics, EMap<Object, Object> context)
+    {
+        LanguageValidator::validate(this, diagnostics, context)
+    }
+}
+
+@MdClass(^id = "24c43748-c938-45d0-8d14-01424a72b11e", code_ru = "ПараметрСеанса")
+class SessionParameter extends MdObject, TypeDescriptionProvider
+{
+    @MdProperty(^id = "b1053250-abe6-11d4-9434-004095e12fc7", code = "Type")
+    contains TypeDescription[1] ^type
+
+    op boolean validate(EDiagnosticChain diagnostics, EMap<Object, Object> context)
+    {
+        SessionParameterValidator::validate(this, diagnostics, context)
+    }
+
+    @ExternalProperty
+    @MdProperty(^id = "4d1b0184-469e-448f-83f4-f8e967a48825")
+    refers transient EObject suppressObject
+}
+
+@MdClass(^id = "0c89c792-16c3-11d5-b96b-0050bae0a95d", code_ru = "ОбщийМакет")
+class CommonTemplate extends BasicTemplate, FullTextSearchDictionarySource
+{
+}
+
+@MdClass(^id = "0fe48980-252d-11d6-a3c7-0050bae0a776", code_ru = "ОбщийМодуль")
+class CommonModule extends MdObject
+{
+    contains transient ContextDef contextDef  // only for non-global modules
+
+    @ExternalProperty
+    @MdProperty(^id = "d5963243-262e-4398-b4d7-fb16d06484f6")
+    refers transient Module module
+    @MdProperty(^id = "7dbb2bc7-6bae-4b81-91cb-681317272a0b")
+    boolean global
+    @MdProperty(^id = "74ce8a02-abd2-46a6-8544-8cfbb4e8c6e0")
+    boolean clientManagedApplication
+    @MdProperty(^id = "6275a02e-96f0-4347-975a-2d661e6a0675")
+    boolean server
+    @MdProperty(^id = "d12660a6-7298-4ae2-a332-b95a6459a280")
+    boolean externalConnection
+    @MdProperty(^id = "436af77a-e846-4084-818b-740a3378518e")
+    boolean clientOrdinaryApplication
+    @MdProperty(^id = "c474bab9-d13a-4fbd-bfb0-9214d6dc2fde")
+    boolean serverCall
+    @MdProperty(^id = "334033a1-6bda-4dba-bc6d-0095d1b66f0b")
+    boolean privileged
+    @MdProperty(^id = "07ddee68-6fc0-4b88-9616-7792446d12b8")
+    ReturnValuesReuse returnValuesReuse
+
+    op boolean validate(EDiagnosticChain diagnostics, EMap<Object, Object> context)
+    {
+        CommonModuleValidator::validate(this, diagnostics, context)
+    }
+    
+    @ExternalProperty
+    @MdProperty(^id = "d979043e-74d8-11ee-b962-0242ac120002")
+    refers transient EObject suppressObject
+}
+
+@MdClass(^id = "15794563-ccec-41f6-a83c-ec5f7b9a5bc1", code_ru = "ОбщийРеквизит")
+class CommonAttribute extends BasicFeature, FieldSource, DataHistorySupport
+{
+    @MdProperty(^id = "2c8143d5-4248-4c43-8bfb-307c0be2e415")
+    boolean fillFromFillingValue
+    @MdProperty(^id = "e6b3f5f3-bdf3-4ad0-bc60-7323b3feb208")
+    contains Value fillValue
+    @MdProperty(^id = "7ba608f2-e654-42a3-8885-334fe88ca910")
+    ChoiceHistoryOnInput choiceHistoryOnInput
+    @MdProperty(^id = "964e62d0-81d1-45c8-a45c-41c7923e0ef5")
+    contains CommonAttributeContentItem[] content
+    @MdProperty(^id = "e481e723-7547-4017-9589-f208239231ff")
+    CommonAttributeAutoUse autoUse
+    @MdProperty(^id = "07d2661d-9884-4100-b9ac-f09cdebc1424")
+    CommonAttributeDataSeparation dataSeparation
+    @MdProperty(^id = "6afd32d1-6c03-4ca8-ba49-a6df3d70c22b")
+    CommonAttributeSeparatedDataUse separatedDataUse
+    @MdProperty(^id = "bbcc543c-59d7-4351-b352-089c023e133e")
+    refers SessionParameter dataSeparationValue
+    @MdProperty(^id = "f43c643b-d769-4d4a-95cb-aac43a185205")
+    refers SessionParameter dataSeparationUse
+    @MdProperty(^id = "5dcc98dd-b3eb-4aa3-a856-4132c98c2ae3")
+    refers MdObject conditionalSeparation
+    @MdProperty(^id = "2c53666f-7e17-4191-a01c-e2bc04859960")
+    CommonAttributeUsersSeparation usersSeparation
+    @MdProperty(^id = "a34bf27e-5104-46ca-b390-152693c0aabd")
+    CommonAttributeAuthenticationSeparation authenticationSeparation
+    @MdProperty(^id = "5d8103d9-e769-4c28-8b0a-03710201b262")
+    CommonAttributeExtensionSeparation configurationExtensionsSeparation
+    @MdProperty(^id = "a93a67a0-1955-11d6-a3c7-0050bae0a776")
+    Indexing indexing
+    @MdProperty(^id = "d4232326-022b-421e-b6d3-88e418f74327")
+    FullTextSearchUsing fullTextSearch
+
+    op boolean validate(EDiagnosticChain diagnostics, EMap<Object, Object> context)
+    {
+        if (dataSeparation == CommonAttributeDataSeparation::DONT_USE)
+            CommonAttributeValidator::validate(this, diagnostics, context)
+        else
+            DataSeparatorValidator::validate(this, diagnostics, context)
+    }
+
+    @ExternalProperty
+    @MdProperty(^id = "467fa4e4-1779-4c1e-a0b1-d7f447e2d0e6")
+    refers transient EObject suppressObject
+}
+
+@MdClass(^id = "07ee8426-87f1-11d5-b99c-0050bae0a95d", code_ru = "ОбщаяФорма")
+class CommonForm extends BasicForm, StandardCommandSource
+{
+    @MdProperty(^id = "d7be18bc-9899-48dd-8100-92dafc4dedea")
+    boolean useStandardCommands
+    @MdProperty(^id = "c9ba86bf-a1e7-440f-9450-adb61f886f88")
+    contains LocalStringMapEntry[] extendedPresentation
+    @MdProperty(^id = "719346a1-02d5-4311-a141-4d22470a7ac3")
+    contains LocalStringMapEntry[] explanation
+}
+
+@MdClass(^id = "7dcd43d9-aca5-4926-b549-1842e6a4e8cf", code_ru = "ОбщаяКартинка")
+class CommonPicture extends MdObject, PictureDef
+{
+    // @MdProperty(^id = "02f3f4dd-36ab-4fd0-a714-1f48d478e678")
+    contains transient PictureDef picture // workaround for extension state type mapping
+    @MdProperty(^id = "475defa1-3251-4561-b313-24639a93ed63") // since 8.3.16
+    boolean availabilityForChoice
+    @MdProperty(^id = "02f3f4dd-36ab-4fd0-a714-1f48d478e678") // since 8.3.16
+    boolean availabilityForAppearance
+    @ExternalProperty
+    @MdProperty(^id = "d25915ea-d47b-46e8-b1e7-a505cbed2195")
+    refers transient EObject suppressObject
+}
+
+@MdClass(^id = "1c57eabe-7349-44b3-b1de-ebfeab67b47d", code_ru = "ГруппаКоманд")
+class CommandGroup extends MdObject, com._1c.g5.v8.dt.mcore.CommandGroup
+{
+    @MdProperty(^id = "a5085b15-9218-4da8-b2e1-3c5d357b9f82")
+    ButtonRepresentation representation
+    @MdProperty(^id = "4c3288f7-2704-4f31-9bf3-4b8e8e080682")
+    contains LocalStringMapEntry[] toolTip
+    @MdProperty(^id = "58e51e5d-aee0-41ea-89c0-b0962a74d237")
+    contains Picture picture
+    @MdProperty(^id = "a6284a90-aa5c-4d44-80e6-b7d30b01ae78")
+    CommandGroupCategory category
+    @ExternalProperty
+    @MdProperty(^id = "6d594db8-9d53-418f-88ba-606d022becab")
+    refers transient EObject suppressObject
+}
+
+abstract class PredefinedItem
+{
+    Uuid[1] ^id
+    String name
+    String description
+    contains ObjectExtension ^extension
+    op boolean validate(EDiagnosticChain diagnostics, EMap<Object, Object> context)
+    {
+        PredefinedItemValidator::validate(this, diagnostics, context)
+    }
+}
+
+abstract class Predefined
+{
+    op PredefinedItem[] predefinedItems()
+}
+
+@MdClass(^id = "cf4abea6-37b2-11d4-940f-008048da11f9", code_ru = "Справочник")
+class Catalog extends BasicDbObject, CatalogOwner, SupportFilterCriterion, DataHistorySupport
+{
+    contains CatalogTypes[1] producedTypes
+    contains transient CatalogDbViewDefs dbViewDefs
+
+    @MdProperty(^id = "b0ec341d-eede-4bb4-b303-ed50020b4c7f")
+    boolean hierarchical
+    @MdProperty(^id = "a865d4e5-8584-4894-8e49-4b4206f98f5a")
+    HierarchyType hierarchyType
+    @MdProperty(^id = "c7e7487f-9a48-4be3-9252-d80619dd4dab")
+    boolean limitLevelCount
+    @MdProperty(^id = "cf4abea5-37b2-11d4-940f-008048da11f9")
+    int levelCount
+    @MdProperty(^id = "b69601f2-4cf6-11d4-9415-008048da11f9")
+    boolean foldersOnTop
+    @MdProperty(^id = "b69601f0-4cf6-11d4-9415-008048da11f9")
+    refers CatalogOwner[] owners
+    @MdProperty(^id = "d88cdc71-8447-43bf-b566-0b7a55472238")
+    SubordinationUse subordinationUse
+    @MdProperty(^id = "37f2fa9d-b276-11d4-9435-004095e12fc7")
+    int codeLength
+    @MdProperty(^id = "37f2fa9f-b276-11d4-9435-004095e12fc7")
+    int descriptionLength
+    @MdProperty(^id = "37f2fa9e-b276-11d4-9435-004095e12fc7")
+    CatalogCodeType codeType
+    @MdProperty(^id = "bf9cc511-eb2a-48b6-a666-7afb78b83f36")
+    AllowedLength codeAllowedLength
+    @MdProperty(^id = "ea6cbf20-3c58-4040-bd90-4ee8c5efa474")
+    CatalogCodesSeries codeSeries
+    @MdProperty(^id = "b69601f1-4cf6-11d4-9415-008048da11f9")
+    boolean checkUnique
+    @MdProperty(^id = "b1053251-abe6-11d4-9434-004095e12fc7")
+    boolean autonumbering
+    @MdProperty(^id = "9cd510cf-abfc-11d4-9434-004095e12fc7")
+    CatalogMainPresentation defaultPresentation
+    @MdProperty(^id = "f440939a-f130-413b-9c9a-2b18c4af69c6")
+    contains CatalogPredefined predefined    // in original xml it is hold in another resource. think how to do this right
+    @MdProperty(^id = "e0f7a40c-d85a-468b-a598-d816bef1bb6c")
+    PredefinedDataUpdate predefinedDataUpdate
+    @MdProperty(^id = "267add9b-837b-42d9-992d-374a808fd94d")
+    EditType editType
+    @MdProperty(^id = "1b3ecd33-43d7-45e4-a012-776d95785465")
+    boolean quickChoice
+    @MdProperty(^id = "cab319ad-716c-4d9e-9240-639aab7e9a0c")
+    ChoiceMode choiceMode
+    @MdProperty(^id = "b69601f3-4cf6-11d4-9415-008048da11f9")
+    refers CatalogForm defaultObjectForm
+    @MdProperty(^id = "b69601f4-4cf6-11d4-9415-008048da11f9")
+    refers CatalogForm defaultFolderForm
+    @MdProperty(^id = "b69601f5-4cf6-11d4-9415-008048da11f9")
+    refers CatalogForm defaultListForm
+    @MdProperty(^id = "b69601f6-4cf6-11d4-9415-008048da11f9")
+    refers CatalogForm defaultChoiceForm
+    @MdProperty(^id = "2b191b80-4ada-11d6-a3c9-0050bae0a776")
+    refers CatalogForm defaultFolderChoiceForm
+    @MdProperty(^id = "98388ad1-7b6f-4049-bfdb-02b3e3789cdc")
+    refers CatalogForm auxiliaryObjectForm
+    @MdProperty(^id = "53c0f725-cc2e-4a43-a19b-3740401a996b")
+    refers CatalogForm auxiliaryFolderForm
+    @MdProperty(^id = "367b60f5-2ad5-4399-a6b0-3dd8e4ac3650")
+    refers CatalogForm auxiliaryListForm
+    @MdProperty(^id = "4f0c02fe-c9da-4f51-ae93-e69119d4eb2c")
+    refers CatalogForm auxiliaryChoiceForm
+    @MdProperty(^id = "8c626437-9d8e-44dc-b70d-fc827b097643")
+    refers CatalogForm auxiliaryFolderChoiceForm
+    @MdProperty(^id = "7ba608f2-e654-42a3-8885-334fe88ca910")
+    ChoiceHistoryOnInput choiceHistoryOnInput
+    @MdProperty(^id = "0912c390-3c7e-4de9-abd0-f9c9cb19f0e6") // since 8.3.15
+    boolean updateDataHistoryImmediatelyAfterWrite
+    @MdProperty(^id = "c4986a1c-1315-4f86-9587-f1d116329b58") // since 8.3.15
+    boolean executeAfterWriteDataHistoryVersionProcessing
+
+    @MdClass(^id = "cf4abea7-37b2-11d4-940f-008048da11f9", code = "Attribute", code_ru = "Реквизит")
+    contains CatalogAttribute[] attributes
+    @MdClass(^id = "932159f9-95b2-4e76-a8dd-8849fe5c5ded", code = "TabularSection", code_ru = "ТабличнаяЧасть")
+    contains CatalogTabularSection[] tabularSections
+    @MdClass(^id = "fdf816d2-1ead-11d5-b975-0050bae0a95d", code = "Form", code_ru = "Форма")
+    contains CatalogForm[] forms
+    @MdClass(^id = "3daea016-69b7-4ed4-9453-127911372fe6")
+    contains Template[] templates
+    @MdClass(^id = "4fe87c89-9ad4-43f6-9fdb-9dc83b3879c6", code = "Command", code_ru = "Команда")
+    contains CatalogCommand[] commands
+
+    op boolean validate(EDiagnosticChain diagnostics, EMap<Object, Object> context)
+    {
+        CatalogValidator::validate(this, diagnostics, context)
+    }
+
+    op TypeItem selectCriterionTypeRef()
+    {
+        producedTypes.refType.^type
+    }
+}
+
+@MdClass(^id = "cf4abea7-37b2-11d4-940f-008048da11f9", code = "Attribute", code_ru = "Реквизит")
+class CatalogAttribute extends HierarchicalDbObjectAttribute, DataHistorySupport
+{
+    @MdProperty(^id = "7ba608f2-e654-42a3-8885-334fe88ca910")
+    ChoiceHistoryOnInput choiceHistoryOnInput
+}
+
+@MdClass(^id = "932159f9-95b2-4e76-a8dd-8849fe5c5ded", code = "TabularSection", code_ru = "ТабличнаяЧасть")
+class CatalogTabularSection extends HierarchicalDbObjectTabularSection
+{
+}
+
+@MdClass(^id = "fdf816d2-1ead-11d5-b975-0050bae0a95d", code = "Form", code_ru = "Форма")
+class CatalogForm extends BasicForm
+{
+}
+
+@MdClass(^id = "4fe87c89-9ad4-43f6-9fdb-9dc83b3879c6", code = "Command", code_ru = "Команда")
+class CatalogCommand extends BasicCommand
+{
+}
+
+class CatalogPredefinedItem extends PredefinedItem
+{
+    contains Value code
+    boolean isFolder
+    contains CatalogPredefinedItem[] content
+}
+
+class CatalogPredefined extends Predefined
+{
+    contains CatalogPredefinedItem[] items
+
+    op PredefinedItem[] predefinedItems()
+    {
+        val EList<? extends PredefinedItem> _items = items
+        return _items as EList<PredefinedItem>
+    }
+}
+
+@MdClass(^id = "061d872a-5787-460e-95ac-ed74ea3a3e84", code_ru = "Документ")
+class Document extends BasicDbObject, SupportFilterCriterion, DataHistorySupport
+{
+    contains DocumentTypes[1] producedTypes
+    contains transient DocumentDbViewDefs dbViewDefs // inferred
+
+    @MdProperty(^id = "216e0434-4ec5-4d1b-8e60-643d982d5fd9")
+    refers DocumentNumerator numerator
+    @MdProperty(^id = "60643a07-120a-4a63-9dba-67369c0f0145")
+    DocumentNumberType numberType
+    @MdProperty(^id = "490eb6bd-24c4-4943-82aa-d0c4b666861b")
+    int numberLength
+    @MdProperty(^id = "c6c9689d-2978-42e8-863f-0280c6a85b56")
+    AllowedLength numberAllowedLength
+    @MdProperty(^id = "67ebd6e9-d0ad-4b29-8d2b-3bfec03ff2cb")
+    DocumentNumberPeriodicity numberPeriodicity
+    @MdProperty(^id = "8336a121-59b3-427d-8e49-1c813662a550")
+    boolean checkUnique
+    @MdProperty(^id = "05720713-cc30-4c4e-a417-87b1676d8d85")
+    boolean autonumbering
+    @MdProperty(^id = "b69601f3-4cf6-11d4-9415-008048da11f9")
+    refers DocumentForm defaultObjectForm
+    @MdProperty(^id = "b69601f5-4cf6-11d4-9415-008048da11f9")
+    refers DocumentForm defaultListForm
+    @MdProperty(^id = "b69601f6-4cf6-11d4-9415-008048da11f9")
+    refers DocumentForm defaultChoiceForm
+    @MdProperty(^id = "98388ad1-7b6f-4049-bfdb-02b3e3789cdc")
+    refers DocumentForm auxiliaryObjectForm
+    @MdProperty(^id = "367b60f5-2ad5-4399-a6b0-3dd8e4ac3650")
+    refers DocumentForm auxiliaryListForm
+    @MdProperty(^id = "4f0c02fe-c9da-4f51-ae93-e69119d4eb2c")
+    refers DocumentForm auxiliaryChoiceForm
+    @MdProperty(^id = "68548ca0-1f29-11d6-a3c7-0050bae0a776")
+    Posting posting
+    @MdProperty(^id = "6c363173-16b4-4fe9-93d9-c2c4193e4065")
+    RealTimePosting realTimePosting
+    @MdProperty(^id = "cb89c6e0-1f2a-11d6-a3c7-0050bae0a776")
+    RegisterRecordsDeletion registerRecordsDeletion
+    @MdProperty(^id = "ffb10f15-34c5-4e17-846c-aa3415eb0f96")
+    RegisterRecordsWritingOnPost registerRecordsWritingOnPost
+    @MdProperty(^id = "78019747-bba9-4901-9e02-3646ae7a0424")
+    SequenceFilling sequenceFilling
+    @MdProperty(^id = "aa7de5c0-0f31-11d6-a3c7-0050bae0a776")
+    refers BasicRegister[] registerRecords
+    @MdProperty(^id = "99d272f6-0aeb-4743-9295-3aa0b2c27356")
+    boolean postInPrivilegedMode
+    @MdProperty(^id = "14076db5-1fdc-4ba4-b9f1-9714c8363c89")
+    boolean unpostInPrivilegedMode
+    @MdProperty(^id = "7ba608f2-e654-42a3-8885-334fe88ca910")
+    ChoiceHistoryOnInput choiceHistoryOnInput
+    @MdProperty(^id = "0912c390-3c7e-4de9-abd0-f9c9cb19f0e6") // since 8.3.15
+    boolean updateDataHistoryImmediatelyAfterWrite
+    @MdProperty(^id = "c4986a1c-1315-4f86-9587-f1d116329b58") // since 8.3.15
+    boolean executeAfterWriteDataHistoryVersionProcessing
+
+    @MdClass(^id = "45e46cbc-3e24-4165-8b7b-cc98a6f80211", code = "Attribute", code_ru = "Реквизит")
+    contains DocumentAttribute[] attributes
+    @MdClass(^id = "fb880e93-47d7-4127-9357-a20e69c17545", code = "Form", code_ru = "Форма")
+    contains DocumentForm[] forms
+    @MdClass(^id = "21c53e09-8950-4b5e-a6a0-1054f1bbc274", code = "TabularSection", code_ru = "ТабличнаяЧасть")
+    contains DocumentTabularSection[] tabularSections
+    @MdClass(^id = "3daea016-69b7-4ed4-9453-127911372fe6")
+    contains Template[] templates
+    @MdClass(^id = "b544fc6a-2ba3-4885-8fb2-cb289fb6d65e", code = "Command", code_ru = "Команда")
+    contains DocumentCommand[] commands
+
+    op boolean validate(EDiagnosticChain diagnostics, EMap<Object, Object> context)
+    {
+        DocumentValidator::validate(this, diagnostics, context)
+    }
+
+    op TypeItem selectCriterionTypeRef()
+    {
+        producedTypes.refType.^type
+    }
+}
+
+@MdClass(^id = "45e46cbc-3e24-4165-8b7b-cc98a6f80211", code = "Attribute", code_ru = "Реквизит")
+class DocumentAttribute extends DbObjectAttribute, DataHistorySupport
+{
+    @MdProperty(^id = "7ba608f2-e654-42a3-8885-334fe88ca910")
+    ChoiceHistoryOnInput choiceHistoryOnInput
+}
+
+@MdClass(^id = "fb880e93-47d7-4127-9357-a20e69c17545", code = "Form", code_ru = "Форма")
+class DocumentForm extends BasicForm
+{
+}
+
+@MdClass(^id = "21c53e09-8950-4b5e-a6a0-1054f1bbc274", code = "TabularSection", code_ru = "ТабличнаяЧасть")
+class DocumentTabularSection extends DbObjectTabularSection
+{
+}
+
+@MdClass(^id = "b544fc6a-2ba3-4885-8fb2-cb289fb6d65e", code = "Command", code_ru = "Команда")
+class DocumentCommand extends BasicCommand
+{
+}
+
+@MdClass(^id = "36a8e346-9aaa-4af9-bdbd-83be3c177977", code_ru = "НумераторДокумента")
+class DocumentNumerator extends MdObject
+{
+    @MdProperty(^id = "60643a07-120a-4a63-9dba-67369c0f0145")
+    DocumentNumberType numberType
+    @MdProperty(^id = "490eb6bd-24c4-4943-82aa-d0c4b666861b")
+    int numberLength
+    @MdProperty(^id = "c6c9689d-2978-42e8-863f-0280c6a85b56")
+    AllowedLength numberAllowedLength
+    @MdProperty(^id = "67ebd6e9-d0ad-4b29-8d2b-3bfec03ff2cb")
+    DocumentNumberPeriodicity numberPeriodicity
+    @MdProperty(^id = "8336a121-59b3-427d-8e49-1c813662a550")
+    boolean checkUnique
+
+    op boolean validate(EDiagnosticChain diagnostics, EMap<Object, Object> context)
+    {
+        DocumentNumeratorValidator::validate(this, diagnostics, context)
+    }
+
+    @ExternalProperty
+    @MdProperty(^id = "ee6100d1-e7b6-4a5d-9297-eb5cb4ddd0a5")
+    refers transient EObject suppressObject
+}
+
+@MdClass(^id = "82a1b659-b220-4d94-a9bd-14d757b95a48", code_ru = "ПланВидовХарактеристик")
+class ChartOfCharacteristicTypes extends BasicDbObject, CatalogOwner, SupportFilterCriterion, DataHistorySupport, TypeDescriptionProvider
+{
+    contains ChartOfCharacteristicTypesTypes[1] producedTypes
+    contains transient ChartOfCharacteristicTypesDbViewDefs dbViewDefs    // inferred
+
+    @MdProperty(^id = "c4815c10-b9a1-4144-81d3-51cb99120a8d")
+    refers Catalog characteristicExtValues
+    @MdProperty(^id = "b1053250-abe6-11d4-9434-004095e12fc7", code = "Type")
+    contains TypeDescription[1] ^type
+    @MdProperty(^id = "b0ec341d-eede-4bb4-b303-ed50020b4c7f")
+    boolean hierarchical
+    @MdProperty(^id = "b69601f2-4cf6-11d4-9415-008048da11f9")
+    boolean foldersOnTop
+    @MdProperty(^id = "37f2fa9d-b276-11d4-9435-004095e12fc7")
+    int codeLength
+    @MdProperty(^id = "bf9cc511-eb2a-48b6-a666-7afb78b83f36")
+    AllowedLength codeAllowedLength
+    @MdProperty(^id = "37f2fa9f-b276-11d4-9435-004095e12fc7")
+    int descriptionLength
+    @MdProperty(^id = "ee20ef76-a524-4429-a738-450075908322")
+    CharacteristicKindCodesSeries codeSeries
+    @MdProperty(^id = "b69601f1-4cf6-11d4-9415-008048da11f9")
+    boolean checkUnique
+    @MdProperty(^id = "b1053251-abe6-11d4-9434-004095e12fc7")
+    boolean autonumbering
+    @MdProperty(^id = "b316e935-1b20-4857-b29e-9b70684f9e83")
+    CharacteristicTypeMainPresentation defaultPresentation
+    @MdProperty(^id = "f440939a-f130-413b-9c9a-2b18c4af69c6")
+    contains ChartOfCharacteristicTypesPredefined predefined     // in original xml it is in another resource.
+    @MdProperty(^id = "e0f7a40c-d85a-468b-a598-d816bef1bb6c")
+    PredefinedDataUpdate predefinedDataUpdate
+    @MdProperty(^id = "267add9b-837b-42d9-992d-374a808fd94d")
+    EditType editType
+    @MdProperty(^id = "1b3ecd33-43d7-45e4-a012-776d95785465")
+    boolean quickChoice
+    @MdProperty(^id = "cab319ad-716c-4d9e-9240-639aab7e9a0c")
+    ChoiceMode choiceMode
+    @MdProperty(^id = "7ba608f2-e654-42a3-8885-334fe88ca910")
+    ChoiceHistoryOnInput choiceHistoryOnInput
+    @MdProperty(^id = "b69601f3-4cf6-11d4-9415-008048da11f9")
+    refers ChartOfCharacteristicTypesForm defaultObjectForm
+    @MdProperty(^id = "b69601f4-4cf6-11d4-9415-008048da11f9")
+    refers ChartOfCharacteristicTypesForm defaultFolderForm
+    @MdProperty(^id = "b69601f5-4cf6-11d4-9415-008048da11f9")
+    refers ChartOfCharacteristicTypesForm defaultListForm
+    @MdProperty(^id = "b69601f6-4cf6-11d4-9415-008048da11f9")
+    refers ChartOfCharacteristicTypesForm defaultChoiceForm
+    @MdProperty(^id = "2b191b80-4ada-11d6-a3c9-0050bae0a776")
+    refers ChartOfCharacteristicTypesForm defaultFolderChoiceForm
+    @MdProperty(^id = "98388ad1-7b6f-4049-bfdb-02b3e3789cdc")
+    refers ChartOfCharacteristicTypesForm auxiliaryObjectForm
+    @MdProperty(^id = "53c0f725-cc2e-4a43-a19b-3740401a996b")
+    refers ChartOfCharacteristicTypesForm auxiliaryFolderForm
+    @MdProperty(^id = "367b60f5-2ad5-4399-a6b0-3dd8e4ac3650")
+    refers ChartOfCharacteristicTypesForm auxiliaryListForm
+    @MdProperty(^id = "4f0c02fe-c9da-4f51-ae93-e69119d4eb2c")
+    refers ChartOfCharacteristicTypesForm auxiliaryChoiceForm
+    @MdProperty(^id = "8c626437-9d8e-44dc-b70d-fc827b097643")
+    refers ChartOfCharacteristicTypesForm auxiliaryFolderChoiceForm
+    @MdProperty(^id = "0912c390-3c7e-4de9-abd0-f9c9cb19f0e6") // since 8.3.15
+    boolean updateDataHistoryImmediatelyAfterWrite
+    @MdProperty(^id = "c4986a1c-1315-4f86-9587-f1d116329b58") // since 8.3.15
+    boolean executeAfterWriteDataHistoryVersionProcessing
+
+    @MdClass(^id = "31182525-9346-4595-81f8-6f91a72ebe06", code = "Attribute", code_ru = "Реквизит")
+    contains ChartOfCharacteristicTypesAttribute[] attributes
+    @MdClass(^id = "54e36536-7863-42fd-bea3-c5edd3122fdc", code = "TabularSection", code_ru = "ТабличнаяЧасть")
+    contains ChartOfCharacteristicTypesTabularSection[] tabularSections
+    @MdClass(^id = "eb2b78a8-40a6-4b7e-b1b3-6ca9966cbc94", code = "Form", code_ru = "Форма")
+    contains ChartOfCharacteristicTypesForm[] forms
+    @MdClass(^id = "3daea016-69b7-4ed4-9453-127911372fe6")
+    contains Template[] templates
+    @MdClass(^id = "95b5e1d4-abfa-4a16-818d-a5b07b7d3f73", code = "Command", code_ru = "Команда")
+    contains ChartOfCharacteristicTypesCommand[] commands
+
+    op boolean validate(EDiagnosticChain diagnostics, EMap<Object, Object> context)
+    {
+        ChartOfCharacteristicTypesValidator::validate(this, diagnostics, context)
+    }
+
+    op TypeItem selectCriterionTypeRef()
+    {
+        producedTypes.refType.^type
+    }
+}
+
+@MdClass(^id = "31182525-9346-4595-81f8-6f91a72ebe06", code = "Attribute", code_ru = "Реквизит")
+class ChartOfCharacteristicTypesAttribute extends HierarchicalDbObjectAttribute, DataHistorySupport
+{
+    @MdProperty(^id = "7ba608f2-e654-42a3-8885-334fe88ca910")
+    ChoiceHistoryOnInput choiceHistoryOnInput
+}
+
+@MdClass(^id = "54e36536-7863-42fd-bea3-c5edd3122fdc", code = "TabularSection", code_ru = "ТабличнаяЧасть")
+class ChartOfCharacteristicTypesTabularSection extends HierarchicalDbObjectTabularSection
+{
+}
+
+@MdClass(^id = "eb2b78a8-40a6-4b7e-b1b3-6ca9966cbc94", code = "Form", code_ru = "Форма")
+class ChartOfCharacteristicTypesForm extends BasicForm
+{
+}
+
+@MdClass(^id = "95b5e1d4-abfa-4a16-818d-a5b07b7d3f73", code = "Command", code_ru = "Команда")
+class ChartOfCharacteristicTypesCommand extends BasicCommand
+{
+}
+
+class ChartOfCharacteristicTypesPredefinedItem extends PredefinedItem
+{
+    boolean isFolder
+    String code
+    contains TypeDescription ^type
+    contains ChartOfCharacteristicTypesPredefinedItem[] content
+}
+
+class ChartOfCharacteristicTypesPredefined extends Predefined
+{
+    contains ChartOfCharacteristicTypesPredefinedItem[] items
+
+    op PredefinedItem[] predefinedItems()
+    {
+        val EList<? extends PredefinedItem> _items = items
+        return _items as EList<PredefinedItem>
+    }
+}
+
+@MdClass(^id = "f6a80749-5ad7-400b-8519-39dc5dff2542", code_ru = "Перечисление")
+class Enum extends MdObject, FieldSource, StandardCommandSource
+{
+    contains EnumTypes[1] producedTypes
+    contains transient EnumDbViewDefs dbViewDefs // inferred
+
+    @MdProperty(^id = "d7be18bc-9899-48dd-8100-92dafc4dedea")
+    boolean useStandardCommands
+    @MdProperty(^id = "03f171e8-326f-41c6-9fa5-932a0b12cddf")
+    contains StandardAttribute[] standardAttributes
+    @MdProperty(^id = "97fc573f-64e4-46df-b464-077a96d76122")
+    contains CharacteristicsDescription[] characteristics
+    @MdProperty(^id = "1b3ecd33-43d7-45e4-a012-776d95785465")
+    boolean quickChoice
+    @MdProperty(^id = "cab319ad-716c-4d9e-9240-639aab7e9a0c")
+    ChoiceMode choiceMode
+    @MdProperty(^id = "b69601f5-4cf6-11d4-9415-008048da11f9")
+    refers EnumForm defaultListForm
+    @MdProperty(^id = "b69601f6-4cf6-11d4-9415-008048da11f9")
+    refers EnumForm defaultChoiceForm
+    @MdProperty(^id = "367b60f5-2ad5-4399-a6b0-3dd8e4ac3650")
+    refers EnumForm auxiliaryListForm
+    @MdProperty(^id = "4f0c02fe-c9da-4f51-ae93-e69119d4eb2c")
+    refers EnumForm auxiliaryChoiceForm
+    @ExternalProperty
+    @MdProperty(^id = "d1b64a2c-8078-4982-8190-8f81aefda192")
+    refers transient Module managerModule
+    @MdProperty(^id = "b894dce6-9f10-45d6-958f-45993525a044")
+    contains LocalStringMapEntry[] listPresentation
+    @MdProperty(^id = "97f5ad64-29e4-410f-8ead-ec0dd5c5e58d")
+    contains LocalStringMapEntry[] extendedListPresentation
+    @MdProperty(^id = "719346a1-02d5-4311-a141-4d22470a7ac3")
+    contains LocalStringMapEntry[] explanation
+    @MdProperty(^id = "7ba608f2-e654-42a3-8885-334fe88ca910")
+    ChoiceHistoryOnInput choiceHistoryOnInput
+
+    @MdClass(^id = "bee0a08c-07eb-40c0-8544-5c364c171465")
+    contains EnumValue[] enumValues
+    @MdClass(^id = "33f2e54b-37ce-4a7a-a569-b648d7aa4634", code = "Form", code_ru = "Форма")
+    contains EnumForm[] forms
+    @MdClass(^id = "3daea016-69b7-4ed4-9453-127911372fe6")
+    contains Template[] templates
+    @MdClass(^id = "6d8d73a7-ba29-401d-9032-3872ec2d6433", code = "Command", code_ru = "Команда")
+    contains EnumCommand[] commands
+    @ExternalProperty
+    @MdProperty(^id = "311adbc5-6c3c-46db-8ef9-1e43d0221831")
+    refers transient EObject suppressObject
+}
+
+@MdClass(^id = "bee0a08c-07eb-40c0-8544-5c364c171465")
+class EnumValue extends MdObject
+{
+}
+
+@MdClass(^id = "33f2e54b-37ce-4a7a-a569-b648d7aa4634", code = "Form", code_ru = "Форма")
+class EnumForm extends BasicForm
+{
+}
+
+@MdClass(^id = "6d8d73a7-ba29-401d-9032-3872ec2d6433", code = "Command", code_ru = "Команда")
+class EnumCommand extends BasicCommand
+{
+}
+
+@MdClass(^id = "13134201-f60b-11d5-a3c7-0050bae0a776", code_ru = "РегистрСведений")
+class InformationRegister extends BasicRegister, DataHistorySupport
+{
+    contains InformationRegisterTypes[1] producedTypes
+    contains transient InformationRegisterDbViewDefs dbViewDefs    // inferred
+
+    @MdProperty(^id = "d7be18bc-9899-48dd-8100-92dafc4dedea")
+    boolean useStandardCommands
+    @MdProperty(^id = "267add9b-837b-42d9-992d-374a808fd94d")
+    EditType editType
+    @MdProperty(^id = "353c5ce0-0b3c-11d6-a3c7-0050bae0a776")
+    refers InformationRegisterForm defaultRecordForm
+    @MdProperty(^id = "b69601f5-4cf6-11d4-9415-008048da11f9")
+    refers InformationRegisterForm defaultListForm
+    @MdProperty(^id = "5b0405ec-b187-4828-a005-f15921422b2b")
+    refers InformationRegisterForm auxiliaryRecordForm
+    @MdProperty(^id = "367b60f5-2ad5-4399-a6b0-3dd8e4ac3650")
+    refers InformationRegisterForm auxiliaryListForm
+    @MdProperty(^id = "03f171e8-326f-41c6-9fa5-932a0b12cddf")
+    contains StandardAttribute[] standardAttributes
+    @MdProperty(^id = "13134205-f60b-11d5-a3c7-0050bae0a776")
+    InformationRegisterPeriodicity informationRegisterPeriodicity
+    @MdProperty(^id = "09c412e0-0f30-11d6-a3c7-0050bae0a776")
+    RegisterWriteMode writeMode
+    @MdProperty(^id = "6e4cd931-ddd4-4f35-86d7-88c59f3e26e7")
+    boolean mainFilterOnPeriod
+    @MdProperty(^id = "1f2b167a-25fe-4f47-8710-933567dfa7d9")
+    boolean includeHelpInContents
+    @MdProperty(^id = "038b5c85-fb1c-4082-9c4c-e69f8928bf3a")
+    contains Help help
+    @ExternalProperty
+    @MdProperty(^id = "9f36fd70-4bf4-47f6-b235-935f73aab43f")
+    refers transient Module recordSetModule
+    @ExternalProperty
+    @MdProperty(^id = "d1b64a2c-8078-4982-8190-8f81aefda192")
+    refers transient Module managerModule
+    @MdProperty(^id = "09c14dad-bd23-4d30-9c09-20ca3e5cd9f0")
+    DefaultDataLockControlMode dataLockControlMode
+    @MdProperty(^id = "d4232326-022b-421e-b6d3-88e418f74327")
+    FullTextSearchUsing fullTextSearch
+    @MdProperty(^id = "d200da23-b24d-4d2d-8601-d5fdfa61e245")
+    boolean enableTotalsSliceFirst
+    @MdProperty(^id = "382758de-f473-4894-b7a6-1a9418d8646e")
+    boolean enableTotalsSliceLast
+    @MdProperty(^id = "b2f35c4e-8ffd-4e78-bb87-f7a7f14916e3")
+    contains LocalStringMapEntry[] recordPresentation
+    @MdProperty(^id = "efb47759-ee9f-4a50-b774-e4722073df6e")
+    contains LocalStringMapEntry[] extendedRecordPresentation
+    @MdProperty(^id = "b894dce6-9f10-45d6-958f-45993525a044")
+    contains LocalStringMapEntry[] listPresentation
+    @MdProperty(^id = "97f5ad64-29e4-410f-8ead-ec0dd5c5e58d")
+    contains LocalStringMapEntry[] extendedListPresentation
+    @MdProperty(^id = "719346a1-02d5-4311-a141-4d22470a7ac3")
+    contains LocalStringMapEntry[] explanation
+    @MdProperty(^id = "0912c390-3c7e-4de9-abd0-f9c9cb19f0e6") // since 8.3.15
+    boolean updateDataHistoryImmediatelyAfterWrite
+    @MdProperty(^id = "c4986a1c-1315-4f86-9587-f1d116329b58") // since 8.3.15
+    boolean executeAfterWriteDataHistoryVersionProcessing
+
+    @MdClass(^id = "13134202-f60b-11d5-a3c7-0050bae0a776", code = "Resource", code_ru = "Ресурс")
+    contains InformationRegisterResource[] resources
+    @MdClass(^id = "a2207540-1400-11d6-a3c7-0050bae0a776", code = "Attribute", code_ru = "Реквизит")
+    contains InformationRegisterAttribute[] attributes
+    @MdClass(^id = "13134203-f60b-11d5-a3c7-0050bae0a776", code = "Dimension", code_ru = "Измерение")
+    contains InformationRegisterDimension[] dimensions
+    @MdClass(^id = "13134204-f60b-11d5-a3c7-0050bae0a776", code = "Form", code_ru = "Форма")
+    contains InformationRegisterForm[] forms
+    @MdClass(^id = "3daea016-69b7-4ed4-9453-127911372fe6")
+    contains Template[] templates
+    @MdClass(^id = "b44ba719-945c-445c-8aab-1088fa4df16e", code = "Command", code_ru = "Команда")
+    contains InformationRegisterCommand[] commands
+
+    op boolean validate(EDiagnosticChain diagnostics, EMap<Object, Object> context)
+    {
+        InformationRegisterValidator::validate(this, diagnostics, context)
+    }
+}
+
+@MdClass(^id = "13134202-f60b-11d5-a3c7-0050bae0a776", code = "Resource", code_ru = "Ресурс")
+class InformationRegisterResource extends RegisterResource, DataHistorySupport
+{
+    @MdProperty(^id = "2c8143d5-4248-4c43-8bfb-307c0be2e415")
+    boolean fillFromFillingValue
+    @MdProperty(^id = "e6b3f5f3-bdf3-4ad0-bc60-7323b3feb208")
+    contains Value fillValue
+    @MdProperty(^id = "7ba608f2-e654-42a3-8885-334fe88ca910")
+    ChoiceHistoryOnInput choiceHistoryOnInput
+    @MdProperty(^id = "a93a67a0-1955-11d6-a3c7-0050bae0a776")
+    Indexing indexing
+}
+
+@MdClass(^id = "a2207540-1400-11d6-a3c7-0050bae0a776", code = "Attribute", code_ru = "Реквизит")
+class InformationRegisterAttribute extends RegisterAttribute, DataHistorySupport
+{
+    @MdProperty(^id = "2c8143d5-4248-4c43-8bfb-307c0be2e415")
+    boolean fillFromFillingValue
+    @MdProperty(^id = "e6b3f5f3-bdf3-4ad0-bc60-7323b3feb208")
+    contains Value fillValue
+    @MdProperty(^id = "7ba608f2-e654-42a3-8885-334fe88ca910")
+    ChoiceHistoryOnInput choiceHistoryOnInput
+}
+
+@MdClass(^id = "13134203-f60b-11d5-a3c7-0050bae0a776", code = "Dimension", code_ru = "Измерение")
+class InformationRegisterDimension extends RegisterDimension, DataHistorySupport
+{
+    @MdProperty(^id = "2c8143d5-4248-4c43-8bfb-307c0be2e415")
+    boolean fillFromFillingValue
+    @MdProperty(^id = "e6b3f5f3-bdf3-4ad0-bc60-7323b3feb208")
+    contains Value fillValue
+    @MdProperty(^id = "7ba608f2-e654-42a3-8885-334fe88ca910")
+    ChoiceHistoryOnInput choiceHistoryOnInput
+    @MdProperty(^id = "25160ea0-0ab1-11d6-a3c7-0050bae0a776")
+    boolean master
+    @MdProperty(^id = "4125495d-294b-4cf7-85d3-0809d578fe07")
+    boolean mainFilter
+}
+
+@MdClass(^id = "13134204-f60b-11d5-a3c7-0050bae0a776", code = "Form", code_ru = "Форма")
+class InformationRegisterForm extends BasicForm
+{
+}
+
+@MdClass(^id = "b44ba719-945c-445c-8aab-1088fa4df16e", code = "Command", code_ru = "Команда")
+class InformationRegisterCommand extends BasicCommand
+{
+}
+
+interface MdExtObject
+{
+}
+
+@MdClass(^id = "39bddf6a-0c3c-452b-921c-d99cfa1c2f1b")
+class Interface extends MdObject
+{
+    @ExternalProperty
+    @MdProperty(^id = "e14360bb-c165-49e7-a9bf-5d78c3c66a63")
+    refers transient MdExtObject ^interface
+    @MdProperty(^id = "294048e0-d1f1-11d5-a3c1-0050bae0a776")
+    boolean switchable
+}
+
+@MdClass(^id = "3e5404af-6ef8-4c73-ad11-91bd2dfac4c8", code = "Style", code_ru = "Стиль")
+class Style extends MdObject
+{
+    @ExternalProperty
+    @MdProperty(^id = "78205e58-fa2b-4ba4-a423-2f91348e2c52")
+    refers transient AbstractStyle style
+    @ExternalProperty
+    @MdProperty(^id = "a6c2efd9-276c-43b4-b0bf-51f4c857f533")
+    refers transient EObject suppressObject
+}
+
+@MdClass(^id = "cf4abeab-37b2-11d4-940f-008048da11f9")
+class Configuration extends MdObject
+{
+    contains ContainedObject[] containedObjects
+    contains transient ConstantsDbViewDefs[1] dbViewDefs    // inferred
+    @MdProperty(^id = "47f509d7-3ba3-46c8-8fd8-fbeb3662c0d9")
+    boolean keepMappingToExtendedConfigurationObjectsByIDs // since 8.3.15 extension only
+    @MdProperty(^id = "52547ac3-1dff-4930-88b8-7419997945ba")
+    String namePrefix
+    @MdProperty(^id = "c79cb2e3-6fa1-446a-97f6-68b4742480b5")
+    CompatibilityMode configurationExtensionCompatibilityMode
+    @MdProperty(^id = "67363886-e95e-403b-9127-82cf64183fab")
+    ConfigurationExtensionPurpose configurationExtensionPurpose // since 8.3.10 extension only
+    @MdProperty(^id = "c6c6cdec-9de1-431f-b17a-e442eebf86c1")
+    ClientRunMode defaultRunMode
+    @MdProperty(^id = "da648ef9-2f12-418f-8e2f-8956bc10a66f")
+    ApplicationUsePurpose[] usePurposes
+    @MdProperty(^id = "2b144fd9-4ab7-4f9e-a5a9-753d43a9840e")
+    ScriptVariant scriptVariant
+    @MdProperty(^id = "f6cdb7fb-dab4-4699-a22e-feac3e4a2cae")
+    refers Role defaultRole                                     // not support
+    @MdProperty(^id = "6a447e3f-d9d7-4c97-a239-87e3fe6d8055")
+    refers Role[] defaultRoles
+    @MdProperty(^id = "c5f8bc62-5534-499e-ac1a-d7d043df2a9e")
+    String vendor
+    @MdProperty(^id = "b8c86b25-2e11-4be1-9cd3-9a9cd6ae0f7a")
+    String version
+    @MdProperty(^id = "b95a55fd-5334-45a9-8189-fdcbb6d71ade")
+    String updateCatalogAddress
+    @ExternalProperty
+    @MdProperty(^id = "d22e852a-cf8a-4f77-8ccb-3548e7792bea")
+    refers transient Module managedApplicationModule
+    @ExternalProperty
+    @MdProperty(^id = "9b7bbbae-9771-46f2-9e4d-2489e0ffc702")
+    refers transient Module sessionModule
+    @ExternalProperty
+    @MdProperty(^id = "a4a9c1e2-1e54-4c7f-af06-4ca341198fac")
+    refers transient Module externalConnectionModule
+    @ExternalProperty
+    @MdProperty(^id = "a78d9ce3-4e0c-48d5-9863-ae7342eedf94")
+    refers transient Module ordinaryApplicationModule
+    @MdProperty(^id = "1f2b167a-25fe-4f47-8710-933567dfa7d9")
+    boolean includeHelpInContents
+    @MdProperty(^id = "038b5c85-fb1c-4082-9c4c-e69f8928bf3a")
+    contains Help help
+    @MdProperty(^id = "da451f2d-2b84-4c22-a1b4-f3ff02bc87a7")
+    boolean useManagedFormInOrdinaryApplication
+    @MdProperty(^id = "fe4e2ec0-716b-42ab-a1c4-dfa8dd242b3d")
+    boolean useOrdinaryFormInManagedApplication
+    @MdProperty(^id = "24ff84da-3683-4c92-8bcd-03f6eb5a208b")
+    refers FullTextSearchDictionarySource[] additionalFullTextSearchDictionaries
+    @MdProperty(^id = "982ff47a-aba8-41b2-aedb-cde5e10291a2")
+    refers SettingsStorage commonSettingsStorage
+    @MdProperty(^id = "932a87cf-144c-449f-970f-19835d547068")
+    refers SettingsStorage reportsUserSettingsStorage
+    @MdProperty(^id = "ce176ad6-af25-4ec7-a660-750772e493ff")
+    refers SettingsStorage reportsVariantsStorage
+    @MdProperty(^id = "7afdfce2-d83a-4762-b863-06f720de2d86")
+    refers SettingsStorage formDataSettingsStorage
+    @MdProperty(^id = "ce445614-63e1-43ba-910d-72105140e94f")
+    refers SettingsStorage dynamicListsUserSettingsStorage
+    @MdProperty(^id = "43a0ac9c-210e-4571-af7e-6ebab49a4dce")  // since 8.3.19
+    refers SettingsStorage urlExternalDataStorage 
+    @MdProperty(^id = "c6690627-40cf-4741-8719-4e7feb832b84")
+    refers MdObject[] content                                    // not support
+    @MdProperty(^id = "3858755b-07b8-4c0b-a7b1-b013192a5863")
+    refers CommonForm defaultReportForm
+    @MdProperty(^id = "700a5dda-3341-45c2-974e-3c8bfb318228")
+    refers CommonForm defaultReportVariantForm
+    @MdProperty(^id = "a78774fa-ae3b-4450-a0d1-22d5654af1bb")
+    refers CommonForm defaultReportSettingsForm
+    @MdProperty(^id = "f71e5124-a281-4192-bc51-3be41a230a11")
+    refers CommonForm defaultDynamicListSettingsForm
+    @MdProperty(^id = "5e3c8a23-7453-4785-a338-2c0d78700e74")
+    refers CommonForm defaultSearchForm
+    @MdProperty(^id = "770647c-f103-4c3a-a834-144df18a2938")  // since 8.3.13
+    refers CommonForm defaultDataHistoryChangeHistoryForm
+    @MdProperty(^id = "5e815a7a-f20f-4a57-a5d0-01c2ceba0dbe")  // since 8.3.13
+    refers CommonForm defaultDataHistoryVersionDataForm
+    @MdProperty(^id = "6c487f40-583b-4100-ac4b-7f9ab2678557")  // since 8.3.13
+    refers CommonForm defaultDataHistoryVersionDifferencesForm
+    @MdProperty(^id = "2e69c9c8-7383-438f-a424-29ebaa7dc015")  // since 8.3.15
+    refers CommonForm defaultCollaborationSystemUsersChoiceForm
+    @MdProperty(^id = "3431bd92-4a73-4ace-aace-191f9fdeaea2")
+    RequiredMobileApplicationPermissions[] requiredMobileApplicationPermissions
+    // since 8.3.15
+    @MdProperty(^id = "3431bd92-4a73-4ace-aace-191f9fdeaea2")
+    contains RequiredPermission[] requiredMobileApplicationPermissions8315
+    // since 8.3.18
+    @MdProperty(^id = "cca11de4-1e73-4988-8c35-2ae49b6c616c")
+    contains UsedFunctionality usedMobileApplicationFunctionalities
+    @MdProperty(^id = "4c65c2ac-e8ea-46b9-873d-81660cc4c5c0")
+    contains AbstractMobileApplicationUrl[] mobileApplicationUrls
+    @ExternalProperty
+    @MdProperty(^id = "00cfc4d0-27ff-4b1d-b96c-xc579bb28916")
+    refers transient AbstractMobileClientSign mobileClientSign
+    @ExternalProperty
+    @MdProperty(^id = "4ee1cca2-6a29-4dc5-836a-053301216e39") // since 8.3.16
+    refers transient AbstractStandaloneContent mobileApplicationContent
+    @MdProperty(^id = "39bfa4e0-334f-428c-803b-9227445f1788") // since 8.3.16
+    refers Role[] standaloneConfigurationRestrictionRoles
+    @ExternalProperty
+    @MdProperty(^id = "7f676314-716a-4d54-8335-a71a3857b21c")
+    refers transient AbstractCommandInterface commandInterface
+    @ExternalProperty
+    @MdProperty(^id = "740eb5f6-e214-4e30-aefa-f15bab91c688", code = "StartPageWorkingArea")
+    /* Use this if version < 8.3.9 */
+    refers transient AbstractWorkArea startPageWorkingArea
+    @ExternalProperty
+    @MdProperty(^id = "740eb5f6-e214-4e30-aefa-f15bab91c688", code = "HomePageWorkArea") // since 8.3.9
+    /* Use this if version >= 8.3.9. Use startPageWorkingArea otherwise */
+    refers transient AbstractWorkArea homePageWorkArea
+    @ExternalProperty
+    @MdProperty(^id = "9dfcabbf-6a7a-48aa-8721-df5e78b367c6")
+    refers transient AbstractCommandInterface mainSectionCommandInterface
+    @MdProperty(^id = "61504080-8acd-43f6-b42c-1a3412b2ded4") // since 8.3.24
+    contains AllowedIncomingShareRequestType[] allowedIncomingShareRequestTypes
+    @MdProperty(^id = "6dece861-bb9b-4acd-a35e-5b514531abe1")
+    contains MdPicture mainSectionPicture
+    @ExternalProperty
+    @MdProperty(^id = "4c4a88c2-ce59-4124-9369-ddcaccc05740")
+    refers transient Interface defaultInterface    // ordinary application
+    @MdProperty(^id = "ac8f7099-e6c4-4a11-aa97-26105d03cfbc")
+    refers Style defaultStyle
+    @MdProperty(^id = "15e3462b-bc9b-40cd-9d9f-dc0922f84560")
+    refers Language defaultLanguage
+    @MdProperty(^id = "12fce844-eac7-4413-8235-19256a766f21")
+    contains LocalStringMapEntry[] briefInformation
+    @MdProperty(^id = "a91a4a6e-0268-4ee2-b48c-9986c8c1dbd9")
+    contains LocalStringMapEntry[] detailedInformation
+    @MdProperty(^id = "3035a9db-d6b2-450e-8b22-4430577f8dab")
+    contains MdPicture logo
+    @MdProperty(^id = "d98a8e01-7219-41ce-9f23-dada0860b9bf")
+    contains MdPicture splash
+    @MdProperty(^id = "876bcf1c-e28d-4749-8619-6138739eb433")
+    contains LocalStringMapEntry[] copyright
+    @MdProperty(^id = "cc298508-6a00-422b-a1a0-e2fb933fb408")
+    contains LocalStringMapEntry[] vendorInformationAddress
+    @MdProperty(^id = "2efeb7da-4876-464e-9b46-fe7fd5554a8e")
+    contains LocalStringMapEntry[] configurationInformationAddress
+    @ExternalProperty
+    @MdProperty(^id = "e90d4b34-b805-46bb-8468-3e247df53c38")
+    refers transient AbstractClientApplicationInterface clientApplicationInterface
+    @MdProperty(^id = "648d83d8-0468-49a5-a50f-070e7846a231")
+    MainClientApplicationWindowMode mainClientApplicationWindowMode // since 8.3.10
+    @MdProperty(^id = "eb610a9d-686b-4e90-8629-8713c914aa2d")
+    DefaultDataLockControlMode dataLockControlMode
+    @MdProperty(^id = "e20689a6-b18e-43af-8490-49476b8f216e") 
+    BinaryDataStorageMode binaryDataStorageMode // since 8.3.23
+    @MdProperty(^id = "74fc3305-e7f0-4389-918e-f74a105d316c")
+    ObjectAutonumerationMode objectAutonumerationMode
+    @MdProperty(^id = "3a5cca5c-0675-43df-80ca-2cf5163335f2")
+    ModalityUseMode modalityUseMode
+    @MdProperty(^id = "94f2cd02-0fa8-4468-9bba-69e6ef9c4245")
+    /* Use this if version < 8.3.9 */
+    SynchronousPlatformExtensionAndAddInCallUseMode synchronousExtensionAndAddInCallUseMode
+    @MdProperty(^id = "94f2cd02-0fa8-4468-9bba-69e6ef9c4245") // since 8.3.9
+    /* Use this if version >= 8.3.9. Otherwise use synchronousExtensionAndAddInCallUseMode */
+    SynchronousPlatformExtensionAndAddInCallUseMode synchronousPlatformExtensionAndAddInCallUseMode
+    @MdProperty(^id = "cbd1f1ed-72d3-4da3-bd02-c643d9595b7d")
+    InterfaceCompatibilityMode interfaceCompatibilityMode
+    @MdProperty(^id = "9497ea6f-b3d2-433d-ab38-7c562e2932ab") // since 8.3.23
+    DatabaseTablespacesUseMode databaseTablespacesUseMode
+    @MdProperty(^id = "161bc4c0-4cc0-4382-a045-f58f25e24783")
+    CompatibilityMode compatibilityMode
+    @MdProperty(^id = "d4769b90-a0ff-11d5-b99f-0050bae0a95d")
+    refers CommonForm defaultConstantsForm
+    @MdProperty(^id = "b73fb5ab-f9e5-4855-8b20-8c1b12f0d41b")
+    DefaultReportAppearanceTemplate defaultReportAppearanceTemplate //ОсновнойМакетОформленияОтчета since 8.3.22
+
+    @ExternalProperty
+    @MdProperty(^id = "be0fe5b1-9cb0-4aba-aa3f-1347c3a6c230")
+    refers transient EObject parentConfigurations
+
+    @MdClass(^id = "9cd510ce-abfc-11d4-9434-004095e12fc7")
+    contains Language[] languages
+    @MdClass(^id = "37f2fa9a-b276-11d4-9435-004095e12fc7")
+    refers Subsystem[] subsystems
+    @MdClass(^id = "58848766-36ea-4076-8800-e91eb49590d7")
+    refers StyleItem[] styleItems
+    @MdClass(^id = "3e5404af-6ef8-4c73-ad11-91bd2dfac4c8")
+    refers Style[] styles    // ordinary application
+    @MdClass(^id = "7dcd43d9-aca5-4926-b549-1842e6a4e8cf")
+    refers CommonPicture[] commonPictures
+    @MdClass(^id = "39bddf6a-0c3c-452b-921c-d99cfa1c2f1b")
+    refers Interface[] interfaces    // ordinary application
+    @MdClass(^id = "24c43748-c938-45d0-8d14-01424a72b11e")
+    refers SessionParameter[] sessionParameters
+    @MdClass(^id = "09736b02-9cac-4e3f-b4f7-d3e9576ab948")
+    refers Role[] roles
+    @MdClass(^id = "0c89c792-16c3-11d5-b96b-0050bae0a95d")
+    refers CommonTemplate[] commonTemplates
+    @MdClass(^id = "3e7bfcc0-067d-11d6-a3c7-0050bae0a776")
+    refers FilterCriterion[] filterCriteria
+    @MdClass(^id = "0fe48980-252d-11d6-a3c7-0050bae0a776")
+    refers CommonModule[] commonModules
+    @MdClass(^id = "15794563-ccec-41f6-a83c-ec5f7b9a5bc1")
+    refers CommonAttribute[] commonAttributes
+    @MdClass(^id = "857c4a91-e5f4-4fac-86ec-787626f1c108")
+    refers ExchangePlan[] exchangePlans
+    @MdClass(^id = "cc9df798-7c94-4616-97d2-7aa0b7bc515e")
+    refers XDTOPackage[] xDTOPackages
+    @MdClass(^id = "8657032e-7740-4e1d-a3ba-5dd6e8afb78f")
+    refers WebService[] webServices
+    @MdClass(^id = "0fffc09c-8f4c-47cc-b41c-8d5c5a221d79")
+    refers HTTPService[] httpServices
+    @MdClass(^id = "d26096fb-7a5d-4df9-af63-47d04771fa9b")
+    refers WSReference[] wsReferences
+    @MdClass(^id = "4e828da6-0f44-4b5b-b1c0-a2b3cfe7bdcc")
+    refers EventSubscription[] eventSubscriptions
+    @MdClass(^id = "11bdaf85-d5ad-4d91-bb24-aa0eee139052")
+    refers ScheduledJob[] scheduledJobs
+    @MdClass(^id = "46b4cd97-fd13-4eaa-aba2-3bddd7699218")
+    refers SettingsStorage[] settingsStorages
+    @MdClass(^id = "af547940-3268-434f-a3e7-e47d6d2638c3")
+    refers FunctionalOption[] functionalOptions
+    @MdClass(^id = "30d554db-541e-4f62-8970-a1c6dcfeb2bc")
+    refers FunctionalOptionsParameter[] functionalOptionsParameters
+    @MdClass(^id = "c045099e-13b9-4fb6-9d50-fca00202971e")
+    refers DefinedType[] definedTypes
+    @MdClass(^id = "2f1a5187-fb0e-4b05-9489-dc5dd6412348")
+    refers CommonCommand[] commonCommands
+    @MdClass(^id = "1c57eabe-7349-44b3-b1de-ebfeab67b47d")
+    refers CommandGroup[] commandGroups
+    @MdClass(^id = "0195e80c-b157-11d4-9435-004095e12fc7")
+    refers Constant[] constants
+    @MdClass(^id = "07ee8426-87f1-11d5-b99c-0050bae0a95d")
+    refers CommonForm[] commonForms
+    @MdClass(^id = "cf4abea6-37b2-11d4-940f-008048da11f9")
+    refers Catalog[] catalogs
+    @MdClass(^id = "061d872a-5787-460e-95ac-ed74ea3a3e84")
+    refers Document[] documents
+    @MdClass(^id = "36a8e346-9aaa-4af9-bdbd-83be3c177977")
+    refers DocumentNumerator[] documentNumerators
+    @MdClass(^id = "bc587f20-35d9-11d6-a3c7-0050bae0a776")
+    refers Sequence[] sequences
+    @MdClass(^id = "4612bd75-71b7-4a5c-8cc5-2b0b65f9fa0d")
+    refers DocumentJournal[] documentJournals
+    @MdClass(^id = "f6a80749-5ad7-400b-8519-39dc5dff2542")
+    refers Enum[] enums
+    @MdClass(^id = "631b75a0-29e2-11d6-a3c7-0050bae0a776")
+    refers Report[] reports
+    @MdClass(^id = "bf845118-327b-4682-b5c6-285d2a0eb296")
+    refers DataProcessor[] dataProcessors
+    @MdClass(^id = "13134201-f60b-11d5-a3c7-0050bae0a776")
+    refers InformationRegister[] informationRegisters
+    @MdClass(^id = "b64d9a40-1642-11d6-a3c7-0050bae0a776")
+    refers AccumulationRegister[] accumulationRegisters
+    @MdClass(^id = "82a1b659-b220-4d94-a9bd-14d757b95a48")
+    refers ChartOfCharacteristicTypes[] chartsOfCharacteristicTypes
+    @MdClass(^id = "238e7e88-3c5f-48b2-8a3b-81ebbecb20ed")
+    refers ChartOfAccounts[] chartsOfAccounts
+    @MdClass(^id = "2deed9b8-0056-4ffe-a473-c20a6c32a0bc")
+    refers AccountingRegister[] accountingRegisters
+    @MdClass(^id = "30b100d6-b29f-47ac-aec7-cb8ca8a54767")
+    refers ChartOfCalculationTypes[] chartsOfCalculationTypes
+    @MdClass(^id = "f2de87a8-64e5-45eb-a22d-b3aedab050e7")
+    refers CalculationRegister[] calculationRegisters
+    @MdClass(^id = "fcd3404e-1523-48ce-9bc0-ecdb822684a1")
+    refers BusinessProcess[] businessProcesses
+    @MdClass(^id = "3e63355c-1378-4953-be9b-1deb5fb6bec5")
+    refers Task[] tasks
+    @MdClass(^id = "5274d9fc-9c3a-4a71-8f5e-a0db8ab23de5")
+    refers ExternalDataSource[] externalDataSources
+    @MdClass(^id = "bf3420b0-f6f9-41a0-b83a-fe9d4ab0b65d")
+    refers IntegrationService[] integrationServices
+    @MdClass(^id = "e2c55bd8-1862-4b98-950d-4e7a33440537")
+    refers Bot[] bots
+
+    op boolean validate(EDiagnosticChain diagnostics, EMap<Object, Object> context)
+    {
+        ConfigurationValidator::validate(this, diagnostics, context)
+    }
+    
+    @ExternalProperty
+    @MdProperty(^id = "953e95db-e000-4007-a335-f4582b39a483")
+    refers transient EObject suppressObject
+}
+
+class ContainedObject
+{
+    Uuid[1] classId
+    Uuid[1] objectId
+}
+
+class AbstractWorkArea
+{
+}
+
+@MdClass(^id = "58848766-36ea-4076-8800-e91eb49590d7", code_ru = "ЭлементСтиля")
+class StyleItem extends MdObject
+{
+    contains transient StyleAppearanceItem appearanceItem // inferred
+
+    @MdProperty(^id = "1ab4ba03-e4e6-4bf0-93e9-fcc28cc67567")
+    StyleElementType ^type
+    @MdProperty(^id = "36e0f718-e0ba-4369-af8b-aff9a4ad7a35")
+    contains Value value
+
+    op boolean validate(EDiagnosticChain diagnostics, EMap<Object, Object> context)
+    {
+        StyleItemValidator::validate(this, diagnostics, context)
+    }
+
+    @ExternalProperty
+    @MdProperty(^id = "d35bc40a-7611-43de-965d-31bb733d3070")
+    refers transient EObject suppressObject
+}
+
+@MdClass(^id = "857c4a91-e5f4-4fac-86ec-787626f1c108", code_ru = "ПланОбмена")
+class ExchangePlan extends BasicDbObject, CatalogOwner, SupportFilterCriterion, DataHistorySupport
+{
+    Uuid[1] thisNode
+    contains ExchangePlanTypes[1] producedTypes
+    contains transient ExchangePlanDbViewDefs dbViewDefs    // inferred
+    @MdProperty(^id = "10a89e58-99bd-4f95-9a1f-5cf708839f4e")
+    int codeLength
+    @MdProperty(^id = "bf9cc511-eb2a-48b6-a666-7afb78b83f36")
+    AllowedLength codeAllowedLength
+    @MdProperty(^id = "0312e6ae-6614-4843-8724-a1becd1110d1")
+    int descriptionLength
+    @MdProperty(^id = "ee705b5d-dd16-46e4-b613-3a7edba5ba84")
+    contains ExchangePlanContentItem[] content
+    @MdProperty(^id = "c88bacb0-b8a0-49cc-a0bd-459b2b3eff98")
+    DataExchangeMainPresentation defaultPresentation
+    @MdProperty(^id = "267add9b-837b-42d9-992d-374a808fd94d")
+    EditType editType
+    @MdProperty(^id = "1b3ecd33-43d7-45e4-a012-776d95785465")
+    boolean quickChoice
+    @MdProperty(^id = "cab319ad-716c-4d9e-9240-639aab7e9a0c")
+    ChoiceMode choiceMode
+    @MdProperty(^id = "b69601f3-4cf6-11d4-9415-008048da11f9")
+    refers ExchangePlanForm defaultObjectForm
+    @MdProperty(^id = "b69601f5-4cf6-11d4-9415-008048da11f9")
+    refers ExchangePlanForm defaultListForm
+    @MdProperty(^id = "b69601f6-4cf6-11d4-9415-008048da11f9")
+    refers ExchangePlanForm defaultChoiceForm
+    @MdProperty(^id = "98388ad1-7b6f-4049-bfdb-02b3e3789cdc")
+    refers ExchangePlanForm auxiliaryObjectForm
+    @MdProperty(^id = "367b60f5-2ad5-4399-a6b0-3dd8e4ac3650")
+    refers ExchangePlanForm auxiliaryListForm
+    @MdProperty(^id = "4f0c02fe-c9da-4f51-ae93-e69119d4eb2c")
+    refers ExchangePlanForm auxiliaryChoiceForm
+    @MdProperty(^id = "df7a9d73-67e5-4d7b-900a-3e7fb9fab533")
+    boolean distributedInfoBase
+    @MdProperty(^id = "ab86f950-e041-41ac-bef6-037d15829b51")
+    boolean includeConfigurationExtensions
+    @MdProperty(^id = "7ba608f2-e654-42a3-8885-334fe88ca910")
+    ChoiceHistoryOnInput choiceHistoryOnInput
+    @MdProperty(^id = "0912c390-3c7e-4de9-abd0-f9c9cb19f0e6") // since 8.3.15
+    boolean updateDataHistoryImmediatelyAfterWrite
+    @MdProperty(^id = "c4986a1c-1315-4f86-9587-f1d116329b58") // since 8.3.15
+    boolean executeAfterWriteDataHistoryVersionProcessing
+
+    @MdClass(^id = "1a1b4fea-e093-470d-94ff-1d2f16cda2ab", code = "Attribute", code_ru = "Реквизит")
+    contains ExchangePlanAttribute[] attributes
+    @MdClass(^id = "52293f4b-f98c-43ea-a80f-41047ae7ab58", code = "TabularSection", code_ru = "ТабличнаяЧасть")
+    contains ExchangePlanTabularSection[] tabularSections
+    @MdClass(^id = "87c509ab-3d38-4d67-b379-aca796298578", code = "Form", code_ru = "Форма")
+    contains ExchangePlanForm[] forms
+    @MdClass(^id = "3daea016-69b7-4ed4-9453-127911372fe6")
+    contains Template[] templates
+    @MdClass(^id = "d5207c64-11d5-4d46-bba2-55b7b07ff4eb", code = "Command", code_ru = "Команда")
+    contains ExchangePlanCommand[] commands
+
+    op boolean validate(EDiagnosticChain diagnostics, EMap<Object, Object> context)
+    {
+        ExchangePlanValidator::validate(this, diagnostics, context)
+    }
+
+    op TypeItem selectCriterionTypeRef()
+    {
+        producedTypes.refType.^type
+    }
+}
+
+class ExchangePlanContentItem
+{
+    refers MdObject mdObject
+    AutoRegistrationChanges autoRecord
+
+    contains ObjectExtension ^extension
+
+    op boolean validate(EDiagnosticChain diagnostics, EMap<Object, Object> context)
+    {
+        ExchangePlanContentItemValidator::validate(this, diagnostics, context)
+    }
+}
+
+enum AutoRegistrationChanges
+{
+    Deny = 0
+    Allow = 1
+}
+
+@MdClass(^id = "1a1b4fea-e093-470d-94ff-1d2f16cda2ab", code = "Attribute", code_ru = "Реквизит")
+class ExchangePlanAttribute extends DbObjectAttribute, DataHistorySupport
+{
+    @MdProperty(^id = "7ba608f2-e654-42a3-8885-334fe88ca910")
+    ChoiceHistoryOnInput choiceHistoryOnInput
+}
+
+@MdClass(^id = "52293f4b-f98c-43ea-a80f-41047ae7ab58", code = "TabularSection", code_ru = "ТабличнаяЧасть")
+class ExchangePlanTabularSection extends DbObjectTabularSection
+{
+}
+
+@MdClass(^id = "87c509ab-3d38-4d67-b379-aca796298578", code = "Form", code_ru = "Форма")
+class ExchangePlanForm extends BasicForm
+{
+}
+
+@MdClass(^id = "d5207c64-11d5-4d46-bba2-55b7b07ff4eb", code = "Command", code_ru = "Команда")
+class ExchangePlanCommand extends BasicCommand
+{
+}
+
+@MdClass(^id = "37f2fa9a-b276-11d4-9435-004095e12fc7", code_ru = "Подсистема")
+class Subsystem extends MdObject
+{
+    @MdProperty(^id = "1f2b167a-25fe-4f47-8710-933567dfa7d9")
+    boolean includeHelpInContents
+    @MdProperty(^id = "038b5c85-fb1c-4082-9c4c-e69f8928bf3a")
+    contains Help help
+    @MdProperty(^id = "5e3f7fa0-5dd7-4f18-aca7-7132bab274ed")
+    boolean includeInCommandInterface
+    @MdProperty(^id = "0e30a46e-01c4-4fb7-876d-41c1ddf36b66")
+    boolean useOneCommand // since 8.3.21
+    @ExternalProperty
+    @MdProperty(^id = "7f676314-716a-4d54-8335-a71a3857b21c")
+    refers transient AbstractCommandInterface commandInterface
+    @MdProperty(^id = "719346a1-02d5-4311-a141-4d22470a7ac3")
+    contains LocalStringMapEntry[] explanation
+    @MdProperty(^id = "58e51e5d-aee0-41ea-89c0-b0962a74d237")
+    contains Picture picture
+    @MdProperty(^id = "c6690627-40cf-4741-8719-4e7feb832b84")
+    refers MdObject[] content
+
+    @MdClass(^id = "37f2fa9a-b276-11d4-9435-004095e12fc7")
+    refers Subsystem[] subsystems
+
+    refers Subsystem parentSubsystem
+
+    @ExternalProperty
+    @MdProperty(^id = "957ebb98-f305-43e0-a3af-69b2d71c3ed7")
+    refers transient EObject suppressObject
+}
+
+@MdClass(^id = "d26096fb-7a5d-4df9-af63-47d04771fa9b", code_ru = "WSСсылка")
+class WSReference extends MdObject
+{
+    contains WSReferenceTypes[1] producedTypes
+
+    @MdProperty(^id = "ee439090-8334-44a0-8269-28a0d1f02071")
+    String locationURL
+    @ExternalProperty
+    @MdProperty(^id = "c33c1fd7-071a-442d-af52-f4bb13eff423")
+    refers transient WSDefinitions wsDefinitions
+
+    op boolean validate(EDiagnosticChain diagnostics, EMap<Object, Object> context)
+    {
+        WSReferenceValidator::validate(this, diagnostics, context)
+    }
+
+    @ExternalProperty
+    @MdProperty(^id = "53e82891-5a3e-4346-8f8c-e2040b5dec90")
+    refers transient EObject suppressObject
+}
+
+@MdClass(^id = "4e828da6-0f44-4b5b-b1c0-a2b3cfe7bdcc", code_ru = "ПодпискаНаСобытие")
+class EventSubscription extends MdObject
+{
+    @MdProperty(^id = "41721fe8-6dcb-4585-9ec2-5577d430cf6b")
+    contains TypeDescription source
+    @MdProperty(^id = "51207ec7-9107-453a-a578-18f72ab0ca73")
+    String event
+    @MdProperty(^id = "b80eafc1-8ceb-4613-9bf0-5a5ae1cf10d8")
+    String handler
+
+    op boolean validate(EDiagnosticChain diagnostics, EMap<Object, Object> context)
+    {
+        EventSubscriptionValidator::validate(this, diagnostics, context)
+    }
+
+    @ExternalProperty
+    @MdProperty(^id = "8176f4ed-8ac0-4c13-b020-881d0f921ed3")
+    refers transient EObject suppressObject
+}
+
+@MdClass(^id = "c045099e-13b9-4fb6-9d50-fca00202971e", code_ru = "ОпределяемыйТип")
+class DefinedType extends MdObject, TypeDescriptionProvider
+{
+    contains DefinedTypeTypes[1] producedTypes
+
+    @MdProperty(^id = "b1053250-abe6-11d4-9434-004095e12fc7", code = "Type")
+    contains TypeDescription[1] ^type
+
+    op boolean validate(EDiagnosticChain diagnostics, EMap<Object, Object> context)
+    {
+        DefinedTypeValidator::validate(this, diagnostics, context)
+    }
+
+    @ExternalProperty
+    @MdProperty(^id = "ace17c92-e171-4855-b3d8-ba1a07d01416")
+    refers transient EObject suppressObject
+}
+
+@MdClass(^id = "0195e80c-b157-11d4-9435-004095e12fc7", code_ru = "Константа")
+class Constant extends MdObject, FullTextSearchDictionarySource, StandardCommandSource, FieldSource, DataHistorySupport, TypeDescriptionProvider
+{
+    contains ConstantTypes[1] producedTypes
+    contains transient ConstantDbViewDefs dbViewDefs    // inferred
+
+    @MdProperty(^id = "b1053250-abe6-11d4-9434-004095e12fc7", code = "Type")
+    contains TypeDescription[1] ^type
+    @MdProperty(^id = "d7be18bc-9899-48dd-8100-92dafc4dedea")
+    boolean useStandardCommands
+    @MdProperty(^id = "3e8c558e-64b4-405d-8ad3-7faf63b866ba")
+    refers CommonForm defaultForm
+    @MdProperty(^id = "c9ba86bf-a1e7-440f-9450-adb61f886f88")
+    contains LocalStringMapEntry[] extendedPresentation
+    @MdProperty(^id = "719346a1-02d5-4311-a141-4d22470a7ac3")
+    contains LocalStringMapEntry[] explanation
+    @MdProperty(^id = "90ae4b5d-e0fd-49ef-a008-d67c1e75038c")
+    boolean passwordMode
+    @MdProperty(^id = "580c29e2-8af4-4258-882a-7cf8073e61c8")
+    contains LocalStringMapEntry[] format
+    @MdProperty(^id = "88149a78-9448-4767-867b-0e650d165d2e")
+    contains LocalStringMapEntry[] editFormat
+    @MdProperty(^id = "4690ff70-e3fa-4914-9127-6a9acc5fc949")
+    contains LocalStringMapEntry[] toolTip
+    @MdProperty(^id = "b02800e9-a8d1-42ab-9a12-f673e92be968")
+    boolean markNegatives
+    @MdProperty(^id = "f49e4ced-4033-4e6c-8755-9fbaaccd6078")
+    String mask
+    @MdProperty(^id = "2bbba66b-fabf-4863-8ba3-54b3c64c896e")
+    boolean multiLine
+    @MdProperty(^id = "4de03908-56f4-4396-a61e-17253afca9ac")
+    boolean extendedEdit
+    @MdProperty(^id = "c65a541f-0b91-4f33-bc88-fbaaa57f9992")
+    contains Value minValue
+    @MdProperty(^id = "3eaf5a8b-06d6-47b0-ac7d-a9698247f499")
+    contains Value maxValue
+    @MdProperty(^id = "2723eb98-b4c1-498a-a6f3-70444757902f")
+    FillChecking fillChecking
+    @MdProperty(^id = "c421d5c6-dcd9-4e28-9a35-0b2f4d66bef0")
+    FoldersAndItemsUse choiceFoldersAndItems
+    @MdProperty(^id = "e3da683b-c54a-457a-a243-b9b4f9bf76dd")
+    contains ChoiceParameterLink[] choiceParameterLinks
+    @MdProperty(^id = "fcf503b8-1c06-454a-970c-06413e64aee5")
+    contains ChoiceParameter[] choiceParameters
+    @MdProperty(^id = "6e3a1131-37a3-4da5-8895-572d9d0c9db6")
+    UseQuickChoice quickChoice
+    @MdProperty(^id = "6c4f7074-e7d4-48eb-b31b-132873666262")
+    refers BasicForm choiceForm
+    @MdProperty(^id = "1183c14f-f814-49c6-9233-a3c26b3f64cf")
+    contains TypeLink linkByType
+    @MdProperty(^id = "7ba608f2-e654-42a3-8885-334fe88ca910")
+    ChoiceHistoryOnInput choiceHistoryOnInput
+    @ExternalProperty
+    @MdProperty(^id = "3e58c91f-9aaa-4f42-8999-4baf33907b75")
+    refers transient Module valueManagerModule
+    @ExternalProperty
+    @MdProperty(^id = "d1b64a2c-8078-4982-8190-8f81aefda192")
+    refers transient Module managerModule
+    @MdProperty(^id = "09c14dad-bd23-4d30-9c09-20ca3e5cd9f0")
+    DefaultDataLockControlMode dataLockControlMode
+    @MdProperty(^id = "0912c390-3c7e-4de9-abd0-f9c9cb19f0e6") // since 8.3.15
+    boolean updateDataHistoryImmediatelyAfterWrite
+    @MdProperty(^id = "c4986a1c-1315-4f86-9587-f1d116329b58") // since 8.3.15
+    boolean executeAfterWriteDataHistoryVersionProcessing
+
+    op boolean validate(EDiagnosticChain diagnostics, EMap<Object, Object> context)
+    {
+        ConstantValidator::validate(this, diagnostics, context)
+    }
+
+    @ExternalProperty
+    @MdProperty(^id = "2369431b-faf8-4eb6-983c-bb60488af161")
+    refers transient EObject suppressObject
+}
+
+@MdClass(^id = "bc587f20-35d9-11d6-a3c7-0050bae0a776", code_ru = "Последовательность")
+class Sequence extends MdObject
+{
+    contains SequenceTypes[1] producedTypes
+    contains transient SequenceDbViewDefs dbViewDefs    // inferred
+
+    @MdProperty(^id = "02f5a809-5b35-456d-a0cd-2e51c5673962")
+    MoveBoundaryOnPosting moveBoundaryOnPosting
+    @MdProperty(^id = "ab36f2a0-35eb-11d6-a3c7-0050bae0a776")
+    refers Document[] documents
+    @MdProperty(^id = "c4b08de0-35eb-11d6-a3c7-0050bae0a776")
+    refers BasicRegister[] registerRecords
+    @ExternalProperty
+    @MdProperty(^id = "9f36fd70-4bf4-47f6-b235-935f73aab43f")
+    refers transient Module recordSetModule
+    @MdProperty(^id = "09c14dad-bd23-4d30-9c09-20ca3e5cd9f0")
+    DefaultDataLockControlMode dataLockControlMode
+
+    @MdClass(^id = "437488c0-35e2-11d6-a3c7-0050bae0a776", code = "Dimension", code_ru = "Измерение")
+    contains SequenceDimension[] dimensions
+
+    op boolean validate(EDiagnosticChain diagnostics, EMap<Object, Object> context)
+    {
+        SequenceValidator::validate(this, diagnostics, context)
+    }
+
+    @ExternalProperty
+    @MdProperty(^id = "88fdf8e2-650c-42fa-8cfc-b2c0dda747ec")
+    refers transient EObject suppressObject
+}
+
+@MdClass(^id = "437488c0-35e2-11d6-a3c7-0050bae0a776", code = "Dimension", code_ru = "Измерение")
+class SequenceDimension extends MdObject, TypeDescriptionProvider
+{
+    @MdProperty(^id = "b1053250-abe6-11d4-9434-004095e12fc7", code = "Type")
+    contains TypeDescription[1] ^type
+    @MdProperty(^id = "c74a4ec0-35ef-11d6-a3c7-0050bae0a776")
+    refers BasicFeature[] documentMap                            // document attribute or document tabular section attribute
+    @MdProperty(^id = "d9e30cc0-35ef-11d6-a3c7-0050bae0a776")
+    refers BasicFeature[] registerRecordsMap    // Register attributes or dimensions
+
+    op boolean validate(EDiagnosticChain diagnostics, EMap<Object, Object> context)
+    {
+        SequenceDimensionValidator::validate(this, diagnostics, context)
+    }
+}
+
+@MdClass(^id = "4612bd75-71b7-4a5c-8cc5-2b0b65f9fa0d", code_ru = "ЖурналДокументов")
+class DocumentJournal extends MdObject, FieldSource, StandardCommandSource
+{
+    contains DocumentJournalTypes[1] producedTypes
+    contains transient DocumentJournalDbViewDefs dbViewDefs    // inferred
+
+    @MdProperty(^id = "3e8c558e-64b4-405d-8ad3-7faf63b866ba")
+    refers DocumentJournalForm defaultForm
+    @MdProperty(^id = "2b017861-cb7f-449d-812a-3bd6a81b0177")
+    refers DocumentJournalForm auxiliaryForm
+    @MdProperty(^id = "d7be18bc-9899-48dd-8100-92dafc4dedea")
+    boolean useStandardCommands
+    @MdProperty(^id = "ed852bb0-0b24-11d6-b9b8-0050bae0a95d")
+    refers Document[] registeredDocuments
+    @MdProperty(^id = "1f2b167a-25fe-4f47-8710-933567dfa7d9")
+    boolean includeHelpInContents
+    @MdProperty(^id = "038b5c85-fb1c-4082-9c4c-e69f8928bf3a")
+    contains Help help
+    @ExternalProperty
+    @MdProperty(^id = "d1b64a2c-8078-4982-8190-8f81aefda192")
+    refers transient Module managerModule
+    @MdProperty(^id = "03f171e8-326f-41c6-9fa5-932a0b12cddf")
+    contains StandardAttribute[] standardAttributes
+    @MdProperty(^id = "b894dce6-9f10-45d6-958f-45993525a044")
+    contains LocalStringMapEntry[] listPresentation
+    @MdProperty(^id = "97f5ad64-29e4-410f-8ead-ec0dd5c5e58d")
+    contains LocalStringMapEntry[] extendedListPresentation
+    @MdProperty(^id = "719346a1-02d5-4311-a141-4d22470a7ac3")
+    contains LocalStringMapEntry[] explanation
+
+    @MdClass(^id = "5aee69df-0513-4c6c-9815-103102471712")
+    contains Column[] columns
+    @MdClass(^id = "ec81ad10-ca07-11d5-b9a5-0050bae0a95d", code = "Form", code_ru = "Форма")
+    contains DocumentJournalForm[] forms
+    @MdClass(^id = "3daea016-69b7-4ed4-9453-127911372fe6")
+    contains Template[] templates
+    @MdClass(^id = "a49a35ce-120a-4c80-8eea-b0618479cd70", code = "Command", code_ru = "Команда")
+    contains DocumentJournalCommand[] commands
+
+    op boolean validate(EDiagnosticChain diagnostics, EMap<Object, Object> context)
+    {
+        DocumentJournalValidator::validate(this, diagnostics, context)
+    }
+
+    @ExternalProperty
+    @MdProperty(^id = "e5b4879a-786e-44fc-858f-c2070e1585cd")
+    refers transient EObject suppressObject
+}
+
+@MdClass(^id = "ec81ad10-ca07-11d5-b9a5-0050bae0a95d", code = "Form", code_ru = "Форма")
+class DocumentJournalForm extends BasicForm
+{
+}
+
+@MdClass(^id = "5aee69df-0513-4c6c-9815-103102471712")
+class Column extends MdObject
+{
+    @MdProperty(^id = "a93a67a0-1955-11d6-a3c7-0050bae0a776")
+    Indexing indexing
+    @MdProperty(^id = "0f1aacc0-7817-41c0-8f6f-609b13fdb337")
+    refers DocumentAttribute[] references
+
+    op boolean validate(EDiagnosticChain diagnostics, EMap<Object, Object> context)
+    {
+        ColumnValidator::validate(this, diagnostics, context)
+    }
+}
+
+@MdClass(^id = "a49a35ce-120a-4c80-8eea-b0618479cd70", code = "Command", code_ru = "Команда")
+class DocumentJournalCommand extends BasicCommand
+{
+}
+
+abstract class AbstractDataCompositionSchema
+{
+}
+
+@MdClass(^id = "631b75a0-29e2-11d6-a3c7-0050bae0a776", code_ru = "Отчет")
+class Report extends MdObject, FieldSource, StandardCommandSource
+{
+    contains ReportTypes[1] producedTypes
+
+    @MdProperty(^id = "d7be18bc-9899-48dd-8100-92dafc4dedea")
+    boolean useStandardCommands
+    @MdProperty(^id = "3e8c558e-64b4-405d-8ad3-7faf63b866ba")
+    refers BasicForm defaultForm
+    @MdProperty(^id = "2b017861-cb7f-449d-812a-3bd6a81b0177")
+    refers BasicForm auxiliaryForm
+    @MdProperty(^id = "43678597-7217-4072-81e0-568f44ff6f3d", code = "DataCompositionSchema", code_ru = "СхемаКомпоновкиДанных")
+    refers BasicTemplate mainDataCompositionSchema    // TODO: figure out DCS
+    @MdProperty(^id = "60b51f1c-0ba8-4004-bfe3-430bd20b68a8")
+    refers BasicForm defaultSettingsForm
+    @MdProperty(^id = "4f4cf10a-99fa-4139-9a31-731e409d3a9e")
+    refers BasicForm auxiliarySettingsForm
+    @MdProperty(^id = "1021f579-255c-47c6-a880-01bfd163449e")
+    refers BasicForm defaultVariantForm
+    @MdProperty(^id = "70b23efb-6bc8-4d80-b36f-466417e36014")
+    refers SettingsStorage variantsStorage
+    @MdProperty(^id = "df9755ae-d8fb-48b6-80fa-ec97cb875921")
+    refers SettingsStorage settingsStorage
+    @ExternalProperty
+    @MdProperty(^id = "a637f77f-3840-441d-a1c3-699c8c5cb7e0")
+    refers transient Module objectModule
+    @ExternalProperty
+    @MdProperty(^id = "d1b64a2c-8078-4982-8190-8f81aefda192")
+    refers transient Module managerModule
+    @MdProperty(^id = "1f2b167a-25fe-4f47-8710-933567dfa7d9")
+    boolean includeHelpInContents
+    @MdProperty(^id = "038b5c85-fb1c-4082-9c4c-e69f8928bf3a")
+    contains Help help
+    @MdProperty(^id = "c9ba86bf-a1e7-440f-9450-adb61f886f88")
+    contains LocalStringMapEntry[] extendedPresentation
+    @MdProperty(^id = "719346a1-02d5-4311-a141-4d22470a7ac3")
+    contains LocalStringMapEntry[] explanation
+
+    @MdClass(^id = "7e7123e0-29e2-11d6-a3c7-0050bae0a776", code = "Attribute", code_ru = "Реквизит")
+    contains ReportAttribute[] attributes
+    @MdClass(^id = "b077d780-29e2-11d6-a3c7-0050bae0a776", code = "TabularSection", code_ru = "ТабличнаяЧасть")
+    contains ReportTabularSection[] tabularSections
+    @MdClass(^id = "a3b368c0-29e2-11d6-a3c7-0050bae0a776", code = "Form", code_ru = "Форма")
+    contains ReportForm[] forms
+    @MdClass(^id = "3daea016-69b7-4ed4-9453-127911372fe6")
+    contains Template[] templates
+    @MdClass(^id = "e7ff38c0-ec3c-47a0-ae90-20c73ca72246", code = "Command", code_ru = "Команда")
+    contains ReportCommand[] commands
+
+    op boolean validate(EDiagnosticChain diagnostics, EMap<Object, Object> context)
+    {
+        ReportValidator::validate(this, diagnostics, context)
+    }
+
+    @ExternalProperty
+    @MdProperty(^id = "37aea679-f4bc-412c-9487-e37f3107a9f8")
+    refers transient EObject suppressObject
+}
+
+@MdClass(^id = "7e7123e0-29e2-11d6-a3c7-0050bae0a776", code = "Attribute", code_ru = "Реквизит")
+class ReportAttribute extends BasicFeature
+{
+    @MdProperty(^id = "7ba608f2-e654-42a3-8885-334fe88ca910")
+    ChoiceHistoryOnInput choiceHistoryOnInput
+}
+
+@MdClass(^id = "b077d780-29e2-11d6-a3c7-0050bae0a776", code = "TabularSection", code_ru = "ТабличнаяЧасть")
+class ReportTabularSection extends BasicTabularSection
+{
+    contains TabularSectionTypes[1] producedTypes
+
+    @MdClass(^id = "c339c860-29e2-11d6-a3c7-0050bae0a776", code = "Attribute", code_ru = "Реквизит")
+    contains ReportTabularSectionAttribute[] attributes
+}
+
+@MdClass(^id = "c339c860-29e2-11d6-a3c7-0050bae0a776", code = "Attribute", code_ru = "Реквизит")
+class ReportTabularSectionAttribute extends BasicFeature
+{
+    @MdProperty(^id = "2c8143d5-4248-4c43-8bfb-307c0be2e415")
+    boolean fillFromFillingValue
+    @MdProperty(^id = "e6b3f5f3-bdf3-4ad0-bc60-7323b3feb208")
+    contains Value fillValue
+    @MdProperty(^id = "7ba608f2-e654-42a3-8885-334fe88ca910")
+    ChoiceHistoryOnInput choiceHistoryOnInput
+}
+
+@MdClass(^id = "a3b368c0-29e2-11d6-a3c7-0050bae0a776", code = "Form", code_ru = "Форма")
+class ReportForm extends BasicForm
+{
+    @MdProperty(^id = "c9ba86bf-a1e7-440f-9450-adb61f886f88")
+    contains LocalStringMapEntry[] extendedPresentation
+}
+
+@MdClass(^id = "e7ff38c0-ec3c-47a0-ae90-20c73ca72246", code = "Command", code_ru = "Команда")
+class ReportCommand extends BasicCommand
+{
+}
+
+@MdClass(^id = "e41aff26-25cf-4bb6-b6c1-3f478a75f374", code_ru = "ВнешнийОтчет")
+class ExternalReport extends MdObject, FieldSource
+{
+    contains ContainedObject[] containedObjects
+    contains ExternalReportTypes[1] producedTypes
+
+    @MdProperty(^id = "3e8c558e-64b4-405d-8ad3-7faf63b866ba")
+    refers BasicForm defaultForm
+    @MdProperty(^id = "2b017861-cb7f-449d-812a-3bd6a81b0177")
+    refers BasicForm auxiliaryForm
+    @MdProperty(^id = "43678597-7217-4072-81e0-568f44ff6f3d", code = "DataCompositionSchema", code_ru = "СхемаКомпоновкиДанных")
+    refers BasicTemplate mainDataCompositionSchema
+    @MdProperty(^id = "60b51f1c-0ba8-4004-bfe3-430bd20b68a8")
+    refers BasicForm defaultSettingsForm
+    @MdProperty(^id = "4f4cf10a-99fa-4139-9a31-731e409d3a9e")
+    refers BasicForm auxiliarySettingsForm
+    @MdProperty(^id = "1021f579-255c-47c6-a880-01bfd163449e")
+    refers BasicForm defaultVariantForm
+    @MdProperty(^id = "70b23efb-6bc8-4d80-b36f-466417e36014")
+    refers SettingsStorage variantsStorage
+    @MdProperty(^id = "df9755ae-d8fb-48b6-80fa-ec97cb875921")
+    refers SettingsStorage settingsStorage
+    @ExternalProperty
+    @MdProperty(^id = "a637f77f-3840-441d-a1c3-699c8c5cb7e0")
+    refers transient Module objectModule
+
+    @MdProperty(^id = "038b5c85-fb1c-4082-9c4c-e69f8928bf3a")
+    contains Help help
+    @GenModel(documentation="@Deprecated not exist in platform")
+    @MdProperty(^id = "c9ba86bf-a1e7-440f-9450-adb61f886f88")
+    contains LocalStringMapEntry[] extendedPresentation
+    @GenModel(documentation="@Deprecated not exist in platform")
+    @MdProperty(^id = "719346a1-02d5-4311-a141-4d22470a7ac3")
+    contains LocalStringMapEntry[] explanation
+
+    @MdClass(^id = "7e7123e0-29e2-11d6-a3c7-0050bae0a776", code = "Attribute", code_ru = "Реквизит")
+    contains ReportAttribute[] attributes
+    @MdClass(^id = "b077d780-29e2-11d6-a3c7-0050bae0a776", code = "TabularSection", code_ru = "ТабличнаяЧасть")
+    contains ReportTabularSection[] tabularSections
+    @MdClass(^id = "a3b368c0-29e2-11d6-a3c7-0050bae0a776", code = "Form", code_ru = "Форма")
+    contains ReportForm[] forms
+    @MdClass(^id = "3daea016-69b7-4ed4-9453-127911372fe6")
+    contains Template[] templates
+
+    op boolean validate(EDiagnosticChain diagnostics, EMap<Object, Object> context)
+    {
+        ExternalReportValidator::validate(this, diagnostics, context)
+    }
+    
+    @ExternalProperty
+    @MdProperty(^id = "050fb6b1-93a9-4204-b22a-5df45b814cf8")
+    refers transient EObject suppressObject
+}
+
+@MdClass(^id = "bf845118-327b-4682-b5c6-285d2a0eb296", code_ru = "Обработка")
+class DataProcessor extends MdObject, FieldSource, StandardCommandSource
+{
+    contains DataProcessorTypes[1] producedTypes
+
+    @MdProperty(^id = "d7be18bc-9899-48dd-8100-92dafc4dedea")
+    boolean useStandardCommands
+    @MdProperty(^id = "3e8c558e-64b4-405d-8ad3-7faf63b866ba")
+    refers BasicForm defaultForm
+    @MdProperty(^id = "2b017861-cb7f-449d-812a-3bd6a81b0177")
+    refers BasicForm auxiliaryForm
+    @ExternalProperty
+    @MdProperty(^id = "a637f77f-3840-441d-a1c3-699c8c5cb7e0")
+    refers transient Module objectModule
+    @ExternalProperty
+    @MdProperty(^id = "d1b64a2c-8078-4982-8190-8f81aefda192")
+    refers transient Module managerModule
+    @MdProperty(^id = "1f2b167a-25fe-4f47-8710-933567dfa7d9")
+    boolean includeHelpInContents
+    @MdProperty(^id = "038b5c85-fb1c-4082-9c4c-e69f8928bf3a")
+    contains Help help
+    @MdProperty(^id = "c9ba86bf-a1e7-440f-9450-adb61f886f88")
+    contains LocalStringMapEntry[] extendedPresentation
+    @MdProperty(^id = "719346a1-02d5-4311-a141-4d22470a7ac3")
+    contains LocalStringMapEntry[] explanation
+
+    @MdClass(^id = "ec6bb5e5-b7a8-4d75-bec9-658107a699cf", code = "Attribute", code_ru = "Реквизит")
+    contains DataProcessorAttribute[] attributes
+    @MdClass(^id = "2bcef0d1-0981-11d6-b9b8-0050bae0a95d", code = "TabularSection", code_ru = "ТабличнаяЧасть")
+    contains DataProcessorTabularSection[] tabularSections
+    @MdClass(^id = "d5b0e5ed-256d-401c-9c36-f630cafd8a62", code = "Form", code_ru = "Форма")
+    contains DataProcessorForm[] forms
+    @MdClass(^id = "3daea016-69b7-4ed4-9453-127911372fe6")
+    contains Template[] templates
+    @MdClass(^id = "45556acb-826a-4f73-898a-6025fc9536e1", code = "Command", code_ru = "Команда")
+    contains DataProcessorCommand[] commands
+
+    op boolean validate(EDiagnosticChain diagnostics, EMap<Object, Object> context)
+    {
+        DataProcessorValidator::validate(this, diagnostics, context)
+    }
+    
+    @ExternalProperty
+    @MdProperty(^id = "76025430-d729-465e-842e-abb7020c26f5")
+    refers transient EObject suppressObject
+}
+
+@MdClass(^id = "ec6bb5e5-b7a8-4d75-bec9-658107a699cf", code = "Attribute", code_ru = "Реквизит")
+class DataProcessorAttribute extends BasicFeature
+{
+    @MdProperty(^id = "7ba608f2-e654-42a3-8885-334fe88ca910")
+    ChoiceHistoryOnInput choiceHistoryOnInput
+}
+
+@MdClass(^id = "2bcef0d1-0981-11d6-b9b8-0050bae0a95d", code = "TabularSection", code_ru = "ТабличнаяЧасть")
+class DataProcessorTabularSection extends BasicTabularSection
+{
+    contains TabularSectionTypes[1] producedTypes
+
+    @MdClass(^id = "5d24a9d1-098e-11d6-b9b8-0050bae0a95d", code = "Attribute", code_ru = "Реквизит")
+    contains DataProcessorTabularSectionAttribute[] attributes
+}
+
+@MdClass(^id = "5d24a9d1-098e-11d6-b9b8-0050bae0a95d", code = "Attribute", code_ru = "Реквизит")
+class DataProcessorTabularSectionAttribute extends BasicFeature
+{
+    @MdProperty(^id = "2c8143d5-4248-4c43-8bfb-307c0be2e415")
+    boolean fillFromFillingValue
+    @MdProperty(^id = "e6b3f5f3-bdf3-4ad0-bc60-7323b3feb208")
+    contains Value fillValue
+    @MdProperty(^id = "7ba608f2-e654-42a3-8885-334fe88ca910")
+    ChoiceHistoryOnInput choiceHistoryOnInput
+}
+
+@MdClass(^id = "d5b0e5ed-256d-401c-9c36-f630cafd8a62", code = "Form", code_ru = "Форма")
+class DataProcessorForm extends BasicForm
+{
+    @MdProperty(^id = "c9ba86bf-a1e7-440f-9450-adb61f886f88")
+    contains LocalStringMapEntry[] extendedPresentation
+}
+
+@MdClass(^id = "45556acb-826a-4f73-898a-6025fc9536e1", code = "Command", code_ru = "Команда")
+class DataProcessorCommand extends BasicCommand
+{
+}
+
+@MdClass(^id = "c3831ec8-d8d5-4f93-8a22-f9bfae07327f", code_ru = "ВнешняяОбработка")
+class ExternalDataProcessor extends MdObject, FieldSource
+{
+    // ClassId - c3831ec8-d8d5-4f93-8a22-f9bfae07327f
+    contains ContainedObject[] containedObjects
+    contains ExternalDataProcessorTypes[1] producedTypes
+
+    @MdProperty(^id = "3e8c558e-64b4-405d-8ad3-7faf63b866ba")
+    refers BasicForm defaultForm
+    @MdProperty(^id = "2b017861-cb7f-449d-812a-3bd6a81b0177")
+    refers BasicForm auxiliaryForm
+    @ExternalProperty
+    @MdProperty(^id = "a637f77f-3840-441d-a1c3-699c8c5cb7e0")
+    refers transient Module objectModule
+    @MdProperty(^id = "038b5c85-fb1c-4082-9c4c-e69f8928bf3a")
+    contains Help help
+
+    @MdClass(^id = "ec6bb5e5-b7a8-4d75-bec9-658107a699cf", code = "Attribute", code_ru = "Реквизит")
+    contains DataProcessorAttribute[] attributes
+    @MdClass(^id = "2bcef0d1-0981-11d6-b9b8-0050bae0a95d", code = "TabularSection", code_ru = "ТабличнаяЧасть")
+    contains DataProcessorTabularSection[] tabularSections
+    @MdClass(^id = "d5b0e5ed-256d-401c-9c36-f630cafd8a62", code = "Form", code_ru = "Форма")
+    contains DataProcessorForm[] forms
+    @MdClass(^id = "3daea016-69b7-4ed4-9453-127911372fe6")
+    contains Template[] templates
+
+    op boolean validate(EDiagnosticChain diagnostics, EMap<Object, Object> context)
+    {
+        ExternalDataProcessorValidator::validate(this, diagnostics, context)
+    }
+    
+    @ExternalProperty
+    @MdProperty(^id = "96919736-78b2-4cd7-8d0b-337b0b6b658b")
+    refers transient EObject suppressObject
+}
+
+@MdClass(^id = "b64d9a40-1642-11d6-a3c7-0050bae0a776", code_ru = "РегистрНакопления")
+class AccumulationRegister extends BasicRegister
+{
+    contains AccumulationRegisterTypes[1] producedTypes
+    contains transient AccumulationRegisterbViewDefs dbViewDefs    // inferred
+
+    @MdProperty(^id = "d7be18bc-9899-48dd-8100-92dafc4dedea")
+    boolean useStandardCommands
+    @MdProperty(^id = "b69601f5-4cf6-11d4-9415-008048da11f9")
+    refers AccumulationRegisterForm defaultListForm
+    @MdProperty(^id = "367b60f5-2ad5-4399-a6b0-3dd8e4ac3650")
+    refers AccumulationRegisterForm auxiliaryListForm
+    @MdProperty(^id = "bd533460-4001-11d6-a3c7-0050bae0a776")
+    AccumulationRegisterType registerType
+    @MdProperty(^id = "1f2b167a-25fe-4f47-8710-933567dfa7d9")
+    boolean includeHelpInContents
+    @MdProperty(^id = "038b5c85-fb1c-4082-9c4c-e69f8928bf3a")
+    contains Help help
+    @ExternalProperty
+    @MdProperty(^id = "9f36fd70-4bf4-47f6-b235-935f73aab43f")
+    refers transient Module recordSetModule
+    @ExternalProperty
+    @MdProperty(^id = "d1b64a2c-8078-4982-8190-8f81aefda192")
+    refers transient Module managerModule
+    @MdProperty(^id = "03f171e8-326f-41c6-9fa5-932a0b12cddf")
+    contains StandardAttribute[] standardAttributes
+    @MdProperty(^id = "09c14dad-bd23-4d30-9c09-20ca3e5cd9f0")
+    DefaultDataLockControlMode dataLockControlMode
+    @MdProperty(^id = "d4232326-022b-421e-b6d3-88e418f74327")
+    FullTextSearchUsing fullTextSearch
+    @MdProperty(^id = "9c703426-16bd-4e3f-8dd5-0591a614e6de")
+    boolean enableTotalsSplitting
+    @MdProperty(^id = "04e7c33a-87b9-429a-a8d7-49d2e7d7c298")
+    contains AbstractAggregates aggregates
+    @MdProperty(^id = "b894dce6-9f10-45d6-958f-45993525a044")
+    contains LocalStringMapEntry[] listPresentation
+    @MdProperty(^id = "97f5ad64-29e4-410f-8ead-ec0dd5c5e58d")
+    contains LocalStringMapEntry[] extendedListPresentation
+    @MdProperty(^id = "719346a1-02d5-4311-a141-4d22470a7ac3")
+    contains LocalStringMapEntry[] explanation
+
+    @MdClass(^id = "b64d9a41-1642-11d6-a3c7-0050bae0a776", code = "Resource", code_ru = "Ресурс")
+    contains AccumulationRegisterResource[] resources
+    @MdClass(^id = "b64d9a42-1642-11d6-a3c7-0050bae0a776", code = "Attribute", code_ru = "Реквизит")
+    contains AccumulationRegisterAttribute[] attributes
+    @MdClass(^id = "b64d9a43-1642-11d6-a3c7-0050bae0a776", code = "Dimension", code_ru = "Измерение")
+    contains AccumulationRegisterDimension[] dimensions
+    @MdClass(^id = "b64d9a44-1642-11d6-a3c7-0050bae0a776", code = "Form", code_ru = "Форма")
+    contains AccumulationRegisterForm[] forms
+    @MdClass(^id = "3daea016-69b7-4ed4-9453-127911372fe6")
+    contains Template[] templates
+    @MdClass(^id = "99f328af-a77f-4572-a2d8-80ed20c81890", code = "Command", code_ru = "Команда")
+    contains AccumulationRegisterCommand[] commands
+
+    op boolean validate(EDiagnosticChain diagnostics, EMap<Object, Object> context)
+    {
+        AccumulationRegisterValidator::validate(this, diagnostics, context)
+    }
+}
+
+@MdClass(^id = "b64d9a41-1642-11d6-a3c7-0050bae0a776", code = "Resource", code_ru = "Ресурс")
+class AccumulationRegisterResource extends RegisterResource
+{
+    @MdProperty(^id = "7ba608f2-e654-42a3-8885-334fe88ca910")
+    ChoiceHistoryOnInput choiceHistoryOnInput
+}
+
+@MdClass(^id = "b64d9a42-1642-11d6-a3c7-0050bae0a776", code = "Attribute", code_ru = "Реквизит")
+class AccumulationRegisterAttribute extends RegisterAttribute
+{
+    @MdProperty(^id = "7ba608f2-e654-42a3-8885-334fe88ca910")
+    ChoiceHistoryOnInput choiceHistoryOnInput
+}
+
+@MdClass(^id = "b64d9a43-1642-11d6-a3c7-0050bae0a776", code = "Dimension", code_ru = "Измерение")
+class AccumulationRegisterDimension extends RegisterDimension
+{
+    @MdProperty(^id = "7ba608f2-e654-42a3-8885-334fe88ca910")
+    ChoiceHistoryOnInput choiceHistoryOnInput
+    @MdProperty(^id = "3af11bfd-c4f3-43b9-9ef1-6f4c1310e6dd")
+    boolean useInTotals
+}
+
+@MdClass(^id = "b64d9a44-1642-11d6-a3c7-0050bae0a776", code = "Form", code_ru = "Форма")
+class AccumulationRegisterForm extends BasicForm
+{
+}
+
+@MdClass(^id = "99f328af-a77f-4572-a2d8-80ed20c81890", code = "Command", code_ru = "Команда")
+class AccumulationRegisterCommand extends BasicCommand
+{
+}
+
+abstract class AbstractAggregates
+{
+}
+
+@MdClass(^id = "af547940-3268-434f-a3e7-e47d6d2638c3", code_ru = "ФункциональнаяОпция")
+class FunctionalOption extends MdObject
+{
+    @MdProperty(^id = "98eafc16-765b-49e5-95c7-1f2a20625a01")
+    refers MdObject location
+    @MdProperty(^id = "2cb2a601-2817-4d6a-838c-a9caf79e4f47")
+    boolean privilegedGetMode
+    @MdProperty(^id = "93a0e223-71ec-4c9d-8020-a62842ce0560")
+    refers MdObject[] content
+
+    op boolean validate(EDiagnosticChain diagnostics, EMap<Object, Object> context)
+    {
+        FunctionalOptionValidator::validate(this, diagnostics, context)
+    }
+    
+    @ExternalProperty
+    @MdProperty(^id = "86b141c2-b7e6-45d1-8c62-a792fb6c249d")
+    refers transient EObject suppressObject
+}
+
+@MdClass(^id = "fcd3404e-1523-48ce-9bc0-ecdb822684a1", code_ru = "БизнесПроцесс")
+class BusinessProcess extends BasicDbObject, SupportFilterCriterion, DataHistorySupport
+{
+    contains BusinessProcessTypes[1] producedTypes
+    contains transient BusinessProcessDbViewDefs dbViewDefs    // inferred
+
+    @ExternalProperty
+    @MdProperty(^id = "db3ee9cf-18c2-46b9-baed-8774629bae57")
+    refers transient AbstractFlowchart flowchart
+    @MdProperty(^id = "267add9b-837b-42d9-992d-374a808fd94d")
+    EditType editType
+    @MdProperty(^id = "b69601f3-4cf6-11d4-9415-008048da11f9")
+    refers BusinessProcessForm defaultObjectForm
+    @MdProperty(^id = "b69601f5-4cf6-11d4-9415-008048da11f9")
+    refers BusinessProcessForm defaultListForm
+    @MdProperty(^id = "b69601f6-4cf6-11d4-9415-008048da11f9")
+    refers BusinessProcessForm defaultChoiceForm
+    @MdProperty(^id = "98388ad1-7b6f-4049-bfdb-02b3e3789cdc")
+    refers BusinessProcessForm auxiliaryObjectForm
+    @MdProperty(^id = "367b60f5-2ad5-4399-a6b0-3dd8e4ac3650")
+    refers BusinessProcessForm auxiliaryListForm
+    @MdProperty(^id = "4f0c02fe-c9da-4f51-ae93-e69119d4eb2c")
+    refers BusinessProcessForm auxiliaryChoiceForm
+    @MdProperty(^id = "7ba608f2-e654-42a3-8885-334fe88ca910")
+    ChoiceHistoryOnInput choiceHistoryOnInput
+    @MdProperty(^id = "6bf0e946-bc0a-4c14-ae2a-ef91a97130e6")
+    BusinessProcessNumberType numberType
+    @MdProperty(^id = "490eb6bd-24c4-4943-82aa-d0c4b666861b")
+    int numberLength
+    @MdProperty(^id = "c6c9689d-2978-42e8-863f-0280c6a85b56")
+    AllowedLength numberAllowedLength
+    @MdProperty(^id = "8336a121-59b3-427d-8e49-1c813662a550")
+    boolean checkUnique
+    @MdProperty(^id = "05720713-cc30-4c4e-a417-87b1676d8d85")
+    boolean autonumbering
+    @MdProperty(^id = "52fd6c27-ff2f-4fc9-88c4-706b1788d3c2")
+    BusinessProcessNumberPeriodicity numberPeriodicity
+    @MdProperty(^id = "e0084c38-04d3-4089-a4f0-40735edd1528")
+    refers Task task
+    @MdProperty(^id = "02d45043-49d5-4de9-bc4e-9dce8415e464")
+    boolean createTaskInPrivilegedMode
+    @MdProperty(^id = "0912c390-3c7e-4de9-abd0-f9c9cb19f0e6") // since 8.3.15
+    boolean updateDataHistoryImmediatelyAfterWrite
+    @MdProperty(^id = "c4986a1c-1315-4f86-9587-f1d116329b58") // since 8.3.15
+    boolean executeAfterWriteDataHistoryVersionProcessing
+
+    @MdClass(^id = "87c988de-ecbf-413b-87b0-b9516df05e28", code = "Attribute", code_ru = "Реквизит")
+    contains BusinessProcessAttribute[] attributes
+    @MdClass(^id = "a3fe6537-d787-40f7-8a06-419d2f0c1cfd", code = "TabularSection", code_ru = "ТабличнаяЧасть")
+    contains BusinessProcessTabularSection[] tabularSections
+    @MdClass(^id = "3f7a8120-b71a-4265-98bf-4d9bc09b7719", code = "Form", code_ru = "Форма")
+    contains BusinessProcessForm[] forms
+    @MdClass(^id = "3daea016-69b7-4ed4-9453-127911372fe6")
+    contains Template[] templates
+    @MdClass(^id = "7a3e533c-f232-40d5-a932-6a311d2480bf", code = "Command", code_ru = "Команда")
+    contains BusinessProcessCommand[] commands
+
+    op boolean validate(EDiagnosticChain diagnostics, EMap<Object, Object> context)
+    {
+        BusinessProcessValidator::validate(this, diagnostics, context)
+    }
+
+    op TypeItem selectCriterionTypeRef()
+    {
+        producedTypes.refType.^type
+    }
+}
+
+@MdClass(^id = "3f7a8120-b71a-4265-98bf-4d9bc09b7719", code = "Form", code_ru = "Форма")
+class BusinessProcessForm extends BasicForm
+{
+}
+
+@MdClass(^id = "7a3e533c-f232-40d5-a932-6a311d2480bf", code = "Command", code_ru = "Команда")
+class BusinessProcessCommand extends BasicCommand
+{
+}
+
+@MdClass(^id = "87c988de-ecbf-413b-87b0-b9516df05e28", code = "Attribute", code_ru = "Реквизит")
+class BusinessProcessAttribute extends DbObjectAttribute, DataHistorySupport
+{
+    @MdProperty(^id = "7ba608f2-e654-42a3-8885-334fe88ca910")
+    ChoiceHistoryOnInput choiceHistoryOnInput
+}
+
+@MdClass(^id = "a3fe6537-d787-40f7-8a06-419d2f0c1cfd", code = "TabularSection", code_ru = "ТабличнаяЧасть")
+class BusinessProcessTabularSection extends DbObjectTabularSection
+{
+}
+
+@MdClass(^id = "3e63355c-1378-4953-be9b-1deb5fb6bec5", code_ru = "Задача")
+class Task extends BasicDbObject, SupportFilterCriterion, DataHistorySupport
+{
+    contains TaskTypes[1] producedTypes
+    contains transient TaskDbViewDefs dbViewDefs    // inferred
+
+    @MdProperty(^id = "069171dd-c9aa-4c92-99a0-dd54e2ab3df7")
+    TaskNumberType numberType
+    @MdProperty(^id = "490eb6bd-24c4-4943-82aa-d0c4b666861b")
+    int numberLength
+    @MdProperty(^id = "c6c9689d-2978-42e8-863f-0280c6a85b56")
+    AllowedLength numberAllowedLength
+    @MdProperty(^id = "8336a121-59b3-427d-8e49-1c813662a550")
+    boolean checkUnique
+    @MdProperty(^id = "05720713-cc30-4c4e-a417-87b1676d8d85")
+    boolean autonumbering
+    @MdProperty(^id = "4299d32f-a415-498a-85bf-a20c8b1200d1")
+    TaskNumberAutoPrefix taskNumberAutoPrefix
+    @MdProperty(^id = "37f2fa9f-b276-11d4-9435-004095e12fc7")
+    int descriptionLength
+    @MdProperty(^id = "ecd25ed0-49f3-4efc-accc-aef0ad1da2fe")
+    refers InformationRegister addressing
+    @MdProperty(^id = "6ac2b7da-1ae1-4c98-9cc9-45415e84ac92")
+    refers AddressingAttribute mainAddressingAttribute
+    @MdProperty(^id = "d7bee74f-4650-4970-a96a-e11b9adfaa7d")
+    refers SessionParameter currentPerformer
+    @MdProperty(^id = "24b70491-8b78-43ad-a6bb-5b33cc0fe5f0")
+    TaskMainPresentation defaultPresentation
+    @MdProperty(^id = "267add9b-837b-42d9-992d-374a808fd94d")
+    EditType editType
+    @MdProperty(^id = "b69601f3-4cf6-11d4-9415-008048da11f9")
+    refers TaskForm defaultObjectForm
+    @MdProperty(^id = "b69601f5-4cf6-11d4-9415-008048da11f9")
+    refers TaskForm defaultListForm
+    @MdProperty(^id = "b69601f6-4cf6-11d4-9415-008048da11f9")
+    refers TaskForm defaultChoiceForm
+    @MdProperty(^id = "98388ad1-7b6f-4049-bfdb-02b3e3789cdc")
+    refers TaskForm auxiliaryObjectForm
+    @MdProperty(^id = "367b60f5-2ad5-4399-a6b0-3dd8e4ac3650")
+    refers TaskForm auxiliaryListForm
+    @MdProperty(^id = "4f0c02fe-c9da-4f51-ae93-e69119d4eb2c")
+    refers TaskForm auxiliaryChoiceForm
+    @MdProperty(^id = "7ba608f2-e654-42a3-8885-334fe88ca910")
+    ChoiceHistoryOnInput choiceHistoryOnInput
+    @MdProperty(^id = "0912c390-3c7e-4de9-abd0-f9c9cb19f0e6") // since 8.3.15
+    boolean updateDataHistoryImmediatelyAfterWrite
+    @MdProperty(^id = "c4986a1c-1315-4f86-9587-f1d116329b58") // since 8.3.15
+    boolean executeAfterWriteDataHistoryVersionProcessing
+
+    @MdClass(^id = "8ddfb495-c5fc-46b9-bdc5-bcf58341bff0", code = "Attribute", code_ru = "Реквизит")
+    contains TaskAttribute[] attributes
+    @MdClass(^id = "ee865d4b-a458-48a0-b38f-5a26898feeb0", code = "TabularSection", code_ru = "ТабличнаяЧасть")
+    contains TaskTabularSection[] tabularSections
+    @MdClass(^id = "3f58cbfb-4172-4e54-be49-561a579bb38b", code = "Form", code_ru = "Форма")
+    contains TaskForm[] forms
+    @MdClass(^id = "3daea016-69b7-4ed4-9453-127911372fe6")
+    contains Template[] templates
+    @MdClass(^id = "e97c0570-251c-4566-b0f1-10686820f143", code = "AddressingAttribute", code_ru = "РеквизитАдресации")
+    contains AddressingAttribute[] addressingAttributes
+    @MdClass(^id = "f27c2152-a2c9-4c30-adb1-130f5eb2590f", code = "Command", code_ru = "Команда")
+    contains TaskCommand[] commands
+
+    op boolean validate(EDiagnosticChain diagnostics, EMap<Object, Object> context)
+    {
+        TaskValidator::validate(this, diagnostics, context)
+    }
+
+    op TypeItem selectCriterionTypeRef()
+    {
+        producedTypes.refType.^type
+    }
+}
+
+@MdClass(^id = "f27c2152-a2c9-4c30-adb1-130f5eb2590f", code = "Command", code_ru = "Команда")
+class TaskCommand extends BasicCommand
+{
+}
+
+@MdClass(^id = "3f58cbfb-4172-4e54-be49-561a579bb38b", code = "Form", code_ru = "Форма")
+class TaskForm extends BasicForm
+{
+}
+
+@MdClass(^id = "8ddfb495-c5fc-46b9-bdc5-bcf58341bff0", code = "Attribute", code_ru = "Реквизит")
+class TaskAttribute extends DbObjectAttribute, DataHistorySupport
+{
+    @MdProperty(^id = "7ba608f2-e654-42a3-8885-334fe88ca910")
+    ChoiceHistoryOnInput choiceHistoryOnInput
+}
+
+@MdClass(^id = "ee865d4b-a458-48a0-b38f-5a26898feeb0", code = "TabularSection", code_ru = "ТабличнаяЧасть")
+class TaskTabularSection extends DbObjectTabularSection
+{
+}
+
+@MdClass(^id = "e97c0570-251c-4566-b0f1-10686820f143", code = "AddressingAttribute", code_ru = "РеквизитАдресации")
+class AddressingAttribute extends BasicFeature, DataHistorySupport
+{
+    @MdProperty(^id = "2c8143d5-4248-4c43-8bfb-307c0be2e415")
+    boolean fillFromFillingValue
+    @MdProperty(^id = "e6b3f5f3-bdf3-4ad0-bc60-7323b3feb208")
+    contains Value fillValue
+    @MdProperty(^id = "7ba608f2-e654-42a3-8885-334fe88ca910")
+    ChoiceHistoryOnInput choiceHistoryOnInput
+    @MdProperty(^id = "a93a67a0-1955-11d6-a3c7-0050bae0a776")
+    Indexing indexing
+    @MdProperty(^id = "5448b2cc-2952-4876-878f-5c418068bc31")
+    refers InformationRegisterDimension addressingDimension
+    @MdProperty(^id = "d4232326-022b-421e-b6d3-88e418f74327")
+    FullTextSearchUsing fullTextSearch
+}
+
+@MdClass(^id = "11bdaf85-d5ad-4d91-bb24-aa0eee139052", code_ru = "РегламентноеЗадание")
+class ScheduledJob extends MdObject
+{
+    @MdProperty(^id = "84fe0d1a-994d-45ba-9285-cf45eb673132")
+    String methodName
+    @MdProperty(^id = "e37fc39f-6a18-4f1e-a3cc-8fb26fb80bd0")
+    String description
+    @MdProperty(^id = "5397f83c-1502-4b85-8737-0c4824fb8884")
+    String key
+    @ExternalProperty
+    @MdProperty(^id = "ae7c9d76-384b-4ad8-ae2e-9335eac74f26")
+    refers transient Schedule schedule
+    @MdProperty(^id = "84add6a6-0384-4af6-8094-f5ec355d5cee")
+    boolean use
+    @MdProperty(^id = "07ea7a90-663a-48cc-a132-b2cd62dec212")
+    boolean predefined
+    @MdProperty(^id = "b33f19f8-5fe5-4559-89c6-31a873a3fd38")
+    int restartCountOnFailure
+    @MdProperty(^id = "dba7697a-4f98-4bf6-a8d6-c985a9004004")
+    int restartIntervalOnFailure
+
+    op boolean validate(EDiagnosticChain diagnostics, EMap<Object, Object> context)
+    {
+        ScheduledJobValidator::validate(this, diagnostics, context)
+    }
+
+    @ExternalProperty
+    @MdProperty(^id = "ccfe19b6-416f-486f-89c5-4eca58de591e")
+    refers transient EObject suppressObject
+}
+
+@MdClass(^id = "30d554db-541e-4f62-8970-a1c6dcfeb2bc", code_ru = "ПараметрФункциональныхОпций")
+class FunctionalOptionsParameter extends MdObject
+{
+    @MdProperty(^id = "326fef5e-7e6d-4604-98ae-da47cc22d546")
+    refers MdObject[] use
+
+    op boolean validate(EDiagnosticChain diagnostics, EMap<Object, Object> context)
+    {
+        FunctionalOptionsParameterValidator::validate(this, diagnostics, context)
+    }
+    
+    @ExternalProperty
+    @MdProperty(^id = "b9f06fd4-62d4-4e80-a9a1-56e4a4818d94")
+    refers transient EObject suppressObject
+}
+
+@MdClass(^id = "3e7bfcc0-067d-11d6-a3c7-0050bae0a776", code_ru = "КритерийОтбора")
+class FilterCriterion extends MdObject, StandardCommandSource, TypeDescriptionProvider
+{
+    contains FilterCriterionTypes[1] producedTypes
+    contains transient FilterCriterionDbViewDefs dbViewDefs    // inferred
+
+    @MdProperty(^id = "b1053250-abe6-11d4-9434-004095e12fc7", code = "Type")
+    contains TypeDescription[1] ^type
+    @MdProperty(^id = "d7be18bc-9899-48dd-8100-92dafc4dedea")
+    boolean useStandardCommands
+    @MdProperty(^id = "e1e8ea40-0906-11d6-a3c7-0050bae0a776")
+    refers MdObject[] content
+    @MdProperty(^id = "3e8c558e-64b4-405d-8ad3-7faf63b866ba")
+    refers FilterCriterionForm defaultForm
+    @MdProperty(^id = "2b017861-cb7f-449d-812a-3bd6a81b0177")
+    refers FilterCriterionForm auxiliaryForm
+    @ExternalProperty
+    @MdProperty(^id = "d1b64a2c-8078-4982-8190-8f81aefda192")
+    refers transient Module managerModule
+    @MdProperty(^id = "b894dce6-9f10-45d6-958f-45993525a044")
+    contains LocalStringMapEntry[] listPresentation
+    @MdProperty(^id = "97f5ad64-29e4-410f-8ead-ec0dd5c5e58d")
+    contains LocalStringMapEntry[] extendedListPresentation
+    @MdProperty(^id = "719346a1-02d5-4311-a141-4d22470a7ac3")
+    contains LocalStringMapEntry[] explanation
+
+    @MdClass(^id = "00867c40-06b1-11d6-a3c7-0050bae0a776", code = "Form", code_ru = "Форма")
+    contains FilterCriterionForm[] forms
+    @MdClass(^id = "23fa3b84-220a-40e9-8331-e588bed87f7d", code = "Command", code_ru = "Команда")
+    contains FilterCriterionCommand[] commands
+
+    op boolean validate(EDiagnosticChain diagnostics, EMap<Object, Object> context)
+    {
+        FilterCriterionValidator::validate(this, diagnostics, context)
+    }
+    
+    @ExternalProperty
+    @MdProperty(^id = "75c3a1bd-a970-4cfe-bcc8-3e7f94d3142d")
+    refers transient EObject suppressObject
+}
+
+@MdClass(^id = "23fa3b84-220a-40e9-8331-e588bed87f7d", code = "Command", code_ru = "Команда")
+class FilterCriterionCommand extends BasicCommand
+{
+}
+
+@MdClass(^id = "00867c40-06b1-11d6-a3c7-0050bae0a776", code = "Form", code_ru = "Форма")
+class FilterCriterionForm extends BasicForm
+{
+}
+
+@MdClass(^id = "46b4cd97-fd13-4eaa-aba2-3bddd7699218", code_ru = "ХранилищеНастроек")
+class SettingsStorage extends MdObject
+{
+    contains SettingsStorageTypes[1] producedTypes
+
+    @MdProperty(^id = "f5094eee-42ee-4e29-8536-a6f06f20b66a")
+    refers SettingsStorageForm defaultSaveForm
+    @MdProperty(^id = "48fe5600-73bd-42d1-9c4f-de6647049f4a")
+    refers SettingsStorageForm defaultLoadForm
+    @MdProperty(^id = "7cb99c54-28fe-422e-9c07-1262b43e3bf4")
+    refers SettingsStorageForm auxiliarySaveForm
+    @MdProperty(^id = "8993266c-719b-4ad0-ae5f-b86bd62a09c6")
+    refers SettingsStorageForm auxiliaryLoadForm
+    @ExternalProperty
+    @MdProperty(^id = "0c8cad23-bf8c-468e-b49e-12f1927c048b")
+    refers transient Module managerModule
+
+    @MdClass(^id = "b8533c0c-2342-4db3-91a2-c2b08cbf6b23", code = "Form", code_ru = "Форма")
+    contains SettingsStorageForm[] forms
+    @MdClass(^id = "3daea016-69b7-4ed4-9453-127911372fe6")
+    contains Template[] templates
+
+    @ExternalProperty
+    @MdProperty(^id = "8f2de2ee-c1b1-4832-b675-75c9f07c01f7")
+    refers transient EObject suppressObject
+}
+
+@MdClass(^id = "b8533c0c-2342-4db3-91a2-c2b08cbf6b23", code = "Form", code_ru = "Форма")
+class SettingsStorageForm extends BasicForm
+{
+}
+
+@MdClass(^id = "cc9df798-7c94-4616-97d2-7aa0b7bc515e", code_ru = "XDTOПакет")
+class XDTOPackage extends MdObject
+{
+    @MdProperty(^id = "c8a6c337-57d5-479f-84c5-76c73e6761ee")
+    String namespace
+    @ExternalProperty
+    @MdProperty(^id = "2153da00-9515-40fd-b57e-39adf28c839f")
+    refers transient com._1c.g5.v8.dt.xdto.model.Package ^package
+
+    op boolean validate(EDiagnosticChain diagnostics, EMap<Object, Object> context)
+    {
+        XDTOPackageValidator::validate(this, diagnostics, context)
+    }
+
+    @ExternalProperty
+    @MdProperty(^id = "016263ac-789f-431e-bcb7-dc44a8bd05a3")
+    refers transient EObject suppressObject
+}
+
+@MdClass(^id = "8657032e-7740-4e1d-a3ba-5dd6e8afb78f", code_ru = "WebСервис")
+class WebService extends MdObject
+{
+    @MdProperty(^id = "c8a6c337-57d5-479f-84c5-76c73e6761ee")
+    String namespace
+    @ExternalProperty
+    @MdProperty(^id = "d5963243-262e-4398-b4d7-fb16d06484f6")
+    refers transient Module module
+    @MdProperty(^id = "804f486d-b754-4e21-8afa-0b0bf51098f5")
+    contains Value[] xdtoPackages
+    @MdProperty(^id = "2d15f3d3-9c28-4a47-8d76-2ca859b04f54")
+    String descriptorFileName
+    @MdProperty(^id = "e1d1cc9f-5e20-4065-9205-c502efb5f8ec")
+    SessionReuseMode reuseSessions
+    @MdProperty(^id = "d58dbde9-0ae8-406f-a288-13c7a5670dd6")
+    long sessionMaxAge
+
+    @MdClass(^id = "36186084-c23a-43bd-876c-a3a8ba1a9622", code_ru = "Операция")
+    contains Operation[] operations
+
+    op boolean validate(EDiagnosticChain diagnostics, EMap<Object, Object> context)
+    {
+        WebServiceValidator::validate(this, diagnostics, context)
+    }
+
+    @ExternalProperty
+    @MdProperty(^id = "a603f492-fcad-4136-aa63-b64ee18990a7")
+    refers transient EObject suppressObject
+}
+
+@MdClass(^id = "36186084-c23a-43bd-876c-a3a8ba1a9622", code_ru = "Операция")
+class Operation extends MdObject
+{
+    @MdProperty(^id = "4f239ce7-e38f-4ee4-95bc-8a48f81eae85")
+    contains QName[1] xdtoReturningValueType
+    @MdProperty(^id = "924dfdc9-b8da-4b1f-a631-57a8a6c05e65")
+    boolean nillable
+    @MdProperty(^id = "b9460636-d17c-437e-b82a-e56c91a302bc")
+    boolean transactioned
+    @MdProperty(^id = "35c0830c-c0cc-462a-ab18-9ddc77f18703")
+    String procedureName
+    @MdProperty(^id = "09c14dad-bd23-4d30-9c09-20ca3e5cd9f0")
+    DefaultDataLockControlMode dataLockControlMode
+
+    @MdClass(^id = "b78a00b2-2260-4ef5-a70c-17889cfee695", code_ru = "Параметр")
+    contains Parameter[] parameters
+
+    op boolean validate(EDiagnosticChain diagnostics, EMap<Object, Object> context)
+    {
+        WebServiceOperationValidator::validate(this, diagnostics, context)
+    }
+}
+
+@MdClass(^id = "b78a00b2-2260-4ef5-a70c-17889cfee695", code_ru = "Параметр")
+class Parameter extends MdObject
+{
+    @MdProperty(^id = "2690bd62-1aef-4aed-ae0f-6b399f4a119c")
+    contains QName[1] xdtoValueType
+    @MdProperty(^id = "924dfdc9-b8da-4b1f-a631-57a8a6c05e65")
+    boolean nillable
+    @MdProperty(^id = "be1baeb7-4753-4fb7-94eb-f18117735764")
+    TransferDirection transferDirection
+}
+
+@MdClass(^id = "0fffc09c-8f4c-47cc-b41c-8d5c5a221d79", code_ru="HTTPСервис")
+class HTTPService extends MdObject
+{
+    @MdProperty(^id = "4ffaf6d7-3efc-4211-aa30-f0a301ce1032")
+    String rootURL
+    @ExternalProperty
+    @MdProperty(^id = "d5963243-262e-4398-b4d7-fb16d06484f6")
+    refers transient Module module
+    @MdProperty(^id = "e1d1cc9f-5e20-4065-9205-c502efb5f8ec")
+    SessionReuseMode reuseSessions
+    @MdProperty(^id = "d58dbde9-0ae8-406f-a288-13c7a5670dd6")
+    long sessionMaxAge
+
+    @MdClass(^id = "ec6896c2-9b28-42d8-9140-48491146b8ea", code_ru="ШаблонURL")
+    contains URLTemplate[] urlTemplates
+
+    op boolean validate(EDiagnosticChain diagnostics, EMap<Object, Object> context)
+    {
+        HTTPServiceValidator::validate(this, diagnostics, context)
+    }
+
+    @ExternalProperty
+    @MdProperty(^id = "eb11a897-26fd-468b-80b6-73719eb70ff4")
+    refers transient EObject suppressObject
+}
+
+@MdClass(^id = "ec6896c2-9b28-42d8-9140-48491146b8ea", code_ru="ШаблонURL")
+class URLTemplate extends MdObject
+{
+    @MdProperty(^id = "f6d1e9d1-96c6-400e-8d19-1f291c7c0d2f")
+    String template
+
+    @MdClass(^id = "21c96ea8-c8fc-424a-a0b4-e1ffb2fa1a73", code_ru="Метод")
+    contains Method[] methods
+
+    op boolean validate(EDiagnosticChain diagnostics, EMap<Object, Object> context)
+    {
+        URLTemplateValidator::validate(this, diagnostics, context)
+    }
+}
+
+@MdClass(^id = "21c96ea8-c8fc-424a-a0b4-e1ffb2fa1a73", code_ru="Метод")
+class Method extends MdObject
+{
+    @MdProperty(^id = "45489a64-d58a-4697-b850-8ad18b9bf83a")
+    HTTPMethod httpMethod
+    @MdProperty(^id = "550dafce-92ea-4a3f-9cf9-2382a8c5fc55")
+    String handler
+
+    op boolean validate(EDiagnosticChain diagnostics, EMap<Object, Object> context)
+    {
+        MethodValidator::validate(this, diagnostics, context)
+    }
+}
+
+// ------  ExternalDataSource -------
+// TODO: review model
+@MdClass(^id = "5274d9fc-9c3a-4a71-8f5e-a0db8ab23de5", code_ru="ВнешнийИсточникДанных")
+class ExternalDataSource extends MdObject
+{
+    contains ExternalDataSourceTypes[1] producedTypes
+
+    @MdProperty(^id = "e62bec13-4f7e-45ab-adba-b1348364bb48")
+    DefaultDataLockControlMode dataLockControlMode
+
+    @MdClass(^id = "e3403acd-1c95-421b-87e4-4dfa29d38b52", code_ru = "Таблица")
+    refers Table[] tables
+    @MdClass(^id = "2bb208ca-e441-4023-9ab9-32a7807a85d0", code_ru = "Куб")
+    refers Cube[] cubes
+    @MdClass(^id = "a98a108a-49a0-4dcf-bfd0-aa4b89eeb3f5", code_ru = "Функция")
+    contains Function[] functions
+
+    @ExternalProperty
+    @MdProperty(^id = "a8f3f746-c15c-4bc3-970f-4d8c80a97577")
+    refers transient EObject suppressObject
+}
+
+@MdClass(^id = "e3403acd-1c95-421b-87e4-4dfa29d38b52", code_ru="Таблица")
+class Table extends MdObject, StandardCommandSource, FieldSource
+{
+    contains TableTypes[1] producedTypes
+    contains transient TableDbViewDefs dbViewDefs
+    refers ExternalDataSource parentDataSource
+
+    @MdProperty(^id = "4b8645b1-82ab-4b77-bdd2-47705b455eca")
+    ExternalDataSourceTableType tableType
+    @MdProperty(^id = "80d8c15a-41c3-4ce7-bfb3-4f1aede2649b")
+    String nameInDataSource
+    @MdProperty(^id = "e17188af-805e-4eb5-8a77-b5b296a79007")
+    String expressionInDataSource
+    @MdProperty(^id = "14c0a585-f30b-428b-8ed3-9c6563826997")
+    ExternalDataSourceTableDataType tableDataType
+    @MdProperty(^id = "9a526d8b-ceb4-41b6-89cd-83ae835d870b")
+    refers com._1c.g5.v8.dt.mcore.Field[] keyFields
+    @MdProperty(^id = "b5937463-8629-4b26-b4ee-7914d9ac1d82")
+    refers Field presentationField
+    @MdProperty(^id = "74ec4e99-d43b-4889-b56e-dc3397d39714")
+    refers Field parentField
+    @MdProperty(^id = "f2b51318-20cc-4aa2-8193-0aad9c6efe27")
+    contains Value unfilledParentValue
+    @MdProperty(^id = "97fc573f-64e4-46df-b464-077a96d76122")
+    contains CharacteristicsDescription[] characteristics
+    @MdProperty(^id = "d7be18bc-9899-48dd-8100-92dafc4dedea")
+    boolean useStandardCommands
+    @MdProperty(^id = "1b3ecd33-43d7-45e4-a012-776d95785465")
+    boolean quickChoice
+    @MdProperty(^id = "b28cb2f0-9b2a-4784-bd09-2cb60497027f")
+    refers com._1c.g5.v8.dt.mcore.Field[] inputByString
+    @MdProperty(^id = "33c74a4d-561f-4bc0-9eaa-8d21c893c0a9")
+    CreateOnInput createOnInput
+    @MdProperty(^id = "5bd5743d-bf9a-43bc-b7a9-c1a0b5984f78")
+    SearchStringModeOnInputByString searchStringModeOnInputByString
+    @MdProperty(^id = "d80df833-0fcb-49e6-91c9-dda7ea01c2a5")
+    ChoiceDataGetModeOnInputByString choiceDataGetModeOnInputByString
+    @MdProperty(^id = "7ba608f2-e654-42a3-8885-334fe88ca910")
+    ChoiceHistoryOnInput choiceHistoryOnInput
+    @MdProperty(^id = "b69601f3-4cf6-11d4-9415-008048da11f9")
+    refers TableForm defaultObjectForm
+    @MdProperty(^id = "eb69bd85-1628-4846-8279-fade997cbcde")
+    refers TableForm defaultRecordForm
+    @MdProperty(^id = "b69601f5-4cf6-11d4-9415-008048da11f9")
+    refers TableForm defaultListForm
+    @MdProperty(^id = "b69601f6-4cf6-11d4-9415-008048da11f9")
+    refers TableForm defaultChoiceForm
+    @MdProperty(^id = "d79e10d1-ebb6-46c3-a053-55c3b7248b7e")
+    contains LocalStringMapEntry[] objectPresentation
+    @MdProperty(^id = "3613fe2b-442b-4723-a0dd-4bad030dcfa5")
+    contains LocalStringMapEntry[] extendedObjectPresentation
+    @MdProperty(^id = "b2f35c4e-8ffd-4e78-bb87-f7a7f14916e3")
+    contains LocalStringMapEntry[] recordPresentation
+    @MdProperty(^id = "efb47759-ee9f-4a50-b774-e4722073df6e")
+    contains LocalStringMapEntry[] extendedRecordPresentation
+    @MdProperty(^id = "b894dce6-9f10-45d6-958f-45993525a044")
+    contains LocalStringMapEntry[] listPresentation
+    @MdProperty(^id = "97f5ad64-29e4-410f-8ead-ec0dd5c5e58d")
+    contains LocalStringMapEntry[] extendedListPresentation
+    @MdProperty(^id = "719346a1-02d5-4311-a141-4d22470a7ac3")
+    contains LocalStringMapEntry[] explanation
+    @ExternalProperty
+    @MdProperty(^id = "a637f77f-3840-441d-a1c3-699c8c5cb7e0")
+    refers transient Module objectModule
+    @ExternalProperty
+    @MdProperty(^id = "9f36fd70-4bf4-47f6-b235-935f73aab43f")
+    refers transient Module recordSetModule
+    @ExternalProperty
+    @MdProperty(^id = "d1b64a2c-8078-4982-8190-8f81aefda192")
+    refers transient Module managerModule
+    @MdProperty(^id = "1f2b167a-25fe-4f47-8710-933567dfa7d9")
+    boolean includeHelpInContents
+    @MdProperty(^id = "038b5c85-fb1c-4082-9c4c-e69f8928bf3a")
+    contains Help help
+    @MdProperty(^id = "a57d5e9c-3d4d-4824-a8e0-168f2137385f")
+    boolean readOnly
+    @MdProperty(^id = "13b847d2-79e2-43cf-aa06-0c04e47c1ea9")
+    TransactionsIsolationLevel transactionsIsolationLevel
+    @MdProperty(^id = "68f69f70-8d34-4ec7-a0d2-c02daaae6e83")
+    refers MdObject dataVersionField
+    @MdProperty(^id = "267add9b-837b-42d9-992d-374a808fd94d")
+    EditType editType
+    @MdProperty(^id = "a1f564fd-c8e2-4aea-9e6e-2ee5fd5c2ed4")
+    refers MdObject[] basedOn
+    @MdProperty(^id = "130bff15-88ce-4f99-8610-abb4a300ebb0")
+    refers com._1c.g5.v8.dt.mcore.Field[] dataLockFields
+    @MdProperty(^id = "09c14dad-bd23-4d30-9c09-20ca3e5cd9f0")
+    DefaultDataLockControlMode dataLockControlMode
+
+    @MdClass(^id = "c7075688-01c1-41ba-bd1c-1023c8189079", code = "Field", code_ru = "Поле")
+    contains Field[] tableFields
+    @MdClass(^id = "17816ebc-4068-496e-adc4-8879945a832f", code = "Form", code_ru = "Форма")
+    contains TableForm[] forms
+    @MdClass(^id = "5bb6f09e-5d80-41f6-8070-9faa4d15b69b", code = "Command", code_ru = "Команда")
+    contains TableCommand[] commands
+    @MdClass(^id = "3daea016-69b7-4ed4-9453-127911372fe6")
+    contains Template[] templates
+
+    @ExternalProperty
+    @MdProperty(^id = "9487f217-9a90-4fa1-b71f-e011d970802b")
+    refers transient EObject suppressObject
+}
+
+@MdClass(^id = "17816ebc-4068-496e-adc4-8879945a832f", code = "Form")
+class TableForm extends BasicForm
+{
+}
+
+@MdClass(^id = "5bb6f09e-5d80-41f6-8070-9faa4d15b69b", code = "Command")
+class TableCommand extends BasicCommand
+{
+}
+
+@MdClass(^id = "c7075688-01c1-41ba-bd1c-1023c8189079")
+class Field extends MdObject, TypeDescriptionProvider
+{
+    @MdProperty(^id = "b1053250-abe6-11d4-9434-004095e12fc7", code = "Type")
+    contains TypeDescription[1] ^type
+    @MdProperty(^id = "90ae4b5d-e0fd-49ef-a008-d67c1e75038c")
+    boolean passwordMode
+    @MdProperty(^id = "580c29e2-8af4-4258-882a-7cf8073e61c8")
+    contains LocalStringMapEntry[] format
+    @MdProperty(^id = "88149a78-9448-4767-867b-0e650d165d2e")
+    contains LocalStringMapEntry[] editFormat
+    @MdProperty(^id = "4690ff70-e3fa-4914-9127-6a9acc5fc949")
+    contains LocalStringMapEntry[] toolTip
+    @MdProperty(^id = "b02800e9-a8d1-42ab-9a12-f673e92be968")
+    boolean markNegatives
+    @MdProperty(^id = "f49e4ced-4033-4e6c-8755-9fbaaccd6078")
+    String mask
+    @MdProperty(^id = "2bbba66b-fabf-4863-8ba3-54b3c64c896e")
+    boolean multiLine
+    @MdProperty(^id = "4de03908-56f4-4396-a61e-17253afca9ac")
+    boolean extendedEdit
+    @MdProperty(^id = "c65a541f-0b91-4f33-bc88-fbaaa57f9992")
+    contains Value minValue
+    @MdProperty(^id = "3eaf5a8b-06d6-47b0-ac7d-a9698247f499")
+    contains Value maxValue
+    @MdProperty(^id = "2c8143d5-4248-4c43-8bfb-307c0be2e415")
+    boolean fillFromFillingValue
+    @MdProperty(^id = "e6b3f5f3-bdf3-4ad0-bc60-7323b3feb208")
+    contains Value fillValue
+    @MdProperty(^id = "2723eb98-b4c1-498a-a6f3-70444757902f")
+    FillChecking fillChecking
+    @MdProperty(^id = "e3da683b-c54a-457a-a243-b9b4f9bf76dd")
+    contains ChoiceParameterLink[] choiceParameterLinks
+    @MdProperty(^id = "fcf503b8-1c06-454a-970c-06413e64aee5")
+    contains ChoiceParameter[] choiceParameters
+    @MdProperty(^id = "6e3a1131-37a3-4da5-8895-572d9d0c9db6")
+    UseQuickChoice quickChoice
+    @MdProperty(^id = "33c74a4d-561f-4bc0-9eaa-8d21c893c0a9")
+    CreateOnInput createOnInput
+    @MdProperty(^id = "7ba608f2-e654-42a3-8885-334fe88ca910")
+    ChoiceHistoryOnInput choiceHistoryOnInput
+    @MdProperty(^id = "6c4f7074-e7d4-48eb-b31b-132873666262")
+    refers BasicForm choiceForm
+    @MdProperty(^id = "11490fb7-6ac9-4045-bb2f-0d32ba506d9e")
+    String nameInDataSource
+    @MdProperty(^id = "9ca892ac-d677-4705-b723-51e8fc422545")
+    boolean readOnly
+    @MdProperty(^id = "32ed47af-caf6-46db-b4a1-f2654a02bf52")
+    boolean allowNull
+}
+
+@MdClass(^id = "2bb208ca-e441-4023-9ab9-32a7807a85d0", code_ru="Куб")
+class Cube extends MdObject, StandardCommandSource
+{
+    contains CubeTypes[1] producedTypes
+    contains transient CubeDbViewDefs dbViewDefs
+    refers ExternalDataSource parentDataSource
+
+    @MdProperty(^id = "9f862ca1-da81-44f0-bd9e-b945fb90349d")
+    String nameInDataSource
+    @MdProperty(^id = "97fc573f-64e4-46df-b464-077a96d76122")
+    contains CharacteristicsDescription[] characteristics
+    @MdProperty(^id = "d7be18bc-9899-48dd-8100-92dafc4dedea")
+    boolean useStandardCommands
+    @MdProperty(^id = "eb69bd85-1628-4846-8279-fade997cbcde")
+    refers BasicForm defaultRecordForm
+    @MdProperty(^id = "b69601f5-4cf6-11d4-9415-008048da11f9")
+    refers BasicForm defaultListForm
+    @MdProperty(^id = "b2f35c4e-8ffd-4e78-bb87-f7a7f14916e3")
+    contains LocalStringMapEntry[] recordPresentation
+    @MdProperty(^id = "efb47759-ee9f-4a50-b774-e4722073df6e")
+    contains LocalStringMapEntry[] extendedRecordPresentation
+    @MdProperty(^id = "b894dce6-9f10-45d6-958f-45993525a044")
+    contains LocalStringMapEntry[] listPresentation
+    @MdProperty(^id = "97f5ad64-29e4-410f-8ead-ec0dd5c5e58d")
+    contains LocalStringMapEntry[] extendedListPresentation
+    @MdProperty(^id = "719346a1-02d5-4311-a141-4d22470a7ac3")
+    contains LocalStringMapEntry[] explanation
+    @ExternalProperty
+    @MdProperty(^id = "9f36fd70-4bf4-47f6-b235-935f73aab43f")
+    refers transient Module recordSetModule
+    @ExternalProperty
+    @MdProperty(^id = "d1b64a2c-8078-4982-8190-8f81aefda192")
+    refers transient Module managerModule
+    @MdProperty(^id = "1f2b167a-25fe-4f47-8710-933567dfa7d9")
+    boolean includeHelpInContents
+    @MdProperty(^id = "038b5c85-fb1c-4082-9c4c-e69f8928bf3a")
+    contains Help help
+
+    @MdClass(^id = "631411f3-8c65-4066-a78f-57a72e015c1c", code = "DimensionTable", code_ru="ТаблицаИзмерения")
+    refers DimensionTable[] dimensionTables
+    @MdClass(^id = "7374aaf6-fe8c-4bba-8574-2075a293f0b6")
+    contains Dimension[] dimensions
+    @MdClass(^id = "cead2290-2080-4077-a57b-73051d618683")
+    contains Resource[] resources
+    @MdClass(^id = "3448e506-5add-4fce-a604-7305466b2d8e", code = "Form", code_ru = "Форма")
+    contains CubeForm[] forms
+    @MdClass(^id = "4ee40ec7-3469-439f-adb4-aa26ce2d3ec3", code = "Command", code_ru = "Команда")
+    contains CubeCommand[] commands
+    @MdClass(^id = "3daea016-69b7-4ed4-9453-127911372fe6")
+    contains Template[] templates
+
+    @ExternalProperty
+    @MdProperty(^id = "310e2734-9c9a-4140-b2f6-8f0eca0ef0a4")
+    refers transient EObject suppressObject
+}
+
+@MdClass(^id = "631411f3-8c65-4066-a78f-57a72e015c1c", code_ru="ТаблицаИзмерения")
+class DimensionTable extends MdObject, StandardCommandSource
+{
+    contains CubeDimensionTableTypes[1] producedTypes
+    contains transient DimensionTableDbViewDefs dbViewDefs
+    refers Cube parentCube
+
+    @MdProperty(^id = "8d13725e-bf6f-4cee-9add-cc60ed338079")
+    String nameInDataSource
+    @MdProperty(^id = "489424a7-3c35-4603-b7ab-db2f0d94b108")
+    refers Field presentationField
+    @MdProperty(^id = "d3a4b6ee-f394-4fbd-87d9-2b7635d83edf")
+    String hierarchyNameInDataSource
+    @MdProperty(^id = "147b7839-a578-4721-8679-9e3a66518461")
+    java.math.BigDecimal levelNumber
+    @MdProperty(^id = "c5e68bcb-2df3-45fd-8b55-65dbe3f6b054")
+    boolean hierarchical
+    @MdProperty(^id = "f2b51318-20cc-4aa2-8193-0aad9c6efe27")
+    contains Value unfilledParentValue
+    @MdProperty(^id = "d7be18bc-9899-48dd-8100-92dafc4dedea")
+    boolean useStandardCommands
+    @MdProperty(^id = "1b3ecd33-43d7-45e4-a012-776d95785465")
+    boolean quickChoice
+    @MdProperty(^id = "b69601f3-4cf6-11d4-9415-008048da11f9")
+    refers BasicForm defaultObjectForm
+    @MdProperty(^id = "b69601f5-4cf6-11d4-9415-008048da11f9")
+    refers BasicForm defaultListForm
+    @MdProperty(^id = "b69601f6-4cf6-11d4-9415-008048da11f9")
+    refers BasicForm defaultChoiceForm
+    @MdProperty(^id = "d79e10d1-ebb6-46c3-a053-55c3b7248b7e")
+    contains LocalStringMapEntry[] objectPresentation
+    @MdProperty(^id = "3613fe2b-442b-4723-a0dd-4bad030dcfa5")
+    contains LocalStringMapEntry[] extendedObjectPresentation
+    @MdProperty(^id = "b894dce6-9f10-45d6-958f-45993525a044")
+    contains LocalStringMapEntry[] listPresentation
+    @MdProperty(^id = "97f5ad64-29e4-410f-8ead-ec0dd5c5e58d")
+    contains LocalStringMapEntry[] extendedListPresentation
+    @MdProperty(^id = "719346a1-02d5-4311-a141-4d22470a7ac3")
+    contains LocalStringMapEntry[] explanation
+    @ExternalProperty
+    @MdProperty(^id = "a637f77f-3840-441d-a1c3-699c8c5cb7e0")
+    refers transient Module objectModule
+    @ExternalProperty
+    @MdProperty(^id = "d1b64a2c-8078-4982-8190-8f81aefda192")
+    refers transient Module managerModule
+    @MdProperty(^id = "1f2b167a-25fe-4f47-8710-933567dfa7d9")
+    boolean includeHelpInContents
+    @MdProperty(^id = "038b5c85-fb1c-4082-9c4c-e69f8928bf3a")
+    contains Help help
+
+    @MdClass(^id = "c7075688-01c1-41ba-bd1c-1023c8189079", code = "Field", code_ru = "Поле")
+    contains Field[] fields
+    @MdClass(^id = "2367cec0-5648-49d7-95f0-76d387653517", code = "Form", code_ru = "Форма")
+    contains DimensionTableForm[] forms
+    @MdClass(^id = "8352a2a3-943d-43a2-95d9-1c592b1d337d", code = "Command", code_ru = "Команда")
+    contains DimensionTableCommand[] commands
+    @MdClass(^id = "3daea016-69b7-4ed4-9453-127911372fe6")
+    contains Template[] templates
+
+    @ExternalProperty
+    @MdProperty(^id = "f80d1e2f-18ec-44f9-8d91-f32a031968a0")
+    refers transient EObject suppressObject
+}
+
+@MdClass(^id = "2367cec0-5648-49d7-95f0-76d387653517", code = "Form")
+class DimensionTableForm extends BasicForm
+{
+}
+
+@MdClass(^id = "8352a2a3-943d-43a2-95d9-1c592b1d337d", code = "Command")
+class DimensionTableCommand extends BasicCommand
+{
+}
+
+@MdClass(^id = "7374aaf6-fe8c-4bba-8574-2075a293f0b6")
+class Dimension extends MdObject, TypeDescriptionProvider
+{
+    @MdProperty(^id = "b1053250-abe6-11d4-9434-004095e12fc7", code = "Type")
+    contains TypeDescription[1] ^type
+    @MdProperty(^id = "90ae4b5d-e0fd-49ef-a008-d67c1e75038c")
+    boolean passwordMode
+    @MdProperty(^id = "580c29e2-8af4-4258-882a-7cf8073e61c8")
+    contains LocalStringMapEntry[] format
+    @MdProperty(^id = "88149a78-9448-4767-867b-0e650d165d2e")
+    contains LocalStringMapEntry[] editFormat
+    @MdProperty(^id = "4690ff70-e3fa-4914-9127-6a9acc5fc949")
+    contains LocalStringMapEntry[] toolTip
+    @MdProperty(^id = "b02800e9-a8d1-42ab-9a12-f673e92be968")
+    boolean markNegatives
+    @MdProperty(^id = "f49e4ced-4033-4e6c-8755-9fbaaccd6078")
+    String mask
+    @MdProperty(^id = "2bbba66b-fabf-4863-8ba3-54b3c64c896e")
+    boolean multiLine
+    @MdProperty(^id = "4de03908-56f4-4396-a61e-17253afca9ac")
+    boolean extendedEdit
+    @MdProperty(^id = "c65a541f-0b91-4f33-bc88-fbaaa57f9992")
+    contains Value minValue
+    @MdProperty(^id = "3eaf5a8b-06d6-47b0-ac7d-a9698247f499")
+    contains Value maxValue
+    @MdProperty(^id = "2723eb98-b4c1-498a-a6f3-70444757902f")
+    FillChecking fillChecking // Required fields
+    @MdProperty(^id = "c421d5c6-dcd9-4e28-9a35-0b2f4d66bef0")
+    FoldersAndItemsUse choiceFoldersAndItems
+    @MdProperty(^id = "e3da683b-c54a-457a-a243-b9b4f9bf76dd")
+    contains ChoiceParameterLink[] choiceParameterLinks
+    @MdProperty(^id = "fcf503b8-1c06-454a-970c-06413e64aee5")
+    contains ChoiceParameter[] choiceParameters
+    @MdProperty(^id = "6e3a1131-37a3-4da5-8895-572d9d0c9db6")
+    UseQuickChoice quickChoice
+    @MdProperty(^id = "33c74a4d-561f-4bc0-9eaa-8d21c893c0a9")
+    CreateOnInput createOnInput
+    @MdProperty(^id = "6c4f7074-e7d4-48eb-b31b-132873666262")
+    refers BasicForm choiceForm
+    @MdProperty(^id = "1183c14f-f814-49c6-9233-a3c26b3f64cf")
+    contains TypeLink linkByType
+    @MdProperty(^id = "7ba608f2-e654-42a3-8885-334fe88ca910")
+    ChoiceHistoryOnInput choiceHistoryOnInput
+}
+
+@MdClass(^id = "cead2290-2080-4077-a57b-73051d618683")
+class Resource extends MdObject, TypeDescriptionProvider
+{
+    @MdProperty(^id = "b1053250-abe6-11d4-9434-004095e12fc7", code = "Type")
+    contains TypeDescription[1] ^type
+    @MdProperty(^id = "90ae4b5d-e0fd-49ef-a008-d67c1e75038c")
+    boolean passwordMode
+    @MdProperty(^id = "580c29e2-8af4-4258-882a-7cf8073e61c8")
+    contains LocalStringMapEntry[] format
+    @MdProperty(^id = "88149a78-9448-4767-867b-0e650d165d2e")
+    contains LocalStringMapEntry[] editFormat
+    @MdProperty(^id = "4690ff70-e3fa-4914-9127-6a9acc5fc949")
+    contains LocalStringMapEntry[] toolTip
+    @MdProperty(^id = "b02800e9-a8d1-42ab-9a12-f673e92be968")
+    boolean markNegatives
+    @MdProperty(^id = "f49e4ced-4033-4e6c-8755-9fbaaccd6078")
+    String mask
+    @MdProperty(^id = "2bbba66b-fabf-4863-8ba3-54b3c64c896e")
+    boolean multiLine
+    @MdProperty(^id = "e3da683b-c54a-457a-a243-b9b4f9bf76dd")
+    contains ChoiceParameterLink[] choiceParameterLinks
+    @MdProperty(^id = "fcf503b8-1c06-454a-970c-06413e64aee5")
+    contains ChoiceParameter[] choiceParameters
+    @MdProperty(^id = "6e3a1131-37a3-4da5-8895-572d9d0c9db6")
+    UseQuickChoice quickChoice
+    @MdProperty(^id = "6c4f7074-e7d4-48eb-b31b-132873666262")
+    refers BasicForm choiceForm
+    @MdProperty(^id = "4de03908-56f4-4396-a61e-17253afca9ac")
+    boolean extendedEdit
+    @MdProperty(^id = "8e4b201d-2411-4536-b40d-62d7d4028cde")
+    String nameInDataSource
+}
+
+@MdClass(^id = "3448e506-5add-4fce-a604-7305466b2d8e", code = "Form")
+class CubeForm extends BasicForm
+{
+}
+
+@MdClass(^id = "4ee40ec7-3469-439f-adb4-aa26ce2d3ec3", code = "Command")
+class CubeCommand extends BasicCommand
+{
+}
+
+@MdClass(^id = "a98a108a-49a0-4dcf-bfd0-aa4b89eeb3f5")
+class Function extends MdObject, TypeDescriptionProvider
+{
+    @MdProperty(^id = "1a732a15-aa56-46ed-a102-352eb30cd90c")
+    boolean returnValue
+    @MdProperty(^id = "b1053250-abe6-11d4-9434-004095e12fc7", code = "Type")
+    contains TypeDescription[1] ^type
+    @MdProperty(^id = "e02e90ab-b2ad-45c6-9025-907785e83212")
+    String expressionInDataSource
+}
+
+// --------------------- ChartOfAccounts ----------------
+@MdClass(^id = "238e7e88-3c5f-48b2-8a3b-81ebbecb20ed", code_ru = "ПланСчетов")
+class ChartOfAccounts extends BasicDbObject, CatalogOwner, SupportFilterCriterion, StandardTabularPartSource, DataHistorySupport
+{
+    contains ChartOfAccountsTypes[1] producedTypes
+    contains transient ChartOfAccountsDbViewDefs dbViewDefs
+
+    @MdProperty(^id = "9f661c27-0d81-4c62-8cd7-244ddc08bbcb")
+    refers ChartOfCharacteristicTypes extDimensionTypes    // виды субконто
+    @MdProperty(^id = "0ed584f0-f683-4c88-a705-9542c1297359")
+    int maxExtDimensionCount
+    @MdProperty(^id = "1233a6f9-2930-4655-a070-09f3d2142c47")
+    String codeMask
+    @MdProperty(^id = "37f2fa9d-b276-11d4-9435-004095e12fc7")
+    int codeLength
+    @MdProperty(^id = "37f2fa9f-b276-11d4-9435-004095e12fc7")
+    int descriptionLength
+    @MdProperty(^id = "269d93bb-9157-4c18-919e-0c21b649596a")
+    CharOfAccountCodeSeries codeSeries
+    @MdProperty(^id = "b69601f1-4cf6-11d4-9415-008048da11f9")
+    boolean checkUnique
+    @MdProperty(^id = "ca303338-c5be-449c-9936-7f80a2ce2544")
+    AccountMainPresentation defaultPresentation
+    @MdProperty(^id = "28db313d-dbc2-4b83-8c4a-d2aeee708062")
+    contains StandardTabularSectionDescription[] standardTabularSections
+    @MdProperty(^id = "f440939a-f130-413b-9c9a-2b18c4af69c6")
+    contains ChartOfAccountsPredefined predefined
+    @MdProperty(^id = "e0f7a40c-d85a-468b-a598-d816bef1bb6c")
+    PredefinedDataUpdate predefinedDataUpdate
+    @MdProperty(^id = "267add9b-837b-42d9-992d-374a808fd94d")
+    EditType editType
+    @MdProperty(^id = "1b3ecd33-43d7-45e4-a012-776d95785465")
+    boolean quickChoice
+    @MdProperty(^id = "cab319ad-716c-4d9e-9240-639aab7e9a0c")
+    ChoiceMode choiceMode
+    @MdProperty(^id = "7ba608f2-e654-42a3-8885-334fe88ca910")
+    ChoiceHistoryOnInput choiceHistoryOnInput
+    @MdProperty(^id = "b69601f3-4cf6-11d4-9415-008048da11f9")
+    refers ChartOfAccountsForm defaultObjectForm
+    @MdProperty(^id = "b69601f5-4cf6-11d4-9415-008048da11f9")
+    refers ChartOfAccountsForm defaultListForm
+    @MdProperty(^id = "b69601f6-4cf6-11d4-9415-008048da11f9")
+    refers ChartOfAccountsForm defaultChoiceForm
+    @MdProperty(^id = "98388ad1-7b6f-4049-bfdb-02b3e3789cdc")
+    refers ChartOfAccountsForm auxiliaryObjectForm
+    @MdProperty(^id = "367b60f5-2ad5-4399-a6b0-3dd8e4ac3650")
+    refers ChartOfAccountsForm auxiliaryListForm
+    @MdProperty(^id = "4f0c02fe-c9da-4f51-ae93-e69119d4eb2c")
+    refers ChartOfAccountsForm auxiliaryChoiceForm
+    @MdProperty(^id = "5d4adc0c-c59d-4ce5-aa4b-87db885f5d51")
+    boolean autoOrderByCode
+    @MdProperty(^id = "a68050bb-abb0-4f4a-93b0-7512211e20e1")
+    int orderLength
+    @MdProperty(^id = "0912c390-3c7e-4de9-abd0-f9c9cb19f0e6") // since 8.3.15
+    boolean updateDataHistoryImmediatelyAfterWrite
+    @MdProperty(^id = "c4986a1c-1315-4f86-9587-f1d116329b58") // since 8.3.15
+    boolean executeAfterWriteDataHistoryVersionProcessing
+
+    @MdClass(^id = "6e65cbf5-daa8-4d8d-bef8-59723f4e5777", code = "Attribute", code_ru = "Реквизит")
+    contains ChartOfAccountsAttribute[] attributes
+    @MdClass(^id = "4c7fec95-d1bd-4508-8a01-f1db090d9af8", code = "TabularSection", code_ru = "ТабличнаяЧасть")
+    contains ChartOfAccountsTabularSection[] tabularSections
+    @MdClass(^id = "78bd1243-c4df-46c3-8138-e147465cb9a4", code_ru = "ПризнакУчета")
+    contains AccountingFlag[] accountingFlags
+    @MdClass(^id = "c70ca527-5042-4cad-a315-dcb4007e32a3", code_ru = "ПризнакУчетаСубконто")
+    contains ExtDimensionAccountingFlag[] extDimensionAccountingFlags
+    @MdClass(^id = "5372e285-03db-4f8c-8565-fe56f1aea40e", code = "Form", code_ru = "Форма")
+    contains ChartOfAccountsForm[] forms
+    @MdClass(^id = "3daea016-69b7-4ed4-9453-127911372fe6")
+    contains Template[] templates
+    @MdClass(^id = "0df30176-6865-4787-9fc8-609eb144174f", code = "Command", code_ru = "Команда")
+    contains ChartOfAccountsCommand[] commands
+
+    op boolean validate(EDiagnosticChain diagnostics, EMap<Object, Object> context)
+    {
+        ChartOfAccountsValidator::validate(this, diagnostics, context)
+    }
+
+    op TypeItem selectCriterionTypeRef()
+    {
+        producedTypes.refType.^type
+    }
+}
+
+class ChartOfAccountsPredefinedItem extends PredefinedItem
+{
+    String code
+    AccountType accountType
+    boolean offBalance
+    String order
+    refers AccountingFlag[] accountingFlags                        // перечислены для которых включено
+    contains ExtDimensionType[] extDimensionTypes
+    contains ChartOfAccountsPredefinedItem[] childItems
+}
+
+class ExtDimensionType
+{
+    refers ChartOfCharacteristicTypesPredefinedItem characteristicType
+    boolean turnover
+    refers ExtDimensionAccountingFlag[] extDimensionAccountingFlags         // перечислены для которых включено
+}
+
+class ChartOfAccountsPredefined extends Predefined
+{
+    contains ChartOfAccountsPredefinedItem[] items
+
+    op PredefinedItem[] predefinedItems()
+    {
+        val EList<? extends PredefinedItem> _items = items
+        return _items as EList<PredefinedItem>
+    }
+}
+
+@MdClass(^id = "6e65cbf5-daa8-4d8d-bef8-59723f4e5777", code = "Attribute", code_ru = "Реквизит")
+class ChartOfAccountsAttribute extends DbObjectAttribute, DataHistorySupport
+{
+    @MdProperty(^id = "7ba608f2-e654-42a3-8885-334fe88ca910")
+    ChoiceHistoryOnInput choiceHistoryOnInput
+}
+
+@MdClass(^id = "4c7fec95-d1bd-4508-8a01-f1db090d9af8", code = "TabularSection", code_ru = "ТабличнаяЧасть")
+class ChartOfAccountsTabularSection extends DbObjectTabularSection
+{
+}
+
+@MdClass(^id = "78bd1243-c4df-46c3-8138-e147465cb9a4", code_ru = "ПризнакУчета")
+class AccountingFlag extends BasicFeature, DataHistorySupport
+{
+    @MdProperty(^id = "2c8143d5-4248-4c43-8bfb-307c0be2e415")
+    boolean fillFromFillingValue
+    @MdProperty(^id = "e6b3f5f3-bdf3-4ad0-bc60-7323b3feb208")
+    contains Value fillValue
+    @MdProperty(^id = "7ba608f2-e654-42a3-8885-334fe88ca910")
+    ChoiceHistoryOnInput choiceHistoryOnInput
+}
+
+@MdClass(^id = "c70ca527-5042-4cad-a315-dcb4007e32a3", code_ru = "ПризнакУчетаСубконто")
+class ExtDimensionAccountingFlag extends BasicFeature, DataHistorySupport
+{
+    @MdProperty(^id = "2c8143d5-4248-4c43-8bfb-307c0be2e415")
+    boolean fillFromFillingValue
+    @MdProperty(^id = "e6b3f5f3-bdf3-4ad0-bc60-7323b3feb208")
+    contains Value fillValue
+    @MdProperty(^id = "7ba608f2-e654-42a3-8885-334fe88ca910")
+    ChoiceHistoryOnInput choiceHistoryOnInput
+}
+
+@MdClass(^id = "0df30176-6865-4787-9fc8-609eb144174f", code = "Command", code_ru = "Команда")
+class ChartOfAccountsCommand extends BasicCommand
+{
+}
+
+@MdClass(^id = "5372e285-03db-4f8c-8565-fe56f1aea40e", code = "Form", code_ru = "Форма")
+class ChartOfAccountsForm extends BasicForm
+{
+}
+
+
+
+
+// -----------   ChartOfCalculationTypes   ----------
+// TODO: review model
+
+@MdClass(^id = "30b100d6-b29f-47ac-aec7-cb8ca8a54767", code_ru = "ПланВидовРасчета")
+class ChartOfCalculationTypes extends BasicDbObject, CatalogOwner, SupportFilterCriterion, StandardTabularPartSource, DataHistorySupport
+{
+    contains ChartOfCalculationTypesTypes[1] producedTypes
+    contains transient ChartOfCalculationTypesDbViewDefs dbViewDefs
+
+    @MdProperty(^id = "37f2fa9d-b276-11d4-9435-004095e12fc7")
+    int codeLength
+    @MdProperty(^id = "37f2fa9f-b276-11d4-9435-004095e12fc7")
+    int descriptionLength
+    @MdProperty(^id = "0040f024-6db7-460b-baba-bf38860f8a6b")
+    ChartOfCalculationTypesCodeType codeType
+    @MdProperty(^id = "bf9cc511-eb2a-48b6-a666-7afb78b83f36")
+    AllowedLength codeAllowedLength
+    @MdProperty(^id = "231ac367-0abd-4874-a1c2-b96b314eca21")
+    CalculationTypeMainPresentation defaultPresentation
+    @MdProperty(^id = "267add9b-837b-42d9-992d-374a808fd94d")
+    EditType editType
+    @MdProperty(^id = "1b3ecd33-43d7-45e4-a012-776d95785465")
+    boolean quickChoice
+    @MdProperty(^id = "cab319ad-716c-4d9e-9240-639aab7e9a0c")
+    ChoiceMode choiceMode
+    @MdProperty(^id = "7ba608f2-e654-42a3-8885-334fe88ca910")
+    ChoiceHistoryOnInput choiceHistoryOnInput
+    @MdProperty(^id = "b69601f3-4cf6-11d4-9415-008048da11f9")
+    refers ChartOfCalculationTypesForm defaultObjectForm
+    @MdProperty(^id = "b69601f5-4cf6-11d4-9415-008048da11f9")
+    refers ChartOfCalculationTypesForm defaultListForm
+    @MdProperty(^id = "b69601f6-4cf6-11d4-9415-008048da11f9")
+    refers ChartOfCalculationTypesForm defaultChoiceForm
+    @MdProperty(^id = "98388ad1-7b6f-4049-bfdb-02b3e3789cdc")
+    refers ChartOfCalculationTypesForm auxiliaryObjectForm
+    @MdProperty(^id = "367b60f5-2ad5-4399-a6b0-3dd8e4ac3650")
+    refers ChartOfCalculationTypesForm auxiliaryListForm
+    @MdProperty(^id = "4f0c02fe-c9da-4f51-ae93-e69119d4eb2c")
+    refers ChartOfCalculationTypesForm auxiliaryChoiceForm
+    @MdProperty(^id = "62e9b78b-2fa1-4984-bab6-1a90a69d2dee")
+    ChartOfCalculationTypesBaseUse dependenceOnCalculationTypes
+    @MdProperty(^id = "6de17c14-70b9-4da1-966c-d0c61f5b81a5")
+    refers ChartOfCalculationTypes[] baseCalculationTypes
+    @MdProperty(^id = "d029903f-b2ae-4120-ae74-097811c24fc6")
+    boolean actionPeriodUse
+    @MdProperty(^id = "28db313d-dbc2-4b83-8c4a-d2aeee708062")
+    contains StandardTabularSectionDescription[] standardTabularSections
+    @MdProperty(^id = "f440939a-f130-413b-9c9a-2b18c4af69c6")
+    contains ChartOfCalculationTypesPredefined predefined
+    @MdProperty(^id = "e0f7a40c-d85a-468b-a598-d816bef1bb6c")
+    PredefinedDataUpdate predefinedDataUpdate
+    @MdProperty(^id = "0912c390-3c7e-4de9-abd0-f9c9cb19f0e6") // since 8.3.15
+    boolean updateDataHistoryImmediatelyAfterWrite
+    @MdProperty(^id = "c4986a1c-1315-4f86-9587-f1d116329b58") // since 8.3.15
+    boolean executeAfterWriteDataHistoryVersionProcessing
+
+    @MdClass(^id = "0dc22ad2-476a-4794-afae-cfa7ed251752", code = "Attribute", code_ru = "Реквизит")
+    contains ChartOfCalculationTypesAttribute[] attributes
+    @MdClass(^id = "054aa8cf-faa6-4634-aef4-1087ca0d88fc", code = "TabularSection", code_ru = "ТабличнаяЧасть")
+    contains ChartOfCalculationTypesTabularSection[] tabularSections
+    @MdClass(^id = "a7f8f92a-7a4b-484b-937e-42d242e64144", code = "Form", code_ru = "Форма")
+    contains ChartOfCalculationTypesForm[] forms
+    @MdClass(^id = "3daea016-69b7-4ed4-9453-127911372fe6")
+    contains Template[] templates
+    @MdClass(^id = "2e90c75b-2f0c-4899-a7d4-5426eaefc96e", code = "Command", code_ru = "Команда")
+    contains ChartOfCalculationTypesCommand[] commands
+
+    op boolean validate(EDiagnosticChain diagnostics, EMap<Object, Object> context)
+    {
+        ChartOfCalculationTypesValidator::validate(this, diagnostics, context)
+    }
+
+    op TypeItem selectCriterionTypeRef()
+    {
+        producedTypes.refType.^type
+    }
+}
+
+class ChartOfCalculationTypesPredefinedItem extends PredefinedItem
+{
+    contains Value code
+    boolean actionPeriodIsBase
+    refers ChartOfCalculationTypesPredefinedItem[] displaced
+    refers ChartOfCalculationTypesPredefinedItem[] base
+    refers ChartOfCalculationTypesPredefinedItem[] leading
+}
+
+class ChartOfCalculationTypesPredefined extends Predefined
+{
+    contains ChartOfCalculationTypesPredefinedItem[] items
+
+    op PredefinedItem[] predefinedItems()
+    {
+        val EList<? extends PredefinedItem> _items = items
+        return _items as EList<PredefinedItem>
+    }
+}
+
+@MdClass(^id = "0dc22ad2-476a-4794-afae-cfa7ed251752", code = "Attribute", code_ru = "Реквизит")
+class ChartOfCalculationTypesAttribute extends DbObjectAttribute, DataHistorySupport
+{
+    @MdProperty(^id = "7ba608f2-e654-42a3-8885-334fe88ca910")
+    ChoiceHistoryOnInput choiceHistoryOnInput
+}
+
+@MdClass(^id = "054aa8cf-faa6-4634-aef4-1087ca0d88fc", code = "TabularSection", code_ru = "ТабличнаяЧасть")
+class ChartOfCalculationTypesTabularSection extends DbObjectTabularSection
+{
+}
+
+@MdClass(^id = "a7f8f92a-7a4b-484b-937e-42d242e64144", code = "Form", code_ru = "Форма")
+class ChartOfCalculationTypesForm extends BasicForm
+{
+}
+
+@MdClass(^id = "2e90c75b-2f0c-4899-a7d4-5426eaefc96e", code = "Command", code_ru = "Команда")
+class ChartOfCalculationTypesCommand extends BasicCommand
+{
+}
+
+
+
+// -----------  AccountingRegister --------
+@MdClass(^id = "2deed9b8-0056-4ffe-a473-c20a6c32a0bc", code_ru = "РегистрБухгалтерии")
+class AccountingRegister extends BasicRegister
+{
+    contains AccountingRegisterTypes[1] producedTypes
+    contains transient AccountingRegisterDbViewDefs dbViewDefs    // inferred
+
+    @MdProperty(^id = "d7be18bc-9899-48dd-8100-92dafc4dedea")
+    boolean useStandardCommands
+    @MdProperty(^id = "1f2b167a-25fe-4f47-8710-933567dfa7d9")
+    boolean includeHelpInContents
+    @MdProperty(^id = "038b5c85-fb1c-4082-9c4c-e69f8928bf3a")
+    contains Help help
+    @MdProperty(^id = "49a60f90-8cea-4f00-b542-d284509e6eee")
+    refers ChartOfAccounts chartOfAccounts
+    @MdProperty(^id = "48a45237-e4f6-4b7a-91d7-c63bc5d023d5")
+    boolean correspondence
+    @MdProperty(^id = "f232967b-c621-455e-a842-8a1c3e91f797")
+    int periodAdjustmentLength
+    @MdProperty(^id = "b69601f5-4cf6-11d4-9415-008048da11f9")
+    refers AccountingRegisterForm defaultListForm
+    @MdProperty(^id = "367b60f5-2ad5-4399-a6b0-3dd8e4ac3650")
+    refers AccountingRegisterForm auxiliaryListForm
+    @ExternalProperty
+    @MdProperty(^id = "9f36fd70-4bf4-47f6-b235-935f73aab43f")
+    refers transient Module recordSetModule
+    @ExternalProperty
+    @MdProperty(^id = "d1b64a2c-8078-4982-8190-8f81aefda192")
+    refers transient Module managerModule
+    @MdProperty(^id = "03f171e8-326f-41c6-9fa5-932a0b12cddf")
+    contains StandardAttribute[] standardAttributes
+    @MdProperty(^id = "09c14dad-bd23-4d30-9c09-20ca3e5cd9f0")
+    DefaultDataLockControlMode dataLockControlMode
+    @MdProperty(^id = "9c703426-16bd-4e3f-8dd5-0591a614e6de")
+    boolean enableTotalsSplitting
+    @MdProperty(^id = "d4232326-022b-421e-b6d3-88e418f74327")
+    FullTextSearchUsing fullTextSearch
+    @MdProperty(^id = "b894dce6-9f10-45d6-958f-45993525a044")
+    contains LocalStringMapEntry[] listPresentation
+    @MdProperty(^id = "97f5ad64-29e4-410f-8ead-ec0dd5c5e58d")
+    contains LocalStringMapEntry[] extendedListPresentation
+    @MdProperty(^id = "719346a1-02d5-4311-a141-4d22470a7ac3")
+    contains LocalStringMapEntry[] explanation
+
+    @MdClass(^id = "35b63b9d-0adf-4625-a047-10ae874c19a3", code = "Dimension", code_ru = "Измерение")
+    contains AccountingRegisterDimension[] dimensions
+    @MdClass(^id = "63405499-7491-4ce3-ac72-43433cbe4112", code = "Resource", code_ru = "Ресурс")
+    contains AccountingRegisterResource[] resources
+    @MdClass(^id = "9d28ee33-9c7e-4a1b-8f13-50aa9b36607b", code = "Attribute", code_ru = "Реквизит")
+    contains AccountingRegisterAttribute[] attributes
+    @MdClass(^id = "d3b5d6eb-4ea2-4610-a3e2-624d4e815934", code = "Form", code_ru = "Форма")
+    contains AccountingRegisterForm[] forms
+    @MdClass(^id = "3daea016-69b7-4ed4-9453-127911372fe6")
+    contains Template[] templates
+    @MdClass(^id = "7162da60-f7fe-4d78-ad5d-e31700f9af18", code = "Command", code_ru = "Команда")
+    contains AccountingRegisterCommand[] commands
+
+    op boolean validate(EDiagnosticChain diagnostics, EMap<Object, Object> context)
+    {
+        AccountingRegisterValidator::validate(this, diagnostics, context)
+    }
+}
+
+@MdClass(^id = "35b63b9d-0adf-4625-a047-10ae874c19a3", code = "Dimension", code_ru = "Измерение")
+class AccountingRegisterDimension extends RegisterDimension
+{
+    @MdProperty(^id = "7ba608f2-e654-42a3-8885-334fe88ca910")
+    ChoiceHistoryOnInput choiceHistoryOnInput
+    @MdProperty(^id = "3ea6b350-4e3e-431e-a01b-42c34ee6d55c")
+    boolean balance
+    @MdProperty(^id = "2f25653c-d863-4f59-8030-e94a5edba14e")
+    refers AccountingFlag accountingFlag
+}
+
+@MdClass(^id = "63405499-7491-4ce3-ac72-43433cbe4112", code = "Resource", code_ru = "Ресурс")
+class AccountingRegisterResource extends RegisterResource
+{
+    @MdProperty(^id = "7ba608f2-e654-42a3-8885-334fe88ca910")
+    ChoiceHistoryOnInput choiceHistoryOnInput
+    @MdProperty(^id = "3ea6b350-4e3e-431e-a01b-42c34ee6d55c")
+    boolean balance
+    @MdProperty(^id = "2f25653c-d863-4f59-8030-e94a5edba14e")
+    refers AccountingFlag accountingFlag
+    @MdProperty(^id = "d7229e32-fef1-414b-a772-4bb4969c20d6")
+    refers ExtDimensionAccountingFlag extDimensionAccountingFlag
+}
+
+@MdClass(^id = "9d28ee33-9c7e-4a1b-8f13-50aa9b36607b", code = "Attribute", code_ru = "Реквизит")
+class AccountingRegisterAttribute extends RegisterAttribute
+{
+    @MdProperty(^id = "7ba608f2-e654-42a3-8885-334fe88ca910")
+    ChoiceHistoryOnInput choiceHistoryOnInput
+}
+
+@MdClass(^id = "d3b5d6eb-4ea2-4610-a3e2-624d4e815934", code = "Form", code_ru = "Форма")
+class AccountingRegisterForm extends BasicForm
+{
+}
+
+@MdClass(^id = "7162da60-f7fe-4d78-ad5d-e31700f9af18", code = "Command", code_ru = "Команда")
+class AccountingRegisterCommand extends BasicCommand
+{
+}
+
+
+// -----------  CalculationRegister --------
+// TODO: review model
+
+@MdClass(^id = "f2de87a8-64e5-45eb-a22d-b3aedab050e7", code_ru="РегистрРасчета")
+class CalculationRegister extends BasicRegister
+{
+    contains CalculationRegisterTypes[1] producedTypes
+    contains transient CalculationRegisterDbViewDefs dbViewDefs    // inferred
+
+    @MdProperty(^id = "d7be18bc-9899-48dd-8100-92dafc4dedea")
+    boolean useStandardCommands
+    @MdProperty(^id = "b69601f5-4cf6-11d4-9415-008048da11f9")
+    refers CalculationRegisterForm defaultListForm
+    @MdProperty(^id = "367b60f5-2ad5-4399-a6b0-3dd8e4ac3650")
+    refers CalculationRegisterForm auxiliaryListForm
+    @MdProperty(^id = "a49c7a4a-8cb5-4f8b-a034-4e8f257ada40")
+    CalculationRegisterPeriodicity periodicity
+    @MdProperty(^id = "cab8b8ca-b4ad-476e-aaaf-097b3426002e")
+    boolean actionPeriod
+    @MdProperty(^id = "3d2ad396-87e5-4c1a-a3c1-66d613ff19af")
+    boolean basePeriod
+    @MdProperty(^id = "d35dfaf3-843a-4745-b0fe-d47d325573a8")
+    refers InformationRegister schedule
+    @MdProperty(^id = "942f4471-e1cd-4bcf-8206-ff65bd4737cb")
+    refers InformationRegisterResource scheduleValue
+    @MdProperty(^id = "c2cf06ca-3429-48c0-a02d-0df4330f6e1e")
+    refers InformationRegisterDimension scheduleDate
+    @MdProperty(^id = "c62fbafa-5e5d-47e7-a2a4-a90eb55bcdfd")
+    refers ChartOfCalculationTypes chartOfCalculationTypes
+    @ExternalProperty
+    @MdProperty(^id = "9f36fd70-4bf4-47f6-b235-935f73aab43f")
+    refers transient Module recordSetModule
+    @ExternalProperty
+    @MdProperty(^id = "d1b64a2c-8078-4982-8190-8f81aefda192")
+    refers transient Module managerModule
+    @MdProperty(^id = "1f2b167a-25fe-4f47-8710-933567dfa7d9")
+    boolean includeHelpInContents
+    @MdProperty(^id = "038b5c85-fb1c-4082-9c4c-e69f8928bf3a")
+    contains Help help
+    @MdProperty(^id = "03f171e8-326f-41c6-9fa5-932a0b12cddf")
+    contains StandardAttribute[] standardAttributes
+    @MdProperty(^id = "09c14dad-bd23-4d30-9c09-20ca3e5cd9f0")
+    DefaultDataLockControlMode dataLockControlMode
+    @MdProperty(^id = "d4232326-022b-421e-b6d3-88e418f74327")
+    FullTextSearchUsing fullTextSearch
+    @MdProperty(^id = "b894dce6-9f10-45d6-958f-45993525a044")
+    contains LocalStringMapEntry[] listPresentation
+    @MdProperty(^id = "97f5ad64-29e4-410f-8ead-ec0dd5c5e58d")
+    contains LocalStringMapEntry[] extendedListPresentation
+    @MdProperty(^id = "719346a1-02d5-4311-a141-4d22470a7ac3")
+    contains LocalStringMapEntry[] explanation
+
+    @MdClass(^id = "702b33ad-843e-41aa-8064-112cd38cc92c", code = "Resource", code_ru = "Ресурс")
+    contains CalculationRegisterResource[] resources
+    @MdClass(^id = "1b304502-2216-440b-960f-60decd04bb5d", code = "Attribute", code_ru = "Реквизит")
+    contains CalculationRegisterAttribute[] attributes
+    @MdClass(^id = "b12fc850-8210-43c8-ae05-89567e698fbb", code = "Dimension", code_ru = "Измерение")
+    contains CalculationRegisterDimension[] dimensions
+    @MdClass(^id = "274bf899-db0e-4df6-8ab5-67bf6371ec0b", code = "Recalculation", code_ru = "Перерасчет")
+    contains Recalculation[] recalculations
+    @MdClass(^id = "a2cb086c-db98-43e4-a1a9-0760ab048f8d", code = "Form", code_ru = "Форма")
+    contains CalculationRegisterForm[] forms
+    @MdClass(^id = "3daea016-69b7-4ed4-9453-127911372fe6")
+    contains Template[] templates
+    @MdClass(^id = "acdf0f11-2d59-4e37-9945-c6721871a8fe", code = "Command", code_ru = "Команда")
+    contains CalculationRegisterCommand[] commands
+
+    op boolean validate(EDiagnosticChain diagnostics, EMap<Object, Object> context)
+    {
+        CalculationRegisterValidator::validate(this, diagnostics, context)
+    }
+}
+
+@MdClass(^id = "702b33ad-843e-41aa-8064-112cd38cc92c", code = "Resource", code_ru = "Ресурс")
+class CalculationRegisterResource extends RegisterResource
+{
+    @MdProperty(^id = "7ba608f2-e654-42a3-8885-334fe88ca910")
+    ChoiceHistoryOnInput choiceHistoryOnInput
+}
+
+@MdClass(^id = "3c456b74-4ea5-4b22-a957-e9fad9133b54", code = "Dimension", code_ru = "Измерение")
+class RecalculationDimension extends MdObject
+{
+    @MdProperty(^id = "b0be9e71-8a25-4390-9a27-a8fd312f89be")
+    refers CalculationRegisterDimension registerDimension
+    @MdProperty(^id = "eabc7d68-dae9-4ea8-8297-570c818cd862")
+    refers BasicFeature[] leadingRegisterData
+}
+
+@MdClass(^id = "1b304502-2216-440b-960f-60decd04bb5d", code = "Attribute", code_ru = "Реквизит")
+class CalculationRegisterAttribute extends RegisterAttribute
+{
+    @MdProperty(^id = "7ba608f2-e654-42a3-8885-334fe88ca910")
+    ChoiceHistoryOnInput choiceHistoryOnInput
+    @MdProperty(^id = "66a5007c-20ab-414d-8b80-85633984c81c")
+    refers InformationRegisterDimension scheduleLink
+}
+
+@MdClass(^id = "b12fc850-8210-43c8-ae05-89567e698fbb", code = "Dimension", code_ru = "Измерение")
+class CalculationRegisterDimension extends RegisterDimension
+{
+    @MdProperty(^id = "7ba608f2-e654-42a3-8885-334fe88ca910")
+    ChoiceHistoryOnInput choiceHistoryOnInput
+    @MdProperty(^id = "f644328f-a0f3-4e3f-bd12-f9a7ce004cb4")
+    boolean baseDimension
+    @MdProperty(^id = "66a5007c-20ab-414d-8b80-85633984c81c")
+    refers InformationRegisterDimension scheduleLink
+}
+
+@MdClass(^id = "274bf899-db0e-4df6-8ab5-67bf6371ec0b", code = "Recalculation", code_ru = "Перерасчет")
+class Recalculation extends MdObject
+{
+    contains RecalculationTypes[1] producedTypes
+    contains transient RecalculationDbViewDefs dbViewDefs    // inferred
+
+    @ExternalProperty
+    @MdProperty(^id = "9f36fd70-4bf4-47f6-b235-935f73aab43f")
+    refers transient Module recordSetModule
+    @MdProperty(^id = "09c14dad-bd23-4d30-9c09-20ca3e5cd9f0")
+    DefaultDataLockControlMode dataLockControlMode
+
+    @MdClass(^id = "3c456b74-4ea5-4b22-a957-e9fad9133b54", code = "Dimension", code_ru = "Измерение")
+    contains RecalculationDimension[] dimensions
+}
+
+
+@MdClass(^id = "a2cb086c-db98-43e4-a1a9-0760ab048f8d", code = "Form", code_ru = "Форма")
+class CalculationRegisterForm extends BasicForm
+{
+}
+
+@MdClass(^id = "acdf0f11-2d59-4e37-9945-c6721871a8fe", code = "Command", code_ru = "Команда")
+class CalculationRegisterCommand extends BasicCommand
+{
+}
+
+class AbstractGeographicalSchema
+{
+}
+
+class AbstractStyle
+{
+    refers transient Style mdStyle
+}
+
+@MdClass(^id = "bf3420b0-f6f9-41a0-b83a-fe9d4ab0b65d", code_ru = "СервисИнтеграции")
+class IntegrationService extends MdObject
+{
+    contains IntegrationServiceTypes[1] producedTypes
+    
+    @MdProperty(^id = "e900510e-70d1-4b2f-85ef-e8fe1e37f497")
+    String externalIntegrationServiceAddress
+    @ExternalProperty
+    @MdProperty(^id = "d5963243-262e-4398-b4d7-fb16d06484f6")
+    refers transient Module module
+    
+    @MdClass(^id = "acb7e81f-0637-4ebd-88ff-954ba075ae51", code_ru = "КаналСервисаИнтеграции")
+    contains IntegrationServiceChannel[] integrationServiceChannels
+    @ExternalProperty
+    @MdProperty(^id = "7956be58-0ffa-4435-ad3c-3fcffbf9c4eb")
+    refers transient EObject suppressObject
+}
+
+@MdClass(^id = "acb7e81f-0637-4ebd-88ff-954ba075ae51", code_ru = "КаналСервисаИнтеграции")
+class IntegrationServiceChannel extends MdObject
+{
+    contains IntegrationServiceChannelTypes[1] producedTypes
+    
+    @MdProperty(^id = "41046bf7-ae10-490c-9f4a-5c1ffe33f40a")
+    String externalIntegrationServiceChannelName
+    
+    @MdProperty(^id = "9356cb0f-d2e1-4a45-b438-37c76de00e23")
+    IntegrationServiceChannelMessageDirection[1] messageDirection
+    
+    @MdProperty(^id = "8a054f40-1922-4331-9c14-8dfc07f2e860")
+    String receiveMessageProcessing
+    
+    @MdProperty(^id = "b9460636-d17c-437e-b82a-e56c91a302bc")
+    boolean transactioned
+}
+
+@MdEnum(^id = "1be9d752-ab89-41c9-b78e-5d4ecbf7868")
+enum IntegrationServiceChannelMessageDirection
+{
+    Send = 0,
+    Receive = 1
+}
+
+@MdClass(^id = "e2c55bd8-1862-4b98-950d-4e7a33440537", code_ru = "Бот")
+class Bot extends MdObject
+{
+    @MdProperty(^id = "9b7906a8-cb30-45b1-9fc7-426833c2f3ce")
+    boolean predefined
+    
+    @ExternalProperty
+    @MdProperty(^id = "d5963243-262e-4398-b4d7-fb16d06484f6")
+    refers transient Module module
+    
+    @MdProperty(^id = "58e51e5d-aee0-41ea-89c0-b0962a74d237")
+    contains Picture picture
+
+    @ExternalProperty
+    @MdProperty(^id = "aa12aafc-cb15-4421-b253-658d3fad5eca")
+    refers transient EObject suppressObject
+}
+
+class SourceReferenceTypeDescription extends TypeDescription
+{
+    op TypeItem[] getTypes() {
+        ((this.eContainer as DerivedField).source as BasicFeature).^type.types
+    }
+    
+    op NumberQualifiers getNumberQualifiers() {
+        ((this.eContainer as DerivedField).source as BasicFeature).^type.numberQualifiers
+    }
+    
+    op StringQualifiers getStringQualifiers() {
+        ((this.eContainer as DerivedField).source as BasicFeature).^type.stringQualifiers
+    }
+    
+    op DateQualifiers getDateQualifiers() {
+        ((this.eContainer as DerivedField).source as BasicFeature).^type.dateQualifiers
+    }
+    
+    op BinaryQualifiers getBinaryQualifiers() {
+        ((this.eContainer as DerivedField).source as BasicFeature).^type.binaryQualifiers
+    }
+}
+
+class MdObjectReferenceTypeDescription extends TypeDescription
+{
+    refers EObject mdObject
+    
+    op TypeItem[] getTypes() {
+        FunctionalModelExtensionProvider.getInstance().getExtension(IMdDbViewFieldDefExtension).
+            getDerivedDbViewFieldDefTypeItems(this);
+    }
+    
+    op NumberQualifiers getNumberQualifiers() {
+        FunctionalModelExtensionProvider.getInstance().getExtension(IMdDbViewFieldDefExtension).
+            getNumberQualifiers(this);
+    }
+    op StringQualifiers getStringQualifiers() {
+        FunctionalModelExtensionProvider.getInstance().getExtension(IMdDbViewFieldDefExtension).
+            getStringQualifiers(this);
+    }
+    op DateQualifiers getDateQualifiers() {
+        FunctionalModelExtensionProvider.getInstance().getExtension(IMdDbViewFieldDefExtension).
+            getDateQualifiers(this);
+    }
+    op BinaryQualifiers getBinaryQualifiers() {
+        FunctionalModelExtensionProvider.getInstance().getExtension(IMdDbViewFieldDefExtension).
+            getBinaryQualifiers(this);
+    }    
+}
+
+class SourceReferenceTypeContainer extends TypeContainerRef
+{
+    op TypeItem[] allTypes() {
+        MdContextDefExtension.getDerivedPropertyTypes(this)
+    }
+    
+    op TypeItem[] getTypes() {
+        MdContextDefExtension.getDerivedPropertyTypes(this)
+    }            
+}
+
+
+
+//@MdEnum(^id = "71579f2a-caf3-4d6e-b110-19a6b0414b2b")
+//enum ExternalDataSourceDataType
+//{
+//    Relational = 0
+//    Multidimensional = 1
+//}

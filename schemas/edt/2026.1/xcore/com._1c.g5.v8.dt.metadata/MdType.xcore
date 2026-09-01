@@ -1,0 +1,430 @@
+@GenModel(nonNLSMarkers="true", prefix="MdType", copyrightText="Copyright (C) 2013, 1C", updateClasspath="false",
+	featureDelegation="Reflective", rootExtendsClass="com._1c.g5.v8.bm.core.BmObject"
+)
+@Ecore(nsPrefix="mdtype", nsURI="http://g5.1c.ru/v8/dt/metadata/mdtype")
+package com._1c.g5.v8.dt.metadata.mdtype
+
+import com._1c.g5.v8.dt.mcore.Type
+import com._1c.g5.v8.dt.mcore.Uuid
+import com._1c.g5.v8.dt.mcore.TypeSet
+
+//    NOTE: changes in this model affects these classes:
+//
+//  MdTypeUtil
+//  MdResourceDescriptionStrategy
+//  MdTypeInferrer
+//  MdTypeSetInferrer
+//  MdStdCommandInferrer
+//  MdContextDefInferrer
+//  MdObjectDynamicTypesProvider
+
+
+
+abstract class AbstractMdType
+{
+    Uuid[1] typeId
+    Uuid[1] valueTypeId
+}
+
+abstract class MdType extends AbstractMdType
+{
+    transient short category // inferred and used by MdTypeIndex
+    contains transient Type ^type // inferred
+}
+
+abstract class MdTypeSet extends AbstractMdType
+{
+    contains transient TypeSet typeSet // inferred
+}
+
+class MdRefType extends MdType
+{
+    contains transient EmptyRef emptyRef // inferred
+}
+
+class EmptyRef
+{
+}
+
+//<br><b>!!! Attention !!!
+//<br>When you created new child of this type you must add it to com._1c.g5.v8.dt.md.resource.MdObjectDynamicTypesProvider
+//!!! Attention !!!
+class MdObjectType extends MdType
+{
+}
+
+//<br><b>!!! Attention !!!
+//<br>When you created new child of this type you must add it to com._1c.g5.v8.dt.md.resource.MdObjectDynamicTypesProvider
+//!!! Attention !!!
+class MdRowType extends MdType
+{
+}
+
+//<br><b>!!! Attention !!!
+//<br>When you created new child of this type you must add it to com._1c.g5.v8.dt.md.resource.MdObjectDynamicTypesProvider
+//!!! Attention !!!
+class MdListType extends MdType
+{
+}
+
+class MdSelectionType extends MdType
+{
+}
+
+//<br><b>!!! Attention !!!
+//<br>When you created new child of this type you must add it to com._1c.g5.v8.dt.md.resource.MdObjectDynamicTypesProvider
+//!!! Attention !!!
+class MdManagerType extends MdType
+{
+}
+
+//<br><b>!!! Attention !!!
+//<br>When you created new child of this type you must add it to com._1c.g5.v8.dt.md.resource.MdObjectDynamicTypesProvider
+//!!! Attention !!!
+class MdValueKeyType extends MdType
+{
+}
+
+//<br><b>!!! Attention !!!
+//<br>When you created new child of this type you must add it to com._1c.g5.v8.dt.md.resource.MdObjectDynamicTypesProvider
+//!!! Attention !!!
+class MdValueManagerType extends MdType
+{
+}
+
+//<br><b>!!! Attention !!!
+//<br>When you created new child of this type you must add it to com._1c.g5.v8.dt.md.resource.MdObjectDynamicTypesProvider
+//!!! Attention !!!
+class MdContainerType extends MdTypeSet
+{
+}
+
+//<br><b>!!! Attention !!!
+//<br>When you created new child of this type you must add it to com._1c.g5.v8.dt.md.resource.MdObjectDynamicTypesProvider
+//!!! Attention !!!
+class MdRecordSetType extends MdType
+{
+}
+
+//<br><b>!!! Attention !!!
+//<br>When you created new child of this type you must add it to com._1c.g5.v8.dt.md.resource.MdObjectDynamicTypesProvider
+//!!! Attention !!!
+class MdRecordKeyType extends MdType
+{
+}
+
+//<br><b>!!! Attention !!!
+//<br>When you created new child of this type you must add it to com._1c.g5.v8.dt.md.resource.MdObjectDynamicTypesProvider
+//!!! Attention !!!
+class MdRecalcsType extends MdType
+{
+}
+
+class MdRecordManagerType extends MdType
+{
+}
+
+//<br><b>!!! Attention !!!
+//<br>When you created new child of this type you must add it to com._1c.g5.v8.dt.md.resource.MdObjectDynamicTypesProvider
+//!!! Attention !!!
+class MdUserDefinedType extends MdTypeSet
+{
+}
+
+//<br><b>!!! Attention !!!
+//<br>When you created new child of this type you must add it to com._1c.g5.v8.dt.md.resource.MdObjectDynamicTypesProvider
+//!!! Attention !!!
+class RoutePointRefType extends MdType
+{
+}
+
+//<br><b>!!! Attention !!!
+//<br>When you created new child of this type you must add it to com._1c.g5.v8.dt.md.resource.MdObjectDynamicTypesProvider
+//!!! Attention !!!
+class MdDisplacingCalculationTypesType extends MdType
+{
+}
+
+//<br><b>!!! Attention !!!
+//<br>When you created new child of this type you must add it to com._1c.g5.v8.dt.md.resource.MdObjectDynamicTypesProvider
+//!!! Attention !!!
+class MdDisplacingCalculationTypesRowType extends MdType
+{
+}
+
+//<br><b>!!! Attention !!!
+//<br>When you created new child of this type you must add it to com._1c.g5.v8.dt.md.resource.MdObjectDynamicTypesProvider
+//!!! Attention !!!
+class MdBaseCalculationTypesType extends MdType
+{
+}
+
+//<br><b>!!! Attention !!!
+//<br>When you created new child of this type you must add it to com._1c.g5.v8.dt.md.resource.MdObjectDynamicTypesProvider
+//!!! Attention !!!
+class MdBaseCalculationTypesRowType extends MdType
+{
+}
+
+//<br><b>!!! Attention !!!
+//<br>When you created new child of this type you must add it to com._1c.g5.v8.dt.md.resource.MdObjectDynamicTypesProvider
+//!!! Attention !!!
+class MdLeadingCalculationTypesType extends MdType
+{
+}
+
+//<br><b>!!! Attention !!!
+//<br>When you created new child of this type you must add it to com._1c.g5.v8.dt.md.resource.MdObjectDynamicTypesProvider
+//!!! Attention !!!
+class MdLeadingCalculationTypesRowType extends MdType
+{
+}
+
+//<br><b>!!! Attention !!!
+//<br>When you created new child of this type you must add it to com._1c.g5.v8.dt.md.resource.MdObjectDynamicTypesProvider
+//!!! Attention !!!
+class MdRecordType extends MdType
+{
+}
+
+class MdExtDimensionTypes extends MdType
+{
+}
+
+class MdExtDimensionTypesRow extends MdType
+{
+}
+
+class MdExtDimensionsType extends MdType
+{
+}
+
+interface MdTypes
+{
+}
+
+class TabularSectionTypes extends MdTypes
+{
+    contains MdObjectType[1] objectType
+    contains MdRowType[1] rowType
+}
+
+class EnumTypes extends MdTypes
+{
+    contains MdRefType[1] refType
+    contains MdListType[1] listType
+    contains MdManagerType[1] managerType
+}
+
+//<br><b>!!! Attention !!!
+//<br>When you created new child of this type you must add it to com._1c.g5.v8.dt.md.resource.MdObjectDynamicTypesProvider
+//<br>see MdTypeUtil#getRefType(BasicDbObject object) to append</br>
+//!!! Attention !!!
+abstract class BasicDbObjectTypes extends MdTypes
+{
+    contains MdObjectType[1] objectType
+    contains MdRefType[1] refType
+    contains MdSelectionType[1] selectionType
+    contains MdListType[1] listType
+    contains MdManagerType[1] managerType
+}
+
+abstract class BasicRegisterTypes extends MdTypes
+{
+    contains MdSelectionType[1] selectionType
+    contains MdListType[1] listType
+    contains MdManagerType[1] managerType
+    contains MdRecordSetType[1] recordSetType
+    contains MdRecordKeyType[1] recordKeyType
+}
+
+class CatalogTypes extends BasicDbObjectTypes
+{
+}
+
+class DocumentTypes extends BasicDbObjectTypes
+{
+}
+
+class ChartOfCharacteristicTypesTypes extends BasicDbObjectTypes
+{
+    contains MdContainerType[1] containerType
+}
+
+class InformationRegisterTypes extends BasicRegisterTypes
+{
+    contains MdRecordType[1] recordType
+    contains MdRecordManagerType[1] recordManagerType
+}
+
+class AccumulationRegisterTypes extends BasicRegisterTypes
+{
+    contains MdRecordType[1] recordType
+}
+
+class ConstantTypes extends MdTypes
+{
+    contains MdManagerType[1] managerType
+    contains MdValueManagerType[1] valueManagerType
+    contains MdValueKeyType valueKeyType
+}
+
+class ExchangePlanTypes extends BasicDbObjectTypes
+{
+}
+
+class DefinedTypeTypes extends MdTypes
+{
+    contains MdUserDefinedType[1] containerType
+}
+
+class SequenceTypes extends MdTypes
+{
+    contains MdRecordType[1] recordType
+    contains MdManagerType[1] managerType
+    contains MdRecordSetType[1] recordSetType
+}
+
+class DocumentJournalTypes extends MdTypes
+{
+    contains MdSelectionType[1] selectionType
+    contains MdListType[1] listType
+    contains MdManagerType[1] managerType
+}
+
+class ReportTypes extends MdTypes
+{
+    contains MdObjectType[1] objectType
+    contains MdManagerType[1] managerType
+}
+
+class ExternalReportTypes extends MdTypes
+{
+    contains MdObjectType[1] objectType
+}
+
+class DataProcessorTypes extends MdTypes
+{
+    contains MdObjectType[1] objectType
+    contains MdManagerType[1] managerType
+}
+
+class ExternalDataProcessorTypes extends MdTypes
+{
+    contains MdObjectType[1] objectType
+}
+
+class BusinessProcessTypes extends BasicDbObjectTypes
+{
+	contains RoutePointRefType[1] routePointRef
+}
+
+class TaskTypes extends BasicDbObjectTypes
+{
+}
+
+class FilterCriterionTypes extends MdTypes
+{
+    contains MdListType[1] listType
+    contains MdManagerType[1] managerType
+}
+
+class SettingsStorageTypes extends MdTypes
+{
+    contains MdManagerType[1] managerType
+}
+
+class WSReferenceTypes extends MdTypes
+{
+    contains MdManagerType[1] managerType
+}
+
+class ChartOfAccountsTypes extends BasicDbObjectTypes
+{
+   contains MdExtDimensionTypes[1] extDimensionTypes
+   contains MdExtDimensionTypesRow[1] extDimensionTypesRow
+}
+
+class ChartOfCalculationTypesTypes extends BasicDbObjectTypes
+{
+	contains MdDisplacingCalculationTypesType[1] displacingCalculationTypesType
+	contains MdDisplacingCalculationTypesRowType[1] displacingCalculationTypesRowType
+	contains MdBaseCalculationTypesType[1] baseCalculationTypesType
+	contains MdBaseCalculationTypesRowType[1] baseCalculationTypesRowType
+	contains MdLeadingCalculationTypesType[1] leadingCalculationTypesType
+	contains MdLeadingCalculationTypesRowType[1] leadingCalculationTypesRowType
+}
+
+class AccountingRegisterTypes extends BasicRegisterTypes
+{
+	// РегистрБухгалтерииЗапись.<Имя регистра бухгалтерии>
+	contains MdRecordType[1] recordType
+	// РегистрБухгалтерииКоллекцияДопИзмерений.<Имя регистра бухгалтерии>
+	contains MdExtDimensionsType[1] extDimensionsType
+}
+
+class CalculationRegisterTypes extends BasicRegisterTypes
+{
+	contains MdRecordType[1] recordType
+	contains MdRecalcsType[1] recalcsType
+}
+
+class RecalculationTypes extends MdTypes
+{
+	contains MdRecordType[1] recordType
+	contains MdManagerType[1] managerType
+    contains MdRecordSetType[1] recordSetType
+}
+
+class ExternalDataSourceTypes extends MdTypes
+{
+	contains MdManagerType[1] managerType
+	contains MdManagerType[1] tablesManagerType
+	contains MdManagerType[1] cubesManagerType
+}
+
+class TableTypes extends MdTypes
+{
+    contains MdRefType[1] refType
+    contains MdListType[1] listType
+    contains MdObjectType[1] objectType
+	contains MdManagerType[1] managerType
+    contains MdRecordManagerType[1] recordManagerType
+    contains MdRecordSetType[1] recordSetType
+    contains MdRecordType[1] recordType
+    contains MdRecordKeyType[1] recordKeyType
+}
+
+class MdDimensionTablesManagerType extends MdType
+{
+
+}
+
+class CubeTypes extends MdTypes
+{
+	contains MdManagerType[1] managerType
+	contains MdListType[1] listType
+    contains MdRecordManagerType[1] recordManagerType
+    contains MdRecordSetType[1] recordSetType
+    contains MdRecordType[1] recordType
+    contains MdRecordKeyType[1] recordKeyType
+    contains MdDimensionTablesManagerType[1] dimensionTablesManagerType
+}
+
+class CubeDimensionTableTypes extends MdTypes
+{
+	contains MdRefType[1] refType
+    contains MdListType[1] listType
+    contains MdObjectType[1] objectType
+	contains MdManagerType[1] managerType
+}
+
+class IntegrationServiceTypes extends MdTypes
+{
+    contains MdManagerType[1] managerType
+}
+
+class IntegrationServiceChannelTypes extends MdTypes
+{
+    contains MdManagerType[1] managerType
+}

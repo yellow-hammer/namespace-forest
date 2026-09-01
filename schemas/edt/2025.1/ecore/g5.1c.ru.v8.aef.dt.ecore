@@ -1,0 +1,256 @@
+<?xml version="1.0" encoding="ASCII"?>
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="viewModels" nsURI="http://g5.1c.ru/v8/aef/dt" nsPrefix="DtAef">
+  <eClassifiers xsi:type="ecore:EClass" name="ButtonItemViewModel">
+    <eSuperTypes href="g5.1c.ru.v8.aef.ecore#//IViewModel"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="enabled" unique="false" defaultValueLiteral="true">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="visible" unique="false" defaultValueLiteral="true">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="tooltip" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="image" unique="false" eType="//Image"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="contextId" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="SelectViewModel" abstract="true">
+    <eSuperTypes href="g5.1c.ru.v8.aef.standard.ecore#//ControlViewModel"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="buttons" upperBound="-1" eType="//ButtonItemViewModel" containment="true" resolveProxies="false"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ComboSelectViewModel">
+    <eSuperTypes href="#//SelectViewModel"/>
+    <eSuperTypes href="g5.1c.ru.v8.aef.standard.ecore#//ComboViewModel"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="EditableComboViewModel" eSuperTypes="//ComboSelectViewModel">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="image" unique="false" eType="//Image"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="textReadOnly" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ActionBarViewModel" eSuperTypes="//SelectViewModel">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="lines" unique="false" defaultValueLiteral="1">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="passwordMode" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="textLimit" unique="false" defaultValueLiteral="-1">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="mask" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="hint" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="image" unique="false" eType="//Image"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ColorActionBarViewModel" eSuperTypes="//ActionBarViewModel">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="color" unique="false" eType="//RGB"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ShortcutViewModel" eSuperTypes="//ActionBarViewModel"/>
+  <eClassifiers xsi:type="ecore:EClass" name="DateControlViewModel" eSuperTypes="//SelectViewModel">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EDate"/>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="DtImageViewerViewModel">
+    <eSuperTypes href="g5.1c.ru.v8.aef.standard.ecore#//ControlViewModel"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="imageUrl" unique="false" eType="//URL"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="showInDarkMode" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="PictureViewModel">
+    <eSuperTypes href="g5.1c.ru.v8.aef.standard.ecore#//ControlViewModel"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="image" unique="false" eType="//Image"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="NullableSpinnerViewModel">
+    <eSuperTypes href="g5.1c.ru.v8.aef.standard.ecore#//AbstractSpinnerViewModel"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EIntegerObject"/>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ToolBarItemViewModel">
+    <eSuperTypes href="g5.1c.ru.v8.aef.ecore#//IViewModel"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="image" unique="false" eType="//Image"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="tooltipText" unique="false" defaultValueLiteral="">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="enabled" unique="false" defaultValueLiteral="true">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="selected" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="style" unique="false" defaultValueLiteral="8">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ToolBarViewModel">
+    <eSuperTypes href="g5.1c.ru.v8.aef.standard.ecore#//ControlViewModel"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="horizontal" unique="false" defaultValueLiteral="true">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="items" upperBound="-1" eType="//ToolBarItemViewModel" containment="true" resolveProxies="false"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="IGridItem" abstract="true" interface="true">
+    <eOperations name="getText" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+      <eParameters name="column" unique="false" eType="//GridColumnViewModel"/>
+    </eOperations>
+    <eOperations name="getImage" unique="false" eType="//Image">
+      <eParameters name="column" unique="false" eType="//GridColumnViewModel"/>
+    </eOperations>
+    <eOperations name="isChecked" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+      <eParameters name="column" unique="false" eType="//GridColumnViewModel"/>
+    </eOperations>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="IGridInput" abstract="true" interface="true"/>
+  <eClassifiers xsi:type="ecore:EClass" name="DynamicGridInput" eSuperTypes="//IGridInput">
+    <eTypeParameters name="T">
+      <eBounds eClassifier="//IGridItem"/>
+    </eTypeParameters>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="contentProvider" unique="false">
+      <eGenericType eClassifier="//IAefGridContentProvider">
+        <eTypeArguments eTypeParameter="//DynamicGridInput/T"/>
+      </eGenericType>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="GridColumnViewModel">
+    <eSuperTypes href="g5.1c.ru.v8.aef.ecore#//IViewModel"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="header" unique="false" defaultValueLiteral="">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="index" unique="false" defaultValueLiteral="-1">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="tree" unique="false" defaultValueLiteral="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="type" unique="false" eType="//GridColumnType" defaultValueLiteral="Text"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="editable" unique="false" defaultValueLiteral="true">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="width" unique="false" defaultValueLiteral="150">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="headers" unique="false" upperBound="-1">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="heightInRows" unique="false" defaultValueLiteral="1">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="GridViewModel">
+    <eSuperTypes href="g5.1c.ru.v8.aef.standard.ecore#//ControlViewModel"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="columns" upperBound="-1" eType="//GridColumnViewModel" containment="true" resolveProxies="false"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="input" eType="//IGridInput" containment="true" resolveProxies="false"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ColorViewModel">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="red" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="blue" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="green" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="FontViewModel">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="bold" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="faceName" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="height" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EIntegerObject"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="italic" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="scale" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EIntegerObject"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="strikeout" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="underline" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="TextPreviewControlViewModel">
+    <eSuperTypes href="g5.1c.ru.v8.aef.standard.ecore#//ControlViewModel"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="text" unique="false" defaultValueLiteral="">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="color" eType="//ColorViewModel" containment="true" resolveProxies="false"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="font" eType="//FontViewModel" containment="true" resolveProxies="false"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="TabFolderViewModel">
+    <eSuperTypes href="g5.1c.ru.v8.aef.standard.ecore#//CompositeViewModel"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="items" upperBound="-1" eType="//TabItemViewModel" containment="true" resolveProxies="false"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="TabItemViewModel">
+    <eSuperTypes href="g5.1c.ru.v8.aef.ecore#//IViewModel"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="title" unique="false" defaultValueLiteral="">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="GanttChartScalingViewModel">
+    <eSuperTypes href="g5.1c.ru.v8.aef.standard.ecore#//ControlViewModel"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="title" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="scaleKeeping" unique="false">
+      <eType xsi:type="ecore:EEnum" href="g5.1c.ru.v8.dt.ganttchart.model.ecore#//GanttChartScaleKeeping"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="noneVariantCharsTitle" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="noneVariantChars" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EDouble"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="noneVariantMeasureTitle" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="noneVariantMeasure" unique="false">
+      <eType xsi:type="ecore:EEnum" href="g5.1c.ru.v8.dt.chart.model.timescale.ecore#//TimeScaleUnitType"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="fixedVariantIntervalTitle" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="fixedVariantInterval" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="fixedVariantMeasure" unique="false">
+      <eType xsi:type="ecore:EEnum" href="g5.1c.ru.v8.dt.chart.model.timescale.ecore#//TimeScaleUnitType"/>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="HeavyViewModel">
+    <eSuperTypes href="g5.1c.ru.v8.aef.standard.ecore#//ControlViewModel"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="GridColumnType">
+    <eLiterals name="Checkbox"/>
+    <eLiterals name="Text" value="1"/>
+    <eLiterals name="TextAndImage" value="2"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EDataType" name="URL" instanceClassName="java.net.URL"/>
+  <eClassifiers xsi:type="ecore:EDataType" name="Image" instanceClassName="org.eclipse.swt.graphics.Image"/>
+  <eClassifiers xsi:type="ecore:EDataType" name="RGB" instanceClassName="org.eclipse.swt.graphics.RGB"/>
+  <eClassifiers xsi:type="ecore:EDataType" name="IAefGridContentProvider" instanceClassName="com._1c.g5.v8.dt.ui.aef.providers.IAefGridContentProvider">
+    <eTypeParameters name="T"/>
+  </eClassifiers>
+</ecore:EPackage>

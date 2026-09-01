@@ -1,0 +1,114 @@
+@GenModel(prefix="PlatformMerge", loadInitialization="false", literalsInterface="true", nonNLSMarkers="true",
+    copyrightText="Copyright (C) 2026, 1C", updateClasspath="false", featureDelegation="Reflective")
+@Ecore(nsPrefix="PlatformMerge", nsURI="http://g5.1c.ru/v8/dt/supply/platform/merge/model")
+package com._1c.g5.v8.dt.supply.platform.merge.model
+
+/*
+ * Merge rule in platform merge settings file. 
+ */
+enum PlatfromMergeRule {
+    GetFromSecondConfiguration = 0
+    MergePrioritizingMainConfiguration = 1
+    MergePrioritizingSecondConfiguration = 2
+    MergeWithExternalTool = 3
+    DoNotMerge = 4    
+}
+
+/*
+ * Object order in platform merge settings file. 
+ */
+enum PlatfromObjectOrder {
+    GetFromMainConfiguration = 0
+    GetFromSecondConfiguration = 1
+}
+
+/*
+ * Entity with a merge rule in a settings file.
+ */
+class PlatformMergeable {
+    unsettable PlatfromMergeRule mergeRule
+}
+
+/*
+ * Merge settings for module method. 
+ */
+class PlatformMergeMethod extends PlatformMergeable {
+    String name
+    String nameInSecondConfiguration
+    String patch
+}
+
+/*
+ * Merge settings for methods and areas of a module. Corresponds to the <Methods> node in XML, hence the name.  
+ */
+class PlatformMergeMethods {
+    contains PlatformMergeable mainArea
+    contains PlatformMergeMethod[] methods
+}
+
+/*
+ * Merge settings for a module. 
+ */
+class PlatformMergeModule {
+    contains PlatformMergeMethods methods
+}
+
+/*
+ * Merge settings for the module of a form. It's a separate thing, which corresponds to the <FormModule> node in XML,
+ * has its own merge rule and module. 
+ */
+class PlatformMergeFormModule extends PlatformMergeable {
+    contains PlatformMergeModule module
+}
+
+/*
+ * Merge settings for a general property. 
+ */
+class PlatformMergeProperty extends PlatformMergeable {
+    String name
+}
+
+/*
+ * Merge settings for a module property (like ManagerModule or ValueManagerModule). 
+ */
+class PlatformMergeModuleProperty extends PlatformMergeProperty {
+    contains PlatformMergeModule module    
+}
+
+/*
+ * Merge settings for a form property. 
+ */
+class PlatformMergeFormProperty extends PlatformMergeProperty {
+    contains PlatformMergeFormModule formModule
+}
+
+/*
+ * A single item of a content property. 
+ */
+class PlatformMergeContentItem extends PlatformMergeable {
+    String name
+}
+
+/*
+ * Merge settings for a Content property (Subsystem's content). 
+ */
+class PlatformMergeContentProperty extends PlatformMergeProperty {
+    contains PlatformMergeContentItem[] items
+}
+
+/*
+ * Merge settings for an object. 
+ */
+class PlatformMergeObject extends PlatformMergeable {
+    String fullName
+    String fullNameInSecondConfiguration
+    unsettable PlatfromObjectOrder objectOrder
+    contains PlatformMergeProperty[] properties
+}
+
+/*
+ * Merge settings model. 
+ */
+class PlatformMergeModel {
+    contains PlatformMergeObject[] objects
+}

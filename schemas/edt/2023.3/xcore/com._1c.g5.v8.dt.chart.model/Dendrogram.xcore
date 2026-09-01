@@ -1,0 +1,84 @@
+@GenModel(nonNLSMarkers="true", prefix="Dendrogram", copyrightText="Copyright (C) 2015, 1C", literalsInterface="true", updateClasspath="false", featureDelegation="Reflective", rootExtendsClass="com._1c.g5.v8.bm.core.BmObject", rootExtendsInterface="com._1c.g5.v8.bm.core.IBmObject")
+@Ecore(nsPrefix="dendrogram", nsURI="http://g5.1c.ru/v8/dt/dendrogram/model")
+
+package com._1c.g5.v8.dt.dendrogram.model
+
+import com._1c.g5.v8.dt.chart.model.Chart
+import com._1c.g5.v8.dt.chart.model.ChartLine
+import com._1c.g5.v8.dt.mcore.Color
+import com._1c.g5.v8.dt.mcore.LocalStringMapEntry
+
+enum DendrogramScaleKeeping
+{
+	AllItems = 0,
+	ItemCount = 1,
+	MinimumWidth = 2	
+}
+
+enum DendrogramOrientation
+{
+	Top = 0,
+	Bottom = 1,
+	Right = 2,
+	Left = 3
+}
+
+class DendrogramLinkValue extends DendrogramDimensionValue
+{
+	int firstElementKey
+	int secondElementKey
+	double distance	
+}
+
+class DendrogramLinks
+{
+	boolean testMode
+	contains DendrogramLinkValue[] value
+	contains DendrogramContent[] contentCacheItem
+	boolean autoText
+	boolean useValuesReverseBehavior 
+}
+
+class DendrogramContent
+{
+	contains Color mainColor
+	contains Color secondColor
+}
+
+class DendrogramDimensionValue
+{
+	int itemKey
+	int key
+	int parentKey
+	int leftKey
+	int rightKey
+	int extKey
+	//valueKey arbitrary type
+	contains LocalStringMapEntry[] title
+	//details arbitrary type
+	int cacheKey
+	long baseData
+}
+
+class DendrogramElements
+{
+	boolean testMode
+	contains DendrogramDimensionValue[] value
+	contains DendrogramContent[] contentCacheItem
+	boolean autoText
+	boolean useValuesReverseBehavior
+}
+
+class Dendrogram
+{
+	contains Chart chart
+	contains DendrogramElements elements
+	contains DendrogramLinks links
+	DendrogramOrientation orientation
+	DendrogramScaleKeeping scaleType
+	int countElements
+	double fixedMinWidthElement
+	contains Color lineColor
+	contains ChartLine line
+	boolean verticalLabels
+}

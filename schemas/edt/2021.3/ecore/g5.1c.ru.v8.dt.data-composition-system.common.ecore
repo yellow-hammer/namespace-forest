@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="ASCII"?>
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="common" nsURI="http://g5.1c.ru/v8/dt/data-composition-system/common" nsPrefix="common">
+  <eClassifiers xsi:type="ecore:EClass" name="DataCompositionDataSetFieldRole">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="periodNumber" unique="false" defaultValueLiteral="0">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="periodType" unique="false" eType="//DataCompositionPeriodType" defaultValueLiteral="Main"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="dimension" unique="false" defaultValueLiteral="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="parentDimension" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="account" unique="false" defaultValueLiteral="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="accountTypeExpression" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="balance" unique="false" defaultValueLiteral="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="balanceGroupName" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="balanceType" unique="false" eType="//DataCompositionBalanceType" defaultValueLiteral="None"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="accountingBalanceType" unique="false" eType="//DataCompositionAccountingBalanceType" defaultValueLiteral="None"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="accountField" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="ignoreNullValues" unique="false" defaultValueLiteral="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="required" unique="false" defaultValueLiteral="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="dimensionAttribute" unique="false" defaultValueLiteral="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="DataCompositionExpression">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="DataCompositionOrderExpression">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="expression" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="orderType" unique="false" defaultValueLiteral="Asc">
+      <eType xsi:type="ecore:EEnum" href="g5.1c.ru.v8.dt.data-composition-system.core.ecore#//DataCompositionSortDirection"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="autoOrder" unique="false" defaultValueLiteral="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="DataCompositionBalanceType">
+    <eLiterals name="None"/>
+    <eLiterals name="OpeningBalance"/>
+    <eLiterals name="ClosingBalance"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="DataCompositionAccountingBalanceType">
+    <eLiterals name="None"/>
+    <eLiterals name="Debit"/>
+    <eLiterals name="Credit"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="DataCompositionPeriodType">
+    <eLiterals name="Main"/>
+    <eLiterals name="Specify"/>
+    <eLiterals name="Additional"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="DataCompositionAreaTemplateType">
+    <eLiterals name="Header"/>
+    <eLiterals name="Footer"/>
+    <eLiterals name="HierarchicalHeader"/>
+    <eLiterals name="HierarchicalFooter"/>
+    <eLiterals name="OverallHeader"/>
+    <eLiterals name="OverallFooter"/>
+  </eClassifiers>
+</ecore:EPackage>

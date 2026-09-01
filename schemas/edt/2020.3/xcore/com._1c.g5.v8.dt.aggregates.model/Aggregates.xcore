@@ -1,0 +1,47 @@
+@GenModel(loadInitialization="false", literalsInterface="true", nonNLSMarkers="true", prefix="Aggregates", copyrightText="Copyright (C) 2013, 1C", updateClasspath="false",
+	featureDelegation="Reflective", rootExtendsClass="com._1c.g5.v8.bm.core.BmObject")
+@Ecore(nsPrefix="aggregates", nsURI="http://g5.1c.ru/v8/dt/aggregates")
+package com._1c.g5.v8.dt.aggregates.model
+
+import com._1c.g5.v8.dt.aggregates.model.impl.AccumulationRegisterAggregateValidator
+import com._1c.g5.v8.dt.aggregates.model.impl.AccumulationRegisterAggregatesValidator
+import com._1c.g5.v8.dt.metadata.common.AccumulationRegisterAggregatePeriodicity
+import com._1c.g5.v8.dt.metadata.common.AccumulationRegisterAggregateUse
+import com._1c.g5.v8.dt.metadata.mdclass.AbstractAggregates
+import com._1c.g5.v8.dt.metadata.mdclass.AccumulationRegisterDimension
+import java.util.UUID
+import org.eclipse.emf.ecore.EDiagnosticChain
+import org.eclipse.emf.ecore.EMap
+
+type Uuid wraps UUID
+create
+{
+    if (it !== null) UUID::fromString(it)
+}
+convert
+{ 
+    if (it !== null) it.toString()
+}
+
+class AccumulationRegisterAggregates extends AbstractAggregates
+{
+    contains AccumulationRegisterAggregate[] aggregates
+    
+    op boolean validate(EDiagnosticChain diagnostics, EMap<Object, Object> context)
+    {
+        AccumulationRegisterAggregatesValidator::validate(this, diagnostics, context)
+    }
+}
+
+class AccumulationRegisterAggregate
+{
+    Uuid[1] ^id
+    AccumulationRegisterAggregateUse[1] use
+    AccumulationRegisterAggregatePeriodicity[1] periodicity
+    refers AccumulationRegisterDimension[] dimensions
+    
+    op boolean validate(EDiagnosticChain diagnostics, EMap<Object, Object> context)
+    {
+        AccumulationRegisterAggregateValidator::validate(this, diagnostics, context)
+    }
+}

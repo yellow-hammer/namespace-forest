@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="ASCII"?>
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="model" nsURI="http://g5.1c.ru/v8/dt/compare/supply/model" nsPrefix="supply">
+  <eClassifiers xsi:type="ecore:EClass" name="SupplyPropertyContainer" abstract="true" interface="true">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="properties" upperBound="-1" eType="//SupplyProperty" containment="true" resolveProxies="false"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="SupplyNamespaceControllable" abstract="true" interface="true">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="suppliedWith" unique="false" upperBound="-1">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="SupplyConfiguration" eSuperTypes="//SupplyPropertyContainer">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="include" unique="false" eType="//IntegrationPolicy" defaultValueLiteral="Always"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="supplyObjectsByDefault" unique="false" defaultValueLiteral="true">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="BaseSupplyObject" eSuperTypes="//SupplyPropertyContainer //SupplyNamespaceControllable">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="fqn" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="include" unique="false" eType="//IntegrationPolicy" defaultValueLiteral="Always"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="SupplyGenericObject" eSuperTypes="//BaseSupplyObject">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="containments" upperBound="-1" eType="//SupplyContainment" containment="true" resolveProxies="false"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="SupplyContainment" eSuperTypes="//BaseSupplyObject"/>
+  <eClassifiers xsi:type="ecore:EClass" name="SupplySubsystem" eSuperTypes="//BaseSupplyObject">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="supplyNamespace" eType="//SupplyNamespace" containment="true" resolveProxies="false"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="SupplyNamespace">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="include" unique="false" defaultValueLiteral="true">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="SupplyProperty">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="include" unique="false" eType="//IntegrationPolicy" defaultValueLiteral="Always"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="supplyRule" unique="false" eType="//SupplyRule"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="suppliedWith" unique="false" upperBound="-1">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="SupplyForm" eSuperTypes="//BaseSupplyObject">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="items" upperBound="-1" eType="//SupplyFormItem" containment="true" resolveProxies="false"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="attributes" upperBound="-1" eType="//SupplyFormAttribute" containment="true" resolveProxies="false"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="commands" upperBound="-1" eType="//SupplyFormCommand" containment="true" resolveProxies="false"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="parameters" upperBound="-1" eType="//SupplyFormParameter" containment="true" resolveProxies="false"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="BaseSupplyFormObject" eSuperTypes="//SupplyPropertyContainer //SupplyNamespaceControllable">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="include" unique="false" eType="//IntegrationPolicy" defaultValueLiteral="Always"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="SupplyFormItem" eSuperTypes="//BaseSupplyFormObject"/>
+  <eClassifiers xsi:type="ecore:EClass" name="SupplyFormAttribute" eSuperTypes="//BaseSupplyFormObject"/>
+  <eClassifiers xsi:type="ecore:EClass" name="SupplyFormCommand" eSuperTypes="//BaseSupplyFormObject"/>
+  <eClassifiers xsi:type="ecore:EClass" name="SupplyFormParameter" eSuperTypes="//BaseSupplyFormObject"/>
+  <eClassifiers xsi:type="ecore:EClass" name="SupplyModule">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="fqn" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="include" unique="false" eType="//IntegrationPolicy" defaultValueLiteral="Always"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="methods" upperBound="-1" eType="//SupplyMethod" containment="true" resolveProxies="false"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="SupplyMethod">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="include" unique="false" eType="//IntegrationPolicy" defaultValueLiteral="Always"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="suppliedWith" unique="false" upperBound="-1">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="LibraryIntegrationSettings">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="libraryName" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="integrationSettings" eType="//IntegrationSettings" containment="true" resolveProxies="false"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="dataProtection" eType="//DataProtection" containment="true" resolveProxies="false"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="DataProtection">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="protectedObjects" upperBound="-1" eType="//ProtectedObject" containment="true" resolveProxies="false"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="IntegrationSettings">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="namespaces" eType="//IntegrateNamespaces" containment="true" resolveProxies="false"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="objects" eType="//IntegrateObjects" containment="true" resolveProxies="false"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="IntegrateNamespaces">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="namespaces" upperBound="-1" eType="//IntegrateNamespace" containment="true" resolveProxies="false"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="include" unique="false" defaultValueLiteral="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="IntegrateNamespace">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="include" unique="false" defaultValueLiteral="true">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="IntegrateObjects">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="objects" upperBound="-1" eType="//IntegrateObject" containment="true" resolveProxies="false"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="include" unique="false" defaultValueLiteral="true">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="IntegrateObject">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="fqn" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="include" unique="false" defaultValueLiteral="true">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ProtectedObject">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="fqn" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="IntegrationPolicy">
+    <eLiterals name="Never"/>
+    <eLiterals name="Once" value="1"/>
+    <eLiterals name="Always" value="2"/>
+    <eLiterals name="ExtensionPoint" value="3"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="SupplyRule">
+    <eLiterals name="IntegratedReferencesOnly"/>
+  </eClassifiers>
+</ecore:EPackage>

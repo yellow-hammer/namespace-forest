@@ -1,0 +1,43 @@
+@GenModel(loadInitialization="false", literalsInterface="true", nonNLSMarkers="true", prefix="Cai",  
+    updateClasspath="false", copyrightText="Copyright (C) 2017, 1C", featureDelegation="Reflective", 
+	rootExtendsClass="com._1c.g5.v8.bm.core.BmObject", rootExtendsInterface="com._1c.g5.v8.bm.core.IBmObject")
+@Ecore(nsPrefix="cai", nsURI="http://g5.1c.ru/v8/dt/cai")
+package com._1c.g5.v8.dt.cai.model
+
+import com._1c.g5.v8.dt.mcore.Uuid
+import com._1c.g5.v8.dt.metadata.mdclass.AbstractClientApplicationInterface
+
+class ClientApplicationInterface extends AbstractClientApplicationInterface
+{
+    contains CaiAbstractItem[] top
+    contains CaiAbstractItem[] bottom
+    contains CaiAbstractItem[] left
+    contains CaiAbstractItem[] right
+    
+    contains CaiPanel[] ^unset
+}
+
+abstract class CaiAbstractItem
+{
+    Uuid ^id
+}
+
+class CaiGroup extends CaiAbstractItem
+{
+    contains CaiPanel[] panels
+}
+
+class CaiPanel extends CaiAbstractItem
+{
+    String name
+    unsettable CaiDisplayType displayType
+}
+
+enum CaiDisplayType 
+{
+    Picture = 0
+    PictureAndText = 1
+    Text = 2
+    PictureOnLeftAndText = 3
+    PictureOnTopAndText =4
+}

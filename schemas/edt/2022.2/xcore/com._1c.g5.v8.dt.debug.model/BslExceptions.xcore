@@ -1,0 +1,67 @@
+@Ecore(nsURI="http://v8.1c.ru/8.2/bsl")
+@GenModel(nonNLSMarkers="true", copyrightText="Copyright (C) 2014, 1C", updateClasspath="false")
+package com._1c.g5.v8.dt.debug.model.bsl.exceptions
+
+import com._1c.g5.v8.dt.debug.model.core.GenericException
+import java.math.BigDecimal
+
+@ExtendedMetaData(name="CompileError", kind="elementOnly")
+class CompileError {
+    @ExtendedMetaData(kind="element", name="moduleId", namespace="##targetNamespace")
+    String moduleId
+    @ExtendedMetaData(kind="element", name="source", namespace="##targetNamespace")
+    String[1] source
+    @ExtendedMetaData(kind="element", name="message", namespace="##targetNamespace")
+    String[1] message
+    @ExtendedMetaData(kind="element", name="descr", namespace="##targetNamespace")
+    String[1] descr
+    @ExtendedMetaData(kind="attribute", name="line")
+    BigDecimal line
+    @ExtendedMetaData(kind="attribute", name="module")
+    String module
+    @ExtendedMetaData(kind="attribute", name="pos")
+    BigDecimal pos
+    @ExtendedMetaData(kind="attribute", name="reason")
+    BigDecimal reason
+}
+
+@ExtendedMetaData(name="CompileException", kind="elementOnly")
+class CompileException extends GenericException {
+    @ExtendedMetaData(kind="element", name="error", namespace="##targetNamespace")
+    contains CompileError[] error
+}
+
+@ExtendedMetaData(name="RuntimeException", kind="elementOnly")
+class RuntimeException extends GenericException {
+    @ExtendedMetaData(kind="element", name="moduleId", namespace="##targetNamespace")
+    String moduleId
+    @ExtendedMetaData(kind="element", name="source", namespace="##targetNamespace")
+    String[1] source
+    @ExtendedMetaData(kind="element", name="message", namespace="##targetNamespace")
+    String[1] message
+    @ExtendedMetaData(kind="attribute", name="line")
+    BigDecimal line
+    @ExtendedMetaData(kind="attribute", name="module")
+    String module
+    @ExtendedMetaData(kind="attribute", name="reason")
+    BigDecimal reason
+    @ExtendedMetaData(kind="element", name="stackTraceElement", namespace="##targetNamespace")
+	contains StackTraceElement[] stackTraceElement
+	@ExtendedMetaData(kind="element", name="code", namespace="##targetNamespace") // since 8.3.21
+    String code
+    @ExtendedMetaData(kind="element", name="additionalInfo", namespace="##targetNamespace") // since 8.3.21
+    String additionalInfo
+}
+
+@ExtendedMetaData(name="StackTraceElement", kind="elementOnly")
+class StackTraceElement {
+    @ExtendedMetaData(kind="attribute", name="module")
+    String module
+    @ExtendedMetaData(kind="attribute", name="line")
+    BigDecimal line
+    @ExtendedMetaData(kind="element", name="moduleId", namespace="##targetNamespace")
+    String moduleId
+    @ExtendedMetaData(kind="element", name="source", namespace="##targetNamespace")
+    String[1] source
+}
+            

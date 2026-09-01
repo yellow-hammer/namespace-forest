@@ -1,0 +1,406 @@
+@GenModel(prefix="GeographicalSchema", loadInitialization="false", literalsInterface="true", nonNLSMarkers="true",
+	copyrightText="Copyright (C) 2018, 1C", updateClasspath="false",
+	featureDelegation="Reflective", rootExtendsClass="com._1c.g5.v8.bm.core.BmObject", rootExtendsInterface="com._1c.g5.v8.bm.core.IBmObject")
+@Ecore(nsPrefix="geographicalSchema", nsURI="http://g5.1c.ru/v8/dt/geographicalschema")
+package com._1c.g5.v8.dt.geographicalschema.model
+
+import com._1c.g5.v8.dt.mcore.Uuid
+import com._1c.g5.v8.dt.mcore.Picture
+import com._1c.g5.v8.dt.mcore.PictureDef
+import com._1c.g5.v8.dt.mcore.Color
+import com._1c.g5.v8.dt.mcore.Font
+import com._1c.g5.v8.dt.mcore.Border
+import com._1c.g5.v8.dt.mcore.LocalStringMapEntry
+import org.eclipse.emf.common.util.EList
+import org.eclipse.emf.common.util.BasicEList
+import com._1c.g5.v8.dt.mcore.Value
+import com._1c.g5.v8.dt.metadata.mdclass.AbstractGeographicalSchema
+
+enum ShowMode
+{
+	ScaleDefined
+	AllData
+	SpecifiedArea
+}
+
+enum LineType
+{
+	None
+	Solid
+	Dashed
+	Dotted
+	DashDotted
+	DashDottedDotted
+}
+
+enum Projection
+{
+	CylindricalMillerProjection
+	CylindricalLambertEqualAreaProjection
+	CylindricalGallStereographicProjection
+	CylindricalEquidistantProjection
+	PseudoCylindricalSinusoidalProjection
+	PseudoCylindricalMollweideProjection
+	PseudoCylindricalRobinsonProjection
+	PseudoCylindricalEckert1Projection
+	PseudoCylindricalEckert2Projection
+	PseudoCylindricalEckert3Projection
+	PseudoCylindricalEckert4Projection
+	PseudoCylindricalEckert5Projection
+	PseudoCylindricalEckert6Projection
+	PseudoCylindricalHatanoAsymetricalEqualAreaProjection
+	PseudoCylindricalLoximutalProjection
+	PseudoCylindricalMcBrydeThomasFlatPolarParabolicProjection
+	PseudoCylindricalMcBrydeThomasFlatPolarQuarticProjection
+	PseudoCylindricalMcBrydeThomasFlatPolarSinusoidalProjection
+	PseudoCylindricalPutninP2Projection
+	PseudoCylindricalPutninP5Projection
+	PseudoCylindricalWinkel1Projection
+	PseudoCylindricalBoggsEumorphicProjection
+	AzimuthalHammerProjection
+	AzimuthalWagner7Projection
+	AzimuthalAitoffProjection
+	AzimuthalWinkelTripelProjection
+	AzimuthalEquidistantProjection
+	AzimuthalLambertEqualAreaProjection
+	MiscellaneousAugustEpicycloidalProjection
+	MiscellaneousBaconGlobularProjection
+	MiscellaneousNicolosiGlobularProjection
+	MiscellaneousApianGlobular1Projection
+	MiscellaneousOrteliusOvalProjection
+	MiscellaneousVanDerGrinten1Projection
+	MiscellaneousVanDerGrinten2Projection
+	MiscellaneousVanDerGrinten3Projection
+	ConicLambertEqualAreaProjection
+}
+
+enum DataSourceOrganizationType
+{
+	AtRow
+	AtIntersection
+}
+
+enum LayerSeriesShowMode
+{
+	DontShow
+	Text
+	Column
+	ShapeSize
+	ShapeColor
+	ShapeColorHue
+	Picture
+	Pie
+	SizedPie
+}
+
+enum SeriesValuesDrawingMode
+{
+	ShowAsValue
+	ShowAsPart
+}
+
+enum MarkerType
+{
+	None
+	Pin
+	Darts
+	LittleCircle
+	BigCircle
+	LittleSquare
+	BigSquare
+	LittleTriangle
+	BigTriangle
+	QuestionMark
+	ExclamationPoint
+}
+
+enum PaintingReferencePointPosition
+{
+	LeftTop
+	LeftCenter
+	LeftBottom
+	CenterTop
+	Center
+	CenterBottom
+	RightTop
+	RightCenter
+	RightBottom
+}
+
+enum PointObjectDrawingType
+{
+	Char
+	Marker
+	Picture
+}
+
+enum LegendItemShowScaleType
+{
+	DoNotShow
+	ShowByValues
+}
+
+enum HorizontalAlign
+{
+	Middle
+	Left
+	Right
+}
+
+// Enum for Output Usage property
+enum UseOutput
+{
+	Auto
+	Enable
+	Disable
+}
+
+class ShapeCoordinateSystemInfo
+{
+	String name
+	String datumName
+	String spheroidName
+	double semimajorAxis
+	double semiminorAxis
+	double inverseFlattening
+	String angularUnitName
+	double radiansPerUnit
+	String primeMeridianName
+	double primeMeridianLongitude
+}
+
+class DataSeriesItem
+{
+	int objectID
+	contains Color figureBaseColor
+	contains Color textColor
+	contains Font textFont
+	contains Value value
+	String name
+	String text
+	String format
+	LayerSeriesShowMode showMode
+	String group
+	int textAngle
+	SeriesValuesDrawingMode drawingMode
+	double minValue
+	double maxValue
+	op String getDisplayedName()
+	{
+		if(text===null||text.isEmpty)name else text
+	}
+}
+
+class ObjectSeriesValue
+{
+	contains Value value
+	int ^id
+	int seriesId
+}
+
+class Point
+{
+	int objectID
+	double x
+	double y
+}
+
+abstract class LayerObject
+{
+	int objectID
+	contains Color color
+	contains Value value
+	contains ObjectSeriesValue[] objectSeriesValues
+	String tooltip
+	boolean showLinkedData
+	boolean visible
+	double xMin
+	double yMin
+	double xMax
+	double yMax
+
+	op void setBounds(double xMin, double yMin, double xMax, double yMax){
+		XMin = xMin;
+		YMin = yMin;
+		XMax= xMax;
+		YMax = yMax;
+	}
+}
+
+abstract class PointShape extends LayerObject
+{
+	contains Font font
+	contains Picture picture
+	String symbol
+	MarkerType markerType
+	PaintingReferencePointPosition pointPosition
+	PointObjectDrawingType drawingType
+}
+
+class SinglePointShape extends PointShape
+{
+	double x
+	double y
+	
+	op boolean ^contains(double x, double y)
+	{
+		return getX == x && getY == y
+	}
+	
+	op int[] getIntCoordinates(double xShift, double yShift, double mult)
+	{
+		var EList<Integer> coordinates = new BasicEList()
+		coordinates.add(((this.x + xShift) * mult).intValue)
+		coordinates.add(((this.y + yShift) * -mult).intValue)
+		return coordinates
+	}
+}
+
+class MultiPointShape extends PointShape
+{
+	contains Point[] points
+}
+
+class LineStyle
+{
+	LineType lineType
+	int width
+	boolean gap
+}
+
+class PointContour
+{
+	int objectID
+	contains Point[] points
+}
+
+class PolylineShape extends LayerObject
+{
+	contains LineStyle lineStyle
+	contains PointContour[] segments
+}
+
+class PolygonShape extends LayerObject
+{
+	contains Color borderColor
+	contains PointContour[] contours
+	op Color getFillColor()
+	{
+		return color
+	}
+	op void setFillColor(Color fillColor){
+		setColor(fillColor)
+	}
+}
+
+class LayerItem
+{
+	int objectID
+	contains ShapeCoordinateSystemInfo coordinateSystem
+	contains DataSeriesItem[] series
+	contains LayerObject[] objects
+	String name
+	String text
+	String dataSourceRange
+	double xMin
+	double yMin
+	double xMax
+	double yMax
+	boolean visible
+	boolean selectable
+	int scaleRangeBegin
+	int scaleRangeEnd
+	DataSourceOrganizationType organizationType
+	Uuid elementsType
+}
+
+class LegendItem
+{
+	int objectID
+	contains Color sampleTextColor
+	contains Font sampleTextFont
+	contains Picture picture
+	int dataSeriesID
+	int layerItemID
+	String sampleText
+	String captionText
+	LegendItemShowScaleType showScaleType
+}
+
+abstract class GeographicalSchemaComponent
+{
+	contains Border border
+	boolean transparent
+	int leftCoordinatePercentage
+	int topCoordinatePercentage
+	int rightCoordinatePercentage
+	int bottomCoordinatePercentage
+}
+
+class GeographicalSchemaLegend extends GeographicalSchemaComponent
+{
+	contains Color scaleLineTextColor
+	contains Color borderColor
+	contains Color backColor
+	contains Font scaleLineTextFont
+	contains LegendItem[] items
+	boolean shown
+	boolean scaleLineShown
+}
+
+class GeographicalSchemaDrawingArea extends GeographicalSchemaComponent
+{
+	contains Color borderColor
+	contains Color backColor
+}
+
+class GeographicalSchemaTitle extends GeographicalSchemaComponent
+{
+	contains Font font
+	contains LocalStringMapEntry[] text
+	contains Color textColor
+	contains Color borderColor
+	contains Color backColor
+	boolean shown
+	HorizontalAlign align
+}
+
+class PrintOption wraps java.util.Map$Entry
+{
+	Integer key
+	contains Value value
+}
+
+class GeographicalSchema extends AbstractGeographicalSchema
+{
+	//TODO EDTGEO-7. Зачем здесь изображение
+	//	Image picture
+	contains LayerItem[] layerItems
+	contains PrintOption[] printOptions
+	contains GeographicalSchemaLegend geographicalSchemaLegend
+	contains GeographicalSchemaTitle geographicalSchemaTitle
+	contains GeographicalSchemaDrawingArea geographicalSchemaDrawingArea
+	double latitudeShift
+	double longitudeShift
+	Projection schemaProjection
+	ShowMode showMode
+	double scale
+	
+	double xMin
+	double yMin
+	double xMax
+	double yMax
+	
+	double viewedXMin
+	double viewedYMin
+	double viewedXMax
+	double viewedYMax
+	
+	UseOutput useOutput
+	int currentID
+}
+
+class GeoPicture extends PictureDef
+{
+	String content
+}
