@@ -76,12 +76,12 @@ jobs:
           if [ -n "$ONLY_VERSION" ]; then
             echo "$ONLY_VERSION" > /tmp/new-versions.txt
           elif [ "$REDUMP" = "true" ]; then
-            PROCESSED=schemas/processed-versions.json \
+            PROCESSED=schemas/designer/processed-versions.json \
             OUT_FILE=/tmp/new-versions.txt \
               oscript scripts/select-processed.os
           else
             YARD_JSON=/tmp/yard-versions.json \
-            PROCESSED=schemas/processed-versions.json \
+            PROCESSED=schemas/designer/processed-versions.json \
             MIN_VERSION="$MIN_VERSION" \
             LIMIT="$BATCH_SIZE" \
             OUT_FILE=/tmp/new-versions.txt \
@@ -234,7 +234,7 @@ jobs:
               echo "ERROR: FormatVersion не определён для $PLATFORM_VERSION"
               rm -rf "$OUTPUT_DIR" "$DISTR_DIR" "$DB_DIR" "$DATA_DIR"; continue
             fi
-            SCHEMA_DIR="$REPO_DIR/schemas/$SCHEMA_VERSION"
+            SCHEMA_DIR="$REPO_DIR/schemas/designer/$SCHEMA_VERSION"
             mkdir -p "$SCHEMA_DIR"
             echo "Платформа $PLATFORM_VERSION → формат $SCHEMA_VERSION, $XSD_COUNT схем"
             cp "$OUTPUT_DIR"/*.xsd "$SCHEMA_DIR/"
@@ -242,7 +242,7 @@ jobs:
 
             echo "$PLATFORM_VERSION $SCHEMA_VERSION" >> /tmp/processed-map.txt
 
-            git add "schemas/$SCHEMA_VERSION/"
+            git add "schemas/designer/$SCHEMA_VERSION/"
             if git diff --cached --quiet; then
               echo "Схемы формата $SCHEMA_VERSION не изменились."
             else
@@ -260,9 +260,9 @@ jobs:
 
           if [ -s /tmp/processed-map.txt ]; then
             MAP_FILE=/tmp/processed-map.txt \
-            PROCESSED=schemas/processed-versions.json \
+            PROCESSED=schemas/designer/processed-versions.json \
               oscript scripts/update-processed.os
-            git add schemas/processed-versions.json
+            git add schemas/designer/processed-versions.json
             if ! git diff --cached --quiet; then
               git commit -m "chore: обновление processed-versions.json"
             fi
