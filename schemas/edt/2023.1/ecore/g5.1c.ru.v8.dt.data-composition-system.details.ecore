@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="ASCII"?>
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="details" nsURI="http://g5.1c.ru/v8/dt/data-composition-system/details" nsPrefix="details">
+  <eClassifiers xsi:type="ecore:EEnum" name="DataCompositionDetailsProcessingAction">
+    <eLiterals name="None"/>
+    <eLiterals name="DrillDown"/>
+    <eLiterals name="Filter"/>
+    <eLiterals name="Order"/>
+    <eLiterals name="Group"/>
+    <eLiterals name="OpenValue"/>
+    <eLiterals name="ApplyAppearance"/>
+  </eClassifiers>
+</ecore:EPackage>

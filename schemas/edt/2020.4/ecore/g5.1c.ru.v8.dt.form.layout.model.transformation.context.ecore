@@ -1,0 +1,1476 @@
+<?xml version="1.0" encoding="ASCII"?>
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="context" nsURI="http://g5.1c.ru/v8/dt/form.layout.model.transformation.context" nsPrefix="layout">
+  <eClassifiers xsi:type="ecore:EClass" name="PagesChildInfosCacheMapEntry" instanceClassName="java.util.Map$Entry">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="key" eType="//HTVariantKey"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="value" upperBound="-1" eType="//PagesChildInfo" containment="true" resolveProxies="false"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="LimitsCacheMapEntry" instanceClassName="java.util.Map$Entry">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="key" eType="//HTVariantKey"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="value" eType="//Estimate"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="CalcVerVariantEstimatesResCacheEntry" instanceClassName="java.util.Map$Entry">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="key" eType="//HTVariantKey"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="value" eType="//CalcVerVariantEstimatesRes"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ChildHorStoredVariant">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="horStrategy" unique="false" eType="//HorStrategy"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="maxWidth" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ChildHorStoredVariantsCacheEntry" instanceClassName="java.util.Map$Entry">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="key" eType="//HTVariantKey"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" unique="false" eType="//ChildHorStoredVariants"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="VariantEstimateIntResCacheMapEntry" instanceClassName="java.util.Map$Entry">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="key" eType="//HTVariantKey"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="value" eType="//VariantEstimateIntRes" containment="true" resolveProxies="false"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Estimate">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="width" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="alignedTitleWidth" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="height" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="horStrategy" unique="false" eType="//HorStrategy"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="verStrategy" unique="false" eType="//VerStrategy"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="adaptiveGroupingCount" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="maxWidth" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="maxHeight" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="category" unique="false" eType="//HTEVariantCategory"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="HTVariantKey">
+    <eOperations name="hashCode" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    </eOperations>
+    <eOperations name="equals" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+      <eParameters name="key" unique="false">
+        <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EJavaObject"/>
+      </eParameters>
+    </eOperations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="complexKey" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="maxWidth" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="maxHeight" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="horStrategy" unique="false" eType="//HorStrategy"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="verStrategy" unique="false" eType="//VerStrategy"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="adaptiveGroupingCount" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="noExternalAlign" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="options" unique="false" eType="//GetVariantAdditionalOptions"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="FormElementDimension">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="length" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="minLengthWithNormalPriority" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="minLengthWithStretchPriority" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="maxLengthWithNormalPriority" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="maxLengthWithCompressPriority" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="narrowStandardLength" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="wideStandardLength" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="standardLength" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="hasSlaveColumns" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="slaveLength" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="slaveMinLengthWithNormalPriority" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="slaveMinLengthWithStretchPriority" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="slaveMaxLengthWithNormalPriority" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="slaveMaxLengthWithCompressPriority" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="slavePadding" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="slaveNarrowStandardLength" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="slaveWideStandardLength" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="slaveStandardLength" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ExtDimItem">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="minLength" unique="false" defaultValueLiteral="0">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="flag" unique="false" defaultValueLiteral="true">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="noMinLength" unique="false" defaultValueLiteral="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="stepByStepLength" unique="false" defaultValueLiteral="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="RootBaseTransformationContext" abstract="true" interface="true">
+    <eTypeParameters name="T">
+      <eBounds>
+        <eClassifier xsi:type="ecore:EClass" href="http://g5.1c.ru/v8/dt/form.layout.model.description.model#//HippoLayElementBase"/>
+      </eBounds>
+    </eTypeParameters>
+    <eTypeParameters name="C">
+      <eBounds>
+        <eClassifier xsi:type="ecore:EClass" href="g5.1c.ru.v8.dt.form.layout.model.calculation.context.ecore#//RootBaseCalculationContext"/>
+      </eBounds>
+    </eTypeParameters>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="layoutElement">
+      <eGenericType eTypeParameter="//RootBaseTransformationContext/T"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="calculationContext">
+      <eGenericType eTypeParameter="//RootBaseTransformationContext/C"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="containmentInfo" eType="//GroupSimpleChild"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="visualComputer" unique="false" eType="//VisualComputer"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="additionalInfoProvider" unique="false" eType="//TransformatorAdditionalInfoProvider"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="parent">
+      <eGenericType eClassifier="//RootBaseTransformationContext">
+        <eTypeArguments>
+          <eUpperBound>
+            <eClassifier xsi:type="ecore:EClass" href="http://g5.1c.ru/v8/dt/form.layout.model.description.model#//HippoLayElementBase"/>
+          </eUpperBound>
+        </eTypeArguments>
+        <eTypeArguments>
+          <eUpperBound>
+            <eClassifier xsi:type="ecore:EClass" href="g5.1c.ru.v8.dt.form.layout.model.calculation.context.ecore#//RootBaseCalculationContext"/>
+          </eUpperBound>
+        </eTypeArguments>
+      </eGenericType>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ElementBaseTransformationContext" abstract="true" interface="true">
+    <eTypeParameters name="T">
+      <eBounds>
+        <eClassifier xsi:type="ecore:EClass" href="http://g5.1c.ru/v8/dt/form.layout.model.description.model#//HippoLayElementBase"/>
+      </eBounds>
+    </eTypeParameters>
+    <eTypeParameters name="C">
+      <eBounds>
+        <eClassifier xsi:type="ecore:EClass" href="g5.1c.ru.v8.dt.form.layout.model.calculation.context.ecore#//ElementBaseCalculationContext"/>
+      </eBounds>
+    </eTypeParameters>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="enableAlignByExternalCondition" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="osInfo" unique="false">
+      <eType xsi:type="ecore:EEnum" href="http://g5.1c.ru/v8/dt/form.layout.model.description.model#//ClientOSInfo"/>
+    </eStructuralFeatures>
+    <eGenericSuperTypes eClassifier="//RootBaseTransformationContext">
+      <eTypeArguments eTypeParameter="//ElementBaseTransformationContext/T"/>
+      <eTypeArguments eTypeParameter="//ElementBaseTransformationContext/C"/>
+    </eGenericSuperTypes>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="FormElementBaseTransformationContext" abstract="true" interface="true">
+    <eTypeParameters name="T">
+      <eBounds>
+        <eClassifier xsi:type="ecore:EClass" href="http://g5.1c.ru/v8/dt/form.layout.model.description.model#//HippoLayFormElementBase"/>
+      </eBounds>
+    </eTypeParameters>
+    <eTypeParameters name="C">
+      <eBounds>
+        <eClassifier xsi:type="ecore:EClass" href="g5.1c.ru.v8.dt.form.layout.model.calculation.context.ecore#//FormElementBaseCalculationContext"/>
+      </eBounds>
+    </eTypeParameters>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="compat839" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="keepMinWidth" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    </eStructuralFeatures>
+    <eGenericSuperTypes eClassifier="//ElementBaseTransformationContext">
+      <eTypeArguments eTypeParameter="//FormElementBaseTransformationContext/T"/>
+      <eTypeArguments eTypeParameter="//FormElementBaseTransformationContext/C"/>
+    </eGenericSuperTypes>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="GroupBaseTransformationContext" abstract="true" interface="true">
+    <eTypeParameters name="T">
+      <eBounds>
+        <eClassifier xsi:type="ecore:EClass" href="http://g5.1c.ru/v8/dt/form.layout.model.description.model#//HippoLayElementBase"/>
+      </eBounds>
+    </eTypeParameters>
+    <eTypeParameters name="C">
+      <eBounds>
+        <eClassifier xsi:type="ecore:EClass" href="g5.1c.ru.v8.dt.form.layout.model.calculation.context.ecore#//GroupBaseCalculationContext"/>
+      </eBounds>
+    </eTypeParameters>
+    <eOperations name="addChild" unique="false">
+      <eParameters name="child" unique="false">
+        <eGenericType eClassifier="//RootBaseTransformationContext">
+          <eTypeArguments>
+            <eUpperBound>
+              <eClassifier xsi:type="ecore:EClass" href="http://g5.1c.ru/v8/dt/form.layout.model.description.model#//HippoLayElementBase"/>
+            </eUpperBound>
+          </eTypeArguments>
+          <eTypeArguments>
+            <eUpperBound>
+              <eClassifier xsi:type="ecore:EClass" href="g5.1c.ru.v8.dt.form.layout.model.calculation.context.ecore#//RootBaseCalculationContext"/>
+            </eUpperBound>
+          </eTypeArguments>
+        </eGenericType>
+      </eParameters>
+    </eOperations>
+    <eOperations name="remove" unique="false">
+      <eParameters name="child" unique="false">
+        <eGenericType eClassifier="//RootBaseTransformationContext">
+          <eTypeArguments>
+            <eUpperBound>
+              <eClassifier xsi:type="ecore:EClass" href="http://g5.1c.ru/v8/dt/form.layout.model.description.model#//HippoLayElementBase"/>
+            </eUpperBound>
+          </eTypeArguments>
+          <eTypeArguments>
+            <eUpperBound>
+              <eClassifier xsi:type="ecore:EClass" href="g5.1c.ru.v8.dt.form.layout.model.calculation.context.ecore#//RootBaseCalculationContext"/>
+            </eUpperBound>
+          </eTypeArguments>
+        </eGenericType>
+      </eParameters>
+    </eOperations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="children" upperBound="-1" containment="true" resolveProxies="false">
+      <eGenericType eClassifier="//RootBaseTransformationContext">
+        <eTypeArguments>
+          <eUpperBound>
+            <eClassifier xsi:type="ecore:EClass" href="http://g5.1c.ru/v8/dt/form.layout.model.description.model#//HippoLayElementBase"/>
+          </eUpperBound>
+        </eTypeArguments>
+        <eTypeArguments>
+          <eUpperBound>
+            <eClassifier xsi:type="ecore:EClass" href="g5.1c.ru.v8.dt.form.layout.model.calculation.context.ecore#//RootBaseCalculationContext"/>
+          </eUpperBound>
+        </eTypeArguments>
+      </eGenericType>
+    </eStructuralFeatures>
+    <eGenericSuperTypes eClassifier="//ElementBaseTransformationContext">
+      <eTypeArguments eTypeParameter="//GroupBaseTransformationContext/T"/>
+      <eTypeArguments eTypeParameter="//GroupBaseTransformationContext/C"/>
+    </eGenericSuperTypes>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="GroupSimpleChild"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Result">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="estimateInit" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="estimate" eType="//Estimate"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="logicRowsHeightInit" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="logicRowsHeight" unique="false" defaultValueLiteral="1">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ResultCacheMapEntry" instanceClassName="java.util.Map$Entry">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="key" eType="//HTVariantKey"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="value" eType="//Result" containment="true" resolveProxies="false"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="GroupCacheableChild" eSuperTypes="//GroupSimpleChild">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="adaptiveGroupingFormGroupLevels" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="resultCache" upperBound="-1" eType="//ResultCacheMapEntry" containment="true" resolveProxies="false"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="rangesInit" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="constantRanges" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="FormGroupChild" eSuperTypes="//GroupCacheableChild">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="leftAlign" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="leftAlignInit" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ElementWithLimitsBaseTransformationContext" abstract="true" interface="true">
+    <eTypeParameters name="T">
+      <eBounds>
+        <eClassifier xsi:type="ecore:EClass" href="http://g5.1c.ru/v8/dt/form.layout.model.description.model#//HippoLayElementBase"/>
+      </eBounds>
+    </eTypeParameters>
+    <eTypeParameters name="C">
+      <eBounds>
+        <eClassifier xsi:type="ecore:EClass" href="g5.1c.ru.v8.dt.form.layout.model.calculation.context.ecore#//ElementWithLimitsBaseCalculationContext"/>
+      </eBounds>
+    </eTypeParameters>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="limitsConstantRangesInit" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="limitsConstantRanges" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="limitsCache" upperBound="-1" eType="//LimitsCacheMapEntry" containment="true" resolveProxies="false"/>
+    <eGenericSuperTypes eClassifier="//RootBaseTransformationContext">
+      <eTypeArguments eTypeParameter="//ElementWithLimitsBaseTransformationContext/T"/>
+      <eTypeArguments eTypeParameter="//ElementWithLimitsBaseTransformationContext/C"/>
+    </eGenericSuperTypes>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="INoExtTooltipAtBottomTransformationContext" abstract="true" interface="true"/>
+  <eClassifiers xsi:type="ecore:EClass" name="INoTitlesOnTopTransformationContext" abstract="true" interface="true"/>
+  <eClassifiers xsi:type="ecore:EClass" name="ChildVerVariant">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="horStrategy" unique="false" eType="//HorStrategy" defaultValueLiteral="eHSAuto"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="verStrategy" unique="false" eType="//VerStrategy" defaultValueLiteral="eVSAuto"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="adaptiveGroupingCount" unique="false" defaultValueLiteral="0">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="maxWidth" unique="false" defaultValueLiteral="0">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="maxHeight" unique="false" defaultValueLiteral="0">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="estimate" eType="//Estimate"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="pVariant">
+      <eType xsi:type="ecore:EClass" href="http://g5.1c.ru/v8/dt/form.layout.model.description.model#//HippoLayElementBase"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="leftHAlign" unique="false" defaultValueLiteral="true">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="enableAlign" unique="false" defaultValueLiteral="true">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="logicRowsHeight" unique="false" defaultValueLiteral="0">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="enableAlignByCondition" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="CalcVerVariantEstimatesRes">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="childVariants" unique="false" eType="//ChildVerVariants"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="width" unique="false" defaultValueLiteral="0">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="alignedWidth" unique="false" defaultValueLiteral="0">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="nonAlignedWidth" unique="false" defaultValueLiteral="0">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="alignedTitleWidth" unique="false" defaultValueLiteral="0">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="alignedTitleWidthIndex" unique="false" defaultValueLiteral="0">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="height" unique="false" defaultValueLiteral="0">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="maxCatergory" unique="false" eType="//HTEVariantCategory" defaultValueLiteral="eHTEVCStandard"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="alignedChildrenCount" unique="false" defaultValueLiteral="0">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="FormGroupBaseTransformationContext" abstract="true" interface="true">
+    <eTypeParameters name="T">
+      <eBounds>
+        <eClassifier xsi:type="ecore:EClass" href="http://g5.1c.ru/v8/dt/form.layout.model.description.model#//HippoLayFormGroupBase"/>
+      </eBounds>
+    </eTypeParameters>
+    <eTypeParameters name="C">
+      <eBounds>
+        <eClassifier xsi:type="ecore:EClass" href="g5.1c.ru.v8.dt.form.layout.model.calculation.context.ecore#//FormGroupBaseCalculationContext"/>
+      </eBounds>
+    </eTypeParameters>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="childrenAlign" unique="false">
+      <eType xsi:type="ecore:EEnum" href="http://g5.1c.ru/v8/dt/form#//FormChildrenAlign"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="maxAlignedChildrenCount" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="curGroupingVertical" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="slaveLogFormElementName" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="slaveBaseName" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="slaveEnableExternalAlign" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="calcVerVariantEstimatesResCache" upperBound="-1" eType="//CalcVerVariantEstimatesResCacheEntry" containment="true" resolveProxies="false"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="childHorStoredVariantsCache" upperBound="-1" eType="//ChildHorStoredVariantsCacheEntry" containment="true" resolveProxies="false"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="pCB" eType="//MegaGroupTransformationContext"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="megaGroup" eType="//MegaGroupTransformationContext" containment="true" resolveProxies="false"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="constantRangesInit" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="constantRanges" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="verticalGrouping" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    </eStructuralFeatures>
+    <eGenericSuperTypes eClassifier="//LayoutVirtualGrid"/>
+    <eGenericSuperTypes eClassifier="//GroupBaseTransformationContext">
+      <eTypeArguments eTypeParameter="//FormGroupBaseTransformationContext/T"/>
+      <eTypeArguments eTypeParameter="//FormGroupBaseTransformationContext/C"/>
+    </eGenericSuperTypes>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="LayoutVirtualGrid" abstract="true" interface="true">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="childrenGridHAlign" unique="false">
+      <eType xsi:type="ecore:EEnum" href="http://g5.1c.ru/v8/dt/form#//ItemHorizontalAlignment"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="childrenGridVAlign" unique="false">
+      <eType xsi:type="ecore:EEnum" href="http://g5.1c.ru/v8/dt/form#//ItemVerticalAlignment"/>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="VirtualGridSizeInt">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="width" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="minWidthWithNormalPriority" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="minWidthWithStretchPriority" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="maxWidthWithNormalPriority" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="maxWidthWithCompressPriority" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="narrowStandardWidth" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="wideStandardWidth" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="standardWidth" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="height" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="minHeightWithNormalPriority" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="minHeightWithStretchPriority" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="maxHeightWithNormalPriority" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="maxHeightWithCompressPriority" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="narrowStandardHeight" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="wideStandardHeight" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="standardHeight" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="FormTransformationContext">
+    <eGenericSuperTypes eClassifier="//FormGroupBaseTransformationContext">
+      <eTypeArguments>
+        <eClassifier xsi:type="ecore:EClass" href="http://g5.1c.ru/v8/dt/form.layout.model.description.model#//HippoLayForm"/>
+      </eTypeArguments>
+      <eTypeArguments>
+        <eClassifier xsi:type="ecore:EClass" href="g5.1c.ru.v8.dt.form.layout.model.calculation.context.ecore#//FormCalculationContext"/>
+      </eTypeArguments>
+    </eGenericSuperTypes>
+    <eGenericSuperTypes eClassifier="//ElementWithLimitsBaseTransformationContext">
+      <eTypeArguments>
+        <eClassifier xsi:type="ecore:EClass" href="http://g5.1c.ru/v8/dt/form.layout.model.description.model#//HippoLayForm"/>
+      </eTypeArguments>
+      <eTypeArguments>
+        <eClassifier xsi:type="ecore:EClass" href="g5.1c.ru.v8.dt.form.layout.model.calculation.context.ecore#//FormCalculationContext"/>
+      </eTypeArguments>
+    </eGenericSuperTypes>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="SlaveGroupIndexEntry" instanceClassName="java.util.Map$Entry">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="key" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="value" eType="//VerGroupResult" containment="true" resolveProxies="false"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ContextPositionsPair">
+    <eOperations name="init" unique="false"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="first">
+      <eGenericType eClassifier="//ElementBaseTransformationContext">
+        <eTypeArguments/>
+        <eTypeArguments/>
+      </eGenericType>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="second" eType="//Positions" containment="true" resolveProxies="false"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="GridPositionsEntry" instanceClassName="java.util.Map$Entry">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="key" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" unique="false" eType="//IntPair"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="VerGroupResult">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="pVerGroup">
+      <eGenericType eClassifier="//RootBaseTransformationContext">
+        <eTypeArguments/>
+        <eTypeArguments/>
+      </eGenericType>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="resultCache" upperBound="-1" eType="//ResultCacheMapEntry" containment="true" resolveProxies="false"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="rangesInit" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="constantRanges" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="IndexEntry" instanceClassName="java.util.Map$Entry">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="key" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" unique="false" eType="//ChildrenPath"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Child">
+    <eOperations name="init" unique="false"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="ifLeaf" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="leafChild" eType="//LeafChild" containment="true" resolveProxies="false"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="delegateGroupChild" eType="//DelegateGroupChild" containment="true" resolveProxies="false"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="index" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="DelegateGroupChild">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="grouping" unique="false">
+      <eType xsi:type="ecore:EEnum" href="http://g5.1c.ru/v8/dt/form#//FormChildrenGroup"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="backColor" unique="false" eType="//Color"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="children" upperBound="-1" eType="//Child" containment="true" resolveProxies="false"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="groupLogFormElementName" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="SelfResultCacheEntry" instanceClassName="java.util.Map$Entry">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="key" eType="//HTVariantKey"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="value" eType="//Result" containment="true" resolveProxies="false"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ColoredGroupData">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="logFormElementName" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="rect" eType="//Rect" containment="true" resolveProxies="false"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="color" unique="false" eType="//Color"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Rect">
+    <eOperations name="width" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    </eOperations>
+    <eOperations name="height" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    </eOperations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="top" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="bottom" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="left" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="right" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Positions">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="gridPositions" upperBound="-1" eType="//GridPositionsEntry" containment="true" resolveProxies="false"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="coloredGroupPositions" upperBound="-1" eType="//ColoredGroupData" containment="true" resolveProxies="false"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="MegaGroupTransformationContext">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="slaveGroupIndex" upperBound="-1" eType="//SlaveGroupIndexEntry" containment="true" resolveProxies="false"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="index" upperBound="-1" eType="//IndexEntry" containment="true" resolveProxies="false"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="children" upperBound="-1" eType="//Child" containment="true" resolveProxies="false"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="pCurGridPositions" unique="false" eType="//GridPositionsMap"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="pCurColoredGroupPositions" unique="false" eType="//ColoredGroupDataList"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="selfCache" upperBound="-1" eType="//SelfResultCacheEntry" containment="true" resolveProxies="false"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="pParentElement">
+      <eGenericType eClassifier="//RootBaseTransformationContext">
+        <eTypeArguments/>
+        <eTypeArguments/>
+      </eGenericType>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="pInternalVariantBeforeAdapting">
+      <eGenericType eClassifier="//RootBaseTransformationContext">
+        <eTypeArguments/>
+        <eTypeArguments/>
+      </eGenericType>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="pInternalVariantAfterAdapting">
+      <eGenericType eClassifier="//RootBaseTransformationContext">
+        <eTypeArguments/>
+        <eTypeArguments/>
+      </eGenericType>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="gridPositionsBeforeAdapting" upperBound="-1" eType="//GridPositionsEntry" containment="true" resolveProxies="false"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="coloredGroupPositionsBeforeAdapting" upperBound="-1" eType="//ColoredGroupData" containment="true" resolveProxies="false"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="gridPositionsAfterAdapting" upperBound="-1" eType="//GridPositionsEntry" containment="true" resolveProxies="false"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="coloredGroupPositionsAfterAdapting" upperBound="-1" eType="//ColoredGroupData" containment="true" resolveProxies="false"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="slaveVerGroupNumerator" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="internalVariantsWithAdapting" upperBound="-1" eType="//ContextPositionsPair" containment="true" resolveProxies="false"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="layoutElement">
+      <eType xsi:type="ecore:EClass" href="http://g5.1c.ru/v8/dt/form.layout.model.description.model#//HippoLayGroupBase"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="visualComputer" unique="false" eType="//VisualComputer"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="additionalInfoProvider" unique="false" eType="//TransformatorAdditionalInfoProvider"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="grouping" unique="false">
+      <eType xsi:type="ecore:EEnum" href="http://g5.1c.ru/v8/dt/form#//FormChildrenGroup"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="targetPlatform" unique="false">
+      <eType xsi:type="ecore:EEnum" href="g5.1c.ru.v8.dt.form.layout.model.calculation.context.ecore#//LFTargetPlatform"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="interfaceVariant" unique="false">
+      <eType xsi:type="ecore:EEnum" href="http://g5.1c.ru/v8/dt/form.layout.model.description.model#//ClientInterfaceVariant"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="osInfo" unique="false">
+      <eType xsi:type="ecore:EEnum" href="http://g5.1c.ru/v8/dt/form.layout.model.description.model#//ClientOSInfo"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="compatibilityMode" unique="false">
+      <eType xsi:type="ecore:EEnum" href="http://g5.1c.ru/v8/dt/metadata/mdclass#//CompatibilityMode"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="horSpacingVariant" unique="false">
+      <eType xsi:type="ecore:EEnum" href="http://g5.1c.ru/v8/dt/form#//FormItemSpacing"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="horSpacing" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="verSpacingVariant" unique="false">
+      <eType xsi:type="ecore:EEnum" href="http://g5.1c.ru/v8/dt/form#//FormItemSpacing"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="verSpacing" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="childrenAlign" unique="false">
+      <eType xsi:type="ecore:EEnum" href="http://g5.1c.ru/v8/dt/form#//FormChildrenAlign"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="hAlign" unique="false">
+      <eType xsi:type="ecore:EEnum" href="http://g5.1c.ru/v8/dt/form#//ItemHorizontalAlignment"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="vAlign" unique="false">
+      <eType xsi:type="ecore:EEnum" href="http://g5.1c.ru/v8/dt/form#//ItemVerticalAlignment"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="externalTitleAlign" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="maxTargetWidth" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="maxTargetHeight" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="adpatedToMobilePlatform" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="options" unique="false" eType="//CalculateAdditionalOptions"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="mobileBlockModeEnabled" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="mobileRowMinHeight" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="mobileRowMinIndent" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="mobileRowHorIndent" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="mobileRowRoundRadius" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="LeafChild">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="pLeafChild">
+      <eGenericType eClassifier="//RootBaseTransformationContext">
+        <eTypeArguments/>
+        <eTypeArguments/>
+      </eGenericType>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="resultCache" upperBound="-1" eType="//ResultCacheMapEntry" containment="true" resolveProxies="false"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="rangesInit" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="constantRanges" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="InputFieldTransformationContext">
+    <eGenericSuperTypes eClassifier="//FormElementBaseTransformationContext">
+      <eTypeArguments>
+        <eClassifier xsi:type="ecore:EClass" href="http://g5.1c.ru/v8/dt/form.layout.model.description.model#//HippoLayEdit"/>
+      </eTypeArguments>
+      <eTypeArguments>
+        <eClassifier xsi:type="ecore:EClass" href="g5.1c.ru.v8.dt.form.layout.model.calculation.context.ecore#//InputFieldCalculationContext"/>
+      </eTypeArguments>
+    </eGenericSuperTypes>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ImageTransformationContext">
+    <eGenericSuperTypes eClassifier="//FormElementBaseTransformationContext">
+      <eTypeArguments>
+        <eClassifier xsi:type="ecore:EClass" href="http://g5.1c.ru/v8/dt/form.layout.model.description.model#//HippoLayImage"/>
+      </eTypeArguments>
+      <eTypeArguments>
+        <eClassifier xsi:type="ecore:EClass" href="g5.1c.ru.v8.dt.form.layout.model.calculation.context.ecore#//ImageCalculationContext"/>
+      </eTypeArguments>
+    </eGenericSuperTypes>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="CheckBoxTransformationContext">
+    <eGenericSuperTypes eClassifier="//FormElementBaseTransformationContext">
+      <eTypeArguments>
+        <eClassifier xsi:type="ecore:EClass" href="http://g5.1c.ru/v8/dt/form.layout.model.description.model#//HippoLayCheckBox"/>
+      </eTypeArguments>
+      <eTypeArguments>
+        <eClassifier xsi:type="ecore:EClass" href="g5.1c.ru.v8.dt.form.layout.model.calculation.context.ecore#//CheckBoxCalculationContext"/>
+      </eTypeArguments>
+    </eGenericSuperTypes>
+    <eGenericSuperTypes eClassifier="//INoExtTooltipAtBottomTransformationContext"/>
+    <eGenericSuperTypes eClassifier="//INoTitlesOnTopTransformationContext"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="SwitcherTransformationContext">
+    <eGenericSuperTypes eClassifier="//FormElementBaseTransformationContext">
+      <eTypeArguments>
+        <eClassifier xsi:type="ecore:EClass" href="http://g5.1c.ru/v8/dt/form.layout.model.description.model#//HippoLaySwitcher"/>
+      </eTypeArguments>
+      <eTypeArguments>
+        <eClassifier xsi:type="ecore:EClass" href="g5.1c.ru.v8.dt.form.layout.model.calculation.context.ecore#//SwitcherCalculationContext"/>
+      </eTypeArguments>
+    </eGenericSuperTypes>
+    <eGenericSuperTypes eClassifier="//INoExtTooltipAtBottomTransformationContext"/>
+    <eGenericSuperTypes eClassifier="//INoTitlesOnTopTransformationContext"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ProgressBarTransformationContext">
+    <eGenericSuperTypes eClassifier="//FormElementBaseTransformationContext">
+      <eTypeArguments>
+        <eClassifier xsi:type="ecore:EClass" href="http://g5.1c.ru/v8/dt/form.layout.model.description.model#//HippoLayProgressBar"/>
+      </eTypeArguments>
+      <eTypeArguments>
+        <eClassifier xsi:type="ecore:EClass" href="g5.1c.ru.v8.dt.form.layout.model.calculation.context.ecore#//ProgressBarCalculationContext"/>
+      </eTypeArguments>
+    </eGenericSuperTypes>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="TrackBarTransformationContext">
+    <eGenericSuperTypes eClassifier="//FormElementBaseTransformationContext">
+      <eTypeArguments>
+        <eClassifier xsi:type="ecore:EClass" href="http://g5.1c.ru/v8/dt/form.layout.model.description.model#//HippoLayTrackBar"/>
+      </eTypeArguments>
+      <eTypeArguments>
+        <eClassifier xsi:type="ecore:EClass" href="g5.1c.ru.v8.dt.form.layout.model.calculation.context.ecore#//TrackBarCalculationContext"/>
+      </eTypeArguments>
+    </eGenericSuperTypes>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="TextDocTransformationContext">
+    <eGenericSuperTypes eClassifier="//FormElementBaseTransformationContext">
+      <eTypeArguments>
+        <eClassifier xsi:type="ecore:EClass" href="http://g5.1c.ru/v8/dt/form.layout.model.description.model#//HippoLayTextDoc"/>
+      </eTypeArguments>
+      <eTypeArguments>
+        <eClassifier xsi:type="ecore:EClass" href="g5.1c.ru.v8.dt.form.layout.model.calculation.context.ecore#//TextDocCalculationContext"/>
+      </eTypeArguments>
+    </eGenericSuperTypes>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="FormButtonTransformationContext">
+    <eGenericSuperTypes eClassifier="//FormElementBaseTransformationContext">
+      <eTypeArguments>
+        <eClassifier xsi:type="ecore:EClass" href="http://g5.1c.ru/v8/dt/form.layout.model.description.model#//HippoLayButton"/>
+      </eTypeArguments>
+      <eTypeArguments>
+        <eClassifier xsi:type="ecore:EClass" href="g5.1c.ru.v8.dt.form.layout.model.calculation.context.ecore#//FormButtonCalculationContext"/>
+      </eTypeArguments>
+    </eGenericSuperTypes>
+    <eGenericSuperTypes eClassifier="//GroupBaseTransformationContext">
+      <eTypeArguments>
+        <eClassifier xsi:type="ecore:EClass" href="http://g5.1c.ru/v8/dt/form.layout.model.description.model#//HippoLayButton"/>
+      </eTypeArguments>
+      <eTypeArguments>
+        <eClassifier xsi:type="ecore:EClass" href="g5.1c.ru.v8.dt.form.layout.model.calculation.context.ecore#//FormButtonCalculationContext"/>
+      </eTypeArguments>
+    </eGenericSuperTypes>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="PanelTransformationContext">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="groupWidth" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="groupHeight" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    </eStructuralFeatures>
+    <eGenericSuperTypes eClassifier="//FormGroupBaseTransformationContext">
+      <eTypeArguments>
+        <eClassifier xsi:type="ecore:EClass" href="http://g5.1c.ru/v8/dt/form.layout.model.description.model#//HippoLayPanel"/>
+      </eTypeArguments>
+      <eTypeArguments>
+        <eClassifier xsi:type="ecore:EClass" href="g5.1c.ru.v8.dt.form.layout.model.calculation.context.ecore#//PanelCalculationContext"/>
+      </eTypeArguments>
+    </eGenericSuperTypes>
+    <eGenericSuperTypes eClassifier="//ElementWithLimitsBaseTransformationContext">
+      <eTypeArguments>
+        <eClassifier xsi:type="ecore:EClass" href="http://g5.1c.ru/v8/dt/form.layout.model.description.model#//HippoLayPanel"/>
+      </eTypeArguments>
+      <eTypeArguments>
+        <eClassifier xsi:type="ecore:EClass" href="g5.1c.ru.v8.dt.form.layout.model.calculation.context.ecore#//PanelCalculationContext"/>
+      </eTypeArguments>
+    </eGenericSuperTypes>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="SeparatePanelTransformationContext">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="pCloseBtnElement">
+      <eType xsi:type="ecore:EClass" href="http://g5.1c.ru/v8/dt/form.layout.model.description.model#//HippoLayElementBase"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="panelWidth" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="panelHeight" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="leftPadding" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="topPadding" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="bottomPadding" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="leftCloseBtnPadding" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="rightCloseBtnPadding" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="topCloseBtnPadding" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="closeBtnPictWidth" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="closeBtnPictHeight" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="sumHorIntOffsets" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="sumVerIntOffsets" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="sumHorExtOffsets" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="sumVerExtOffsets" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    </eStructuralFeatures>
+    <eGenericSuperTypes eClassifier="//FormGroupBaseTransformationContext">
+      <eTypeArguments>
+        <eClassifier xsi:type="ecore:EClass" href="http://g5.1c.ru/v8/dt/form.layout.model.description.model#//HippoLaySeparatePanel"/>
+      </eTypeArguments>
+      <eTypeArguments>
+        <eClassifier xsi:type="ecore:EClass" href="g5.1c.ru.v8.dt.form.layout.model.calculation.context.ecore#//SeparatePanelCalculationContext"/>
+      </eTypeArguments>
+    </eGenericSuperTypes>
+    <eGenericSuperTypes eClassifier="//ElementWithLimitsBaseTransformationContext">
+      <eTypeArguments>
+        <eClassifier xsi:type="ecore:EClass" href="http://g5.1c.ru/v8/dt/form.layout.model.description.model#//HippoLaySeparatePanel"/>
+      </eTypeArguments>
+      <eTypeArguments>
+        <eClassifier xsi:type="ecore:EClass" href="g5.1c.ru.v8.dt.form.layout.model.calculation.context.ecore#//SeparatePanelCalculationContext"/>
+      </eTypeArguments>
+    </eGenericSuperTypes>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="FormattedAreaTransformationContext">
+    <eGenericSuperTypes eClassifier="//FormGroupBaseTransformationContext">
+      <eTypeArguments>
+        <eClassifier xsi:type="ecore:EClass" href="http://g5.1c.ru/v8/dt/form.layout.model.description.model#//HippoLayFormattedArea"/>
+      </eTypeArguments>
+      <eTypeArguments>
+        <eClassifier xsi:type="ecore:EClass" href="g5.1c.ru.v8.dt.form.layout.model.calculation.context.ecore#//FormattedAreaCalculationContext"/>
+      </eTypeArguments>
+    </eGenericSuperTypes>
+    <eGenericSuperTypes eClassifier="//ElementWithLimitsBaseTransformationContext">
+      <eTypeArguments>
+        <eClassifier xsi:type="ecore:EClass" href="http://g5.1c.ru/v8/dt/form.layout.model.description.model#//HippoLayFormattedArea"/>
+      </eTypeArguments>
+      <eTypeArguments>
+        <eClassifier xsi:type="ecore:EClass" href="g5.1c.ru.v8.dt.form.layout.model.calculation.context.ecore#//FormattedAreaCalculationContext"/>
+      </eTypeArguments>
+    </eGenericSuperTypes>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ExternalObjectTransformationContext">
+    <eGenericSuperTypes eClassifier="//ElementBaseTransformationContext">
+      <eTypeArguments>
+        <eClassifier xsi:type="ecore:EClass" href="http://g5.1c.ru/v8/dt/form.layout.model.description.model#//HippoLayExternalObject"/>
+      </eTypeArguments>
+      <eTypeArguments>
+        <eClassifier xsi:type="ecore:EClass" href="g5.1c.ru.v8.dt.form.layout.model.calculation.context.ecore#//ExternalObjectCalculationContext"/>
+      </eTypeArguments>
+    </eGenericSuperTypes>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="LogicGroupPaddings">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="leftOutsidePadding" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="topOutsidePadding" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="rightOutsidePadding" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="bottomOutsidePadding" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="leftBackColorPadding" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="topBackColorPadding" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="rightBackColorPadding" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="bottomBackColorPadding" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="leftInsidePadding" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="topInsidePadding" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="rightInsidePadding" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="bottomInsidePadding" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="titleAdditionalInsidePadding" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="LogicGroupTransformationContext">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="pLayTitleElement">
+      <eType xsi:type="ecore:EClass" href="http://g5.1c.ru/v8/dt/form.layout.model.description.model#//HippoLayElementBase"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="paddings" eType="//LogicGroupPaddings" containment="true" resolveProxies="false"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="logicGroupConstantRanges" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="logicGroupConstantRangesInit" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    </eStructuralFeatures>
+    <eGenericSuperTypes eClassifier="//FormGroupBaseTransformationContext">
+      <eTypeArguments>
+        <eClassifier xsi:type="ecore:EClass" href="http://g5.1c.ru/v8/dt/form.layout.model.description.model#//HippoLayLogicGroup"/>
+      </eTypeArguments>
+      <eTypeArguments>
+        <eClassifier xsi:type="ecore:EClass" href="g5.1c.ru.v8.dt.form.layout.model.calculation.context.ecore#//LogicGroupCalculationContext"/>
+      </eTypeArguments>
+    </eGenericSuperTypes>
+    <eGenericSuperTypes eClassifier="//ElementWithLimitsBaseTransformationContext">
+      <eTypeArguments>
+        <eClassifier xsi:type="ecore:EClass" href="http://g5.1c.ru/v8/dt/form.layout.model.description.model#//HippoLayLogicGroup"/>
+      </eTypeArguments>
+      <eTypeArguments>
+        <eClassifier xsi:type="ecore:EClass" href="g5.1c.ru.v8.dt.form.layout.model.calculation.context.ecore#//LogicGroupCalculationContext"/>
+      </eTypeArguments>
+    </eGenericSuperTypes>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="TumblerTransformationContext">
+    <eGenericSuperTypes eClassifier="//FormElementBaseTransformationContext">
+      <eTypeArguments>
+        <eClassifier xsi:type="ecore:EClass" href="http://g5.1c.ru/v8/dt/form.layout.model.description.model#//HippoLayTumbler"/>
+      </eTypeArguments>
+      <eTypeArguments>
+        <eClassifier xsi:type="ecore:EClass" href="g5.1c.ru.v8.dt.form.layout.model.calculation.context.ecore#//TumblerCalculationContext"/>
+      </eTypeArguments>
+    </eGenericSuperTypes>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="TableTransformationContext">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="transformedLineEditForm">
+      <eType xsi:type="ecore:EClass" href="http://g5.1c.ru/v8/dt/form.layout.model.description.model#//HippoLayElementBase"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="logicRowsHeight" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    </eStructuralFeatures>
+    <eGenericSuperTypes eClassifier="//FormElementBaseTransformationContext">
+      <eTypeArguments>
+        <eClassifier xsi:type="ecore:EClass" href="http://g5.1c.ru/v8/dt/form.layout.model.description.model#//HippoLayTable"/>
+      </eTypeArguments>
+      <eTypeArguments>
+        <eClassifier xsi:type="ecore:EClass" href="g5.1c.ru.v8.dt.form.layout.model.calculation.context.ecore#//TableCalculationContext"/>
+      </eTypeArguments>
+    </eGenericSuperTypes>
+    <eGenericSuperTypes eClassifier="//GroupBaseTransformationContext">
+      <eTypeArguments>
+        <eClassifier xsi:type="ecore:EClass" href="http://g5.1c.ru/v8/dt/form.layout.model.description.model#//HippoLayTable"/>
+      </eTypeArguments>
+      <eTypeArguments>
+        <eClassifier xsi:type="ecore:EClass" href="g5.1c.ru.v8.dt.form.layout.model.calculation.context.ecore#//TableCalculationContext"/>
+      </eTypeArguments>
+    </eGenericSuperTypes>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="TableColumnsGroupTransformationContext">
+    <eGenericSuperTypes eClassifier="//GroupBaseTransformationContext">
+      <eTypeArguments>
+        <eClassifier xsi:type="ecore:EClass" href="http://g5.1c.ru/v8/dt/form.layout.model.description.model#//HippoLayTableColumnsGroup"/>
+      </eTypeArguments>
+      <eTypeArguments>
+        <eClassifier xsi:type="ecore:EClass" href="g5.1c.ru.v8.dt.form.layout.model.calculation.context.ecore#//TableColumnsGroupCalculationContext"/>
+      </eTypeArguments>
+    </eGenericSuperTypes>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="TableColumnTransformationContext">
+    <eGenericSuperTypes eClassifier="//ElementBaseTransformationContext">
+      <eTypeArguments>
+        <eClassifier xsi:type="ecore:EClass" href="http://g5.1c.ru/v8/dt/form.layout.model.description.model#//HippoLayElementBase"/>
+      </eTypeArguments>
+      <eTypeArguments>
+        <eClassifier xsi:type="ecore:EClass" href="g5.1c.ru.v8.dt.form.layout.model.calculation.context.ecore#//TableColumnCalculationContext"/>
+      </eTypeArguments>
+    </eGenericSuperTypes>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ViewStatusAdditionTransformationContext">
+    <eGenericSuperTypes eClassifier="//FormElementBaseTransformationContext">
+      <eTypeArguments>
+        <eClassifier xsi:type="ecore:EClass" href="http://g5.1c.ru/v8/dt/form.layout.model.description.model#//HippoLayViewStatus"/>
+      </eTypeArguments>
+      <eTypeArguments>
+        <eClassifier xsi:type="ecore:EClass" href="g5.1c.ru.v8.dt.form.layout.model.calculation.context.ecore#//ViewStatusAdditionCalculationContext"/>
+      </eTypeArguments>
+    </eGenericSuperTypes>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="NonFormattedHeightDescr">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="width" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="logicRowsHeight" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="height" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="FormattedHeightDescr">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="width" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="logicRowsHeight" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="logicRowsHeightPriority" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="formattedStringHeight" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="StaticTextTransformationContext">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="nonFormattedHeightDescrs" upperBound="-1" eType="//NonFormattedHeightDescr" containment="true" resolveProxies="false"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="formattedHeightDescrs" upperBound="-1" eType="//FormattedHeightDescr" containment="true" resolveProxies="false"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="recomendedAndMinimumVariantsConsistent" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="recomendedAndMinimumVariantsWidth" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    </eStructuralFeatures>
+    <eGenericSuperTypes eClassifier="//FormElementBaseTransformationContext">
+      <eTypeArguments>
+        <eClassifier xsi:type="ecore:EClass" href="http://g5.1c.ru/v8/dt/form.layout.model.description.model#//HippoLayStaticText"/>
+      </eTypeArguments>
+      <eTypeArguments>
+        <eClassifier xsi:type="ecore:EClass" href="g5.1c.ru.v8.dt.form.layout.model.calculation.context.ecore#//StaticTextCalculationContext"/>
+      </eTypeArguments>
+    </eGenericSuperTypes>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="CommandBarTransformationContext">
+    <eGenericSuperTypes eClassifier="//ElementBaseTransformationContext">
+      <eTypeArguments>
+        <eClassifier xsi:type="ecore:EClass" href="http://g5.1c.ru/v8/dt/form.layout.model.description.model#//HippoLayCommandBar"/>
+      </eTypeArguments>
+      <eTypeArguments>
+        <eClassifier xsi:type="ecore:EClass" href="g5.1c.ru.v8.dt.form.layout.model.calculation.context.ecore#//CommandBarCalculationContext"/>
+      </eTypeArguments>
+    </eGenericSuperTypes>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="VariantEstimateIntRes">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="extTooltipEstimate" eType="//Estimate" containment="true" resolveProxies="false"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="extTooltipEdge" unique="false">
+      <eType xsi:type="ecore:EEnum" href="http://g5.1c.ru/v8/dt/form.layout.model.description.model#//HippoLayouterEdge"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="titleEstimate" eType="//Estimate" containment="true" resolveProxies="false"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="titleEdge" unique="false">
+      <eType xsi:type="ecore:EEnum" href="http://g5.1c.ru/v8/dt/form.layout.model.description.model#//HippoLayouterEdge"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="width" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="height" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="resEstimate" eType="//Estimate" containment="true" resolveProxies="false"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="extTooltipHorStrategy" unique="false" eType="//HorStrategy"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="extTooltipVerStrategy" unique="false" eType="//VerStrategy"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="extTooltipMaxWidth" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="extTooltipMaxHeight" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="titleHorStrategy" unique="false" eType="//HorStrategy"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="titleVerStrategy" unique="false" eType="//VerStrategy"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="titleMaxWidth" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="titleMaxHeight" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="contentHorStrategy" unique="false" eType="//HorStrategy"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="contentVerStrategy" unique="false" eType="//VerStrategy"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="contentMaxWidth" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="contentMaxHeight" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="RichElementTransformationContext">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="constantRangesInit" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="constantRanges" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="variantEstimateIntResCache" upperBound="-1" eType="//VariantEstimateIntResCacheMapEntry" containment="true" resolveProxies="false"/>
+    <eGenericSuperTypes eClassifier="//GroupBaseTransformationContext">
+      <eTypeArguments>
+        <eClassifier xsi:type="ecore:EClass" href="http://g5.1c.ru/v8/dt/form.layout.model.description.model#//HippoLayFormRichElement"/>
+      </eTypeArguments>
+      <eTypeArguments>
+        <eClassifier xsi:type="ecore:EClass" href="g5.1c.ru.v8.dt.form.layout.model.calculation.context.ecore#//RichElementCalculationContext"/>
+      </eTypeArguments>
+    </eGenericSuperTypes>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="PagesChildInfo">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="width" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="horStrategy" unique="false" eType="//HorStrategy"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="adaptiveGroupingCount" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="verStrategy" unique="false" eType="//VerStrategy"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="height" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="category" unique="false" eType="//HTEVariantCategory"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="maxWidth" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="maxHeight" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="PagesTransformationContext">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="childInfosCache" upperBound="-1" eType="//PagesChildInfosCacheMapEntry" containment="true" resolveProxies="false"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="constantRangesInit" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="constantRanges" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    </eStructuralFeatures>
+    <eGenericSuperTypes eClassifier="//GroupBaseTransformationContext">
+      <eTypeArguments>
+        <eClassifier xsi:type="ecore:EClass" href="http://g5.1c.ru/v8/dt/form.layout.model.description.model#//HippoLayPages"/>
+      </eTypeArguments>
+      <eTypeArguments>
+        <eClassifier xsi:type="ecore:EClass" href="g5.1c.ru.v8.dt.form.layout.model.calculation.context.ecore#//PagesCalculationContext"/>
+      </eTypeArguments>
+    </eGenericSuperTypes>
+    <eGenericSuperTypes eClassifier="//ElementWithLimitsBaseTransformationContext">
+      <eTypeArguments>
+        <eClassifier xsi:type="ecore:EClass" href="http://g5.1c.ru/v8/dt/form.layout.model.description.model#//HippoLayPages"/>
+      </eTypeArguments>
+      <eTypeArguments>
+        <eClassifier xsi:type="ecore:EClass" href="g5.1c.ru.v8.dt.form.layout.model.calculation.context.ecore#//PagesCalculationContext"/>
+      </eTypeArguments>
+    </eGenericSuperTypes>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="PageTransformationContext">
+    <eGenericSuperTypes eClassifier="//FormGroupBaseTransformationContext">
+      <eTypeArguments>
+        <eClassifier xsi:type="ecore:EClass" href="http://g5.1c.ru/v8/dt/form.layout.model.description.model#//HippoLayPage"/>
+      </eTypeArguments>
+      <eTypeArguments>
+        <eClassifier xsi:type="ecore:EClass" href="g5.1c.ru.v8.dt.form.layout.model.calculation.context.ecore#//PageCalculationContext"/>
+      </eTypeArguments>
+    </eGenericSuperTypes>
+    <eGenericSuperTypes eClassifier="//ElementWithLimitsBaseTransformationContext">
+      <eTypeArguments>
+        <eClassifier xsi:type="ecore:EClass" href="http://g5.1c.ru/v8/dt/form.layout.model.description.model#//HippoLayPage"/>
+      </eTypeArguments>
+      <eTypeArguments>
+        <eClassifier xsi:type="ecore:EClass" href="g5.1c.ru.v8.dt.form.layout.model.calculation.context.ecore#//PageCalculationContext"/>
+      </eTypeArguments>
+    </eGenericSuperTypes>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="RadioGroupTransformationContext">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="titleElements" upperBound="-1" eType="//StaticTextTransformationContext" containment="true" resolveProxies="false"/>
+    <eGenericSuperTypes eClassifier="//FormElementBaseTransformationContext">
+      <eTypeArguments>
+        <eClassifier xsi:type="ecore:EClass" href="http://g5.1c.ru/v8/dt/form.layout.model.description.model#//HippoLayRadioGroup"/>
+      </eTypeArguments>
+      <eTypeArguments>
+        <eClassifier xsi:type="ecore:EClass" href="g5.1c.ru.v8.dt.form.layout.model.calculation.context.ecore#//RadioGroupCalculationContext"/>
+      </eTypeArguments>
+    </eGenericSuperTypes>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="RadioGroupMobileTransformationContext" eSuperTypes="//RadioGroupTransformationContext"/>
+  <eClassifiers xsi:type="ecore:EClass" name="FormPresElementBaseTransformationContext">
+    <eTypeParameters name="T">
+      <eBounds>
+        <eClassifier xsi:type="ecore:EClass" href="http://g5.1c.ru/v8/dt/form.layout.model.description.model#//HippoLayFormElementBase"/>
+      </eBounds>
+    </eTypeParameters>
+    <eTypeParameters name="C">
+      <eBounds>
+        <eClassifier xsi:type="ecore:EClass" href="g5.1c.ru.v8.dt.form.layout.model.calculation.context.ecore#//FormPresElementBaseCalculationContext"/>
+      </eBounds>
+    </eTypeParameters>
+    <eGenericSuperTypes eClassifier="//FormElementBaseTransformationContext">
+      <eTypeArguments eTypeParameter="//FormPresElementBaseTransformationContext/T"/>
+      <eTypeArguments eTypeParameter="//FormPresElementBaseTransformationContext/C"/>
+    </eGenericSuperTypes>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="MoxelTransformationContext">
+    <eGenericSuperTypes eClassifier="//FormPresElementBaseTransformationContext">
+      <eTypeArguments>
+        <eClassifier xsi:type="ecore:EClass" href="http://g5.1c.ru/v8/dt/form.layout.model.description.model#//HippoLayMoxel"/>
+      </eTypeArguments>
+      <eTypeArguments>
+        <eClassifier xsi:type="ecore:EClass" href="g5.1c.ru.v8.dt.form.layout.model.calculation.context.ecore#//MoxelCalculationContext"/>
+      </eTypeArguments>
+    </eGenericSuperTypes>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="CalendarTransformationContext">
+    <eGenericSuperTypes eClassifier="//FormElementBaseTransformationContext">
+      <eTypeArguments>
+        <eClassifier xsi:type="ecore:EClass" href="http://g5.1c.ru/v8/dt/form.layout.model.description.model#//HippoLayCalendar"/>
+      </eTypeArguments>
+      <eTypeArguments>
+        <eClassifier xsi:type="ecore:EClass" href="g5.1c.ru.v8.dt.form.layout.model.calculation.context.ecore#//CalendarCalculationContext"/>
+      </eTypeArguments>
+    </eGenericSuperTypes>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="HTMLTransformationContext">
+    <eGenericSuperTypes eClassifier="//FormPresElementBaseTransformationContext">
+      <eTypeArguments>
+        <eClassifier xsi:type="ecore:EClass" href="http://g5.1c.ru/v8/dt/form.layout.model.description.model#//HippoLayHTML"/>
+      </eTypeArguments>
+      <eTypeArguments>
+        <eClassifier xsi:type="ecore:EClass" href="g5.1c.ru.v8.dt.form.layout.model.calculation.context.ecore#//HTMLCalculationContext"/>
+      </eTypeArguments>
+    </eGenericSuperTypes>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="FormattedDocTransformationContext">
+    <eGenericSuperTypes eClassifier="//FormPresElementBaseTransformationContext">
+      <eTypeArguments>
+        <eClassifier xsi:type="ecore:EClass" href="http://g5.1c.ru/v8/dt/form.layout.model.description.model#//HippoLayFormattedDoc"/>
+      </eTypeArguments>
+      <eTypeArguments>
+        <eClassifier xsi:type="ecore:EClass" href="g5.1c.ru.v8.dt.form.layout.model.calculation.context.ecore#//FormattedDocCalculationContext"/>
+      </eTypeArguments>
+    </eGenericSuperTypes>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="PlannerTransformationContext">
+    <eGenericSuperTypes eClassifier="//FormPresElementBaseTransformationContext">
+      <eTypeArguments>
+        <eClassifier xsi:type="ecore:EClass" href="http://g5.1c.ru/v8/dt/form.layout.model.description.model#//HippoLayPlanner"/>
+      </eTypeArguments>
+      <eTypeArguments>
+        <eClassifier xsi:type="ecore:EClass" href="g5.1c.ru.v8.dt.form.layout.model.calculation.context.ecore#//PlannerCalculationContext"/>
+      </eTypeArguments>
+    </eGenericSuperTypes>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="PeriodTransformationContext">
+    <eGenericSuperTypes eClassifier="//FormElementBaseTransformationContext">
+      <eTypeArguments>
+        <eClassifier xsi:type="ecore:EClass" href="http://g5.1c.ru/v8/dt/form.layout.model.description.model#//HippoLayPeriod"/>
+      </eTypeArguments>
+      <eTypeArguments>
+        <eClassifier xsi:type="ecore:EClass" href="g5.1c.ru.v8.dt.form.layout.model.calculation.context.ecore#//PeriodCalculationContext"/>
+      </eTypeArguments>
+    </eGenericSuperTypes>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ChartTransformationContext">
+    <eGenericSuperTypes eClassifier="//FormPresElementBaseTransformationContext">
+      <eTypeArguments>
+        <eClassifier xsi:type="ecore:EClass" href="http://g5.1c.ru/v8/dt/form.layout.model.description.model#//HippoLayChart"/>
+      </eTypeArguments>
+      <eTypeArguments>
+        <eClassifier xsi:type="ecore:EClass" href="g5.1c.ru.v8.dt.form.layout.model.calculation.context.ecore#//ChartCalculationContext"/>
+      </eTypeArguments>
+    </eGenericSuperTypes>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="GanttChartTransformationContext">
+    <eGenericSuperTypes eClassifier="//FormPresElementBaseTransformationContext">
+      <eTypeArguments>
+        <eClassifier xsi:type="ecore:EClass" href="http://g5.1c.ru/v8/dt/form.layout.model.description.model#//HippoLayGanttChart"/>
+      </eTypeArguments>
+      <eTypeArguments>
+        <eClassifier xsi:type="ecore:EClass" href="g5.1c.ru.v8.dt.form.layout.model.calculation.context.ecore#//GanttChartCalculationContext"/>
+      </eTypeArguments>
+    </eGenericSuperTypes>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="DendrogramTransformationContext">
+    <eGenericSuperTypes eClassifier="//FormPresElementBaseTransformationContext">
+      <eTypeArguments>
+        <eClassifier xsi:type="ecore:EClass" href="http://g5.1c.ru/v8/dt/form.layout.model.description.model#//HippoLayDendrogram"/>
+      </eTypeArguments>
+      <eTypeArguments>
+        <eClassifier xsi:type="ecore:EClass" href="g5.1c.ru.v8.dt.form.layout.model.calculation.context.ecore#//DendrogramCalculationContext"/>
+      </eTypeArguments>
+    </eGenericSuperTypes>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="FlowchartTransformationContext">
+    <eGenericSuperTypes eClassifier="//FormPresElementBaseTransformationContext">
+      <eTypeArguments>
+        <eClassifier xsi:type="ecore:EClass" href="http://g5.1c.ru/v8/dt/form.layout.model.description.model#//HippoLayFlowchart"/>
+      </eTypeArguments>
+      <eTypeArguments>
+        <eClassifier xsi:type="ecore:EClass" href="g5.1c.ru.v8.dt.form.layout.model.calculation.context.ecore#//FlowchartCalculationContext"/>
+      </eTypeArguments>
+    </eGenericSuperTypes>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="GeographicalMapTransformationContext">
+    <eGenericSuperTypes eClassifier="//FormPresElementBaseTransformationContext">
+      <eTypeArguments>
+        <eClassifier xsi:type="ecore:EClass" href="http://g5.1c.ru/v8/dt/form.layout.model.description.model#//HippoLayGeographicalMap"/>
+      </eTypeArguments>
+      <eTypeArguments>
+        <eClassifier xsi:type="ecore:EClass" href="g5.1c.ru.v8.dt.form.layout.model.calculation.context.ecore#//GeographicalMapCalculationContext"/>
+      </eTypeArguments>
+    </eGenericSuperTypes>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="HorStrategy">
+    <eLiterals name="eHSAuto"/>
+    <eLiterals name="eHSCompactTitle" value="1"/>
+    <eLiterals name="eHSExtTooltipsAtBottom" value="2"/>
+    <eLiterals name="eHSSmartCompressToRecomendedWidth" value="3"/>
+    <eLiterals name="eHSCompressToRecomendedWidth" value="4"/>
+    <eLiterals name="eHSBeforeVerticalGrouping" value="5"/>
+    <eLiterals name="eHSVerticalGrouping" value="6"/>
+    <eLiterals name="eHSDontAlignButtons" value="7"/>
+    <eLiterals name="eHSSmartCompressToMinWidth" value="8"/>
+    <eLiterals name="eHSCompressToMinWidth" value="9"/>
+    <eLiterals name="eHSDontAlignTitles" value="10"/>
+    <eLiterals name="eHSTitlesOnTop" value="11"/>
+    <eLiterals name="eHSTitlesOnTopSecondPhase" value="12"/>
+    <eLiterals name="eHSCompressWidth" value="13"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="VerStrategy">
+    <eLiterals name="eVSAuto"/>
+    <eLiterals name="eVSSmartCompressToMinHeight" value="1"/>
+    <eLiterals name="eVSCompressToMinHeight" value="2"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="HTEVariantCategory">
+    <eLiterals name="eHTEVCStandard"/>
+    <eLiterals name="eHTEVCAlignmentError" value="1"/>
+    <eLiterals name="eHTEVCWidthError" value="2"/>
+    <eLiterals name="eHTEVCGroupWidthError" value="3"/>
+    <eLiterals name="eHTEVCGroupHeightError" value="4"/>
+    <eLiterals name="eHTEVCFormWidthError" value="5"/>
+    <eLiterals name="eHTEVCFormHeightError" value="6"/>
+    <eLiterals name="eHTEVCInternalErrorFunctionNotImplemented" value="7"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="StrategyConstantRange">
+    <eLiterals name="eSCRNone"/>
+    <eLiterals name="eSCRAuto_CompressWidth" value="1"/>
+    <eLiterals name="eSCRAuto_SmartCompressToRecomendedWidth" value="2"/>
+    <eLiterals name="eSCRAuto_SmartCompressToRecomendedWidthNoCompactTitle" value="4"/>
+    <eLiterals name="eSCRAuto_SmartCompressToMinWidth" value="8"/>
+    <eLiterals name="eSCRAuto_VerticalGrouping" value="16"/>
+    <eLiterals name="eSCRAuto_DontAlignButtons" value="32"/>
+    <eLiterals name="eSCRAuto_TitlesOnTop" value="64"/>
+    <eLiterals name="eSCRCompressToRecomendedWidth_SmartCompressToMinWidth" value="128"/>
+    <eLiterals name="eSCRAuto_CompressToMinHeight" value="256"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="ConstantRangesLevel">
+    <eLiterals name="eCRLLevelNone"/>
+    <eLiterals name="eCRLLevelSmartCompressToRecomendedWidth" value="1"/>
+    <eLiterals name="eCRLLevelVerticalGrouping" value="2"/>
+    <eLiterals name="eCRLLevelDontAlignButtons" value="3"/>
+    <eLiterals name="eCRLLevelSmartCompressToMinWidth" value="4"/>
+    <eLiterals name="eCRLLevelTitlesOnTop" value="5"/>
+    <eLiterals name="eCRLLevelCompressWidth" value="6"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="Margin">
+    <eLiterals name="eMTop"/>
+    <eLiterals name="eMBottom" value="1"/>
+    <eLiterals name="eMLeft" value="2"/>
+    <eLiterals name="eMRight" value="3"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EDataType" name="Font" instanceClassName="com._1c.g5.v8.dt.form.layout.model.platform.font.Font"/>
+  <eClassifiers xsi:type="ecore:EDataType" name="V8Picture" instanceClassName="com._1c.g5.v8.dt.form.layout.model.platform.picture.V8Picture"/>
+  <eClassifiers xsi:type="ecore:EDataType" name="V8PictureProps" instanceClassName="com._1c.g5.v8.dt.form.layout.model.platform.V8PictureProps"/>
+  <eClassifiers xsi:type="ecore:EDataType" name="GetVariantAdditionalOptions" instanceClassName="com._1c.g5.v8.dt.form.layout.model.transformation.GetVariantAdditionalOptions"/>
+  <eClassifiers xsi:type="ecore:EDataType" name="CalculateAdditionalOptions" instanceClassName="com._1c.g5.v8.dt.form.layout.model.calculation.CalculateAdditionalOptions"/>
+  <eClassifiers xsi:type="ecore:EDataType" name="V8Font" instanceClassName="com._1c.g5.v8.dt.form.layout.model.platform.font.V8LogFont"/>
+  <eClassifiers xsi:type="ecore:EDataType" name="Size" instanceClassName="com._1c.g5.v8.dt.form.layout.model.common.Size"/>
+  <eClassifiers xsi:type="ecore:EDataType" name="Color" instanceClassName="com._1c.g5.v8.dt.form.layout.model.platform.color.Color"/>
+  <eClassifiers xsi:type="ecore:EDataType" name="ChildHorStoredVariants" instanceTypeName="java.util.List&lt;com._1c.g5.v8.dt.form.layout.model.transformation.context.ChildHorStoredVariant>"/>
+  <eClassifiers xsi:type="ecore:EDataType" name="VisualComputer" instanceClassName="com._1c.g5.v8.dt.form.layout.model.platform.IPlatformVisualComputer"/>
+  <eClassifiers xsi:type="ecore:EDataType" name="TransformatorAdditionalInfoProvider" instanceClassName="com._1c.g5.v8.dt.form.layout.model.common.IHippoTransformatorAdditionalInfoProvider"/>
+  <eClassifiers xsi:type="ecore:EDataType" name="ChildVerVariants" instanceTypeName="java.util.List&lt;com._1c.g5.v8.dt.form.layout.model.transformation.context.ChildVerVariant>"/>
+  <eClassifiers xsi:type="ecore:EDataType" name="CalcVerVariantEstimatesResCache" instanceTypeName="java.util.TreeMap&lt;com._1c.g5.v8.dt.form.layout.model.transformation.context.HTVariantKey, com._1c.g5.v8.dt.form.layout.model.transformation.context.CalcVerVariantEstimatesRes>"/>
+  <eClassifiers xsi:type="ecore:EDataType" name="IntPair" instanceTypeName="com._1c.g5.v8.dt.form.layout.model.common.Pair&lt;java.lang.Integer, java.lang.Integer>"/>
+  <eClassifiers xsi:type="ecore:EDataType" name="GridPositionsMap" instanceTypeName="org.eclipse.emf.common.util.EMap&lt;java.lang.String, com._1c.g5.v8.dt.form.layout.model.common.Pair&lt;java.lang.Integer, java.lang.Integer>>"/>
+  <eClassifiers xsi:type="ecore:EDataType" name="ColoredGroupDataList" instanceTypeName="org.eclipse.emf.common.util.EList&lt;com._1c.g5.v8.dt.form.layout.model.transformation.context.ColoredGroupData>"/>
+  <eClassifiers xsi:type="ecore:EDataType" name="ChildrenPath" instanceTypeName="java.util.List&lt;java.lang.Integer>"/>
+</ecore:EPackage>

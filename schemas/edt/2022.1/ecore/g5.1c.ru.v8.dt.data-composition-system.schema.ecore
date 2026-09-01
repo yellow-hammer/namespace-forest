@@ -1,0 +1,325 @@
+<?xml version="1.0" encoding="ASCII"?>
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="schema" nsURI="http://g5.1c.ru/v8/dt/data-composition-system/schema" nsPrefix="schema">
+  <eClassifiers xsi:type="ecore:EClass" name="DataCompositionSchema">
+    <eSuperTypes href="http://g5.1c.ru/v8/dt/metadata/mdclass#//AbstractDataCompositionSchema"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="dataSources" upperBound="-1" eType="//DataCompositionSchemaDataSource" containment="true" resolveProxies="false"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="dataSets" upperBound="-1" eType="//DataSet" containment="true" resolveProxies="false"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="dataSetLinks" upperBound="-1" eType="//DataCompositionSchemaDataSetLink" containment="true" resolveProxies="false"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="calculatedFields" upperBound="-1" eType="//DataCompositionSchemaCalculatedField" containment="true" resolveProxies="false"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="totalFields" upperBound="-1" eType="//DataCompositionSchemaTotalField" containment="true" resolveProxies="false"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="parameters" upperBound="-1" eType="//DataCompositionSchemaParameter" containment="true" resolveProxies="false"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="nestedSchemas" upperBound="-1" eType="//NestedDataCompositionSchema" containment="true" resolveProxies="false"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="templates" upperBound="-1" eType="//DataCompositionSchemaTemplateDescription" containment="true" resolveProxies="false"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="fieldTemplates" upperBound="-1" eType="//DataCompositionSchemaFieldTemplate" containment="true" resolveProxies="false"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="groupTemplates" upperBound="-1" eType="//DataCompositionSchemaGroupTemplate" containment="true" resolveProxies="false"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="groupHeaderTemplates" upperBound="-1" eType="//DataCompositionSchemaGroupTemplate" containment="true" resolveProxies="false"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="totalFieldsTemplates" upperBound="-1" eType="//DataCompositionSchemaTotalFieldsTemplate" containment="true" resolveProxies="false"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="defaultSettings" containment="true" resolveProxies="false">
+      <eType xsi:type="ecore:EClass" href="http://g5.1c.ru/v8/dt/data-composition-system/settings#//DataCompositionSettings"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="settingsVariants" upperBound="-1" containment="true" resolveProxies="false">
+      <eType xsi:type="ecore:EClass" href="http://g5.1c.ru/v8/dt/data-composition-system/settings#//SettingsVariant"/>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="DataCompositionSchemaDataSource">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="dataSourceType" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="connectionString" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="DataSet" abstract="true">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="fields" upperBound="-1" eType="//DataSetField" containment="true" resolveProxies="false"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="DataCompositionSchemaDataSetUnion" eSuperTypes="//DataSet">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="items" upperBound="-1" eType="//DataSet" containment="true" resolveProxies="false"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="DataCompositionSchemaDataSetQuery" eSuperTypes="//DataSet">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="dataSource" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="query" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="autoFillAvailableFields" unique="false" defaultValueLiteral="true">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="useQueryGroupIfPossible" unique="false" defaultValueLiteral="true">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="DataCompositionSchemaDataSetObject" eSuperTypes="//DataSet">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="dataSource" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="objectName" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="DataSetField" abstract="true"/>
+  <eClassifiers xsi:type="ecore:EClass" name="DataCompositionSchemaDataSetFieldFolder" eSuperTypes="//DataSetField">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="dataPath" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="title" containment="true" resolveProxies="false">
+      <eType xsi:type="ecore:EClass" href="g5.1c.ru.v8.dt.data-composition-system.core.ecore#//Presentation"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="useRestriction" eType="//DataCompositionSchemaFieldUseRestriction" containment="true" resolveProxies="false"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="DataCompositionSchemaDataSetField" eSuperTypes="//DataSetField">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="dataPath" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="field" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="title" containment="true" resolveProxies="false">
+      <eType xsi:type="ecore:EClass" href="g5.1c.ru.v8.dt.data-composition-system.core.ecore#//Presentation"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="useRestriction" eType="//DataCompositionSchemaFieldUseRestriction" containment="true" resolveProxies="false"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="attributeUseRestriction" eType="//DataCompositionSchemaFieldUseRestriction" containment="true" resolveProxies="false"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="role" containment="true" resolveProxies="false">
+      <eType xsi:type="ecore:EClass" href="http://g5.1c.ru/v8/dt/data-composition-system/common#//DataCompositionDataSetFieldRole"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="presentationExpression" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="orderExpressions" upperBound="-1" containment="true" resolveProxies="false">
+      <eType xsi:type="ecore:EClass" href="http://g5.1c.ru/v8/dt/data-composition-system/common#//DataCompositionOrderExpression"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="inHierarchyDataSet" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="inHierarchyDataSetParameter" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="valueType" containment="true" resolveProxies="false">
+      <eType xsi:type="ecore:EClass" href="http://g5.1c.ru/v8/dt/mcore#//TypeDescription"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="appearance" containment="true" resolveProxies="false">
+      <eType xsi:type="ecore:EClass" href="g5.1c.ru.v8.dt.data-composition-system.core.ecore#//DataCompositionAppearance"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="availableValues" upperBound="-1" eType="//AvailableValue" containment="true" resolveProxies="false"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="inputParameters" containment="true" resolveProxies="false">
+      <eType xsi:type="ecore:EClass" href="g5.1c.ru.v8.dt.data-composition-system.core.ecore#//InputParameters"/>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="DataCompositionSchemaNestedDataSet" eSuperTypes="//DataSetField">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="dataPath" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="field" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="title" containment="true" resolveProxies="false">
+      <eType xsi:type="ecore:EClass" href="g5.1c.ru.v8.dt.data-composition-system.core.ecore#//Presentation"/>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="DataCompositionSchemaCalculatedField">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="dataPath" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="expression" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="title" containment="true" resolveProxies="false">
+      <eType xsi:type="ecore:EClass" href="g5.1c.ru.v8.dt.data-composition-system.core.ecore#//Presentation"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="useRestriction" eType="//DataCompositionSchemaFieldUseRestriction" containment="true" resolveProxies="false"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="presentationExpression" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="orderExpression" upperBound="-1" containment="true" resolveProxies="false">
+      <eType xsi:type="ecore:EClass" href="http://g5.1c.ru/v8/dt/data-composition-system/common#//DataCompositionOrderExpression"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="appearance" containment="true" resolveProxies="false">
+      <eType xsi:type="ecore:EClass" href="g5.1c.ru.v8.dt.data-composition-system.core.ecore#//DataCompositionAppearance"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="availableValues" upperBound="-1" eType="//AvailableValue" containment="true" resolveProxies="false"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="valueType" containment="true" resolveProxies="false">
+      <eType xsi:type="ecore:EClass" href="http://g5.1c.ru/v8/dt/mcore#//TypeDescription"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="inputParameters" containment="true" resolveProxies="false">
+      <eType xsi:type="ecore:EClass" href="g5.1c.ru.v8.dt.data-composition-system.core.ecore#//InputParameters"/>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="DataCompositionSchemaFieldUseRestriction">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="field" unique="false" defaultValueLiteral="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="condition" unique="false" defaultValueLiteral="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="group" unique="false" defaultValueLiteral="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="order" unique="false" defaultValueLiteral="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="DataCompositionSchemaTotalField">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="dataPath" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="expression" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="groups" unique="false" upperBound="-1">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="DataCompositionSchemaDataSetLink">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="sourceDataSet" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="destinationDataSet" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="sourceExpression" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="destinationExpression" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="parameter" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="parameterListAllowed" unique="false" unsettable="true">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="linkConditionExpression" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="startExpression" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="required" unique="false" defaultValueLiteral="true">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="DataCompositionSchemaParameter">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="title" containment="true" resolveProxies="false">
+      <eType xsi:type="ecore:EClass" href="g5.1c.ru.v8.dt.data-composition-system.core.ecore#//Presentation"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="valueType" containment="true" resolveProxies="false">
+      <eType xsi:type="ecore:EClass" href="http://g5.1c.ru/v8/dt/mcore#//TypeDescription"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="values" upperBound="-1" containment="true" resolveProxies="false">
+      <eType xsi:type="ecore:EClass" href="http://g5.1c.ru/v8/dt/mcore#//Value"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="useRestriction" unique="false" defaultValueLiteral="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="expression" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="availableValues" upperBound="-1" eType="//AvailableValue" containment="true" resolveProxies="false"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="valueListAllowed" unique="false" defaultValueLiteral="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="availableAsField" unique="false" defaultValueLiteral="true">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="functionalOptionsParameter" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="inputParameters" containment="true" resolveProxies="false">
+      <eType xsi:type="ecore:EClass" href="g5.1c.ru.v8.dt.data-composition-system.core.ecore#//InputParameters"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="denyIncompleteValues" unique="false" defaultValueLiteral="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="use" unique="false" defaultValueLiteral="Auto">
+      <eType xsi:type="ecore:EEnum" href="g5.1c.ru.v8.dt.data-composition-system.core.ecore#//DataCompositionParameterUse"/>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="NestedDataCompositionSchema">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="title" containment="true" resolveProxies="false">
+      <eType xsi:type="ecore:EClass" href="g5.1c.ru.v8.dt.data-composition-system.core.ecore#//Presentation"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="URL" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="schema" eType="//DataCompositionSchema" containment="true" resolveProxies="false"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="settings" containment="true" resolveProxies="false">
+      <eType xsi:type="ecore:EClass" href="http://g5.1c.ru/v8/dt/data-composition-system/settings#//DataCompositionSettings"/>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="DataCompositionSchemaFieldTemplate">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="field" containment="true" resolveProxies="false">
+      <eType xsi:type="ecore:EClass" href="g5.1c.ru.v8.dt.data-composition-system.core.ecore#//DataCompositionField"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="template" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="DataCompositionSchemaGroupTemplate">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="groupFields" upperBound="-1" containment="true" resolveProxies="false">
+      <eType xsi:type="ecore:EClass" href="g5.1c.ru.v8.dt.data-composition-system.core.ecore#//DataCompositionField"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="groupName" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="templateType" unique="false" defaultValueLiteral="Header">
+      <eType xsi:type="ecore:EEnum" href="http://g5.1c.ru/v8/dt/data-composition-system/common#//DataCompositionAreaTemplateType"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="template" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="DataCompositionSchemaTotalFieldsTemplate">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="groupFields1" upperBound="-1" containment="true" resolveProxies="false">
+      <eType xsi:type="ecore:EClass" href="g5.1c.ru.v8.dt.data-composition-system.core.ecore#//DataCompositionField"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="groupName1" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="templateType1" unique="false" defaultValueLiteral="Header">
+      <eType xsi:type="ecore:EEnum" href="http://g5.1c.ru/v8/dt/data-composition-system/common#//DataCompositionAreaTemplateType"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="groupFields2" upperBound="-1" containment="true" resolveProxies="false">
+      <eType xsi:type="ecore:EClass" href="g5.1c.ru.v8.dt.data-composition-system.core.ecore#//DataCompositionField"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="groupName2" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="templateType2" unique="false" defaultValueLiteral="Header">
+      <eType xsi:type="ecore:EEnum" href="http://g5.1c.ru/v8/dt/data-composition-system/common#//DataCompositionAreaTemplateType"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="template" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="DataCompositionSchemaTemplateDescription">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="template" containment="true" resolveProxies="false">
+      <eType xsi:type="ecore:EClass" href="http://g5.1c.ru/v8/dt/data-composition-system/areaTemplate#//DataCompositionAreaTemplate"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="parameters" upperBound="-1" containment="true" resolveProxies="false">
+      <eType xsi:type="ecore:EClass" href="http://g5.1c.ru/v8/dt/data-composition-system/areaTemplate#//AreaTemplateParameter"/>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="AvailableValue">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="value" containment="true" resolveProxies="false">
+      <eType xsi:type="ecore:EClass" href="http://g5.1c.ru/v8/dt/mcore#//Value"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="presentation" containment="true" resolveProxies="false">
+      <eType xsi:type="ecore:EClass" href="g5.1c.ru.v8.dt.data-composition-system.core.ecore#//Presentation"/>
+    </eStructuralFeatures>
+  </eClassifiers>
+</ecore:EPackage>

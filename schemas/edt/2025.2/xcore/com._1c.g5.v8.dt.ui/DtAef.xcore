@@ -1,0 +1,291 @@
+@GenModel(loadInitialization="false", literalsInterface="true", nonNLSMarkers="true", prefix="DtAef",
+    copyrightText="Copyright (C) 2015, 1C", updateClasspath="false")
+@Ecore(nsPrefix="DtAef", nsURI="http://g5.1c.ru/v8/aef/dt")
+package com._1c.g5.v8.dt.ui.aef.viewModels
+
+import com._1c.g5.aef2.standard.viewModels.AbstractSpinnerViewModel
+import com._1c.g5.aef2.standard.viewModels.ComboViewModel
+import com._1c.g5.aef2.standard.viewModels.CompositeViewModel
+import com._1c.g5.aef2.standard.viewModels.ControlViewModel
+import com._1c.g5.aef2.viewModels.IViewModel
+import com._1c.g5.v8.dt.chart.model.timescale.TimeScaleUnitType
+import com._1c.g5.v8.dt.ganttchart.model.GanttChartScaleKeeping
+import com._1c.g5.v8.dt.ui.aef.providers.IAefGridContentProvider
+import org.eclipse.swt.graphics.Image
+import org.eclipse.swt.graphics.RGB
+import java.net.URL
+
+type URL wraps URL
+
+type Image wraps Image
+
+type RGB wraps RGB
+
+type IAefGridContentProvider<T> wraps IAefGridContentProvider
+
+/**
+ * Represents one button item which includes in views as part of the
+ * control.
+ */
+class ButtonItemViewModel extends IViewModel
+{
+	/** The enable state of the button item. */
+	boolean enabled = "true"
+	/** The visible state of the button item. */
+	boolean visible = "true"
+	/** The tooltip for button item. */
+	String tooltip
+	/** The icon for button item. */
+	Image image
+	/** The context to define hotkey command. */
+	String contextId
+}
+
+/**
+ * Basic view model for views which contains some buttons along the main one.
+ */
+abstract class SelectViewModel extends ControlViewModel
+{
+	/** Buttons for action bar. */
+	contains ButtonItemViewModel[] buttons
+}
+
+/** The view model for combo with the opportunity to add buttons along the combo. */
+class ComboSelectViewModel extends SelectViewModel, ComboViewModel
+{
+}
+
+class EditableComboViewModel extends ComboSelectViewModel
+{
+	/* The selected value. */
+	String value
+	/* The image of selected value. */
+	Image image
+	/* Indicates that whether editable combo text input is supported or not */
+	boolean textReadOnly
+}
+
+/**
+ * The view model for action bar.
+ */
+class ActionBarViewModel extends SelectViewModel
+{
+	/** The value */
+	String value
+	/** The displayed line count */
+	int lines = "1"
+	/** Indicates that action bar is in password mode and all entered symbols
+	 *  will be hidden */
+	boolean passwordMode
+	/** The text limit. The positive integer is allowed or '-1' for unlimited text. */
+	int textLimit = "-1"
+	/** Mask */
+	String mask
+	/** Hint */
+	String hint
+	/** The left side image */
+	Image image
+}
+
+/**
+ * The action bar view model with ability to set color.
+ * The main use purposes are font and color controls. 
+ */
+class ColorActionBarViewModel extends ActionBarViewModel
+{
+	/** The color of the icon at the left side of text box. */
+	RGB color
+}
+
+/** The view model for shortcut control. */
+class ShortcutViewModel extends ActionBarViewModel
+{
+}
+
+class DateControlViewModel extends SelectViewModel
+{
+	Date value
+}
+
+/** The view model for picture preview control. */
+class DtImageViewerViewModel extends ControlViewModel
+{
+    URL imageUrl
+    boolean showInDarkMode
+}
+
+/** The view model for picture preview control. */
+class PictureViewModel extends ControlViewModel
+{
+	/** The image. */
+	Image image
+}
+
+/* Nullable spinner control view model*/
+class NullableSpinnerViewModel extends AbstractSpinnerViewModel
+{
+	Integer value
+}
+
+/* The view model for ToolBarItem */
+class ToolBarItemViewModel extends IViewModel
+{
+	/* The image of the item */
+	Image image
+	/* The tooltip text of the item */
+	String tooltipText = ""
+	/* The enabled state of the item */
+	boolean enabled = "true"
+	/* The selected state of the item */
+	boolean selected
+	/* The toolbar item style */
+	int style = "8" // SWT.PUSH
+}
+
+/* The view model for ToolBar */
+class ToolBarViewModel extends ControlViewModel
+{
+	/* The horizontal flag */
+	boolean horizontal = "true"
+	/* ToolBar items */
+	contains ToolBarItemViewModel[] items
+}
+
+/* The grid item */
+interface IGridItem
+{
+	/* Retrieves text for the given column */
+	op String getText(GridColumnViewModel column)
+	/* Retrieves image for the given column */
+	op Image getImage(GridColumnViewModel column)
+	/* Retrieves checked state for the given column */
+	op boolean isChecked(GridColumnViewModel column)
+}
+
+/* The grid input */
+interface IGridInput
+{
+}
+
+/* The dynamic grid input */
+class DynamicGridInput<T extends IGridItem> extends IGridInput
+{
+	/* The content provider of grid input */
+	IAefGridContentProvider<T> contentProvider
+}
+
+/* The view model that represents one column of grid */
+class GridColumnViewModel extends IViewModel
+{
+	/* The header text of the column */
+	String header = ""
+	/* The index of the column */
+	int index = "-1"
+	/* The 'tree' flag of the column */
+	boolean tree = "false"
+	/* The type of the column */
+	GridColumnType ^type = "Text"
+	/* The editable flag of the column */
+	boolean editable = "true"
+	/* The width of the column in pixels */
+	int width = "150"
+	/* The headers text of the column */
+	String[] headers
+	/* The height of the column in row count */
+	int heightInRows = "1"
+}
+
+/* The grid column type */
+enum GridColumnType
+{
+	Checkbox = 0
+	Text = 1
+	TextAndImage = 2
+}
+
+/* The grid view model */
+class GridViewModel extends ControlViewModel
+{
+	/* The column structure of the grid */
+	contains GridColumnViewModel[] columns
+	/* The input of the grid */
+	contains IGridInput input
+}
+
+class ColorViewModel
+{
+	int red
+	int blue
+	int green	
+}
+
+class FontViewModel
+{
+	boolean bold
+	String faceName
+	Integer height
+	boolean italic
+	Integer scale
+	boolean strikeout
+	boolean underline
+}
+
+class TextPreviewControlViewModel extends ControlViewModel
+{
+	String text = ""
+	
+	//color props
+	contains ColorViewModel color
+	
+	//font props
+	contains FontViewModel font
+}
+
+/* The tab folder view model */
+class TabFolderViewModel extends CompositeViewModel
+{
+	/* The contained tab items */
+	contains TabItemViewModel[] items
+}
+
+/* The tab item view model */
+class TabItemViewModel extends IViewModel
+{
+	/* The title */
+	String title = ""
+}
+
+/* Gantt chart scaling settings model. */
+class GanttChartScalingViewModel extends ControlViewModel
+{
+	/* The 'Title' string value. Used for localization purposes. */
+	String title
+	
+	/* The 'Scale keeping' model value. */
+	GanttChartScaleKeeping scaleKeeping
+	
+	/* The 'None variant chars title' string value. Used for localization purposes. */
+	String noneVariantCharsTitle
+	/* The 'None variant chars' model value. */
+	double noneVariantChars
+	
+	/* The 'None variant measure title' string value. Used for localization purposes. */
+	String noneVariantMeasureTitle
+	/* The 'None variant measure' model value. */
+	TimeScaleUnitType noneVariantMeasure
+	
+	/* The 'Fixed variant interval title' string value. Used for localization purposes. */
+	String fixedVariantIntervalTitle
+	/* The 'Fixed variant interval' model value. */	
+	int fixedVariantInterval
+	
+	/* The 'Fixed variant measure' model value. */	
+	TimeScaleUnitType fixedVariantMeasure
+}
+
+/* Empty heavy view model. */
+class HeavyViewModel extends ControlViewModel
+{
+    // 
+}
+

@@ -1,0 +1,746 @@
+<?xml version="1.0" encoding="ASCII"?>
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="context" nsURI="http://g5.1c.ru/v8/dt/form.layout.model.generation.context" nsPrefix="layout">
+  <eClassifiers xsi:type="ecore:EClass" name="IElementGeneratorContext" abstract="true" interface="true"/>
+  <eClassifiers xsi:type="ecore:EClass" name="ElementBaseGeneratorContext" abstract="true" interface="true" eSuperTypes="//IElementGeneratorContext">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="pLogFormElement">
+      <eType xsi:type="ecore:EClass" href="http://g5.1c.ru/v8/dt/form#//FormVisualEntity"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="pParent" eType="//IElementGeneratorContext"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="targetPlatform" unique="false">
+      <eType xsi:type="ecore:EEnum" href="http://g5.1c.ru/v8/dt/form.layout.model.calculation.context#//LFTargetPlatform"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="interfaceVariant" unique="false">
+      <eType xsi:type="ecore:EEnum" href="http://g5.1c.ru/v8/dt/form.layout.model.description.model#//ClientInterfaceVariant"/>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ElementWithContextMenuBaseGeneratorContext" abstract="true" interface="true" eSuperTypes="//IElementGeneratorContext">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="pContextMenu" eType="//ContextMenuGeneratorContext"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="RichElementBaseGeneratorContext" abstract="true" interface="true" eSuperTypes="//ElementBaseGeneratorContext //ElementWithContextMenuBaseGeneratorContext">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="titleLocation" unique="false">
+      <eType xsi:type="ecore:EEnum" href="http://g5.1c.ru/v8/dt/form#//FormElementTitleLocation"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="title" unique="false" defaultValueLiteral="">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="stretchableTitle" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="titleTextColor" unique="false" eType="//Color"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="titleFont" unique="false" eType="//Font"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="tooltip" unique="false" defaultValueLiteral="">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="formattedTooltip" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="tooltipRepresentation" unique="false">
+      <eType xsi:type="ecore:EEnum" href="http://g5.1c.ru/v8/dt/form#//TooltipRepresentation"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="pExtTooltip">
+      <eType xsi:type="ecore:EClass" href="http://g5.1c.ru/v8/dt/form#//Decoration"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="pHippoGenExtTooltip" eType="//TextDecorationGeneratorContext"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="changedFormattedString" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="RichFieldBaseGeneratorContext" abstract="true" interface="true" eSuperTypes="//RichElementBaseGeneratorContext"/>
+  <eClassifiers xsi:type="ecore:EClass" name="GroupBaseGeneratorContext" abstract="true" interface="true" eSuperTypes="//ElementBaseGeneratorContext">
+    <eOperations name="addChild" unique="false">
+      <eParameters name="pChild" unique="false" eType="//ElementBaseGeneratorContext"/>
+    </eOperations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="compat838" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="compat8319" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="children" upperBound="-1" eType="//ElementBaseGeneratorContext" containment="true" resolveProxies="false"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="SlaveElementBaseGeneratorContext" abstract="true" interface="true" eSuperTypes="//ElementBaseGeneratorContext">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="slaveMode" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="slaveLogFormElementName" unique="false" defaultValueLiteral="">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="slaveName" unique="false" defaultValueLiteral="">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="slaveTitle" unique="false" defaultValueLiteral="">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="slaveCategories" unique="false" upperBound="-1">
+      <eType xsi:type="ecore:EEnum" href="http://g5.1c.ru/v8/dt/form.layout.model.description.model#//HippoLayouterCategory"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="slaveVisible" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="slaveEnabled" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="slaveReadOnly" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="slaveSkipOnInput" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="slaveDefaultControl" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="SlaveFormElementBaseGeneratorContext" abstract="true" interface="true" eSuperTypes="//SlaveElementBaseGeneratorContext">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="slaveWidth" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="slaveMinWidth" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="slaveMaxWidth" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="slaveHeight" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="slaveMinHeight" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="slaveMaxHeight" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="slaveStretchableMode" unique="false">
+      <eType xsi:type="ecore:EEnum" href="http://g5.1c.ru/v8/dt/form.layout.model.description.model#//StretchableMode"/>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="SearchStringElementAdditionBaseGeneratorContext" abstract="true" interface="true">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="textColor" unique="false" eType="//Color"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="backColor" unique="false" eType="//Color"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="borderColor" unique="false" eType="//Color"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="font" unique="false" eType="//Font"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="TumblerBaseGeneratorContext" abstract="true" interface="true" eSuperTypes="//RichFieldBaseGeneratorContext">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="readOnly" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="titles" unique="false" upperBound="-1">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="columnsCount" unique="false" defaultValueLiteral="2">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ElementWithAutoCommandBarBaseGeneratorContext" abstract="true" interface="true" eSuperTypes="//IElementGeneratorContext">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="acbLocation" unique="false" eType="//AutoCommandBarLocation"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="pAutoCommandBar" eType="//CommandBarGeneratorContext"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="SearchControlElementAdditionBaseGeneratorContext" abstract="true" interface="true"/>
+  <eClassifiers xsi:type="ecore:EClass" name="IExtTooltipGeneratorContext" abstract="true" interface="true"/>
+  <eClassifiers xsi:type="ecore:EClass" name="ICommandBarGeneratorContext" abstract="true" interface="true"/>
+  <eClassifiers xsi:type="ecore:EClass" name="IAutoAdditionsContainerGeneratorContext" abstract="true" interface="true"/>
+  <eClassifiers xsi:type="ecore:EClass" name="IAutoAdditionsProviderGeneratorContext" abstract="true" interface="true"/>
+  <eClassifiers xsi:type="ecore:EClass" name="IMenuElementGeneratorContext" abstract="true" interface="true"/>
+  <eClassifiers xsi:type="ecore:EClass" name="InputFieldGeneratorContext" eSuperTypes="//RichFieldBaseGeneratorContext">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="formatString" unique="false" defaultValueLiteral="">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="inputHint" unique="false" defaultValueLiteral="">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="readOnly" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="typeQuickChoice" unique="false" defaultValueLiteral="true">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="typeQuickChoiceMode" unique="false" eType="//QuickChoiceMode_TIP"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="inputByStringRunMode" unique="false">
+      <eType xsi:type="ecore:EEnum" href="http://g5.1c.ru/v8/dt/form.layout.model.description.model#//InputByStringRunMode"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="finalInputByStringRunMode" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="searchOnInputRightRes" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="searchOnInputRight" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="choiceHistoryOnInput" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EBooleanObject"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="enableCreateButton" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EBooleanObject"/>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="TextFieldGeneratorContext" eSuperTypes="//RichFieldBaseGeneratorContext">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="formatString" unique="false" defaultValueLiteral="">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ImageFieldGeneratorContext" eSuperTypes="//RichFieldBaseGeneratorContext">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="nonSelectedPictureText" unique="false" defaultValueLiteral="">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="HyperlinkButtonGeneratorContext" eSuperTypes="//RichElementBaseGeneratorContext">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="commandText" unique="false" defaultValueLiteral="">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="commandPicture" unique="false" eType="//Picture"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="commandTooltip" unique="false" defaultValueLiteral="">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="commandShortCut" unique="false" defaultValueLiteral="">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="canDynamicHeight" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="TextDecorationGeneratorContext" eSuperTypes="//RichElementBaseGeneratorContext //IExtTooltipGeneratorContext">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="extTooltipMode" unique="false" eType="//ExtTooltipMode"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="text" unique="false" defaultValueLiteral="">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="formattedString" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="canDynamicHeight" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="PictureDecorationGeneratorContext" eSuperTypes="//RichElementBaseGeneratorContext">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="nonselectedPictureText" unique="false" defaultValueLiteral="">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="CheckBoxGeneratorContext" eSuperTypes="//RichFieldBaseGeneratorContext">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="readOnly" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="SwitcherGeneratorContext" eSuperTypes="//RichFieldBaseGeneratorContext">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="readOnly" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="SubMenuGeneratorContext" eSuperTypes="//GroupBaseGeneratorContext //IMenuElementGeneratorContext">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="title" unique="false" defaultValueLiteral="">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="picture" unique="false" eType="//Picture"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="tooltip" unique="false" defaultValueLiteral="">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="important" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="compat837" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="compat8310" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="FormButtonGeneratorContext" eSuperTypes="//RichElementBaseGeneratorContext">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="commandText" unique="false" defaultValueLiteral="">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="commandPicture" unique="false" eType="//Picture"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="commandTooltip" unique="false" defaultValueLiteral="">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="commandShortCut" unique="false" defaultValueLiteral="">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="compat837" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="compat8310" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ContextMenuGeneratorContext" eSuperTypes="//GroupBaseGeneratorContext"/>
+  <eClassifiers xsi:type="ecore:EClass" name="MenuButtonGeneratorContext" eSuperTypes="//ElementBaseGeneratorContext //IMenuElementGeneratorContext">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="commandText" unique="false" defaultValueLiteral="">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="commandPicture" unique="false" eType="//Picture"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="commandTooltip" unique="false" defaultValueLiteral="">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="commandShortCut" unique="false" defaultValueLiteral="">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="important" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="compat837" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="compat8310" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="PanelGeneratorContext" eSuperTypes="//GroupBaseGeneratorContext //SlaveFormElementBaseGeneratorContext">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="backColor" unique="false" eType="//Color"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="grouping" unique="false">
+      <eType xsi:type="ecore:EEnum" href="http://g5.1c.ru/v8/dt/form#//FormChildrenGroup"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="horSpacing" unique="false">
+      <eType xsi:type="ecore:EEnum" href="http://g5.1c.ru/v8/dt/form#//FormItemSpacing"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="verSpacing" unique="false">
+      <eType xsi:type="ecore:EEnum" href="http://g5.1c.ru/v8/dt/form#//FormItemSpacing"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="childrenAlign" unique="false">
+      <eType xsi:type="ecore:EEnum" href="http://g5.1c.ru/v8/dt/form#//FormChildrenAlign"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="horAlgn" unique="false">
+      <eType xsi:type="ecore:EEnum" href="http://g5.1c.ru/v8/dt/form#//ItemHorizontalAlignment"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="verAlgn" unique="false">
+      <eType xsi:type="ecore:EEnum" href="http://g5.1c.ru/v8/dt/form#//ItemVerticalAlignment"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="verScrolling" unique="false" defaultValueLiteral="UseIfNecessary">
+      <eType xsi:type="ecore:EEnum" href="http://g5.1c.ru/v8/dt/form#//LogFormScrollMode"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="pSlaveElement">
+      <eType xsi:type="ecore:EClass" href="http://g5.1c.ru/v8/dt/form.layout.model.description.model#//HippoLayElementBase"/>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="MainElementGeneratorContext" eSuperTypes="//ElementWithAutoCommandBarBaseGeneratorContext //GroupBaseGeneratorContext">
+    <eOperations name="init" unique="false"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="generateIntermediateMainLayouter" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="generateIntermediateMainLayouterMode" unique="false" eType="//GenerateIntermediateMainLayouter"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="title" unique="false" defaultValueLiteral="">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="horSpacing" unique="false">
+      <eType xsi:type="ecore:EEnum" href="http://g5.1c.ru/v8/dt/form#//FormItemSpacing"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="verSpacing" unique="false">
+      <eType xsi:type="ecore:EEnum" href="http://g5.1c.ru/v8/dt/form#//FormItemSpacing"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="childrenAlign" unique="false">
+      <eType xsi:type="ecore:EEnum" href="http://g5.1c.ru/v8/dt/form#//FormChildrenAlign"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="horAlgn" unique="false">
+      <eType xsi:type="ecore:EEnum" href="http://g5.1c.ru/v8/dt/form#//ItemHorizontalAlignment"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="verAlgn" unique="false">
+      <eType xsi:type="ecore:EEnum" href="http://g5.1c.ru/v8/dt/form#//ItemVerticalAlignment"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="pIntermediateMainLayouter" eType="//ElementBaseGeneratorContext"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="pNavigator" eType="//ElementBaseGeneratorContext"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="topCB" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="bottomCB" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="pMobileTransformations" eType="//MobileTransformations"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="leftCaptionCommandText" unique="false" defaultValueLiteral="">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="leftCaptionCommandTooltip" unique="false" defaultValueLiteral="">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="leftCaptionCommandShortCut" unique="false" defaultValueLiteral="">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="defButtonCommandText" unique="false" defaultValueLiteral="">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="defButtonCommandTooltip" unique="false" defaultValueLiteral="">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="defButtonCommandShortCut" unique="false" defaultValueLiteral="">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="pRightCaptionCommandBar" eType="//CommandBarGeneratorContext"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="CommandBarGeneratorContext" eSuperTypes="//GroupBaseGeneratorContext //ICommandBarGeneratorContext //IAutoAdditionsContainerGeneratorContext">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="defaultComandSourceName" unique="false" defaultValueLiteral="">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="pProvider" unique="false" eType="//ILogFormAdditionalInfoProvider"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="lang" unique="false" defaultValueLiteral="">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="alias" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="compat837" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="location" unique="false">
+      <eType xsi:type="ecore:EEnum" href="http://g5.1c.ru/v8/dt/form.layout.model.description.model#//HippoLayCommandBarLocation"/>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="RadioGroupGeneratorContext" eSuperTypes="//RichFieldBaseGeneratorContext">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="readOnly" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="titles" unique="false" upperBound="-1">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="CheckBoxAsTumblerGeneratorContext" eSuperTypes="//TumblerBaseGeneratorContext"/>
+  <eClassifiers xsi:type="ecore:EClass" name="RadioGroupAsTumblerGeneratorContext" eSuperTypes="//TumblerBaseGeneratorContext"/>
+  <eClassifiers xsi:type="ecore:EClass" name="NavigatorGeneratorContext" eSuperTypes="//GroupBaseGeneratorContext"/>
+  <eClassifiers xsi:type="ecore:EClass" name="ProgressBarGeneratorContext" eSuperTypes="//RichFieldBaseGeneratorContext"/>
+  <eClassifiers xsi:type="ecore:EClass" name="TrackBarGeneratorContext" eSuperTypes="//RichFieldBaseGeneratorContext">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="readOnly" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="TextDocFieldGeneratorContext" eSuperTypes="//RichFieldBaseGeneratorContext">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="readOnly" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="LogicGroupGeneratorContext" eSuperTypes="//GroupBaseGeneratorContext //RichElementBaseGeneratorContext">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="united" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="behavior" unique="false">
+      <eType xsi:type="ecore:EEnum" href="http://g5.1c.ru/v8/dt/form#//UsualGroupBehavior"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="collapsedTitle" unique="false" defaultValueLiteral="">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="titleDataFlag" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="dataLength" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="formatString" unique="false" defaultValueLiteral="">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="representation" unique="false">
+      <eType xsi:type="ecore:EEnum" href="http://g5.1c.ru/v8/dt/form.layout.model.description.model#//LogicGroupInternalRepresentation"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="throughAlign" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="horSpacing" unique="false">
+      <eType xsi:type="ecore:EEnum" href="http://g5.1c.ru/v8/dt/form#//FormItemSpacing"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="verSpacing" unique="false">
+      <eType xsi:type="ecore:EEnum" href="http://g5.1c.ru/v8/dt/form#//FormItemSpacing"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="childrenAlign" unique="false">
+      <eType xsi:type="ecore:EEnum" href="http://g5.1c.ru/v8/dt/form#//FormChildrenAlign"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="horAlgn" unique="false">
+      <eType xsi:type="ecore:EEnum" href="http://g5.1c.ru/v8/dt/form#//ItemHorizontalAlignment"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="verAlgn" unique="false">
+      <eType xsi:type="ecore:EEnum" href="http://g5.1c.ru/v8/dt/form#//ItemVerticalAlignment"/>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="MenuButtonsGroupGeneratorContext" eSuperTypes="//GroupBaseGeneratorContext //IMenuElementGeneratorContext">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="important" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="notFirstInGroup" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="PageGeneratorContext" eSuperTypes="//GroupBaseGeneratorContext //RichElementBaseGeneratorContext">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="dataLength" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="formatString" unique="false" defaultValueLiteral="">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="horSpacing" unique="false">
+      <eType xsi:type="ecore:EEnum" href="http://g5.1c.ru/v8/dt/form#//FormItemSpacing"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="verSpacing" unique="false">
+      <eType xsi:type="ecore:EEnum" href="http://g5.1c.ru/v8/dt/form#//FormItemSpacing"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="childrenAlign" unique="false">
+      <eType xsi:type="ecore:EEnum" href="http://g5.1c.ru/v8/dt/form#//FormChildrenAlign"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="horAlgn" unique="false">
+      <eType xsi:type="ecore:EEnum" href="http://g5.1c.ru/v8/dt/form#//ItemHorizontalAlignment"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="verAlgn" unique="false">
+      <eType xsi:type="ecore:EEnum" href="http://g5.1c.ru/v8/dt/form#//ItemVerticalAlignment"/>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="PagesGeneratorContext" eSuperTypes="//GroupBaseGeneratorContext //RichElementBaseGeneratorContext"/>
+  <eClassifiers xsi:type="ecore:EClass" name="MoxelGeneratorContext" eSuperTypes="//RichFieldBaseGeneratorContext">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="readOnly" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="CalendarFieldGeneratorContext" eSuperTypes="//RichFieldBaseGeneratorContext">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="readOnly" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="HTMLGeneratorContext" eSuperTypes="//RichFieldBaseGeneratorContext">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="readOnly" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="FormattedDocGeneratorContext" eSuperTypes="//RichFieldBaseGeneratorContext">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="readOnly" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="PlannerGeneratorContext" eSuperTypes="//RichFieldBaseGeneratorContext">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="readOnly" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="PeriodFieldGeneratorContext" eSuperTypes="//RichFieldBaseGeneratorContext">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="readOnly" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ChartGeneratorContext" eSuperTypes="//RichFieldBaseGeneratorContext">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="readOnly" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="GanttChartGeneratorContext" eSuperTypes="//RichFieldBaseGeneratorContext">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="readOnly" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="DendrogramGeneratorContext" eSuperTypes="//RichFieldBaseGeneratorContext">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="readOnly" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="FlowchartGeneratorContext" eSuperTypes="//RichFieldBaseGeneratorContext">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="readOnly" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="GeographicalMapGeneratorContext" eSuperTypes="//RichFieldBaseGeneratorContext">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="readOnly" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="SearchControlElementAdditionInFormGeneratorContext" eSuperTypes="//GroupBaseGeneratorContext //RichElementBaseGeneratorContext //SearchControlElementAdditionBaseGeneratorContext"/>
+  <eClassifiers xsi:type="ecore:EClass" name="SearchControlElementAdditionInMenuGeneratorContext" eSuperTypes="//GroupBaseGeneratorContext //IMenuElementGeneratorContext //SearchControlElementAdditionBaseGeneratorContext">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="tooltip" unique="false" defaultValueLiteral="">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="title" unique="false" defaultValueLiteral="">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="SearchStringElementAdditionInFormGeneratorContext" eSuperTypes="//RichElementBaseGeneratorContext //SearchStringElementAdditionBaseGeneratorContext"/>
+  <eClassifiers xsi:type="ecore:EClass" name="SearchStringElementAdditionInMenuGeneratorContext" eSuperTypes="//ElementBaseGeneratorContext //SearchStringElementAdditionBaseGeneratorContext //IMenuElementGeneratorContext">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="tooltip" unique="false" defaultValueLiteral="">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="TableColumnGeneratorContext" eSuperTypes="//ElementBaseGeneratorContext //ElementWithContextMenuBaseGeneratorContext">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="mode" unique="false" defaultValueLiteral="InputField">
+      <eType xsi:type="ecore:EEnum" href="http://g5.1c.ru/v8/dt/form.layout.model.description.model#//ColumnMode"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="title" unique="false" defaultValueLiteral="">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="invisibleTitle" unique="false" defaultValueLiteral="">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="footerText" unique="false" defaultValueLiteral="">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="inputFormatString" unique="false" defaultValueLiteral="">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="formatString" unique="false" defaultValueLiteral="">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="tooltip" unique="false" defaultValueLiteral="">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="inputHint" unique="false" defaultValueLiteral="">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="readOnly" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="typeQuickChoice" unique="false" defaultValueLiteral="true">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="typeQuickChoiceMode" unique="false" eType="//QuickChoiceMode_TIP"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="inputByStringRunMode" unique="false">
+      <eType xsi:type="ecore:EEnum" href="http://g5.1c.ru/v8/dt/form.layout.model.description.model#//InputByStringRunMode"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="finalInputByStringRunMode" unique="false" defaultValueLiteral="true">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="searchOnInputRightRes" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="searchOnInputRight" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="choiceHistoryOnInput" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EBooleanObject"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="enableCreateButton" unique="false" defaultValueLiteral="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EBooleanObject"/>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="TableColumnsGroupGeneratorContext" eSuperTypes="//GroupBaseGeneratorContext">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="showHeader" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="title" unique="false" defaultValueLiteral="">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="tooltip" unique="false" defaultValueLiteral="">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="formatString" unique="false" defaultValueLiteral="">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="TableGeneratorContext" eSuperTypes="//GroupBaseGeneratorContext //ElementWithAutoCommandBarBaseGeneratorContext //RichElementBaseGeneratorContext //IAutoAdditionsProviderGeneratorContext">
+    <eOperations name="addLineEditFormField" unique="false">
+      <eParameters name="lineEditFormField" unique="false" eType="//ElementBaseGeneratorContext"/>
+    </eOperations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="readOnly" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="inplaceEdit" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="ULType" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="searchStringLocation" unique="false" defaultValueLiteral="None">
+      <eType xsi:type="ecore:EEnum" href="http://g5.1c.ru/v8/dt/form#//SearchStringLocation"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="pSearchString" eType="//ElementBaseGeneratorContext"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="viewStatusLocation" unique="false" defaultValueLiteral="None">
+      <eType xsi:type="ecore:EEnum" href="http://g5.1c.ru/v8/dt/form#//ViewStatusLocation"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="pViewStatus" eType="//ElementBaseGeneratorContext"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="searchControlLocation" unique="false" defaultValueLiteral="None">
+      <eType xsi:type="ecore:EEnum" href="http://g5.1c.ru/v8/dt/form#//SearchControlLocation"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="lineEditFormFields" upperBound="-1" eType="//ElementBaseGeneratorContext" containment="true" resolveProxies="false"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="horizontalSpacing" unique="false">
+      <eType xsi:type="ecore:EEnum" href="http://g5.1c.ru/v8/dt/form#//FormItemSpacing"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="verticalSpacing" unique="false">
+      <eType xsi:type="ecore:EEnum" href="http://g5.1c.ru/v8/dt/form#//FormItemSpacing"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="horizontalAlign" unique="false">
+      <eType xsi:type="ecore:EEnum" href="http://g5.1c.ru/v8/dt/form#//ItemHorizontalAlignment"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="childrenAlign" unique="false">
+      <eType xsi:type="ecore:EEnum" href="http://g5.1c.ru/v8/dt/form#//FormChildrenAlign"/>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ViewStatusRepresentationElementAdditionInFormGeneratorContext" eSuperTypes="//RichElementBaseGeneratorContext"/>
+  <eClassifiers xsi:type="ecore:EClass" name="HippoGeneratorContext">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="alias" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="lang" unique="false" defaultValueLiteral="">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="targetPlatform" unique="false">
+      <eType xsi:type="ecore:EEnum" href="http://g5.1c.ru/v8/dt/form.layout.model.calculation.context#//LFTargetPlatform"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="interfaceVariant" unique="false">
+      <eType xsi:type="ecore:EEnum" href="http://g5.1c.ru/v8/dt/form.layout.model.description.model#//ClientInterfaceVariant"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="pProvider" unique="false" eType="//ILogFormAdditionalInfoProvider"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="pHippoGeneratorMainElement" eType="//MainElementGeneratorContext"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="mobilePlatform" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="mobileTransformations" eType="//MobileTransformations"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="tables" upperBound="-1" eType="//LongHippoLayTableMapEntry" containment="true" resolveProxies="false"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="logFormIndexById" upperBound="-1" eType="//LongFormVisualMapEntry" containment="true" resolveProxies="false"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="logFormIndexByName" upperBound="-1" eType="//StringFormVisualMapEntry" containment="true" resolveProxies="false"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="LongHippoLayTableMapEntry" instanceClassName="java.util.Map$Entry">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="key" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//ELongObject"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="value">
+      <eType xsi:type="ecore:EClass" href="http://g5.1c.ru/v8/dt/form.layout.model.description.model#//HippoLayTable"/>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="LongFormVisualMapEntry" instanceClassName="java.util.Map$Entry">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="key" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//ELongObject"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="value">
+      <eType xsi:type="ecore:EClass" href="http://g5.1c.ru/v8/dt/form#//FormVisualEntity"/>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="StringFormVisualMapEntry" instanceClassName="java.util.Map$Entry">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="key" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="value">
+      <eType xsi:type="ecore:EClass" href="http://g5.1c.ru/v8/dt/form#//FormVisualEntity"/>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="MobileTransformations">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="searchDefaultButton" unique="false" defaultValueLiteral="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="pDefaultButton">
+      <eType xsi:type="ecore:EClass" href="http://g5.1c.ru/v8/dt/form#//Button"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="generateCloseButton" unique="false" defaultValueLiteral="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="pCloseButton">
+      <eType xsi:type="ecore:EClass" href="http://g5.1c.ru/v8/dt/form#//Button"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="searchTopCommandBar" unique="false" defaultValueLiteral="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="pTopCommandBar">
+      <eType xsi:type="ecore:EClass" href="http://g5.1c.ru/v8/dt/form#//FormGroup"/>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="GenerateIntermediateMainLayouter">
+    <eLiterals name="eGIMLAuto"/>
+    <eLiterals name="eGIMLAlways" value="1"/>
+    <eLiterals name="eGIMLNever" value="2"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="QuickChoiceMode_TIP">
+    <eLiterals name="Soft_FromForm"/>
+    <eLiterals name="Soft_InList" value="1"/>
+    <eLiterals name="Hard_FromForm" value="2"/>
+    <eLiterals name="Hard_InList" value="3"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="AutoCommandBarLocation">
+    <eLiterals name="None"/>
+    <eLiterals name="Top" value="1"/>
+    <eLiterals name="Bottom" value="2"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="ExtTooltipMode">
+    <eLiterals name="None"/>
+    <eLiterals name="ShowInForm" value="1"/>
+    <eLiterals name="PopUp" value="2"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EDataType" name="ChildrenArray" instanceTypeName="java.util.ArrayList&lt;com._1c.g5.v8.dt.form.layout.model.generation.context.ElementBaseGeneratorContext>"/>
+  <eClassifiers xsi:type="ecore:EDataType" name="ILogFormAdditionalInfoProvider" instanceClassName="com._1c.g5.v8.dt.form.layout.model.common.ILogFormAdditionalInfoProvider"/>
+  <eClassifiers xsi:type="ecore:EDataType" name="Font" instanceClassName="com._1c.g5.v8.dt.form.layout.model.platform.font.Font"/>
+  <eClassifiers xsi:type="ecore:EDataType" name="Picture" instanceClassName="com._1c.g5.v8.dt.form.layout.model.platform.picture.V8Picture"/>
+  <eClassifiers xsi:type="ecore:EDataType" name="Color" instanceClassName="com._1c.g5.v8.dt.form.layout.model.platform.color.Color"/>
+</ecore:EPackage>

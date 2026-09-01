@@ -1,0 +1,253 @@
+@GenModel(prefix="Supply", loadInitialization="false", literalsInterface="true", nonNLSMarkers="true",
+    copyrightText="Copyright (C) 2018, 1C", updateClasspath="false",
+    featureDelegation="Reflective", rootExtendsClass="com._1c.g5.v8.bm.core.BmObject", rootExtendsInterface="com._1c.g5.v8.bm.core.IBmObject")
+@Ecore(nsPrefix="supply", nsURI="http://g5.1c.ru/v8/dt/compare/supply/model")
+package com._1c.g5.v8.dt.supply.settings.model
+
+/**
+ * Integration policy type. Defines the policy that should be applied to the library supplied object 
+ */
+enum IntegrationPolicy
+{
+	/**
+	 * Target shouldn't be integrated as a result of the library integration
+	 */
+	Never = 0
+	/**
+     * Target should be integrated during the first integration of the library. Used to provide extension points
+     * of the library
+     */
+	Once = 1
+	/**
+     * Target should be integrated as a part of a library with each library update
+     */
+	Always = 2
+	/**
+	 * 
+	 */
+	ExtensionPoint = 3
+}
+
+/**
+ * Supply rule. Provides the ability to add aditional supplement rules to the elements being supplied with the library 
+ */
+enum SupplyRule
+{
+	/*
+	 * This rule could be applied to reference collections that hold references to integrated objects 
+	 * or their derivatives (e.g. types. contents, etc).
+	 * 
+	 * This rule allows to integrate only those reference that points to the objects being integrated with the integration
+	 * of the library 
+	 */
+	IntegratedReferencesOnly = 0
+}
+
+/**
+ * Supply object that contains terminal properties
+ */
+interface SupplyPropertyContainer
+{
+	contains SupplyProperty[] properties
+}
+
+/**
+ * Supply objects which supplement is being controlled by a corresponding namespace integration
+ */
+interface SupplyNamespaceControllable
+{
+	String[] suppliedWith
+}
+
+/**
+ * Supply policy definition for the Configuration object. Defines policies for the object and its properties
+ * as well as global policy of the object inclusion/exclusion. 
+ */
+class SupplyConfiguration extends SupplyPropertyContainer
+{
+	/**
+	 * Includes/excludes the Configuration object/its properties from the library supplyment.
+	 */
+	IntegrationPolicy include = "Always"
+	/**
+	 * Supplies all objects of library configuration in case if {@code true}.
+	 */
+	boolean supplyObjectsByDefault = "true"
+}
+
+class BaseSupplyObject extends SupplyPropertyContainer, SupplyNamespaceControllable
+{
+	String fqn
+	IntegrationPolicy include = "Always"
+}
+
+/**
+ * Supply settings for the generic object (MD, Common, etc)
+ */
+class SupplyGenericObject extends BaseSupplyObject
+{
+	contains SupplyContainment[] containments
+}
+
+/**
+ * Supply settings for the {@link SupplyGenericObject} containment object 
+ */
+class SupplyContainment extends BaseSupplyObject
+{
+}
+
+/**
+ * Supply settings for the {@link Subsystem}. Along with object settings contains namespace supplement settings
+ */
+class SupplySubsystem extends BaseSupplyObject 
+{
+	contains SupplyNamespace supplyNamespace
+}
+
+/**
+ * Supply settings for the namespace
+ */
+class SupplyNamespace
+{
+	boolean include = "true"
+}
+
+/**
+ * Supply settings for a single property 
+ */
+class SupplyProperty
+{
+	String name
+	IntegrationPolicy include = "Always"
+	SupplyRule supplyRule
+	String[] suppliedWith
+}
+
+/**
+ * Supply settings for the {@link Form} object
+ */
+class SupplyForm extends BaseSupplyObject 
+{
+	contains SupplyFormItem[] items
+	contains SupplyFormAttribute[] attributes
+	contains SupplyFormParameter[] parameters
+}
+
+class BaseSupplyFormObject extends SupplyPropertyContainer, SupplyNamespaceControllable 
+{
+	String name
+	IntegrationPolicy include = "Always"
+}
+
+/**
+ * Supply settings for the {@link FormItem} subclasses
+ */
+class SupplyFormItem extends BaseSupplyFormObject
+{
+}
+
+/**
+ * Supply settings for the {@link FormAttribute} 
+ */
+class SupplyFormAttribute extends BaseSupplyFormObject
+{
+}
+
+/**
+ * Supply settings for the {@link FormParameter} 
+ */
+class SupplyFormParameter extends BaseSupplyFormObject
+{
+}
+
+/**
+ * Supply settings for an internal language module 
+ */
+class SupplyModule  
+{
+	String fqn
+	IntegrationPolicy include = "Always"
+
+	contains SupplyMethod[] methods
+}
+
+/**
+ * Supply settings for a single internal language method   
+ */
+class SupplyMethod
+{
+	String name
+	IntegrationPolicy include = "Always"
+	String[] suppliedWith
+}
+
+/**
+ * Integration settings container. Contains rules of integration for a specific library
+ */
+class LibraryIntegrationSettings
+{
+	String libraryName
+	contains IntegrationSettings integrationSettings
+	contains DataProtection dataProtection
+}
+
+/**
+ * Data protection settings container. Contains a set of protected object definitions 
+ */
+class DataProtection
+{
+	contains ProtectedObject[] protectedObjects
+}
+
+/**
+ * Integration settings container 
+ */
+class IntegrationSettings
+{
+	contains IntegrateNamespaces namespaces
+	contains IntegrateObjects objects
+}
+
+/**
+ * Namespace integration settings container
+ */
+class IntegrateNamespaces
+{
+	contains IntegrateNamespace[] namespaces
+	boolean include = "false"
+}
+
+/**
+ * Namespace integration directive. Integrates specified namespace
+ */
+class IntegrateNamespace
+{
+	/**
+	 * The name of the namespace. Cannot be {@code null}
+	 */
+	String name
+	/**
+	 * Integration flag. Integrate supplement-declared namespaces in case if {@code true}
+	 */
+	boolean include = "true"
+}
+
+class IntegrateObjects
+{
+	contains IntegrateObject[] objects
+	boolean include = "true"
+}
+
+class IntegrateObject
+{
+	String fqn
+	boolean include = "true"
+}
+
+/**
+ * Object protection settings. Defines the protected object using it's FQN for adressing
+ */
+class ProtectedObject
+{
+	String fqn
+}

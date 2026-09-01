@@ -1,0 +1,792 @@
+@GenModel(nonNLSMarkers="true", prefix="Bsl", copyrightText="Copyright (C) 2012, 1C", updateClasspath="false")
+@Ecore(nsPrefix="bsl", nsURI="http://g5.1c.ru/v8/dt/bsl/model")
+package com._1c.g5.v8.dt.bsl.model
+
+import com._1c.g5.v8.dt.mcore.ContextDef
+import com._1c.g5.v8.dt.mcore.DuallyNamedElement
+import com._1c.g5.v8.dt.mcore.Environmental
+import com._1c.g5.v8.dt.mcore.NamedElement
+import com._1c.g5.v8.dt.mcore.Type
+import com._1c.g5.v8.dt.mcore.TypeItem
+import com._1c.g5.v8.dt.mcore.impl.EnvironmentalExtension
+import com._1c.g5.v8.dt.mcore.util.Environments
+import org.eclipse.emf.ecore.EObject
+import com._1c.g5.v8.dt.bsl.model.typesytem.VariableTypeStateProviderCollector
+import com._1c.g5.v8.dt.bsl.model.util.BslUtil
+import org.eclipse.emf.common.util.DelegatingEList.UnmodifiableEList
+import java.util.ArrayList
+import org.eclipse.xtext.nodemodel.util.NodeModelUtils
+import org.eclipse.xtext.RuleCall
+
+class Module extends Block
+{
+    refers transient EObject[1] owner // inferred. MdObject or Form
+    ModuleType moduleType
+    contains Pragma[] defaultPragmas
+    contains Method[] methods
+    contains Preprocessor[] preprocessors
+    refers transient ContextDef[1] contextDef
+    
+    op Method[] allMethods()
+    {
+    	return new UnmodifiableEList(BslUtil::allMethods(this))
+    }
+}
+
+enum ModuleType
+{
+    COMMON_MODULE
+    ORDINARY_APP_MODULE
+    MANAGED_APP_MODULE
+    EXTERNAL_CONN_MODULE
+    SESSION_MODULE
+    OBJECT_MODULE
+    MANAGER_MODULE
+    VALUE_MANAGER_MODULE
+    RECORDSET_MODULE
+    FORM_MODULE
+    COMMAND_MODULE
+    WEB_SERVICE_MODULE    
+    HTTP_SERVICE_MODULE
+    INTEGRATION_SERVICE_MODULE
+    BOT_MODULE
+    WEB_SOCKET_CLIENT_MODULE
+}
+
+abstract class Block extends Environmental
+{
+    contains DeclareStatement[] declareStatements
+    contains Statement[] statements
+    refers transient ImplicitVariable[] implicitVariables
+    String uniqueName
+    
+    op DeclareStatement[] allDeclareStatements()
+    {
+    	return new UnmodifiableEList(BslUtil::allDeclareStatements(this))
+    }
+    
+    op Statement[] allStatements()
+    {
+    	return new UnmodifiableEList(BslUtil::allStatements(this))
+    }
+}
+
+abstract class PragmaTarget
+{
+    contains Pragma[] pragmas
+}
+
+class Pragma
+{
+    String[1] symbol
+    String value
+    
+    op String value()
+    {
+    	return BslUtil::getPragmaValue(this)
+    }
+}
+
+class DeclareStatement extends PragmaTarget, Environmental
+{
+    contains ExplicitVariable[1..*] variables
+}
+
+abstract class Preprocessor
+{
+	contains PreprocessorItem itemAfter
+	
+	op PreprocessorItem[] allPreprocessorItems()
+}
+
+abstract class PreprocessorItem
+{
+	op boolean hasDeclareStatements()
+	{
+		return false
+	}
+	
+	op boolean hasStatements()
+	{
+		return false
+	}
+	
+	op boolean hasStatementsWithoutEmpty()
+	{
+		return false
+	}
+	
+	op boolean hasMethods()
+	{
+		return false
+	}
+	
+	op boolean hasPreprocessors()
+	{
+		return false
+	}
+	
+	op boolean hasExpression()
+	{
+		return false
+	}
+	
+	op boolean hasExpressionWithoutEmpty()
+	{
+		return false
+	}
+	
+	op boolean hasElement()
+	{
+		return hasDeclareStatements() || hasStatements() || hasMethods()
+			|| hasPreprocessors() || hasExpression()
+	}
+	
+	op boolean hasElementWithoutEmpty()
+	{
+		return hasDeclareStatements() || hasStatementsWithoutEmpty() || hasMethods()
+			|| hasPreprocessors() || hasExpressionWithoutEmpty()
+	}
+}
+
+class PreprocessorItemDeclareStatement extends PreprocessorItem
+{
+	contains DeclareStatement[] declareStatements
+	
+	op boolean hasDeclareStatements()
+	{
+		return !declareStatements.empty
+	}
+}
+
+class PreprocessorItemStatements extends PreprocessorItem
+{
+	contains Statement[] statements
+	
+	op boolean hasStatements()
+	{
+		return !statements.empty
+	}
+	
+	op boolean hasStatementsWithoutEmpty()
+	{
+		if (statements.empty)
+			return false
+		else
+		{
+			for (Statement statement: statements)
+				if (!(statement instanceof EmptyStatement))
+					return true
+					
+		}
+		return false
+	}
+}
+
+class PreprocessorItemExpression extends PreprocessorItem
+{
+	contains Expression expression
+	
+	op boolean hasExpression()
+	{
+		return expression !== null
+	}
+	
+	op boolean hasExpressionWithoutEmpty()
+	{
+		return expression !== null 
+			&& !(expression instanceof EmptyExpression)
+	}
+}
+
+class PreprocessorItemMethodStatement extends PreprocessorItemStatements
+{
+	contains Method[] methods
+	contains Preprocessor[] preprocessors
+	
+	op boolean hasMethods()
+	{
+		return !methods.empty
+	}
+	
+	op boolean hasPreprocessors()
+	{
+		return !preprocessors.empty
+	}
+}
+
+class PreprocessorItemModule extends PreprocessorItemMethodStatement, PreprocessorItemDeclareStatement
+{
+}
+
+class PreprocessorItemAllTypeStatements extends PreprocessorItemStatements, PreprocessorItemDeclareStatement
+{
+}
+
+enum RegionPreprocessorType
+{
+    Region
+    Insert
+    Delete
+}
+
+//region preprocessor
+class RegionPreprocessor extends Preprocessor, NamedElement
+{
+	contains PreprocessorItem item
+	
+	op PreprocessorItem[] allPreprocessorItems()
+	{
+		val list = new ArrayList<PreprocessorItem>
+		list.add(item)
+		list.add(itemAfter)
+		return new UnmodifiableEList(list);
+	}
+	
+	op RegionPreprocessorType computeType()
+	{
+	    if (this.name !== null)
+	    {
+	        return RegionPreprocessorType.REGION
+	    }
+	    else
+	    {
+	        val node = NodeModelUtils.findActualNodeFor(this)
+	        if (node !== null)
+	        {
+	            val leafNodes = node.leafNodes
+	            val iterator = leafNodes.iterator
+	            while (iterator.hasNext)
+	            {
+	                val leafNode = iterator.next
+	                if (!leafNode.hidden)
+	                {
+    	                if (leafNode.grammarElement instanceof RuleCall && (leafNode.grammarElement as RuleCall).rule !== null)
+    	                {
+    	                    val keyword = leafNode.grammarElement as RuleCall
+    	                    val name = keyword.rule.name
+    	                    if ("BEGIN_DELETE".equals(name))
+    	                    {
+    	                        return RegionPreprocessorType.DELETE
+    	                    }
+    	                    else if ("BEGIN_INSERT".equals(name))
+                            {
+                                return RegionPreprocessorType.INSERT
+                            }
+                            else
+                            {
+                                return RegionPreprocessorType.REGION
+                            }
+    	                }
+    	                else
+                        {
+                            return RegionPreprocessorType.REGION
+                        }
+	                }
+	            }
+	        }
+	    }
+	    return RegionPreprocessorType.REGION
+	}
+}
+
+class RegionPreprocessorDeclareStatement extends RegionPreprocessor, DeclareStatement
+{
+}
+
+class RegionPreprocessorStatement extends RegionPreprocessor, UnlabeledStatement
+{
+}
+
+class RegionPreprocessorExpression extends RegionPreprocessor, Expression
+{
+}
+
+//ifPreprocessor
+abstract class PreprocessorExpression
+{
+}
+
+class PreprocessorIfConditional extends PreprocessorConditional
+{
+    contains PreprocessorExpression[1] predicate
+}
+
+class PreprocessorConditional extends Environmental
+{
+	contains PreprocessorItem item
+}
+
+class IfPreprocessor extends Preprocessor
+{
+	contains PreprocessorIfConditional[1] ifPart
+    contains PreprocessorIfConditional[] elsIfParts
+    contains PreprocessorConditional elseElement
+    
+    op PreprocessorItem[] allPreprocessorItems()
+	{
+		val list = new ArrayList<PreprocessorItem>
+		list.add(ifPart.item)
+		for (PreprocessorIfConditional elsIfPart : elsIfParts)
+		{
+			list.add(elsIfPart.item)
+		}
+		list.add(elseElement.item)
+		list.add(itemAfter)
+		return new UnmodifiableEList(list);
+	}
+}
+
+class IfPreprocessorDeclareStatement extends IfPreprocessor, DeclareStatement
+{
+}
+
+class IfPreprocessorStatement extends IfPreprocessor, UnlabeledStatement
+{
+}
+
+class IfPreprocessorExpression extends IfPreprocessor, Expression
+{
+}
+
+class PreprocessorLiteralExpression extends PreprocessorExpression
+{
+	PreprocessorLiteralExpressionType typeLiteral
+}
+
+enum PreprocessorLiteralExpressionType
+{
+	CLIENT
+	AT_CLIENT
+	AT_SERVER
+	MOBILE_APP_CLIENT
+	MOBILE_APP_SERVER
+	THICK_CLIENT_ORDINARY_APP
+	THICK_CLIENT_MANAGED_APP
+	SERVER
+	EXTERNAL_CONNECTION
+	THIN_CLIENT
+	WEB_CLIENT
+	MOBILE_CLIENT
+	MOBILE_STANDALONE_SERVER
+}
+
+class BinaryPreprocessorExpression extends PreprocessorExpression
+{
+    BinaryOperation operation
+    contains PreprocessorExpression[1] left
+    contains PreprocessorExpression[1] right
+}
+
+class UnaryPreprocessorExpression extends PreprocessorExpression
+{
+    UnaryOperation operation
+    contains PreprocessorExpression[1] operand
+}
+
+class BracketPreprocessorExpression extends PreprocessorExpression
+{
+	contains PreprocessorExpression[1] operand
+}
+
+type TypeStateProvider wraps VariableTypeStateProviderCollector 
+
+abstract class Variable extends NamedElement
+{
+	TypeStateProvider typeStateProvider 
+}
+
+class ExplicitVariable extends Variable
+{
+    boolean export
+}
+
+type Environments wraps Environments
+class ImplicitVariable extends Variable, Environmental
+{
+    op Environments environments()
+    {
+        EnvironmentalExtension::environments(this)
+    }
+}
+
+abstract class Method extends PragmaTarget, NamedElement, Block
+{
+    boolean async
+    contains FormalParam[] formalParams
+    boolean export
+    boolean event
+    boolean used
+    transient TypeStateProvider[0..*] finalInParamState //each provider always has one state for each environment
+    transient TypeStateProvider[0..*] finalOutParamState //each provider always has one state for each environment
+    refers transient Block[] callers
+    refers transient Method[] callees
+}
+
+class Procedure extends Method
+{
+}
+
+class Function extends Method
+{
+	transient TypeStateProvider finalReturnState //always has one state for each environment
+}
+
+class FormalParam extends Variable
+{
+    boolean byValue
+    contains Literal defaultValue
+}
+
+class Label extends NamedElement
+{
+}
+
+abstract class Statement
+{
+}
+
+class LabeledStatement extends Statement
+{
+    contains Label[1..*] labels
+    contains UnlabeledStatement[1] statement
+}
+
+abstract class UnlabeledStatement extends Statement
+{
+}
+
+class EmptyStatement extends UnlabeledStatement
+{
+}
+
+class SimpleStatement extends UnlabeledStatement
+{
+    contains Expression[1] left
+    contains Expression right
+}
+
+class IfStatement extends UnlabeledStatement
+{
+    contains Conditional[1] ifPart
+    contains Conditional[] elsIfParts
+    contains Statement[] elseStatements
+}
+
+class Conditional
+{
+    contains Expression[1] predicate
+    contains Statement[] statements
+}
+
+abstract class LoopStatement extends UnlabeledStatement
+{
+    contains Statement[] statements
+}
+
+class WhileStatement extends LoopStatement
+{
+    contains Expression[1] predicate
+}
+
+abstract class ForStatement extends LoopStatement
+{
+    contains StaticFeatureAccess variableAccess
+}
+
+class ForToStatement extends ForStatement
+{
+    contains Expression[1] initializer
+    contains Expression[1] bound
+}
+
+class ForEachStatement extends ForStatement
+{
+    contains Expression[1] collection
+}
+
+class TryExceptStatement extends UnlabeledStatement
+{
+    contains Statement[] tryStatements
+    contains Statement[] exceptStatements
+}
+
+class GotoStatement extends UnlabeledStatement
+{
+    refers transient Label[1] label
+}
+
+class BreakStatement extends UnlabeledStatement
+{
+}
+
+class ContinueStatement extends UnlabeledStatement
+{
+}
+
+class ReturnStatement extends UnlabeledStatement
+{
+    contains Expression expression
+}
+
+class RaiseStatement extends UnlabeledStatement
+{
+    contains Expression[] expressions
+}
+
+class ExecuteStatement extends UnlabeledStatement
+{
+    contains Expression[1] expression
+}
+
+abstract class EventHandlerStatement extends UnlabeledStatement
+{
+    contains Expression[1] eventExpression
+    contains Expression[1] handlerExpression
+}
+
+class AddHandlerStatement extends EventHandlerStatement
+{
+}
+
+class RemoveHandlerStatement extends EventHandlerStatement
+{
+}
+
+class AwaitStatement extends UnlabeledStatement
+{
+    contains AwaitExpression expression
+}
+
+
+abstract class Expression
+{
+	refers transient unique TypeItem[0..*] types
+	
+	op TypeItem[] getRetValTypes()
+	{
+		types
+	}
+}
+
+class BinaryExpression extends Expression
+{
+    BinaryOperation operation
+    contains Expression[1] left
+    contains Expression[1] right
+}
+
+enum BinaryOperation
+{
+    OR          // e1 OR e2
+    AND         // e1 AND e2
+    LT          // e1 < e2
+    LE          // e1 <= e2
+    EQ          // e1 = e2
+    GE          // e1 >= e2
+    GT          // e1 > e2
+    NE          // e1 <> e2
+    PLUS        // e1 + e2
+    MINUS       // e1 - e2
+    MULTIPLY    // e1 * e2
+    DIVIDE      // e1 / e2
+    MODULO      // e1 % e2
+}
+
+class UnaryExpression extends Expression
+{
+    UnaryOperation operation
+    contains Expression[1] operand
+}
+
+enum UnaryOperation
+{
+    NOT         // NOT e
+    MINUS       // -e
+    PLUS        // +e
+}
+
+abstract class FeatureAccess extends Expression
+{
+	String[1] name
+}
+
+class StaticFeatureAccess extends FeatureAccess
+{
+    contains FeatureEntry[] featureEntries
+    contains ImplicitVariable implicitVariable
+}
+
+class FeatureEntry
+{
+    Environments environments
+    refers transient EObject feature // can be Variable, Method, ContextProperty or ContextMethod
+}
+
+class DynamicFeatureAccess extends FeatureAccess
+{
+    contains Expression[1] source
+    contains unsettable FeatureEntry[] featureEntries
+}
+
+class Invocation extends Expression
+{
+    contains FeatureAccess[1] methodAccess
+    contains Expression[] params
+    boolean isServerCall
+}
+
+class IndexAccess extends Expression
+{
+    contains Expression[1] source
+    contains Expression[1] index
+}
+
+class FunctionStyleCreator extends Expression
+{
+    contains Expression[1] typeNameExpression
+    contains Expression paramsExpression
+}
+
+class OperatorStyleCreator extends Expression
+{
+    refers transient Type[1] ^type
+    contains Expression[] params
+}
+
+class NameExpression extends Expression
+{
+    String[1] name
+}
+
+class EmptyExpression extends Expression
+{
+}
+
+class AwaitExpression extends Expression
+{
+    contains Expression expression
+}
+
+abstract class Literal extends Expression
+{
+}
+
+class NullLiteral extends Literal
+{	
+}
+
+class UndefinedLiteral extends Literal
+{
+}
+
+class BooleanLiteral extends Literal
+{
+    boolean isTrue
+}
+
+class NumberLiteral extends Literal
+{
+    String[1..*] value
+}
+
+class DateLiteral extends Literal
+{
+    String[1] value
+}
+
+class StringLiteral extends Literal
+{
+    String[1..*] lines
+    
+    /**
+     * Returns computed types of string literal content.
+     * If not set then types was not computed yet,
+     * if collection is empty then literal has no type.
+     */
+    unsettable transient String[] contentTypes
+    
+    /**
+     * Gets content of the StringLiteral by its lines without service symbols ('"', '|')
+     * @param trim defines needing to removing leading and trailing whitespace
+     * @return list of string line without service symbols, never <code>null</code>  
+     */
+    op String[] lines(boolean trim)
+    {
+    	return new UnmodifiableEList(BslUtil::getStringLiteralContent(this, trim));
+    }
+}
+
+class BuiltinFunction extends DuallyNamedElement
+{
+    contains ParamSet[1..*] paramSets
+}
+
+class ParamSet
+{
+    int minParams
+    int maxParams
+}
+
+abstract class FakeReference
+{
+    refers com._1c.g5.v8.dt.mcore.Property property
+    refers com._1c.g5.v8.dt.mcore.Method method
+}
+
+abstract class FeaturesScopeSpec
+{
+    refers Module[1] module
+    refers Method method
+    Environments environments
+    boolean ignoreModuleItems
+    boolean onlyModuleItems
+}
+
+class MethodsScopeSpec extends FeaturesScopeSpec
+{
+    boolean ignoreServerCalls
+    refers EObject methodRef
+}
+
+class VariablesScopeSpec extends FeaturesScopeSpec
+{
+    boolean ignoreImplicits
+    refers Statement statement
+    refers EObject variableRef
+}
+
+class VersionedElement
+{
+	refers EObject element
+	String version
+}
+
+
+class DocumentationElement extends VersionedElement
+{
+	String documentation
+	boolean template
+}
+
+class PropertyType extends Type
+{
+	String[1..*] propertyName
+}
+
+class ExtendedType extends Type
+{
+	
+}
+
+class ExtendedCollectionType extends Type
+{
+	
+}
+
+class BslDerivedPropertySource
+{
+	String moduleUri
+	String methodName
+	int localOffset
+}

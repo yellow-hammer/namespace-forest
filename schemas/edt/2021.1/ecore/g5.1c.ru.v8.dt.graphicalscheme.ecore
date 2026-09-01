@@ -1,0 +1,369 @@
+<?xml version="1.0" encoding="ASCII"?>
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="model" nsURI="http://g5.1c.ru/v8/dt/graphicalscheme" nsPrefix="sch">
+  <eClassifiers xsi:type="ecore:EClass" name="GraphicalScheme">
+    <eSuperTypes href="http://g5.1c.ru/v8/dt/metadata/mdclass#//AbstractFlowchart"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="backColor" containment="true" resolveProxies="false">
+      <eType xsi:type="ecore:EClass" href="http://g5.1c.ru/v8/dt/mcore#//Color"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="gridEnabled" unique="false" defaultValueLiteral="true">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="drawGridMode" unique="false" eType="//GraphicalSchemeGridDrawMode" defaultValueLiteral="Lines"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="gridHorizontalStep" unique="false" defaultValueLiteral="20">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="gridVerticalStep" unique="false" defaultValueLiteral="20">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="printPropItems" upperBound="-1" eType="//PrintPropItem" containment="true" resolveProxies="false"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="items" upperBound="-1" eType="//GraphicalSchemeItem" containment="true" resolveProxies="false"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="bpUUID" unique="false" eType="//UUID" defaultValueLiteral=""/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="useOutput" unique="false" eType="//UseOutput" defaultValueLiteral="Auto"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="GraphicalSchemeItem">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="itemType" unique="false" eType="//GraphicalSchemeItemType"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="id" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="title" upperBound="-1" containment="true" resolveProxies="false">
+      <eType xsi:type="ecore:EClass" href="http://g5.1c.ru/v8/dt/mcore#//LocalStringMapEntry"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="toolTip" upperBound="-1" containment="true" resolveProxies="false">
+      <eType xsi:type="ecore:EClass" href="http://g5.1c.ru/v8/dt/mcore#//LocalStringMapEntry"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="tabOrder" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="backColor" containment="true" resolveProxies="false">
+      <eType xsi:type="ecore:EClass" href="http://g5.1c.ru/v8/dt/mcore#//Color"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="textColor" containment="true" resolveProxies="false">
+      <eType xsi:type="ecore:EClass" href="http://g5.1c.ru/v8/dt/mcore#//Color"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="lineColor" containment="true" resolveProxies="false">
+      <eType xsi:type="ecore:EClass" href="http://g5.1c.ru/v8/dt/mcore#//Color"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="groupNumber" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="zOrder" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="hyperlink" unique="false" defaultValueLiteral="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="transparent" unique="false" defaultValueLiteral="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="font" containment="true" resolveProxies="false">
+      <eType xsi:type="ecore:EClass" href="http://g5.1c.ru/v8/dt/mcore#//Font"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="horizontalAlign" unique="false" defaultValueLiteral="Center">
+      <eType xsi:type="ecore:EEnum" href="http://g5.1c.ru/v8/dt/metadata/common#//HorizontalAlign"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="verticalAlign" unique="false" defaultValueLiteral="Center">
+      <eType xsi:type="ecore:EEnum" href="http://g5.1c.ru/v8/dt/metadata/common#//VerticalAlign"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="pictureLocation" unique="false" eType="//GraphicalSchemePictureLocation" defaultValueLiteral="Left"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="line" eType="//GraphicalSchemeLine" containment="true" resolveProxies="false"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="pointUUID" unique="false" eType="//UUID" defaultValueLiteral=""/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="passageState" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="eventHandlers" upperBound="-1" eType="//EventHandler" containment="true" resolveProxies="false"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="tableCode" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="currentLanguage" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="GraphicalSchemeFigure" eSuperTypes="//GraphicalSchemeItem">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="bounds" eType="//Bounds" containment="true" resolveProxies="false"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="picture" containment="true" resolveProxies="false">
+      <eType xsi:type="ecore:EClass" href="http://g5.1c.ru/v8/dt/mcore#//Picture"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="pictureSize" unique="false" eType="//GraphicalSchemePictureStyle" defaultValueLiteral="AutoSize"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="GraphicalSchemeDecoration" eSuperTypes="//GraphicalSchemeFigure">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="shape" unique="false" eType="//GraphicalSchemeShapes" defaultValueLiteral="Block"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="flipMode" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="angle" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="GraphicalSchemeSwitch" eSuperTypes="//GraphicalSchemeFigure">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="cases" upperBound="-1" eType="//Case" containment="true" resolveProxies="false"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="GraphicalSchemeSubProcess" eSuperTypes="//GraphicalSchemeFigure">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="subprocessUUID" unique="false" eType="//UUID" defaultValueLiteral="00000000-0000-0000-0000-000000000000"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="taskDescription" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="subprocess">
+      <eType xsi:type="ecore:EClass" href="http://g5.1c.ru/v8/dt/metadata/mdclass#//BusinessProcess"/>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="GraphicalSchemeActivity" eSuperTypes="//GraphicalSchemeFigure">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="taskDescription" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="addressingZoneDivideValid" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="addressingZondeDivideYPosition" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="explanation" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="group" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="addressingAttributes" upperBound="-1" eType="//SchemeItemAddressingAttribute" containment="true" resolveProxies="false"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="GraphicalSchemeCondition" eSuperTypes="//GraphicalSchemeFigure">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="truePortIndex" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="falsePortIndex" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="GraphicalSchemeConnection" eSuperTypes="//GraphicalSchemeItem">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="points" upperBound="-1" eType="//Point" containment="true" resolveProxies="false"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="sourceItemId" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="sourceItemName" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="sourcePortIndex" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="targetItemId" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="targetItemName" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="targetPortIndex" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="decorativeLine" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="textLocation" unique="false" eType="//GraphicalSchemeConnectionTextLocation" defaultValueLiteral="FirstSegment"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="beginArrow" unique="false" eType="//ArrowStyle"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="endArrow" unique="false" eType="//ArrowStyle" defaultValueLiteral="Blank"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="userSegments" upperBound="-1" eType="//Segment" containment="true" resolveProxies="false"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="GraphicalSchemeLine">
+    <eSuperTypes href="http://g5.1c.ru/v8/dt/mcore#//AbstractLine"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="style" unique="false" eType="//GraphicalSchemeLineType" defaultValueLiteral="Solid"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="SchemeItemAddressingAttribute">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="ref">
+      <eType xsi:type="ecore:EClass" href="http://g5.1c.ru/v8/dt/metadata/mdclass#//AddressingAttribute"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="value" containment="true" resolveProxies="false">
+      <eType xsi:type="ecore:EClass" href="http://g5.1c.ru/v8/dt/mcore#//Value"/>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="PrintPropItem">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="key" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Bounds">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="x" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="y" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="width" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="height" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Point">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="x" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="y" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Segment">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="id" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="startX" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="startY" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="endX" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="endY" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="index" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Case">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="description" upperBound="-1" containment="true" resolveProxies="false">
+      <eType xsi:type="ecore:EClass" href="http://g5.1c.ru/v8/dt/mcore#//LocalStringMapEntry"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="backColor" containment="true" resolveProxies="false">
+      <eType xsi:type="ecore:EClass" href="http://g5.1c.ru/v8/dt/mcore#//Color"/>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="EventHandler">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="event" lowerBound="1">
+      <eType xsi:type="ecore:EClass" href="http://g5.1c.ru/v8/dt/mcore#//Event"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" unique="false" lowerBound="1" defaultValueLiteral="">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="GraphicalSchemePicture">
+    <eSuperTypes href="http://g5.1c.ru/v8/dt/mcore#//PictureDef"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="content" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="GraphicalSchemeItemType">
+    <eLiterals name="Decoration"/>
+    <eLiterals name="ConnectionLine" value="1"/>
+    <eLiterals name="Start" value="2"/>
+    <eLiterals name="Completion" value="3"/>
+    <eLiterals name="Condition" value="4"/>
+    <eLiterals name="Activity" value="5"/>
+    <eLiterals name="Switch" value="6"/>
+    <eLiterals name="Split" value="7"/>
+    <eLiterals name="Join" value="8"/>
+    <eLiterals name="Processing" value="9"/>
+    <eLiterals name="SubBusinessProcess" value="10"/>
+    <eLiterals name="Dummy" value="99"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="GraphicalSchemeLineType">
+    <eLiterals name="None"/>
+    <eLiterals name="Solid" value="1"/>
+    <eLiterals name="Dashed" value="2"/>
+    <eLiterals name="Dotted" value="3"/>
+    <eLiterals name="DashDotted" value="4"/>
+    <eLiterals name="DashDottedDotted" value="5"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="GraphicalSchemeGridDrawMode">
+    <eLiterals name="None"/>
+    <eLiterals name="Dots" value="1"/>
+    <eLiterals name="Chess" value="2"/>
+    <eLiterals name="Lines" value="3"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="GraphicalSchemePictureLocation">
+    <eLiterals name="Left" value="1"/>
+    <eLiterals name="Top" value="2"/>
+    <eLiterals name="Right" value="3"/>
+    <eLiterals name="Bottom" value="4"/>
+    <eLiterals name="Center" value="5"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="GraphicalSchemePictureStyle">
+    <eLiterals name="RealSize"/>
+    <eLiterals name="Stretch" value="1"/>
+    <eLiterals name="Proportionally" value="2"/>
+    <eLiterals name="Tile" value="3"/>
+    <eLiterals name="AutoSize" value="4"/>
+    <eLiterals name="ByFontSize" value="5"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="GraphicalSchemeShapes">
+    <eLiterals name="None"/>
+    <eLiterals name="File" value="1"/>
+    <eLiterals name="Folder" value="2"/>
+    <eLiterals name="RightArrow" value="3"/>
+    <eLiterals name="LeftArrow" value="4"/>
+    <eLiterals name="UpArrow" value="5"/>
+    <eLiterals name="DownArrow" value="6"/>
+    <eLiterals name="LeftRightArrow" value="7"/>
+    <eLiterals name="UpDownArrow" value="8"/>
+    <eLiterals name="VerticalBrackets" value="9"/>
+    <eLiterals name="HorizontalBrackets" value="10"/>
+    <eLiterals name="Document" value="11"/>
+    <eLiterals name="Block" value="12"/>
+    <eLiterals name="Ellipse" value="13"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="GraphicalSchemeConnectionTextLocation">
+    <eLiterals name="FirstSegment"/>
+    <eLiterals name="Middle" value="1"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="ArrowStyle">
+    <eLiterals name="None"/>
+    <eLiterals name="Filled" value="1"/>
+    <eLiterals name="Blank" value="2"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="UseOutput">
+    <eLiterals name="Auto"/>
+    <eLiterals name="Enable" value="1"/>
+    <eLiterals name="Disable" value="2"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="GraphicalSchemaPrintParameters">
+    <eLiterals name="Paper"/>
+    <eLiterals name="PageOrientation" value="1"/>
+    <eLiterals name="Scale" value="2"/>
+    <eLiterals name="Collate" value="3"/>
+    <eLiterals name="Copies" value="4"/>
+    <eLiterals name="PerPage" value="5"/>
+    <eLiterals name="TopMargin" value="6"/>
+    <eLiterals name="LeftMargin" value="7"/>
+    <eLiterals name="BottomMargin" value="8"/>
+    <eLiterals name="RightMargin" value="9"/>
+    <eLiterals name="Header" value="10"/>
+    <eLiterals name="Footer" value="11"/>
+    <eLiterals name="FitToPage" value="12"/>
+    <eLiterals name="BlackAndWhite" value="13"/>
+    <eLiterals name="Printer" value="14"/>
+    <eLiterals name="PaperSource" value="15"/>
+    <eLiterals name="FitPageMode" value="16"/>
+    <eLiterals name="DuplexPrinting" value="17"/>
+    <eLiterals name="PageMargin" value="18"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="FitPageMode">
+    <eLiterals name="Auto"/>
+    <eLiterals name="PageWidth" value="1"/>
+    <eLiterals name="Proportionally" value="2"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="PageOrientation">
+    <eLiterals name="Portrait" value="1"/>
+    <eLiterals name="Landscape" value="2"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="DuplexPrintingType">
+    <eLiterals name="None" value="1"/>
+    <eLiterals name="FlipPagesLeft" value="2"/>
+    <eLiterals name="FlipPagesUp" value="3"/>
+    <eLiterals name="UsePrinterSettings" value="4"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="PagePlacementAlternation">
+    <eLiterals name="Auto"/>
+    <eLiterals name="DontUse" value="1"/>
+    <eLiterals name="MirrorOnLeft" value="2"/>
+    <eLiterals name="MirrorOnTop" value="3"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EDataType" name="UUID" instanceClassName="java.util.UUID"/>
+</ecore:EPackage>

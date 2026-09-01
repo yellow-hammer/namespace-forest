@@ -1,0 +1,407 @@
+<?xml version="1.0" encoding="ASCII"?>
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="data" nsURI="http://v8.1c.ru/8.3/debugger/debugBaseData" nsPrefix="data">
+  <eClassifiers xsi:type="ecore:EClass" name="BSLModuleIdInternal">
+    <eAnnotations source="http:///org/eclipse/emf/ecore/util/ExtendedMetaData">
+      <details key="name" value="BSLModuleIdInternal"/>
+      <details key="kind" value="elementOnly"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="type" unique="false" lowerBound="1" eType="//BSLModuleType" defaultValueLiteral="ConfigModule" unsettable="true">
+      <eAnnotations source="http:///org/eclipse/emf/ecore/util/ExtendedMetaData">
+        <details key="kind" value="element"/>
+        <details key="name" value="type"/>
+        <details key="namespace" value="##targetNamespace"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="uRL" unique="false" lowerBound="1" defaultValueLiteral="" unsettable="true">
+      <eAnnotations source="http:///org/eclipse/emf/ecore/util/ExtendedMetaData">
+        <details key="kind" value="element"/>
+        <details key="name" value="URL"/>
+        <details key="namespace" value="##targetNamespace"/>
+      </eAnnotations>
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="extensionName" unique="false" lowerBound="1" defaultValueLiteral="" unsettable="true">
+      <eAnnotations source="http:///org/eclipse/emf/ecore/util/ExtendedMetaData">
+        <details key="kind" value="element"/>
+        <details key="name" value="extensionName"/>
+        <details key="namespace" value="##targetNamespace"/>
+      </eAnnotations>
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="objectID" unique="false">
+      <eAnnotations source="http:///org/eclipse/emf/ecore/util/ExtendedMetaData">
+        <details key="kind" value="element"/>
+        <details key="name" value="objectID"/>
+        <details key="namespace" value="##targetNamespace"/>
+      </eAnnotations>
+      <eType xsi:type="ecore:EDataType" href="http://v8.1c.ru/8.1/data/core#//UUID"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="propertyID" unique="false">
+      <eAnnotations source="http:///org/eclipse/emf/ecore/util/ExtendedMetaData">
+        <details key="kind" value="element"/>
+        <details key="name" value="propertyID"/>
+        <details key="namespace" value="##targetNamespace"/>
+      </eAnnotations>
+      <eType xsi:type="ecore:EDataType" href="http://v8.1c.ru/8.1/data/core#//UUID"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="extId" unique="false" lowerBound="1" defaultValueLiteral="0" unsettable="true">
+      <eAnnotations source="http:///org/eclipse/emf/ecore/util/ExtendedMetaData">
+        <details key="kind" value="element"/>
+        <details key="name" value="extId"/>
+        <details key="namespace" value="##targetNamespace"/>
+      </eAnnotations>
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EBigDecimal"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="version" unique="false">
+      <eAnnotations source="http:///org/eclipse/emf/ecore/util/ExtendedMetaData">
+        <details key="kind" value="element"/>
+        <details key="name" value="version"/>
+        <details key="namespace" value="##targetNamespace"/>
+      </eAnnotations>
+      <eType xsi:type="ecore:EDataType" href="http://v8.1c.ru/8.1/data/core#//ObjectVersion"/>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="BSLModuleIdUser">
+    <eAnnotations source="http:///org/eclipse/emf/ecore/util/ExtendedMetaData">
+      <details key="name" value="BSLModuleIdUser"/>
+      <details key="kind" value="elementOnly"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="type" unique="false" lowerBound="1" eType="//BSLModuleType" unsettable="true">
+      <eAnnotations source="http:///org/eclipse/emf/ecore/util/ExtendedMetaData">
+        <details key="kind" value="element"/>
+        <details key="name" value="type"/>
+        <details key="namespace" value="##targetNamespace"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="uRL" unique="false" lowerBound="1" defaultValueLiteral="" unsettable="true">
+      <eAnnotations source="http:///org/eclipse/emf/ecore/util/ExtendedMetaData">
+        <details key="kind" value="element"/>
+        <details key="name" value="URL"/>
+        <details key="namespace" value="##targetNamespace"/>
+      </eAnnotations>
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="extensionName" unique="false" lowerBound="1" defaultValueLiteral="" unsettable="true">
+      <eAnnotations source="http:///org/eclipse/emf/ecore/util/ExtendedMetaData">
+        <details key="kind" value="element"/>
+        <details key="name" value="extensionName"/>
+        <details key="namespace" value="##targetNamespace"/>
+      </eAnnotations>
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="mDObject" unique="false" lowerBound="1">
+      <eAnnotations source="http:///org/eclipse/emf/ecore/util/ExtendedMetaData">
+        <details key="kind" value="element"/>
+        <details key="name" value="MDObject"/>
+        <details key="namespace" value="##targetNamespace"/>
+      </eAnnotations>
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="mDProperty" unique="false" lowerBound="1">
+      <eAnnotations source="http:///org/eclipse/emf/ecore/util/ExtendedMetaData">
+        <details key="kind" value="element"/>
+        <details key="name" value="MDProperty"/>
+        <details key="namespace" value="##targetNamespace"/>
+      </eAnnotations>
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="extId" unique="false" lowerBound="1" defaultValueLiteral="0" unsettable="true">
+      <eAnnotations source="http:///org/eclipse/emf/ecore/util/ExtendedMetaData">
+        <details key="kind" value="element"/>
+        <details key="name" value="ExtId"/>
+        <details key="namespace" value="##targetNamespace"/>
+      </eAnnotations>
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EBigDecimal"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="version" unique="false">
+      <eAnnotations source="http:///org/eclipse/emf/ecore/util/ExtendedMetaData">
+        <details key="kind" value="element"/>
+        <details key="name" value="Version"/>
+        <details key="namespace" value="##targetNamespace"/>
+      </eAnnotations>
+      <eType xsi:type="ecore:EDataType" href="http://v8.1c.ru/8.1/data/core#//ObjectVersion"/>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="DbgTargetStateInfo">
+    <eAnnotations source="http:///org/eclipse/emf/ecore/util/ExtendedMetaData">
+      <details key="name" value="DbgTargetStateInfo"/>
+      <details key="kind" value="elementOnly"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="targetIDStr" unique="false" eType="//DebugTargetIdStr">
+      <eAnnotations source="http:///org/eclipse/emf/ecore/util/ExtendedMetaData">
+        <details key="kind" value="element"/>
+        <details key="name" value="targetIDStr"/>
+        <details key="namespace" value="##targetNamespace"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="targetID" eType="//DebugTargetId" containment="true" resolveProxies="false">
+      <eAnnotations source="http:///org/eclipse/emf/ecore/util/ExtendedMetaData">
+        <details key="kind" value="element"/>
+        <details key="name" value="targetID"/>
+        <details key="namespace" value="##targetNamespace"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="stateNum" unique="false">
+      <eAnnotations source="http:///org/eclipse/emf/ecore/util/ExtendedMetaData">
+        <details key="kind" value="element"/>
+        <details key="name" value="stateNum"/>
+        <details key="namespace" value="##targetNamespace"/>
+      </eAnnotations>
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EBigDecimal"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="state" unique="false" eType="//DbgTargetState" unsettable="true">
+      <eAnnotations source="http:///org/eclipse/emf/ecore/util/ExtendedMetaData">
+        <details key="kind" value="element"/>
+        <details key="name" value="state"/>
+        <details key="namespace" value="##targetNamespace"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="DebugTargetId" eSuperTypes="//DebugTargetIdLight">
+    <eAnnotations source="http:///org/eclipse/emf/ecore/util/ExtendedMetaData">
+      <details key="name" value="DebugTargetId"/>
+      <details key="kind" value="elementOnly"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="seanceId" unique="false" lowerBound="1">
+      <eAnnotations source="http:///org/eclipse/emf/ecore/util/ExtendedMetaData">
+        <details key="kind" value="element"/>
+        <details key="name" value="seanceId"/>
+        <details key="namespace" value="##targetNamespace"/>
+      </eAnnotations>
+      <eType xsi:type="ecore:EDataType" href="http://v8.1c.ru/8.1/data/core#//UUID"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="seanceNo" unique="false" lowerBound="1">
+      <eAnnotations source="http:///org/eclipse/emf/ecore/util/ExtendedMetaData">
+        <details key="kind" value="element"/>
+        <details key="name" value="seanceNo"/>
+        <details key="namespace" value="##targetNamespace"/>
+      </eAnnotations>
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EBigDecimal"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="infoBaseInstanceID" unique="false" lowerBound="1">
+      <eAnnotations source="http:///org/eclipse/emf/ecore/util/ExtendedMetaData">
+        <details key="kind" value="element"/>
+        <details key="name" value="infoBaseInstanceID"/>
+        <details key="namespace" value="##targetNamespace"/>
+      </eAnnotations>
+      <eType xsi:type="ecore:EDataType" href="http://v8.1c.ru/8.1/data/core#//UUID"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="infoBaseAlias" unique="false" lowerBound="1">
+      <eAnnotations source="http:///org/eclipse/emf/ecore/util/ExtendedMetaData">
+        <details key="kind" value="element"/>
+        <details key="name" value="infoBaseAlias"/>
+        <details key="namespace" value="##targetNamespace"/>
+      </eAnnotations>
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="isServerInfoBase" unique="false" lowerBound="1" eType="//IsServerInfoBase" unsettable="true">
+      <eAnnotations source="http:///org/eclipse/emf/ecore/util/ExtendedMetaData">
+        <details key="kind" value="element"/>
+        <details key="name" value="isServerInfoBase"/>
+        <details key="namespace" value="##targetNamespace"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="userName" unique="false" lowerBound="1" defaultValueLiteral="" unsettable="true">
+      <eAnnotations source="http:///org/eclipse/emf/ecore/util/ExtendedMetaData">
+        <details key="kind" value="element"/>
+        <details key="name" value="userName"/>
+        <details key="namespace" value="##targetNamespace"/>
+      </eAnnotations>
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="configVersion" unique="false" lowerBound="1">
+      <eAnnotations source="http:///org/eclipse/emf/ecore/util/ExtendedMetaData">
+        <details key="kind" value="element"/>
+        <details key="name" value="configVersion"/>
+        <details key="namespace" value="##targetNamespace"/>
+      </eAnnotations>
+      <eType xsi:type="ecore:EDataType" href="http://v8.1c.ru/8.1/data/core#//ObjectVersion"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="targetType" unique="false" lowerBound="1" eType="//DebugTargetType" unsettable="true">
+      <eAnnotations source="http:///org/eclipse/emf/ecore/util/ExtendedMetaData">
+        <details key="kind" value="element"/>
+        <details key="name" value="targetType"/>
+        <details key="namespace" value="##targetNamespace"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="DebugTargetIdLight">
+    <eAnnotations source="http:///org/eclipse/emf/ecore/util/ExtendedMetaData">
+      <details key="name" value="DebugTargetIdLight"/>
+      <details key="kind" value="elementOnly"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="id" unique="false" lowerBound="1">
+      <eAnnotations source="http:///org/eclipse/emf/ecore/util/ExtendedMetaData">
+        <details key="kind" value="element"/>
+        <details key="name" value="id"/>
+        <details key="namespace" value="##targetNamespace"/>
+      </eAnnotations>
+      <eType xsi:type="ecore:EDataType" href="http://v8.1c.ru/8.1/data/core#//UUID"/>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="StackItemViewInfoData">
+    <eAnnotations source="http:///org/eclipse/emf/ecore/util/ExtendedMetaData">
+      <details key="name" value="StackItemViewInfoData"/>
+      <details key="kind" value="elementOnly"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="moduleIDStr" unique="false" eType="//BSLModuleIdInternalStr">
+      <eAnnotations source="http:///org/eclipse/emf/ecore/util/ExtendedMetaData">
+        <details key="kind" value="element"/>
+        <details key="name" value="moduleIDStr"/>
+        <details key="namespace" value="##targetNamespace"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="moduleID" eType="//BSLModuleIdInternal" containment="true" resolveProxies="false">
+      <eAnnotations source="http:///org/eclipse/emf/ecore/util/ExtendedMetaData">
+        <details key="kind" value="element"/>
+        <details key="name" value="moduleID"/>
+        <details key="namespace" value="##targetNamespace"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="lineNo" unique="false" lowerBound="1">
+      <eAnnotations source="http:///org/eclipse/emf/ecore/util/ExtendedMetaData">
+        <details key="kind" value="element"/>
+        <details key="name" value="lineNo"/>
+        <details key="namespace" value="##targetNamespace"/>
+      </eAnnotations>
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EBigDecimal"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="presentation" unique="false" lowerBound="1">
+      <eAnnotations source="http:///org/eclipse/emf/ecore/util/ExtendedMetaData">
+        <details key="kind" value="element"/>
+        <details key="name" value="presentation"/>
+        <details key="namespace" value="##targetNamespace"/>
+      </eAnnotations>
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2003/XMLType#//Base64Binary"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="isFantom" unique="false" lowerBound="1" unsettable="true">
+      <eAnnotations source="http:///org/eclipse/emf/ecore/util/ExtendedMetaData">
+        <details key="kind" value="element"/>
+        <details key="name" value="isFantom"/>
+        <details key="namespace" value="##targetNamespace"/>
+      </eAnnotations>
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EBooleanObject"/>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="AttachDebugUIResult">
+    <eAnnotations source="http:///org/eclipse/emf/ecore/util/ExtendedMetaData">
+      <details key="name" value="AttachDebugUIResult"/>
+    </eAnnotations>
+    <eLiterals name="unknown"/>
+    <eLiterals name="registered" value="1"/>
+    <eLiterals name="credentialsRequired" value="2"/>
+    <eLiterals name="ibInDebug" value="3"/>
+    <eLiterals name="notRegistered" value="4"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="BSLModuleType">
+    <eAnnotations source="http:///org/eclipse/emf/ecore/util/ExtendedMetaData">
+      <details key="name" value="BSLModuleType"/>
+    </eAnnotations>
+    <eLiterals name="ConfigModule"/>
+    <eLiterals name="SystemFormModule" value="1"/>
+    <eLiterals name="SystemModule" value="2"/>
+    <eLiterals name="ExtMDModule" value="3"/>
+    <eLiterals name="ExtensionModule" value="4"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="DbgTargetState">
+    <eAnnotations source="http:///org/eclipse/emf/ecore/util/ExtendedMetaData">
+      <details key="name" value="DbgTargetState"/>
+    </eAnnotations>
+    <eLiterals name="Undefined"/>
+    <eLiterals name="NotRegistered" value="1"/>
+    <eLiterals name="Registered" value="2"/>
+    <eLiterals name="WaitDebugger" value="3"/>
+    <eLiterals name="Worked" value="4"/>
+    <eLiterals name="StopOnNextLine" value="5"/>
+    <eLiterals name="Evaluating" value="6"/>
+    <eLiterals name="Terminating" value="7"/>
+    <eLiterals name="Last" value="8"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="DebugStepAction">
+    <eAnnotations source="http:///org/eclipse/emf/ecore/util/ExtendedMetaData">
+      <details key="name" value="DebugStepAction"/>
+    </eAnnotations>
+    <eLiterals name="Unknown"/>
+    <eLiterals name="Step" value="1"/>
+    <eLiterals name="StepIn" value="2"/>
+    <eLiterals name="StepOut" value="3"/>
+    <eLiterals name="Continue" value="4"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="DebugTargetType">
+    <eAnnotations source="http:///org/eclipse/emf/ecore/util/ExtendedMetaData">
+      <details key="name" value="DebugTargetType"/>
+    </eAnnotations>
+    <eLiterals name="Unknown"/>
+    <eLiterals name="Client" value="1"/>
+    <eLiterals name="ManagedClient" value="2"/>
+    <eLiterals name="WEBClient" value="3"/>
+    <eLiterals name="COMConnector" value="4"/>
+    <eLiterals name="Server" value="5"/>
+    <eLiterals name="ServerEmulation" value="6"/>
+    <eLiterals name="WEBService" value="7"/>
+    <eLiterals name="HTTPService" value="8"/>
+    <eLiterals name="OData" value="9"/>
+    <eLiterals name="JOB" value="10"/>
+    <eLiterals name="JobFileMode" value="11"/>
+    <eLiterals name="MobileClient" value="12"/>
+    <eLiterals name="MobileServer" value="13"/>
+    <eLiterals name="MobileJobFileMode" value="14"/>
+    <eLiterals name="MobileManagedClient" value="15"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="IsServerInfoBase">
+    <eAnnotations source="http:///org/eclipse/emf/ecore/util/ExtendedMetaData">
+      <details key="name" value="IsServerInfoBase"/>
+    </eAnnotations>
+    <eLiterals name="undefined"/>
+    <eLiterals name="true" value="1"/>
+    <eLiterals name="false" value="2"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EDataType" name="AttachDebugUIResultObject">
+    <eAnnotations source="http:///org/eclipse/emf/ecore/util/ExtendedMetaData">
+      <details key="name" value="AttachDebugUIResult:Object"/>
+      <details key="baseType" value="AttachDebugUIResult"/>
+    </eAnnotations>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EDataType" name="BSLModuleIdInternalStr" instanceClassName="byte[]">
+    <eAnnotations source="http:///org/eclipse/emf/ecore/util/ExtendedMetaData">
+      <details key="name" value="BSLModuleIdInternalStr"/>
+      <details key="baseType" value="http://www.eclipse.org/emf/2003/XMLType#base64Binary"/>
+    </eAnnotations>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EDataType" name="BSLModuleTypeObject">
+    <eAnnotations source="http:///org/eclipse/emf/ecore/util/ExtendedMetaData">
+      <details key="name" value="BSLModuleType:Object"/>
+      <details key="baseType" value="BSLModuleType"/>
+    </eAnnotations>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EDataType" name="DbgTargetStateObject">
+    <eAnnotations source="http:///org/eclipse/emf/ecore/util/ExtendedMetaData">
+      <details key="name" value="DbgTargetState:Object"/>
+      <details key="baseType" value="DbgTargetState"/>
+    </eAnnotations>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EDataType" name="DebugStepActionObject">
+    <eAnnotations source="http:///org/eclipse/emf/ecore/util/ExtendedMetaData">
+      <details key="name" value="DebugStepAction:Object"/>
+      <details key="baseType" value="DebugStepAction"/>
+    </eAnnotations>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EDataType" name="DebugTargetIdStr" instanceClassName="byte[]">
+    <eAnnotations source="http:///org/eclipse/emf/ecore/util/ExtendedMetaData">
+      <details key="name" value="DebugTargetIdStr"/>
+      <details key="baseType" value="http://www.eclipse.org/emf/2003/XMLType#base64Binary"/>
+    </eAnnotations>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EDataType" name="DebugTargetTypeObject">
+    <eAnnotations source="http:///org/eclipse/emf/ecore/util/ExtendedMetaData">
+      <details key="name" value="DebugTargetType:Object"/>
+      <details key="baseType" value="DebugTargetType"/>
+    </eAnnotations>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EDataType" name="IsServerInfoBaseObject">
+    <eAnnotations source="http:///org/eclipse/emf/ecore/util/ExtendedMetaData">
+      <details key="name" value="IsServerInfoBase:Object"/>
+      <details key="baseType" value="IsServerInfoBase"/>
+    </eAnnotations>
+  </eClassifiers>
+</ecore:EPackage>

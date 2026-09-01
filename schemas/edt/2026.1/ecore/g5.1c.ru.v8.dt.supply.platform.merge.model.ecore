@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="ASCII"?>
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="model" nsURI="http://g5.1c.ru/v8/dt/supply/platform/merge/model" nsPrefix="PlatformMerge">
+  <eClassifiers xsi:type="ecore:EClass" name="PlatformMergeable">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="mergeRule" unique="false" eType="//PlatfromMergeRule" unsettable="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="PlatformMergeMethod" eSuperTypes="//PlatformMergeable">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="nameInSecondConfiguration" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="patch" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="PlatformMergeMethods">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="mainArea" eType="//PlatformMergeable" containment="true" resolveProxies="false"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="methods" upperBound="-1" eType="//PlatformMergeMethod" containment="true" resolveProxies="false"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="PlatformMergeModule">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="methods" eType="//PlatformMergeMethods" containment="true" resolveProxies="false"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="PlatformMergeFormModule" eSuperTypes="//PlatformMergeable">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="module" eType="//PlatformMergeModule" containment="true" resolveProxies="false"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="PlatformMergeProperty" eSuperTypes="//PlatformMergeable">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="PlatformMergeModuleProperty" eSuperTypes="//PlatformMergeProperty">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="module" eType="//PlatformMergeModule" containment="true" resolveProxies="false"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="PlatformMergeFormProperty" eSuperTypes="//PlatformMergeProperty">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="formModule" eType="//PlatformMergeFormModule" containment="true" resolveProxies="false"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="PlatformMergeContentItem" eSuperTypes="//PlatformMergeable">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="PlatformMergeContentProperty" eSuperTypes="//PlatformMergeProperty">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="items" upperBound="-1" eType="//PlatformMergeContentItem" containment="true" resolveProxies="false"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="PlatformMergeObject" eSuperTypes="//PlatformMergeable">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="fullName" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="fullNameInSecondConfiguration" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="objectOrder" unique="false" eType="//PlatfromObjectOrder" unsettable="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="properties" upperBound="-1" eType="//PlatformMergeProperty" containment="true" resolveProxies="false"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="PlatformMergeModel">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="objects" upperBound="-1" eType="//PlatformMergeObject" containment="true" resolveProxies="false"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="PlatfromMergeRule">
+    <eLiterals name="GetFromSecondConfiguration"/>
+    <eLiterals name="MergePrioritizingMainConfiguration" value="1"/>
+    <eLiterals name="MergePrioritizingSecondConfiguration" value="2"/>
+    <eLiterals name="MergeWithExternalTool" value="3"/>
+    <eLiterals name="DoNotMerge" value="4"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="PlatfromObjectOrder">
+    <eLiterals name="GetFromMainConfiguration"/>
+    <eLiterals name="GetFromSecondConfiguration" value="1"/>
+  </eClassifiers>
+</ecore:EPackage>

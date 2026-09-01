@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="ASCII"?>
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="model" nsURI="http://g5.1c.ru/v8/dt/right/ql/model" nsPrefix="qlrights">
+  <eClassifiers xsi:type="ecore:EClass" name="Restriction" abstract="true">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="owner">
+      <eType xsi:type="ecore:EClass" href="http://g5.1c.ru/v8/dt/rights#//RoleDescription"/>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="TemplateRestriction" eSuperTypes="//Restriction">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="template" eType="//TemplateCall" containment="true" resolveProxies="false"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="TemplateCall">
+    <eSuperTypes href="g5.1c.ru.v8.dt.mcore.ecore#//NamedElement"/>
+    <eSuperTypes href="g5.1c.ru.v8.dt.ql.model.ecore#//AbstractExpression"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="params" upperBound="-1" containment="true" resolveProxies="false">
+      <eType xsi:type="ecore:EClass" href="g5.1c.ru.v8.dt.ql.model.ecore#//AbstractExpression"/>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="QlRestriction" eSuperTypes="//Restriction">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="restrictTableName" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="filters" containment="true" resolveProxies="false">
+      <eType xsi:type="ecore:EClass" href="g5.1c.ru.v8.dt.ql.model.ecore#//QuerySchemaExpression"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="sources" upperBound="-1" containment="true" resolveProxies="false">
+      <eType xsi:type="ecore:EClass" href="g5.1c.ru.v8.dt.ql.model.ecore#//QuerySchemaSource"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="currentTable" transient="true" containment="true" resolveProxies="false">
+      <eType xsi:type="ecore:EClass" href="g5.1c.ru.v8.dt.metadata.dbview.ecore#//DbViewDef"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="dbViewByFrom" upperBound="-1" transient="true" containment="true" resolveProxies="false">
+      <eType xsi:type="ecore:EClass" href="g5.1c.ru.v8.dt.metadata.dbview.ecore#//DbViewDef"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="descriptionTempTable" upperBound="-1" transient="true" containment="true" resolveProxies="false">
+      <eType xsi:type="ecore:EClass" href="g5.1c.ru.v8.dt.ql.model.ecore#//DbViewDescriptionTempTable"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="from" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="PreprocessorRestriction" eSuperTypes="//Restriction">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="ifPart" eType="//PreprocessorConditional" containment="true" resolveProxies="false"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="elsIfParts" upperBound="-1" eType="//PreprocessorConditional" containment="true" resolveProxies="false"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="elseRestriction" eType="//Restriction" containment="true" resolveProxies="false"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="PreprocessorConditional">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="predicate" containment="true" resolveProxies="false">
+      <eType xsi:type="ecore:EClass" href="g5.1c.ru.v8.dt.ql.model.ecore#//AbstractExpression"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="restriction" eType="//Restriction" containment="true" resolveProxies="false"/>
+  </eClassifiers>
+</ecore:EPackage>

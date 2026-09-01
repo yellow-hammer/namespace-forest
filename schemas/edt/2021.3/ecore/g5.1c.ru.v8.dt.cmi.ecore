@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="ASCII"?>
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="model" nsURI="http://g5.1c.ru/v8/dt/cmi" nsPrefix="cmi">
+  <eClassifiers xsi:type="ecore:EClass" name="CommandInterface">
+    <eSuperTypes href="http://g5.1c.ru/v8/dt/metadata/mdclass#//AbstractCommandInterface"/>
+    <eOperations name="validate" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+      <eParameters name="diagnostics" unique="false">
+        <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EDiagnosticChain"/>
+      </eParameters>
+      <eParameters name="context" unique="false">
+        <eGenericType>
+          <eTypeArguments>
+            <eClassifier xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EJavaObject"/>
+          </eTypeArguments>
+          <eTypeArguments>
+            <eClassifier xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EJavaObject"/>
+          </eTypeArguments>
+          <eClassifier xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EMap"/>
+        </eGenericType>
+      </eParameters>
+    </eOperations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="commandsVisibility" eType="//CommandsVisibility" containment="true" resolveProxies="false"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="subsystemsVisibility" eType="//SubsystemsVisibility" containment="true" resolveProxies="false"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="commandsPlacement" eType="//CommandsPlacement" containment="true" resolveProxies="false"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="commandsOrder" eType="//CommandsOrder" containment="true" resolveProxies="false"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="subsystemsOrder" eType="//SubsystemsOrder" containment="true" resolveProxies="false"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="CommandsVisibility">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="visibilityFragments" upperBound="-1" eType="//CommandsVisibilityFragment" containment="true" resolveProxies="false"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="SubsystemsVisibility">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="visibilityFragments" upperBound="-1" eType="//SubsystemsVisibilityFragment" containment="true" resolveProxies="false"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="CommandsVisibilityFragment">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="command" lowerBound="1">
+      <eType xsi:type="ecore:EClass" href="http://g5.1c.ru/v8/dt/mcore#//Command"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="visible" lowerBound="1" containment="true" resolveProxies="false">
+      <eType xsi:type="ecore:EClass" href="http://g5.1c.ru/v8/dt/metadata/mdclass#//AdjustableBoolean"/>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="SubsystemsVisibilityFragment">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="subsystem" lowerBound="1">
+      <eType xsi:type="ecore:EClass" href="http://g5.1c.ru/v8/dt/metadata/mdclass#//Subsystem"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="visible" lowerBound="1" containment="true" resolveProxies="false">
+      <eType xsi:type="ecore:EClass" href="http://g5.1c.ru/v8/dt/metadata/mdclass#//AdjustableBoolean"/>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="CommandsPlacement">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="placementFragments" upperBound="-1" eType="//CommandsPlacementFragment" containment="true" resolveProxies="false"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="CommandsPlacementFragment">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="group" lowerBound="1">
+      <eType xsi:type="ecore:EClass" href="http://g5.1c.ru/v8/dt/mcore#//CommandGroup"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="commands" upperBound="-1">
+      <eType xsi:type="ecore:EClass" href="http://g5.1c.ru/v8/dt/mcore#//Command"/>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="CommandsOrder">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="orderFragments" upperBound="-1" eType="//CommandsOrderFragment" containment="true" resolveProxies="false"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="SubsystemsOrder">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="subsystems" upperBound="-1">
+      <eType xsi:type="ecore:EClass" href="http://g5.1c.ru/v8/dt/metadata/mdclass#//Subsystem"/>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="CommandsOrderFragment">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="group" lowerBound="1">
+      <eType xsi:type="ecore:EClass" href="http://g5.1c.ru/v8/dt/mcore#//CommandGroup"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="commands" upperBound="-1">
+      <eType xsi:type="ecore:EClass" href="http://g5.1c.ru/v8/dt/mcore#//Command"/>
+    </eStructuralFeatures>
+  </eClassifiers>
+</ecore:EPackage>

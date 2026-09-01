@@ -1,0 +1,599 @@
+<?xml version="1.0" encoding="ASCII"?>
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="context" nsURI="http://g5.1c.ru/v8/dt/form.layout.model.calculation.context" nsPrefix="layout">
+  <eClassifiers xsi:type="ecore:EClass" name="StringToElementTransformationContextMapEntry" instanceClassName="java.util.Map$Entry">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="key" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="value" containment="true" resolveProxies="false">
+      <eGenericType>
+        <eTypeArguments/>
+        <eTypeArguments/>
+        <eClassifier xsi:type="ecore:EClass" href="http://g5.1c.ru/v8/dt/form.layout.model.transformation.context#//ElementBaseTransformationContext"/>
+      </eGenericType>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="RootBaseCalculationContext" abstract="true" interface="true"/>
+  <eClassifiers xsi:type="ecore:EClass" name="IContainedElementCalculationContext" abstract="true" interface="true">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="defFont" unique="false" eType="//Font"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ElementBaseCalculationContext" abstract="true" interface="true" eSuperTypes="//RootBaseCalculationContext">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="targetPlatform" unique="false" eType="//LFTargetPlatform" defaultValueLiteral="eLFTPDontSpecific"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="interfaceVariant" unique="false" defaultValueLiteral="DontSpecific">
+      <eType xsi:type="ecore:EEnum" href="http://g5.1c.ru/v8/dt/form.layout.model.description.model#//ClientInterfaceVariant"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="compatibilityMode" unique="false">
+      <eType xsi:type="ecore:EEnum" href="http://g5.1c.ru/v8/dt/metadata/mdclass#//CompatibilityMode"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="minWidthForCompressedElements" unique="false" defaultValueLiteral="0">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="adpatedToMobilePlatform" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="options" unique="false" eType="//CalculateAdditionalOptions"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="FormElementBaseCalculationContext" abstract="true" interface="true" eSuperTypes="//ElementBaseCalculationContext">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="pCloneElement">
+      <eType xsi:type="ecore:EClass" href="http://g5.1c.ru/v8/dt/form.layout.model.description.model#//HippoLayElementBase"/>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="GroupBaseCalculationContext" abstract="true" interface="true" eSuperTypes="//ElementBaseCalculationContext"/>
+  <eClassifiers xsi:type="ecore:EClass" name="ElementWithLimitsBaseCalculationContext" abstract="true" interface="true" eSuperTypes="//RootBaseCalculationContext"/>
+  <eClassifiers xsi:type="ecore:EClass" name="FormGroupBaseCalculationContext" abstract="true" interface="true" eSuperTypes="//GroupBaseCalculationContext">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="curChildrenVAlign" unique="false">
+      <eType xsi:type="ecore:EEnum" href="http://g5.1c.ru/v8/dt/form#//ItemVerticalAlignment"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="originalGrouping" unique="false" defaultValueLiteral="Vertical">
+      <eType xsi:type="ecore:EEnum" href="http://g5.1c.ru/v8/dt/form#//FormChildrenGroup"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="childrenMaxAdaptiveGroupingFormGroupLevels" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="horSpacingVariant" unique="false">
+      <eType xsi:type="ecore:EEnum" href="http://g5.1c.ru/v8/dt/form#//FormItemSpacing"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="horSpacing" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="verSpacingVariant" unique="false">
+      <eType xsi:type="ecore:EEnum" href="http://g5.1c.ru/v8/dt/form#//FormItemSpacing"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="verSpacing" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="splitterSize" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="hAlign" unique="false">
+      <eType xsi:type="ecore:EEnum" href="http://g5.1c.ru/v8/dt/form#//ItemHorizontalAlignment"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="originalVAlign" unique="false">
+      <eType xsi:type="ecore:EEnum" href="http://g5.1c.ru/v8/dt/form#//ItemVerticalAlignment"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="childrenAlign" unique="false">
+      <eType xsi:type="ecore:EEnum" href="http://g5.1c.ru/v8/dt/form#//FormChildrenAlign"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="groupMode" unique="false" eType="//GroupMode" defaultValueLiteral="eGMStandard"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="slaveEnableExternalAlign" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="slaveEnableSplitters" unique="false" defaultValueLiteral="true">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="slaveLogFormElementName" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="slaveBaseName" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="slaveHorGrouping" unique="false" defaultValueLiteral="true">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="slaveHAlign" unique="false" defaultValueLiteral="Left">
+      <eType xsi:type="ecore:EEnum" href="http://g5.1c.ru/v8/dt/form#//ItemHorizontalAlignment"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="slaveVAlign" unique="false" defaultValueLiteral="Top">
+      <eType xsi:type="ecore:EEnum" href="http://g5.1c.ru/v8/dt/form#//ItemVerticalAlignment"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="slaveHorSpacingVariant" unique="false" defaultValueLiteral="Single">
+      <eType xsi:type="ecore:EEnum" href="http://g5.1c.ru/v8/dt/form#//FormItemSpacing"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="slaveHorSpacing" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="slaveVerSpacingVariant" unique="false" defaultValueLiteral="Single">
+      <eType xsi:type="ecore:EEnum" href="http://g5.1c.ru/v8/dt/form#//FormItemSpacing"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="slaveVerSpacing" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="slaveChildrenAlign" unique="false" defaultValueLiteral="None">
+      <eType xsi:type="ecore:EEnum" href="http://g5.1c.ru/v8/dt/form#//FormChildrenAlign"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="slaveGroupVisible" unique="false" defaultValueLiteral="true">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="slaveGroupEnabled" unique="false" defaultValueLiteral="true">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="maxTargetWidth" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="FormCalculationContext" eSuperTypes="//FormGroupBaseCalculationContext //ElementWithLimitsBaseCalculationContext"/>
+  <eClassifiers xsi:type="ecore:EClass" name="InputFieldCalculationContext" eSuperTypes="//FormElementBaseCalculationContext //IContainedElementCalculationContext"/>
+  <eClassifiers xsi:type="ecore:EClass" name="ImageCalculationContext" eSuperTypes="//FormElementBaseCalculationContext">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="logicRowsHeight" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="CheckBoxCalculationContext" eSuperTypes="//FormElementBaseCalculationContext"/>
+  <eClassifiers xsi:type="ecore:EClass" name="SwitcherCalculationContext" eSuperTypes="//CheckBoxCalculationContext"/>
+  <eClassifiers xsi:type="ecore:EClass" name="ProgressBarCalculationContext" eSuperTypes="//FormElementBaseCalculationContext">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="logicRowsHeight" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="TrackBarCalculationContext" eSuperTypes="//FormElementBaseCalculationContext">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="logicRowsHeight" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="TextDocCalculationContext" eSuperTypes="//FormElementBaseCalculationContext">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="logicRowsHeight" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="FormButtonCalculationContext" eSuperTypes="//FormElementBaseCalculationContext //GroupBaseCalculationContext">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="logicRowsHeight" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="supportEqualWidth" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="equalWidth" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="PanelCalculationContext" eSuperTypes="//FormGroupBaseCalculationContext //ElementWithLimitsBaseCalculationContext"/>
+  <eClassifiers xsi:type="ecore:EClass" name="SeparatePanelCalculationContext" eSuperTypes="//FormGroupBaseCalculationContext //ElementWithLimitsBaseCalculationContext"/>
+  <eClassifiers xsi:type="ecore:EClass" name="FormattedAreaCalculationContext" eSuperTypes="//FormGroupBaseCalculationContext //ElementWithLimitsBaseCalculationContext">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="firstCallOfGetVariantFormattedArea" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="margins" eType="//Margins" containment="true" resolveProxies="false"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ExternalObjectCalculationContext" eSuperTypes="//FormElementBaseCalculationContext"/>
+  <eClassifiers xsi:type="ecore:EClass" name="LogicGroupCalculationContext" eSuperTypes="//FormGroupBaseCalculationContext //ElementWithLimitsBaseCalculationContext">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="behavior" unique="false">
+      <eType xsi:type="ecore:EEnum" href="http://g5.1c.ru/v8/dt/form#//UsualGroupBehavior"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="collapsed" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="originalTitle" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="textLength" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="groupWidth" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="groupHeight" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="throughAlign" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="finalVerGrouping" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="maxTargetHeight" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="representation" unique="false">
+      <eType xsi:type="ecore:EEnum" href="http://g5.1c.ru/v8/dt/form.layout.model.description.model#//LogicGroupInternalRepresentation"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="titleElement" containment="true" resolveProxies="false">
+      <eGenericType>
+        <eTypeArguments/>
+        <eTypeArguments/>
+        <eClassifier xsi:type="ecore:EClass" href="http://g5.1c.ru/v8/dt/form.layout.model.transformation.context#//ElementBaseTransformationContext"/>
+      </eGenericType>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="pPopUpElement" containment="true" resolveProxies="false">
+      <eGenericType>
+        <eTypeArguments/>
+        <eTypeArguments/>
+        <eClassifier xsi:type="ecore:EClass" href="http://g5.1c.ru/v8/dt/form.layout.model.transformation.context#//ElementBaseTransformationContext"/>
+      </eGenericType>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="pOriginalLogicGroup">
+      <eType xsi:type="ecore:EClass" href="http://g5.1c.ru/v8/dt/form.layout.model.description.model#//HippoLayLogicGroup"/>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="TumblerCalculationContext" eSuperTypes="//FormElementBaseCalculationContext">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="sizes" unique="false" upperBound="-1" eType="//Size"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="elementHeight" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="equalColumnsWidth" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="columnsCount" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="multiHeight" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="relativeWidth" unique="false" upperBound="-1">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EDouble"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="addBorderHeight" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="TableCalculationContext" eSuperTypes="//FormElementBaseCalculationContext //GroupBaseCalculationContext">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="logicRowsHeight" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="TableColumnsGroupCalculationContext" eSuperTypes="//GroupBaseCalculationContext">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="pCloneElement" containment="true" resolveProxies="false">
+      <eType xsi:type="ecore:EClass" href="http://g5.1c.ru/v8/dt/form.layout.model.description.model#//HippoLayElementBase"/>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="TableColumnCalculationContext" eSuperTypes="//ElementBaseCalculationContext">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="addWidth" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="pCloneElement" containment="true" resolveProxies="false">
+      <eType xsi:type="ecore:EClass" href="http://g5.1c.ru/v8/dt/form.layout.model.description.model#//HippoLayElementBase"/>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ViewStatusAdditionCalculationContext" eSuperTypes="//FormElementBaseCalculationContext"/>
+  <eClassifiers xsi:type="ecore:EClass" name="StaticTextCalculationContext" eSuperTypes="//FormElementBaseCalculationContext">
+    <eOperations name="setText" unique="false">
+      <eParameters name="text" unique="false">
+        <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+      </eParameters>
+      <eParameters name="forLengthCalculation" unique="false">
+        <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+      </eParameters>
+    </eOperations>
+    <eOperations name="setTextColor" unique="false">
+      <eParameters name="clr" unique="false" eType="//Color"/>
+    </eOperations>
+    <eOperations name="setFont" unique="false">
+      <eParameters name="fnt" unique="false" eType="//Font"/>
+    </eOperations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="logicRowsHeight" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="logicRowsHeightPriority" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="formattedStringHeight" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="canSeparate" unique="false" defaultValueLiteral="true">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="rowsCnt" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="maxStringWidth" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="horAdd" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="verAdd" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="curTitleForCalculation" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="curTitleForCalculationInLines" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="externalTextFlag" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="externalText" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="externalTextForCalculationFlag" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="externalTextForCalculation" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="autoWidth" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="lines" unique="false" upperBound="-1">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="hardLines" unique="false" upperBound="-1">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="prevLines" unique="false" upperBound="-1">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="prevHardLines" unique="false" upperBound="-1">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="externalColorFlag" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="externalColor" unique="false" eType="//Color"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="externalFontFlag" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="externalFont" unique="false" eType="//Font"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="originalLengthInDLU" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="textBreakMode" unique="false">
+      <eType xsi:type="ecore:EEnum" href="http://g5.1c.ru/v8/dt/form#//TextBreakMode"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="maxWordWidth" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="nonFormattedHeightDescrs" upperBound="-1" containment="true" resolveProxies="false">
+      <eType xsi:type="ecore:EClass" href="http://g5.1c.ru/v8/dt/form.layout.model.transformation.context#//NonFormattedHeightDescr"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="maxTargetWidth" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="RichElementCalculationContext" eSuperTypes="//GroupBaseCalculationContext">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="hasTitle" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="hasExtTooltip" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="extTooltipIsButton" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="titleIndex" unique="false" defaultValueLiteral="-1">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="extTooltipIndex" unique="false" defaultValueLiteral="-1">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="extTooltipPanelIndex" unique="false" defaultValueLiteral="-1">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="contentIndex" unique="false" defaultValueLiteral="-1">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="leftTitleIndent" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="rightTitleIndent" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="topTitleIndent" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="bottomTitleIndent" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="extTooltipHorIndent" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="extTooltipVerIndent" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="topTitleExtIndent" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="bottomTitleExtIndent" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="mobileHorIndent" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="maxWidthForRightExtTooltip" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="firstCallOfGetVariantRichElement" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="maxTargetHeight" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="maxTargetWidth" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="parentChildrenAlign" unique="false">
+      <eType xsi:type="ecore:EEnum" href="http://g5.1c.ru/v8/dt/form#//FormChildrenAlign"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="titleEdge" unique="false">
+      <eType xsi:type="ecore:EEnum" href="http://g5.1c.ru/v8/dt/form.layout.model.description.model#//HippoLayouterEdge"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="extTooltipEdge" unique="false">
+      <eType xsi:type="ecore:EEnum" href="http://g5.1c.ru/v8/dt/form.layout.model.description.model#//HippoLayouterEdge"/>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="RadioGroupCalculationContext" eSuperTypes="//FormElementBaseCalculationContext">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="buttonsCount" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="columnsCount" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="radioElementHeight" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="radioElementWidth" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="titleIndent" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="horSpacing" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="verSpacing" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="scaledFont" unique="false" eType="//Font"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="RadioGroupMobileCalculationContext" eSuperTypes="//RadioGroupCalculationContext"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Margins">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="leftMargin" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="topMargin" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="rightMargin" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="bottomMargin" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="leftPadding" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="topPadding" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="rightPadding" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="bottomPadding" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="PagesCalculationContext" eSuperTypes="//GroupBaseCalculationContext //ElementWithLimitsBaseCalculationContext">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="pCloneElement" containment="true" resolveProxies="false">
+      <eType xsi:type="ecore:EClass" href="http://g5.1c.ru/v8/dt/form.layout.model.description.model#//HippoLayElementBase"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="groupWidth" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="groupHeight" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="representation" unique="false" eType="//TabsRepresentationInt"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="margins" eType="//Margins" containment="true" resolveProxies="false"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="horTabsLength" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="verScroller" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="childrenMaxAdaptiveGroupingFormGroupLevels" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="horTabsMinHeight" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="PagePaddings">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="leftPadding" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="topPadding" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="rightPadding" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="bottomPadding" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="PageCalculationContext" eSuperTypes="//FormGroupBaseCalculationContext //ElementWithLimitsBaseCalculationContext">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="groupWidth" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="groupHeight" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="noRepresentation" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="paddings" eType="//PagePaddings" containment="true" resolveProxies="false"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="scrollOnCompress" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="minHeight" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="CommandBarCalculationContext" eSuperTypes="//ElementBaseCalculationContext">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="edits" upperBound="-1" eType="//StringToElementTransformationContextMapEntry" containment="true" resolveProxies="false"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="autoWidth" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="autoMinWidth" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="recomendedWidth" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="pCloneElement">
+      <eType xsi:type="ecore:EClass" href="http://g5.1c.ru/v8/dt/form.layout.model.description.model#//HippoLayElementBase"/>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="FormPresElementBaseCalculationContext" eSuperTypes="//FormElementBaseCalculationContext">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="logicRowsHeight" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="MoxelCalculationContext" eSuperTypes="//FormPresElementBaseCalculationContext"/>
+  <eClassifiers xsi:type="ecore:EClass" name="CalendarCalculationContext" eSuperTypes="//FormElementBaseCalculationContext">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="logicRowsHeight" unique="false" defaultValueLiteral="8">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="HTMLCalculationContext" eSuperTypes="//FormPresElementBaseCalculationContext"/>
+  <eClassifiers xsi:type="ecore:EClass" name="FormattedDocCalculationContext" eSuperTypes="//FormPresElementBaseCalculationContext"/>
+  <eClassifiers xsi:type="ecore:EClass" name="PlannerCalculationContext" eSuperTypes="//FormPresElementBaseCalculationContext"/>
+  <eClassifiers xsi:type="ecore:EClass" name="PeriodCalculationContext" eSuperTypes="//FormElementBaseCalculationContext">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="logicRowsHeight" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ChartCalculationContext" eSuperTypes="//FormPresElementBaseCalculationContext"/>
+  <eClassifiers xsi:type="ecore:EClass" name="GanttChartCalculationContext" eSuperTypes="//FormPresElementBaseCalculationContext"/>
+  <eClassifiers xsi:type="ecore:EClass" name="DendrogramCalculationContext" eSuperTypes="//FormPresElementBaseCalculationContext"/>
+  <eClassifiers xsi:type="ecore:EClass" name="FlowchartCalculationContext" eSuperTypes="//FormPresElementBaseCalculationContext"/>
+  <eClassifiers xsi:type="ecore:EClass" name="GeographicalMapCalculationContext" eSuperTypes="//FormPresElementBaseCalculationContext"/>
+  <eClassifiers xsi:type="ecore:EEnum" name="LFTargetPlatform">
+    <eLiterals name="eLFTPDontSpecific"/>
+    <eLiterals name="eLFTPGeneralClient" value="1"/>
+    <eLiterals name="eLFTPMobilePlatform" value="2"/>
+    <eLiterals name="eLFTPMobilePlatformEmulation" value="3"/>
+    <eLiterals name="eLFTPMobileThinClient" value="4"/>
+    <eLiterals name="eLFTPMobileThinClientEmulation" value="5"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="TabsRepresentationInt">
+    <eLiterals name="None"/>
+    <eLiterals name="Top"/>
+    <eLiterals name="Bottom"/>
+    <eLiterals name="LeftHor"/>
+    <eLiterals name="RightHor"/>
+    <eLiterals name="MobileSwipe"/>
+    <eLiterals name="MobileTop"/>
+    <eLiterals name="MobileBottom"/>
+    <eLiterals name="MobileVer"/>
+    <eLiterals name="Auto"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="GroupMode">
+    <eLiterals name="eGMStandard"/>
+    <eLiterals name="eGMSlaveMegaHor"/>
+    <eLiterals name="eGMSlaveMegaVer"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EDataType" name="Size" instanceClassName="com._1c.g5.v8.dt.form.layout.model.common.Size"/>
+  <eClassifiers xsi:type="ecore:EDataType" name="Font" instanceClassName="com._1c.g5.v8.dt.form.layout.model.platform.font.Font"/>
+  <eClassifiers xsi:type="ecore:EDataType" name="Color" instanceClassName="com._1c.g5.v8.dt.form.layout.model.platform.color.Color"/>
+  <eClassifiers xsi:type="ecore:EDataType" name="CalculateAdditionalOptions" instanceClassName="com._1c.g5.v8.dt.form.layout.model.calculation.CalculateAdditionalOptions"/>
+</ecore:EPackage>

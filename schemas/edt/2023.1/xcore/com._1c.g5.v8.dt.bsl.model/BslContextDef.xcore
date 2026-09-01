@@ -1,0 +1,67 @@
+@GenModel(loadInitialization="false", literalsInterface="true", nonNLSMarkers="true", prefix="BslContextDef",
+    copyrightText="Copyright (C) 2022, 1C", updateClasspath="false", featureDelegation="Reflective",
+    rootExtendsClass="com._1c.g5.v8.bm.core.BmObject")
+@Ecore(nsPrefix="bslcontextdef", nsURI="http://g5.1c.ru/v8/dt/bsl/contextdef/model")
+package com._1c.g5.v8.dt.bsl.model
+
+import com._1c.g5.v8.dt.mcore.ContextDef
+import com._1c.g5.v8.dt.mcore.Method
+import com._1c.g5.v8.dt.mcore.Property
+import org.eclipse.emf.common.util.BasicEList
+import org.eclipse.emf.common.util.URI
+import org.eclipse.emf.ecore.EObject
+
+class BslContextDef extends ContextDef
+{
+	URI moduleUri
+	boolean globalCommonModule
+	String allMethodNames  //all module names through comma
+	
+	op Property[] allProperties() {
+		properties
+	}
+	op Method[] allMethods() {
+		methods
+	}
+	op ContextDef[] allRefContextDefs() {
+		new BasicEList();
+	}
+}
+
+type URI wraps URI
+create
+{
+	URI::createURI(it)
+}
+convert
+{
+	it.toString
+}
+
+class SourceObjectLinkProvider
+{
+	URI sourceUri
+}
+
+class BslContextDefMethod extends Method, SourceObjectLinkProvider
+{
+	boolean serverCall
+	boolean deprecated
+	unsettable String[] commentLines
+    unsettable int[] commentLineLocalOffsets
+}
+
+class BslContextDefMockMethod extends BslContextDefMethod
+{
+	refers EObject context
+}
+
+class BslContextDefProperty extends Property, SourceObjectLinkProvider
+{
+	
+}
+
+class BslContextDefMockProperty extends BslContextDefProperty
+{
+	refers EObject context
+}

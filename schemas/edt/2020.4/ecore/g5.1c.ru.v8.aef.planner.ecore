@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="ASCII"?>
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="viewModels" nsURI="http://g5.1c.ru/v8/aef/planner" nsPrefix="PlannerAef">
+  <eClassifiers xsi:type="ecore:EClass" name="PlannerDimensionGridItem">
+    <eSuperTypes href="http://g5.1c.ru/v8/aef/dt#//IGridItem"/>
+    <eOperations name="getImage" unique="false" eType="//Image">
+      <eParameters name="column" unique="false">
+        <eType xsi:type="ecore:EClass" href="http://g5.1c.ru/v8/aef/dt#//GridColumnViewModel"/>
+      </eParameters>
+    </eOperations>
+    <eOperations name="getText" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+      <eParameters name="column" unique="false">
+        <eType xsi:type="ecore:EClass" href="http://g5.1c.ru/v8/aef/dt#//GridColumnViewModel"/>
+      </eParameters>
+    </eOperations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="text" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="textColor" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="backColor" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="borderColor" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="font" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EDataType" name="Image" instanceClassName="org.eclipse.swt.graphics.Image"/>
+</ecore:EPackage>

@@ -1,0 +1,50 @@
+@GenModel(loadInitialization="false", literalsInterface="true", nonNLSMarkers="true", prefix="RightQl", copyrightText="Copyright (C) 2014, 1C", updateClasspath="false")
+@Ecore(nsPrefix="qlrights", nsURI="http://g5.1c.ru/v8/dt/right/ql/model")
+
+package com._1c.g5.v8.dt.right.ql.model
+
+import com._1c.g5.v8.dt.mcore.NamedElement
+import com._1c.g5.v8.dt.ql.model.AbstractExpression
+import com._1c.g5.v8.dt.ql.model.QuerySchemaExpression
+import com._1c.g5.v8.dt.ql.model.QuerySchemaSource
+import com._1c.g5.v8.dt.ql.model.DbViewDescriptionTempTable
+import com._1c.g5.v8.dt.metadata.dbview.DbViewDef
+import com._1c.g5.v8.dt.rights.model.RoleDescription
+
+abstract class Restriction
+{
+	refers RoleDescription owner
+}
+
+class TemplateRestriction extends Restriction
+{
+	contains TemplateCall template
+}
+
+class TemplateCall extends NamedElement, AbstractExpression
+{
+	contains AbstractExpression[] params
+}
+
+class QlRestriction extends Restriction
+{
+	String restrictTableName
+	contains QuerySchemaExpression filters //отбор //"Где"
+	contains QuerySchemaSource[] sources
+	contains transient DbViewDef[] dbViewByFrom
+	contains transient DbViewDescriptionTempTable[] descriptionTempTable 
+	boolean from
+}
+
+class PreprocessorRestriction extends Restriction
+{
+	contains PreprocessorConditional ifPart
+	contains PreprocessorConditional[] elsIfParts
+	contains Restriction elseRestriction
+}
+
+class PreprocessorConditional
+{
+	contains AbstractExpression predicate
+	contains Restriction restriction
+}

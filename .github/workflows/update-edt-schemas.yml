@@ -1,0 +1,277 @@
+name: Обновление схем 1С:EDT
+
+on:
+  schedule:
+    # Раз в неделю, в другой день от конвейера схем платформы
+    - cron: '0 7 * * 3'
+  workflow_dispatch:
+    inputs:
+      versions:
+        description: 'Версии EDT через пробел (пусто - все необработанные)'
+        required: false
+        default: ''
+      redump:
+        description: 'Перевыгрузить версии, даже если они уже обработаны'
+        required: false
+        type: boolean
+        default: false
+      batch_size:
+        description: 'Максимум версий за прогон'
+        required: false
+        default: '12'
+
+concurrency:
+  group: update-edt-schemas
+  cancel-in-progress: false
+
+jobs:
+  versions:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+
+    permissions:
+      contents: read
+
+    outputs:
+      list: ${{ steps.pick.outputs.list }}
+      count: ${{ steps.pick.outputs.count }}
+
+    steps:
+      - name: Получить код
+        uses: actions/checkout@v5
+
+      - name: Установить OneScript
+        uses: otymko/setup-onescript@v1.5.1
+        with:
+          version: stable
+
+      - name: Установить yard
+        run: |
+          opm install opm
+          opm install yard
+          YARD_OS=$(find "$HOME/.local/share/ovm" -path '*/yard/src/yard.os' 2>/dev/null | head -1)
+          if [ -z "$YARD_OS" ]; then echo "ERROR: yard.os не найден"; exit 1; fi
+          echo "YARD_OS=$YARD_OS" >> "$GITHUB_ENV"
+
+      - name: Выбрать версии EDT
+        id: pick
+        env:
+          YARD_RELEASES_USER: ${{ secrets.ONEC_LOGIN }}
+          YARD_RELEASES_PWD: ${{ secrets.ONEC_PASSWORD }}
+          REQUESTED: ${{ inputs.versions }}
+          REDUMP: ${{ inputs.redump && 'true' || '' }}
+          BATCH_SIZE: ${{ inputs.batch_size || '12' }}
+        run: |
+          set -eo pipefail
+          if [ -n "$REQUESTED" ]; then
+            CANDIDATES="$REQUESTED"
+          else
+            oscript "$YARD_OS" releases list \
+              --app-filter "1C:Enterprise Development Tools" \
+              --output-file /tmp/edt-versions.json
+            # Версии вида 2026.1.x: берём все, старшие первыми
+            CANDIDATES=$(jq -r '[.. | strings | select(test("^[0-9]{4}[.][0-9]"))] | unique | reverse | .[]' /tmp/edt-versions.json)
+            echo "Доступно релизов EDT: $(echo $CANDIDATES | wc -w)"
+          fi
+
+          # Каталог схем называется по релизу EDT: 2026.1.3+7 хранится как 2026.1.
+          # На каталог хватает старшего релиза, поэтому дубли отбрасываем.
+          TODO=""
+          SEEN=""
+          for VERSION in $CANDIDATES; do
+            SHORT=$(echo "$VERSION" | cut -d. -f1,2)
+            case " $SEEN " in *" $SHORT "*) continue;; esac
+            SEEN="$SEEN $SHORT"
+            if [ "$REDUMP" != "true" ] && jq -e --arg v "$SHORT" 'has($v)' schemas/edt/processed-versions.json > /dev/null; then
+              continue
+            fi
+            TODO="$TODO $VERSION"
+            if [ "$(echo $TODO | wc -w)" -ge "$BATCH_SIZE" ]; then break; fi
+          done
+          TODO=$(echo $TODO)
+
+          echo "К обработке: ${TODO:-нечего}"
+          LIST=$(printf '%s\n' $TODO | jq -R . | jq -s -c .)
+          echo "list=$LIST" >> "$GITHUB_OUTPUT"
+          echo "count=$(echo $TODO | wc -w)" >> "$GITHUB_OUTPUT"
+
+  build:
+    needs: versions
+    if: needs.versions.outputs.count != '0'
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+
+    permissions:
+      contents: read
+
+    strategy:
+      fail-fast: false
+      # Больше трёх параллельных загрузок с releases.1c.ru не просим
+      max-parallel: 3
+      matrix:
+        version: ${{ fromJson(needs.versions.outputs.list) }}
+
+    steps:
+      - name: Получить код
+        uses: actions/checkout@v5
+
+      - name: Установить JDK
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+
+      - name: Установить OneScript
+        uses: otymko/setup-onescript@v1.5.1
+        with:
+          version: stable
+
+      - name: Установить yard
+        run: |
+          opm install opm
+          opm install yard
+          YARD_OS=$(find "$HOME/.local/share/ovm" -path '*/yard/src/yard.os' 2>/dev/null | head -1)
+          if [ -z "$YARD_OS" ]; then echo "ERROR: yard.os не найден"; exit 1; fi
+          echo "YARD_OS=$YARD_OS" >> "$GITHUB_ENV"
+
+      - name: Системные зависимости EDT
+        run: |
+          set -eo pipefail
+          sudo apt-get update
+          sudo DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends libgtk-3-0 locales
+          sudo localedef -i ru_RU -c -f UTF-8 -A /usr/share/locale/locale.alias ru_RU.UTF-8 || true
+
+      - name: Собрать схемы версии
+        id: extract
+        env:
+          YARD_RELEASES_USER: ${{ secrets.ONEC_LOGIN }}
+          YARD_RELEASES_PWD: ${{ secrets.ONEC_PASSWORD }}
+          VERSION: ${{ matrix.version }}
+        run: |
+          set -eo pipefail
+          SHORT=$(echo "$VERSION" | cut -d. -f1,2)
+          echo "short=$SHORT" >> "$GITHUB_OUTPUT"
+          DISTR_DIR=$(mktemp -d); chmod 777 "$DISTR_DIR"
+
+          ESCAPED_VERSION=$(echo "$VERSION" | sed 's/[.]/\\./g')
+          # Названия дистрибутивов у разных выпусков отличаются, поэтому идём
+          # от точного к общему: последний фильтр берёт любой Linux-дистрибутив
+          DISTR_FILTERS=(
+            "Дистрибутив для оффлайн установки 1C:EDT для ОС Linux 64 бит"
+            "Дистрибутив 1C:EDT для ОС Linux для установки без интернета"
+            "Linux"
+          )
+          for DF in "${DISTR_FILTERS[@]}"; do
+            timeout 1800 oscript "$YARD_OS" releases get \
+              --app-filter "1C:Enterprise Development Tools" \
+              --version-filter "$ESCAPED_VERSION" \
+              --distr-filter "$DF" \
+              --path "$DISTR_DIR" --download-limit 1 --extract || true
+            if find "$DISTR_DIR" -name '1ce-installer-cli' -o -name '*.tar.gz' | grep -q .; then
+              break
+            fi
+          done
+
+          echo "Скачано:"
+          find "$DISTR_DIR" -maxdepth 2 -type f | sed "s#$DISTR_DIR/##" | head -10
+
+          if ! find "$DISTR_DIR" -name '1ce-installer-cli' | grep -q .; then
+            ARCHIVE=$(find "$DISTR_DIR" -name '*.tar.gz' | head -1)
+            if [ -z "$ARCHIVE" ]; then
+              echo "Дистрибутив $VERSION не получен: версия пропущена"
+              echo "ready=false" >> "$GITHUB_OUTPUT"
+              exit 0
+            fi
+            tar -xzf "$ARCHIVE" -C "$DISTR_DIR"
+          fi
+
+          INSTALLER=$(find "$DISTR_DIR" -name '1ce-installer-cli' | head -1)
+          if [ -z "$INSTALLER" ]; then
+            echo "В дистрибутиве $VERSION нет 1ce-installer-cli: версия пропущена"
+            echo "ready=false" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+          (cd "$(dirname "$INSTALLER")" && chmod -R +x . && sudo ./1ce-installer-cli install all \
+            --ignore-hardware-checks --ignore-signature-warnings)
+          rm -rf "$DISTR_DIR"
+
+          # Каталог установки назван по версии: с загрузчиком EDT не спутать -
+          # у него свой bundles.info на три плагина
+          BUNDLES=$(sudo find /opt/1C -path "*1c-edt-$SHORT*/configuration/org.eclipse.equinox.simpleconfigurator/bundles.info" 2>/dev/null | head -1)
+          if [ -z "$BUNDLES" ]; then
+            echo "EDT $SHORT не установилась: версия пропущена"
+            echo "Что стоит в /opt/1C:"
+            sudo ls /opt/1C/1CE/components 2>/dev/null || true
+            echo "ready=false" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+
+          INSTALLATION=$(dirname "$(dirname "$(dirname "$BUNDLES")")")
+          # Чтение файлов мало: без +x на каталогах путь до jar не открывается
+          sudo chmod -R a+rX "$INSTALLATION"
+          bash tools/edt-schemas/extract.sh "$SHORT" "$INSTALLATION"
+          echo "ready=true" >> "$GITHUB_OUTPUT"
+
+      - name: Передать схемы дальше
+        if: steps.extract.outputs.ready == 'true'
+        uses: actions/upload-artifact@v4
+        with:
+          name: edt-schemas-${{ steps.extract.outputs.short }}
+          path: schemas/edt/${{ steps.extract.outputs.short }}
+          retention-days: 1
+
+  commit:
+    needs: [versions, build]
+    if: always() && needs.versions.outputs.count != '0'
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+
+    permissions:
+      contents: write
+
+    steps:
+      - name: Получить код
+        uses: actions/checkout@v5
+
+      - name: Забрать схемы версий
+        uses: actions/download-artifact@v4
+        with:
+          path: /tmp/edt-schemas
+          pattern: edt-schemas-*
+
+      - name: Разложить схемы и обновить реестр
+        id: collect
+        run: |
+          set -eo pipefail
+          TODAY=$(date -u +%Y-%m-%d)
+          DONE=""
+
+          for DIR in /tmp/edt-schemas/edt-schemas-*; do
+            [ -d "$DIR" ] || continue
+            SHORT=$(basename "$DIR" | sed 's/^edt-schemas-//')
+            rm -rf "schemas/edt/$SHORT"
+            mkdir -p "schemas/edt/$SHORT"
+            cp -r "$DIR/." "schemas/edt/$SHORT/"
+            jq --arg v "$SHORT" --arg d "$TODAY" '. + {($v): $d}' schemas/edt/processed-versions.json > /tmp/processed.json
+            mv /tmp/processed.json schemas/edt/processed-versions.json
+            DONE="$DONE $SHORT"
+          done
+
+          echo "Собрано версий: ${DONE:-нет}"
+          echo "done=$(echo $DONE)" >> "$GITHUB_OUTPUT"
+
+      - name: Закоммитить схемы
+        if: steps.collect.outputs.done != ''
+        env:
+          DONE: ${{ steps.collect.outputs.done }}
+        run: |
+          set -eo pipefail
+          git config user.name  "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add schemas/edt
+          if git diff --cached --quiet; then
+            echo "Схемы не изменились"
+            exit 0
+          fi
+          git commit -m "chore(schemas): схемы 1С:EDT $DONE"
+          git push origin "HEAD:${GITHUB_REF_NAME}"

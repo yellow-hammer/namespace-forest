@@ -1,0 +1,35 @@
+@GenModel(nonNLSMarkers="true", prefix="Lcore", copyrightText="Copyright (C) 2013, 1C", updateClasspath="false")
+@Ecore(nsPrefix="core", nsURI="http://g5.1c.ru/v8/dt/lcore")
+package com._1c.g5.v8.dt.lcore.model
+
+import com._1c.g5.v8.dt.mcore.DateFractions
+
+abstract class BasicType
+{
+}
+
+class BooleanType extends BasicType
+{
+}
+
+class StringType extends BasicType
+{
+    int length
+    boolean fixed
+}
+
+class NumberType extends BasicType
+{
+    int precision
+    int scale
+    boolean nonNegative
+}
+
+class DateType extends BasicType
+{
+    DateFractions dateFractions
+}
+
+class NullType extends BasicType
+{
+}

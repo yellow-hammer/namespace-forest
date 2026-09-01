@@ -1,0 +1,183 @@
+@Ecore(nsURI="http://v8.1c.ru/8.3/debugger/debugBaseData")
+@GenModel(nonNLSMarkers="true", copyrightText="Copyright (C) 2014, 1C", updateClasspath="false")
+package com._1c.g5.v8.dt.debug.model.base.data
+
+import com._1c.g5.v8.dt.debug.model.core.UUID
+import com._1c.g5.v8.dt.debug.model.core.ObjectVersion
+import org.eclipse.emf.ecore.xml.^type.Base64Binary
+import java.math.BigDecimal
+
+@ExtendedMetaData(name="AttachDebugUIResult")
+enum AttachDebugUIResult {
+	unknown
+	registered = 1
+	credentialsRequired = 2
+	ibInDebug = 3
+	notRegistered = 4
+	fullCredentialsRequired = 5
+}
+
+@ ExtendedMetaData ( name = "AttachDebugUIResult:Object" , baseType = "AttachDebugUIResult" ) type AttachDebugUIResultObject wraps org.eclipse.emf.common.util.Enumerator
+
+@ExtendedMetaData(name="BSLModuleIdInternal", kind="elementOnly")
+class BSLModuleIdInternal {
+	@ExtendedMetaData(kind="element", name="type", namespace="##targetNamespace")
+	unsettable BSLModuleType[1] ^type = "ConfigModule"
+	@ExtendedMetaData(kind="element", name="URL", namespace="##targetNamespace")
+	unsettable String[1] uRL = ""
+	@ExtendedMetaData(kind="element", name="extensionName", namespace="##targetNamespace")
+	unsettable String[1] extensionName = "" // versions 8.3.10+
+	@ExtendedMetaData(kind="element", name="objectID", namespace="##targetNamespace")
+	UUID objectID
+	@ExtendedMetaData(kind="element", name="propertyID", namespace="##targetNamespace")
+	UUID propertyID
+	@ExtendedMetaData(kind="element", name="extId", namespace="##targetNamespace")
+	unsettable BigDecimal[1] extId = "0"
+	@ExtendedMetaData(kind="element", name="version", namespace="##targetNamespace")
+	ObjectVersion version
+}
+
+@ ExtendedMetaData ( name = "BSLModuleIdInternalStr" , baseType = "http://www.eclipse.org/emf/2003/XMLType#base64Binary" ) type BSLModuleIdInternalStr wraps byte[]
+
+@ExtendedMetaData(name="BSLModuleIdUser", kind="elementOnly")
+class BSLModuleIdUser {
+	@ExtendedMetaData(kind="element", name="type", namespace="##targetNamespace")
+	unsettable BSLModuleType[1] ^type
+	@ExtendedMetaData(kind="element", name="URL", namespace="##targetNamespace")
+	unsettable String[1] uRL = ""
+	@ExtendedMetaData(kind="element", name="extensionName", namespace="##targetNamespace")
+	unsettable String[1] extensionName = "" // versions 8.3.10+
+	@ExtendedMetaData(kind="element", name="MDObject", namespace="##targetNamespace")
+	String[1] mDObject
+	@ExtendedMetaData(kind="element", name="MDProperty", namespace="##targetNamespace")
+	String[1] mDProperty
+	@ExtendedMetaData(kind="element", name="ExtId", namespace="##targetNamespace")
+	unsettable BigDecimal[1] extId = "0"
+	@ExtendedMetaData(kind="element", name="Version", namespace="##targetNamespace")
+	ObjectVersion version
+}
+
+@ExtendedMetaData(name="BSLModuleType")
+enum BSLModuleType {
+	ConfigModule
+	SystemFormModule = 1
+	SystemModule = 2
+	ExtMDModule = 3
+	ExtensionModule = 4
+}
+
+@ ExtendedMetaData ( name = "BSLModuleType:Object" , baseType = "BSLModuleType" ) type BSLModuleTypeObject wraps org.eclipse.emf.common.util.Enumerator
+
+@ExtendedMetaData(name="DbgTargetState")
+enum DbgTargetState {
+	Undefined
+	NotRegistered = 1
+	Registered = 2
+	WaitDebugger = 3
+	Worked = 4
+	StopOnNextLine = 5
+	Evaluating = 6
+	Terminating = 7
+	Last = 8
+}
+
+@ExtendedMetaData(name="DbgTargetStateInfo", kind="elementOnly")
+class DbgTargetStateInfo {
+	@ExtendedMetaData(kind="element", name="targetIDStr", namespace="##targetNamespace")
+	DebugTargetIdStr targetIDStr
+	@ExtendedMetaData(kind="element", name="targetID", namespace="##targetNamespace")
+	contains DebugTargetId targetID
+	@ExtendedMetaData(kind="element", name="stateNum", namespace="##targetNamespace")
+	BigDecimal stateNum
+	@ExtendedMetaData(kind="element", name="state", namespace="##targetNamespace")
+	unsettable DbgTargetState state
+}
+
+@ ExtendedMetaData ( name = "DbgTargetState:Object" , baseType = "DbgTargetState" ) type DbgTargetStateObject wraps org.eclipse.emf.common.util.Enumerator
+
+@ExtendedMetaData(name="DebugStepAction")
+enum DebugStepAction {
+	Unknown
+	Step = 1
+	StepIn = 2
+	StepOut = 3
+	Continue = 4
+}
+
+@ ExtendedMetaData ( name = "DebugStepAction:Object" , baseType = "DebugStepAction" ) type DebugStepActionObject wraps org.eclipse.emf.common.util.Enumerator
+
+@ExtendedMetaData(name="DebugTargetId", kind="elementOnly")
+class DebugTargetId extends DebugTargetIdLight {
+	@ExtendedMetaData(kind="element", name="seanceId", namespace="##targetNamespace")
+	UUID[1] seanceId
+	@ExtendedMetaData(kind="element", name="seanceNo", namespace="##targetNamespace")
+	BigDecimal[1] seanceNo
+	@ExtendedMetaData(kind="element", name="infoBaseInstanceID", namespace="##targetNamespace")
+	UUID[1] infoBaseInstanceID
+	@ExtendedMetaData(kind="element", name="infoBaseAlias", namespace="##targetNamespace")
+	String[1] infoBaseAlias
+	@ExtendedMetaData(kind="element", name="isServerInfoBase", namespace="##targetNamespace")
+	unsettable IsServerInfoBase[1] isServerInfoBase
+	@ExtendedMetaData(kind="element", name="userName", namespace="##targetNamespace")
+	unsettable String[1] userName = ""
+	@ExtendedMetaData(kind="element", name="configVersion", namespace="##targetNamespace")
+	ObjectVersion[1] configVersion
+	@ExtendedMetaData(kind="element", name="targetType", namespace="##targetNamespace")
+	unsettable DebugTargetType[1] targetType
+}
+
+@ExtendedMetaData(name="DebugTargetIdLight", kind="elementOnly")
+class DebugTargetIdLight {
+	@ExtendedMetaData(kind="element", name="id", namespace="##targetNamespace")
+	UUID[1] ^id
+}
+
+@ ExtendedMetaData ( name = "DebugTargetIdStr" , baseType = "http://www.eclipse.org/emf/2003/XMLType#base64Binary" ) type DebugTargetIdStr wraps byte[]
+
+@ExtendedMetaData(name="DebugTargetType")
+enum DebugTargetType {
+	Unknown
+	Client = 1
+	ManagedClient = 2
+	WEBClient = 3
+	COMConnector = 4
+	Server = 5
+	ServerEmulation = 6
+	WEBService = 7
+	HTTPService = 8
+	OData = 9
+	WebSocket = 10
+	WebSocketFileMode = 11
+	JOB = 12
+	JobFileMode = 13
+	MobileClient = 14
+	MobileServer = 15
+	MobileJobFileMode = 16
+	MobileManagedClient = 17
+	MobileManagedServer = 18
+}
+
+@ ExtendedMetaData ( name = "DebugTargetType:Object" , baseType = "DebugTargetType" ) type DebugTargetTypeObject wraps org.eclipse.emf.common.util.Enumerator
+
+@ExtendedMetaData(name="IsServerInfoBase")
+enum IsServerInfoBase {
+	undefined
+	^true = 1
+	^false = 2
+}
+
+@ ExtendedMetaData ( name = "IsServerInfoBase:Object" , baseType = "IsServerInfoBase" ) type IsServerInfoBaseObject wraps org.eclipse.emf.common.util.Enumerator
+
+@ExtendedMetaData(name="StackItemViewInfoData", kind="elementOnly")
+class StackItemViewInfoData {
+	@ExtendedMetaData(kind="element", name="moduleIDStr", namespace="##targetNamespace")
+	BSLModuleIdInternalStr moduleIDStr
+	@ExtendedMetaData(kind="element", name="moduleID", namespace="##targetNamespace")
+	contains BSLModuleIdInternal moduleID
+	@ExtendedMetaData(kind="element", name="lineNo", namespace="##targetNamespace")
+	BigDecimal[1] lineNo
+	@ExtendedMetaData(kind="element", name="presentation", namespace="##targetNamespace")
+	Base64Binary[1] presentation
+	@ExtendedMetaData(kind="element", name="isFantom", namespace="##targetNamespace")
+    unsettable Boolean[1] isFantom
+}

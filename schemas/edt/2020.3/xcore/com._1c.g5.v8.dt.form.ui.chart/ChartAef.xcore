@@ -1,0 +1,296 @@
+@GenModel(loadInitialization="false", literalsInterface="true", nonNLSMarkers="true", prefix="ChartAef",
+    copyrightText="Copyright (C) 2016, 1C", updateClasspath="false")
+@Ecore(nsPrefix="ChartAef", nsURI="http://g5.1c.ru/v8/aef/chart")
+
+package com._1c.g5.v8.dt.form.ui.chart.aef.viewModels
+
+import com._1c.g5.v8.dt.ui.aef.viewModels.IGridItem
+import com._1c.g5.v8.dt.ui.aef.viewModels.GridColumnViewModel
+import org.eclipse.swt.graphics.Image
+
+type Image wraps Image
+
+class TimeScaleLevelGridItem extends IGridItem
+{
+	boolean show
+	boolean showPeriodicalLabels
+	String measure
+	String interval
+	String dayFormatRule
+	String format
+	String labels
+	String line
+	String scaleColor
+	String backColor
+	String textColor
+	Image lineImage
+	Image scaleColorImage
+	Image backColorImage
+	Image textColorImage
+	op boolean isChecked(GridColumnViewModel column) {
+		switch (column.index) {
+			case 0: show
+			case 1: showPeriodicalLabels
+			default: throw new IllegalArgumentException("The given column index is out of bound")
+		}
+	}
+	op Image getImage(GridColumnViewModel column) {
+		switch (column.index) {
+			case 7: lineImage
+			case 8: scaleColorImage
+			case 9: backColorImage
+			case 10: textColorImage
+			default: throw new IllegalArgumentException("The given column index is out of bound")
+		}
+	}
+	op String getText(GridColumnViewModel column) {
+		switch (column.index) {
+			case 0: null
+			case 1: null
+			case 2: measure
+			case 3: interval
+			case 4: dayFormatRule
+			case 5: format
+			case 6: labels
+			case 7: line
+			case 8: scaleColor
+			case 9: backColor
+			case 10: textColor
+			default: throw new IllegalArgumentException("The given column index is out of bound")
+		}
+	}
+}
+
+class TimeScaleLabelGridItem extends IGridItem
+{
+	String date
+	String text
+	String lineColor
+	String textColor
+	Image lineColorImage
+	Image textColorImage
+	op Image getImage(GridColumnViewModel column) {
+		switch (column.index) {
+			case 2: lineColorImage
+			case 3: textColorImage
+			default: throw new IllegalArgumentException("The given column index is out of bound")
+		}
+	}
+	op String getText(GridColumnViewModel column) {
+		switch (column.index) {
+			case 0: date
+			case 1: text
+			case 2: lineColor
+			case 3: textColor
+			default: throw new IllegalArgumentException("The given column index is out of bound")
+		}
+	}
+}
+
+/* The chart reference line grid item */
+class ChartReferenceLineGridItem extends IGridItem 
+{
+	/* The grid's 1st column value.
+	 * Can be a string representation of 'value', depending on context.
+	 */
+	String column1
+	
+	/* The grid's 2st column value.
+	 * Can be a string representation of 'label text' or 'tooltip', depending on context.
+	 */
+	String column2
+	
+	/* The grid's 3rd column value.
+	 * Can be a string representation of 'label area', depending on context.
+	 */
+	String column3
+	
+	/* The grid's 4st column value.
+	 * Can be a string representation of 'color' or 'semitransparency percent', depending on context.
+	 */
+	String column4
+	
+	/* The grid's 5st column value.
+	 * Can be a string representation of 'line' or 'position', depending on context.
+	 */
+	String column5
+	
+	op String getText(GridColumnViewModel column) 
+	{
+		switch (column.index) {
+			case 0: column1
+			case 1: column2
+			case 2: column3
+			case 3: column4
+			case 4: column5
+			default: throw new IllegalArgumentException("The given column index is out of bound")
+		}
+	}	
+}
+
+/* The chart reference band grid item */
+class ChartReferenceBandGridItem extends IGridItem 
+{
+	/* The grid's 1st column value.
+	 * Can be a string representation of 'begin' or 'end', depending on context.
+	 */
+	String column1
+	
+	/* The grid's 2st column value.
+	 * Can be a string representation of 'label text' or 'tooltip', depending on context.
+	 */
+	String column2
+	
+	/* The grid's 3rd column value.
+	 * Can be a string representation of 'label area', depending on context.
+	 */
+	String column3
+	
+	/* The grid's 4st column value.
+	 * Can be a string representation of 'color' or 'semitransparency percent', depending on context.
+	 */
+	String column4
+	
+	/* The grid's 5st column value.
+	 * Can be a string representation of 'border' or 'border semitransparency percent', depending on context.
+	 */
+	String column5
+	
+	/* The grid's 6st column value.
+	 * Can be a string representation of 'line', depending on context.
+	 */
+	String column6
+	
+	/* The grid's 7st column value.
+	 * Can be a string representation of 'display area begin' or 'display area end', depending on context.
+	 */
+	String column7
+	
+	/* The grid's 8st column value.
+	 * Can be a string representation of 'position', depending on context.
+	 */
+	String column8
+	
+	op String getText(GridColumnViewModel column) 
+	{
+		switch (column.index) {
+			case 0: column1
+			case 1: column2
+			case 2: column3
+			case 3: column4
+			case 4: column5
+			case 5: column6
+			case 6: column7
+			case 7: column8
+			default: throw new IllegalArgumentException("The given column index is out of bound")
+		}
+	}	
+}
+
+/* The trendline grid item */
+class TrendlineGridItem extends IGridItem
+{
+	/* The grid's 1st column value.
+	 * Can be a string representation of 'approximation type' or 'approximation degree' value of trendline, depending on context.
+	 */
+	String column1
+	/* The grid's 2nd column value.
+	 * Can be a string representation of 'factor' or 'stock chart used point value' value of trendline, depending on context.
+	 */
+	String column2
+	/* The grid's 3rd column value.
+	 * Can be a string representation of 'color' or 'marker' or 'line style' value of trendline, depending on context.
+	 */
+	String column3
+	/* The grid's 4th column value.
+	 * Can be a string representation of 'text' or 'equation area' value of trendline, depending on context.
+	 */
+	String column4
+	/* The grid's 5th column value.
+	 * Can be a boolean representation of 'show in legend' or 'show equation' or 'show determination factor' value of trendline, depending on context. 
+	 */
+	boolean column5
+	
+	op String getText(GridColumnViewModel column) {
+		switch (column.index) {
+			case 0: column1
+			case 1: column2
+			case 2: column3
+			case 3: column4
+			case 4: null
+			default: throw new IllegalArgumentException("The given column index is out of bound")
+		}
+	}	
+	
+	op boolean isChecked(GridColumnViewModel column) {
+		switch (column.index) {
+			case 4: column5
+			default: throw new IllegalArgumentException("The given column index is out of bound")
+		}
+	}	
+}
+
+/* The gauge chart quality band grid item */
+class GaugeChartQualityBandGridItem extends IGridItem
+{
+	/* The 'begin' view model value. A string representation of a 'begin' value of a gauge chart quality band. */
+	String begin
+	/* The 'end' view model value. A string representation of a 'end' value of a gauge chart quality band. */
+	String end
+	/* The 'back color' view model value. A string representation of a 'back color' value of a gauge chart quality band. */
+	String backColor
+	/* The 'text' view model value. A string representation of a 'text' value of a gauge chart quality band. */
+	String text
+	/* The 'tooltip' view model value. A string representation of a 'tooltip' value of a gauge chart quality band. */	
+	String tooltip
+	
+	op String getText(GridColumnViewModel column) {
+		switch (column.index) {
+			case 0: begin
+			case 1: end
+			case 2: backColor
+			case 3: text
+			case 4: tooltip
+			default: throw new IllegalArgumentException("The given column index is out of bound")
+		}
+	}	
+}
+
+/* The chart interval grid item */
+class ChartIntervalGridItem extends IGridItem
+{
+	/* The 'begin' view model value. A string representation of a beginning time of a gantt chart's background interval */
+	String begin
+	/* The 'end' view model value. A string representation of a ending time of a gantt chart's background interval */
+	String end
+	/* The 'color' view model value. A string representation of a color of a gantt chart's background interval */
+	String color
+	/* The 'color image' view model value. An image representation of a color of a gantt chart's background interval */
+	Image colorImage
+	
+	op Image getImage(GridColumnViewModel column) {
+		switch (column.index) {
+			case 2: colorImage
+			default: throw new IllegalArgumentException("The given column index is out of bound")
+		}
+	}	
+	op String getText(GridColumnViewModel column) {
+		switch (column.index) {
+			case 0: begin
+			case 1: end
+			case 2: color
+			default: throw new IllegalArgumentException("The given column index is out of bound")
+		}
+	}	
+}
+
+/* The gantt chart background interval auxiliary representation */
+class GanttChartBackgroundInterval
+{
+	/* The beginning time of a gantt chart's background interval */
+	com._1c.g5.v8.dt.mcore.Date begin
+	/* The ending time of a gantt chart's background interval */
+	com._1c.g5.v8.dt.mcore.Date end
+	/* The color of a gantt chart's background interval */
+	contains com._1c.g5.v8.dt.mcore.Color color
+}

@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="ASCII"?>
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="descriptor" nsURI="http://g5.1c.ru/v8/aef/descriptor" nsPrefix="AefDescriptor">
+  <eClassifiers xsi:type="ecore:EEnum" name="Section">
+    <eLiterals name="General"/>
+    <eLiterals name="Presentation"/>
+    <eLiterals name="Data"/>
+    <eLiterals name="Help"/>
+    <eLiterals name="Appearance"/>
+    <eLiterals name="Usage"/>
+    <eLiterals name="Development"/>
+    <eLiterals name="Compatibility"/>
+    <eLiterals name="Layout"/>
+    <eLiterals name="Events"/>
+    <eLiterals name="Object"/>
+    <eLiterals name="CommandSet"/>
+    <eLiterals name="Addressing"/>
+    <eLiterals name="DataTable"/>
+    <eLiterals name="Characteristics"/>
+    <eLiterals name="Series"/>
+    <eLiterals name="Points"/>
+    <eLiterals name="Link"/>
+    <eLiterals name="ValuesAxis"/>
+    <eLiterals name="AdditionalValuesAxis"/>
+    <eLiterals name="PointsAxis"/>
+    <eLiterals name="TimeScale"/>
+    <eLiterals name="TimeScaleElement"/>
+    <eLiterals name="Template"/>
+    <eLiterals name="Placement"/>
+    <eLiterals name="Picture"/>
+    <eLiterals name="Values_"/>
+    <eLiterals name="Paragraph"/>
+    <eLiterals name="Format"/>
+  </eClassifiers>
+</ecore:EPackage>

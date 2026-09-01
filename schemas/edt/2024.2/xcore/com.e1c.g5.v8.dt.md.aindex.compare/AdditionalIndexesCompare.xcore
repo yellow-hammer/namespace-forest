@@ -1,0 +1,10 @@
+@GenModel(prefix="AdditionalIndexesCompare", loadInitialization="false", literalsInterface="true", nonNLSMarkers="true",
+    copyrightText="Copyright (C) 2024, 1C", updateClasspath="false",
+    featureDelegation="Reflective", rootExtendsClass="com._1c.g5.v8.bm.core.BmObject", rootExtendsInterface="com._1c.g5.v8.bm.core.IBmObject")
+@Ecore(nsPrefix="aindexcompare", nsURI="http://g5.1c.ru/v8/dt/md/aindex/compare")
+package com.e1c.g5.v8.dt.md.aindex.compare
+
+import com._1c.g5.v8.dt.compare.model.ExternalPropertyComparisonNode
+
+class AdditionalIndexesComparisonNode extends ExternalPropertyComparisonNode
+{}

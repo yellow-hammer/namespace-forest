@@ -1,0 +1,75 @@
+@Ecore(nsURI="http://v8.1c.ru/8.3/debugger/debugBreakpoints")
+@GenModel(nonNLSMarkers="true", copyrightText="Copyright (C) 2014-2023, 1C-Soft LLC", updateClasspath="false")
+package com._1c.g5.v8.dt.debug.model.breakpoints
+
+import com._1c.g5.v8.dt.debug.model.base.data.BSLModuleIdInternal
+import com._1c.g5.v8.dt.debug.model.base.data.BSLModuleIdUser
+import java.math.BigDecimal
+
+@ExtendedMetaData(name="BPWorkspaceInternal", kind="elementOnly")
+class BPWorkspaceInternal {
+	@ExtendedMetaData(kind="element", name="moduleBPInfo", namespace="##targetNamespace")
+	contains ModuleBPInfoInternal[] moduleBPInfo
+}
+
+@ExtendedMetaData(name="BPWorkspaceUser", kind="elementOnly")
+class BPWorkspaceUser {
+	@ExtendedMetaData(kind="element", name="moduleBPInfo", namespace="##targetNamespace")
+	contains ModuleBPInfoUser[] moduleBPInfo
+}
+
+@ExtendedMetaData(name="BreakpointInfo", kind="elementOnly")
+class BreakpointInfo {
+	@ExtendedMetaData(kind="element", name="line", namespace="##targetNamespace")
+	unsettable BigDecimal[1] line = "0"
+	@ExtendedMetaData(kind="element", name="isActive", namespace="##targetNamespace")
+	unsettable Boolean[1] isActive = "true"
+	@ExtendedMetaData(kind="element", name="breakOnCondition", namespace="##targetNamespace")
+	unsettable Boolean[1] breakOnCondition = "false"
+	@ExtendedMetaData(kind="element", name="condition", namespace="##targetNamespace")
+	unsettable String[1] condition = ""
+	@ExtendedMetaData(kind="element", name="breakOnParentMethod", namespace="##targetNamespace")
+	unsettable Boolean[1] breakOnParentMethod = "false"
+	@ExtendedMetaData(kind="element", name="parentMethod", namespace="##targetNamespace")
+	unsettable String[1] parentMethod = ""
+	@ExtendedMetaData(kind="element", name="breakOnHitCount", namespace="##targetNamespace")
+	unsettable Boolean[1] breakOnHitCount = "false"
+	@ExtendedMetaData(kind="element", name="hitCountVariant", namespace="##targetNamespace")
+	unsettable BigDecimal[1] hitCountVariant = "0"
+	@ExtendedMetaData(kind="element", name="hitCount", namespace="##targetNamespace")
+	unsettable BigDecimal[1] hitCount = "0"
+	@ExtendedMetaData(kind="element", name="showOutputMessage", namespace="##targetNamespace")
+	unsettable Boolean[1] showOutputMessage = "false"
+	@ExtendedMetaData(kind="element", name="putDescription", namespace="##targetNamespace")
+	unsettable String[1] putDescription = ""
+	@ExtendedMetaData(kind="element", name="putExpressionResult", namespace="##targetNamespace")
+	unsettable String[1] putExpressionResult = ""
+	@ExtendedMetaData(kind="element", name="putStackTrace", namespace="##targetNamespace")
+	unsettable Boolean[1] putStackTrace = "false"
+	@ExtendedMetaData(kind="element", name="putHitCount", namespace="##targetNamespace")
+	unsettable Boolean[1] putHitCount = "false"
+	@ExtendedMetaData(kind="element", name="continueExecution", namespace="##targetNamespace")
+	unsettable Boolean[1] continueExecution = "false"
+	@ExtendedMetaData(kind="element", name="currentHitCounter", namespace="##targetNamespace")
+	unsettable BigDecimal[1] currentHitCount = "0"
+	@ExtendedMetaData(kind="element", name="temp", namespace="##targetNamespace")
+	unsettable Boolean[1] temp = "false"
+	@ExtendedMetaData(kind="element", name="user", namespace="##targetNamespace")
+	unsettable Boolean[1] user = "true"
+}
+
+@ExtendedMetaData(name="ModuleBPInfoInternal", kind="elementOnly")
+class ModuleBPInfoInternal {
+	@ExtendedMetaData(kind="element", name="id", namespace="##targetNamespace")
+	contains BSLModuleIdInternal[1] ^id
+	@ExtendedMetaData(kind="element", name="bpInfo", namespace="##targetNamespace")
+	contains BreakpointInfo[] bpInfo
+}
+
+@ExtendedMetaData(name="ModuleBPInfoUser", kind="elementOnly")
+class ModuleBPInfoUser {
+	@ExtendedMetaData(kind="element", name="id", namespace="##targetNamespace")
+	contains BSLModuleIdUser[1] ^id
+	@ExtendedMetaData(kind="element", name="bpInfo", namespace="##targetNamespace")
+	contains BreakpointInfo[] bpInfo
+}

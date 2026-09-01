@@ -1,0 +1,929 @@
+@GenModel(loadInitialization="false", literalsInterface="true", nonNLSMarkers="true", prefix="Dcs", copyrightText="Copyright (C) 2013, 1C", updateClasspath="false",
+	featureDelegation="Reflective", rootExtendsClass="com._1c.g5.v8.bm.core.BmObject"
+)
+@Ecore(nsPrefix="settings", nsURI="http://g5.1c.ru/v8/dt/data-composition-system/settings")
+package com._1c.g5.v8.dt.dcs.model.settings
+
+import com._1c.g5.v8.dt.dcs.model.core.ParameterValues
+import com._1c.g5.v8.dt.dcs.model.core.DataCompositionField
+import com._1c.g5.v8.dt.dcs.model.core.DataCompositionSortDirection
+import com._1c.g5.v8.dt.dcs.model.core.Presentation
+import com._1c.g5.v8.dt.dcs.model.core.DataCompositionGroupType
+import com._1c.g5.v8.dt.dcs.model.core.DataCompositionPeriodAdditionType
+import com._1c.g5.v8.dt.dcs.model.core.DataCompositionAppearance
+import com._1c.g5.v8.dt.dcs.model.core.DataCompositionParameterValue
+import com._1c.g5.v8.dt.dcs.model.core.DataCompositionParameter
+
+import com._1c.g5.v8.dt.mcore.Structure
+import com._1c.g5.v8.dt.mcore.Value
+import com._1c.g5.v8.dt.chart.model.ChartColorPaletteDescription
+import com._1c.g5.v8.dt.chart.model.ChartReferenceLines
+import com._1c.g5.v8.dt.chart.model.ChartReferenceBands
+import com._1c.g5.v8.dt.chart.model.ChartReferenceBand
+import com._1c.g5.v8.dt.chart.model.ChartReferenceLine
+import com._1c.g5.v8.dt.chart.model.ChartScale
+import com._1c.g5.v8.dt.chart.model.ChartAxis
+
+
+// Настройки.
+
+class DataCompositionSettings
+{
+	contains DataCompositionUserFields userFields // Пользовательские поля.	
+	contains DataCompositionSelectedFields selection // Выбранные поля. При выводе отчета не используется.			
+	contains DataCompositionFilter filter // Глобальный фильтр. Прописывается как условия в запросы наборов данных и как фильтры для наборов данных целиком.			
+	contains DataCompositionDataParameterValues dataParameters // Значение парметров получения данных.			
+	contains DataCompositionOrder order // Порядок. Прописывается как упорядочивание в запросы набоов данных.			
+	contains DataCompositionConditionalAppearance conditionalAppearance // Условное оформление. Используется во всей компоновке.			
+	contains DataCompositionOutputParameterValues outputParameters // Параметры вывода. Использование зависит от свойства.			
+	contains StructureItem[] items // Элементы структуры отчета.			
+	contains Structure additionalProperties // Дополнительные свойства.			
+    DataCompositionSettingsItemViewMode itemsViewMode = "QuickAccess" // Режим отображения структуры.        
+    String itemsUserSettingID // Идентификатор выделенной настройки структуры.		
+	contains Presentation itemsUserSettingPresentation // Представление выделенной настройки структуры.
+}
+
+
+// Параметры получения данных.
+
+class DataCompositionDataParameterValues extends ParameterValues
+{
+}
+
+
+// Параметры вывода всей компоновки. См. ЗначенияПараметровВыводаКомпоновкиДанных
+
+class DataCompositionOutputParameterValues extends ParameterValues
+{
+	contains ChartColorPaletteDescription colorPaletteDescription // Since 8.3.12
+	contains ChartColorPaletteDescription referenceBandsColorPaletteDescription // Since 8.3.12
+	contains ChartReferenceLines valuesReferenceLines // Since 8.3.12
+	contains ChartReferenceLines pointsReferenceLines // Since 8.3.12
+	contains ChartReferenceBands valuesReferenceBands // Since 8.3.12
+	contains ChartReferenceBands pointsReferenceBands // Since 8.3.12
+	
+	contains ChartScale additionalValuesScale //since 8.3.16
+	contains ChartAxis additionalValuesAxis	  //since 8.3.16
+}
+
+
+// Порядок.
+
+class DataCompositionOrder
+{
+	contains OrderItem[] items // Элементы порядка.
+	DataCompositionSettingsItemViewMode viewMode = "QuickAccess" // Режим отображения.
+    String userSettingID // Идентификатор выделенной настройки.
+	contains Presentation userSettingPresentation // Представление выделенной настройки.
+}	
+
+
+// Элемент порядка.
+
+abstract class OrderItem
+{
+}
+
+
+// Элемент порядка поле.
+
+class DataCompositionOrderItem extends OrderItem
+{
+	boolean	use = "true" // Элемент порядка используется.
+	contains DataCompositionField field // Поле упорядочивания.
+	DataCompositionSortDirection orderType // Тип упорядочивания.
+	DataCompositionSettingsItemViewMode viewMode = "QuickAccess" // Режим отображения.
+}
+
+
+// Элемент порядка авто.
+
+class DataCompositionAutoOrderItem extends OrderItem
+{
+	boolean use = "true" // Элемент порядка используется.
+}
+
+
+// Отбор.
+
+class DataCompositionFilter
+{
+	contains FilterItem[] items // Элементы отбора.
+	DataCompositionSettingsItemViewMode viewMode = "QuickAccess" // >Режим отображения.
+    String userSettingID // Идентификатор выделенной настройки.
+	contains Presentation userSettingPresentation // Представление выделенной настройки.
+}
+
+
+// Элемент отбора.
+
+abstract class FilterItem
+{
+}
+
+
+// Элемент отбора - сравнение.
+
+class DataCompositionFilterItem extends FilterItem
+{
+	boolean use = "true" // Элемент отбора используется.
+	contains Value left // Значение в левой части условия. Может содержать константное значение или значение - поле.
+	DataCompositionComparisonType comparisonType // Тип сравнения.
+	contains Value[] right //Значение в правой части условия. Может содержать константное значение или значение - поле.
+	contains Presentation presentation // Представление элемента.
+	DataCompositionFilterApplicationType application // Применение элемента.	
+	DataCompositionSettingsItemViewMode viewMode = "QuickAccess" // Режим отображения
+	String userSettingID // Идентификатор выделенной настройки.
+	contains Presentation userSettingPresentation // Представление выделенной настройки.
+}
+
+
+// Вид сравнения.
+
+enum DataCompositionComparisonType
+{
+	Equal,
+	NotEqual,
+	Less,
+	LessOrEqual,
+	Greater,
+	GreaterOrEqual,
+	Contains,
+	InList,
+	InListByHierarchy,
+	InHierarchy,
+	NotContains,
+	NotInList,
+	NotInListByHierarchy,
+	NotInHierarchy,
+	Filled,
+	NotFilled,
+	BeginsWith,
+    NotBeginsWith,
+    Like,
+    NotLike
+}
+
+
+// Элемент отбора группа.
+
+class DataCompositionFilterItemGroup extends FilterItem
+{
+	boolean	use = "true" // Элемент отбора используется.					
+	DataCompositionFilterItemsGroupType groupType //Тип группы.				
+	contains FilterItem[] items // Вложенные элементы отбора.
+	contains Presentation presentation // Представление элемента.				
+	DataCompositionFilterApplicationType application // Применение элемента.				
+	DataCompositionSettingsItemViewMode	viewMode = "QuickAccess" // Режим отображения.				
+	String userSettingID // Идентификатор выделенной настройки.
+	contains Presentation userSettingPresentation // Представление выделенной настройки.
+}
+
+
+// Тип группы отбора.
+
+enum DataCompositionFilterItemsGroupType
+{
+	AndGroup,
+	OrGroup,
+	NotGroup
+}
+
+
+// Выбранные элементы.
+
+class DataCompositionSelectedFields
+{
+	contains SelectedItem[] items // Элементы выбора.
+	DataCompositionSettingsItemViewMode viewMode = "QuickAccess" // Режим отображения.
+    String userSettingID // Идентификатор выделенной настройки.
+    contains Presentation userSettingPresentation // Представление выделенной настройки.
+}
+
+
+// Выбранный элемент.
+
+abstract class SelectedItem
+{
+}
+
+
+// Выбранное поле.
+
+class DataCompositionSelectedField extends SelectedItem
+{
+	boolean use = "true" // Поле используется.				
+	contains DataCompositionField field // Путь к данным поля.				
+	contains Presentation title // Заголовок.							
+	DataCompositionSettingsItemViewMode	viewMode = "QuickAccess" // Режим отображения.
+}
+
+
+// Тип размещения поля.
+
+enum DataCompositionFieldPlacement
+{
+	Auto,
+	Horizontally,
+	Vertically,
+	SpecialColumn,
+	Together
+}
+
+
+// Выбранная папка.
+
+class DataCompositionSelectedFieldGroup extends SelectedItem
+{
+	boolean	use = "true" // Папка и ее содержимое используется.					
+	contains DataCompositionField field // Путь к данным папки.					
+	contains Presentation title // Заголовок.										
+	contains SelectedItem[]	items // Вложенный выбор.				
+	DataCompositionFieldPlacement placement // Размещение.	
+	DataCompositionSettingsItemViewMode	viewMode = "QuickAccess" // Режим отображения.
+}
+
+
+// Выбранное поле "авто".
+
+class DataCompositionAutoSelectedField extends SelectedItem
+{
+	boolean use = "true" // Выбранное поле используется.
+}
+
+
+// Пользовательские поля.
+
+class DataCompositionUserFields
+{
+	contains UserField[] items // Элементы.
+}
+
+
+// Пользовательское поле.
+
+abstract class UserField
+{
+	boolean	use = "true" // Поле используется.
+	String dataPath // Путь к данным поля.
+	contains Presentation title // Заголовок поля.
+}
+
+
+// Пользовательское поле - выражение.
+
+class DataCompositionUserFieldExpression extends UserField
+{
+	String detailExpression // Выражение поля.
+	String detailExpressionPresentation // Представление выражения поля.
+	String totalExpression // Выражение итогового поля.
+	String totalExpressionPresentation // Представление выражения итогового поля.
+}
+	
+
+// Пользовательское поле - выбор.
+
+class DataCompositionUserFieldCase extends UserField
+{
+	contains DataCompositionUserFieldsCaseVariants variants // Варианты.
+}
+	
+
+// Варианты пользовательского поля.
+
+class DataCompositionUserFieldsCaseVariants
+{
+	contains DataCompositionUserFieldsVariant[]	items // Варианты.
+}	
+	
+
+// Вариант пользовательского поля.
+
+class DataCompositionUserFieldsVariant
+{
+	boolean	use = "true" // Вариант используется.			
+	contains DataCompositionFilter filter // Отбор варианта.			
+	contains Value value // Значение. Может содержать константное значение или значение - поле.
+	contains Presentation presentationValue // Значение представления.		
+}
+    
+
+// Элемент структуры.
+
+abstract class StructureItem
+{
+}
+	
+
+// Группировка.
+
+class DataCompositionGroup extends StructureItem
+{
+	boolean use = "true" // Группировка используется.
+	String name // Имя группировки.
+	contains DataCompositionGroupFields	groupFields // Поля, по которым осуществляется группировка.
+	contains DataCompositionFilter filter // Отбор, применяемый к записям, попадающим в группировку.
+	contains DataCompositionOrder order // Порядок для упорядочивания групповых записей.
+	contains DataCompositionSelectedFields selection // Поля, выводимые в группировке.
+	contains DataCompositionConditionalAppearance conditionalAppearance // Условное оформление, применяемое в группировке.
+	contains DataCompositionGroupOutputParameterValues outputParameters // Использование зависит от свойства.
+	contains StructureItem[] items // Элементы структуры группировки.
+	String Id // Идентификатор.
+	DataCompositionSettingsItemViewMode viewMode = "QuickAccess" // Режим отображения.
+    String userSettingID // Идентификатор выделенной настройки.
+	contains Presentation userSettingPresentation // Представление выделенной настройки.
+	DataCompositionSettingsItemViewMode itemsViewMode = "QuickAccess" // Режим отображения структуры.
+    String itemsUserSettingID // Идентификатор выделенной настройки структуры.
+	contains Presentation itemsUserSettingPresentation // Представление выделенной настройки структуры.
+    DataCompositionSettingsItemState groupState = "Enabled" // Состояние группировки.
+}
+	
+
+// Параметры вывода группировки.
+
+class DataCompositionGroupOutputParameterValues extends ParameterValues
+{
+	contains ChartColorPaletteDescription colorPaletteDescription // Since 8.3.12
+	contains ChartColorPaletteDescription referenceBandsColorPaletteDescription // Since 8.3.12
+	contains ChartReferenceLines valuesReferenceLines // Since 8.3.12
+	contains ChartReferenceLines pointsReferenceLines // Since 8.3.12
+	contains ChartReferenceBands valuesReferenceBands // Since 8.3.12
+	contains ChartReferenceBands pointsReferenceBands // Since 8.3.12
+}
+	
+
+// Таблица.
+
+class DataCompositionTable extends StructureItem
+{
+	boolean	use = "true" // Таблица используется.
+	String name // Имя таблицы.
+	contains DataCompositionTableGroup[] columns // Колонки таблицы.
+	contains DataCompositionTableGroup[] rows // Строки таблицы.
+	contains DataCompositionSelectedFields selection // Выбранные поля. При выводе не используется.
+	contains DataCompositionConditionalAppearance conditionalAppearance // Условное оформление, используемое в таблице.
+	contains DataCompositionTableOutputParameterValues outputParameters // Параметры вывода таблицы. Использование зависит от свойства.
+	String Id // Идентификатор.
+	DataCompositionSettingsItemViewMode viewMode = "QuickAccess" // Режим отображения.
+    String userSettingID // Идентификатор выделенной настройки.
+	contains Presentation userSettingPresentation // Представление выделенной настройки.
+	DataCompositionSettingsItemViewMode	columnsViewMode = "QuickAccess" // Режим отображения колонок.
+    String columnsUserSettingID // Идентификатор выделенной настройки структуры колонок.
+	contains Presentation columnsUserSettingPresentation // Представление выделенной настройки структуры колонок.
+	DataCompositionSettingsItemViewMode rowsViewMode = "QuickAccess" // Режим отображения строк.
+    String rowsUserSettingID // Идентификатор выделенной настройки структуры строк
+	contains Presentation rowsUserSettingPresentation // Представление выделенной настройки структуры строк.
+}
+	
+
+// Параметры вывода таблицы.
+
+class DataCompositionTableOutputParameterValues extends ParameterValues
+{
+}
+	
+
+// Группировка таблицы.
+
+class DataCompositionTableGroup
+{
+	boolean	use = "true" // Группировка используется.
+	String name // Имя группировки.
+	contains DataCompositionGroupFields	groupFields // Поля, по которым осуществляется группировка.
+	contains DataCompositionFilter filter // Фильтр, применяемый к записям, попадающим в группировку.
+	contains DataCompositionOrder order // Упорядочивание записей группировки.
+	contains DataCompositionSelectedFields selection // Поля, выводимые в группировке.
+	contains DataCompositionConditionalAppearance conditionalAppearance // Условное оформление, применяемое для группировки.
+	contains DataCompositionTableGroupOutputParameterValues outputParameters // Параметры вывода группировки. Использование зависит от свойства.
+	contains DataCompositionTableGroup[] items // Элементы структуры группировки.
+	String Id // Идентификатор.
+	DataCompositionSettingsItemViewMode viewMode = "QuickAccess" // Режим отображения.
+    String userSettingID // Идентификатор выделенной настройки.
+	contains Presentation userSettingPresentation // Представление выделенной настройки.
+	DataCompositionSettingsItemViewMode itemsViewMode = "QuickAccess" // Режим отображения структуры
+    String itemsUserSettingID // Идентификатор выделенной настройки структуры.
+	contains Presentation itemsUserSettingPresentation // Представление выделенной настройки структуры.
+	DataCompositionSettingsItemState groupState = "Enabled" // Состояние группировки.
+}
+    
+
+// Параметры вывода группировки таблицы.
+
+class DataCompositionTableGroupOutputParameterValues extends ParameterValues
+{
+}
+
+
+// Диаграмма.
+
+class DataCompositionChart extends StructureItem
+{
+	boolean	use = "true" // Диаграмма используется.
+	String name // Имя диаграммы.
+	contains DataCompositionChartGroup[] points // Точки диаграммы.
+	contains DataCompositionChartGroup[] series // Серии диаграммы.
+	contains DataCompositionSelectedFields selection // Задаются ресурсы, выводимые в диаграмму.
+	contains DataCompositionConditionalAppearance conditionalAppearance // Условное оформление, используемое в диаграмме.
+	contains DataCompositionChartOutputParameterValues outputParameters // Параметры вывода диаграммы.
+	String Id // Идентификатор
+	DataCompositionSettingsItemViewMode viewMode = "QuickAccess" // Режим отображения.
+    String userSettingID // Идентификатор выделенной настройки.
+	contains Presentation userSettingPresentation // Представление выделенной настройки.
+	DataCompositionSettingsItemViewMode pointsViewMode = "QuickAccess" // Режим отображения структуры точек.
+    String pointsUserSettingID // Идентификатор выделенной настройки структуры точек.
+	contains Presentation pointsUserSettingPresentation // Представление выделенной настройки структуры точек.
+	DataCompositionSettingsItemViewMode	seriesViewMode = "QuickAccess" // Режим отображения структуры серий.
+    String seriesUserSettingID // Идентификатор выделенной настройки структуры серий.
+	contains Presentation seriesUserSettingPresentation // Представление выделенной настройки структуры серий.
+}	
+
+
+// Параметры вывода диаграммы. См. ЗначенияПараметровВыводаДиаграммыКомпоновкиДанных
+
+class DataCompositionChartOutputParameterValues extends ParameterValues
+{
+	contains ChartColorPaletteDescription colorPaletteDescription // Since 8.3.12
+	contains ChartColorPaletteDescription referenceBandsColorPaletteDescription // Since 8.3.12
+	contains ChartReferenceLines valuesReferenceLines // Since 8.3.12
+	contains ChartReferenceLines pointsReferenceLines // Since 8.3.12
+	contains ChartReferenceBands valuesReferenceBands // Since 8.3.12
+	contains ChartReferenceBands pointsReferenceBands // Since 8.3.12
+
+	contains ChartScale additionalValuesScale //since 8.3.16
+	contains ChartAxis additionalValuesAxis	  //since 8.3.16
+}
+
+
+// Параметры вывода группировки диаграммы.
+
+class DataCompositionChartGroupOutputParameterValues extends ParameterValues
+{
+}
+
+
+// Группировка диаграммы.
+
+class DataCompositionChartGroup
+{
+	boolean	use = "true" // Группировка диаграммы используется.
+	String name // Имя группировки.
+	contains DataCompositionGroupFields groupFields // Поля, по которым осуществляется группировка.
+	contains DataCompositionFilter filter // Фильтр, применяемый к записям, попадающим в группировку.
+	contains DataCompositionOrder order // Упорядочивание группировки.
+	contains DataCompositionSelectedFields selection // Поля выводимые поля.
+	contains DataCompositionConditionalAppearance conditionalAppearance // Условное оформление, применяемое в группировке.
+	contains DataCompositionChartGroupOutputParameterValues outputParameters // Параметры вывода группировки диаграммы.
+	contains DataCompositionChartGroup[] items // Вложенная группировка.
+	String Id // Идентификатор.
+	DataCompositionSettingsItemViewMode viewMode = "QuickAccess" // Режим отображения.
+	String userSettingID // Идентификатор выделенной настройки.
+	contains Presentation userSettingPresentation // Представление выделенной настройки.
+	DataCompositionSettingsItemViewMode	itemsViewMode = "QuickAccess" // Режим отображения структуры.
+    String itemsUserSettingID // Идентификатор выделенной настройки структуры.
+	contains Presentation itemsUserSettingPresentation // Представление выделенной настройки структуры.
+	DataCompositionSettingsItemState groupState = "Enabled" // Состояние группировки.
+}
+
+
+// Вложенный объект настройки.
+
+class DataCompositionNestedObjectSettings extends StructureItem
+{
+	boolean	use = "true"	// Вложенный отчет используется.
+	String name // Имя. 
+	String objectID	// Идентификатор объекта настройки.
+	contains DataCompositionSettings settings // Настройки вложенного объекта.
+	String Id // Идентификатор.
+	DataCompositionSettingsItemViewMode viewMode = "QuickAccess" // Режим отображения.
+    String userSettingID // Идентификатор выделенной настройки.
+	contains Presentation userSettingPresentation // Представление выделенной настройки.
+}
+
+
+// Элементы группировки.
+
+class DataCompositionGroupFields
+{
+	contains GroupItem[] items // Поле группировки.
+}
+	
+
+// Поле группировки.
+
+abstract class GroupItem
+{
+}	
+
+
+// Групповое поле.
+
+class DataCompositionGroupField extends GroupItem
+{
+	boolean use = "true" // Поле используется для группировки.
+	contains DataCompositionField field // Путь к данным поля, по которому осуществляется группировка.
+	DataCompositionGroupType groupType // Тип группировки.
+	DataCompositionPeriodAdditionType periodAdditionType // Тип дополнения.
+	contains Value periodAdditionBegin // Начальная дата периода. Может содержать константное значение, либо значение - поле.
+	contains Value periodAdditionEnd // Конечная дата периода. Может содержать константное значение, либо значение - поле.
+}
+
+
+// Авто групповое поле.
+
+class DataCompositionAutoGroupField extends GroupItem	
+{
+	boolean use = "true" // Поле используется для группировки.
+}
+
+
+// Условное оформление.
+
+class DataCompositionConditionalAppearance
+{
+	contains DataCompositionConditionalAppearanceItem[] items // Элемент условного оформления.
+	DataCompositionSettingsItemViewMode	viewMode = "QuickAccess" // Режим отображения.
+    String userSettingID // Идентификатор выделенной настройки.
+	contains Presentation userSettingPresentation // Представление выделенной настройки.
+	contains ChartReferenceLine referenceLineInChart // Since 8.3.12
+	contains ChartReferenceBand referenceBandInChart // Since 8.3.12
+}
+
+
+// Элемент условного оформления.
+
+class DataCompositionConditionalAppearanceItem
+{
+	boolean use = "true" // Элемент оформления используется.
+	contains DataCompositionAppearanceFields selection // Выбор условного оформления.
+	contains DataCompositionFilter	filter // Отбор условного оформления.
+	contains DataCompositionAppearance	appearance // Применяемое оформление.
+	contains Presentation presentation	// Представление элемента.
+	DataCompositionSettingsItemViewMode	viewMode = "QuickAccess" // Режим отображения.
+    String userSettingID // Идентификатор выделенной настройки.
+	contains Presentation userSettingPresentation // Представление выделенной настройки.
+	DataCompositionConditionalAppearanceUse	useInGroup // Указывает необходимость применения оформления к полю, выводимому в группировке.
+    DataCompositionConditionalAppearanceUse useInHierarchicalGroup // Указывает необходимость применения оформления к полю, выводимому в иерархической группировке.
+    DataCompositionConditionalAppearanceUse useInOverall // Указывает необходимость применения оформления к полю, выводимому в общем итоге.
+    DataCompositionConditionalAppearanceUse useInFieldsHeader // Указывает необходимость применения оформления к заголовку полей.
+    DataCompositionConditionalAppearanceUse useInHeader // Указывает необходимость применения оформления к заголовку.
+    DataCompositionConditionalAppearanceUse useInParameters // Указывает необходимость применения оформления к области, в которой выводятся параметры отчета.
+    DataCompositionConditionalAppearanceUse useInFilter // Указывает необходимость применения оформления области, в которой выводятся отборы.
+    
+    // since 8.3.16
+    DataCompositionConditionalAppearanceUse useInResourceFieldsHeader // Указывает необходимость применения оформления области, в которой выводятся заголовки полей ресурсов.
+    DataCompositionConditionalAppearanceUse useInOverallHeader // Указывает необходимость применения оформления области, в которой выводятся заголовки общих итогов.
+    DataCompositionConditionalAppearanceUse useInOverallResourceFieldsHeader // Указывает необходимость применения оформления области, в которой выводятся заголовки полей ресурсов общих итогов.
+}
+    
+
+// Поля оформления.
+
+class DataCompositionAppearanceFields
+{
+	contains DataCompositionAppearanceField[] items // Поле оформления.
+}
+	
+
+// Поле оформления.
+
+class DataCompositionAppearanceField
+{
+	boolean use = "true" // Оформление будет применено к полю.
+	contains DataCompositionField field // Путь к данным поля, к которому применяется оформление.
+}
+    
+
+// Значение параметра настроек.
+
+class SettingsParameterValue extends DataCompositionParameterValue
+{
+	DataCompositionSettingsItemViewMode viewMode = "QuickAccess" // Режим отображения.
+    String userSettingID // Идентификатор выделенной настройки.
+    contains Presentation userSettingPresentation // Представление выделенной настройки.
+}
+    
+
+// Структура настроек.
+
+class SettingStructure
+{
+	contains StructureItem[] items // Элементы структуры группировки.
+	DataCompositionSettingsItemViewMode	viewMode = "QuickAccess" // Режим отображения.
+    String userSettingID // Идентификатор выделенной настройки.
+}
+	
+
+// Выделенные настройки.
+
+class DataCompositionUserSettings
+{
+	contains Value[] items // Коллекция выделенных настроек.
+	contains Structure additionalProperties // Дополнительные свойства.
+}
+	
+
+// Тип размещения полей группировок.
+
+enum DataCompositionGroupFieldsPlacement
+{
+	Together,
+	Separately,
+	SeparatelyAndInTotalsOnly
+}
+	
+
+// Тип размещения группировки.
+
+enum DataCompositionGroupPlacement
+{
+	Begin,
+	End,
+	BeginAndEnd,
+	None
+}
+	
+
+// Тип размещения реквизитов группировок.
+
+enum DataCompositionAttributesPlacement
+{
+	WithOwnerField,
+	Separately,
+	Together,
+	SpecialPosition
+}
+	
+
+// Тип размещения ресурсов.
+
+enum DataCompositionResourcesPlacement
+{
+	Vertically,
+	Horizontally
+}
+	
+
+// Тип макета группировки.
+
+enum DataCompositionGroupTemplateType
+{
+	Vertical,
+	Horizontal,
+	Auto
+}
+	
+
+// Тип вывода текстов.
+
+enum DataCompositionTextOutputType
+{
+	DontOutput, // Не выводить.
+	Output, // Выводить.
+	Auto // Выводить, если есть информация для вывода.
+	OutputFilled // since 8.5.1
+}
+	
+
+// РасположениеЛегендыДиаграммыКомпоновкиДанных.
+
+enum DataCompositionChartLegendPlacement
+{
+	None,
+	Left,
+	Right,
+	Top,
+	Bottom
+}
+
+
+// РасположениеРесурсовВДиаграммеКомпоновкиДанных.
+
+enum DataCompositionResourcesPlacementInChart
+{
+	Auto,
+	Series,
+	Points
+}
+    
+
+// Тип применения элемента отбора компоновки данных (ТипПримененияОтбораКомпоновкиДанных).
+
+enum DataCompositionFilterApplicationType
+{
+	Items,
+	Hierarchy,
+	HierarchyOnly
+}
+
+
+// Режим отображения элемента настройки компоновки данных (РежимОтображенияЭлементаНастройкиКомпоновкиДанных).
+
+enum DataCompositionSettingsItemViewMode
+{
+	Normal = 0,
+	QuickAccess = 1,
+	Inaccessible = 2,
+	Auto = 3
+}
+     
+
+// Режим отображения настроек компоновки данных (РежимОтображенияНастроекКомпоновкиДанных).
+
+enum DataCompositionSettingsViewMode
+{
+	All,
+	QuickAccess
+}
+
+//since 8.5.1
+enum DataCompositionComplexSettingsViewMode
+{
+	Show,
+	DontShow
+}
+
+
+// Связи параметров выбора значения.
+
+class DataCompositionSettingsComposer
+{
+	contains DataCompositionSettings settings // Настройки.
+	contains DataCompositionAvailableSettingsSource source // Источник доступных настроек.
+	contains DataCompositionUserSettings userSettings // Выделенные настройки.
+	contains DataCompositionSettings fixedSettings	// Фиксированные настройки.
+}
+
+
+// Связи параметров выбора значения.
+
+class DataCompositionAvailableSettingsSource
+{
+	contains Value sourceID // Идентификатор источника доступных настроек (URL или идентификатор типа отчета).
+    AvailableSettingsSourceBehaviour behaviour // Поведение окружения для данного источника.
+}
+
+
+// Поведение окружения для данного источника.
+
+enum AvailableSettingsSourceBehaviour
+{
+	Usual,
+	Designer,
+	UniversalList,
+	LogFormDesigner,
+	UniversalListDesigner
+}
+
+
+// Связи параметров выбора значения.
+
+class AvailableFields
+{
+}
+	
+
+// Коллекция ограничений использования доступных полей системы компоновки данных.
+
+class AvailableFieldUseRestrictions
+{
+	contains AvailableFieldUseRestriction[] items
+}
+	
+
+// Описание ограничения использования конкретного поля в табличном поле доступных полей компоновки данных.
+
+class AvailableFieldUseRestriction
+{
+	contains DataCompositionField field
+	boolean enabled
+}
+	
+
+// Коллекция ограничений использования доступных параметров системы компоновки данных.
+
+class AvailableParameterUseRestrictions
+{
+	contains AvailableParameterUseRestriction[] items
+}
+	
+
+// Описание ограничения использования конкретного параметра.
+
+class AvailableParameterUseRestriction
+{
+	contains DataCompositionParameter parameter
+	boolean enabled
+}
+
+
+// Вариант настроек компоновки данных.
+
+class SettingsVariant
+{
+	String name // Имя.
+	contains Presentation presentation // Представление
+	contains DataCompositionSettings settings // Настройки
+}
+	
+
+// Состояние элемента настройки компоновки данных.
+
+enum DataCompositionSettingsItemState
+{
+	Enabled = 0,
+	Disabled = 1,
+	DeletedByUser = 2
+}
+
+
+enum DataCompositionResourcesAutoPosition
+{
+	DontUse, // Не использовать.
+	AfterAllFields // После всех полей.
+}
+
+
+enum DataCompositionGroupUseVariant
+{
+	Auto, // Авто.
+	AdditionalInformation // Дополнительная информация.
+}
+
+
+enum DataCompositionFixation
+{
+	Auto, // Авто.
+	DontUse // НеИспользовать.
+}
+
+
+// Содержит варианты использования условного оформления.
+
+enum DataCompositionConditionalAppearanceUse
+{
+	Use, // Использовать.
+    DontUse // НеИспользовать.
+}
+
+// ТипВыводаКартинкиКомпоновкиДанных
+// since 8.3.13
+enum DataCompositionPictureOutputType
+{
+	Auto,  // Авто
+	DontOutput, // НеВыводить
+	OutputByRef, // ВыводитьПоСсылке
+	OutputByValue // ВыводитьПоЗначению
+}
+
+// ТипВыводаАктуальностиДанныхКомпоновкиДанных
+// since 8.3.13
+enum DataCompositionDataRelevanceOutputType
+{
+	Auto,  // Выводить, если данные неактуальные
+	Output, // Выводить
+	DontOutput // Не выводить
+}
+
+// ТипВыводаКопииБазыДанныхКомпоновкиДанных
+// since 8.3.13
+enum DataCompositionDatabaseCopyOutputType
+{
+	Auto,  // Выводить, если данные неактуальные
+	Output, // Выводить
+	DontOutput // Не выводить
+}
+
+// СохранениеОформленияКомпоновкиДанных
+// since 8.3.16
+enum SaveDataCompositionAppearance
+{
+    Auto, // Авто
+    ForUser, // ДляПользователя
+    ForCurrentResult, // ДляТекущегоРезультата
+    ByKeyForUser, // ПоКлючуДляПользователя
+    DontUse // НеИспользовать
+}
+
+// since 8.5.1
+enum DataCompositionSortOutputType
+{
+	Auto = 0,          // Авто
+    PictureOutput = 1, // Выводить картинку
+    DontOutput = 2     // Не выводить
+}
+
+// since 8.5.1
+enum ResultAutoCompositionOnOpenMode
+{
+	Auto = 0,       // Авто
+    Background = 1, // ВФоновомРежиме
+    DontCompose = 2 // НеКомпоновать
+}
+
+// since 8.5.1
+enum ResultAutoCompositionOnSettingsChangeMode
+{
+	Auto = 0,       // Авто
+    Background = 1, // ВФоновомРежиме
+    DontCompose = 2 // НеКомпоновать
+}

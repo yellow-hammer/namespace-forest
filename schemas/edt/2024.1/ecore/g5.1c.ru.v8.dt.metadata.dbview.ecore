@@ -1,0 +1,285 @@
+<?xml version="1.0" encoding="ASCII"?>
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="dbview" nsURI="http://g5.1c.ru/v8/dt/metadata/dbview" nsPrefix="dbview">
+  <eAnnotations source="http://www.eclipse.org/emf/2011/Xcore">
+    <details key="ForceDirectReference" value="http://www.1c.ru/v8/bm/ForceDirectReference"/>
+  </eAnnotations>
+  <eClassifiers xsi:type="ecore:EClass" name="DbViewElement" abstract="true">
+    <eSuperTypes href="g5.1c.ru.v8.dt.mcore.ecore#//DuallyNamedElement"/>
+    <eOperations name="getPresentation" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+      <eParameters name="languageCode" unique="false">
+        <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+      </eParameters>
+    </eOperations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="mdObject">
+      <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/emf/2002/Ecore#//EObject"/>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Table" abstract="true" interface="true">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="fields" upperBound="-1" eType="//DbViewFieldDef" containment="true" resolveProxies="false"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="DbViewDef" abstract="true" eSuperTypes="//DbViewElement //Table">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="invisible" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="orderFields" upperBound="-1" eType="//DbViewFieldDef"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="DbObjectDef">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="recordRefField" lowerBound="1" eType="//DbViewFieldDef">
+      <eAnnotations source="http://www.1c.ru/v8/bm/ForceDirectReference"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="markToDeleteField" eType="//DbViewFieldDef">
+      <eAnnotations source="http://www.1c.ru/v8/bm/ForceDirectReference"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="postedField" eType="//DbViewFieldDef">
+      <eAnnotations source="http://www.1c.ru/v8/bm/ForceDirectReference"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="presentationField" eType="//DbViewFieldDef">
+      <eAnnotations source="http://www.1c.ru/v8/bm/ForceDirectReference"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="versionField" eType="//DbViewFieldDef">
+      <eAnnotations source="http://www.1c.ru/v8/bm/ForceDirectReference"/>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="DbNonObjectDef">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="keyFields" upperBound="-1" eType="//DbViewFieldDef">
+      <eAnnotations source="http://www.1c.ru/v8/bm/ForceDirectReference"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="recorderField" eType="//DbViewFieldDef">
+      <eAnnotations source="http://www.1c.ru/v8/bm/ForceDirectReference"/>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="HierarchicalDef">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="parentField" eType="//DbViewFieldDef">
+      <eAnnotations source="http://www.1c.ru/v8/bm/ForceDirectReference"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="isFolderField" eType="//DbViewFieldDef">
+      <eAnnotations source="http://www.1c.ru/v8/bm/ForceDirectReference"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="levelsLimit" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="OwnedTableDef">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="ownerFields" upperBound="-1" eType="//DbViewFieldDef">
+      <eAnnotations source="http://www.1c.ru/v8/bm/ForceDirectReference"/>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="DbViewSortInfo">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="prefixOrderFields" upperBound="-1" eType="//DbViewFieldDef">
+      <eAnnotations source="http://www.1c.ru/v8/bm/ForceDirectReference"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="prefixHierarchicalOrderFields" upperBound="-1" eType="//DbViewFieldDef">
+      <eAnnotations source="http://www.1c.ru/v8/bm/ForceDirectReference"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="defOrderFields" upperBound="-1" eType="//DbViewFieldDef">
+      <eAnnotations source="http://www.1c.ru/v8/bm/ForceDirectReference"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="suffixOrderFields" upperBound="-1" eType="//DbViewFieldDef">
+      <eAnnotations source="http://www.1c.ru/v8/bm/ForceDirectReference"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="suffixHierarchicalOrderFields" upperBound="-1" eType="//DbViewFieldDef">
+      <eAnnotations source="http://www.1c.ru/v8/bm/ForceDirectReference"/>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="DbViewTableDef" eSuperTypes="//DbViewDef">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="dbObjectDef" eType="//DbObjectDef" containment="true" resolveProxies="false"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="dbNonObjectDef" eType="//DbNonObjectDef" containment="true" resolveProxies="false"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="hierarchicalDef" eType="//HierarchicalDef" containment="true" resolveProxies="false"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="ownedTableDef" eType="//OwnedTableDef" containment="true" resolveProxies="false"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="dbViewSortInfo" eType="//DbViewSortInfo" containment="true" resolveProxies="false"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ExtendedDbViewTableDef" eSuperTypes="//DbViewTableDef">
+    <eOperations name="getFields" unique="false" upperBound="-1" eType="//DbViewFieldDef"/>
+    <eOperations name="eResource" unique="false" eType="//Resource"/>
+    <eOperations name="eContainer" unique="false">
+      <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/emf/2002/Ecore#//EObject"/>
+    </eOperations>
+    <eOperations name="eContainingFeature" unique="false">
+      <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/emf/2002/Ecore#//EStructuralFeature"/>
+    </eOperations>
+    <eOperations name="eGet" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EJavaObject"/>
+      <eParameters name="feature" unique="false">
+        <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/emf/2002/Ecore#//EStructuralFeature"/>
+      </eParameters>
+    </eOperations>
+    <eOperations name="getName" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eOperations>
+    <eOperations name="getNameRu" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eOperations>
+    <eOperations name="getMdObject" unique="false">
+      <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/emf/2002/Ecore#//EObject"/>
+    </eOperations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="combinedFields" unique="false" eType="//DbViewFieldDefList" volatile="true" transient="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="source" eType="//DbViewTableDef" transient="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ExtendedDbViewFieldTableDef" eSuperTypes="//DbViewFieldTableDef">
+    <eOperations name="getFields" unique="false" upperBound="-1" eType="//DbViewFieldDef"/>
+    <eOperations name="eResource" unique="false" eType="//Resource"/>
+    <eOperations name="eContainer" unique="false">
+      <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/emf/2002/Ecore#//EObject"/>
+    </eOperations>
+    <eOperations name="eContainingFeature" unique="false">
+      <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/emf/2002/Ecore#//EStructuralFeature"/>
+    </eOperations>
+    <eOperations name="eGet" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EJavaObject"/>
+      <eParameters name="feature" unique="false">
+        <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/emf/2002/Ecore#//EStructuralFeature"/>
+      </eParameters>
+    </eOperations>
+    <eOperations name="getName" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eOperations>
+    <eOperations name="getNameRu" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eOperations>
+    <eOperations name="getMdObject" unique="false">
+      <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/emf/2002/Ecore#//EObject"/>
+    </eOperations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="combinedFields" unique="false" eType="//DbViewFieldDefList" volatile="true" transient="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="source" eType="//DbViewFieldTableDef" transient="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="DbViewSelectDef" eSuperTypes="//DbViewDef">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="params" upperBound="-1" eType="//DbViewSelectParamDef" containment="true" resolveProxies="false"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="DbViewSelectParamDef">
+    <eSuperTypes href="g5.1c.ru.v8.dt.mcore.ecore#//DuallyNamedElement"/>
+    <eOperations name="fields" unique="false" upperBound="-1" eType="//DbViewFieldDef"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="kind" unique="false" defaultValueLiteral="1">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="fieldRefs" upperBound="-1" eType="//DbViewFieldDef"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="fieldDefs" upperBound="-1" eType="//DbViewFieldDef" containment="true" resolveProxies="false"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="variants" upperBound="-1" eType="//DbViewSelectParamVariant" containment="true" resolveProxies="false"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="type" containment="true" resolveProxies="false">
+      <eType xsi:type="ecore:EClass" href="g5.1c.ru.v8.dt.mcore.ecore#//TypeDescription"/>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="DbViewSelectParamVariant">
+    <eSuperTypes href="g5.1c.ru.v8.dt.mcore.ecore#//DuallyNamedElement"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="DbViewFieldRole">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="roleMask" unique="false" defaultValueLiteral="1">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="periodParentField" eType="//DbViewFieldDef"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="balanceLinkField" eType="//DbViewFieldDef"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="dtctLinkField" eType="//DbViewFieldDef"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="accKindLinkField" eType="//DbViewFieldDef"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="accLinkField" eType="//DbViewFieldDef"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="accKindField" eType="//DbViewFieldDef"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="periodType" unique="false" eType="//DbViewFieldPeriodType" defaultValueLiteral="MainPeriod"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="periodNumber" unique="false" defaultValueLiteral="0">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="DbViewFieldDef" abstract="true" eSuperTypes="//DbViewElement">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="type" containment="true" resolveProxies="false">
+      <eType xsi:type="ecore:EClass" href="g5.1c.ru.v8.dt.mcore.ecore#//TypeDescription"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="fieldRole" eType="//DbViewFieldRole" containment="true" resolveProxies="false"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="presentationSource">
+      <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/emf/2002/Ecore#//EObject"/>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="DbViewFieldFieldDef" eSuperTypes="//DbViewFieldDef"/>
+  <eClassifiers xsi:type="ecore:EClass" name="DbViewFieldFieldDefWithPeriod" eSuperTypes="//DbViewFieldFieldDef">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="periodSource">
+      <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/emf/2002/Ecore#//EObject"/>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="DbViewFieldTableDef" eSuperTypes="//DbViewFieldDef //Table"/>
+  <eClassifiers xsi:type="ecore:EClass" name="DbViewVirtualFieldDef" eSuperTypes="//DbViewFieldFieldDef"/>
+  <eClassifiers xsi:type="ecore:EClass" name="BasicDbViewDefs" abstract="true">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="mainView" lowerBound="1" eType="//DbViewTableDef" containment="true" resolveProxies="false"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ChangeableDbViewDefs" abstract="true" eSuperTypes="//BasicDbViewDefs">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="changeView" eType="//DbViewDef" containment="true" resolveProxies="false"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="EnumDbViewDefs" eSuperTypes="//BasicDbViewDefs"/>
+  <eClassifiers xsi:type="ecore:EClass" name="CatalogDbViewDefs" eSuperTypes="//ChangeableDbViewDefs"/>
+  <eClassifiers xsi:type="ecore:EClass" name="DocumentDbViewDefs" eSuperTypes="//ChangeableDbViewDefs"/>
+  <eClassifiers xsi:type="ecore:EClass" name="ChartOfCharacteristicTypesDbViewDefs" eSuperTypes="//ChangeableDbViewDefs"/>
+  <eClassifiers xsi:type="ecore:EClass" name="InformationRegisterDbViewDefs" eSuperTypes="//ChangeableDbViewDefs">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="sliceSelectViewFirst" eType="//DbViewSelectDef" containment="true" resolveProxies="false"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="sliceSelectViewLast" eType="//DbViewSelectDef" containment="true" resolveProxies="false"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ExchangePlanDbViewDefs" eSuperTypes="//BasicDbViewDefs"/>
+  <eClassifiers xsi:type="ecore:EClass" name="ConstantDbViewDefs" eSuperTypes="//ChangeableDbViewDefs"/>
+  <eClassifiers xsi:type="ecore:EClass" name="ConstantsDbViewDefs">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="allConstantsSelectView" eType="//DbViewSelectDef" containment="true" resolveProxies="false"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="SequenceDbViewDefs" eSuperTypes="//ChangeableDbViewDefs">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="boundaryView" eType="//DbViewTableDef" containment="true" resolveProxies="false"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="DocumentJournalDbViewDefs" eSuperTypes="//BasicDbViewDefs"/>
+  <eClassifiers xsi:type="ecore:EClass" name="AccumulationRegisterbViewDefs" eSuperTypes="//ChangeableDbViewDefs">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="balanceSelectView" eType="//DbViewSelectDef" containment="true" resolveProxies="false"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="turnoverSelectView" eType="//DbViewSelectDef" containment="true" resolveProxies="false"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="balanceAndTurnoverSelectView" eType="//DbViewSelectDef" containment="true" resolveProxies="false"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="BusinessProcessDbViewDefs" eSuperTypes="//ChangeableDbViewDefs">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="routePointView" eType="//DbViewTableDef" containment="true" resolveProxies="false"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="TaskDbViewDefs" eSuperTypes="//ChangeableDbViewDefs">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="bpTaskAddressingSelectView" eType="//DbViewSelectDef" containment="true" resolveProxies="false"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="FilterCriterionDbViewDefs">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="filterCriterionSelectView" eType="//DbViewSelectDef" containment="true" resolveProxies="false"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ChartOfAccountsDbViewDefs" eSuperTypes="//ChangeableDbViewDefs"/>
+  <eClassifiers xsi:type="ecore:EClass" name="ChartOfCalculationTypesDbViewDefs" eSuperTypes="//ChangeableDbViewDefs"/>
+  <eClassifiers xsi:type="ecore:EClass" name="AccountingRegisterDbViewDefs" eSuperTypes="//ChangeableDbViewDefs">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="balanceSelectView" eType="//DbViewSelectDef" containment="true" resolveProxies="false"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="turnoverSelectView" eType="//DbViewSelectDef" containment="true" resolveProxies="false"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="balanceAndTurnoverSelectView" eType="//DbViewSelectDef" containment="true" resolveProxies="false"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="extDimensionsView" eType="//DbViewTableDef" containment="true" resolveProxies="false"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="drCrTurnoverSelectView" eType="//DbViewSelectDef" containment="true" resolveProxies="false"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="recordsWithExtDimensionSelectView" eType="//DbViewSelectDef" containment="true" resolveProxies="false"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="CalculationRegisterDbViewDefs" eSuperTypes="//ChangeableDbViewDefs">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="actionPeriodSelectView" eType="//DbViewSelectDef" containment="true" resolveProxies="false"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="scheduleDataSelectView" eType="//DbViewSelectDef" containment="true" resolveProxies="false"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="baseSelectViews" upperBound="-1" eType="//DbViewSelectDef" containment="true" resolveProxies="false"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="RecalculationDbViewDefs" eSuperTypes="//ChangeableDbViewDefs"/>
+  <eClassifiers xsi:type="ecore:EClass" name="TableDbViewDefs" eSuperTypes="//BasicDbViewDefs"/>
+  <eClassifiers xsi:type="ecore:EClass" name="CubeDbViewDefs" eSuperTypes="//BasicDbViewDefs"/>
+  <eClassifiers xsi:type="ecore:EClass" name="DimensionTableDbViewDefs" eSuperTypes="//BasicDbViewDefs"/>
+  <eClassifiers xsi:type="ecore:EEnum" name="DbViewSelectParamKind">
+    <eLiterals name="SelectParamValue" value="1"/>
+    <eLiterals name="SelectParamVariant" value="2"/>
+    <eLiterals name="SelectParamWhere" value="4"/>
+    <eLiterals name="SelectParamFieldList" value="8"/>
+    <eLiterals name="SelectParamValueList" value="16"/>
+    <eLiterals name="SelectParamOrder" value="32"/>
+    <eLiterals name="SelectParamTop" value="64"/>
+    <eLiterals name="SelectParamBeginPeriod" value="128"/>
+    <eLiterals name="SelectParamEndPeriod" value="256"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="DbViewFieldRoleKind">
+    <eLiterals name="FieldRoleOrdinary" value="1"/>
+    <eLiterals name="FieldRoleDimension" value="2"/>
+    <eLiterals name="FieldRolePeriodBalance" value="4"/>
+    <eLiterals name="FieldRoleBeginBalance" value="8"/>
+    <eLiterals name="FieldRoleEndBalance" value="16"/>
+    <eLiterals name="FieldRoleBalanceDt" value="32"/>
+    <eLiterals name="FieldRoleBalanceCt" value="64"/>
+    <eLiterals name="FieldRoleTurnover" value="128"/>
+    <eLiterals name="FieldRoleSkipNull" value="256"/>
+    <eLiterals name="FieldRoleNotSorted" value="512"/>
+    <eLiterals name="FieldRoleMainPeriod" value="1024"/>
+    <eLiterals name="FieldRoleUnstable" value="2048"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="DbViewFieldPeriodType">
+    <eLiterals name="MainPeriod"/>
+    <eLiterals name="SpecifyPeriod"/>
+    <eLiterals name="AdditionalPeriod"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EDataType" name="Resource" instanceClassName="org.eclipse.emf.ecore.resource.Resource"/>
+  <eClassifiers xsi:type="ecore:EDataType" name="DbViewFieldDefList" instanceTypeName="java.util.List&lt;com._1c.g5.v8.dt.metadata.dbview.DbViewFieldDef>"/>
+</ecore:EPackage>

@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="ASCII"?>
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="model" nsURI="http://g5.1c.ru/v8/dt/rights" nsPrefix="">
+  <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore">
+    <details key="nsName" value="rights"/>
+  </eAnnotations>
+  <eClassifiers xsi:type="ecore:EClass" name="RoleDescription">
+    <eSuperTypes href="g5.1c.ru.v8.dt.metadata.mdclass.ecore#//AbstractRoleDescription"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="rights" upperBound="-1" eType="//ObjectRights" containment="true" resolveProxies="false"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="templates" upperBound="-1" eType="//RestrictionTemplate" containment="true" resolveProxies="false"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="setForNewObjects" unique="false" defaultValueLiteral="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="setForAttributesByDefault" unique="false" defaultValueLiteral="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="independentRightsOfChildObjects" unique="false" defaultValueLiteral="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ObjectRights">
+    <eOperations name="validate" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+      <eParameters name="diagnostics" unique="false">
+        <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EDiagnosticChain"/>
+      </eParameters>
+      <eParameters name="context" unique="false">
+        <eGenericType>
+          <eTypeArguments>
+            <eClassifier xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EJavaObject"/>
+          </eTypeArguments>
+          <eTypeArguments>
+            <eClassifier xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EJavaObject"/>
+          </eTypeArguments>
+          <eClassifier xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EMap"/>
+        </eGenericType>
+      </eParameters>
+    </eOperations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="object" lowerBound="1">
+      <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/emf/2002/Ecore#//EObject"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="rights" upperBound="-1" eType="//ObjectRight" containment="true" resolveProxies="false"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ObjectRight">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="right" lowerBound="1" eType="//Right"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" unique="false" eType="//RightValue"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="restrictionsByCondition" upperBound="-1" eType="//Rls" containment="true" resolveProxies="false"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Rls">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="fields" upperBound="-1">
+      <eType xsi:type="ecore:EClass" href="g5.1c.ru.v8.dt.metadata.dbview.ecore#//DbViewFieldDef"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="condition" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="RestrictionTemplate">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" unique="false" lowerBound="1">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="condition" unique="false" lowerBound="1">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Right">
+    <eSuperTypes href="g5.1c.ru.v8.dt.mcore.ecore#//DuallyNamedElement"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="RightInfo">
+    <eSuperTypes href="g5.1c.ru.v8.dt.mcore.ecore#//NamedElement"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="right" lowerBound="1" eType="//Right"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="eClass" lowerBound="1">
+      <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/emf/2002/Ecore#//EClass"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="parentRights" upperBound="-1" eType="//RightInfo" eOpposite="//RightInfo/childRights"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="childRights" upperBound="-1" eType="//RightInfo" eOpposite="//RightInfo/parentRights"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="RightValue">
+    <eLiterals name="Provided" literal="provided"/>
+    <eLiterals name="Set" literal="true"/>
+    <eLiterals name="Unset" literal="false"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EDataType" name="Role" instanceClassName="com._1c.g5.v8.dt.metadata.mdclass.Role"/>
+</ecore:EPackage>

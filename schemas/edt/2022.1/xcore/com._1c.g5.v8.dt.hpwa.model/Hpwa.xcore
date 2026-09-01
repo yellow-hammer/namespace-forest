@@ -1,0 +1,49 @@
+@GenModel(loadInitialization="false", literalsInterface="true", nonNLSMarkers="true", prefix="Hpwa", copyrightText="Copyright (C) 2013, 1C", updateClasspath="false",
+	featureDelegation="Reflective", rootExtendsClass="com._1c.g5.v8.bm.core.BmObject")
+@Ecore(nsPrefix="hpwa", nsURI="http://g5.1c.ru/v8/dt/hpwa")
+package com._1c.g5.v8.dt.hpwa.model
+
+import com._1c.g5.v8.dt.metadata.mdclass.AbstractWorkArea
+import com._1c.g5.v8.dt.metadata.mdclass.AdjustableBoolean
+import com._1c.g5.v8.dt.metadata.mdclass.BasicForm
+import org.eclipse.emf.ecore.EDiagnosticChain
+import org.eclipse.emf.ecore.EMap
+import com._1c.g5.v8.dt.hpwa.model.impl.HomePageWorkAreaValidator
+
+class HomePageWorkArea extends AbstractWorkArea
+{
+	WorkingAreaTemplate workingAreaTemplate
+	MACommandInterfaceDisplays mACommandInterfaceDisplays
+	contains HomePageWorkAreaColumn[] columns
+	
+	op boolean validate(EDiagnosticChain diagnostics, EMap<Object, Object> context)
+    {
+        HomePageWorkAreaValidator::validate(this, diagnostics, context)
+    }
+}
+
+enum MACommandInterfaceDisplays
+{
+	None = 0
+	Top = 1
+	Bottom = 2
+}
+
+enum WorkingAreaTemplate
+{
+	OneColumn = 0
+    TwoColumnsEqualWidth = 1
+    TwoColumnsVariableWidth = 2
+}
+
+class HomePageWorkAreaColumnItem
+{
+	refers BasicForm form
+    int height
+    contains AdjustableBoolean visibility
+}
+
+class HomePageWorkAreaColumn
+{
+	contains HomePageWorkAreaColumnItem[] items
+}

@@ -1,0 +1,28 @@
+@GenModel(loadInitialization="false", literalsInterface="true", nonNLSMarkers="true", prefix="Dcs", copyrightText="Copyright (C) 2017, 1C", updateClasspath="false",
+	featureDelegation="Reflective", rootExtendsClass="com._1c.g5.v8.bm.core.BmObject"
+)
+@Ecore(nsPrefix="appearanceTemplate", nsURI="http://g5.1c.ru/v8/dt/data-composition-system/appearanceTemplate")
+package com._1c.g5.v8.dt.dcs.model.appearancetemplate
+
+import com._1c.g5.v8.dt.dcs.model.core.ParameterValues
+import com._1c.g5.v8.dt.mcore.Value
+
+// Макет оформления комоновки данных.
+class DataCompositionAppearanceTemplate extends ParameterValues
+{
+}
+
+class DataCompositionAppearanceTemplateArea extends Value
+{
+	contains DataCompositionAppearanceTemplateAreaItem[] items
+}
+
+class DataCompositionAppearanceTemplateAreaItem
+{
+	int level
+	contains DataCompositionAppearanceTemplateAppearance appearance
+}
+
+class DataCompositionAppearanceTemplateAppearance extends ParameterValues
+{
+}

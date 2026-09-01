@@ -1,0 +1,203 @@
+@Ecore(nsURI="http://v8.1c.ru/8.3/debugger/debugCalculations")
+@GenModel(nonNLSMarkers="true", copyrightText="Copyright (C) 2014, 1C", updateClasspath="false")
+package com._1c.g5.v8.dt.debug.model.calculations
+
+import com._1c.g5.v8.dt.debug.model.core.UUID
+import org.eclipse.emf.ecore.EObject
+import org.eclipse.emf.ecore.xml.^type.DateTime
+import org.eclipse.emf.ecore.xml.^type.Base64Binary
+import java.math.BigDecimal
+
+
+@ExtendedMetaData(name="BaseValueInfoData", kind="elementOnly")
+class BaseValueInfoData {
+	@ExtendedMetaData(kind="element", name="typeCode", namespace="##targetNamespace")
+	unsettable BigDecimal[1] typeCode = "0"
+	@ExtendedMetaData(kind="element", name="typeName", namespace="##targetNamespace")
+	unsettable String[1] typeName = ""
+	@ExtendedMetaData(kind="element", name="valueDecimal", namespace="##targetNamespace")
+	BigDecimal valueDecimal
+	@ExtendedMetaData(kind="element", name="valueString", namespace="##targetNamespace")
+	Base64Binary valueString
+	@ExtendedMetaData(kind="element", name="valueDateTime", namespace="##targetNamespace")
+	DateTime valueDateTime
+	@ExtendedMetaData(kind="element", name="valueBoolean", namespace="##targetNamespace")
+	unsettable Boolean valueBoolean
+	@ExtendedMetaData(kind="element", name="pres", namespace="##targetNamespace")
+	Base64Binary pres
+	@ExtendedMetaData(kind="element", name="presProcessedCorrectly", namespace="##targetNamespace")
+	unsettable Boolean[1] presProcessedCorrectly = "true"
+	@ExtendedMetaData(kind="element", name="isExpandable", namespace="##targetNamespace")
+	unsettable Boolean[1] isExpandable = "false"
+	@ExtendedMetaData(kind="element", name="isSupportIContext", namespace="##targetNamespace")
+	unsettable Boolean[1] isSupportIContext = "false"
+	@ExtendedMetaData(kind="element", name="isIIndexedCollectionRO", namespace="##targetNamespace")
+	unsettable Boolean[1] isIIndexedCollectionRO = "false"
+	@ExtendedMetaData(kind="element", name="isSupportIEnumValue", namespace="##targetNamespace")
+	unsettable Boolean[1] isSupportIEnumValue = "false"
+    @ExtendedMetaData(kind="element", name="collectionSize", namespace="##targetNamespace")
+    unsettable BigDecimal[1] collectionSize // versions 8.3.21+
+}
+
+@ExtendedMetaData(name="CalculationResultBaseData", kind="elementOnly")
+class CalculationResultBaseData {
+	@ExtendedMetaData(kind="element", name="evalResultState", namespace="##targetNamespace")
+	unsettable CalculationResultState[1] evalResultState
+	@ExtendedMetaData(kind="element", name="expressionResultID", namespace="##targetNamespace")
+	UUID expressionResultID
+	@ExtendedMetaData(kind="element", name="resultValueInfo", namespace="##targetNamespace")
+	contains BaseValueInfoData resultValueInfo
+	@ExtendedMetaData(kind="element", name="testedAndSupportedInterface", namespace="##targetNamespace")
+	ViewInterface[] testedAndSupportedInterface
+	@ExtendedMetaData(kind="element", name="calculationResult", namespace="##targetNamespace")
+	contains CalculationResultObjData calculationResult
+	@ExtendedMetaData(kind="element", name="errorOccurred", namespace="##targetNamespace")
+	unsettable Boolean[1] errorOccurred = "false"
+	@ExtendedMetaData(kind="element", name="exceptionStr", namespace="##targetNamespace")
+	Base64Binary exceptionStr
+	@ExtendedMetaData(kind="element", name="localVariableName", namespace="##targetNamespace")
+	unsettable String[1] localVariableName = ""
+}
+
+@ExtendedMetaData(name="CalculationResultContextPropertyInfo", kind="elementOnly")
+class CalculationResultContextPropertyInfo {
+	@ExtendedMetaData(kind="element", name="propInfo", namespace="##targetNamespace")
+	contains ContextPropertyData[1] propInfo
+	@ExtendedMetaData(kind="element", name="valueInfo", namespace="##targetNamespace")
+	contains BaseValueInfoData valueInfo
+}
+
+@ExtendedMetaData(name="CalculationResultEnumAndColPropertyInfo", kind="elementOnly")
+class CalculationResultEnumAndColPropertyInfo {
+	@ExtendedMetaData(kind="element", name="valueInfo", namespace="##targetNamespace")
+	contains BaseValueInfoData[1] valueInfo
+	@ExtendedMetaData(kind="element", name="valueOfContextPropInfo", namespace="##targetNamespace")
+	contains CalculationResultContextPropertyInfo[] valueOfContextPropInfo
+}
+
+@ExtendedMetaData(name="CalculationResultObjData", kind="elementOnly")
+class CalculationResultObjData {
+	@ExtendedMetaData(kind="element", name="viewInterface", namespace="##targetNamespace")
+	unsettable ViewInterface[1] viewInterface
+	@ExtendedMetaData(kind="element", name="valueOfContextPropInfo", namespace="##targetNamespace")
+	contains CalculationResultContextPropertyInfo[] valueOfContextPropInfo
+	@ExtendedMetaData(kind="element", name="valueOfCollectionInfo", namespace="##targetNamespace")
+	contains CalculationResultEnumAndColPropertyInfo[] valueOfCollectionInfo
+	@ExtendedMetaData(kind="element", name="valueOfEnumInfo", namespace="##targetNamespace")
+	contains CalculationResultEnumAndColPropertyInfo[] valueOfEnumInfo
+}
+
+@ExtendedMetaData(name="CalculationResultState")
+enum CalculationResultState {
+	undefined
+	correctly = 1
+	withErrors = 2
+}
+
+@ ExtendedMetaData ( name = "CalculationResultState:Object" , baseType = "CalculationResultState" ) type CalculationResultStateObject wraps org.eclipse.emf.common.util.Enumerator
+
+@ExtendedMetaData(name="CalculationResultStorage", kind="elementOnly")
+class CalculationResultStorage {
+	@ExtendedMetaData(kind="element", name="evalExprResBaseData", namespace="##targetNamespace")
+	contains CalculationResultBaseData[1] evalExprResBaseData
+}
+
+@ExtendedMetaData(name="CalculationSourceDataStorage", kind="elementOnly")
+class CalculationSourceDataStorage {
+	@ExtendedMetaData(kind="element", name="stackLevel", namespace="##targetNamespace")
+	unsettable BigDecimal[1] stackLevel = "0"
+	@ExtendedMetaData(kind="element", name="srcCalcInfo", namespace="##targetNamespace")
+	contains SourceCalculationDataInfo[1] srcCalcInfo
+	@ExtendedMetaData(kind="element", name="maxTextSize", namespace="##targetNamespace")
+	unsettable BigDecimal[1] maxTextSize = "0" // versions 8.3.8 - 8.3.9
+	@ExtendedMetaData(kind="element", name="presOptions", namespace="##targetNamespace")
+	contains DbgPresentationOptionsOfStringValue presOptions // versions 8.3.10+
+}
+
+@ExtendedMetaData(name="ContextPropertyData", kind="elementOnly")
+class ContextPropertyData {
+	@ExtendedMetaData(kind="element", name="propName", namespace="##targetNamespace")
+	unsettable String[1] propName = ""
+	@ExtendedMetaData(kind="element", name="isReadable", namespace="##targetNamespace")
+	unsettable Boolean[1] isReadable = "true"
+	@ExtendedMetaData(kind="element", name="isWritable", namespace="##targetNamespace")
+	unsettable Boolean[1] isWritable = "true"
+	@ExtendedMetaData(kind="element", name="isReaded", namespace="##targetNamespace")
+	unsettable Boolean[1] isReaded = "false"
+	@ExtendedMetaData(kind="element", name="errorStr", namespace="##targetNamespace")
+	Base64Binary errorStr
+}
+
+@ExtendedMetaData(name="DbgPresentationOptionsOfStringValue", kind="elementOnly")
+class DbgPresentationOptionsOfStringValue {
+	@ExtendedMetaData(kind="element", name="maxTextSize", namespace="##targetNamespace")
+	unsettable BigDecimal[1] maxTextSize = "0"
+	@ExtendedMetaData(kind="element", name="stopOnFirstEOL", namespace="##targetNamespace")
+	unsettable Boolean[1] stopOnFirstEOL = "false"
+}
+
+@ExtendedMetaData(name="NewValueInfo", kind="elementOnly")
+class NewValueInfo {
+	@ExtendedMetaData(kind="element", name="variant", namespace="##targetNamespace")
+	unsettable NewValueVariant[1] variant
+	@ExtendedMetaData(kind="element", name="value", namespace="##targetNamespace")
+	contains EObject value
+	@ExtendedMetaData(kind="element", name="valueExpression", namespace="##targetNamespace")
+	String valueExpression
+}
+
+@ExtendedMetaData(name="NewValueVariant")
+enum NewValueVariant {
+	unknown
+	^val = 1
+	expr = 2
+}
+
+@ ExtendedMetaData ( name = "NewValueVariant:Object" , baseType = "NewValueVariant" ) type NewValueVariantObject wraps org.eclipse.emf.common.util.Enumerator
+
+@ExtendedMetaData(name="SourceCalculationDataInfo", kind="elementOnly")
+class SourceCalculationDataInfo {
+	@ExtendedMetaData(kind="element", name="expressionID", namespace="##targetNamespace")
+	UUID expressionID
+	@ExtendedMetaData(kind="element", name="expressionResultID", namespace="##targetNamespace")
+	UUID expressionResultID
+	@ExtendedMetaData(kind="element", name="calcItem", namespace="##targetNamespace")
+	contains SourceCalculationDataItem[] calcItem
+	@ExtendedMetaData(kind="element", name="interfaces", namespace="##targetNamespace")
+	ViewInterface[] interfaces
+    @ExtendedMetaData(kind="element", name="startIndex", namespace="##targetNamespace")
+    unsettable BigDecimal[1] startIndex // versions 8.3.21+
+    @ExtendedMetaData(kind="element", name="pageSize", namespace="##targetNamespace")
+    unsettable BigDecimal[1] pageSize // versions 8.3.21+
+}
+
+@ExtendedMetaData(name="SourceCalculationDataItem", kind="elementOnly")
+class SourceCalculationDataItem {
+	@ExtendedMetaData(kind="element", name="itemType", namespace="##targetNamespace")
+	unsettable SourceCalculationDataItemType[1] itemType
+	@ExtendedMetaData(kind="element", name="expression", namespace="##targetNamespace")
+	unsettable String[1] expression = ""
+	@ExtendedMetaData(kind="element", name="property", namespace="##targetNamespace")
+	unsettable String[1] property = ""
+	@ExtendedMetaData(kind="element", name="index", namespace="##targetNamespace")
+	BigDecimal index
+}
+
+@ExtendedMetaData(name="SourceCalculationDataItemType")
+enum SourceCalculationDataItemType {
+	expression
+	property = 1
+	index = 2
+}
+
+@ ExtendedMetaData ( name = "SourceCalculationDataItemType:Object" , baseType = "SourceCalculationDataItemType" ) type SourceCalculationDataItemTypeObject wraps org.eclipse.emf.common.util.Enumerator
+
+@ExtendedMetaData(name="ViewInterface")
+enum ViewInterface {
+	none
+	context = 1
+	^enum = 2
+	collection = 3
+}
+
+@ ExtendedMetaData ( name = "ViewInterface:Object" , baseType = "ViewInterface" ) type ViewInterfaceObject wraps org.eclipse.emf.common.util.Enumerator

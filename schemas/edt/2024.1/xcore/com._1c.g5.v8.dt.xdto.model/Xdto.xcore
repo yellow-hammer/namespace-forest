@@ -1,0 +1,132 @@
+@GenModel(loadInitialization="false", literalsInterface="true", nonNLSMarkers="true", prefix="Xdto", copyrightText="Copyright (C) 2016, 1C LLC", updateClasspath="false",
+	featureDelegation="Reflective", rootExtendsClass="com._1c.g5.v8.bm.core.BmObject")
+@Ecore(nsPrefix="xdto", nsURI="http://g5.1c.ru/v8/dt/xdto/model")
+package com._1c.g5.v8.dt.xdto.model
+
+import com._1c.g5.v8.dt.mcore.QName
+
+annotation "http://www.1c.ru/v8/bm/CollectionItemId" as CollectionItemId
+
+class Model
+{
+	refers Package[] packages
+}
+
+//Special element using for deserialization xdto packages into one file
+class InnerModel
+{
+	contains Package[] packages 
+}
+
+class Package
+{
+    String[1] nsUri
+    unsettable boolean elementFormQualified = "true"
+    unsettable boolean attributeFormQualified = "false"
+    contains ValueType[] types
+    contains ObjectType[] objects
+    contains Property[] properties
+    @CollectionItemId(feature="namespace")
+    contains Import[] dependencies
+}
+
+abstract class Type
+{
+	String name
+	contains QName baseType 	
+}
+
+class ValueType extends Type
+{
+    unsettable Variety variety
+    @CollectionItemId(feature="pattern")
+    contains Pattern[] patterns
+    @CollectionItemId(feature="content")
+    contains Enumeration[] enumerations //anyType
+    contains Type[] typeDefs
+    contains QName itemType
+    contains QName[] memeberTypes
+    unsettable int length = "0" // >= 0
+    unsettable int minLength = "0" // >= 0
+    unsettable int maxLength = "0" // >= 0
+    unsettable Whitespace whitespace
+    String minInclusive //anyType
+    String minExclusive //anyType
+    String maxInclusive //anyType
+    String maxExclusive //anyType
+    unsettable int totalDigits = "0" // > 0
+    unsettable int fractionDigits = "0" // >= 0
+}
+
+class ObjectType extends Type
+{
+	contains Property[] properties
+	unsettable boolean open = "false"
+	unsettable boolean ^abstract = "false"
+	unsettable boolean mixed = "false"
+	unsettable boolean ordered = "true"
+	unsettable boolean sequenced = "false"
+}
+
+class Property
+{
+	String name
+	contains Type typeDefs
+	contains QName ref
+	contains QName ^type
+	unsettable int lowerBound = "1" // >= 0
+	unsettable int upperBound = "1"
+	unsettable boolean nillable = "false"
+	unsettable boolean fixed = "false"
+	String ^default
+	unsettable Form form = "Element"
+	String localName
+	String namespaceURI
+	Boolean qualified
+}
+
+class Import
+{
+	String[1] namespace
+	String location
+}
+
+class Pattern
+{
+	String[1] pattern
+}
+
+class Enumeration
+{
+	contains QName ^type
+	String content
+}
+
+enum Variety
+{
+	Atomic,
+	List,
+	Union
+}
+
+enum Whitespace
+{
+	preserve,
+	replace
+	collapse
+}
+
+enum Form
+{
+	Element,
+	Attribute,
+	Text
+}
+
+class PackageScopeSpec
+{
+	refers Property property
+	refers Type ^type 
+	refers ValueType valueType
+	refers ObjectType objectType
+}

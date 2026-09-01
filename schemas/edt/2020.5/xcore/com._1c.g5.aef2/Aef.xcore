@@ -1,0 +1,67 @@
+@GenModel(loadInitialization="false", literalsInterface="true", nonNLSMarkers="true", prefix="Aef",
+    copyrightText="Copyright (C) 2015, 1C", updateClasspath="false")
+@Ecore(nsPrefix="Aef", nsURI="http://g5.1c.ru/v8/aef")
+package com._1c.g5.aef2.viewModels
+
+import com._1c.g5.aef2.events.IEventChannel
+
+type IEventChannel wraps IEventChannel
+
+/*
+ * The base for all AEF view models classes.
+ */
+interface IViewModel
+{
+	/*
+	 * Event channel to communicate with the associated {@code IComponent}.
+	 */
+	IEventChannel eventChannel
+	/*
+     * Parent of this view model or {@code null} if view model has no parent.
+     */
+	container IContainerViewModel parent opposite children
+}
+
+/* 
+ * The model that may contain other view models but has no corresponding
+ * {@code IView}. In other words, its child views are embedded in the
+ * parent view of the container view.
+ */
+interface IContainerViewModel extends IViewModel
+{
+	/**
+	 * Child view models of this view model.
+	 */
+	contains IViewModel[] children opposite parent
+}
+
+/*
+ * The view model that has the corresponding {@code IView} – a text
+ * box, for example.
+ */
+interface IControlViewModel extends IViewModel
+{
+}
+
+/*
+ * The view model that may contain other view models and has its own
+ * {@code IView} – an SWT composite, for example.
+ */
+interface IContainerControlViewModel extends IControlViewModel, IContainerViewModel
+{
+}
+
+/** The view model for dialogs. */
+interface IDialogViewModel extends IContainerViewModel
+{
+}
+
+/* Interface for all AEFs layout data objects. */
+interface IAefLayoutData
+{
+}
+
+/* Interface for all AEF layouts. */
+interface IAefLayout
+{
+}

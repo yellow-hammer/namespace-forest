@@ -1,0 +1,21 @@
+@Ecore(nsURI="http://v8.1c.ru/8.3/debugger/debugRTEFilter")
+@GenModel(nonNLSMarkers="true", copyrightText="Copyright (C) 2014, 1C", updateClasspath="false")
+package com._1c.g5.v8.dt.debug.model.rte.filter
+
+@ExtendedMetaData(name="RteFilterItem", kind="elementOnly")
+class RteFilterItem {
+	@ExtendedMetaData(kind="element", name="include", namespace="##targetNamespace")
+	unsettable Boolean[1] include = "true"
+	@ExtendedMetaData(kind="element", name="str", namespace="##targetNamespace")
+	String[1] str
+}
+
+@ExtendedMetaData(name="RteFilterStorage", kind="elementOnly")
+class RteFilterStorage {
+	@ExtendedMetaData(kind="element", name="stopOnErrors", namespace="##targetNamespace")
+	unsettable Boolean[1] stopOnErrors
+	@ExtendedMetaData(kind="element", name="analyzeErrorStr", namespace="##targetNamespace")
+	unsettable Boolean[1] analyzeErrorStr
+	@ExtendedMetaData(kind="element", name="strTemplate", namespace="##targetNamespace")
+	contains RteFilterItem[] strTemplate
+}

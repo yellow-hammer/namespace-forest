@@ -1,0 +1,107 @@
+@GenModel(nonNLSMarkers="true", prefix="Platform", copyrightText="Copyright (C) 2013, 1C",
+	featureDelegation="Reflective", rootExtendsClass="com._1c.g5.v8.bm.core.BmObject"
+)
+@Ecore(nsPrefix="platform", nsURI="http://g5.1c.ru/v8/dt/platform/model")
+package com._1c.g5.v8.dt.platform.model
+
+import com._1c.g5.v8.dt.mcore.BorderDef
+import com._1c.g5.v8.dt.mcore.BorderStyle
+import com._1c.g5.v8.dt.mcore.Color
+import com._1c.g5.v8.dt.mcore.ColorDef
+import com._1c.g5.v8.dt.mcore.CompositeId
+import com._1c.g5.v8.dt.mcore.DuallyNamedElement
+import com._1c.g5.v8.dt.mcore.Font
+import com._1c.g5.v8.dt.mcore.FontDef
+import com._1c.g5.v8.dt.mcore.FontRef
+import com._1c.g5.v8.dt.mcore.NamedElement
+import com._1c.g5.v8.dt.mcore.PictureDef
+import com._1c.g5.v8.dt.mcore.impl.FontRefExtension
+import com._1c.g5.v8.dt.platform.model.impl.SystemColorExtension
+import com._1c.g5.v8.dt.platform.model.impl.SystemFontExtension
+
+class PlatformBorder extends NamedElement, BorderDef
+{
+	CompositeId compositeId
+	
+	op BorderStyle style() { getStyle() }
+    op int width() { getWidth() }
+	
+	op CompositeId compositeId() { getCompositeId() }
+}
+
+class PlatformFont extends NamedElement, FontDef
+{
+    op String faceName() { getFaceName() }
+    op boolean bold() { isBold() }
+    op boolean italic() { isItalic() }
+    op boolean underline() { isUnderline() }
+    op boolean strikeout() { isStrikeout() }
+    op int scale() { getScale() }
+}
+
+class PlatformFontRef extends NamedElement, FontRef
+{
+	CompositeId compositeId
+	
+    op String faceName() { FontRefExtension::faceName(this) }
+    op int height() { FontRefExtension::height(this) }
+    op boolean bold() { FontRefExtension::bold(this) }
+    op boolean italic() { FontRefExtension::italic(this) }
+    op boolean underline() { FontRefExtension::underline(this) }
+    op boolean strikeout() { FontRefExtension::strikeout(this) }
+    op int scale() { FontRefExtension::scale(this) }
+    
+    op CompositeId compositeId() { getCompositeId() }
+}
+
+class SystemFont extends NamedElement, Font
+{
+	CompositeId compositeId
+	
+    op String faceName() { SystemFontExtension::faceName(this) }
+    op int height() { SystemFontExtension::height(this) }
+    op boolean bold() { SystemFontExtension::bold(this) }
+    op boolean italic() { SystemFontExtension::italic(this) }
+    op boolean underline() { SystemFontExtension::underline(this) }
+    op boolean strikeout() { SystemFontExtension::strikeout(this) }
+    op int scale() { SystemFontExtension::scale(this) }
+    
+    op CompositeId compositeId() { getCompositeId() }
+}
+
+class PlatformColor extends NamedElement, ColorDef
+{
+	CompositeId compositeId
+	
+    op int red() { getRed() }
+    op int green() { getGreen() }
+    op int blue() { getBlue() }
+    
+    op CompositeId compositeId() { getCompositeId() } 
+}
+
+class SystemColor extends NamedElement, Color
+{
+	CompositeId compositeId
+		
+    op int red() { SystemColorExtension::red(this) }
+    op int green() { SystemColorExtension::green(this) }
+    op int blue() { SystemColorExtension::blue(this) }
+    
+    op CompositeId compositeId() { getCompositeId() }
+}
+
+enum PlatformPictureUsing
+{
+    Normal
+    Version81      // картинка для совместимости с 8.1
+    Version82      // картинка недоступна в режиме совместимости с 8.1
+    Version82Rich  // картинка не используется в управляемом приложении
+}
+
+class PlatformPicture extends DuallyNamedElement, PictureDef
+{
+	CompositeId compositeId
+	String url
+	PlatformPictureUsing pictureUsing
+}

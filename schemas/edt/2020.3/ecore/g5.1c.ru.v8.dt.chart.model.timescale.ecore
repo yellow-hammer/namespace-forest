@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="ASCII"?>
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="timescale" nsURI="http://g5.1c.ru/v8/dt/chart/model/timescale" nsPrefix="timescale">
+  <eClassifiers xsi:type="ecore:EClass" name="TimeScaleLabel">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="key" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://g5.1c.ru/v8/dt/mcore#//Date"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="text" upperBound="-1" containment="true" resolveProxies="false">
+      <eType xsi:type="ecore:EClass" href="http://g5.1c.ru/v8/dt/mcore#//LocalStringMapEntry"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="lineColor" containment="true" resolveProxies="false">
+      <eType xsi:type="ecore:EClass" href="http://g5.1c.ru/v8/dt/mcore#//Color"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="textColor" containment="true" resolveProxies="false">
+      <eType xsi:type="ecore:EClass" href="http://g5.1c.ru/v8/dt/mcore#//Color"/>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="TimeScaleLabels">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="labels" upperBound="-1" eType="//TimeScaleLabel" containment="true" resolveProxies="false"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="ticks" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="TimeScaleLevel">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="measure" unique="false" eType="//TimeScaleUnitType"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="interval" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="show" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="line" containment="true" resolveProxies="false">
+      <eType xsi:type="ecore:EClass" href="http://g5.1c.ru/v8/dt/chart/model#//ChartLine"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="scaleColor" containment="true" resolveProxies="false">
+      <eType xsi:type="ecore:EClass" href="http://g5.1c.ru/v8/dt/mcore#//Color"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="dayFormatRule" unique="false" eType="//TimeScaleDayFormat"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="format" upperBound="-1" containment="true" resolveProxies="false">
+      <eType xsi:type="ecore:EClass" href="http://g5.1c.ru/v8/dt/mcore#//LocalStringMapEntry"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="labels" eType="//TimeScaleLabels" containment="true" resolveProxies="false"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="backColor" containment="true" resolveProxies="false">
+      <eType xsi:type="ecore:EClass" href="http://g5.1c.ru/v8/dt/mcore#//Color"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="textColor" containment="true" resolveProxies="false">
+      <eType xsi:type="ecore:EClass" href="http://g5.1c.ru/v8/dt/mcore#//Color"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="showPereodicalLabels" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="TimeScale">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="placement" unique="false" eType="//TimeScalePosition"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="levels" upperBound="-1" eType="//TimeScaleLevel" containment="true" resolveProxies="false"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="transparent" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="backColor" containment="true" resolveProxies="false">
+      <eType xsi:type="ecore:EClass" href="http://g5.1c.ru/v8/dt/mcore#//Color"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="textColor" containment="true" resolveProxies="false">
+      <eType xsi:type="ecore:EClass" href="http://g5.1c.ru/v8/dt/mcore#//Color"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="currentLevel" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="TimeScaleUnitType">
+    <eLiterals name="Second" value="5"/>
+    <eLiterals name="Minute" value="10"/>
+    <eLiterals name="Hour" value="20"/>
+    <eLiterals name="Day" value="30"/>
+    <eLiterals name="Week" value="40"/>
+    <eLiterals name="Month" value="50"/>
+    <eLiterals name="Quarter" value="60"/>
+    <eLiterals name="Year" value="70"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="TimeScalePosition">
+    <eLiterals name="Top"/>
+    <eLiterals name="Bottom" value="1"/>
+    <eLiterals name="Left" value="2"/>
+    <eLiterals name="Right" value="3"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="TimeScaleDayFormat">
+    <eLiterals name="MonthDay" value="1"/>
+    <eLiterals name="WeekDay" value="2"/>
+    <eLiterals name="MonthDayWeekDay" value="3"/>
+    <eLiterals name="WeekDayMonthDay" value="4"/>
+  </eClassifiers>
+</ecore:EPackage>

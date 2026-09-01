@@ -1,0 +1,295 @@
+@GenModel(loadInitialization="false", literalsInterface="true", nonNLSMarkers="true", prefix="Dcs", copyrightText="Copyright (C) 2013, 1C", updateClasspath="false",
+	featureDelegation="Reflective", rootExtendsClass="com._1c.g5.v8.bm.core.BmObject"
+)
+@Ecore(nsPrefix="schema", nsURI="http://g5.1c.ru/v8/dt/data-composition-system/schema")
+package com._1c.g5.v8.dt.dcs.model.schema
+
+import com._1c.g5.v8.dt.dcs.model.settings.DataCompositionSettings
+import com._1c.g5.v8.dt.dcs.model.settings.SettingsVariant
+import com._1c.g5.v8.dt.dcs.model.common.DataCompositionDataSetFieldRole
+import com._1c.g5.v8.dt.dcs.model.common.DataCompositionOrderExpression
+import com._1c.g5.v8.dt.dcs.model.common.DataCompositionAreaTemplateType
+import com._1c.g5.v8.dt.dcs.model.core.Presentation
+import com._1c.g5.v8.dt.dcs.model.core.DataCompositionAppearance
+import com._1c.g5.v8.dt.dcs.model.core.InputParameters
+import com._1c.g5.v8.dt.dcs.model.core.DataCompositionParameterUse
+import com._1c.g5.v8.dt.dcs.model.core.DataCompositionField
+import com._1c.g5.v8.dt.dcs.model.areaTemplate.DataCompositionAreaTemplate
+import com._1c.g5.v8.dt.dcs.model.areaTemplate.AreaTemplateParameter
+
+
+import com._1c.g5.v8.dt.mcore.TypeDescription
+import com._1c.g5.v8.dt.mcore.Value
+import com._1c.g5.v8.dt.metadata.mdclass.AbstractDataCompositionSchema
+
+
+
+// Схема компоновки данных.
+
+class DataCompositionSchema extends AbstractDataCompositionSchema
+{
+	contains DataCompositionSchemaDataSource[] dataSources // Источники данных.
+	contains DataSet[] dataSets // Наборы данных.
+	contains DataCompositionSchemaDataSetLink[] dataSetLinks // Связи между наборами данных.
+	contains DataCompositionSchemaCalculatedField[] calculatedFields // Вычисляемые поля.
+	contains DataCompositionSchemaTotalField[] totalFields // Итоги по полям.
+	contains DataCompositionSchemaParameter[] parameters // Параметры.
+	contains NestedDataCompositionSchema[] nestedSchemas // Вложенные схемы компоновки данных.
+	contains DataCompositionSchemaTemplateDescription[] templates // Описания макетов.
+	contains DataCompositionSchemaFieldTemplate[] fieldTemplates // Макеты полей.
+	contains DataCompositionSchemaGroupTemplate[] groupTemplates // Макеты группировок.
+	contains DataCompositionSchemaGroupTemplate[] groupHeaderTemplates // Макеты заголовков группировок.
+	contains DataCompositionSchemaTotalFieldsTemplate[] totalFieldsTemplates // Макеты ресурсов.
+	contains DataCompositionSettings defaultSettings // Настройки по-умолчанию.
+	contains SettingsVariant[] settingsVariants // Варианты настроек.
+}
+
+
+// Источник данных.
+
+class DataCompositionSchemaDataSource
+{
+    String name // Имя источника данных.
+    String dataSourceType // Тип источника данных.
+    String connectionString // Строка соединения.
+}
+
+
+// Абстрактный набор данных.
+
+abstract class DataSet
+{
+    String name // Имя набора данных.
+    contains DataSetField[] fields // Поля набора данных.
+}
+
+
+// Набор данных - объединение.
+
+class DataCompositionSchemaDataSetUnion extends DataSet
+{
+	contains DataSet[] items // Части объединения.
+}
+
+
+// Набор данных - запрос.
+
+class DataCompositionSchemaDataSetQuery extends DataSet
+{
+	String dataSource // Имя источника данных из которого получаются данные.
+	String query // Текст запроса для получения данных.
+	boolean autoFillAvailableFields = "true" // Автоматическое заполнение доступных полей.
+	boolean useQueryGroupIfPossible = "true" // Использование группировки в запросе, если возможно // since 8.3.14
+}
+
+
+// Набор данных - объект.
+
+class DataCompositionSchemaDataSetObject extends DataSet
+{
+	String dataSource // Имя источника данных из которого получаются данные.
+	String objectName // Имя объекта, содержащего данные.
+}
+
+
+// Поле набора данных.
+
+abstract class DataSetField
+{
+}
+
+
+// Поле набора данных.
+
+class DataCompositionSchemaDataSetFieldFolder extends DataSetField
+{
+	String dataPath // Путь к данным поля.
+	contains Presentation title // Заголовок поля. Может быть xs:string или core:LocalStringType
+	contains DataCompositionSchemaFieldUseRestriction useRestriction // Ограничение доступности поля.
+}
+
+
+// Поле набора данных.
+
+class DataCompositionSchemaDataSetField extends DataSetField
+{
+	String dataPath // Путь к данным поля.
+	String field // Поле набора данных.
+	contains Presentation title // Заголовок поля. Может быть xs:string или core:LocalStringType.
+	contains DataCompositionSchemaFieldUseRestriction useRestriction // Ограничение доступности поля.
+	contains DataCompositionSchemaFieldUseRestriction attributeUseRestriction // Ограничение доступности полей - реквизитов.
+	contains DataCompositionDataSetFieldRole role // Роль поля.
+	String presentationExpression // Выражение, по которому вычисляется представление поля.
+	contains DataCompositionOrderExpression[] orderExpressions // Выражения упорядочивания.
+	String inHierarchyDataSet // Набор данных для проверки принадлежности иерархии.
+	String inHierarchyDataSetParameter // Параметр набора данных для проверки принадлежности иерархии.
+	contains TypeDescription valueType // Тип значения поля.
+	contains DataCompositionAppearance	appearance // Оформление, применяемое к полю.
+	contains AvailableValue[] availableValues // Доступные значения для поля.
+    contains InputParameters inputParameters // Параметры редактирования.
+}
+	
+
+// Поле набора данных - вложенный набор данных.
+
+class DataCompositionSchemaNestedDataSet extends DataSetField	
+{
+	String dataPath // Путь к данным поля.
+	String field // Поле набора данных.
+	contains Presentation title // Заголовок поля. Может быть xs:string или core:LocalStringType.
+}
+
+
+// Вычисляемое поле.
+
+class DataCompositionSchemaCalculatedField
+{
+	String dataPath // Путь к данным поля - выражения.
+	String expression // Выражение, по которому вычисляется поле.
+	contains Presentation title // Заголовок поля. Может быть xs:string или core:LocalStringType.
+	contains DataCompositionSchemaFieldUseRestriction useRestriction // Ограничение доступности поля.
+	String presentationExpression // Выражение, по которому вычисляется представление поля.
+	contains DataCompositionOrderExpression[] orderExpression // Выражения упорядочивания.
+	contains DataCompositionAppearance appearance // Оформление, применяемое к полю.
+	contains AvailableValue[] availableValues // Доступные значения для поля.
+	contains TypeDescription valueType // Тип значения поля.
+	contains InputParameters inputParameters // Параметры ввода.
+}
+
+
+// Доступность поля.
+
+class DataCompositionSchemaFieldUseRestriction
+{
+	boolean field = "false" // Недоступно для выбора.
+	boolean	condition = "false" // Недоступно как условие.
+	boolean	group = "false" // Недоступно для группировки.
+	boolean	order = "false" // Недоступно для упорядочивания.
+}
+	
+
+// Итог по полю.
+
+class DataCompositionSchemaTotalField
+{
+	String dataPath // Путь к данным поля - выражения.
+	String expression // Выражение, по которому вычисляется итог.
+	String[] groups // Группировки, для которых доступен ресурс.
+}
+
+
+// Связь между наборами данных.
+
+class DataCompositionSchemaDataSetLink
+{
+	String sourceDataSet // Набор данных - источник связи.
+	String destinationDataSet // Набор данных - приемник связи.
+	String sourceExpression // Выражение - источник.
+	String destinationExpression // Выражение - приемник.
+	String parameter // Параметр связи.
+	unsettable boolean parameterListAllowed // Допустимо использование списка в качестве параметра.
+	String linkConditionExpression // Условие, при выполнении которого будет осуществляться связь.
+	String startExpression // Выражение, устанавливающее начальное значение связи при иерерхическом спуске.
+	boolean	required = "true" // Связь обязательно переходит в макет в случае, если между наборами данных будет осуществляться связь.
+}
+
+
+// Параметр.
+
+class DataCompositionSchemaParameter
+{
+      String name // Имя параметра.
+      contains Presentation title // Заголовок параметра. Может быть xs:string или core:LocalStringType.
+      contains TypeDescription valueType // Тип значения параметра.
+      contains Value[] values // Значение параметра по умолчанию.
+      boolean useRestriction = "false" // Запрет использования.
+      String expression // Выражение, по которому вычисляется значение параметра.
+      contains AvailableValue[] availableValues // Доступные значения.
+      boolean valueListAllowed = "false" // В качестве знаения параметра можно использовать список значений.
+      boolean availableAsField = "true" // Параметр будет доступен как поле.
+      String functionalOptionsParameter// Имя параметра функциональной опции.
+      contains InputParameters inputParameters // Параметры редактирования.
+      boolean denyIncompleteValues = "false" // Запрет незаполненных значений. По умолчанию false.
+      DataCompositionParameterUse use = "Auto" // Использование. По умолчанию Auto.
+}
+
+
+// Вложенная схема компоновки данных.
+
+class NestedDataCompositionSchema
+{
+	String name // Имя вложенной схемы компоновки данных.
+	contains Presentation title // Заголовок вложенной схемы. Может быть xs:string или core:LocalStringType.
+	String URL // Адрес, по которому расположена схема компоновки.
+	contains DataCompositionSchema schema // Схема компоновки.
+	contains DataCompositionSettings settings // Настойки связи вложенной схемы с родительской схемой.
+}
+	
+
+// Макет поля.
+
+class DataCompositionSchemaFieldTemplate
+{
+	contains DataCompositionField field // Поле, для которого макет.
+	String template // Макет.
+}
+	
+
+// Макет группировки.
+
+class DataCompositionSchemaGroupTemplate
+{
+	contains DataCompositionField[] groupFields // Поля группировки.
+	String groupName // Имя группировки.
+	DataCompositionAreaTemplateType templateType = "Header" // Тип макета.
+	String template // Макет.
+}
+	
+
+// Макет ресурсов группировки.
+
+class DataCompositionSchemaTotalFieldsTemplate
+{
+	contains DataCompositionField[] groupFields1 // Поля группировки.
+	String groupName1 // Имя группировки.
+	DataCompositionAreaTemplateType templateType1 = "Header" // Тип макета.
+	contains DataCompositionField[] groupFields2 // Поля группировки.
+	String groupName2 // Имя группировки.
+	DataCompositionAreaTemplateType	templateType2 = "Header" // Тип макета.
+	String template // Макет.
+}
+	
+
+// Определение макета.
+
+class DataCompositionSchemaTemplateDescription
+{
+	String name // Имя макета.
+	contains DataCompositionAreaTemplate template
+	contains AreaTemplateParameter[] parameters // Параметры макета.
+}
+	
+
+// Доступное значение.
+
+class AvailableValue
+{
+	contains Value value // Значение.
+	contains Presentation presentation // Представление значения
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

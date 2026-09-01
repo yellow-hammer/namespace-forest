@@ -1,0 +1,39 @@
+@GenModel(loadInitialization="false", literalsInterface="true", nonNLSMarkers="true", prefix="AefDescriptor",
+    copyrightText="Copyright (C) 2015, 1C", updateClasspath="false")
+@Ecore(nsPrefix="AefDescriptor", nsURI="http://g5.1c.ru/v8/aef/descriptor")
+package com._1c.g5.v8.dt.ui.aef.descriptor
+
+/* Section enum is used by object descriptors for localization of section labels. */
+enum Section
+{
+	General
+	Presentation
+	Data
+	Help
+	Appearance
+	Usage
+	Development
+	Compatibility
+	Layout
+	Events
+	Object
+	CommandSet
+	Addressing
+	DataTable
+	Characteristics
+	Series
+	Points
+	Link
+	ValuesAxis
+	AdditionalValuesAxis
+	PointsAxis
+	TimeScale
+	TimeScaleElement
+	Template
+	Placement
+	Picture
+	Values_
+	Paragraph
+	Format
+	Preferences
+}

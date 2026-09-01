@@ -1,0 +1,163 @@
+@Ecore(nsURI="http://v8.1c.ru/8.3/debugger/debugDBGUICommands")
+@GenModel(nonNLSMarkers="true", copyrightText="Copyright (C) 2014-2023, 1C-Soft LLC", updateClasspath="false")
+package com._1c.g5.v8.dt.debug.model.dbgui.commands
+
+import com._1c.g5.v8.dt.debug.model.core.UUID
+import com._1c.g5.v8.dt.debug.model.core.GenericException
+import com._1c.g5.v8.dt.debug.model.base.data.DebugTargetId
+import com._1c.g5.v8.dt.debug.model.base.data.DebugTargetIdStr
+import com._1c.g5.v8.dt.debug.model.base.data.StackItemViewInfoData
+import com._1c.g5.v8.dt.debug.model.breakpoints.BPWorkspaceInternal
+import com._1c.g5.v8.dt.debug.model.calculations.CalculationResultBaseData
+import com._1c.g5.v8.dt.debug.model.foreground.data.ForegroundWindowData
+import com._1c.g5.v8.dt.debug.model.measure.PerformanceInfoMain
+import com._1c.g5.v8.dt.debug.model.rte.info.CheckBPCondErrorInfo
+import com._1c.g5.v8.dt.debug.model.rte.info.ErrorViewInfoData
+import org.eclipse.emf.ecore.xml.^type.Base64Binary
+import java.math.BigDecimal
+
+@ExtendedMetaData(name="DBGUIExtCmdInfoBase", kind="elementOnly")
+class DBGUIExtCmdInfoBase {
+	@ExtendedMetaData(kind="element", name="cmdIDNum", namespace="##targetNamespace")
+	BigDecimal cmdIDNum
+	@ExtendedMetaData(kind="element", name="cmdID", namespace="##targetNamespace")
+	unsettable DBGUIExtCmds cmdID
+	@ExtendedMetaData(kind="element", name="targetIDStr", namespace="##targetNamespace")
+	DebugTargetIdStr targetIDStr
+	@ExtendedMetaData(kind="element", name="targetID", namespace="##targetNamespace")
+	contains DebugTargetId targetID
+	@ExtendedMetaData(kind="element", name="requestQueueID", namespace="##targetNamespace")
+	String requestQueueID
+}
+
+@ExtendedMetaData(name="DBGUIExtCmdInfoCallStackFormed", kind="elementOnly")
+class DBGUIExtCmdInfoCallStackFormed extends DBGUIExtCmdInfoBase {
+	@ExtendedMetaData(kind="element", name="stopByBP", namespace="##targetNamespace")
+	unsettable Boolean[1] stopByBP
+	@ExtendedMetaData(kind="element", name="suspendedByOther", namespace="##targetNamespace")
+	unsettable Boolean[1] suspendedByOther
+	@ExtendedMetaData(kind="element", name="sendMessageOnly", namespace="##targetNamespace")
+	unsettable Boolean[1] sendMessageOnly
+	@ExtendedMetaData(kind="element", name="sendHitCounterOnly", namespace="##targetNamespace")
+	unsettable Boolean[1] sendHitCounterOnly
+	@ExtendedMetaData(kind="element", name="showStack", namespace="##targetNamespace")
+	unsettable Boolean[1] showStack
+	@ExtendedMetaData(kind="element", name="hasMessage", namespace="##targetNamespace")
+	unsettable Boolean[1] hasMessage
+	@ExtendedMetaData(kind="element", name="message", namespace="##targetNamespace")
+	unsettable String[1] message
+	@ExtendedMetaData(kind="element", name="hitCounter", namespace="##targetNamespace")
+	unsettable BigDecimal[1] hitCounter
+	@ExtendedMetaData(kind="element", name="callStack", namespace="##targetNamespace")
+	contains StackItemViewInfoData[] callStack
+}
+
+@ExtendedMetaData(name="DBGUIExtCmdInfoCorrectedBP", kind="elementOnly")
+class DBGUIExtCmdInfoCorrectedBP extends DBGUIExtCmdInfoBase {
+	@ExtendedMetaData(kind="element", name="bpWorkspace", namespace="##targetNamespace")
+	contains BPWorkspaceInternal[1] bpWorkspace
+}
+
+@ExtendedMetaData(name="DBGUIExtCmdInfoErrorViewInfo", kind="elementOnly")
+class DBGUIExtCmdInfoErrorViewInfo extends DBGUIExtCmdInfoBase {
+	@ExtendedMetaData(kind="element", name="requestConnection", namespace="##targetNamespace")
+	unsettable Boolean[1] requestConnection = "false"
+	@ExtendedMetaData(kind="element", name="addTargetIDStr", namespace="##targetNamespace")
+	DebugTargetIdStr[] addTargetIDStr
+	@ExtendedMetaData(kind="element", name="addTargetID", namespace="##targetNamespace")
+	contains DebugTargetId[] addTargetID
+	@ExtendedMetaData(kind="element", name="errorInfo", namespace="##targetNamespace")
+	contains ErrorViewInfoData[] errorInfo
+}
+
+@ExtendedMetaData(name="DBGUIExtCmdInfoExprEvaluated", kind="elementOnly")
+class DBGUIExtCmdInfoExprEvaluated extends DBGUIExtCmdInfoBase {
+	@ExtendedMetaData(kind="element", name="evalExprResBaseData", namespace="##targetNamespace")
+	contains CalculationResultBaseData[1] evalExprResBaseData
+}
+
+@ExtendedMetaData(name="DBGUIExtCmdInfoMeasure", kind="elementOnly")
+class DBGUIExtCmdInfoMeasure extends DBGUIExtCmdInfoBase {
+	@ExtendedMetaData(kind="element", name="measureStr", namespace="##targetNamespace")
+	Base64Binary measureStr
+	@ExtendedMetaData(kind="element", name="measure", namespace="##targetNamespace")
+	contains PerformanceInfoMain measure
+}
+
+@ExtendedMetaData(name="DBGUIExtCmdInfoQuit", kind="elementOnly")
+class DBGUIExtCmdInfoQuit extends DBGUIExtCmdInfoBase {
+}
+
+@ExtendedMetaData(name="DBGUIExtCmdInfoRte", kind="elementOnly")
+class DBGUIExtCmdInfoRte extends DBGUIExtCmdInfoBase {
+	@ExtendedMetaData(kind="element", name="exception", namespace="##targetNamespace")
+	contains GenericException[1] exception
+	@ExtendedMetaData(kind="element", name="callStack", namespace="##targetNamespace")
+	contains StackItemViewInfoData[] callStack
+}
+
+@ExtendedMetaData(name="DBGUIExtCmdInfoRteBPCondition", kind="elementOnly")
+class DBGUIExtCmdInfoRteBPCondition extends DBGUIExtCmdInfoBase {
+	@ExtendedMetaData(kind="element", name="errorInfo", namespace="##targetNamespace")
+	contains CheckBPCondErrorInfo[1] errorInfo
+}
+
+@ExtendedMetaData(name="DBGUIExtCmdInfoValueModifyResult", kind="elementOnly")
+class DBGUIExtCmdInfoValueModifyResult extends DBGUIExtCmdInfoBase {
+	@ExtendedMetaData(kind="element", name="processed", namespace="##targetNamespace")
+	unsettable Boolean[1] processed = "true"
+	@ExtendedMetaData(kind="element", name="newValState", namespace="##targetNamespace")
+	contains CalculationResultBaseData newValState
+	@ExtendedMetaData(kind="element", name="errorStr", namespace="##targetNamespace")
+	Base64Binary errorStr
+}
+
+@ExtendedMetaData(name="DBGUIExtCmdShowMetadataObject", kind="elementOnly")
+class DBGUIExtCmdShowMetadataObject extends DBGUIExtCmdInfoBase {
+    @ExtendedMetaData(kind="element", name="metadataObjectName", namespace="##targetNamespace")
+    String metadataObjectName
+}
+
+@ExtendedMetaData(name="DBGUIExtCmdInfoStarted", kind="elementOnly")
+class DBGUIExtCmdInfoStarted extends DBGUIExtCmdInfoBase {
+}
+
+
+@ExtendedMetaData(name="DBGUIExtCmdInfoForegroundHelperRequest", kind="elementOnly")
+class DBGUIExtCmdInfoForegroundHelperRequest extends DBGUIExtCmdInfoBase {
+	@ExtendedMetaData(kind="element", name="senderID", namespace="##targetNamespace")
+	UUID senderID
+}
+
+@ExtendedMetaData(name="DBGUIExtCmdInfoForegroundHelperSet", kind="elementOnly")
+class DBGUIExtCmdInfoForegroundHelperSet extends DBGUIExtCmdInfoBase {
+	@ExtendedMetaData(kind="element", name="data", namespace="##targetNamespace")
+	contains ForegroundWindowData data
+}
+
+@ExtendedMetaData(name="DBGUIExtCmdInfoForegroundHelperProcess", kind="elementOnly")
+class DBGUIExtCmdInfoForegroundHelperProcess extends DBGUIExtCmdInfoBase {
+	@ExtendedMetaData(kind="element", name="data", namespace="##targetNamespace")
+	contains ForegroundWindowData data
+}
+
+@ExtendedMetaData(name="DBGUIExtCmds")
+enum DBGUIExtCmds {
+	unknown
+	targetStarted = 1
+	targetQuit = 2
+	correctedBP = 3
+	rteProcessing = 4
+	rteOnBPConditionProcessing = 5
+	measureResultProcessing = 6
+	callStackFormed = 7
+	exprEvaluated = 8
+	valueModified = 9
+	errorViewInfo = 10
+	ForegroundHelperSet = 11
+	ForegroundHelperRequest = 12
+	ForegroundHelperProcess = 13
+	showMetadataObject = 14
+}
+
+@ ExtendedMetaData ( name = "DBGUIExtCmds:Object" , baseType = "DBGUIExtCmds" ) type DBGUIExtCmdsObject wraps org.eclipse.emf.common.util.Enumerator

@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="ASCII"?>
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="model" nsURI="http://g5.1c.ru/v8/dt/binary" nsPrefix="binary">
+  <eClassifiers xsi:type="ecore:EClass" name="BinaryData">
+    <eOperations name="inputStream" unique="false" eType="//InputStream"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EDataType" name="InputStream" instanceClassName="java.io.InputStream"/>
+</ecore:EPackage>

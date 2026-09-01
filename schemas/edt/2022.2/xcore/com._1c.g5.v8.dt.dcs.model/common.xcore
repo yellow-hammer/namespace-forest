@@ -1,0 +1,90 @@
+@GenModel(loadInitialization="false", literalsInterface="true", nonNLSMarkers="true", prefix="Dcs", copyrightText="Copyright (C) 2013, 1C", updateClasspath="false",
+	featureDelegation="Reflective", rootExtendsClass="com._1c.g5.v8.bm.core.BmObject"
+)
+@Ecore(nsPrefix="common", nsURI="http://g5.1c.ru/v8/dt/data-composition-system/common")
+package com._1c.g5.v8.dt.dcs.model.common
+
+import com._1c.g5.v8.dt.dcs.model.core.DataCompositionSortDirection
+
+
+// Роль поля набора данных.
+
+class DataCompositionDataSetFieldRole
+{
+	int periodNumber = "0" // Номер периода.
+	DataCompositionPeriodType periodType = "Main" // Тип периода.
+	boolean dimension = "false" // Поле является измерением.
+	String parentDimension // Родительское измерение.
+	boolean account = "false" // Поле является полем счета
+	String accountTypeExpression // Выражение для расчета типа счета (активный/пассивный/активно пассивный) (0/1/2 соответственно).
+	boolean balance = "false" // Поле является полем баланса.
+	String balanceGroupName // Имя группы балансовых полей. Например, Сумма или Количество
+	DataCompositionBalanceType balanceType = "None" // Тип балансового поля (начальный или конечный баланс).
+	DataCompositionAccountingBalanceType accountingBalanceType = "None" // Тип бухгалтерского баланса (Дебит или Кредит).
+	String accountField // Поле счета.
+	boolean ignoreNullValues = "false" // Игнорировать значения NULL.
+	boolean	required = "false" // Обязательное поле
+    boolean dimensionAttribute = "false" // Реквизит измерения.
+}
+	
+
+// Тип остатка.
+
+enum DataCompositionBalanceType
+{
+	None,
+	OpeningBalance,
+	ClosingBalance
+}
+	
+
+// Тип бухгалтерского остатка.
+
+enum DataCompositionAccountingBalanceType
+{
+	None,
+	Debit,
+	Credit
+}
+
+
+// Выражение компоновки данных.
+
+class DataCompositionExpression
+{
+	String value
+}
+	
+
+// Выражение упорядочивания.
+
+class DataCompositionOrderExpression
+{
+	String expression // Выражение для упорядочивания.
+	DataCompositionSortDirection orderType = "Asc" // Тип упорядочивания.
+	boolean autoOrder = "false" // Необходимость автоупорядочивания.
+}
+	
+
+// Тип периода.
+
+enum DataCompositionPeriodType
+{
+	Main,
+	Specify,
+	Additional
+}
+
+
+// Тип области макета.
+
+enum DataCompositionAreaTemplateType
+{
+	Header,
+	Footer,
+	HierarchicalHeader,
+	HierarchicalFooter,
+	OverallHeader,
+	OverallFooter
+}
+

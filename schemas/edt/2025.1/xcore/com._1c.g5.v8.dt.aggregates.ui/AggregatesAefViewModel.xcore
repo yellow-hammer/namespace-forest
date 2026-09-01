@@ -1,0 +1,29 @@
+@GenModel(loadInitialization="false", literalsInterface="true", nonNLSMarkers="true", prefix="AggregatesAef",
+    copyrightText="Copyright (C) 2016, 1C", updateClasspath="false", runtimeVersion="2.12")
+@Ecore(nsPrefix="AggregatesAefViewModel", nsURI="http://g5.1c.ru/v8/aef/aggregates")
+package com._1c.g5.v8.dt.aggregates.ui.viewmodel
+
+import com._1c.g5.aef2.standard.viewModels.ControlViewModel
+import com._1c.g5.v8.dt.metadata.common.AccumulationRegisterAggregateUse
+import com._1c.g5.v8.dt.metadata.common.AccumulationRegisterAggregatePeriodicity
+import com._1c.g5.aef2.viewModels.IViewModel
+
+class AggregatesTableViewModel extends ControlViewModel
+{
+    contains AggregatesTableColumnViewModel[] columns
+    contains AggregateTableItemViewModel[] input
+}
+
+class AggregatesTableColumnViewModel extends IViewModel
+{
+    String header
+}
+
+class AggregateTableItemViewModel extends IViewModel
+{
+    String stateImageId
+    String stateMessage
+    AccumulationRegisterAggregateUse use = "Auto"
+    AccumulationRegisterAggregatePeriodicity periodicity = "Auto"
+    String[] dimensionNames
+}

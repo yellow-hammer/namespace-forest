@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="ASCII"?>
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="model" nsURI="http://g5.1c.ru/v8/dt/md/aindex" nsPrefix="aindex">
+  <eClassifiers xsi:type="ecore:EClass" name="AdditionalIndexes">
+    <eSuperTypes href="g5.1c.ru.v8.dt.metadata.externalProperties.ecore#//AbstractAdditionalIndexes"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="indexes" upperBound="-1" eType="//AdditionalIndex" containment="true" resolveProxies="false"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="AdditionalIndex">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="id" unique="false">
+      <eType xsi:type="ecore:EDataType" href="g5.1c.ru.v8.dt.mcore.ecore#//Uuid"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="table">
+      <eType xsi:type="ecore:EClass" href="g5.1c.ru.v8.dt.metadata.dbview.ecore#//Table"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="indexedFields" upperBound="-1" eType="//IndexField" containment="true" resolveProxies="false"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="additionalFields" upperBound="-1" eType="//IndexField" containment="true" resolveProxies="false"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="IndexField">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="path" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" unique="false" transient="true">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="nameRu" unique="false" transient="true">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="source" transient="true">
+      <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/emf/2002/Ecore#//EObject"/>
+    </eStructuralFeatures>
+  </eClassifiers>
+</ecore:EPackage>

@@ -1,0 +1,19 @@
+@Ecore(nsURI="http://v8.1c.ru/8.3/debugger/debugAutoAttach")
+@GenModel(nonNLSMarkers="true", copyrightText="Copyright (C) 2014, 1C", updateClasspath="false")
+package com._1c.g5.v8.dt.debug.model.attach
+
+import com._1c.g5.v8.dt.debug.model.base.data.DebugTargetType
+
+@ExtendedMetaData(name="DebugAutoAttachSettings", kind="elementOnly")
+class DebugAutoAttachSettings {
+	@ExtendedMetaData(kind="element", name="targetType", namespace="##targetNamespace")
+	DebugTargetType[] targetType
+	@ExtendedMetaData(kind="element", name="areaName", namespace="##targetNamespace")
+	String[] areaName
+}
+
+@ExtendedMetaData(name="DebugAutoAttachSettingsProperty", kind="elementOnly")
+class DebugAutoAttachSettingsProperty {
+	@ExtendedMetaData(kind="element", name="autoAttachSettings", namespace="##targetNamespace")
+	contains DebugAutoAttachSettings autoAttachSettings
+}

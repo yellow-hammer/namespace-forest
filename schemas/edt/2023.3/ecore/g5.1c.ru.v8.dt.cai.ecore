@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="ASCII"?>
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="model" nsURI="http://g5.1c.ru/v8/dt/cai" nsPrefix="cai">
+  <eClassifiers xsi:type="ecore:EClass" name="ClientApplicationInterface">
+    <eSuperTypes href="http://g5.1c.ru/v8/dt/metadata/mdclass#//AbstractClientApplicationInterface"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="top" upperBound="-1" eType="//CaiAbstractItem" containment="true" resolveProxies="false"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="bottom" upperBound="-1" eType="//CaiAbstractItem" containment="true" resolveProxies="false"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="left" upperBound="-1" eType="//CaiAbstractItem" containment="true" resolveProxies="false"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="right" upperBound="-1" eType="//CaiAbstractItem" containment="true" resolveProxies="false"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="unset" upperBound="-1" eType="//CaiPanel" containment="true" resolveProxies="false"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="CaiAbstractItem" abstract="true">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="id" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://g5.1c.ru/v8/dt/mcore#//Uuid"/>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="CaiGroup" eSuperTypes="//CaiAbstractItem">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="panels" upperBound="-1" eType="//CaiPanel" containment="true" resolveProxies="false"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="CaiPanel" eSuperTypes="//CaiAbstractItem">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="displayType" unique="false" eType="//CaiDisplayType" unsettable="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="CaiDisplayType">
+    <eLiterals name="Picture"/>
+    <eLiterals name="PictureAndText" value="1"/>
+    <eLiterals name="Text" value="2"/>
+    <eLiterals name="PictureOnLeftAndText" value="3"/>
+    <eLiterals name="PictureOnTopAndText" value="4"/>
+  </eClassifiers>
+</ecore:EPackage>

@@ -1,0 +1,214 @@
+@GenModel(loadInitialization="false", literalsInterface="true", nonNLSMarkers="true", prefix="Dcs", copyrightText="Copyright (C) 2013, 1C", updateClasspath="false",
+	featureDelegation="Reflective", rootExtendsClass="com._1c.g5.v8.bm.core.BmObject"
+)
+@Ecore(nsPrefix="areaTemplate", nsURI="http://g5.1c.ru/v8/dt/data-composition-system/areaTemplate")
+package com._1c.g5.v8.dt.dcs.model.areaTemplate
+
+import com._1c.g5.v8.dt.dcs.model.details.DataCompositionDetailsProcessingAction
+import com._1c.g5.v8.dt.dcs.model.core.ParameterValues
+import com._1c.g5.v8.dt.dcs.model.core.Presentation
+
+import com._1c.g5.v8.dt.mcore.TypeDescription
+import com._1c.g5.v8.dt.mcore.Value
+import com._1c.g5.v8.dt.chart.model.ChartColorPaletteDescription
+import com._1c.g5.v8.dt.chart.model.ChartReferenceLines
+import com._1c.g5.v8.dt.chart.model.ChartReferenceBands
+import com._1c.g5.v8.dt.chart.model.ChartReferenceLine
+import com._1c.g5.v8.dt.chart.model.ChartReferenceBand
+import com._1c.g5.v8.dt.chart.model.ChartScale
+import com._1c.g5.v8.dt.chart.model.ChartAxis
+import com._1c.g5.v8.dt.chart.model.ChartSeriesGraphicalRepresentationType
+import com._1c.g5.v8.dt.chart.model.ChartSeriesStackType
+import com._1c.g5.v8.dt.chart.model.UsedChartValuesAxis
+
+// Макет области комоновки данных.
+
+class DataCompositionAreaTemplate
+{
+	contains AreaTemplateItem[] items
+}
+	
+
+// Элемент макета области компоновки данных.
+
+abstract class AreaTemplateItem
+{
+}
+	
+
+// Строка таблицы.
+
+class DataCompositionAreaTemplateTableRow extends AreaTemplateItem
+{
+	contains DataCompositionAreaTemplateTableCell[] cells // Ячейки макета.
+	String tableID // Идентификатор таблицы.
+}
+	
+
+// Ячейка таблицы.
+
+class DataCompositionAreaTemplateTableCell
+{
+	contains TemplateItem[]	item // Элементы.
+	contains DataCompositionAreaTemplateTableCellAppearance appearance // Оформление ячейки.
+    int appIndex = "0" // Индекс оформления ячейки.
+}
+	
+
+// Оформление ячейки.
+
+class DataCompositionAreaTemplateTableCellAppearance extends ParameterValues
+{
+}
+	
+
+// Оформление группировки диаграммы. См. ОформлениеГруппировкиДиаграммыОбластиКомпоновкиДанных
+
+class DataCompositionAreaTemplateChartGroupAppearance extends ParameterValues
+{
+	contains ChartReferenceLine referenceLineInChart // Since 8.3.12
+	contains ChartReferenceBand referenceBandInChart // Since 8.3.12
+
+	ChartSeriesGraphicalRepresentationType visualTypeInChart // since 8.3.16
+	ChartSeriesStackType stackTypeInChart                    // since 8.3.16
+	UsedChartValuesAxis usedValueAxisInChart                 // since 8.3.16
+	String stackGroupInChart                                 // since 8.3.16
+}
+
+
+// Оформление ресурса диаграммы.
+
+class DataCompositionAreaTemplateChartResourceAppearance extends ParameterValues
+{
+}
+	
+
+// Оформление диаграммы. См. ОформлениеДиаграммыОбластиКомпоновкиДанных
+
+class DataCompositionAreaTemplateChartAppearance extends ParameterValues
+{
+	contains ChartColorPaletteDescription colorPaletteDescription // Since 8.3.12
+	contains ChartColorPaletteDescription referenceBandsColorPaletteDescription // Since 8.3.12
+	contains ChartReferenceLines valuesReferenceLines // Since 8.3.12
+	contains ChartReferenceLines pointsReferenceLines // Since 8.3.12
+	contains ChartReferenceBands valuesReferenceBands // Since 8.3.12
+	contains ChartReferenceBands pointsReferenceBands // Since 8.3.12
+
+	contains ChartScale additionalValuesScale //since 8.3.16
+	contains ChartAxis additionalValuesAxis	  //since 8.3.16
+}
+	
+
+// Элемент макета.
+
+abstract class TemplateItem
+{
+}
+	
+
+// Поле области.
+
+class DataCompositionAreaTemplateField extends TemplateItem
+{
+	contains Value value // Значение.
+	contains DataCompositionAreaTemplateFieldAppearance appearance // Оформление поля.
+}
+	
+
+// Оформление поля.
+
+class DataCompositionAreaTemplateFieldAppearance extends ParameterValues
+{
+}
+	
+
+// Макет для вывода группировки диаграммы.
+
+class DataCompositionAreaTemplateChartGroupTemplate
+{
+	contains Value value // Групповое значение.
+	contains DataCompositionAreaTemplateChartGroupAppearance appearance // Оформление.
+	contains Value presentation // Групповое представление
+}
+	
+
+// Макет для вывода ресурса диаграммы.
+
+class DataCompositionAreaTemplateChartResourceTemplate
+{
+	contains Value[] resourceValue // Значение ресурса.
+	contains DataCompositionAreaTemplateChartResourceAppearance appearance // Оформление.
+}
+	
+
+// Макет диаграммы.
+
+class DataCompositionAreaTemplateChartTemplate
+{
+	contains DataCompositionAreaTemplateChartAppearance appearance // Оформление диаграммы.
+}
+	
+
+// Параметр макета.
+
+abstract class AreaTemplateParameter
+{
+	String name // Имя параметра.
+}
+	
+
+// Параметр макета области.
+
+class DataCompositionExpressionAreaParameter extends AreaTemplateParameter
+{
+	String expression // Выражение, по которому вычисляется параметр макета.
+}
+
+
+// Параметр макета - расшифровка.
+
+class DataCompositionDetailsAreaParameter extends AreaTemplateParameter
+{
+	contains DataCompositionDetailsAreaParameterFieldExpression[] fieldExpression // Выражения полей.
+    DataCompositionDetailsProcessingAction mainAction = "None" // Основное действие.
+}
+
+
+// Выражение поля параметра макета.
+
+class DataCompositionDetailsAreaParameterFieldExpression
+{
+	String field // Имя поля.
+	String expression // Выражение, по которому вычисляется значение поля.
+}
+
+
+// Ячейка заголовка коллекции значений.
+
+class ValueCollectionHeaderCell
+{
+	contains Value name	// Имя колонки.
+	contains Presentation title // Заголовок колонки.
+	contains TypeDescription valueType
+}
+
+
+// Ячейка макета коллекции значений.
+
+class ValueCollectionCell
+{
+	contains Value value // Значение.
+}
+
+
+// Макет коллекции значений.
+
+class ValueCollectionTemplate
+{
+	contains ValueCollectionCell[] cell // Ячейка макета.
+}
+
+class ValueCollectionHeaderTemplate
+{
+	contains ValueCollectionHeaderCell[] cell // Ячейка.
+}

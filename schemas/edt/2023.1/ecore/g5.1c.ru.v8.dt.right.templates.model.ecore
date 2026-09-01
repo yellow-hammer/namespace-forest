@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="ASCII"?>
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="model" nsURI="http://g5.1c.ru/v8/dt/right/templates/model" nsPrefix="rt">
+  <eClassifiers xsi:type="ecore:EClass" name="RootTemplate">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="maxParamValue" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="template" eType="//Template" containment="true" resolveProxies="false"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Template">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="statements" upperBound="-1" eType="//Statement" containment="true" resolveProxies="false"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Statement" abstract="true"/>
+  <eClassifiers xsi:type="ecore:EClass" name="TextStatement" eSuperTypes="//Statement">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="content" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="IfStatement" eSuperTypes="//Statement">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="ifPart" lowerBound="1" eType="//Conditional" containment="true" resolveProxies="false"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="elsIfParts" upperBound="-1" eType="//Conditional" containment="true" resolveProxies="false"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="elseTemplate" eType="//Template" containment="true" resolveProxies="false"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Conditional">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="predicate" lowerBound="1" eType="//Expression" containment="true" resolveProxies="false"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="template" eType="//Template" containment="true" resolveProxies="false"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Expression" abstract="true"/>
+  <eClassifiers xsi:type="ecore:EClass" name="OuterParameter" eSuperTypes="//Expression">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Function" abstract="true" eSuperTypes="//Expression">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="params" upperBound="-1" eType="//Expression" containment="true" resolveProxies="false"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="TemplateParameter" eSuperTypes="//Function">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="type" unique="false" eType="//TemplateParameterType"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="StrContains" eSuperTypes="//Function"/>
+  <eClassifiers xsi:type="ecore:EClass" name="BinaryExpression" eSuperTypes="//Expression">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="operation" unique="false" eType="//BinaryOperation"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="left" lowerBound="1" eType="//Expression" containment="true" resolveProxies="false"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="right" lowerBound="1" eType="//Expression" containment="true" resolveProxies="false"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="UnaryExpression" eSuperTypes="//Expression">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="operation" unique="false" eType="//UnaryOperation"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="operand" lowerBound="1" eType="//Expression" containment="true" resolveProxies="false"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Literal" abstract="true" eSuperTypes="//Expression"/>
+  <eClassifiers xsi:type="ecore:EClass" name="BooleanLiteral" eSuperTypes="//Literal">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="isTrue" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="NumberLiteral" eSuperTypes="//Literal">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" unique="false" lowerBound="1">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="StringLiteral" eSuperTypes="//Literal">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="content" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ValueLiteral" eSuperTypes="//Literal">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="TemplateParameterType">
+    <eLiterals name="Parameter"/>
+    <eLiterals name="CurrentTable"/>
+    <eLiterals name="CurrentTableName"/>
+    <eLiterals name="CurrentAccessRightName"/>
+    <eLiterals name="WrongType"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="BinaryOperation">
+    <eLiterals name="OR"/>
+    <eLiterals name="AND"/>
+    <eLiterals name="LT"/>
+    <eLiterals name="LE"/>
+    <eLiterals name="EQ"/>
+    <eLiterals name="GE"/>
+    <eLiterals name="GT"/>
+    <eLiterals name="NE"/>
+    <eLiterals name="PLUS"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="UnaryOperation">
+    <eLiterals name="NOT"/>
+  </eClassifiers>
+</ecore:EPackage>

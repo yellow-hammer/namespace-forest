@@ -1,0 +1,225 @@
+@GenModel(nonNLSMarkers="true", prefix="Expressions", copyrightText="Copyright (C) 2015, 1C", updateClasspath="false")
+@Ecore(nsPrefix="expressions", nsURI="http://g5.1c.ru/v8/dt/dcs/expressions/model")
+package com._1c.g5.v8.dt.dcs.expressions.model
+
+import com._1c.g5.v8.dt.mcore.TypeItem
+
+class Expressions
+{
+	contains Expression item
+}
+
+abstract class Expression
+{
+	refers unique TypeItem[0..*] types
+	
+	op TypeItem[] getRetValTypes()
+	{
+		types
+	}
+}
+
+class EmptyExpression extends Expression
+{
+}
+
+class UnaryExpression extends Expression
+{
+    UnaryOperation operation
+    contains Expression[1] operand
+}
+
+enum UnaryOperation
+{
+    NOT         // NOT e
+    MINUS       // -e
+    PLUS        // +e
+}
+
+class BinaryExpression extends Expression
+{
+    BinaryOperation operation
+    contains Expression[1] left
+    contains Expression[1] right
+}
+
+enum BinaryOperation
+{
+    OR          // e1 OR e2
+    AND         // e1 AND e2
+    IN          // e1 IN
+    IS          // e1 IS NULL
+    LT          // e1 < e2
+    LE          // e1 <= e2
+    EQ          // e1 = e2
+    GE          // e1 >= e2
+    GT          // e1 > e2
+    NE          // e1 <> e2
+    LIKE        // e1 LIKE e2
+    PLUS        // e1 + e2
+    MINUS       // e1 - e2
+    MULTIPLY    // e1 * e2
+    DIVIDE      // e1 / e2
+    MODULO      // e1 % e2
+}
+
+abstract class Literal extends Expression
+{
+}
+
+class NullLiteral extends Literal
+{	
+}
+
+class UndefinedLiteral extends Literal
+{
+}
+
+class BooleanLiteral extends Literal
+{
+    boolean isTrue
+}
+
+class NumberLiteral extends Literal
+{
+    String[1] value
+}
+
+class DateLiteral extends Literal
+{
+    contains NumberLiteral year
+    contains NumberLiteral month
+    contains NumberLiteral day
+    contains NumberLiteral hour
+    contains NumberLiteral minute
+    contains NumberLiteral second
+}
+
+class StringLiteral extends Literal
+{
+    String[1] value
+    
+    op String value() {
+    	return getValue.substring(1, getValue.length - 1)
+    }
+}
+
+class ValueLiteral extends Literal
+{
+	contains Name value
+}
+
+class TypeLiteral extends Literal
+{
+	contains StringLiteral value
+}
+
+class Case extends Expression
+{
+    contains Expression inputExpression
+	contains CaseBody[] body
+	contains Expression elseExpression
+}
+
+class CaseBody extends Expression
+{
+	contains Expression when
+	contains Expression then
+}
+
+class InList extends Expression
+{
+	contains Expression[] items
+}
+
+class IsNull extends Expression
+{
+	boolean not
+}
+
+class Like extends Expression
+{
+    contains Expression[1] literal
+    contains Expression escape
+}
+
+class Parameter extends Expression
+{
+    String value
+}
+
+class Ident extends Expression
+{
+	String value
+}
+
+abstract class Name
+{
+	String content
+	op String getFullContent()
+}
+
+class SinglePartName extends Name
+{	
+	op String getFullContent()
+	{
+		return content
+	}
+}
+
+class MultiPartName extends Name
+{	
+	contains Name prev
+	
+	op String getFullContent()
+	{
+		var notNullContent = ""
+		if (content !== null)
+		{
+			notNullContent = content
+		}
+		
+		val builder = new StringBuilder(notNullContent)
+		var Name current = prev
+		
+		while (current !== null)
+		{
+			builder.insert(0, ".")
+			builder.insert(0, current.getContent())
+		
+			if (current instanceof MultiPartName)
+			{
+				current = current.prev
+			}
+			else
+			{
+				current = null
+			}
+		}
+		
+		return builder.toString()
+	}
+}
+
+class Field extends Expression
+{
+    contains Name[1] path
+}
+
+class ExpressionWithAlias extends Expression
+{
+	contains Expression[1] expression
+	String alias
+}
+
+class ExpressionWithDistinct extends Expression
+{
+	contains Expression[1] expression
+}
+
+class Function extends Expression
+{
+    contains Name[1] name
+    contains Expression[] parameters
+}
+  

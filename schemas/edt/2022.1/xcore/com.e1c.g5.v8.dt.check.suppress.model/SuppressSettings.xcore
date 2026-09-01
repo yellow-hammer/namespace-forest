@@ -1,0 +1,95 @@
+@GenModel(prefix="Suppress", loadInitialization="false", literalsInterface="true", nonNLSMarkers="true",
+    copyrightText="Copyright (C) 2020, 1C", updateClasspath="false",
+    featureDelegation="Reflective", rootExtendsClass="com._1c.g5.v8.bm.core.BmObject", rootExtendsInterface="com._1c.g5.v8.bm.core.IBmObject")
+@Ecore(nsPrefix="suppress", nsURI="http://g5.1c.ru/v8/dt/check/suppress/model")
+package com.e1c.g5.v8.dt.check.suppress.settings.model
+
+import java.util.Map
+import com.e1c.g5.v8.dt.check.settings.CheckUid
+
+type CheckUid wraps CheckUid
+
+/**
+ * Suppress object that contains check ID and suppression status.
+ */
+class SuppressionMapEntry wraps Map$Entry
+{
+    CheckUid key
+    Boolean value
+}
+
+/**
+ * Suppress object that contains terminal properties
+ */
+interface SuppressionsContainer
+{
+	contains SuppressionMapEntry[] suppressions
+	Boolean suppressed
+}
+
+/**
+ * Suppress object that contains terminal properties
+ */
+interface SuppressPropertyContainer
+{
+    contains SuppressProperty[] properties
+}
+
+/**
+ * Suppress settings for the Configuration object.
+ */
+class SuppressConfiguration extends SuppressionsContainer
+{
+}
+
+class BaseSuppressObject extends SuppressionsContainer
+{
+	String fqn
+	contains SuppressContainment[] containments
+}
+
+/**
+ * Suppress settings for the generic object (MD, Common, etc)
+ */
+class SuppressGenericObject extends BaseSuppressObject
+{
+}
+
+/**
+ * Suppress settings for the {@link SuppressGenericObject} containment object 
+ */
+class SuppressContainment extends BaseSuppressObject
+{
+}
+
+/**
+ * Suppress settings for the {@link Subsystem}.
+ */
+class SuppressSubsystem extends BaseSuppressObject 
+{
+    contains SuppressionMapEntry[] contentSuppressions
+}
+
+/**
+ * Suppress settings for a single property 
+ */
+class SuppressProperty
+{
+	String name
+}
+
+/**
+ * Suppress settings for an internal language module 
+ */
+class SuppressModule extends BaseSuppressObject
+{
+	contains SuppressMethod[] methods
+}
+
+/**
+ * Suppress settings for a single internal language method   
+ */
+class SuppressMethod extends SuppressionsContainer
+{
+	String name
+}

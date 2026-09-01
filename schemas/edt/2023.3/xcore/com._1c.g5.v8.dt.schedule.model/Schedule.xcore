@@ -1,0 +1,88 @@
+@GenModel(loadInitialization="false", literalsInterface="true", nonNLSMarkers="true", containmentProxies="true",
+    prefix="Schedule", copyrightText="Copyright (C) 2014, 1C", updateClasspath="false", 
+    featureDelegation="Reflective", rootExtendsClass="com._1c.g5.v8.bm.core.BmObject")
+@Ecore(nsPrefix="schedule", nsURI="http://g5.1c.ru/v8/dt/schedule")
+package com._1c.g5.v8.dt.schedule.model
+
+import com._1c.g5.v8.dt.schedule.model.util.ScheduleDateTimeUtil
+import java.util.Date
+
+class Schedule
+{
+    // common 
+    Date beginDate
+    Date endDate
+    int daysRepeatPeriod // >=0 NonNegative
+    // daily
+    Time beginTime
+    Time endTime
+    Time completionTime
+    int completionInterval // >=0 NonNegative
+    int repeatPeriodInDay // >=0 NonNegative
+    int repeatPause // >=0 NonNegative
+    contains unique DailySchedule[0..*] dailySchedules
+    // weekly
+    int weeksPeriod // > 0
+    unique WeekDays[0..7] weekDays
+    // monthly
+    int weekDayInMonth
+    int dayInMonth
+    unique Months[0..12] months
+}
+
+class DailySchedule
+{
+    Time beginTime
+    Time endTime
+    Time completionTime
+    int completionInterval // >=0 NonNegative
+    int repeatPeriodInDay // >=0 NonNegative
+    int repeatPause // >=0 NonNegative
+}
+
+enum WeekDays
+{
+    Sunday as "Sun" = 0
+    Monday as "Mon" = 1
+    Tuesday as "Tue" = 2
+    Wednesday as "Wed" = 3
+    Thursday as "Thu" = 4
+    Friday as "Fri" = 5
+    Saturday as "Sat" = 6
+}
+
+enum Months
+{
+    January as "Jan" = 0
+    February as "Feb" = 1
+    March as "Mar" = 2
+    April as "Apr" = 3
+    May as "May" = 4
+    June as "Jun" = 5
+    July as "Jul" = 6
+    August as "Aug" = 7
+    September as "Sep" = 8
+    October as "Oct" = 9
+    November as "Nov" = 10
+    December as "Dec" = 11
+}
+
+type Date wraps Date
+create
+{
+	ScheduleDateTimeUtil.dateFromString(it)
+}
+convert
+{
+	ScheduleDateTimeUtil.dateToString(it)
+}
+
+type Time wraps Date
+create
+{
+	ScheduleDateTimeUtil.timeFromString(it)
+}
+convert
+{
+	ScheduleDateTimeUtil.timeToString(it)
+}

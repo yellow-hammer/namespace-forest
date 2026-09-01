@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="ASCII"?>
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="model" nsURI="http://g5.1c.ru/v8/dt/style" nsPrefix="style">
+  <eClassifiers xsi:type="ecore:EClass" name="Style">
+    <eSuperTypes href="g5.1c.ru.v8.dt.metadata.mdclass.ecore#//AbstractStyle"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="items" upperBound="-1" eType="//StyleItem" containment="true" resolveProxies="false"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="StyleItem" abstract="true">
+    <eSuperTypes href="g5.1c.ru.v8.dt.mcore.ecore#//NamedElement"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ColorStyleItem" eSuperTypes="//StyleItem">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="color" lowerBound="1" containment="true" resolveProxies="false">
+      <eType xsi:type="ecore:EClass" href="g5.1c.ru.v8.dt.mcore.ecore#//Color"/>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="FontStyleItem" eSuperTypes="//StyleItem">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="font" lowerBound="1" containment="true" resolveProxies="false">
+      <eType xsi:type="ecore:EClass" href="g5.1c.ru.v8.dt.mcore.ecore#//Font"/>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="BorderStyleItem" eSuperTypes="//StyleItem">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="border" lowerBound="1" containment="true" resolveProxies="false">
+      <eType xsi:type="ecore:EClass" href="g5.1c.ru.v8.dt.mcore.ecore#//Border"/>
+    </eStructuralFeatures>
+  </eClassifiers>
+</ecore:EPackage>

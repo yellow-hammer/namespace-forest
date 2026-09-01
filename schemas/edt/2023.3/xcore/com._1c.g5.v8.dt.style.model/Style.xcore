@@ -1,0 +1,36 @@
+@GenModel(prefix="Style", loadInitialization="false", literalsInterface="true", nonNLSMarkers="true",
+	copyrightText="Copyright (C) 2019, 1C", updateClasspath="false",
+	featureDelegation="Reflective", rootExtendsClass="com._1c.g5.v8.bm.core.BmObject", rootExtendsInterface="com._1c.g5.v8.bm.core.IBmObject")
+@Ecore(nsPrefix="style", nsURI="http://g5.1c.ru/v8/dt/style")
+
+package com._1c.g5.v8.dt.style.model
+
+import com._1c.g5.v8.dt.metadata.mdclass.AbstractStyle
+import com._1c.g5.v8.dt.mcore.NamedElement
+import com._1c.g5.v8.dt.mcore.Color
+import com._1c.g5.v8.dt.mcore.Font
+import com._1c.g5.v8.dt.mcore.Border
+
+class Style extends AbstractStyle
+{
+	contains StyleItem[] items		
+}
+
+abstract class StyleItem extends NamedElement
+{
+}
+
+class ColorStyleItem extends StyleItem
+{
+	contains Color[1] color
+}
+
+class FontStyleItem extends StyleItem
+{
+	contains Font[1] font
+}
+
+class BorderStyleItem extends StyleItem
+{
+	contains Border[1] border
+}

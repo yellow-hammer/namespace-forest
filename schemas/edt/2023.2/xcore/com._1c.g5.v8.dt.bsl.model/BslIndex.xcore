@@ -1,0 +1,72 @@
+@GenModel(prefix="BslIndex", loadInitialization="false", literalsInterface="true", nonNLSMarkers="true",
+    copyrightText="Copyright (C) 2022, 1C", updateClasspath="false",
+    featureDelegation="Reflective", rootExtendsClass="com._1c.g5.v8.bm.core.BmObject", rootExtendsInterface="com._1c.g5.v8.bm.core.IBmObject")
+@Ecore(nsPrefix="bslindex", nsURI="http://g5.1c.ru/v8/dt/bsl/index/model")
+
+package com._1c.g5.v8.dt.bsl.model
+
+import com._1c.g5.v8.dt.mcore.util.Environments
+import com._1c.g5.v8.dt.bsl.model.BslContextDef
+
+type ByteArray wraps byte[]
+
+/*
+ * Custom-serialized Environments wrapper
+ */
+type Environments wraps Environments
+create
+{
+    if (it !== null) Environments::fromString(it)
+}
+convert
+{
+    if (it !== null) it.toString()
+}
+
+/*
+ * BSL context definition module index holder object. The object being stored in the EDT object storage and provides
+ * unified access by both model and language services.
+ * Not a part of a public API 
+ */
+class ModuleContextDefIndex
+{
+    contains BslContextDef contextDef
+    
+    contains ContextDefMethodInfo[] methods
+    contains ContextDefPropertyInfo[] properties
+    
+    ByteArray typeIndexStore    
+}
+
+/*
+ * BSL resource description index holder object.
+ * Not a part of a public API
+ */
+class ModuleResourceDescriptionIndex
+{    
+    ByteArray resourceDescriptionStore    
+    ByteArray resourceDescriptionReferenceStore    
+    
+    String[] importedNames
+}
+
+
+abstract class ContextDefItemInfo
+{
+    String name
+    Environments envs
+    String sourceUri
+}
+
+class ContextDefPropertyInfo extends ContextDefItemInfo
+{
+}
+
+class ContextDefMethodInfo extends ContextDefItemInfo
+{
+    boolean function
+    boolean serverCall
+    boolean deprecated
+    int minParams
+    boolean[] outParams
+}

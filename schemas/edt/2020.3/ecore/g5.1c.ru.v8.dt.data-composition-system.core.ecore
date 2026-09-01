@@ -1,0 +1,198 @@
+<?xml version="1.0" encoding="ASCII"?>
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="core" nsURI="http://g5.1c.ru/v8/dt/data-composition-system/core" nsPrefix="core">
+  <eClassifiers xsi:type="ecore:EClass" name="ParameterValues">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="items" upperBound="-1" eType="//DataCompositionParameterValue" containment="true" resolveProxies="false"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="DataCompositionParameterValue">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="use" unique="false" defaultValueLiteral="true">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="parameter" eType="//DataCompositionParameter" containment="true" resolveProxies="false"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="values" upperBound="-1" containment="true" resolveProxies="false">
+      <eType xsi:type="ecore:EClass" href="http://g5.1c.ru/v8/dt/mcore#//Value"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="nestedParameterValues" upperBound="-1" eType="//DataCompositionParameterValue" containment="true" resolveProxies="false"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="DataCompositionParameter">
+    <eSuperTypes href="http://g5.1c.ru/v8/dt/mcore#//Value"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="DataCompositionField">
+    <eSuperTypes href="http://g5.1c.ru/v8/dt/mcore#//Value"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="DataCompositionID">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="DataCompositionAppearance" eSuperTypes="//ParameterValues"/>
+  <eClassifiers xsi:type="ecore:EClass" name="DesignTimeValue">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="DesignTimeValueValue">
+    <eSuperTypes href="http://g5.1c.ru/v8/dt/mcore#//Value"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="value" lowerBound="1" eType="//DesignTimeValue" containment="true" resolveProxies="false"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="InputParameters" eSuperTypes="//ParameterValues"/>
+  <eClassifiers xsi:type="ecore:EClass" name="DataCompositionTypeLink">
+    <eSuperTypes href="http://g5.1c.ru/v8/dt/mcore#//Value"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="field" eType="//DataCompositionField" containment="true" resolveProxies="false"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="linkItem" unique="false" defaultValueLiteral="0">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="DataCompositionChoiceParameterLink">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="field" eType="//DataCompositionField" containment="true" resolveProxies="false"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="valueChange" unique="false" defaultValueLiteral="Clear">
+      <eType xsi:type="ecore:EEnum" href="http://g5.1c.ru/v8/dt/metadata/common#//LinkedValueChangeMode"/>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="DataCompositionChoiceParameterLinks">
+    <eSuperTypes href="http://g5.1c.ru/v8/dt/mcore#//Value"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="items" upperBound="-1" eType="//DataCompositionChoiceParameterLink" containment="true" resolveProxies="false"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="DataCompositionChoiceParameter">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="value" upperBound="-1" containment="true" resolveProxies="false">
+      <eType xsi:type="ecore:EClass" href="http://g5.1c.ru/v8/dt/mcore#//Value"/>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="DataCompositionChoiceParameters">
+    <eSuperTypes href="http://g5.1c.ru/v8/dt/mcore#//Value"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="items" upperBound="-1" eType="//DataCompositionChoiceParameter" containment="true" resolveProxies="false"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="LocalString">
+    <eSuperTypes href="http://g5.1c.ru/v8/dt/mcore#//Value"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="content" upperBound="-1" containment="true" resolveProxies="false">
+      <eType xsi:type="ecore:EClass" href="http://g5.1c.ru/v8/dt/mcore#//LocalStringMapEntry"/>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Presentation">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="localValue" eType="//LocalString" containment="true" resolveProxies="false"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ChartScaleValue">
+    <eSuperTypes href="http://g5.1c.ru/v8/dt/mcore#//Value"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="chartScale" containment="true" resolveProxies="false">
+      <eType xsi:type="ecore:EClass" href="g5.1c.ru.v8.dt.chart.model.ecore#//ChartScale"/>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ChartColorPaletteDescriptionValue">
+    <eSuperTypes href="http://g5.1c.ru/v8/dt/mcore#//Value"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="colorPaletteDescription" containment="true" resolveProxies="false">
+      <eType xsi:type="ecore:EClass" href="g5.1c.ru.v8.dt.chart.model.ecore#//ChartColorPaletteDescription"/>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ChartReferenceLinesValue">
+    <eSuperTypes href="http://g5.1c.ru/v8/dt/mcore#//Value"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="chartReferenceLines" containment="true" resolveProxies="false">
+      <eType xsi:type="ecore:EClass" href="g5.1c.ru.v8.dt.chart.model.ecore#//ChartReferenceLines"/>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ChartReferenceBandsValue">
+    <eSuperTypes href="http://g5.1c.ru/v8/dt/mcore#//Value"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="chartReferenceBands" containment="true" resolveProxies="false">
+      <eType xsi:type="ecore:EClass" href="g5.1c.ru.v8.dt.chart.model.ecore#//ChartReferenceBands"/>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ChartReferenceLineValue">
+    <eSuperTypes href="http://g5.1c.ru/v8/dt/mcore#//Value"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="chartReferenceLine" containment="true" resolveProxies="false">
+      <eType xsi:type="ecore:EClass" href="g5.1c.ru.v8.dt.chart.model.ecore#//ChartReferenceLine"/>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ChartReferenceBandValue">
+    <eSuperTypes href="http://g5.1c.ru/v8/dt/mcore#//Value"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="chartReferenceBand" containment="true" resolveProxies="false">
+      <eType xsi:type="ecore:EClass" href="g5.1c.ru.v8.dt.chart.model.ecore#//ChartReferenceBand"/>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ChartAxisValue">
+    <eSuperTypes href="http://g5.1c.ru/v8/dt/mcore#//Value"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="chartAxis" containment="true" resolveProxies="false">
+      <eType xsi:type="ecore:EClass" href="g5.1c.ru.v8.dt.chart.model.ecore#//ChartAxis"/>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ChartTrendlinesValue">
+    <eSuperTypes href="http://g5.1c.ru/v8/dt/mcore#//Value"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="trendlines" containment="true" resolveProxies="false">
+      <eType xsi:type="ecore:EClass" href="g5.1c.ru.v8.dt.chart.model.ecore#//TrendlineArray"/>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="PictureValue">
+    <eSuperTypes href="http://g5.1c.ru/v8/dt/mcore#//Value"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="picture" containment="true" resolveProxies="false">
+      <eType xsi:type="ecore:EClass" href="http://g5.1c.ru/v8/dt/mcore#//Picture"/>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="DataCompositionTotalPlacement">
+    <eLiterals name="Begin"/>
+    <eLiterals name="End"/>
+    <eLiterals name="BeginAndEnd"/>
+    <eLiterals name="None"/>
+    <eLiterals name="Auto"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="DataCompositionSortDirection">
+    <eLiterals name="Asc"/>
+    <eLiterals name="Desc"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="DataCompositionGroupType">
+    <eLiterals name="Items"/>
+    <eLiterals name="Hierarchy"/>
+    <eLiterals name="HierarchyOnly"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="DataCompositionPeriodAdditionType">
+    <eLiterals name="None"/>
+    <eLiterals name="Year"/>
+    <eLiterals name="HalfYear"/>
+    <eLiterals name="Quarter"/>
+    <eLiterals name="Month"/>
+    <eLiterals name="TenDays"/>
+    <eLiterals name="Week"/>
+    <eLiterals name="Day"/>
+    <eLiterals name="Hour"/>
+    <eLiterals name="Minute"/>
+    <eLiterals name="Second"/>
+    <eLiterals name="YearSinceBeginOfPeriod"/>
+    <eLiterals name="HalfYearSinceBeginOfPeriod"/>
+    <eLiterals name="QuarterSinceBeginOfPeriod"/>
+    <eLiterals name="MonthSinceBeginOfPeriod"/>
+    <eLiterals name="WeekSinceBeginOfPeriod"/>
+    <eLiterals name="DaySinceBeginOfPeriod"/>
+    <eLiterals name="HourSinceBeginOfPeriod"/>
+    <eLiterals name="MinuteSinceBeginOfPeriod"/>
+    <eLiterals name="YearSinceBeginOfPeriod445"/>
+    <eLiterals name="HalfYearSinceBeginOfPeriod445"/>
+    <eLiterals name="QuarterSinceBeginOfPeriod445"/>
+    <eLiterals name="MonthSinceBeginOfPeriod445"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="DataCompositionTextPlacementType">
+    <eLiterals name="Block"/>
+    <eLiterals name="Cut"/>
+    <eLiterals name="Wrap"/>
+    <eLiterals name="Overflow"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="DataCompositionFieldsTitleType">
+    <eLiterals name="Auto"/>
+    <eLiterals name="Full"/>
+    <eLiterals name="Short"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="DataCompositionParameterUse">
+    <eLiterals name="Always"/>
+    <eLiterals name="Auto"/>
+  </eClassifiers>
+</ecore:EPackage>

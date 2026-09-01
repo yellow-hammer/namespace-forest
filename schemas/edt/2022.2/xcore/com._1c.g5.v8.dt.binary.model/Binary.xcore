@@ -1,0 +1,16 @@
+@GenModel(prefix="Binary", loadInitialization="false", literalsInterface="true", nonNLSMarkers="true",
+	copyrightText="Copyright (C) 2014, 1C", updateClasspath="false",
+	featureDelegation="Reflective", rootExtendsClass="com._1c.g5.v8.bm.core.BmObject")
+@Ecore(nsPrefix="binary", nsURI="http://g5.1c.ru/v8/dt/binary")
+package com._1c.g5.v8.dt.binary.model
+
+import com._1c.g5.v8.dt.binary.model.BinaryDataExtension
+
+type InputStream wraps java.io.InputStream
+
+class BinaryData
+{
+	op InputStream inputStream() {
+		BinaryDataExtension.inputStream(this)
+	}
+}

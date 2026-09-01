@@ -1,0 +1,956 @@
+<?xml version="1.0" encoding="ASCII"?>
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="mcore" nsURI="http://g5.1c.ru/v8/dt/mcore" nsPrefix="core">
+  <eAnnotations source="http://www.eclipse.org/emf/2011/Xcore">
+    <details key="CollectionItemId" value="http://www.1c.ru/v8/bm/CollectionItemId"/>
+    <details key="ForceDirectReference" value="http://www.1c.ru/v8/bm/ForceDirectReference"/>
+  </eAnnotations>
+  <eClassifiers xsi:type="ecore:EClass" name="Environmental" abstract="true">
+    <eOperations name="environments" unique="false" eType="//Environments"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="environments" unique="false" eType="//Environments"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="LocalStringMapEntry" instanceClassName="java.util.Map$Entry">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="key" unique="false" lowerBound="1">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" unique="false" lowerBound="1">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="StringKeyAndValue">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="key" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="NamedElement" abstract="true">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" unique="false" lowerBound="1">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="DuallyNamedElement" abstract="true" eSuperTypes="//NamedElement">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="nameRu" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="VersionedItem" abstract="true">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="deprecatedSince" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="compatibilityMode" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="replacedBy" unique="false" upperBound="-1">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="TypeItem" abstract="true" eSuperTypes="//DuallyNamedElement //Environmental">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="compositeId" unique="false" eType="//CompositeId"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Type" eSuperTypes="//TypeItem //VersionedItem">
+    <eOperations name="allEvents" unique="false" upperBound="-1" eType="//Event"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="ctors" upperBound="-1" eType="//Ctor" containment="true" resolveProxies="false"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="contextDef" eType="//ContextDef" containment="true" resolveProxies="false"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="events" upperBound="-1" eType="//Event" containment="true" resolveProxies="false"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="sysEnum" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="createdByNewOperator" unique="false" defaultValueLiteral="true">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="parentType" eType="//TypeItem"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="iterable" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="indexAccessible" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="exchangeWithServer" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="collectionElementTypes" eType="//TypeContainer" containment="true" resolveProxies="false"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="PromiseType" eSuperTypes="//Type">
+    <eOperations name="getName" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eOperations>
+    <eOperations name="getNameRu" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eOperations>
+    <eOperations name="isSysEnum" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    </eOperations>
+    <eOperations name="isCreatedByNewOperator" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    </eOperations>
+    <eOperations name="isIterable" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    </eOperations>
+    <eOperations name="isIndexAccessible" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    </eOperations>
+    <eOperations name="isExchangeWithServer" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    </eOperations>
+    <eOperations name="getEnvironments" unique="false" eType="//Environments"/>
+    <eOperations name="getContextDef" unique="false" eType="//ContextDef"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="wrapTypes" eType="//TypeContainer" containment="true" resolveProxies="false"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="EmptyContextDef" eSuperTypes="//ContextDef">
+    <eOperations name="getProperties" unique="false" upperBound="-1" eType="//Property"/>
+    <eOperations name="getMethods" unique="false" upperBound="-1" eType="//Method"/>
+    <eOperations name="getRefContextDefs" unique="false" upperBound="-1" eType="//ContextDef"/>
+    <eOperations name="allProperties" unique="false" upperBound="-1" eType="//Property"/>
+    <eOperations name="allMethods" unique="false" upperBound="-1" eType="//Method"/>
+    <eOperations name="allRefContextDefs" unique="false" upperBound="-1" eType="//ContextDef"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Ctor" eSuperTypes="//VersionedItem">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="minParams" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="maxParams" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="params" upperBound="-1" eType="//Parameter" containment="true" resolveProxies="false"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="FakeCtor">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="params" upperBound="-1" eType="//FakeParameter" containment="true" resolveProxies="false"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="typeName" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="FakeParameter">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="types" unique="false" upperBound="-1">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="TypeSet" eSuperTypes="//TypeItem">
+    <eOperations name="types" unique="false" upperBound="-1" eType="//Type">
+      <eParameters name="context" unique="false">
+        <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/emf/2002/Ecore#//EObject"/>
+      </eParameters>
+    </eOperations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="baseTypes" upperBound="-1" eType="//Type"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="types" upperBound="-1" eType="//Type"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="NumberQualifiers">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="precision" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="scale" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="nonNegative" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="StringQualifiers">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="length" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="fixed" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="DateQualifiers">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="dateFractions" unique="false" eType="//DateFractions"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="BinaryQualifiers">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="length" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="fixed" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="TypeDescription">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="types" upperBound="-1" eType="//TypeItem"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="numberQualifiers" eType="//NumberQualifiers" containment="true" resolveProxies="false"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="stringQualifiers" eType="//StringQualifiers" containment="true" resolveProxies="false"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="dateQualifiers" eType="//DateQualifiers" containment="true" resolveProxies="false"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="binaryQualifiers" eType="//BinaryQualifiers" containment="true" resolveProxies="false"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Value" abstract="true"/>
+  <eClassifiers xsi:type="ecore:EClass" name="TypeValue" eSuperTypes="//Value">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="value" eType="//TypeItem"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="TypeDescriptionValue" eSuperTypes="//Value">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="value" eType="//TypeDescription" containment="true" resolveProxies="false"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="UndefinedValue" eSuperTypes="//Value"/>
+  <eClassifiers xsi:type="ecore:EClass" name="NullValue" eSuperTypes="//Value"/>
+  <eClassifiers xsi:type="ecore:EClass" name="NumberValue" eSuperTypes="//Value">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" unique="false" lowerBound="1">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EBigDecimal"/>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="BooleanValue" eSuperTypes="//Value">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="StringValue" eSuperTypes="//Value">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" unique="false" lowerBound="1">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="DateValue" eSuperTypes="//Value">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" unique="false" lowerBound="1" eType="//Date"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="BinaryValue" eSuperTypes="//Value">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" unique="false" lowerBound="1">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ReferenceValue" eSuperTypes="//Value">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="value">
+      <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/emf/2002/Ecore#//EObject"/>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="EnumValue" eSuperTypes="//Value">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" unique="false" lowerBound="1" eType="//Enumerator"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="SysEnumValue" eSuperTypes="//Value">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ColorValue" eSuperTypes="//Value">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="value" lowerBound="1" eType="//Color" containment="true" resolveProxies="false"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="FontValue" eSuperTypes="//Value">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="value" lowerBound="1" eType="//Font" containment="true" resolveProxies="false"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="LineValue" eSuperTypes="//Value">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="value" lowerBound="1" eType="//Line" containment="true" resolveProxies="false"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="BorderValue" eSuperTypes="//Value">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="value" lowerBound="1" eType="//Border" containment="true" resolveProxies="false"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="IrresolvableReferenceValue" eSuperTypes="//Value">
+    <eOperations name="validate" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+      <eParameters name="diagnostics" unique="false">
+        <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EDiagnosticChain"/>
+      </eParameters>
+      <eParameters name="context" unique="false">
+        <eGenericType>
+          <eTypeArguments>
+            <eClassifier xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EJavaObject"/>
+          </eTypeArguments>
+          <eTypeArguments>
+            <eClassifier xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EJavaObject"/>
+          </eTypeArguments>
+          <eClassifier xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EMap"/>
+        </eGenericType>
+      </eParameters>
+    </eOperations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="refTypeId" unique="false" lowerBound="1" eType="//Uuid"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="instanceId" unique="false" lowerBound="1" eType="//Uuid"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ValueList" eSuperTypes="//Value">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="values" upperBound="-1" eType="//Value" containment="true" resolveProxies="false"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="FixedArrayValue" eSuperTypes="//Value">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="values" upperBound="-1" eType="//Value" containment="true" resolveProxies="false"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="TypedValueListItem">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="value" eType="//Value" containment="true" resolveProxies="false"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="presentation" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="checkState" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="picture" eType="//Picture" containment="true" resolveProxies="false"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="Id" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="formatPresentationSpecified" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="formatPresentation" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="TypedValueList" eSuperTypes="//Value">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="valueType" lowerBound="1" eType="//TypeDescription" containment="true" resolveProxies="false"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="availableValues" eType="//TypedValueList" containment="true" resolveProxies="false"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="lastId" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="items" upperBound="-1" eType="//TypedValueListItem" containment="true" resolveProxies="false"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="StructureProperty">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" unique="false" lowerBound="1">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="value" eType="//Value" unsettable="true" containment="true" resolveProxies="false"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Structure">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="property" upperBound="-1" eType="//StructureProperty" containment="true" resolveProxies="false"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="UuidValue" eSuperTypes="//Value">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" unique="false" lowerBound="1" eType="//Uuid"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="RuntimeValue" eSuperTypes="//Value">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="nsUri" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="prefix" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="typeName" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="content" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="attributes" upperBound="-1" eType="//LocalStringMapEntry" containment="true" resolveProxies="false"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="StandardBeginningDate">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="variant" unique="false" eType="//StandardBeginningDateVariant" defaultValueLiteral="Custom"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="date" unique="false" eType="//Date"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="StandardBeginningDateValue" eSuperTypes="//Value">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="value" lowerBound="1" eType="//StandardBeginningDate" containment="true" resolveProxies="false"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="StandardPeriod">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="variant" unique="false" eType="//StandardPeriodVariant" defaultValueLiteral="Custom"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="startDate" unique="false" eType="//Date"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="endDate" unique="false" eType="//Date"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="StandardPeriodValue" eSuperTypes="//Value">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="value" lowerBound="1" eType="//StandardPeriod" containment="true" resolveProxies="false"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ContextDef" eSuperTypes="//Environmental">
+    <eOperations name="allProperties" unique="false" upperBound="-1" eType="//Property"/>
+    <eOperations name="allMethods" unique="false" upperBound="-1" eType="//Method"/>
+    <eOperations name="allRefContextDefs" unique="false" upperBound="-1" eType="//ContextDef"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="properties" upperBound="-1" eType="//Property" containment="true" resolveProxies="false"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="methods" upperBound="-1" eType="//Method" containment="true" resolveProxies="false"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="refContextDefs" upperBound="-1" eType="//ContextDef">
+      <eAnnotations source="http://www.1c.ru/v8/bm/ForceDirectReference"/>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ContextDefWithRefItem" eSuperTypes="//ContextDef">
+    <eOperations name="allProperties" unique="false" upperBound="-1" eType="//Property"/>
+    <eOperations name="allMethods" unique="false" upperBound="-1" eType="//Method"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="refProperties" upperBound="-1" eType="//Property"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="refMethods" upperBound="-1" eType="//Method"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Property" eSuperTypes="//DuallyNamedElement //Environmental //VersionedItem">
+    <eOperations name="getTypes" unique="false" upperBound="-1" eType="//TypeItem"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="readable" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="writable" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="dependsOnMetadata" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="typeContainer" lowerBound="1" eType="//TypeContainer" containment="true" resolveProxies="false"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="serverRequest" unique="false" eType="//ServerRequest"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="TypeContainer" abstract="true">
+    <eOperations name="allTypes" unique="false" upperBound="-1" eType="//TypeItem"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="TypeContainerRef" eSuperTypes="//TypeContainer">
+    <eOperations name="allTypes" unique="false" upperBound="-1" eType="//TypeItem"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="types" upperBound="-1" eType="//TypeItem"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="TypeContainerDef" eSuperTypes="//TypeContainer">
+    <eOperations name="allTypes" unique="false" upperBound="-1" eType="//TypeItem"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="types" upperBound="-1" eType="//TypeItem" containment="true" resolveProxies="false"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="DerivedProperty" eSuperTypes="//Property">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="source">
+      <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/emf/2002/Ecore#//EObject"/>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ContainingSourceDerivedProperty" eSuperTypes="//DerivedProperty">
+    <eOperations name="getSource" unique="false">
+      <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/emf/2002/Ecore#//EObject"/>
+    </eOperations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="containingSource" containment="true" resolveProxies="false">
+      <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/emf/2002/Ecore#//EObject"/>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="AbstractMethod" abstract="true" eSuperTypes="//DuallyNamedElement //VersionedItem">
+    <eOperations name="actualParamSet" unique="false" eType="//ParamSet">
+      <eParameters name="numParam" unique="false">
+        <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+      </eParameters>
+    </eOperations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="paramSet" lowerBound="1" upperBound="-1" eType="//ParamSet" containment="true" resolveProxies="false"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="retVal" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="retValType" upperBound="-1" eType="//TypeItem"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Method" eSuperTypes="//AbstractMethod //Environmental"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Event" eSuperTypes="//AbstractMethod //Environmental">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="serverCallWithContextNotAllowed" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="order" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="uuid" unique="false" eType="//Uuid"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ParamSet">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="minParams" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="maxParams" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="params" upperBound="-1" eType="//Parameter" containment="true" resolveProxies="false"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="serverRequest" unique="false" eType="//ServerRequest"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Parameter" eSuperTypes="//DuallyNamedElement //VersionedItem">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="type" upperBound="-1" eType="//TypeItem"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="out" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="defaultValue" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="GeneralContextDef" eSuperTypes="//ContextDef"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Field" eSuperTypes="//DuallyNamedElement">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="type" lowerBound="1" eType="//TypeDescription" containment="true" resolveProxies="false"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="readOnly" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="sourceTypes" unique="false" upperBound="-1" eType="//SourceType"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="fieldIdPrefix" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="fieldId" unique="false" changeable="false" volatile="true" transient="true" derived="true">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="id" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="DerivedField" eSuperTypes="//Field">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="source" lowerBound="1">
+      <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/emf/2002/Ecore#//EObject"/>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="FieldSource" abstract="true" interface="true">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="fields" upperBound="-1" eType="//Field" transient="true" containment="true" resolveProxies="false">
+      <eAnnotations source="http://www.1c.ru/v8/bm/CollectionItemId">
+        <details key="feature" value="fieldId"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="refFieldSources" upperBound="-1" eType="//FieldSource" transient="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="StandardTabularPartSource" abstract="true" interface="true">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="tabularParts" upperBound="-1" eType="//StandardTabularPart" transient="true" containment="true" resolveProxies="false"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="StandardTabularPart" eSuperTypes="//DuallyNamedElement //FieldSource">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="readOnly" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="id" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Command" abstract="true"/>
+  <eClassifiers xsi:type="ecore:EClass" name="CommandRef" eSuperTypes="//Command">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="command" lowerBound="1" eType="//Command"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="CommandGroup" abstract="true"/>
+  <eClassifiers xsi:type="ecore:EClass" name="StandardCommandGroup" eSuperTypes="//DuallyNamedElement //CommandGroup">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="category" unique="false" eType="//CommandGroupCategory"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="priority" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Point">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="x" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="y" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Picture" abstract="true"/>
+  <eClassifiers xsi:type="ecore:EClass" name="PictureRef" eSuperTypes="//Picture">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="picture" lowerBound="1" eType="//Picture"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="PictureDef" abstract="true" eSuperTypes="//Picture">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="glyph" eType="//Point" containment="true" resolveProxies="false"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="transparentPixel" eType="//Point" containment="true" resolveProxies="false"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Color" abstract="true">
+    <eOperations name="red" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    </eOperations>
+    <eOperations name="green" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    </eOperations>
+    <eOperations name="blue" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    </eOperations>
+    <eOperations name="compositeId" unique="false" eType="//CompositeId"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ColorDef" eSuperTypes="//Color">
+    <eOperations name="red" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    </eOperations>
+    <eOperations name="green" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    </eOperations>
+    <eOperations name="blue" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    </eOperations>
+    <eOperations name="compositeId" unique="false" eType="//CompositeId"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="red" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="green" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="blue" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ColorRef" eSuperTypes="//Color">
+    <eOperations name="red" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    </eOperations>
+    <eOperations name="green" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    </eOperations>
+    <eOperations name="blue" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    </eOperations>
+    <eOperations name="compositeId" unique="false" eType="//CompositeId"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="color" lowerBound="1" eType="//Color"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="StyleAppearanceItem" abstract="true" eSuperTypes="//NamedElement"/>
+  <eClassifiers xsi:type="ecore:EClass" name="StyleColor" eSuperTypes="//StyleAppearanceItem //ColorRef">
+    <eOperations name="compositeId" unique="false" eType="//CompositeId"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="compositeId" unique="false" eType="//CompositeId" transient="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="StyleBorder" eSuperTypes="//StyleAppearanceItem //BorderRef"/>
+  <eClassifiers xsi:type="ecore:EClass" name="StyleFont" eSuperTypes="//StyleAppearanceItem //FontRef">
+    <eOperations name="compositeId" unique="false" eType="//CompositeId"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="compositeId" unique="false" eType="//CompositeId" transient="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Border" abstract="true">
+    <eOperations name="style" unique="false" eType="//BorderStyle"/>
+    <eOperations name="width" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    </eOperations>
+    <eOperations name="compositeId" unique="false" eType="//CompositeId"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="BorderDef" eSuperTypes="//Border">
+    <eOperations name="style" unique="false" eType="//BorderStyle"/>
+    <eOperations name="width" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    </eOperations>
+    <eOperations name="compositeId" unique="false" eType="//CompositeId"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="style" unique="false" eType="//BorderStyle"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="width" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="BorderRef" eSuperTypes="//Border">
+    <eOperations name="style" unique="false" eType="//BorderStyle"/>
+    <eOperations name="width" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    </eOperations>
+    <eOperations name="compositeId" unique="false" eType="//CompositeId"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="border" lowerBound="1" eType="//Border"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Font" abstract="true">
+    <eOperations name="faceName" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eOperations>
+    <eOperations name="height" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    </eOperations>
+    <eOperations name="heightF" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EFloat"/>
+    </eOperations>
+    <eOperations name="bold" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    </eOperations>
+    <eOperations name="italic" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    </eOperations>
+    <eOperations name="underline" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    </eOperations>
+    <eOperations name="strikeout" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    </eOperations>
+    <eOperations name="scale" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    </eOperations>
+    <eOperations name="compositeId" unique="false" eType="//CompositeId"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="MutableFont" abstract="true" interface="true">
+    <eOperations name="setFaceName" unique="false">
+      <eParameters name="faceName" unique="false">
+        <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+      </eParameters>
+    </eOperations>
+    <eOperations name="setHeight" unique="false">
+      <eParameters name="height" unique="false">
+        <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EFloat"/>
+      </eParameters>
+    </eOperations>
+    <eOperations name="setBold" unique="false">
+      <eParameters name="bold" unique="false">
+        <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+      </eParameters>
+    </eOperations>
+    <eOperations name="setItalic" unique="false">
+      <eParameters name="italic" unique="false">
+        <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+      </eParameters>
+    </eOperations>
+    <eOperations name="setUnderline" unique="false">
+      <eParameters name="underline" unique="false">
+        <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+      </eParameters>
+    </eOperations>
+    <eOperations name="setStrikeout" unique="false">
+      <eParameters name="strikeout" unique="false">
+        <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+      </eParameters>
+    </eOperations>
+    <eOperations name="setScale" unique="false">
+      <eParameters name="scale" unique="false">
+        <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+      </eParameters>
+    </eOperations>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="FontDef" eSuperTypes="//Font //MutableFont">
+    <eOperations name="faceName" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eOperations>
+    <eOperations name="height" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    </eOperations>
+    <eOperations name="heightF" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EFloat"/>
+    </eOperations>
+    <eOperations name="setHeight" unique="false">
+      <eParameters name="height" unique="false">
+        <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+      </eParameters>
+    </eOperations>
+    <eOperations name="bold" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    </eOperations>
+    <eOperations name="italic" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    </eOperations>
+    <eOperations name="underline" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    </eOperations>
+    <eOperations name="strikeout" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    </eOperations>
+    <eOperations name="scale" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    </eOperations>
+    <eOperations name="compositeId" unique="false" eType="//CompositeId"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="faceName" unique="false" lowerBound="1" defaultValueLiteral="">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="height" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EFloat"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="bold" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="italic" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="underline" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="strikeout" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="scale" unique="false" defaultValueLiteral="100">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="AutoFont" eSuperTypes="//Font //MutableFont">
+    <eOperations name="faceName" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eOperations>
+    <eOperations name="height" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    </eOperations>
+    <eOperations name="heightF" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EFloat"/>
+    </eOperations>
+    <eOperations name="setHeight" unique="false">
+      <eParameters name="height" unique="false">
+        <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+      </eParameters>
+    </eOperations>
+    <eOperations name="bold" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    </eOperations>
+    <eOperations name="italic" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    </eOperations>
+    <eOperations name="underline" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    </eOperations>
+    <eOperations name="strikeout" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    </eOperations>
+    <eOperations name="scale" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    </eOperations>
+    <eOperations name="compositeId" unique="false" eType="//CompositeId"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="faceName" unique="false" unsettable="true">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="height" unique="false" unsettable="true">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EFloat"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="bold" unique="false" unsettable="true">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="italic" unique="false" unsettable="true">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="underline" unique="false" unsettable="true">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="strikeout" unique="false" unsettable="true">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="scale" unique="false" unsettable="true">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="FontRef" eSuperTypes="//Font //MutableFont">
+    <eOperations name="faceName" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eOperations>
+    <eOperations name="height" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    </eOperations>
+    <eOperations name="heightF" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EFloat"/>
+    </eOperations>
+    <eOperations name="bold" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    </eOperations>
+    <eOperations name="italic" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    </eOperations>
+    <eOperations name="underline" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    </eOperations>
+    <eOperations name="strikeout" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    </eOperations>
+    <eOperations name="scale" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    </eOperations>
+    <eOperations name="compositeId" unique="false" eType="//CompositeId"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="font" lowerBound="1" eType="//Font"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="faceName" unique="false" unsettable="true">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="height" unique="false" unsettable="true">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EFloat"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="bold" unique="false" unsettable="true">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="italic" unique="false" unsettable="true">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="underline" unique="false" unsettable="true">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="strikeout" unique="false" unsettable="true">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="scale" unique="false" defaultValueLiteral="100" unsettable="true">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="AbstractLine" abstract="true">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="width" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="gap" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Line" eSuperTypes="//AbstractLine">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="style" eType="//Value" containment="true" resolveProxies="false"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Help">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="pages" upperBound="-1" eType="//HelpPage" containment="true" resolveProxies="false">
+      <eAnnotations source="http://www.1c.ru/v8/bm/CollectionItemId">
+        <details key="feature" value="lang"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="HelpPage">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="lang" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="RefContextDelegatingContextDef" eSuperTypes="//ContextDef"/>
+  <eClassifiers xsi:type="ecore:EClass" name="QName">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" unique="false" lowerBound="1">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="nsUri" unique="false" lowerBound="1">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="AutoColor" eSuperTypes="//ColorDef"/>
+  <eClassifiers xsi:type="ecore:EEnum" name="DateFractions">
+    <eLiterals name="DateTime"/>
+    <eLiterals name="Date" value="1"/>
+    <eLiterals name="Time" value="2"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="StandardBeginningDateVariant">
+    <eLiterals name="Custom"/>
+    <eLiterals name="BeginningOfThisDay" value="1"/>
+    <eLiterals name="BeginningOfThisWeek" value="2"/>
+    <eLiterals name="BeginningOfThisTenDays" value="3"/>
+    <eLiterals name="BeginningOfThisMonth" value="4"/>
+    <eLiterals name="BeginningOfThisQuarter" value="5"/>
+    <eLiterals name="BeginningOfThisHalfYear" value="6"/>
+    <eLiterals name="BeginningOfThisYear" value="7"/>
+    <eLiterals name="BeginningOfLastDay" value="8"/>
+    <eLiterals name="BeginningOfLastWeek" value="9"/>
+    <eLiterals name="BeginningOfLastTenDays" value="10"/>
+    <eLiterals name="BeginningOfLastMonth" value="11"/>
+    <eLiterals name="BeginningOfLastQuarter" value="12"/>
+    <eLiterals name="BeginningOfLastHalfYear" value="13"/>
+    <eLiterals name="BeginningOfLastYear" value="14"/>
+    <eLiterals name="BeginningOfNextDay" value="15"/>
+    <eLiterals name="BeginningOfNextWeek" value="16"/>
+    <eLiterals name="BeginningOfNextTenDays" value="17"/>
+    <eLiterals name="BeginningOfNextMonth" value="18"/>
+    <eLiterals name="BeginningOfNextQuarter" value="19"/>
+    <eLiterals name="BeginningOfNextHalfYear" value="20"/>
+    <eLiterals name="BeginningOfNextYear" value="21"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="StandardPeriodVariant">
+    <eLiterals name="Custom"/>
+    <eLiterals name="Today" value="1"/>
+    <eLiterals name="ThisWeek" value="2"/>
+    <eLiterals name="ThisTenDays" value="3"/>
+    <eLiterals name="ThisMonth" value="4"/>
+    <eLiterals name="ThisQuarter" value="5"/>
+    <eLiterals name="ThisHalfYear" value="6"/>
+    <eLiterals name="ThisYear" value="7"/>
+    <eLiterals name="FromBeginningOfThisWeek" value="8"/>
+    <eLiterals name="FromBeginningOfThisTenDays" value="9"/>
+    <eLiterals name="FromBeginningOfThisMonth" value="10"/>
+    <eLiterals name="FromBeginningOfThisQuarter" value="11"/>
+    <eLiterals name="FromBeginningOfThisHalfYear" value="12"/>
+    <eLiterals name="FromBeginningOfThisYear" value="13"/>
+    <eLiterals name="Yesterday" value="14"/>
+    <eLiterals name="LastWeek" value="15"/>
+    <eLiterals name="LastTenDays" value="16"/>
+    <eLiterals name="LastMonth" value="17"/>
+    <eLiterals name="LastQuarter" value="18"/>
+    <eLiterals name="LastHalfYear" value="19"/>
+    <eLiterals name="LastYear" value="20"/>
+    <eLiterals name="LastWeekTillSameWeekDay" value="21"/>
+    <eLiterals name="LastTenDaysTillSameDayNumber" value="22"/>
+    <eLiterals name="LastMonthTillSameDate" value="23"/>
+    <eLiterals name="LastQuarterTillSameDate" value="24"/>
+    <eLiterals name="LastHalfYearTillSameDate" value="25"/>
+    <eLiterals name="LastYearTillSameDate" value="26"/>
+    <eLiterals name="Tomorrow" value="27"/>
+    <eLiterals name="NextWeek" value="28"/>
+    <eLiterals name="NextTenDays" value="29"/>
+    <eLiterals name="NextMonth" value="30"/>
+    <eLiterals name="NextQuarter" value="31"/>
+    <eLiterals name="NextHalfYear" value="32"/>
+    <eLiterals name="NextYear" value="33"/>
+    <eLiterals name="NextWeekTillSameWeekDay" value="34"/>
+    <eLiterals name="NextTenDaysTillSameDayNumber" value="35"/>
+    <eLiterals name="NextMonthTillSameDate" value="36"/>
+    <eLiterals name="NextQuarterTillSameDate" value="37"/>
+    <eLiterals name="NextHalfYearTillSameDate" value="38"/>
+    <eLiterals name="NextYearTillSameDate" value="39"/>
+    <eLiterals name="TillEndOfThisWeek" value="40"/>
+    <eLiterals name="TillEndOfThisTenDays" value="41"/>
+    <eLiterals name="TillEndOfThisMonth" value="42"/>
+    <eLiterals name="TillEndOfThisQuarter" value="43"/>
+    <eLiterals name="TillEndOfThisHalfYear" value="44"/>
+    <eLiterals name="TillEndOfThisYear" value="45"/>
+    <eLiterals name="Last7Days" value="46"/>
+    <eLiterals name="Next7Days" value="47"/>
+    <eLiterals name="Month" value="48"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="SourceType">
+    <eLiterals name="InputByString"/>
+    <eLiterals name="CharacteristicKind"/>
+    <eLiterals name="Characteristic"/>
+    <eLiterals name="StandardFields"/>
+    <eLiterals name="ChoiceParamLinks"/>
+    <eLiterals name="CharacteristicMainFields"/>
+    <eLiterals name="EDBTableKeyFields"/>
+    <eLiterals name="FieldsForLocking"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="ButtonRepresentation">
+    <eLiterals name="Text"/>
+    <eLiterals name="Picture" value="1"/>
+    <eLiterals name="PictureAndText" value="2"/>
+    <eLiterals name="Auto" value="3"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="CommandParameterUseMode">
+    <eLiterals name="Single"/>
+    <eLiterals name="Multiple" value="1"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="CommandGroupCategory">
+    <eLiterals name="NavigationPanel"/>
+    <eLiterals name="ActionsPanel" value="1"/>
+    <eLiterals name="FormNavigationPanel" value="2"/>
+    <eLiterals name="FormCommandBar" value="3"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="BorderStyle">
+    <eLiterals name="None" literal="WithoutBorder"/>
+    <eLiterals name="Single" value="1"/>
+    <eLiterals name="Double" value="200"/>
+    <eLiterals name="Embossed" value="2"/>
+    <eLiterals name="Indented" value="3"/>
+    <eLiterals name="Underline" value="4"/>
+    <eLiterals name="DoubleUnderline" value="5"/>
+    <eLiterals name="Rounded" value="6"/>
+    <eLiterals name="Overline" value="7"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="ServerRequest">
+    <eLiterals name="No"/>
+    <eLiterals name="Yes" value="1"/>
+    <eLiterals name="Possible" value="2"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EDataType" name="Uuid" instanceClassName="java.util.UUID"/>
+  <eClassifiers xsi:type="ecore:EDataType" name="CompositeId" instanceClassName="com._1c.g5.v8.dt.mcore.util.CompositeId"/>
+  <eClassifiers xsi:type="ecore:EDataType" name="Date" instanceClassName="com._1c.g5.v8.dt.mcore.util.Date"/>
+  <eClassifiers xsi:type="ecore:EDataType" name="Environment" instanceClassName="com._1c.g5.v8.dt.mcore.util.Environment"/>
+  <eClassifiers xsi:type="ecore:EDataType" name="Environments" instanceClassName="com._1c.g5.v8.dt.mcore.util.Environments"/>
+  <eClassifiers xsi:type="ecore:EDataType" name="Enumerator" instanceClassName="org.eclipse.emf.common.util.Enumerator"/>
+  <eClassifiers xsi:type="ecore:EDataType" name="List" instanceTypeName="com._1c.g5.v8.dt.mcore.impl.DelegatingRefContextDefEList&lt;com._1c.g5.v8.dt.mcore.ContextDef>"/>
+</ecore:EPackage>

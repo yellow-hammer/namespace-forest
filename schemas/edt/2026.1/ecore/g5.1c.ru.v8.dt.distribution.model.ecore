@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="ASCII"?>
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="model" nsURI="http://g5.1c.ru/v8/dt/distribution/model" nsPrefix="distributionSupport">
+  <eClassifiers xsi:type="ecore:EClass" name="SupportLanguages">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="use" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="languages" unique="false" upperBound="-1">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="DistributiveMapEntry" instanceClassName="java.util.Map$Entry">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="key" unique="false" lowerBound="1">
+      <eType xsi:type="ecore:EDataType" href="g5.1c.ru.v8.dt.mcore.ecore#//Uuid"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" unique="false" lowerBound="1" eType="//ParentSupportMode"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ObjectModuleMapEntry" instanceClassName="java.util.Map$Entry">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="key" unique="false" lowerBound="1">
+      <eType xsi:type="ecore:EDataType" href="g5.1c.ru.v8.dt.mcore.ecore#//Uuid"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EBooleanObject"/>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="DistributionSupport">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="version" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="fileState" unique="false" eType="//ConfigurationFileState"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="updateAvailable" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="parentConfigurationInfos" upperBound="-1" eType="//ParentConfigurationInfo" containment="true" resolveProxies="false"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="distributives" upperBound="-1" eType="//DistributiveMapEntry" containment="true" resolveProxies="false"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="objectModules" upperBound="-1" eType="//ObjectModuleMapEntry" containment="true" resolveProxies="false"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="UserSupportModeRules">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="newObjectsWithFreeMode" unique="false" eType="//UserSupportMode"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="newObjectsWithWarningMode" unique="false" eType="//UserSupportMode"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="existingIdenticalObjectsWithFreeModeKeepMode" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="existingIdenticalObjectsWithFreeMode" unique="false" eType="//UserSupportMode"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="existingIdenticalObjectsWithWarningModeKeepMode" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="existingIdenticalObjectsWithWarningMode" unique="false" eType="//UserSupportMode"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="existingDifferentObjectsWithFreeModeKeepMode" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="existingDifferentObjectsWithFreeMode" unique="false" eType="//UserSupportMode"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="existingDifferentObjectsWithWarningModeKeepMode" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="existingDifferentObjectsWithWarningMode" unique="false" eType="//UserSupportMode"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ParentConfigurationInfo">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="id" unique="false" lowerBound="1">
+      <eType xsi:type="ecore:EDataType" href="g5.1c.ru.v8.dt.mcore.ecore#//Uuid"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="storeMode" unique="false" eType="//ParentConfigurationStoreMode"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="configRelease" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="providerName" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="configName" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="configVersion" unique="false">
+      <eType xsi:type="ecore:EDataType" href="g5.1c.ru.v8.dt.mcore.ecore#//Uuid"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="notUsedPresent" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="rules" eType="//UserSupportModeRules" containment="true" resolveProxies="false"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="supportLanguages" eType="//SupportLanguages" containment="true" resolveProxies="false"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="items" upperBound="-1" eType="//ParentConfigurationInfoItem" containment="true" resolveProxies="false"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="key" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="keyStrings" unique="false" upperBound="-1">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="edt" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ParentConfigurationInfoItem">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="userId" unique="false" lowerBound="1">
+      <eType xsi:type="ecore:EDataType" href="g5.1c.ru.v8.dt.mcore.ecore#//Uuid"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="parentId" unique="false" lowerBound="1">
+      <eType xsi:type="ecore:EDataType" href="g5.1c.ru.v8.dt.mcore.ecore#//Uuid"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="parentMode" unique="false" eType="//ParentSupportMode"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="userMode" unique="false" eType="//UserSupportMode"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="used" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="ConfigurationFileState">
+    <eLiterals name="Normal"/>
+    <eLiterals name="Distributive" value="1"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="UserSupportMode">
+    <eLiterals name="ChangesNotAllowed"/>
+    <eLiterals name="ChangesAllowed" value="1"/>
+    <eLiterals name="Cancelled" value="2"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="ParentSupportMode">
+    <eLiterals name="FreeMode"/>
+    <eLiterals name="WarningMode" value="1"/>
+    <eLiterals name="ProtectMode" value="2"/>
+    <eLiterals name="NotIncludeInUserConfigByDefault" value="-1"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="ParentConfigurationStoreMode">
+    <eLiterals name="File"/>
+    <eLiterals name="Self" value="1"/>
+  </eClassifiers>
+</ecore:EPackage>
