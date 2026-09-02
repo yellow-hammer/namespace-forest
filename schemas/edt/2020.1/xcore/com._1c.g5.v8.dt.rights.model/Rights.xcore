@@ -1,0 +1,82 @@
+@GenModel(loadInitialization="false", literalsInterface="true", nonNLSMarkers="true", prefix="Rights", copyrightText="Copyright (C) 2013, 1C", updateClasspath="false",
+	featureDelegation="Reflective", rootExtendsClass="com._1c.g5.v8.bm.core.BmObject")
+@Ecore(nsName="rights", nsPrefix="", nsURI="http://g5.1c.ru/v8/dt/rights")
+package com._1c.g5.v8.dt.rights.model
+
+import org.eclipse.emf.ecore.EClass
+import org.eclipse.emf.ecore.EObject
+import org.eclipse.emf.ecore.EDiagnosticChain
+import org.eclipse.emf.ecore.EMap
+import com._1c.g5.v8.dt.metadata.mdclass.AbstractRoleDescription
+import com._1c.g5.v8.dt.mcore.NamedElement
+import com._1c.g5.v8.dt.mcore.DuallyNamedElement
+import com._1c.g5.v8.dt.metadata.dbview.DbViewFieldDef
+import com._1c.g5.v8.dt.rights.model.impl.ObjectRightsValidator
+
+type Role wraps com._1c.g5.v8.dt.metadata.mdclass.Role
+
+class RoleDescription extends AbstractRoleDescription
+{
+	contains ObjectRights[] rights
+	contains RestrictionTemplate[] templates
+	boolean setForNewObjects = "false"
+	boolean setForAttributesByDefault = "false"
+	boolean independentRightsOfChildObjects = "false"
+}
+
+class ObjectRights
+{
+	refers EObject[1] object
+	contains ObjectRight[] rights
+	op boolean validate(EDiagnosticChain diagnostics, EMap<Object, Object> context) {
+		ObjectRightsValidator::validate(this, diagnostics, context)
+	}
+}
+
+class ObjectRight
+{
+	refers Right[1] right
+	RightValue value
+	contains Rls[] restrictionsByCondition
+}
+
+enum RightValue
+{
+	/*
+	 * Value from extensible role is used.
+	 */
+	Provided as "provided"
+	/*
+	 * Value is set.
+	 */
+	Set as "true"
+	/*
+	 * Value is not set. 
+	 */
+	Unset as "false"
+}
+
+class Rls
+{
+	refers DbViewFieldDef[] fields
+	String condition
+}
+
+class RestrictionTemplate
+{
+	String[1] name
+	String[1] condition
+}
+
+class Right extends DuallyNamedElement
+{
+}
+
+// Rights dependency graph
+class RightInfo extends NamedElement
+{
+	refers Right[1] right
+	refers EClass[1] eClass
+	refers RightInfo[] parentRights opposite childRights
+	refers RightInfo[] childRights opposite parentRights
+}

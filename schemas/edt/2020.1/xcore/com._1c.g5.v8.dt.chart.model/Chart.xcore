@@ -1,0 +1,1420 @@
+@GenModel(loadInitialization="false", nonNLSMarkers="true", prefix="Chart", copyrightText="Copyright (C) 2015, 1C", literalsInterface="true", updateClasspath="false", featureDelegation="Reflective", rootExtendsClass="com._1c.g5.v8.bm.core.BmObject", rootExtendsInterface="com._1c.g5.v8.bm.core.IBmObject")
+@Ecore(nsPrefix="chart", nsURI="http://g5.1c.ru/v8/dt/chart/model")
+package com._1c.g5.v8.dt.chart.model
+
+import com._1c.g5.v8.dt.mcore.AbstractLine
+import com._1c.g5.v8.dt.mcore.Border
+import com._1c.g5.v8.dt.mcore.Color
+import com._1c.g5.v8.dt.mcore.Font
+import com._1c.g5.v8.dt.mcore.LocalStringMapEntry
+import com._1c.g5.v8.dt.mcore.Point
+import com._1c.g5.v8.dt.mcore.Uuid
+import com._1c.g5.v8.dt.mcore.Value
+import com._1c.g5.v8.dt.metadata.common.ChartLineType
+import com._1c.g5.v8.dt.metadata.common.HorizontalAlign
+
+enum ChartType
+{
+    Line as "Line" = 0, // График.
+    Step as "Step" = 1, // График по шагам.
+    Area as "Area" = 2, // График с областями.
+    AreaAdd as "StackedArea" = 3,      // График с областями и накоплением.
+    HistSimple as "Column" = 4,   // Гистограмма.
+    HistMultiStage as "StackedColumn" = 5,       // Гистограмма с накоплением.
+    Hist3D as "Column3D" = 6,       // Гистограмма объемная.
+    Hist3DMultiStage as "StackedColumn3D" = 7,     // Гистограмма с накоплением объемная.
+    HorHistSimple as "Bar" = 8,// Гистограмма горизонтальная.
+    HorHistMultiStage as "StackedBar" = 9,    // Гистограмма с накоплением горизонтальная.
+    HorHist3D as "Bar3D" = 10,   // Гистограмма горизонтальная объемная.
+    HorHist3DMultiStage as "StackedBar3D" = 11, // Гистограмма с накоплением горизонтальная объемная. 
+    Circle as "Pie" = 12,      // Круговая.
+    Circle3D as "Pie3D" = 13,    // Круговая объемная.
+    Stock as "Stock" = 14,       // Биржевая
+    StockEx as "OpenHighLowClose" = 15,     // Биржевая "свеча"
+    IsometricStd as "BarGraph" = 16,// Изометрическая обычная.
+    IsometricCeil as "CeilGraph" = 17,       // Изометрическая непрерывная.
+    IsometricTape as "TapeGraph" = 18,       // Изометрическая лента.
+    IsometricPyramid as "PyramidGraph" = 19,    // Изометрическая пирамида. 
+    Waterfall as "Waterfall" = 20,   // Водопад.
+    Wireframe as "WireframeSurface" = 21,   // Каркасная поверхность.
+    Surface as "Surface" = 22,     // Поверхность.
+    ConvexSurface as "ConvexSurface" = 23,       // Выпуклая поверхность.
+    ConcaveSurface as "ConcaveSurface" = 24,      // Вогнутая поверхность.
+    ShadedSurface as "ShadedSurface" = 25,      // Затененная поверхность.
+    LineAdd as "StackedLine" = 26,     // График с накоплением.
+    AreaNorm as "NormalizedArea" = 27,    // График с областями нормированный.
+    HistSimpleNorm as "NormalizedColumn" = 28,      // Гистограмма нормированная.
+    Hist3DNorm as "NormalizedColumn3D" = 29,  // Гистограмма нормированная объемная. 
+    HorHistSimpleNorm as "NormalizedBar" = 30,   // Гистограмма нормированная горизонтальная.
+    HorHist3DNorm as "NormalizedBar3D" = 31,       // Гистограмма нормированная горизонтальная объемная. 
+    Honeycomb as "Honeycomb" = 32,   // Сотовая.
+    RadarLine as "RadarLine" = 33,   // Радарный график.
+    RadarArea as "RadarArea" = 34,   // Радарный график с областями.
+    RadarLineAdd as "RadarStackedLine" = 35,// Радарный график с накоплением.
+    RadarAreaAdd as "RadarStackedArea" = 36,// Радарный график с областями и накоплением.
+    RadarAreaNorm as "RadarNormalizedArea" = 37,       // Радарный график с областями нормированный.
+    Gauge as "Gauge" = 38,       // Измерительная диаграмма.
+    Funnel as "Funnel" = 39,      // Воронка
+    Funnel3D as "Funnel3D" = 40,    // Воронка 3D
+    FunnelNorm as "NormalizedFunnel" = 41,  // Воронка нормированного вида
+    FunnelNorm3D as "NormalizedFunnel3D" = 42 // Воронка нормированного вида 3D
+    Scatter as "Scatter" = 43,     // Точечная диаграмма
+    Bubble as "Bubble" = 44       // Пузырьковая
+}
+
+// Виды подписей к круговой диаграмме.
+enum ChartLabelType  //   CircleLabelType in cpp
+{
+    None = 0,                    // Нет.
+    Series = 1,                  // Имя серии.
+    Value = 2,                   // Значение.
+    Percent = 3,                 // Процент. 
+    SeriesPercent = 4,           // Имя серии + процент.
+    SeriesValue = 5,             // Имя серии + значение. 
+    SeriesValuePercent = 6,      // Имя серии + значение + процент.
+    ValuePercent = 7,            // Значение + процент.
+    Point = 8,                   // Имя точки. 
+    PointPercent = 9,            // Имя точки + процент.
+    PointValue = 10,             // Имя точки + значение.
+    PointValuePercent = 11,      // Имя точки + значение + процент.
+    SeriesPoint = 12,            // Имя серии + имя точки.
+    SeriesPointPercent = 13,     // Имя серии + имя точки + процент.
+    SeriesPointValue = 14,       // Имя серии + имя точки + значение. 
+    SeriesPointValuePercent = 15 // Имя серии + имя точки + значение + процент.
+    ValueSize = 16,              // Значение + размер
+    SeriesSize = 17,             // Имя серии + размер
+    SeriesValueSize = 18,        // Имя серии + значение + размер
+    SeriesPointSize = 19,        // Имя серии + имя точки + размер
+    SeriesPointValueSize = 20,   // Имя серии + имя точки + значение + размер
+    PointSize = 21,              // Имя точки + размер
+    PointValueSize = 22          // Имя точки + значение + размер
+}
+
+// Расположение подписей
+enum ChartLabelLocation    // ChartLabelsLocation in cpp
+{
+    Edge = 0,       // eCLLEdge
+    Center = 1,     // eCLLCenter
+    EdgeInside = 2, // eCLLEdgeInside
+    EdgeAuto = 3,    // eCLLEdgeAuto
+    Auto = 4,        // eCLLAuto since 8.3.10  
+    TopLeft = 5,     // eCLLTopLeft since 8.3.10 // since 8.3.11 name is "LeftTop"
+    BottomLeft = 6,  // eCLLBottomLeft since 8.3.10 // since 8.3.11 name is "LeftBottom"
+    TopRight = 7,    // eCLLTopRight since 8.3.10 // since 8.3.11 name is "RightTop"
+    BottomRight = 6, // eCLLBottomRight since 8.3.10 // since 8.3.11 name is "RightBottom"
+    TopAndLeftSpecified = 9, // eCLLCoords since 8.3.10 // since 8.3.11 name is "LeftAndTopSpecified"
+    EmptySpace = 10  // eCLLFreePlace since 8.3.10
+}
+
+// Режим выдвижения секторов круговых диаграмм.
+//    <xs:simpleType name="AutoSeriesSeparation">
+//        <xs:restriction base="xs:string">
+//            <xs:enumeration value="None" />
+//            <xs:enumeration value="All" />
+//            <xs:enumeration value="Maximum" />
+//            <xs:enumeration value="Minimum" />
+//        </xs:restriction>
+//    </xs:simpleType>
+enum CircleExpandMode
+{
+    ExpandNone as "None" = 0, // Внешнее управление.
+    ExpandAll as "All" = 1,  // Выдвигать всё.
+    ExpandMax as "Maximum" = 2,  // Выдвигать максимальную серию.
+    ExpandMin as "Minimum" =  3  // Выдвигать минимальную серию.
+}
+
+// 3D ориентация.
+//    <simpleType name="ChartOrientation">
+//        <restriction base="string">
+//            <enumeration value="SouthWest" />
+//            <enumeration value="SouthEast" />
+//        </restriction>
+//    </simpleType>
+enum Chart3Dcrd
+{
+    SW as "SouthWest" = 0, // Юг-Запад.
+    SE as "SouthEast" = 1  // Юг-Восток. 
+}
+
+// Ориентация подписей.
+//    <xs:simpleType name="ChartLabelsOrientation">
+//      <xs:restriction base="xs:string">
+//        <xs:enumeration value="Horizontal" />
+//        <xs:enumeration value="Vertical" />
+//        <xs:enumeration value="Auto" />
+//      </xs:restriction>
+//    </xs:simpleType>
+enum LabelsOrientation
+{
+    Horizontal = 0, //       eLOHorizontal = 0, // Горизонтальная.
+    Vertical = 1,   //       eLOVertical,       // Вертикальная. 
+    Auto = 2        //       eLOAuto            // Авто.
+    CustomAngle = 3 //       eLOCustomAngle     // Произвольный угол.
+}
+
+// Режим максимального количества серий.
+//    <simpleType name="MaxSeries">
+//        <restriction base="string">
+//            <enumeration value="NotDefined" />
+//            <enumeration value="Limited" />
+//            <enumeration value="Percent" />
+//        </restriction>
+//    </simpleType>
+enum MaxSeriesMode
+{
+    UndefinedMode as "NotDefined" = 0,  //        eUndefinedMode = 0, // Не ограничено.
+    DefinedMode as "Limited" = 1,       //        eDefinedMode = 1,   // Жестко задано.
+    PercentMode as "Percent" = 2        //        ePercentMode = 2    // Задано как процент.
+}
+
+// Пробелы между точками.
+//    <simpleType name="ChartSpaceMode">
+//        <restriction base="string">
+//            <enumeration value="None" />
+//            <enumeration value="Half" />
+//            <enumeration value="Full" />
+//        </restriction>
+//    </simpleType>
+enum SpaceMode
+{
+    SpaceNone as "None" = 0,   //         eSpaceNone = 0, // Нет.
+    SpaceHalf as "Half" = 1,   //         eSpaceHalf = 1, // Половина.
+    SpaceFull as "Full" = 2    //         eSpaceFull = 2  // Полный.
+}
+
+// Вид палитры.
+//    <xs:simpleType name="ChartColorPalette">
+//      <xs:restriction base="xs:string">
+//        <xs:enumeration value="Palette8" />
+//        <xs:enumeration value="Palette32" />
+//        <xs:enumeration value="Pastel" />
+//        <xs:enumeration value="Bright" />
+//        <xs:enumeration value="Soft" />
+//        <xs:enumeration value="Warm" />
+//        <xs:enumeration value="Cold" />
+//        <xs:enumeration value="Blue" />
+//        <xs:enumeration value="Orange" />
+//        <xs:enumeration value="Green" />
+//        <xs:enumeration value="Yellow" />
+//        <xs:enumeration value="Gray" />
+//        <xs:enumeration value="Custom" />
+//        <xs:enumeration value="Gradient" />
+//        <xs:enumeration value="Auto" />
+//      </xs:restriction>
+//    </xs:simpleType>
+enum PaletteKind
+{
+    PKClassic8 as "Palette8" = 0,   //  ePKClassic8 = 0, // Палитра8 (классическая).
+    PK32 as "Palette32" = 1         //  ePK32            // Палитра32
+    Pastel as "Pastel" = 2          //  ePKPastel,       // Бледные цвета
+    Bright as "Bright" = 3          //  ePKBright,       // Яркие цвета
+    Soft as "Soft" = 4              //  ePKSoft,         // Мягкие цвета
+    Warm as "Warm" = 5              //  ePKWarm,         // Тёплые цвета
+    Cold as "Cold" = 6              //  ePKCold,         // Холодные цвета
+    Blue as "Blue" = 7              //  ePKBlue,         // Синяя
+    Orange as "Orange" = 8          //  ePKOrange,       // Оранжевая
+    Green as "Green" = 9            //  ePKGreen,        // Зелёная
+    Yellow as "Yellow" = 10         //  ePKYellow,       // Жёлтая
+    Gray as "Gray" = 11             //  ePKGrey,         // Серая
+    Custom as "Custom" = 12         //  ePKCustom,       // Произвольная
+    Gradient as "Gradient" = 13     //  ePKGradient,     // Градиентая
+    Auto as "Auto" = 14             //  ePKAuto,         //  - ePK32
+    SoftAdaptive as "SoftAdaptive" = 15             //  ePKSoftAdaptive,         //  - Мягкая адаптивная
+}
+
+// Шкала лепестковых диаграмм.
+//    <simpleType name="RadarChartScaleType">
+//        <restriction base="string">
+//            <enumeration value="Circle" />
+//            <enumeration value="Polygon" />
+//        </restriction>
+//    </simpleType>
+enum RadarChartScaleType
+{
+    Circle = 0,     // eRCSTCircle,
+    Polygon = 1     // eRCSTPolygon
+}
+
+// Отображение значений измерительной диаграммы.
+//    <simpleType name="GaugeChartValueRepresentation">
+//        <restriction base="string">
+//            <enumeration value="Needle" />
+//            <enumeration value="Sector" />
+//        </restriction>
+//    </simpleType>
+enum GaugeChartValuesPresentation
+{
+    Needle = 0,       // eGCVPNeedle,
+    Sector = 1        // eGCVPSector
+}
+
+// Расположение подписей значений измерительной диаграммы.
+//    <simpleType name="GaugeChartValuesScaleLabelsLocation">
+//        <restriction base="string">
+//            <enumeration value="AtScale" />
+//            <enumeration value="InsideScale" />
+//        </restriction>
+//    </simpleType>
+enum GaugeChartLabelsLocation
+{
+    OnScale as "AtScale" = 0,    // eOnScale,
+    InsideScale as "InsideScale" = 1 // eInsideScale
+}
+
+// Сплайновый режим "сглаживания"
+//    <simpleType name="ChartSplineMode">
+//      <restriction base="string">
+//        <enumeration value="None" />
+//        <enumeration value="SmoothCurve" />
+//      </restriction>
+//    </simpleType>
+enum EnSplineMode
+{
+    SplineNone as "None" = 0 ,  //  eSplineNone  = 0, // Сглаживание не применяется
+    SplineBound as "SmoothCurve" = 1   // eSplineBound = 1  // Гладкое соединение точек
+}
+
+
+// Режим прозрачности
+//    <simpleType name="ChartSemitransparencyMode">
+//      <restriction base="string">
+//        <enumeration value="DontUse" />
+//        <enumeration value="Use" />
+//        <enumeration value="Auto" />
+//      </restriction>
+//    </simpleType>
+enum EnTranslucenceMode
+{
+    None as "DontUse" = 0,    // eTranslucenceNone   = 0, // Прозрачность не используется
+    Custom as "Use" = 1,  // eTranslucenceCustom = 1, // ...настраивается пользователем
+    Auto as "Auto" = 2     // eTranslucenceAuto   = 2  // ...настраивается автоматически
+}
+
+// Режим соединения серий в гистограммах с накоплением
+//  <simpleType name="ChartValuesBySeriesConnectionType">
+//      <restriction base="string">
+//        <enumeration value="None" />
+//        <enumeration value="EdgesConnection" />
+//      </restriction>
+//    </simpleType>
+enum EnMultiStageLinkMode
+{
+    MultiStageLinkNone as "None" = 0,   // eMultiStageLinkNone = 0, // Соединения отсутвствуют
+    MultiStageLinkEdge as "EdgesConnection" = 1    // eMultiStageLinkEdge = 1  // Соединения между краями баров одной серии
+}
+
+
+// Анимация диаграммы.
+//    <simpleType name="ChartAnimation">
+//        <restriction base="string">
+//            <enumeration value="Auto" />
+//            <enumeration value="Use" />
+//            <enumeration value="DontUse" />
+//        </restriction>
+//    </simpleType>
+enum ChartAnimation
+{
+   Auto = 0,     //  eAuto = 0,     // В зависимости от глобальных настроек
+   Use = 1,      // eUse,          // Использовать.
+   DontUse = 2   // eDontUse       // Не использовать
+}
+
+// Виды маркера.
+//    <simpleType name="ChartMarkerType">
+//        <restriction base="string">
+//            <enumeration value="None" />
+//            <enumeration value="Rect" />
+//            <enumeration value="Circle" />
+//            <enumeration value="Rhomb" />
+//        </restriction>
+//    </simpleType>
+enum MarkerType
+{
+    None = 0,    // eMrkNone = 0,   // Нет.
+    Rect = 1,    // eMrkRect = 1,   // Квадрат.
+    Circle = 2,  // eMrkCircle = 2, // Круг.
+    Rhomb = 3,    // eMrkRhomb = 3   // Ромб.
+    Auto = 4,     // eMrkAuto since 8.3.10 // Авто
+    Alternation = 5, // eMrkNext since 8.3.10 // Брать следующий
+    GradientCircle = 6, // eMrkGradientCircle since 8.3.10 // Градиентный шар, только для пузырьковой диагарммы, во встроенном языке не нужен
+    AlphaGradientCircle = 7 // eMrkAlphaGradientCircle since 8.3.10 // Градиентный шар c альфа-каналом, только для пузырьковой диагарммы, во встроенном языке не нужен
+}
+
+class ChartLine extends AbstractLine
+{
+    ChartLineType style
+}
+
+class DoubleRect
+{
+	double left
+	double right
+	double top
+	double bottom
+}
+
+//Тип аппроксимации линии тренда
+//since 8.3.10
+enum TrendlineApproximationType
+{
+	Linear = 0,
+	Exponential = 1,
+	Logarithmic = 2,
+	Power = 3,
+	Polynomial = 4
+}
+
+//Фактор линии тренда диаграммы
+//since 8.3.10
+enum TrendlineFactor
+{
+	Auto = 0,
+	PointNumber = 1,
+	PointValue = 2
+}
+
+//Используемое значение точки биржевой диаграммы
+//since 8.3.10
+enum StockChartUsedPointValue
+{
+	Open as "Open" = 0,
+	Max as "High" = 1,
+	Min as "Low" = 2,
+	Close as "Close" = 3,
+	OpenCloseAverage as "OpenCloseAverage" = 4
+}
+
+//Режим отображения серии в легенде
+//since 8.3.10
+enum ShowInChartLegend
+{
+	Auto = 0,
+	Show = 1,
+	DontShow = 2
+}
+
+//Режим отображения серии при отрисовке диаграммы
+//since 8.3.10
+enum ShowOnChart //since 8.3.11 name of the enum is "ShowInChart"
+{
+	Auto = 0,
+	Show = 1,
+	DontShow = 2
+}
+
+//Порядок отображения серий в легенде диаграммы
+//since 8.3.10
+enum SeriesOrderInLegend
+{
+	Auto = 0,
+	Direct = 1,
+	Reverse = 2
+}
+
+//Вариант источника значений на оси точек диаграммы
+//since 8.3.10
+enum PointsAxisValuesSource
+{
+	Auto = 0,
+	Series = 1,
+	Points = 2
+}
+
+//Вариант источника значений размера пузырька в диаграмме
+//since 8.3.10
+enum BubbleSizeValueSource
+{
+	None = 0,
+	CommonSeries = 1,
+	NextSeries = 2
+}
+
+//Вариант вычисления размера пузырька в диаграмме
+//since 8.3.10
+enum BubbleSizing
+{
+	IncreaseDiameter = 0,
+	IncreaseArea = 1,
+	DecreaseDiameter = 2,
+	DecreaseArea = 3
+}
+
+//Вариант отображения отрицательных значений в пузырьковой диаграмме
+//since 8.3.10
+enum BubbleChartNegativeValuesShowMode
+{
+	DontShow as "DontShow" = 0,
+	Abs as "Abs" = 1,
+	Transparent as "Transparent" = 2,
+	InvertColor as "InvertedBackColor" = 3
+}
+
+//Тип соединения точек в диаграмме
+//since 8.3.10
+enum PointsConnectionType
+{
+	Auto = 0,
+	Connect = 1,
+	DontConnect = 2	
+}
+
+//since 8.3.10
+enum BoundaryDetectionMethod
+{
+	AutoDetect = 0,
+	UseValue = 1,
+	UseValueWithLimitations = 2
+}
+
+//Способ заполнения текста заголовка шкалы диаграммы
+//since 8.3.10
+enum ScaleTitleTextSource
+{
+	Auto as "Auto" = 0,
+	CustomText as "UseText" = 1,
+	AutoText as "AutoText" = 2
+}
+
+//Отображение заголовка шкалы диаграммы
+//since 8.3.10
+enum ShowChartScaleTitle
+{
+	Auto = 0,
+	DontShow = 1,
+	Show = 2
+}
+
+//Расположение заголовка шкалы диаграммы
+//since 8.3.10
+enum ScaleTitlePlacement
+{
+	WithAxis = 0,
+	PlotArea = 1,
+	SpecialArea = 2
+}
+
+//Порядок отображения точек в горизонтальной диаграмме
+//since 8.3.10
+enum BarChartPointsOrder
+{
+	Auto = 0,
+	TopToBottom = 1,
+	BottomToTop = 2
+}
+
+//since 8.3.10
+class LabelArea
+{
+	ChartLabelLocation location
+	double left = "0.5"
+	double top = "0.5"
+	contains Font font
+	contains Color textColor
+	contains Color backColor
+	boolean transparent
+	contains Border border
+	contains Color borderColor
+	MarkerType marker
+	LabelsOrientation orientation //since 8.3.12
+	double angle //since 8.3.12
+}
+
+//since 8.3.10
+class ChartScale
+{
+	ShowChartScaleTitle showTitle
+	ScaleTitleTextSource titleTextSource
+	contains LocalStringMapEntry[] titleText
+	contains LabelArea titleArea
+	ScaleTitlePlacement titlePlacement
+	//since 8.3.11
+	GridLinesShowMode gridLinesShowMode
+	ScaleLabelLocation scaleLabelLocation
+	contains ChartLine gridLine
+	contains Color gridLineColor
+	contains Font labelFont
+	contains Color labelColor
+	LabelsOrientation labelOrientation
+	contains LocalStringMapEntry[] labelFormat
+	contains ChartLine scaleLine
+	contains Color scaleLineColor
+	int maxLabelRows
+	int labelAngle
+	ScaleLocation scaleLocation
+	int scaleStep
+	ScaleMarkLocation scaleMarkLocation
+}
+
+class TrendlineArray
+{
+	long seriesId
+	contains Trendline[] line
+}
+
+//since 8.3.10
+class Trendline
+{
+	TrendlineApproximationType approximationType
+	int approximationDegree = "3"
+	contains ChartLine line //Значение по умолчанию: Сплошная, толщина 1 TODO
+	TrendlineFactor factor
+	contains Color color
+	contains LocalStringMapEntry[] text
+	boolean showInLegend
+	boolean showEquation
+	boolean showDeterminationFactor
+	MarkerType marker
+	StockChartUsedPointValue stockChartUsedPointValue
+	contains LabelArea equationArea
+	//details anyType
+}
+
+//since 8.3.10
+class AxisInterval
+{
+	boolean leftIsNum
+	double leftNum
+	com._1c.g5.v8.dt.mcore.Date leftDate
+	boolean rightIsNum
+	double rightNum
+	com._1c.g5.v8.dt.mcore.Date rightDate
+}
+
+//since 8.3.10
+class ChartAxis
+{
+	double baseValue
+	contains AxisInterval interval
+	BoundaryDetectionMethod minValueDetectionMethod
+	BoundaryDetectionMethod maxValueDetectionMethod
+}
+
+class SeriesCalcInfo
+{
+	boolean enabled // Серия изображается (может быть выключено при ограничении
+                          // количества серий).
+    double min    // Расчетные данные (обычные и абсолютные минимумы и максимумы). 
+    double max
+    double absMin
+    double absMax
+    // Расчетные данные для круговых диаграмм.
+    double startAngle // Начальный угол сектора.
+    double stopAngle  // Конечный угол сектора.
+    double percent    // Расчетный процент.
+    String str  // Подпись.
+    boolean m_isExpand     // Сектор расширяется.
+    contains Point m_centerPoint // Центр эллипса для сектора (в случае расширения может 
+                             // не совпадать с центром эллипса.
+    int endX          // Конечная координата серии для отрисовки таблицы данных.
+}
+
+class RealDataItem
+{
+    contains Value dataValue
+    contains Value infoValue              // Уточняющая информация
+    String tooltip                      // Подсказка
+    boolean isToolTipFormatted			// since 8.3.14
+}
+
+class SeriesProperties
+{
+	long ^id                            // Уникальный в рамках Chart идентификатор
+	contains Value valInfo              // Расшифровка серии
+	contains Color color                // Цвет серии
+	contains ChartLine line                  // Стиль линии
+	MarkerType marker                   // Маркер
+	contains LocalStringMapEntry[] text // Имя серии
+	boolean expand // isExpand          // На круговых диаграммах серия расширяема
+	boolean indicator  // isIndicator   // Серия - индикатор на гистограммах
+	boolean strIsChanged                // Имя было изменено
+	contains SeriesCalcInfo info        // Расчетные данные
+	contains Value key                  // Ключ
+	boolean colorPriority               // Приоритет цвета
+
+	ShowInChartLegend showGraphicalRepresentationOfDataInChartLegend
+	ShowOnChart showGraphicalRepresentationOfDataOnChart
+}
+
+// Элемент данных
+class ChartDataItem
+{
+	contains Value dataValue            // Собственно данные.
+	double doubleValue
+	contains Value valInfo              // Уточняющая информация
+	String tooltip                      // Подсказка
+	contains Point point                // Точка для текущей отрисовки
+}
+
+class ChartSeriesItem
+{
+	contains SeriesProperties properties // Свойства серии
+	contains ChartDataItem[] points 	 // Вектор данных
+}
+
+// Свойства точки
+class PointProperties
+{
+	long ^id                               // Уникальный в рамках Chart идентификатор. 
+	contains Value valInfo                 // Расшифровка серии
+	MarkerType marker                      // Маркер
+	contains LocalStringMapEntry[] text    // Имя точки
+	boolean strIsChanged                   // Имя было изменено
+	
+    // Дополнительные данные. Нужны для симметрии с сериями.
+    contains Color color                   // Цвет
+    contains ChartLine line                     // Стиль линии
+    boolean expand // isExpand             // На круговых диаграммах серия расширяема
+	boolean indicator  // isIndicator      // Серия - индикатор на гистограммах
+	
+	int intAdd                             // Сумматоры для диаграммы с областями и суммированием
+	double doubleAdd
+	
+	int endX                               // Конечная координата серии для отрисовки таблицы данных.
+    contains Value key                     // Ключ
+	boolean colorPriority                  // Приоритет цвета
+}
+
+
+//    <xs:complexType name="GaugeChartQualityBand">
+//        <xs:sequence>
+//            <xs:element name="begin" type="xs:decimal" />
+//            <xs:element name="end" type="xs:decimal" />
+//            <xs:element name="backColor" type="tns:Color" />
+//            <xs:element name="text" type="core:LocalStringType" minOccurs="0" />
+//            <xs:element name="tooltip" type="core:LocalStringType" minOccurs="0" />
+//            <xs:element name="textStr" type="xs:string" minOccurs="0" />
+//            <xs:element name="tooltipStr" type="xs:string" minOccurs="0" />
+//        </xs:sequence>
+//    </xs:complexType>
+class GaugeChartQualityBand
+{
+	int begin
+	int end
+	contains Color backColor
+	contains LocalStringMapEntry[] text
+	contains LocalStringMapEntry[] tooltip
+	String textString     // textStr
+	String tooltipString  // tooltipStr
+	boolean useTextString
+	boolean useToolTipString
+}
+
+
+//    <xs:complexType name="GaugeChartQualityBands">
+//        <xs:sequence>
+//            <xs:element name="item" type="tns:GaugeChartQualityBand" maxOccurs="unbounded" minOccurs="0" />
+//        </xs:sequence>
+//        <xs:attribute name="useTextStr" type="xs:boolean" />
+//        <xs:attribute name="useTooltipStr" type="xs:boolean" />
+//    </xs:complexType>
+class GaugeChartQualityBands
+{
+	contains GaugeChartQualityBand[] items
+	boolean useTextStr
+	boolean useTooltipStr
+}
+
+class Chart
+{
+    // Уникальные идентификаторы серий и точек.
+    long seriesCurId
+    long pointsCurId
+    
+    boolean isSeriesDesign // Настраивать дизайн серий
+    
+    int realSeriesCount      // Количество серий реальных данных
+    contains ChartSeriesItem[] realSeriesData
+    contains ChartSeriesItem realExSeriesData // Объединенная серия
+    int realPointCount       // Количество точек реальных данных
+    contains PointProperties[] realPointData
+    contains RealDataItem[] realDataItems    // it not used in binary serialization but save to xml
+
+    boolean isPointsDesign // Настраивать дизайн точек
+
+    int curSeries // Текущая серия
+    int curPoint  // Текущая точка
+    ChartType chartType  // Вид диаграммы
+    ChartLabelType circleLabelType  // Вид подписей к круговой диаграмме
+    String labelsDelimiter  // Строка - разделитель компонентов подписей
+    ChartLabelLocation labelsLocation  // Расположение подписей
+    contains LocalStringMapEntry[] lbFormat    // Формат значений в подписях
+    contains LocalStringMapEntry[] lbpFormat    // Формат процентов в подписях        
+    contains Color labelsColor // Цвет подписей
+    contains Font labelsFont  // Фонт подписей 
+    boolean transparentLabelsBkg // Прозрачный фон подписей
+    contains Color labelsBkgColor  // Цвет фона подписей
+    contains Border labelsBorder    // Рамка подписей
+    contains Color labelsBorderColor    // Цвет рамки подписей
+    
+    CircleExpandMode circleExpandMode    // Режим выдвижения секторов круговых диаграмм.
+    Chart3Dcrd chart3Dcrd    // 3D ориентация
+    
+    contains LocalStringMapEntry[] title    // Заголовок
+    boolean isShowTitle    // Флаг показа заголовка
+    boolean isShowLegend    // Флаг показа легенды
+    contains Border ttlBorder    // Рамка заголовка
+    contains Color ttlBorderColor    // Цвет рамки заголовка
+    contains Border lgBorder    // Рамка легенды
+    contains Color lgBorderColor     // Цвет рамки легенды
+    contains Border chBorder    // Рамка Chart
+    contains Color chBorderColor    // Цвет рамки chart
+    boolean transparent
+    contains Color bkgColor    // Цвет фона
+    boolean isTrnspTtl     // Прозрачный фон заголовка
+    contains Color ttlColor    // Цвет фона заголовка
+    boolean isTrnspLeg    // Прозрачный фон легенды
+    contains Color legColor     // Цвет фона легенды   
+    boolean isTrnspCh    // Прозрачный фон области диаграммы
+    contains Color chColor    // Цвет фона области диаграммы
+    contains Color ttlTxtColor    // Цвет текста заголовка
+    contains Color legTxtColor    // Цвет текста легенды
+    contains Color chTxtColor    // Цвет текста диаграммы
+    contains Font ttlFont    // Фонт заголовка
+    contains Font legFont    // Фонт легенды
+    contains Font chFont    // Фонт диаграммы
+    boolean isShowScale     // Флаг показа шкалы
+    boolean isShowScaleVL     // Флаг показа линий значений шкалы
+    boolean isShowSeriesScale    // Флаг показа подписей серий
+    boolean isShowPointsScale    // Флаг показа подписей точек
+    boolean isShowValuesScale    // Флаг показа подписей шкалы значений
+    contains LocalStringMapEntry[] vsFormat    // Формат шкалы значений
+    LabelsOrientation xLabelsOrientation
+    contains ChartLine scaleLine    // Линии шкалы диаграммы
+    contains Color scaleColor    // Цвет линий шкалы диаграммы
+    boolean isAutoSeriesName    // Разрешить генерацию имен серий по умолчанию
+    boolean isAutoPointName    // Разрешить генерацию имен точек по умолчанию
+    MaxSeriesMode maxMode    // Режим максимального числа серий
+    int maxSeries     // Макс. число серий
+    int maxSeriesPrc    // Макс. серий (процент)
+    SpaceMode spaceMode    // Режим пробелов
+    BigDecimal baseVal     // Базовое значение
+    boolean isOutline    // Флаг окантовки
+    int realPiePoint    // Активная точка для круговых диаграмм - реальные данные
+    int realStockSeries // Активная серия для биржевых диаграмм - реальные данные.
+    boolean isLight    // Флаг освещения
+    boolean isGradient    // Флаг градиента
+    boolean hideBaseVal    // Флаг блокировки базовых значений
+    boolean dataTable    // Флаг показа таблицы данных
+    boolean dtVerLines    // Флаг показа вертикальных линий в таблице данных
+    boolean dtHorLines    // Флаг показа горизонтальных линий в таблице данных
+    HorizontalAlign dtHAlign     // Выравнивание в таблице данных
+    contains LocalStringMapEntry[] dtFormat    // Формат в таблице данных
+    boolean dtKeys    // Флаг показа ключей в таблице данных
+    PaletteKind paletteKind     // Вид палитры
+    boolean legendScrollEnable    // Разрешено скролирование легенды
+    contains Color surfaceColor    // Цвет поверхности
+    RadarChartScaleType radarScaleType    // Тип шкалы лепестковых диаграмм
+    GaugeChartValuesPresentation gaugeValuesPresentation    // Отображение значений измерительной диаграммы
+    contains GaugeChartQualityBands gaugeQualityBands    // Коллекция полос измерительной диаграммы
+    int beginGaugeAngle  // Начальный угол измерительной диаграммы (0 - 360)
+    int endGaugeAngle    // Конечный угол измерительной диаграммы (0 - 360)
+    int gaugeThickness   // Толщина шкалы измерительной диаграммы (1 - 10)
+    GaugeChartLabelsLocation gaugeLabelsLocation    // Расположение подписей значений измерительной диаграммы
+    boolean gaugeLabelsArcDirection     // Направление подписей измерительной диаграммы вдоль шкалы
+    int gaugeBushThickness    // Толщина втулки измерительной диаграммы (0 - 10)
+    contains Color gaugeBushColor    // Цвет втулки измерительной диаграммы
+    
+    boolean autoMaxValue     // Автоматическое определение максимального значения
+    double userMaxValue      // Заданное максимальное значение
+    boolean autoMinValue     // Автоматическое определение минимального значения
+    double userMinValue      // Заданное минимальное значение
+    
+    // Проинициализирован ли лайоутер
+    boolean elementsIsInit    
+    boolean titleIsInit
+    boolean legendIsInit
+    boolean chartIsInit
+    
+    contains DoubleRect elementsChart     //  геометрия Chart
+    contains DoubleRect elementsLegend    //  геометрия Legend
+    contains DoubleRect elementsTitle     //  геометрия Title
+    
+    contains Color borderColor
+    contains Border border
+    
+    String dataSourceDescription	// Описание DataSource. Например, область в мокселе.
+    boolean isTransposition    // Включена транспозиция DataSource.
+    boolean isTransposed    // Автоматическое транспонирование не в режиме DataSource выполнено
+    boolean isDataSourceMode        // Включен режим работы с DataSource
+    boolean autoTransposition    // Флаг автоматического траниспонирования не в режиме DataSource
+    
+    // Инициализировать новые значения генератором случайных чисел.
+    // По умолчанию включено.
+    // Выключается при первом setValue или при setDataSource.
+    boolean isRandomizedNewValues = 'true'  
+    EnSplineMode splineMode // m_modeSpline  Режим сглаживания графиков
+    int splineStrain // m_percentSplineStrain "Натяжение" в точках гладкого графика (0 - 100)
+    EnTranslucenceMode translucenceMode // m_modeTranslucence;  // Режим прозрачности.
+    int translucencePercent // Значение альфа-канала для прозрачности
+    
+    float funnelNeckHeightPercent //  процент цилиндрической части - "горла" воронки. 
+    float funnelNeckWidthPercent  //  процент ширины "горла" воронки от ее максимальной ширины.
+    float funnelGapSumPercent     //  процент "зазоров" между сегментами воронки.
+    
+    EnMultiStageLinkMode multiStageLinkMode   // m_modeMultiStageLink      Режим соединения серий в гистограммах с накоплением
+    contains ChartLine multiStageLinkLine          // m_lineMultiStageLink      Стиль линий соединений серий в гистограммах с накоплением.
+    contains Color multiStageLinkColor        // m_colorMultiStageLink     Цвет линий соединений серий в гистограммах с накоплением.
+    
+    ChartAnimation animation    // Анимация диаграммы (проигрывать ли её)
+    long rebuildTime            // Время последнего перестроения диаграммы
+    
+    transient Uuid ^id 
+    
+    SeriesOrderInLegend seriesOrderInLegend   //since 8.3.10
+    contains ChartAxis valuesAxis   //since 8.3.10
+    contains ChartAxis pointsAxis   //since 8.3.10
+    PointsAxisValuesSource pointsAxisValuesSource   //since 8.3.10
+    int pointsAxisSeries   //since 8.3.10
+    BubbleSizeValueSource bubbleSizeValueSource   //since 8.3.10
+    int bubbleSizeCommonSeries   //since 8.3.10
+    BubbleSizing bubbleSizing   //since 8.3.10
+    BubbleChartNegativeValuesShowMode bubbleChartNegativeValuesShowMode   //since 8.3.10
+    int defaultBubbleSize = "10"   //since 8.3.10
+    int minBubbleSize = "1"   //since 8.3.10
+    int maxBubbleSize = "20"   //since 8.3.10
+    PointsConnectionType pointsConnection   //since 8.3.10
+    contains ChartScale pointsScale   //since 8.3.10
+    contains ChartScale valuesScale   //since 8.3.10
+    contains ChartScale seriesScale   //since 8.3.10
+    BarChartPointsOrder barChartPointsOrder   //since 8.3.10
+    int gradientPaletteMaxColors   //since 8.3.10
+    contains Color gradientPaletteStartColor   //since 8.3.10
+    contains Color gradientPaletteEndColor   //since 8.3.10
+    contains TrendlineArray[] trendLinesArray   //since 8.3.10
+    contains Color[] customPalette   //since 8.3.10
+    
+    contains ChartColorPaletteDescription colorPaletteDescription //since 8.3.12
+    contains ChartColorPaletteDescription referenceBandsColorPaletteDescription //since 8.3.12
+    
+    contains ChartReferenceLines valuesReferenceLines //since 8.3.12
+    contains ChartReferenceLines pointsReferenceLines //since 8.3.12
+    contains ChartReferenceBands valuesReferenceBands //since 8.3.12
+    contains ChartReferenceBands pointsReferenceBands //since 8.3.12
+
+    NonnumericChartValueUse nonnumericValuesUse //since 8.3.13
+    PointsConnectionAcrossSkippedChartValuesType pointConnectionAcrossSkippedValues //since 8.3.13
+
+    ChartValuesToolTipShowMode valuesToolTipShowMode // since 8.3.14
+    ChartValuesToolTipFillType valuesToolTipFillType // since 8.3.14
+    ChartSelectionMode selectionMode // since 8.3.14
+    ShowChartPopupReferenceLine pointsDropLinesShowMode  // since 8.3.14
+    ShowChartPopupReferenceLine valuesDropLinesShowMode  // since 8.3.14
+    // contains ChartSelectedObjects selectedObjects     // since 8.3.14  runtime only
+    String distributedKey  // Ключ в хранилище           // since 8.3.14
+    // String listStreamData // since 8.3.14  runtime only
+
+    LegendPlacement legendPlacement	 		 //since 8.3.12
+    PlotAreaPlacement plotAreaPlacement		 //since 8.3.12
+    TitleAreaPlacement titleAreaPlacement		 //since 8.3.12
+}
+
+//<simpleType name="ChartGridLinesShowMode">
+//    <annotation>
+//        <documentation>Отображение линий сетки диаграммы</documentation>
+//    </annotation>
+//    <restriction base="string">
+//        <enumeration value="Auto" />
+//        <enumeration value="DontShow" />
+//        <enumeration value="Show" />
+//    </restriction>
+//</simpleType>
+//since 8.3.11
+enum GridLinesShowMode
+{
+	Auto = 2,
+	DontShow = 1,
+	Show = 0
+}
+
+//<simpleType name="ChartScaleLabelLocation">
+//    <annotation>
+//        <documentation>Отображение подписей шкалы диаграммы</documentation>
+//    </annotation>
+//    <restriction base="string">
+//        <enumeration value="Auto" />
+//        <enumeration value="None" />
+//        <enumeration value="Inside" />
+//        <enumeration value="Outside" />
+//    </restriction>
+//</simpleType>
+//since 8.3.11
+enum ScaleLabelLocation
+{
+	Auto = 0,
+	None = 1,
+	Inside = 2,
+	Outside = 3
+}
+
+//<simpleType name="ChartScaleLocation">
+//    <annotation>
+//        <documentation>Положение шкалы диаграммы</documentation>
+//    </annotation>
+//    <restriction base="string">
+//        <enumeration value="Auto" />
+//        <enumeration value="BaseValue" />
+//        <enumeration value="Edge" />
+//    </restriction>
+//</simpleType>
+//since 8.3.11
+enum ScaleLocation
+{
+	Auto = 0,
+	BaseValue = 1,
+	Edge = 2
+}
+
+//<simpleType name="ChartScaleMarkLocation">
+//    <annotation>
+//        <documentation>Положение отметки шкалы диагарммы</documentation>
+//    </annotation>
+//    <restriction base="string">
+//        <enumeration value="Auto" />
+//        <enumeration value="Outside" />
+//        <enumeration value="Inside" />
+//        <enumeration value="Center" />
+//        <enumeration value="None" />
+//    </restriction>
+//</simpleType>
+//since 8.3.11
+enum ScaleMarkLocation
+{
+	Auto = 0,
+	Outside = 1,
+	Inside = 2,
+	Center = 3,
+	None = 4
+}
+
+//<complexType name="ChartColorPaletteDescription">
+//    <sequence>
+//        <element name="colorPalette" type="v8ui:ChartColorPalette" maxOccurs="1" minOccurs="0">
+//            <annotation>
+//                <documentation>Значение по умолчанию: Auto</documentation>
+//            </annotation>
+//        </element>
+//        <element name="gradientPaletteStartColor" type="v8ui:Color" maxOccurs="1" minOccurs="0">
+//            <annotation>
+//                <documentation>Значение по умолчанию: Auto</documentation>
+//            </annotation>
+//        </element>
+//        <element name="gradientPaletteEndColor" type="v8ui:Color" maxOccurs="1" minOccurs="0">
+//            <annotation>
+//                <documentation>Значение по умолчанию: Auto</documentation>
+//            </annotation>
+//        </element>
+//        <element name="gradientPaletteMaxColors" type="decimal" maxOccurs="1" minOccurs="0">
+//            <annotation>
+//                <documentation>Значение по умолчанию: 0</documentation>
+//            </annotation>
+//        </element>
+//        <element name="customPalette" type="core:Array" maxOccurs="1" minOccurs="0" >
+//            <annotation>
+//                <documentation>Значение по умолчанию:  nil</documentation>
+//            </annotation>
+//        </element>
+//    </sequence>
+//</complexType>
+//since 8.3.12
+class ChartColorPaletteDescription 
+{
+	PaletteKind colorPalette
+	contains Color gradientPaletteStartColor
+	contains Color gradientPaletteEndColor
+	contains Color[] customPalette
+	int gradientPaletteMaxColors
+}
+
+//<simpleType name="ChartReferenceLinePosition">
+//    <annotation>
+//        <documentation>Положение информационной линии диаграммы</documentation>
+//    </annotation>
+//    <restriction base="string">
+//        <enumeration value="Auto" />
+//        <enumeration value="OnValue" />
+//        <enumeration value="BetweenValues" />
+//    </restriction>
+//</simpleType>
+//since 8.3.12
+enum ChartReferenceLinePosition 
+{
+	Auto = 0,
+	OnValue = 1,
+	BetweenValues = 2
+}
+
+//<simpleType name="ChartReferenceLinePosition">
+//    <annotation>
+//        <documentation>Положение информационной линии диаграммы</documentation>
+//    </annotation>
+//    <restriction base="string">
+//        <enumeration value="Auto" />
+//        <enumeration value="OnValue" />
+//        <enumeration value="BetweenValues" />
+//    </restriction>
+//</simpleType>
+//since 8.3.12
+enum ChartReferenceBandBorderPosition 
+{
+	Auto = 0,
+	OnValue = 1,
+	BetweenValues = 2
+}
+
+//<simpleType name="NonnumericChartValueUse">
+//    <annotation>
+//        <documentation>Использование нечисловых значений диаграммы</documentation>
+//    </annotation>
+//    <restriction base="string">
+//        <enumeration value="Auto" />
+//        <enumeration value="AsZero" />
+//        <enumeration value="Skip" />
+//    </restriction>
+//</simpleType>
+//since 8.3.13
+enum NonnumericChartValueUse
+{
+	Auto = 0,
+	AsZero = 1,
+	Skip = 2
+}
+
+//<simpleType name="PointsConnectionAcrossSkippedChartValuesType">
+//    <annotation>
+//        <documentation>Тип соединения точек при пропущенных значениях диаграммы</documentation>
+//    </annotation>
+//    <restriction base="string">
+//        <enumeration value="Auto" />
+//        <enumeration value="None" />
+//        <enumeration value="ConnectUnskippedValues" />
+//        <enumeration value="ConnectWithBaseValue" />
+//    </restriction>
+//</simpleType>
+//since 8.3.13
+enum PointsConnectionAcrossSkippedChartValuesType
+{
+	Auto = 0,
+	None = 1,
+	ConnectUnskippedValues = 2,
+	ConnectWithBaseValue = 3
+}
+
+//<complexType name="ChartReferenceLine">
+//    <sequence>
+//        <element name="value" type="anyType" maxOccurs="1" minOccurs="0">
+//            <annotation>
+//                <documentation>Значение по умолчанию: nil</documentation>
+//            </annotation>
+//        </element>
+//        <element name="valueIsPointNumber" type="boolean" maxOccurs="1" minOccurs="0">
+//            <annotation>
+//                <documentation>Значение по умолчанию: false</documentation>
+//            </annotation>
+//        </element>
+//        <element name="labelText" type="core:LocalStringType" maxOccurs="1" minOccurs="0" >
+//            <annotation>
+//                <documentation>Значение по умолчанию: пусто</documentation>
+//            </annotation>
+//        </element>
+//        <element name="toolTip" type="core:LocalStringType" maxOccurs="1" minOccurs="0" >
+//            <annotation>
+//                <documentation>Значение по умолчанию: пусто</documentation>
+//            </annotation>
+//        </element>
+//        <element name="labelArea" type="tns:ChartLabelArea" maxOccurs="1" minOccurs="0">
+//            <annotation>
+//                <documentation>Значение по умолчанию равно значению по умолчанию для типа ChartLabelArea</documentation>
+//            </annotation>
+//        </element>
+//        <element name="line" type="v8ui:Line" maxOccurs="1" minOccurs="0" >
+//            <annotation>
+//                <documentation>Значение по умолчанию: Сплошная, толщина 2</documentation>
+//            </annotation>
+//        </element>
+//        <element name="color" type="v8ui:Color" maxOccurs="1" minOccurs="0">
+//            <annotation>
+//                <documentation>Значение по умолчанию: Auto</documentation>
+//            </annotation>
+//        </element>
+//        <element name="semitransparencyPercent" type="decimal" maxOccurs="1" minOccurs="0">
+//            <annotation>
+//                <documentation>Значение по умолчанию: Неопределенно</documentation>
+//            </annotation>
+//        </element>
+//        <element name="details" type="anyType" maxOccurs="1" minOccurs="0" >
+//            <annotation>
+//                <documentation>Значение по умолчанию: nil</documentation>
+//            </annotation>
+//        </element>
+//        <element name="position" type="tns:ChartReferenceLinePosition" maxOccurs="1" minOccurs="0">
+//            <annotation>
+//                <documentation>Значение по умолчанию: Auto</documentation>
+//            </annotation>
+//        </element>
+//    </sequence>
+//</complexType>
+//since 8.3.12
+class ChartReferenceLine 
+{
+	contains Value value
+	contains LocalStringMapEntry[] labelText
+	contains LocalStringMapEntry[] tooltip
+	contains LabelArea labelArea
+    contains ChartLine line
+    contains Color color
+    contains Value semitransparencyPercent
+    contains Value details
+    ChartReferenceLinePosition position
+    boolean valueIsPointNumber
+}
+
+//<complexType name="ChartReferenceBand">
+//    <sequence>
+//        <element name="begin" type="anyType" maxOccurs="1" minOccurs="0">
+//            <annotation>
+//                <documentation>Значение по умолчанию: nil</documentation>
+//            </annotation>
+//        </element>
+//        <element name="beginIsPointNumber" type="boolean" maxOccurs="1" minOccurs="0">
+//            <annotation>
+//                <documentation>Значение по умолчанию: false</documentation>
+//            </annotation>
+//        </element>
+//        <element name="end" type="anyType" maxOccurs="1" minOccurs="0">
+//            <annotation>
+//                <documentation>Значение по умолчанию: nil</documentation>
+//            </annotation>
+//        </element>
+//        <element name="endIsPointNumber" type="boolean" maxOccurs="1" minOccurs="0">
+//            <annotation>
+//                <documentation>Значение по умолчанию: false</documentation>
+//            </annotation>
+//        </element>
+//        <element name="labelText" type="core:LocalStringType" maxOccurs="1" minOccurs="0" >
+//            <annotation>
+//                <documentation>Значение по умолчанию: пусто</documentation>
+//            </annotation>
+//        </element>
+//        <element name="toolTip" type="core:LocalStringType" maxOccurs="1" minOccurs="0" >
+//            <annotation>
+//                <documentation>Значение по умолчанию: пусто</documentation>
+//            </annotation>
+//        </element>
+//        <element name="labelArea" type="tns:ChartLabelArea" maxOccurs="1" minOccurs="0">
+//            <annotation>
+//                <documentation>Значение по умолчанию равно значению по умолчанию для типа ChartLabelArea</documentation>
+//            </annotation>
+//        </element>
+//        <element name="color" type="v8ui:Color" maxOccurs="1" minOccurs="0">
+//            <annotation>
+//                <documentation>Значение по умолчанию: Auto</documentation>
+//            </annotation>
+//        </element>
+//        <element name="semitransparencyPercent" type="decimal" maxOccurs="1" minOccurs="0">
+//            <annotation>
+//                <documentation>Значение по умолчанию: Неопределенно</documentation>
+//            </annotation>
+//        </element>
+//        <element name="border" type="v8ui:Line" maxOccurs="1" minOccurs="0" >
+//            <annotation>
+//                <documentation>Значение по умолчанию: Сплошная, толщина 1</documentation>
+//            </annotation>
+//        </element>
+//        <element name="borderColor" type="v8ui:Color" maxOccurs="1" minOccurs="0">
+//            <annotation>
+//                <documentation>Значение по умолчанию: Auto</documentation>
+//            </annotation>
+//        </element>
+//        <element name="borderSemitransparencyPercent" type="decimal" maxOccurs="1" minOccurs="0">
+//            <annotation>
+//                <documentation>Значение по умолчанию: Неопределенно</documentation>
+//            </annotation>
+//        </element>
+//        <element name="details" type="anyType" maxOccurs="1" minOccurs="0" >
+//            <annotation>
+//                <documentation>Значение по умолчанию: nil</documentation>
+//            </annotation>
+//        </element>
+//        <element name="position" type="tns:ChartReferenceBandBorderPosition" maxOccurs="1" minOccurs="0">
+//            <annotation>
+//                <documentation>Значение по умолчанию: Auto</documentation>
+//            </annotation>
+//        </element>
+//        <element name="displayAreaBegin" type="decimal" maxOccurs="1" minOccurs="0" >
+//            <annotation>
+//                <documentation>Значение по умолчанию: 0</documentation>
+//            </annotation>
+//        </element>
+//        <element name="displayAreaEnd" type="decimal" maxOccurs="1" minOccurs="0" >
+//            <annotation>
+//                <documentation>Значение по умолчанию: 1</documentation>
+//            </annotation>
+//        </element>
+//    </sequence>
+//</complexType>
+//since 8.3.12
+class ChartReferenceBand 
+{
+	contains Value begin
+	contains Value end
+	contains LocalStringMapEntry[] labelText
+	contains LocalStringMapEntry[] tooltip
+	contains LabelArea labelArea
+	contains Color color
+	contains Value semitransparencyPercent
+	contains ChartLine border
+	contains Color borderColor
+	contains Value borderSemitransparencyPercent
+	contains Value details
+	ChartReferenceBandBorderPosition position
+	double displayAreaBegin
+	double displayAreaEnd
+	boolean beginIsPointNumber
+	boolean endIsPointNumber
+}
+
+//<complexType name="ChartReferenceLines">
+//    <sequence>
+//        <element name="referenceLine" type="tns:ChartReferenceLine" maxOccurs="unbounded" minOccurs="0" />
+//    </sequence>
+//</complexType>
+//since 8.3.12
+class ChartReferenceLines 
+{
+	contains ChartReferenceLine[] chartReferenceLine
+}
+
+//<complexType name="ChartReferenceBands">
+//    <sequence>
+//        <element name="referenceBand" type="tns:ChartReferenceBand" maxOccurs="unbounded" minOccurs="0" />
+//    </sequence>
+//</complexType>
+//since 8.3.12
+class ChartReferenceBands 
+{
+	contains ChartReferenceBand[] chartReferenceBand
+}
+
+//since 8.3.12
+enum LegendPlacement
+{
+	Auto = 0,
+	Left = 1,
+	Right = 2,
+	Top = 3,
+	Bottom = 4,
+	UseCoordinates = 5,
+	None = 6
+}
+
+//since 8.3.12
+enum PlotAreaPlacement
+{
+	Auto = 0,
+	UseCoordinates = 1,
+	EmptySpace = 2
+}
+
+//since 8.3.12
+enum TitleAreaPlacement 
+{
+	Auto = 0,
+	UseCoordinates = 1,
+	LeftTop = 2,
+	Top = 3, 
+	RightTop = 4,
+	LeftBottom = 5,
+	Bottom = 6,
+	RightBottom = 7
+	None = 8
+}
+
+//since 8.3.14
+//<simpleType name="ChartValuesToolTipShowMode">
+//    <annotation>
+//        <documentation>Режим отображения подсказки значений диаграммы</documentation>
+//    </annotation>
+//    <restriction base="string">
+//        <enumeration value="Auto" />
+//        <enumeration value="ShowForNearestValue" />
+//        <enumeration value="ShowOnHover" />
+//        <enumeration value="DontShow" />
+//    </restriction>
+//</simpleType>
+enum ChartValuesToolTipShowMode
+{
+	Auto = 0,
+	ShowForNearestValue = 1,
+	ShowOnHover = 2,
+	DontShow = 3
+}
+
+// since 8.3.14
+//<simpleType name="ChartValuesToolTipFillType">
+//    <annotation>
+//        <documentation>Заполнение подсказки значений диаграммы</documentation>
+//    </annotation>
+//    <restriction base="string">
+//	    <enumeration value="Auto" />
+//        <enumeration value="SingleValue" />
+//        <enumeration value="AllPointValues" />
+//    </restriction>
+//</simpleType>
+enum ChartValuesToolTipFillType
+{
+	Auto = 0,
+	SingleValue = 1,
+	AllPointValues = 2
+}
+
+// since 8.3.14
+//<simpleType name="ChartSelectionMode">
+//    <annotation>
+//        <documentation>Режим выделения диаграммы</documentation>
+//    </annotation>
+//    <restriction base="string">
+//        <enumeration value="Auto" />
+//        <enumeration value="ValuesSelection" />
+//        <enumeration value="PointsSelection" />
+//        <enumeration value="None" />
+//    </restriction>
+//</simpleType>
+enum ChartSelectionMode
+{
+	Auto = 0,
+	ValuesSelection = 1,
+	PointsSelection = 2,
+	None = 3
+}
+
+// since 8.3.14
+//<simpleType name="ShowChartPopupReferenceLine">
+//    <annotation>
+//        <documentation>Отображение направлящих подсказки диаграммы</documentation>
+//    </annotation>
+//    <restriction base="string">
+//        <enumeration value="Auto" />
+//        <enumeration value="Show" />
+//        <enumeration value="DontShow" />
+//    </restriction>
+//</simpleType>
+enum ShowChartPopupReferenceLine
+{
+	Auto = 0,
+	Show = 1,
+	DontShow = 2
+}
+
+// since 8.3.14
+// runtime only
+//<complexType name="ChartSelectedObjects">
+//    <sequence>
+//      <element name="point" type="decimal" maxOccurs="unbounded" minOccurs="0"/>
+//      <element name="series" type="decimal" maxOccurs="unbounded" minOccurs="0"/>
+//      <element name="value" type="decimal" maxOccurs="unbounded" minOccurs="0"/>
+//    </sequence>
+//</complexType>
+//class ChartSelectedObjects
+//{
+//
+//}

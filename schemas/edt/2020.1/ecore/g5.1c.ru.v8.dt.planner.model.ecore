@@ -1,0 +1,217 @@
+<?xml version="1.0" encoding="ASCII"?>
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="model" nsURI="http://g5.1c.ru/v8/dt/planner/model" nsPrefix="planner">
+  <eClassifiers xsi:type="ecore:EClass" name="PlannerRepresentationPeriod">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="begin" unique="false">
+      <eType xsi:type="ecore:EDataType" href="g5.1c.ru.v8.dt.mcore.ecore#//Date"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="end" unique="false">
+      <eType xsi:type="ecore:EDataType" href="g5.1c.ru.v8.dt.mcore.ecore#//Date"/>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="PlannerDimensionItem">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="value" containment="true" resolveProxies="false">
+      <eType xsi:type="ecore:EClass" href="g5.1c.ru.v8.dt.mcore.ecore#//Value"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="text" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="borderColor" containment="true" resolveProxies="false">
+      <eType xsi:type="ecore:EClass" href="g5.1c.ru.v8.dt.mcore.ecore#//Color"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="backColor" containment="true" resolveProxies="false">
+      <eType xsi:type="ecore:EClass" href="g5.1c.ru.v8.dt.mcore.ecore#//Color"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="textColor" containment="true" resolveProxies="false">
+      <eType xsi:type="ecore:EClass" href="g5.1c.ru.v8.dt.mcore.ecore#//Color"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="font" containment="true" resolveProxies="false">
+      <eType xsi:type="ecore:EClass" href="g5.1c.ru.v8.dt.mcore.ecore#//Font"/>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="PlannerDimension">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="value" containment="true" resolveProxies="false">
+      <eType xsi:type="ecore:EClass" href="g5.1c.ru.v8.dt.mcore.ecore#//Value"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="text" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="borderColor" containment="true" resolveProxies="false">
+      <eType xsi:type="ecore:EClass" href="g5.1c.ru.v8.dt.mcore.ecore#//Color"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="backColor" containment="true" resolveProxies="false">
+      <eType xsi:type="ecore:EClass" href="g5.1c.ru.v8.dt.mcore.ecore#//Color"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="textColor" containment="true" resolveProxies="false">
+      <eType xsi:type="ecore:EClass" href="g5.1c.ru.v8.dt.mcore.ecore#//Color"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="font" containment="true" resolveProxies="false">
+      <eType xsi:type="ecore:EClass" href="g5.1c.ru.v8.dt.mcore.ecore#//Font"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="items" upperBound="-1" eType="//PlannerDimensionItem" containment="true" resolveProxies="false"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="PlannerBackgroundInterval">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="begin" unique="false">
+      <eType xsi:type="ecore:EDataType" href="g5.1c.ru.v8.dt.mcore.ecore#//Date"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="end" unique="false">
+      <eType xsi:type="ecore:EDataType" href="g5.1c.ru.v8.dt.mcore.ecore#//Date"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="color" containment="true" resolveProxies="false">
+      <eType xsi:type="ecore:EClass" href="g5.1c.ru.v8.dt.mcore.ecore#//Color"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="dimensionValues" upperBound="-1" eType="//StringToStringMap" containment="true" resolveProxies="false"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="PlannerItemScheduleWeekDays">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="weekDays" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="PlannerItemScheduleMonths">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="months" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="PlannerItemSchedule">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="endDate" unique="false">
+      <eType xsi:type="ecore:EDataType" href="g5.1c.ru.v8.dt.mcore.ecore#//Date"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="dayInMonth" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="weekDayInMonth" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="daysRepeat" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="weeksRepeat" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="monthsRepeat" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="yearsRepeat" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="repeatCount" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="weekDays" eType="//PlannerItemScheduleWeekDays" containment="true" resolveProxies="false"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="months" eType="//PlannerItemScheduleMonths" containment="true" resolveProxies="false"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="StringToStringMap" instanceClassName="java.util.Map$Entry">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="key" unique="false" lowerBound="1">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" unique="false" lowerBound="1">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="PlannerItem">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="value" containment="true" resolveProxies="false">
+      <eType xsi:type="ecore:EClass" href="g5.1c.ru.v8.dt.mcore.ecore#//Value"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="picture" containment="true" resolveProxies="false">
+      <eType xsi:type="ecore:EClass" href="g5.1c.ru.v8.dt.mcore.ecore#//Picture"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="begin" unique="false">
+      <eType xsi:type="ecore:EDataType" href="g5.1c.ru.v8.dt.mcore.ecore#//Date"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="end" unique="false">
+      <eType xsi:type="ecore:EDataType" href="g5.1c.ru.v8.dt.mcore.ecore#//Date"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="text" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="tooltip" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="borderColor" containment="true" resolveProxies="false">
+      <eType xsi:type="ecore:EClass" href="g5.1c.ru.v8.dt.mcore.ecore#//Color"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="textColor" containment="true" resolveProxies="false">
+      <eType xsi:type="ecore:EClass" href="g5.1c.ru.v8.dt.mcore.ecore#//Color"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="backColor" containment="true" resolveProxies="false">
+      <eType xsi:type="ecore:EClass" href="g5.1c.ru.v8.dt.mcore.ecore#//Color"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="font" containment="true" resolveProxies="false">
+      <eType xsi:type="ecore:EClass" href="g5.1c.ru.v8.dt.mcore.ecore#//Font"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="schedule" eType="//PlannerItemSchedule" containment="true" resolveProxies="false"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="dimensionValues" upperBound="-1" eType="//StringToStringMap" containment="true" resolveProxies="false"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="replacementItems" upperBound="-1" eType="//PlannerItem" containment="true" resolveProxies="false"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="replacementDate" unique="false">
+      <eType xsi:type="ecore:EDataType" href="g5.1c.ru.v8.dt.mcore.ecore#//Date"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="deleted" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="itemId" unique="false">
+      <eType xsi:type="ecore:EDataType" href="g5.1c.ru.v8.dt.mcore.ecore#//Uuid"/>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="PlannerSettings">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="items" upperBound="-1" eType="//PlannerItem" containment="true" resolveProxies="false"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="alignItemBoundariesByTimeScale" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="showWrappedHeaders" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="showWrappedTimeScaleHeaders" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="showCurrentDate" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="wrappedTimeScaleHeaderFormat" upperBound="-1" containment="true" resolveProxies="false">
+      <eType xsi:type="ecore:EClass" href="g5.1c.ru.v8.dt.mcore.ecore#//LocalStringMapEntry"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="timeScaleWrapBeginIndent" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="timeScaleWrapEndIndent" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="periodicVariantRepetition" unique="false">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="periodicVariantUnit" unique="false">
+      <eType xsi:type="ecore:EEnum" href="g5.1c.ru.v8.dt.chart.model.timescale.ecore#//TimeScaleUnitType"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="borderColor" containment="true" resolveProxies="false">
+      <eType xsi:type="ecore:EClass" href="g5.1c.ru.v8.dt.mcore.ecore#//Color"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="lineColor" containment="true" resolveProxies="false">
+      <eType xsi:type="ecore:EClass" href="g5.1c.ru.v8.dt.mcore.ecore#//Color"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="backColor" containment="true" resolveProxies="false">
+      <eType xsi:type="ecore:EClass" href="g5.1c.ru.v8.dt.mcore.ecore#//Color"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="textColor" containment="true" resolveProxies="false">
+      <eType xsi:type="ecore:EClass" href="g5.1c.ru.v8.dt.mcore.ecore#//Color"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="font" containment="true" resolveProxies="false">
+      <eType xsi:type="ecore:EClass" href="g5.1c.ru.v8.dt.mcore.ecore#//Font"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="beginOfRepresentationPeriod" unique="false">
+      <eType xsi:type="ecore:EDataType" href="g5.1c.ru.v8.dt.mcore.ecore#//Date"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="endOfRepresentationPeriod" unique="false">
+      <eType xsi:type="ecore:EDataType" href="g5.1c.ru.v8.dt.mcore.ecore#//Date"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="itemsTimeRepresentation" unique="false" eType="//PlannerItemsTimeRepresentation"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="timeScale" containment="true" resolveProxies="false">
+      <eType xsi:type="ecore:EClass" href="g5.1c.ru.v8.dt.chart.model.timescale.ecore#//TimeScale"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="dimensions" upperBound="-1" eType="//PlannerDimension" containment="true" resolveProxies="false"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="periods" upperBound="-1" eType="//PlannerRepresentationPeriod" containment="true" resolveProxies="false"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="backIntervals" upperBound="-1" eType="//PlannerBackgroundInterval" containment="true" resolveProxies="false"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="PlannerItemsTimeRepresentation">
+    <eLiterals name="DontDisplay"/>
+    <eLiterals name="BeginTime" value="1"/>
+    <eLiterals name="BeginAndEndTime" value="2"/>
+  </eClassifiers>
+</ecore:EPackage>

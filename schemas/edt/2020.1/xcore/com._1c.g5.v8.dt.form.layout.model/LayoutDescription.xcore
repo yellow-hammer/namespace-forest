@@ -1,0 +1,1449 @@
+@GenModel(prefix="LayoutDescriptionModel", loadInitialization="false", literalsInterface="true", nonNLSMarkers="true",
+	copyrightText="Copyright (C) 2015, 1C LLC", updateClasspath="false", suppressNotification="false")
+@Ecore(nsPrefix="layout", nsURI="http://g5.1c.ru/v8/dt/form.layout.model.description.model")
+package com._1c.g5.v8.dt.form.layout.model.description
+
+import com._1c.g5.v8.dt.form.layout.model.platform.border.V8Border
+import com._1c.g5.v8.dt.form.layout.model.platform.color.Color
+import com._1c.g5.v8.dt.form.layout.model.platform.font.Font
+import com._1c.g5.v8.dt.form.layout.model.platform.picture.V8Picture
+import com._1c.g5.v8.dt.form.model.ChoiceButtonRepresentation
+import com._1c.g5.v8.dt.form.model.ColumnGrouping
+import com._1c.g5.v8.dt.form.model.FormChildrenAlign
+import com._1c.g5.v8.dt.form.model.FormChildrenGroup
+import com._1c.g5.v8.dt.form.model.FormDateSelectionMode
+import com._1c.g5.v8.dt.form.model.FormElementOrientation
+import com._1c.g5.v8.dt.form.model.FormEnterKeyBehavior
+import com._1c.g5.v8.dt.form.model.FormItemSpacing
+import com._1c.g5.v8.dt.form.model.FormPagesRepresentation
+import com._1c.g5.v8.dt.form.model.FormProgressBarRepresentation
+import com._1c.g5.v8.dt.form.model.FormConversationsRepresentation
+import com._1c.g5.v8.dt.form.model.IncompleteItemChoiceMode
+import com._1c.g5.v8.dt.form.model.ItemHorizontalAlignment
+import com._1c.g5.v8.dt.form.model.ItemVerticalAlignment
+import com._1c.g5.v8.dt.form.model.LogFormScrollMode
+import com._1c.g5.v8.dt.form.model.MarkingStyle
+import com._1c.g5.v8.dt.form.model.PictureSize
+import com._1c.g5.v8.dt.form.model.SelectionShowMode
+import com._1c.g5.v8.dt.form.model.TableFieldEditMode
+import com._1c.g5.v8.dt.form.model.TableInitialListView
+import com._1c.g5.v8.dt.form.model.TableInitialTreeView
+import com._1c.g5.v8.dt.form.model.TableRepresentation
+import com._1c.g5.v8.dt.form.model.TableRowInputMode
+import com._1c.g5.v8.dt.form.model.TableRowSelectionMode
+import com._1c.g5.v8.dt.form.model.TableScrollBarUse
+import com._1c.g5.v8.dt.form.model.TableSelectionMode
+import com._1c.g5.v8.dt.form.model.SpreadsheetDocumentPointerType
+import com._1c.g5.v8.dt.form.model.SpreadSheetDocumentScrollBarUse
+import com._1c.g5.v8.dt.form.model.ViewScalingMode
+import com._1c.g5.v8.dt.mcore.CompositeId
+import com._1c.g5.v8.dt.mcore.Value
+import com._1c.g5.v8.dt.metadata.mdclass.BasicForm
+import com._1c.g5.v8.dt.form.layout.model.description.LayoutDescriptionModelFactory
+import com._1c.g5.v8.dt.form.layout.model.ILayoutConstants
+import com._1c.g5.v8.dt.metadata.common.FoldersAndItemsUse
+import com._1c.g5.v8.dt.form.model.FormVisualEntity
+import com._1c.g5.v8.dt.mcore.PictureDef
+import com._1c.g5.v8.dt.form.model.FormFixedInTable
+import com._1c.g5.v8.dt.form.layout.model.platform.font.V8LogFont
+import com._1c.g5.v8.dt.form.layout.model.common.Size
+import com._1c.g5.v8.dt.form.model.TextBreakMode
+import com._1c.g5.v8.dt.form.layout.model.common.Rect
+import com._1c.g5.v8.dt.form.model.DisplayImportance
+import com._1c.g5.v8.dt.form.model.TableCurrentRowUse
+import com._1c.g5.v8.dt.form.model.TableBehaviorOnHorizontalCompression
+import com._1c.g5.v8.dt.form.model.UsualGroupBehavior
+import com._1c.g5.v8.dt.mcore.Uuid
+
+/**
+ * @author Alexander Tretyakevich
+ */
+type Rect wraps Rect
+
+type V8Font wraps V8LogFont
+
+type Size wraps Size
+
+type LayChildrenArray wraps java.util.ArrayList<HippoLayElementBase>
+
+type Date wraps com._1c.g5.v8.dt.mcore.util.Date
+
+type BitSet wraps java.util.BitSet
+
+type Font wraps Font
+
+type Border wraps V8Border
+
+type Picture wraps V8Picture
+
+type Color wraps Color
+
+type ByteArray wraps byte[]
+
+interface HippoLayElementBase
+{
+	String title = ""
+	String name = ""
+	String logFormElementName = ""
+	refers HippoLayElementBase pParent
+	BitSet categoriesHolder //+
+	boolean visible = "true"
+	boolean groupVisible = "true"
+	boolean enabled = "true"
+	boolean groupEnabled = "true"
+	boolean readOnly //+
+	boolean groupReadOnly
+	boolean skipOnInput
+	boolean defaultControl
+	boolean postGeneratorCardsInDLU
+	boolean groupingVertical // real grouping of the element
+	refers FormVisualEntity formModelElement
+	op void setCategory(HippoLayouterCategory category, boolean flag) {
+		if (categoriesHolder === null)
+			categoriesHolder = new java.util.BitSet()
+		if (flag) {
+			categoriesHolder.set(category.value)
+		} else {
+			categoriesHolder.clear(category.value)
+		}
+	}
+	op void setCategory(HippoLayouterCategory category) {
+		if (categoriesHolder === null)
+			categoriesHolder = new java.util.BitSet()
+		categoriesHolder.set(category.value)
+	}
+	op boolean checkCategory(HippoLayouterCategory category) {
+		if (categoriesHolder === null) {
+			return false;
+		} else {
+			return categoriesHolder.get(category.value)
+		}
+	}
+}
+
+interface HippoLayFormElementBase  extends HippoLayElementBase 
+{
+	// На этапе генератора задаётся в стандартных символах.
+	// После обработки трансформатором содержит пиксели.
+	int width //+
+	int minWidth //+
+	int maxWidth //+
+	int height //+
+	int minHeight //+
+	int maxHeight //+
+	//
+	StretchableMode stretchableMode //+
+	int gridLeftPadding
+	int gridTopPadding
+	int gridRightPadding
+	int gridBottomPadding
+	int gridLeft
+	int gridTop
+	int gridWidth
+	int gridHeight
+	ItemHorizontalAlignment gridHAlign
+	ItemVerticalAlignment gridVAlign
+	int alignedAreaTopOffset
+	String[] stickyAnchorNames
+	String anchorName
+	int layerNumber
+	op int getGridPadding(HippoLayouterEdge edge) {
+		switch (edge) {
+			case HippoLayouterEdge.LEFT: {
+				return gridLeftPadding;
+			}
+			case HippoLayouterEdge.TOP: {
+				return gridTopPadding;
+			}
+			case HippoLayouterEdge.RIGHT: {
+				return gridRightPadding;
+			}
+			case HippoLayouterEdge.BOTTOM: {
+				return gridBottomPadding;
+			}
+			default: {
+
+				//assert
+				throw new IllegalArgumentException();
+			}
+		}
+	}
+	op void setGridPadding(HippoLayouterEdge edge, int padding) {
+		switch (edge) {
+			case HippoLayouterEdge.LEFT: {
+				gridLeftPadding = padding;
+				return;
+			}
+			case HippoLayouterEdge.TOP: {
+				gridTopPadding = padding;
+				return;
+			}
+			case HippoLayouterEdge.RIGHT: {
+				gridRightPadding = padding;
+				return;
+			}
+			case HippoLayouterEdge.BOTTOM: {
+				gridBottomPadding = padding;
+				return;
+			}
+			default:
+				throw new IllegalArgumentException()
+		}
+	}
+}
+
+// must be implemented by all elements, that have field "font"
+interface IHippoLayElementWithFont
+{
+	Font font
+}
+
+// must be implemented by all elements, that have field "backColor"
+interface IHippoLayElementWithBackColor
+{
+	Color backColor
+}
+
+// must be implemented by all elements, that have field "textColor"
+interface IHippoLayElementWithTextColor
+{
+	Color textColor
+}
+
+// must be implemented by all elements, that have field "borderColor"
+interface IHippoLayElementWithBorderColor
+{
+	Color borderColor
+}
+
+abstract class HippoLayElementWithCustomization 
+	extends IHippoLayElementWithFont, IHippoLayElementWithBackColor, 
+		IHippoLayElementWithTextColor, IHippoLayElementWithBorderColor
+{
+}
+
+interface HippoLayElementWCMBase extends HippoLayElementBase
+{
+	refers HippoLayElementBase pContextMenu
+}
+
+interface HippoLayElementWCMFormElementBase extends HippoLayElementWCMBase, HippoLayFormElementBase
+{
+}
+
+/* The element is displayed on a separate layer. */
+interface IHippoLayLayer extends HippoLayFormElementBase
+{
+}
+
+interface HippoLayFormElementExtBase extends HippoLayFormElementBase
+{
+	int minWidthWithNormalPriority
+	int minWidthWithStretchPriority
+	int maxWidthWithStretchPriority
+	int maxWidthWithNormalPriority
+	int minWidthWithCompressPriority
+	int maxWidthWithCompressPriority
+	int minHeightWithNormalPriority
+	int minHeightWithStretchPriority
+	int maxHeightWithNormalPriority
+	int maxHeightWithCompressPriority
+	int minHeightWithCompressPriority
+	int maxHeightWithStretchPriority
+	int narrowStandardWidth
+	int wideStandardWidth
+	int standardWidth
+	int narrowStandardHeight
+	int wideStandardHeight
+	int standardHeight
+}
+
+interface HippoLayGroupBase extends HippoLayElementBase
+{
+	contains HippoLayElementBase[] children
+	boolean alternativeMode
+	op void addChild(HippoLayElementBase pChild) {
+		if (!alternativeMode) {
+			pChild.setPParent(this);
+		}
+		children.add(pChild);
+	}
+	op void insertChild(HippoLayElementBase pChild, int index) {
+		if (!alternativeMode) {
+			pChild.setPParent(this);
+		}
+
+		if (index >= children.size) {
+			children.add(pChild);
+		} else {
+			children.add(index, pChild);
+		}
+	}
+	op boolean remove(HippoLayElementBase pChild) {
+		val indx = children.indexOf(pChild);
+
+		if (indx == -1) {
+			return false;
+		}
+
+		if (!alternativeMode) {
+			pChild.setPParent(null);
+		}
+		children.remove(indx);
+		return true;
+	}
+	op boolean move(HippoLayElementBase pChild, int offset) {
+		val oldPos = children.indexOf(pChild);
+		if (oldPos == -1) {
+			return false;
+		} else {
+			children.move(oldPos + offset, pChild);
+			return true;
+		}
+	}
+	op int childIndex(HippoLayElementBase pChild) {
+		children.indexOf(pChild);
+	}
+}
+
+interface HippoLayGroupFormElementBase extends HippoLayGroupBase, HippoLayFormElementBase
+{
+}
+
+interface HippoLayGroupFormElementExtBase extends HippoLayGroupBase, HippoLayFormElementExtBase
+{
+}
+
+interface HippoLayVirtualGridBase extends HippoLayGroupBase 
+{
+	contains VirtualColumn[] columns
+	contains VirtualRow[] rows
+	ItemHorizontalAlignment childrenGridHAlign
+	ItemVerticalAlignment childrenGridVAlign
+	op void addRow() {
+		val row = LayoutDescriptionModelFactory.eINSTANCE.createVirtualRow()
+		row.description = LayoutDescriptionModelFactory.eINSTANCE.createVirtualGridElementDescription
+		rows.add(row)
+	}
+	op void insertRow(int index) {
+		if (index >= rows.size()) {
+			addRow();
+		} else {
+			val row = LayoutDescriptionModelFactory.eINSTANCE.createVirtualRow()
+			row.description = LayoutDescriptionModelFactory.eINSTANCE.createVirtualGridElementDescription
+			rows.add(index, row);
+		}
+	}
+	op void addColumn() {
+		val column = LayoutDescriptionModelFactory.eINSTANCE.createVirtualColumn()
+		column.description = LayoutDescriptionModelFactory.eINSTANCE.createVirtualGridElementDescription
+		columns.add(column)
+	}
+	op void insertColumn(int index) {
+		if (index >= columns.size()) {
+			addColumn();
+		} else {
+			val column = LayoutDescriptionModelFactory.eINSTANCE.createVirtualColumn()
+			column.description = LayoutDescriptionModelFactory.eINSTANCE.createVirtualGridElementDescription
+			columns.add(index, column);
+		}
+	}
+}
+
+interface HippoLayVirtualGridFormElementExtBase extends HippoLayVirtualGridBase, HippoLayFormElementExtBase 
+{
+}
+
+class HippoLayVirtualGrid extends HippoLayVirtualGridFormElementExtBase
+{
+}
+
+interface HippoLayFormGroupBase extends HippoLayVirtualGridBase
+{
+	Boolean horStretchable
+	Boolean verStretchable
+	FormChildrenGroup childrenGrouping = "Vertical"
+	FormItemSpacing horizontalSpacing = "Single"
+	FormItemSpacing verticalSpacing = "Single"
+	ItemHorizontalAlignment horizontalAlignment = "Left"
+	ItemVerticalAlignment verticalAlignment = "Top"
+	FormChildrenAlign childrenAlignment = "ItemsLeftTitlesLeft"
+}
+
+interface HippoLayFormGroupFormElementExtBase extends HippoLayFormGroupBase, HippoLayVirtualGridFormElementExtBase
+{
+}
+
+// Picture
+class LayoutPicture extends PictureDef
+{
+	String pictureName
+}
+
+class HippoLayForm extends HippoLayFormGroupBase 
+{
+	int width
+	int height
+	LogFormScrollMode verticalScrolling = "UseIfNecessary"
+	FormEnterKeyBehavior enterKeyBehavior
+	FormConversationsRepresentation showECSConversations
+	int resWidth
+	int resHeight
+}
+
+class HippoLayPage extends HippoLayFormGroupFormElementExtBase, IHippoLayElementWithBackColor
+{
+	Picture picture
+	String shortCut = ""
+	int dataLength
+	boolean scrollOnCompress
+	String formatString
+}
+
+class HippoLayPanel extends HippoLayFormGroupFormElementExtBase, IHippoLayElementWithBackColor
+{
+	LogFormScrollMode verticalScrolling = "UseIfNecessary"
+	int resWidth
+	int resHeight
+}
+
+class HippoLaySeparatePanel extends HippoLayPanel, IHippoLayLayer
+{
+	int leftCalcPadding
+	int topCalcPadding
+	int rightCalcPadding
+	int bottomCalcPadding
+	Appearance appearance
+	Role role
+}
+
+class HippoLayFormRichElement extends HippoLayGroupFormElementBase
+{
+	HippoLayouterEdge titlePlacement
+	HippoLayouterEdge extTooltipPlacement
+}
+
+class HippoLayTableColumnsGroup extends HippoLayGroupBase //+
+{
+	ColumnGrouping grouping = "Vertical"
+	String tooltip = ""
+	boolean showInHeader
+	ItemHorizontalAlignment headerHAlign
+	String headerFormatString = ""
+	Picture headerPicture
+	Color headerTextColor
+	Color headerBackColor
+	Font headerFont
+	FormFixedInTable fixedInTable
+}
+
+class HippoLayTableColumn extends HippoLayElementWCMBase, IHippoLayElementWithBackColor, IHippoLayElementWithFont, IHippoLayElementWithTextColor
+{
+	ColumnMode columnMode = "Input"
+	String tooltip = ""
+	String footerText = ""
+	String invisibleTitle = ""
+	boolean showInHeader = "true"
+	boolean showInFooter = "true"
+	ItemHorizontalAlignment columnHAlign
+	ItemHorizontalAlignment headerHAlign = "Left"
+	ItemHorizontalAlignment footerHAlign
+	TableFieldEditMode columnEditMode = "Enter"
+	boolean autoCellHeight
+	String formatString = ""
+	String inputFormatString = ""
+	boolean markNegatives
+	boolean wrap = "true"
+	boolean passwordMode
+	boolean extendedEdit
+	boolean textEdit = "true"
+	boolean multiLine
+	boolean choiceListButton
+	boolean dropListButton
+	boolean choiceButton
+	ChoiceButtonRepresentation choiceButtonRepresentation
+	boolean clearButton
+	boolean spinButton
+	boolean openButton
+	Boolean createButton
+	contains Value minValue
+	contains Value maxValue
+	String mask = ""
+	boolean listChoiceMode
+	Picture choiceButtonPicture
+	int choiceListHeight
+	int choiceListMinWidth
+	boolean autoChoiceIncomplete
+	IncompleteItemChoiceMode incompleteChoiceMode
+	boolean autoMarkIncomplete
+	Boolean quickChoice
+	boolean finalQuickChoice = "true"
+	InputByStringRunMode inputByStringRunMode
+	boolean finalInputByStringRunMode = "true"
+	//Uuid choiceForm
+	refers BasicForm choiceForm
+	FoldersAndItemsUse choiceObjects = "FoldersAndItems"
+	boolean hyperlink
+	boolean threeState
+	Picture headerPicture
+	Picture footerPicture
+	Color headerTextColor
+	Color headerBackColor
+	Color headersColor
+	Font headerFont
+	Color footerTextColor
+	Color footerBackColor
+	Font footerFont
+	String shortCut
+	SearchOnInputForbiddenMode searchOnInputForbiddenMode
+	String inputHint = ""
+	Boolean choiceHistoryOnInput
+	FormFixedInTable fixingInTable
+	Picture pictureValues
+	StretchableMode stretchableMode
+	int width
+	int height
+	boolean useStdFontForWidthCalculate
+	int buttonsCount
+	DisplayImportance displayImportance = "Usual"
+}
+
+class HippoLayEdit extends HippoLayElementWCMFormElementBase, HippoLayElementWithCustomization
+{
+	ItemHorizontalAlignment hAlign
+	String tooltip = ""
+	boolean wrap = "true"
+	boolean passwordMode
+	boolean extendedEdit
+	boolean markNegatives
+	boolean choiceListButton
+	boolean dropListButton
+	boolean choiceButton
+	ChoiceButtonRepresentation choiceButtonRepresentation
+	boolean clearButton //+
+	boolean spinButton
+	boolean openButton
+	Boolean createButton
+	contains Value minValue
+	contains Value maxValue
+	String mask
+	boolean listChoiceMode
+	Picture choiceButtonPicture
+	int choiceListHeight
+	int choiceListMinWidth
+	boolean autoChoiceIncomplete
+	IncompleteItemChoiceMode incompleteChoiceMode
+	String formatString = ""
+	boolean autoMarkIncomplete
+	Boolean quickChoice
+	boolean finalQuickChoice = "true"
+	InputByStringRunMode inputByStringRunMode
+	boolean finalInputByStringRunMode = "true"
+	//TODO Uuid choiceForm
+	refers BasicForm choiceForm
+	FoldersAndItemsUse choiceObjects = "FoldersAndItems"
+	boolean textEdit = "true"
+	boolean mobileTextEdit
+	boolean multiLine
+	String shortCut = ""
+	boolean warningOnEditMode
+	SearchOnInputForbiddenMode searchOnInputForbiddenMode
+	String inputHint = ""
+	Boolean enableCreateButton
+	Boolean choiceHistoryOnInput
+	boolean useStdFontForWidthCalculate
+	boolean useStdFontForMaxWidthCalculate
+	int buttonsCount
+}
+
+class HippoLaySubMenu extends HippoLayGroupFormElementBase, HippoLayElementWithCustomization, IHippoLayLayer
+{
+	String tooltip = ""
+	String shortCut = ""
+	Picture picture
+	HippoLayouterMenuElementRepresentation representation
+	CompositeId groupId
+	ButtonShape shape
+	ButtonShapeRepresentation shapeRepresentation
+	boolean sticky
+}
+
+class HippoLayCommand extends HippoLayElementBase, HippoLayElementWithCustomization
+{
+	String tooltip = ""
+	String shortCut = ""
+	Picture picture
+	boolean defaultButton
+	boolean important = "true"
+	HippoLayouterMenuElementRepresentation representation = "TextPicture"
+	boolean right
+	boolean subMenu
+	boolean sticky
+	boolean hyperlink
+	ButtonShape shape
+	ButtonShapeRepresentation shapeRepresentation
+	ButtonPictureLocation pictureLocation
+	boolean tableSearchHistoryCommand
+}
+
+class HippoLayMenuSeparator extends HippoLayElementBase
+{
+	boolean autoSeparator = "true"
+}
+
+class HippoLayNavigator extends HippoLayGroupFormElementBase
+{
+}
+
+class HippoLayCommandBar extends HippoLayGroupFormElementBase, IHippoLayElementWithFont, IHippoLayElementWithTextColor
+{
+	String defaultComandSourceName = ""
+	ItemHorizontalAlignment hAlign = "Left"
+	String shortCut
+	boolean secondaryCommandBar = "true"
+	HippoLayCommandBarLocation location
+}
+
+class HippoLayLogicGroup extends HippoLayFormGroupFormElementExtBase, IHippoLayElementWithBackColor, IHippoLayElementWithFont, IHippoLayElementWithTextColor
+{
+	Color hiddenStateTitleBackColor
+	boolean showTitle
+	int dataLength
+	String formatString = ""
+	LogicGroupInternalRepresentation representation
+	String tooltip = ""
+	boolean throughAlign = "true"
+	HippoLayouterGroupRole role
+	UsualGroupBehavior behavior
+	boolean showBehaviorIcon
+	boolean collapsibleLeftMargin = "true"
+	String collapsedTitle = ""
+	boolean united = "true"
+	boolean expandOnBackColor = "true"
+}
+
+class HippoLayPages extends HippoLayGroupFormElementExtBase, IHippoLayElementWithFont
+{
+	FormPagesRepresentation representation = "TabsOnTop"
+	int tabWidth
+	String shortCut = ""
+	Boolean horStretchable
+	Boolean verStretchable
+	int leftCalcPadding
+	int topCalcPadding
+	int rightCalcPadding
+	int bottomCalcPadding
+	boolean autoHeightMode
+	Color tabsTitleTextColor
+}
+
+class HippoLayTable extends HippoLayGroupFormElementBase, HippoLayElementWCMFormElementBase, HippoLayElementWithCustomization
+{
+	String tooltip = ""
+	boolean inplaceEdit
+	boolean changeRowSet = "true"
+	boolean changeRowOrder = "true"
+	TableRowInputMode rowInputMode
+	TableSelectionMode rowsSelectionMode = "MultiRow"
+	TableRowSelectionMode rowSelectionMode
+	boolean showHeader = "true"
+	int headerHeight = "1"
+	boolean showFooter
+	int footerHeight = "1"
+	int logicRowHeight = "1"
+	int realRowHeight = "1"
+	TableScrollBarUse horScrollBarMode
+	TableScrollBarUse verScrollBarMode
+	boolean showHorLines = "true"
+	boolean showVerLines = "true"
+	int fixedLeft
+	int fixedRight
+	boolean useAlternationRowColor
+	boolean autoInsertNewRow
+	boolean bAutoInsertNotcompletedValues
+	boolean bAutoMarkNotcompletedValues
+	TableInitialListView initialListView = "Auto"
+	TableInitialTreeView initialTreeView
+	boolean useOutput = "true"
+	Picture rowsPicture
+	String shortCut = ""
+	boolean enableStartDrag
+	boolean enableDrag
+	int rowsCount
+	TableRepresentation representation
+	boolean filledRowsPictureProperty
+	int minContentHeight
+	int maxContentHeight
+	refers HippoLayElementBase lineEditForm
+	TableCurrentRowUse currentRowUse = "Auto"
+	TableBehaviorOnHorizontalCompression behaviorOnHorizontalCompression = "Auto"
+}
+
+class HippoLaySplitter extends HippoLayFormElementBase
+{
+	HippoLaySplitterDirection direction
+	HippoLaySplitterMode mode
+}
+
+class HippoLayContextMenu extends HippoLayGroupFormElementBase
+{
+}
+
+//Elements
+class HippoLayStaticText extends HippoLayElementWCMFormElementBase, HippoLayElementWithCustomization
+{
+	ItemVerticalAlignment vAlign = "Center"
+	ItemHorizontalAlignment hAlign
+	boolean hyperlink
+	String tooltip = ""
+	String shortCut = ""
+	String formatString = ""
+	boolean markNegatives
+	Border border
+	boolean passwordMode
+	boolean formatted
+	int minTitleRowsCount
+	boolean useStdFontForWidthCalculate
+	boolean useStdFontForMaxWidthCalculate
+	boolean pseudoHyperlink
+	TextBreakMode textBreakMode = "WordBreak"
+	int scale = "100"
+	boolean useOutput
+	int leftCalcPadding
+	int topCalcPadding
+	int rightCalcPadding
+	int bottomCalcPadding
+	op int getCalcPadding(HippoLayouterEdge edge) {
+		switch (edge) {
+			case LEFT:
+				return leftCalcPadding
+			case TOP:
+				return topCalcPadding
+			case RIGHT:
+				return rightCalcPadding
+			case BOTTOM:
+				return bottomCalcPadding
+			default:
+				throw new IllegalArgumentException()
+		}
+	}
+	op void setCalcPadding(HippoLayouterEdge edge, int padding) {
+		switch (edge) {
+			case LEFT:
+				leftCalcPadding = padding
+			case TOP:
+				topCalcPadding = padding
+			case RIGHT:
+				rightCalcPadding = padding
+			case BOTTOM:
+				bottomCalcPadding = padding
+			default:
+				throw new IllegalArgumentException()
+		}
+	}
+}
+
+class HippoLayCalendar extends HippoLayElementWCMFormElementBase, IHippoLayElementWithBorderColor, IHippoLayElementWithFont
+{
+	FormDateSelectionMode dateSelection
+	boolean showCurrentDate = "true"
+	boolean calendarNavigation = "true"
+	Date beginOfRepresentationPeriod
+	Date endOfRepresentationPeriod
+	String tooltip = ""
+	String shortCut = ""
+	boolean enableStartDrag
+	boolean enableDrag
+	boolean monthPanelVisible
+	int widthInMonths = "1"
+	int heightInMonths = "1"
+	Border border
+}
+
+class HippoLayChart extends HippoLayElementWCMFormElementBase //+
+{
+	String tooltip = ""
+	String shortCut = ""
+}
+
+class HippoLayCheckBox extends HippoLayElementWCMFormElementBase, IHippoLayElementWithBorderColor
+{
+	boolean threeState
+	String tooltip = ""
+	String shortCut = ""
+	ItemVerticalAlignment vAlign
+}
+
+class HippoLaySwitcher extends HippoLayCheckBox
+{
+// TODO G5V8DT-8638
+}
+
+class HippoLayFormattedArea extends HippoLayElementWCMFormElementBase, HippoLayFormGroupBase
+{
+	Color backColor
+	Color borderColor
+	double transparency
+	Border border
+	boolean topLevelArea
+}
+
+class HippoLayExternalObject extends HippoLayElementWCMFormElementBase
+{
+// TODO
+}
+
+class HippoLayDendrogram extends HippoLayElementWCMFormElementBase //+
+{
+	String tooltip = ""
+	String shortCut = ""
+}
+
+class HippoLayFlowchart extends HippoLayElementWCMFormElementBase, IHippoLayElementWithBorderColor
+{
+	boolean useOutput = "true"
+	String tooltip = ""
+	boolean edit = "true"
+	String shortCut = ""
+}
+
+class HippoLayFormattedDoc extends HippoLayElementWCMFormElementBase, HippoLayElementWithCustomization
+{
+	String tooltip = ""
+	boolean useOutput = "true"
+	String shortCut = ""
+}
+
+class HippoLayButton extends HippoLayGroupFormElementBase, HippoLayElementWithCustomization
+{
+	String tooltip = ""
+	String shortCut = ""
+	Picture picture
+	boolean defaultButton
+	boolean multiLine
+	int minTitleRowsCount
+	int pictWidth
+	int pictHeight
+	ButtonShape shape
+	ButtonShapeRepresentation shapeRepresentation
+	ButtonPictureLocation pictureLocation
+	ItemHorizontalAlignment textHAlign
+}
+
+class HippoLayGanttChart extends HippoLayElementWCMFormElementBase
+{
+	String tooltip = ""
+	String shortCut = ""
+}
+
+class HippoLayGeographicalMap extends HippoLayElementWCMFormElementBase, IHippoLayElementWithBorderColor
+{
+	String tooltip = ""
+	String shortCut = ""
+	boolean useOutput = "true"
+}
+
+class HippoLayHTML extends HippoLayElementWCMFormElementBase, IHippoLayElementWithBorderColor
+{
+	boolean useOutput = "true"
+	String tooltip = ""
+	String shortCut = ""
+}
+
+class HippoLayTumbler extends HippoLayElementWCMFormElementBase, HippoLayElementWithCustomization
+{
+	String tooltip = ""
+	String shortCut = ""
+	int columnsCount = "2"
+	String[] titles
+	double[] relativeWidthOfColumns
+	boolean checkBoxEmulationMode = "true"
+	int elementHeight
+	int elementTitleHeight
+	int elementWidth
+	Boolean equalColumnsWidth
+}
+
+class HippoLayImage extends HippoLayElementWCMFormElementBase, IHippoLayElementWithBorderColor, IHippoLayElementWithFont, IHippoLayElementWithTextColor
+{
+	boolean hyperlink
+	String tooltip = ""
+	String shortCut = ""
+	Picture picture
+	Picture pictureValues
+	PictureSize pictureSizeMode
+	boolean zoomable
+	String nonselectedPictureText = ""
+	Border border
+	boolean enableStartDrag
+	boolean enableDrag
+	String extTooltip = ""
+	boolean formattedExtTooltip
+	int pictWidth
+	int pictHeight
+	boolean keepOriginalSizeMode
+	Picture hoverPicture
+	Picture pressedPicture
+	boolean useOutput
+}
+
+class HippoLayMoxel extends HippoLayElementWCMFormElementBase, IHippoLayElementWithBorderColor
+{
+	boolean showGrid
+	boolean showHeaders
+	SpreadSheetDocumentScrollBarUse showVerticalScrollBar
+	SpreadSheetDocumentScrollBarUse showHorizontalScrollBar
+	boolean blackAndWhiteView
+	boolean protection
+	SelectionShowMode selectionShowMode = "Always"
+	ViewScalingMode viewScalingMode
+	boolean useOutput = "true"
+	boolean edit
+	boolean showGroups = "true"
+	String tooltip = ""
+	String shortCut = ""
+	boolean enableStartDrag
+	boolean enableDrag
+	SpreadsheetDocumentPointerType cursorTypes
+	boolean showCellNames
+	boolean showRowAndColumnNames
+}
+
+class HippoLayRadioGroup extends HippoLayElementWCMFormElementBase, IHippoLayElementWithBorderColor, IHippoLayElementWithFont, IHippoLayElementWithTextColor
+{
+	String tooltip = ""
+	String shortCut = ""
+	ItemVerticalAlignment elementVAlign
+	int columnsCount
+	int elementTitleHeight
+	String[] titles
+}
+
+class HippoLayRadioGroupMobile extends HippoLayRadioGroup
+{
+}
+
+class HippoLayGroupMobile extends HippoLayVirtualGridBase
+{
+	boolean rounded
+	int roundRadius
+	int internalLineOffset
+	Color backColor
+	Color lineColor
+}
+
+class HippoLayRadioButton extends HippoLayElementWCMFormElementBase, IHippoLayElementWithBorderColor, IHippoLayElementWithTextColor, IHippoLayElementWithFont
+{
+	String tooltip = ""
+	String shortCut = ""
+	ItemVerticalAlignment vAlign
+}
+
+class HippoLayProgressBar extends HippoLayElementWCMFormElementBase, IHippoLayElementWithBorderColor
+{
+	int minValue = "0"
+	int maxValue = "100"
+	FormElementOrientation orientation
+	FormProgressBarRepresentation smoothMode
+	boolean showPercent
+	String tooltip = ""
+	Font font
+}
+
+class HippoLayTrackBar extends HippoLayElementWCMFormElementBase, IHippoLayElementWithBorderColor
+{
+	int minValue = "0"
+	int maxValue = "100"
+	int step = "1"
+	int pageSize = "10"
+	int markingStep = "5"
+	FormElementOrientation orientation
+	MarkingStyle markingStyle = "BottomRight"
+	String tooltip = ""
+	String shortCut = ""
+}
+
+class HippoLayTextDoc extends HippoLayElementWCMFormElementBase, HippoLayElementWithCustomization
+{
+	boolean useOutput = "true"
+	String shortCut = ""
+}
+
+class HippoLayPlanner extends HippoLayElementWCMFormElementBase
+{
+	String tooltip = ""
+	String shortCut = ""
+	boolean enableStartDrag
+	boolean enableDrag
+}
+
+class HippoLayPeriod extends HippoLayElementWCMFormElementBase, IHippoLayElementWithBorderColor, IHippoLayElementWithFont
+{
+	String tooltip = ""
+	String shortCut = ""
+	Border border
+}
+
+class HippoLayViewStatus extends HippoLayElementWCMFormElementBase, HippoLayElementWithCustomization
+{
+	String tooltip = ""
+	ItemHorizontalAlignment hAlign
+	Color titleTextColor
+	Color buttonsBackColor
+	Font titleFont
+	Border border
+}
+
+class HippoLayGroupBox extends HippoLayFormElementBase, IHippoLayElementWithBackColor, IHippoLayElementWithFont, IHippoLayElementWithTextColor
+{
+	boolean horLineMode
+	String formatString
+	boolean dataFlag
+	String tooltip
+	boolean hyperlink
+	String[] names
+}
+
+class HippoLayBackObject extends HippoLayFormElementBase, IHippoLayElementWithBackColor
+{
+	String[] names
+}
+
+enum HippoLaySplitterDirection
+{
+	Horizontal as "Hor" = 0
+	Vertical as "Ver" = 1
+}
+
+enum HippoLaySplitterMode
+{
+	Move = 0
+	Scale = 1
+}
+
+enum HippoLayouterGroupRole
+{
+	// Обычная группа, не требующая специальной обработки.
+	NoSpecialRole = 0
+	// Группа, включающая в себя каринку и текст кнопки вида "Гипперссылка".
+	// Требуется расстановка паддингов.
+	HyperlinkButtonGroupRole = 1
+	// Группа, включающая в себя таблицу и её предопределённые - командную панель и/или
+	// состояние просмотра. Требуется расстановка паддингов.
+	TableGroupRole = 2
+	// Область заголовка в мобильной платформе.
+	MobileTitleAreaRole = 3
+	// Группа, содержащая контент страницы.
+	PageContentRole = 4
+}
+
+enum HippoLayouterEdge
+{
+	Left = 0
+	Top = 1
+	Right = 2
+	Bottom = 3
+	None = 4
+	Auto = 5
+}
+
+enum HippoLayouterMenuElementRepresentation
+{
+	Text = 0
+	Picture = 1
+	TextPicture = 2
+}
+
+enum HippoLayouterCategory
+{
+	MainLayouter as "Main" = 0
+	Title as "Title" = 1
+	AlignedTitle as "AlignedTitle" = 2
+	ExtTooltip as "ExtTooltip" = 3
+	ShowData as "ShowData" = 4
+	WidthDependedHeight as "WidthDependedHeight" = 5
+	HorStretchPriority as "HorStretchPriority" = 6
+	HorCompressPriority as "HorCompressPriority" = 7
+	VerCompressPriority as "VerCompressPriority" = 8
+	Spacing as "Spacing" = 9
+	NoCalcHorContent as "NoCalcHorContent" = 10
+	NoCalcVerContent as "NoCalcVerContent" = 11
+	AlwaysVerticalAlign as "AlwaysVerticalAlign" = 12
+	Align as "Align" = 13
+	Primary as "Primary" = 14
+	AutoChangeVAlign as "AutoChangeVAlign" = 15
+	AutoChangeRowsCount as "AutoChangeRowsCount" = 16
+	ContentStretchableMode as "ContentStretchableMode" = 17
+	ContentIndepended as "ContentIndepended" = 18
+	BehaviorIcon as "BehaviorIcon" = 19
+	MasterColumn as "MasterColumn" = 20
+	SlaveColumn as "SlaveColumn" = 21
+	HasSingleElement as "HasSingleElement" = 22
+	Layered as "Layered" = 23
+	LinkToAnchor as "LinkToAnchor" = 24
+	FullScreen as "FullScreen" = 25
+	Anchor as "Anchor" = 26
+	Splitter as "Splitter" = 27
+	Sticky as "Sticky" = 28
+	SlaveChangeVAlign as "SlaveChangeVAlign" = 29
+	NoHorStretchable as "NoHorStretchable" = 30
+	NoVerStretchable as "NoVerStretchable" = 31
+	CloseBtnImage as "CloseBtnImage"  = 32
+	ChangeHeightOnChangeData as "ChangeHeightOnChangeData" = 33
+	SlaveVisibility as "SlaveVisibility" = 34
+	AmpersandIsData as "AmpersandIsData" = 35
+	PostGeneratorSizesInDLU as "PostGeneratorSizesInDLU" = 36
+	MobileLeftCaption as "MobileLeftCaption" = 37
+	MobileRightCaption as "MobileRightCaption" = 38
+	MobileAutoGeneratedCloseButton as "MobileAutoCloseButton" = 39
+	MobileSpecialRightAlign as "MobileSpecialRightAlign" = 40
+	MobileNoMobileTransformation as "MobileNoMobileTransformation" = 41
+	MobileSeparatedColumn as "MobileSeparatedColumn" = 42
+	Last = 43
+}
+
+enum ColumnMode
+{
+	TextField as "Text" = 0
+	InputField as "Input" = 1
+	CheckBoxField as "Check" = 3
+	ImageField as "Image" = 4
+}
+
+enum LogicGroupInternalRepresentation
+{
+	None = 0 // Нет отображения. Маленький заголовок в 8.3
+	NoneBigTitle = 1 // Нет отображения. Большой заголовок в 8.3
+	GroupBox = 2 // Рамка группы. Не используется в новом интерфейсе (8.3).
+	Line = 3 // Линия. Если есть заголовок, то линия рисуется как его продолжение.
+	// Не используется в новом интерфейсе (8.3).
+	Margin = 4 // "Интеллектуальные отступы". В остальном соответствуют eIRNone.
+	LeftLine = 5 // Линия слева. Используется в новом интерфейсе (8.3) как замена рамки группы.
+	MobileMargin = 6 // Выделенная отступами группа интерфейса мобильной платформы.
+	MobileMarginLeftLine = 7 // Выделенная отступами и линией слева группа интерфейса мобильной платформы.
+}
+
+enum ButtonPictureLocation
+{
+	Auto = 0
+	Left = 1
+	Right = 2
+}
+
+enum SearchOnInputForbiddenMode
+{
+	Allow = 0
+	Forbidden = 1
+	Check = 2
+}
+
+enum ButtonShape
+{
+	Auto = 0
+	Usual = 1
+	Oval = 2
+}
+
+enum ButtonShapeRepresentation
+{
+	Auto = 0
+	Always = 1
+	WhenActive = 2
+	None = 3
+}
+
+enum StretchableMode
+{
+	eNoStretchable as "No" = 0
+	eHorStretchable as "Hor" = 1
+	eVerStretchable as "Ver" = 2
+	eHorVerStretchable as "Any" = 3
+}
+
+//TODO from controlEnums.cpp
+enum EnterButtonBehaviour
+{
+	DefaultButton = 0
+	ControlNavigation = 1
+}
+
+//TODO from mngCoreEnums
+enum InputByStringRunMode
+{
+	Directly = 0
+	Background = 1
+}
+
+class VirtualGridElementDescription
+{
+	int length
+	int minLengthWithNormalPriority
+	int minLengthWithStretchPriority
+	int maxLengthWithNormalPriority
+	int maxLengthWithCompressPriority
+	int narrowStandardLength
+	int wideStandardLength
+	int standardLength
+	int slavePadding
+	BitSet categoriesHolder
+	String additionalData = ""
+	op void setMasterSlaveName(boolean master, String name) {
+		if (additionalData.isEmpty()) {
+			if (master) {
+				additionalData = ILayoutConstants.kHLMasterNamePrefix + name;
+			} else {
+				additionalData = ILayoutConstants.kHLSlaveNamePrefix + name;
+			}
+			return;
+		}
+
+		var otherName = "";
+		var otherNamePos = -1;
+		if (master) {
+			otherNamePos = additionalData.indexOf(ILayoutConstants.kHLSlaveNamePrefix);
+		} else {
+			otherNamePos = additionalData.indexOf(ILayoutConstants.kHLMasterNamePrefix);
+		}
+
+		if (otherNamePos == -1) {
+			if (master) {
+				additionalData = ILayoutConstants.kHLMasterNamePrefix + name;
+			} else {
+				additionalData = ILayoutConstants.kHLSlaveNamePrefix + name;
+			}
+			return;
+		}
+
+		if (master) {
+			otherNamePos += ILayoutConstants.kHLSlaveNamePrefix.length();
+		} else {
+			otherNamePos += ILayoutConstants.kHLMasterNamePrefix.length();
+		}
+
+		var thisNamePos = -1;
+		if (master) {
+			thisNamePos = additionalData.indexOf(ILayoutConstants.kHLSlaveNamePrefix);
+		} else {
+			thisNamePos = additionalData.indexOf(ILayoutConstants.kHLMasterNamePrefix);
+		}
+
+		if (thisNamePos != -1 && thisNamePos > otherNamePos) {
+			otherName = additionalData.substring(otherNamePos, thisNamePos);
+		} else {
+			otherName = additionalData.substring(otherNamePos);
+		}
+
+		if (master) {
+			additionalData = ILayoutConstants.kHLMasterNamePrefix + name + ILayoutConstants.kHLSlaveNamePrefix +
+				otherName;
+		} else {
+			additionalData = ILayoutConstants.kHLSlaveNamePrefix + name + ILayoutConstants.kHLMasterNamePrefix +
+				otherName;
+		}
+	}
+	op void setCategory(HippoLayouterCategory category, boolean flag) {
+		if (categoriesHolder === null) {
+			categoriesHolder = new java.util.BitSet()
+		}
+
+		if (flag) {
+			categoriesHolder.set(category.value)
+		} else {
+			categoriesHolder.clear(category.value)
+		}
+	}
+	op boolean checkCategory(HippoLayouterCategory category) {
+		if (categoriesHolder === null) {
+			return false;
+		} else {
+			return categoriesHolder.get(category.value)
+		}
+	}
+}
+
+class VirtualColumn
+{
+	contains VirtualGridElementDescription description
+}
+
+class VirtualRow
+{
+	contains VirtualGridElementDescription description
+}
+
+enum TypeCategory
+{
+	eAllTypes = 0 // Все типы.
+	eFormPropertyTypes = 1 // Типы, которые могут быть реквизитами формы.
+	eFormControllerTypes = 2 // Типы, которые могут быть основными реквизитами формы.
+	eEditTypes = 3 // Типы, которые могут отображаться в ЭУ поле ввода. 
+	eListTypes = 4 // Списковые типы.
+	eEnumTypes = 5 // Перечисления.
+	eRefTypes = 6 // Ссылочные    типы.
+	eClientTypes = 7 // Типы, доступные на тонком клиенте.
+	eFormSerializableTypes = 8 // Типы свойств, значения которых могут сериализоваться в форме.
+	eFormNestedPropertyDisabledTypes = 9 // Типы, которые запрещены для вложенных реквизитов формы.
+	eTabularPartTypes = 10 // Табличные части.
+	eRecordSetTypes = 11 // Наборы записей.
+	eMobileAppFilterTypes = 12 // Типы, доступные в мобильном приложении
+}
+
+enum HippoLayCommandBarLocation
+{
+	InForm = 0 // В форме.
+	FormTop = 1 // Сверху формы.
+	FormBottom = 2 // Снизу формы.
+	LeftCaption = 3 // Слева в заголовке (мобильное приложение).
+	RightCaption = 4 // Справа в заголовке (мобильное приложение).	
+}
+
+/**
+ * Вариант интерфейса клиентского приложения
+ */
+enum ClientInterfaceVariant
+{
+	DontSpecific = 0
+	Old = 1
+	ClassicNotManaged = 2
+	ClassicManaged = 4
+	TaxiCompact = 8
+	Taxi = 16
+	TaxiMobile = 32
+}
+
+enum ClientOSInfo
+{
+	eCOSUnknown = 0
+	eCOSWindows = 1
+	eCOSLinux = 2
+	eCOSMacOS = 3
+	eCOSiOS = 4
+	eCOSAndroid = 5
+	eCOSWindowsRuntime = 6
+}
+
+enum TabOrientation
+{
+	undefined = 0
+	topBottom = 1
+	leftRight = 2
+	swype = 3
+}
+
+enum MobileOS
+{
+	IOS
+	Android
+	WinPhone
+}
+
+enum MobileRowAffinity
+{
+	Inside = 0 // Элемент может располагаться только в строке.
+	Outside = 1 // Элемент может располагаться и внутри и вне строки. Но прилагаются максимальные усилия, что бы он оказался вне.
+	Both = 2 // Элемент может располагаться и внутри и вне строки. По умолчанию вне, но без фанатизма.
+}
+
+enum IV8Style
+{
+	eTextFont = 0
+	eBorderColor = 1
+	eFormBkgrndColor = 2
+	eFormTextColor = 3
+	eAutoTextFont = 4
+	eAutoEditTextColor = 5
+	eAutoEditBkgrndColor = 6
+	eAutoHeaderTextFont = 7
+	eAutoEditTextFont = 8
+	eAutoFooterTextFont = 9
+}
+
+enum ScrollMode
+{
+	eScrollNone   = 0 // Не показывать
+	eScrollAlways = 1 // Показывать всегда
+	eScrollAuto   = 2 // Автоматически показывать при соответсвующем размере текста
+}
+
+enum Appearance
+{
+	None = 0
+	PopUp = 1
+	ExtTooltip = 2
+}
+
+enum Role
+{
+	NoSpecialRole // Обычная панель, не требующая специальной обработки.
+	PageRole // Группа выполняющая роль cтраницы.
+}
+
+class MobilePreviewInfo
+{
+	ClientOSInfo platform // Мобильная операционная система.
+	LFMobileDeviceKind deviceKind // Вид устройства. 
+	int deviceHeightInPixels // Высота экрана устройства в пикселях.
+	int deviceWidthInPixels // Ширина экрана устройства в пикселях.
+	int dpi // DPI устройства.
+	boolean hasSystemBar // Для Android и Windows девайсов, у которых нет экранных кнопок
+	Font defFont // Шрифт по умолчанию.
+	int aveCharWidth // Средняя ширина символа.
+	int aveCharHeight // Средняя ширина символа.
+	boolean retina // Дисплей относится к категории Retina. Только для platform == eCOSiOS. 
+	MobileDataTransferTechnology tech // Протокол передачи данных по мобильной сети.
+	String skinId // Идентификатор "шкурки".
+}
+
+/* Тип используемого лайоутера. */
+enum LFLayouterType
+{
+	eLFLTLFL = 0
+	eLFLTHippo
+}
+
+/* Вид мобильного устройства. */
+enum LFMobileDeviceKind
+{
+	eLFMDKPhone = 0 // Смартфон.
+	eLFMDKPad = 1 // Планшет.
+}
+
+/* Протокол передачи данных по мобильной сети */
+enum MobileDataTransferTechnology
+{
+	eMDTT2G = 0 // 2G / Edge
+	eMDTT3G = 1 // 3G.
+	eMDTTLTE = 2 // LTE (4G).
+	eMDTTNone = 3
+}
+
+enum DeviceRotateMode
+{
+	eDRM_Auto = 0
+	eDRM_Horzontal
+	eDRM_Vertical
+}
+
+/* Indents, standard widths and height */
+enum IndentKind
+{
+	eIKStatusLineHeight = 0
+	eIKSystemBarHeight
+	eIKTitleHeight
+	eIKFormMarginLeft
+	eIKFormMarginTop
+	eIKFormMarginRight
+	eIKFormMarginBottom
+}
+
+class FormPictureCollection
+{
+	contains LayoutFormPicture[] pictures
+}
+
+class LayoutFormPicture
+{
+	int width
+	int height
+	Uuid pictureId
+}

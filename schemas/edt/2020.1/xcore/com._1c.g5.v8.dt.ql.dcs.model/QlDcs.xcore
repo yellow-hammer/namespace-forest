@@ -1,0 +1,107 @@
+@GenModel(loadInitialization="false", literalsInterface="true", nonNLSMarkers="true", prefix="QlDcs", copyrightText="Copyright (C) 2013, 1C", updateClasspath="false",
+	featureDelegation="Reflective", rootExtendsClass="com._1c.g5.v8.bm.core.BmObject"
+)
+@Ecore(nsPrefix="qldcs", nsURI="http://g5.1c.ru/v8/dt/ql/dcs/model")
+
+package com._1c.g5.v8.dt.ql.dcs.model
+
+import com._1c.g5.v8.dt.ql.model.QuerySchemaExpression
+import com._1c.g5.v8.dt.mcore.TypeDescription
+import com._1c.g5.v8.dt.ql.model.QuerySchemaNestedQuery
+import com._1c.g5.v8.dt.ql.model.AbstractQuerySchemaTable
+import com._1c.g5.v8.dt.ql.model.QuerySchemaQuerySourceJoin
+import com._1c.g5.v8.dt.ql.model.AbstractQuerySchemaQuerySourceJoin
+import com._1c.g5.v8.dt.ql.model.QuerySchemaOperator
+import com._1c.g5.v8.dt.ql.model.QuerySchemaSelectQuery
+import com._1c.g5.v8.dt.ql.dcs.model.util.QlDcsUtil
+import org.eclipse.emf.common.util.DelegatingEList.UnmodifiableEList
+
+
+class FilterCompositionDataQuerySchema
+{
+	contains QuerySchemaExpression[] expressions
+}
+
+class SelectFieldsCompositionDataQuerySchema
+{
+	contains QuerySchemaExpression[] expressions
+}
+
+class DcsQuerySchemaOperator extends QuerySchemaOperator
+{
+	contains DcsExtensionPart[] extensions
+}
+
+class DcsQuerySchemaSelectQuery extends QuerySchemaSelectQuery
+{
+	contains DcsExtensionPart[] extensions
+	
+	op CharacteristicCompositionDataQuerySchema[] characteristicsDcs() {
+		return new UnmodifiableEList(QlDcsUtil.getExtensionItems(this, typeof(CharacteristicCompositionDataQuerySchema)))
+	}
+	
+	op SelectFieldsCompositionDataQuerySchema[] selectFieldsDcs() {
+		return new UnmodifiableEList(QlDcsUtil.getExtensionItems(this, typeof(SelectFieldsCompositionDataQuerySchema)))
+	}
+	
+	op FilterCompositionDataQuerySchema[] filtersDcs() {
+		return new UnmodifiableEList(QlDcsUtil.getExtensionItems(this, typeof(FilterCompositionDataQuerySchema)))
+	}
+}
+
+abstract class DcsExtensionPart
+{
+	//dcs extensions -> filter, select fields and characteristics
+}
+
+class DcsExtensionPartFilter extends DcsExtensionPart
+{
+	contains FilterCompositionDataQuerySchema filters //отбор //"Где" для СКД
+}
+
+class DcsExtensionPartSelectFields extends DcsExtensionPart
+{
+	contains SelectFieldsCompositionDataQuerySchema fields //"Выбрать " для СКД
+}
+
+class DcsExtensionPartCharacteristics extends DcsExtensionPart
+{
+	contains CharacteristicCompositionDataQuerySchema characteristics //{Характеристики} для СКД
+}
+
+class CharacteristicCompositionDataQuerySchema
+{
+	contains AbstractQuerySchemaTable[] types
+	contains CharacteristicTypesAndValues characteristicTypes
+	contains QuerySchemaExpression keyField
+	contains QuerySchemaExpression nameField
+	contains QuerySchemaExpression valueTypeField
+	contains CharacteristicTypesAndValues characteristicValues
+	contains QuerySchemaExpression objectField
+	contains QuerySchemaExpression typeField
+	contains QuerySchemaExpression valueField
+	
+	op TypeDescription getType()
+	{
+		QlDcsUtil::getTypeDescriptionForCharacteristic(this)
+	}
+}
+
+class CharacteristicTypesAndValues
+{
+	contains AbstractQuerySchemaTable table
+	contains QuerySchemaNestedQuery query
+	
+	op boolean isTable()
+	{
+		return getTable() !== null
+	}
+}
+
+class QuerySchemaQueryGroupSourceJoin extends AbstractQuerySchemaQuerySourceJoin
+{
+	contains QuerySchemaQuerySourceJoin[] joins 
+}
+
+
+

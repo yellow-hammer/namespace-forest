@@ -1,0 +1,134 @@
+@GenModel(nonNLSMarkers="true", prefix="Planner", copyrightText="Copyright (C) 2016, 1C", updateClasspath="false", 
+	featureDelegation="Reflective", rootExtendsClass="com._1c.g5.v8.bm.core.BmObject", rootExtendsInterface="com._1c.g5.v8.bm.core.IBmObject"
+)
+@Ecore(nsPrefix="planner", nsURI="http://g5.1c.ru/v8/dt/planner/model")
+
+package com._1c.g5.v8.dt.planner.model
+
+import com._1c.g5.v8.dt.chart.model.timescale.TimeScale
+import com._1c.g5.v8.dt.chart.model.timescale.TimeScaleUnitType
+import com._1c.g5.v8.dt.mcore.Font
+import com._1c.g5.v8.dt.mcore.LocalStringMapEntry
+import com._1c.g5.v8.dt.mcore.Value
+import com._1c.g5.v8.dt.mcore.Color
+import com._1c.g5.v8.dt.mcore.Date
+import com._1c.g5.v8.dt.mcore.Picture
+import com._1c.g5.v8.dt.mcore.Uuid
+
+enum PlannerItemsTimeRepresentation
+{
+	DontDisplay = 0
+	BeginTime = 1
+	BeginAndEndTime = 2
+}
+
+class PlannerRepresentationPeriod
+{
+	Date begin
+	Date end
+}
+
+class PlannerDimensionItem
+{
+	contains Value value
+	String text
+	contains Color borderColor
+	contains Color backColor
+	contains Color textColor
+	contains Font font
+}
+
+class PlannerDimension
+{
+	contains Value value
+	String text
+	contains Color borderColor
+	contains Color backColor
+	contains Color textColor
+	contains Font font
+	contains PlannerDimensionItem[] items
+}
+
+class PlannerBackgroundInterval
+{
+	Date begin
+	Date end
+	contains Color color
+	contains StringToStringMap[] dimensionValues
+}
+
+class PlannerItemScheduleWeekDays
+{
+	String weekDays
+}
+
+class PlannerItemScheduleMonths
+{
+	String months
+}
+
+class PlannerItemSchedule
+{
+	Date endDate
+	int dayInMonth
+	int weekDayInMonth
+	int daysRepeat
+	int weeksRepeat
+	int monthsRepeat
+	int yearsRepeat
+	int repeatCount
+	contains PlannerItemScheduleWeekDays weekDays
+	contains PlannerItemScheduleMonths months
+}
+
+class StringToStringMap wraps java.util.Map$Entry
+{
+	String[1] key
+	String[1] value
+}
+
+class PlannerItem
+{
+	contains Value value
+	contains Picture picture
+	Date begin
+	Date end
+	String text
+	String tooltip
+	contains Color borderColor
+	contains Color textColor
+	contains Color backColor
+	contains Font font
+	contains PlannerItemSchedule schedule
+	contains StringToStringMap[] dimensionValues
+	contains PlannerItem[] replacementItems
+	Date replacementDate
+	boolean deleted
+	Uuid itemId
+}
+
+class PlannerSettings
+{
+	contains PlannerItem[] items
+	boolean alignItemBoundariesByTimeScale
+	boolean showWrappedHeaders
+	boolean showWrappedTimeScaleHeaders
+	boolean showCurrentDate
+	contains LocalStringMapEntry[] wrappedTimeScaleHeaderFormat
+	int timeScaleWrapBeginIndent
+	int timeScaleWrapEndIndent 
+	int periodicVariantRepetition
+	TimeScaleUnitType periodicVariantUnit 
+	contains Color borderColor
+	contains Color lineColor
+	contains Color backColor
+	contains Color textColor
+	contains Font font
+	Date beginOfRepresentationPeriod
+	Date endOfRepresentationPeriod
+	PlannerItemsTimeRepresentation itemsTimeRepresentation
+	contains TimeScale timeScale
+	contains PlannerDimension[] dimensions
+	contains PlannerRepresentationPeriod[] periods
+	contains PlannerBackgroundInterval[] backIntervals
+}

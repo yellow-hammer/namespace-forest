@@ -1,0 +1,35 @@
+@GenModel(loadInitialization="false", literalsInterface="true", nonNLSMarkers="true", prefix="PlannerAef",
+    copyrightText="Copyright (C) 2016, 1C", updateClasspath="false")
+@Ecore(nsPrefix="PlannerAef", nsURI="http://g5.1c.ru/v8/aef/planner")
+
+package com._1c.g5.v8.dt.form.ui.planner.aef.viewModels
+
+import com._1c.g5.v8.dt.ui.aef.viewModels.IGridItem
+import com._1c.g5.v8.dt.ui.aef.viewModels.GridColumnViewModel
+import org.eclipse.swt.graphics.Image
+
+type Image wraps Image
+
+class PlannerDimensionGridItem extends IGridItem
+{
+	String value
+	String text
+	String textColor
+	String backColor
+	String borderColor
+	String font
+	op Image getImage(GridColumnViewModel column) {
+		null
+	}
+	op String getText(GridColumnViewModel column) {
+		switch (column.index) {
+			case 0: value
+			case 1: text
+			case 2: textColor
+			case 3: backColor
+			case 4: borderColor
+			case 5: font
+			default: throw new IllegalArgumentException("The given column index is out of bound")
+		}
+	}
+}

@@ -1,0 +1,34 @@
+@GenModel(loadInitialization="false", literalsInterface="true", nonNLSMarkers="true", prefix="MdClassExtensionType",
+	copyrightText="Copyright (C) 2016, 1C", updateClasspath="false", featureDelegation="Reflective",
+	rootExtendsClass="com._1c.g5.v8.bm.core.BmObject", rootExtendsInterface="com._1c.g5.v8.bm.core.IBmObject")
+@Ecore(nsPrefix="mdclassExtensionType", nsURI="http://g5.1c.ru/v8/dt/metadata/mdclass/extension/type")
+package com._1c.g5.v8.dt.metadata.mdclass.^extension.^type
+
+/*
+ * Metadata property extension type defining whether property may be extended or marked as checked.
+ */
+enum MdPropertyType
+{
+	/* Property value may be used as normal value. */
+	Normal
+	/* Property value may be used to check extension runtime plug-in ability. */
+	Checkable
+	/* Property value may be used to modify original property value in result runtime configuration. */
+	Extensible
+	/* Property value mey either be used to check extension runtime plug-in ability or may be used to
+	 * modify original property value in result runtime configuration. */
+	CheckableOrExtensible
+}
+
+/*
+ * Metadata property extension state defining whether property was actually extended or marked as checked.
+ */
+enum MdPropertyState
+{
+	/* Property value is used as normal value, i.e. is not used in configuration extension runtime. */
+	None
+	/* Property value is used to check extension runtime plug-in ability. */
+	Checked
+	/* Property value is used to modify original property value in result runtime configuration. */
+	Extended
+}

@@ -1,0 +1,522 @@
+@GenModel(prefix="Compare", loadInitialization="false", literalsInterface="true", nonNLSMarkers="true",
+    copyrightText="Copyright (C) 2017, 1C", updateClasspath="false",
+    featureDelegation="Reflective", rootExtendsClass="com._1c.g5.v8.bm.core.BmObject", rootExtendsInterface="com._1c.g5.v8.bm.core.IBmObject")
+@Ecore(nsPrefix="compare", nsURI="http://g5.1c.ru/v8/dt/compare/model")
+package com._1c.g5.v8.dt.compare.model
+
+import com._1c.g5.v8.dt.compare.model.IMatchingSymlinks
+import com._1c.g5.v8.dt.compare.model.ComparisonFlags
+import com._1c.g5.v8.dt.compare.model.ComparisonTreeNodeReadOnlyChildrenList
+import org.eclipse.emf.ecore.EClass
+import org.eclipse.emf.ecore.EcoreFactory
+import org.eclipse.emf.ecore.EStructuralFeature
+import java.util.EnumSet
+
+type ComparisonFlags wraps ComparisonFlags
+create
+{
+    if (it !== null) ComparisonFlags::fromBase64(it)
+}
+convert
+{
+    if (it !== null) it.toBase64()
+}
+
+interface IMatchingSymlinks wraps IMatchingSymlinks
+{}
+
+type UniqueSymlink wraps UniqueSymlink
+create
+{
+    if (it !== null) UniqueSymlink::fromString(it)
+}
+convert
+{
+    if (it !== null) it.toString()
+}
+
+abstract class ComparisonTreeNode extends IMatchingSymlinks
+{
+    ComparisonFlags comparisonFlags
+
+    // the parent is not expected to exist without permanent child; for now this flag is used only for external properties
+    boolean permanentChild
+
+    refers BmTopComparisonNode[] bmTopChildren opposite parent
+    contains ContainmentComparisonNode[] containmentChildren opposite parent
+
+    contains MergeSettings mergeSettings
+    contains CustomNodeSettings customSettings
+
+    // non-null if node is built for the specified feature
+    contains RelatedFeature relatedFeature
+
+    Integer eClassId
+
+    // node's final position in many-feature array after merge finished
+    Integer manyFeaturePosition
+
+    // node's left neighbour in many-feature array
+    contains ManyFeatureNodeNeighbour leftNeighbour
+
+    // G5V8DT-10450 generalize for 3-way merge case
+    boolean mainObjectToBeDeleted
+    boolean otherObjectToBeAdded
+    boolean oneSideParent
+
+    // abstract
+    op ComparisonTreeNode getParent()
+
+    /**
+     * Returns list of all node's children, containment- and bmTop ones.
+     */
+    op ComparisonTreeNode[] getChildren()
+    {
+    	return new ComparisonTreeNodeReadOnlyChildrenList(this)
+    }
+
+    /**
+     * Tells whether the node has its children.
+     */
+    op boolean hasChildren()
+    {
+        return !containmentChildren.isEmpty() || !bmTopChildren.isEmpty()
+    }
+
+    /**
+     * Tells whether the node contains an object only on one side - MAIN or OTHER.
+     */
+    op boolean isOneSideNode()
+
+	/**
+	 * Returns comparison side to which node relates.
+	 * Non-null only if this is one-side node, see {@link #isOneSideNode()}.
+	 */
+	op ComparisonSide getNodeSide()
+
+    /**
+     * Tells whether the node has an ancestor object.
+     */
+    op boolean hasAncestor()
+}
+
+class BmTopComparisonNode extends ComparisonTreeNode
+{
+    String mainSymlink
+    String otherSymlink
+    String commonAncestorSymlink
+
+    ComparisonNodeStatus comparisonStatus
+
+    refers ComparisonTreeNode parent opposite bmTopChildren
+
+    /**
+     * The depth of the node in the hierarchy of BmTop ones.
+     * It tells the count of BmtTop parents of the node up to the root one.
+     */
+    int depth
+
+    // The alternative tree navigation by only BmTop nodes.
+    refers BmTopComparisonNode[] bmTopDescendants opposite bmTopAncestor
+    refers BmTopComparisonNode bmTopAncestor opposite bmTopDescendants
+    
+    // not null only if main/other object is under support
+    contains ObjectOnSupport mainObjectOnSupport
+    contains ObjectOnSupport otherObjectOnSupport
+
+    op String getSymlink(ComparisonSide side)
+    {
+        switch (side)
+        {
+            case MAIN:
+                return mainSymlink
+            case OTHER:
+                return otherSymlink
+            case COMMON_ANCESTOR:
+                return commonAncestorSymlink
+        }
+        throw new IllegalArgumentException("Bad comparison side given: " + side)
+    }
+
+    op boolean isOneSideNode()
+    {
+        return (mainSymlink === null && otherSymlink !== null) || (otherSymlink === null && mainSymlink !== null)
+    }
+
+	op ComparisonSide getNodeSide()
+	{
+        if (!isOneSideNode())
+        {
+            return null
+        }
+        if (mainSymlink !== null)
+        {
+            return ComparisonSide.MAIN
+        }
+        return ComparisonSide.OTHER
+	}
+
+    op boolean hasAncestor()
+    {
+        return commonAncestorSymlink !== null
+    }
+}
+
+enum ContainmentComparisonNodeClassification 
+{
+	SINGLE_FEATURE,
+	MANY_FEATURE,
+	COLLECTION_ELEMENT,
+	CONTAINMENT,
+	REFERENCE,
+    VALUE			
+}
+
+type ClassificationEnumSet wraps EnumSet<ContainmentComparisonNodeClassification>
+
+class ContainmentComparisonNode extends ComparisonTreeNode
+{
+    container ComparisonTreeNode parent opposite containmentChildren
+
+    boolean ancestorObjectExists  // don't use directly, call hasAncestor() instead
+    boolean oneSideNode
+    ComparisonSide origin  // don't use directly, call getNodeSide() instead
+
+    // paths to closest bm-top nodes via main/other/ancestor compared objects
+    int[] mainNodePath
+    int[] otherNodePath
+    int[] ancestorNodePath
+
+    // non-null if there is bm-related object from the corresponding side
+    Long mainMatchedBmId
+    Long otherMatchedBmId
+    Long ancestorMatchedBmId
+
+    UniqueSymlink providedMainSymlink
+    UniqueSymlink providedOtherSymlink
+    UniqueSymlink providedAncestorSymlink
+
+    Integer mainOrder
+    Integer otherOrder
+    Integer ancestorOrder
+    
+    ClassificationEnumSet classification
+
+    op String getMainSymlink()
+    {
+        return null
+    }
+
+    op String getOtherSymlink()
+    {
+        return null
+    }
+
+    op String getCommonAncestorSymlink()
+    {
+        return null
+    }
+
+    op String getSymlink(ComparisonSide side)
+    {
+        return null
+    }
+
+    op int[] getNodePath(ComparisonSide side)
+    {
+        switch (side)
+        {
+            case MAIN:
+                return mainNodePath
+            case OTHER:
+                return otherNodePath
+            case COMMON_ANCESTOR:
+                return ancestorNodePath
+        }
+        throw new IllegalArgumentException("Bad comparison side given: " + side)
+    }
+
+    op Long getMatchedBmId(ComparisonSide side)
+    {
+    	switch (side)
+        {
+            case MAIN:
+                return mainMatchedBmId
+            case OTHER:
+                return otherMatchedBmId
+            case COMMON_ANCESTOR:
+                return ancestorMatchedBmId
+        }
+        throw new IllegalArgumentException("Bad comparison side given: " + side)
+    }
+
+    op void setMatchedBmId(ComparisonSide side, Long bmId)
+    {
+    	switch (side)
+        {
+            case MAIN:
+                mainMatchedBmId = bmId
+            case OTHER:
+                otherMatchedBmId = bmId
+            case COMMON_ANCESTOR:
+                ancestorMatchedBmId = bmId
+            default:
+                throw new IllegalArgumentException("Bad comparison side given: " + side)
+        }
+    }
+
+    op Integer getOrder(ComparisonSide side)
+    {
+        switch (side)
+        {
+	        case MAIN:
+	            return mainOrder
+	        case OTHER:
+	            return otherOrder
+	        case COMMON_ANCESTOR:
+	            return ancestorOrder
+        }
+        throw new IllegalArgumentException("Bad comparison side given: " + side)
+    }
+
+    op void setOrder(ComparisonSide side, Integer order)
+    {
+        switch (side)
+        {
+	        case MAIN:
+	             mainOrder = order
+	        case OTHER:
+	             otherOrder = order
+	        case COMMON_ANCESTOR:
+	             ancestorOrder = order
+	        default:
+	            throw new IllegalArgumentException("Bad comparison side given: " + side)
+        }
+    }
+
+    op UniqueSymlink getProvidedSymlink(ComparisonSide side)
+    {
+        switch (side)
+        {
+	        case MAIN:
+	            return providedMainSymlink
+	        case OTHER:
+	            return providedOtherSymlink
+	        case COMMON_ANCESTOR:
+	            return providedAncestorSymlink
+        }
+        throw new IllegalArgumentException("Bad comparison side given: " + side)
+    }
+
+    op ComparisonSide getNodeSide()
+    {
+        if (oneSideNode)
+        {
+            return origin
+        }
+        return null
+    }
+
+    op boolean hasAncestor()
+    {
+        return ancestorObjectExists
+    }
+}
+
+class RootComparisonNode extends BmTopComparisonNode, OrderChildrenComparisonNode
+{
+    // with parent == null
+}
+
+class ExternalPropertyComparisonNode extends BmTopComparisonNode
+{
+    String mainType
+    String otherType
+    String ancestorType
+
+    op String getQualifyingType(ComparisonSide side)
+    {
+        switch (side)
+        {
+        case MAIN:
+            return mainType
+        case OTHER:
+            return otherType
+        case COMMON_ANCESTOR:
+            return ancestorType
+        }
+        throw new IllegalArgumentException("Bad comparison side given: " + side)
+    }
+
+    /**
+     * Returns a surrogate EClass of the external property to be used in symbolic link conversion services.
+     *
+     * @param side the side of the external property
+     * @return the EClass or {@code null} if the object is missing or it's not possible to determine the EClass
+     */
+    op EClass getEClass(ComparisonSide side)
+    {
+        var String qualifyingType = getQualifyingType(side)
+
+        if (qualifyingType === null)
+        {
+            return null
+        }
+
+        var EClass eClass = EcoreFactory.eINSTANCE.createEClass()
+        eClass.setName(qualifyingType)
+        return eClass
+    }
+}
+
+class SolidResourceComparisonNode extends ExternalPropertyComparisonNode
+{
+}
+
+/**
+ * Class to store EStructuralFeature object.
+ */
+class RelatedFeature
+{
+    int featureId
+    int parentFeatureEClassId
+}
+
+/**
+ * Stores information about node's neighbour in a many-feature array.
+ */
+class ManyFeatureNodeNeighbour
+{
+    Long neighbourMainObjectId
+    Long neighbourNodeId
+
+    // filled only for non-containment arrays
+	UniqueSymlink neighbourMainSymlink
+}
+
+/**
+ * Merge rule for children ordering.
+ */
+class OrderChildrenMergeRule wraps java.util.Map$Entry
+{
+	/**
+	 * The many-feature identifying children to be ordered.
+	 */
+    refers EStructuralFeature key
+
+	/**
+	 * The merge rule to use on children ordering.
+	 */
+    MergeRule value
+}
+
+/**
+ * Nodes implementing this interface support ordering of their children.
+ */
+interface OrderChildrenComparisonNode
+{
+    contains OrderChildrenMergeRule[] orderMergeRules
+}
+
+/**
+ * Different node implementations can extend their settings via this interface.
+ */
+interface CustomNodeSettings
+{
+}
+
+class MergeSettings
+{
+	/**
+	 * The rule to be used during a merge process.
+	 * This rule could be changed by the user in case if {@link MergeSettings#isCanBeMerged} is true. The values
+	 * for overriding should be taken from the {@link MergeSettings#getAvailableMergeRules}
+	 */
+    MergeRule mergeRule
+
+    /**
+     * The list of merge rules available for the node.
+     */
+    MergeRule[] availableMergeRules
+
+	/**
+	 * Tells whether the node will be merged during the merge process using the corresponding merge rule.<br>
+	 * This setting could be changed by the user in case if {@link MergeSettings#isCanBeMerged} is true.
+	 */
+    boolean mustBeMerged
+
+	/**
+	 * Tells whether default merge settings obtained during the comparison process can be changed by the user.
+	 * In case if overriding is available, the user is able to change the merge flag via {@link MergeSettings#setMustBeMerged} as well
+	 * as to select the merge rule ({@link MergeSettings#setMergeRule}) from the available list of rules obtaibable via {@link MergeSettings#getAvailableMergeRules}.
+	 */
+    boolean canBeMerged
+
+	/**
+	 * Tells whether the node contains children excluded from merge.
+	 * More technically, this flag is true when the node contains canBeMerged-children that are not mustBeMerged.
+	 */
+    boolean haveChildrenExcludedFromMerge
+
+    /**
+     * Tells whether the merge rule set by the user and therefore shouldn't be changed
+     * by merge rule's building algorithms.
+     */
+    boolean mergeRuleSetByUser
+}
+
+enum ComparisonSide
+{
+    Main,
+    Other,
+    CommonAncestor
+}
+
+enum MergeRule
+{
+    GetFromOther,
+    DoNotMerge,
+    MergePrioritizingMain,
+    MergePrioritizingOther,
+    CustomMerge
+}
+
+enum ComparisonNodeStatus
+{
+    /**
+     * The node has not yet been compared.
+     */
+    Unfinished,
+
+    /**
+     * The node was compared but at least one of its children (recursively) is not.
+     */
+    HasUnfinishedChildren,
+
+    /**
+     * The node, as well as all of its children (recursively) were compared.
+     */
+    Finished
+}
+
+class ObjectOnSupport
+{
+	boolean canBeEdited
+	boolean canBeDeleted
+}
+
+/*
+ * The special class to get a target BmTopComparisonNode by other symlink if otherSymlink != mainSymlink
+ */
+class OtherSymlinkBmTopNodeId
+{
+	long nodeId
+}
+
+/*
+ * The special class to get a target BmTopComparisonNode by ancestor symlink if it is different from main and other symlinks
+ */
+class CommonAncestorSymlinkBmTopNodeId
+{
+	long nodeId
+}
