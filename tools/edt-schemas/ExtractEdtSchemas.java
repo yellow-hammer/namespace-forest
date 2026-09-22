@@ -85,8 +85,15 @@ public final class ExtractEdtSchemas {
 					}
 
 					String bundle = bundleName(jar);
+					Path bundleDir = xcoreDir.resolve(bundle).normalize();
 					for (String entry : xcoreEntries) {
-						Path target = xcoreDir.resolve(bundle).resolve(fileName(entry));
+						if (isSuspiciousArchiveEntry(entry)) {
+							throw new IOException("Bad archive entry: " + entry);
+						}
+						Path target = bundleDir.resolve(fileName(entry)).normalize();
+						if (!target.startsWith(bundleDir)) {
+							throw new IOException("Archive entry resolves outside target directory: " + entry);
+						}
 						Files.createDirectories(target.getParent());
 						try (InputStream in = file.getInputStream(file.getEntry(entry))) {
 							Files.copy(in, target, java.nio.file.StandardCopyOption.REPLACE_EXISTING);
@@ -235,6 +242,10 @@ public final class ExtractEdtSchemas {
 
 	private static String fileName(String entry) {
 		return entry.substring(entry.lastIndexOf('/') + 1);
+	}
+
+	private static boolean isSuspiciousArchiveEntry(String entry) {
+		return entry.contains("..") || entry.contains("\\");
 	}
 
 	private static String rootCause(Throwable error) {
