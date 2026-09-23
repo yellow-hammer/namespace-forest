@@ -87,12 +87,10 @@ public final class ExtractEdtSchemas {
 					String bundle = bundleName(jar);
 					Path bundleDir = xcoreDir.resolve(bundle).normalize();
 					for (String entry : xcoreEntries) {
-						if (isSuspiciousArchiveEntry(entry)) {
-							throw new IOException("Bad archive entry: " + entry);
-						}
+						// fileName отсекает только '/': на Windows '\' тоже разделитель, и '..' выводит наружу
 						Path target = bundleDir.resolve(fileName(entry)).normalize();
 						if (!target.startsWith(bundleDir)) {
-							throw new IOException("Archive entry resolves outside target directory: " + entry);
+							throw new IOException("Запись " + entry + " в " + jar + " ведёт за пределы " + bundleDir);
 						}
 						Files.createDirectories(target.getParent());
 						try (InputStream in = file.getInputStream(file.getEntry(entry))) {
@@ -242,10 +240,6 @@ public final class ExtractEdtSchemas {
 
 	private static String fileName(String entry) {
 		return entry.substring(entry.lastIndexOf('/') + 1);
-	}
-
-	private static boolean isSuspiciousArchiveEntry(String entry) {
-		return entry.contains("..") || entry.contains("\\");
 	}
 
 	private static String rootCause(Throwable error) {
