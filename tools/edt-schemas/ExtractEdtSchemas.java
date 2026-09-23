@@ -85,8 +85,13 @@ public final class ExtractEdtSchemas {
 					}
 
 					String bundle = bundleName(jar);
+					Path bundleDir = xcoreDir.resolve(bundle).normalize();
 					for (String entry : xcoreEntries) {
-						Path target = xcoreDir.resolve(bundle).resolve(fileName(entry));
+						// fileName отсекает только '/': на Windows '\' тоже разделитель, и '..' выводит наружу
+						Path target = bundleDir.resolve(fileName(entry)).normalize();
+						if (!target.startsWith(bundleDir)) {
+							throw new IOException("Запись " + entry + " в " + jar + " ведёт за пределы " + bundleDir);
+						}
 						Files.createDirectories(target.getParent());
 						try (InputStream in = file.getInputStream(file.getEntry(entry))) {
 							Files.copy(in, target, java.nio.file.StandardCopyOption.REPLACE_EXISTING);
