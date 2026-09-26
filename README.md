@@ -59,7 +59,7 @@ Workflow [`.github/workflows/update-schemas.yml`](.github/workflows/update-schem
 
 ## Лицензия
 
-`*.xsd` — авторские права **ООО «1С-Софт»**, не MIT. См. [LICENSE](LICENSE).
+`*.xsd`, `*.ecore`, `*.xcore` — авторские права **ООО «1С-Софт»**, не MIT. См. [LICENSE](LICENSE).
 
 ## Для разработчиков и ИИ
 
