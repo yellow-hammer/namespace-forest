@@ -26,7 +26,7 @@ concurrency:
 
 jobs:
   versions:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     timeout-minutes: 45
 
     permissions:
@@ -98,7 +98,7 @@ jobs:
   build:
     needs: versions
     if: needs.versions.outputs.count != '0'
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     timeout-minutes: 90
 
     permissions:
@@ -223,7 +223,7 @@ jobs:
   commit:
     needs: [versions, build]
     if: always() && needs.versions.outputs.count != '0'
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     timeout-minutes: 20
 
     permissions:
