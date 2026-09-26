@@ -279,3 +279,17 @@ jobs:
             echo "::error::Не извлечены: $(paste -sd ' ' /tmp/failed-versions.txt)"
             exit 1
           fi
+
+  keepalive:
+    if: github.event_name == 'schedule'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+
+    permissions:
+      actions: write
+
+    steps:
+      - name: Продлить расписание
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh api -X PUT "repos/$GITHUB_REPOSITORY/actions/workflows/update-schemas.yml/enable"

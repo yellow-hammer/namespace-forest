@@ -270,3 +270,17 @@ jobs:
           fi
           git commit -m "chore(schemas): схемы 1С:EDT $DONE"
           git push origin "HEAD:${GITHUB_REF_NAME}"
+
+  keepalive:
+    if: github.event_name == 'schedule'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+
+    permissions:
+      actions: write
+
+    steps:
+      - name: Продлить расписание
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh api -X PUT "repos/$GITHUB_REPOSITORY/actions/workflows/update-edt-schemas.yml/enable"
