@@ -31,7 +31,7 @@ schemas/
 scripts/edt/extract.sh 2026.1 "$LOCALAPPDATA/1C/1cedtstart/installations/1C_EDT 2026.1/1cedt"
 ```
 
-Состав плагинов берётся из `bundles.info` конкретной установки: в общем пуле p2 лежат сразу несколько версий EDT, и смешивать их нельзя. Обработанные версии перечислены в [`schemas/edt/processed-versions.json`](schemas/edt/processed-versions.json).
+Состав плагинов берётся из `bundles.info` конкретной установки: в общем пуле p2 лежат сразу несколько версий EDT, и смешивать их нельзя. Обработанные версии перечислены в [`schemas/edt/processed-versions.json`](schemas/edt/processed-versions.json). Обновление — workflow [`.github/workflows/update-edt-schemas.yml`](.github/workflows/update-edt-schemas.yml).
 
 ## Использование в экосистеме
 
