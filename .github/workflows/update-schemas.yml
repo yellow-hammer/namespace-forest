@@ -116,6 +116,7 @@ jobs:
           YARD_RELEASES_PWD: ${{ secrets.ONEC_PASSWORD }}
         run: |
           set +e
+          fail() { echo "::error::$PLATFORM_VERSION: $1"; echo "$PLATFORM_VERSION" >> /tmp/failed-versions.txt; }
           REPO_DIR=$(pwd)
 
           git config user.name  "github-actions[bot]"
@@ -150,7 +151,7 @@ jobs:
               echo "Попытка $ATTEMPT — дистрибутив не получен, пауза 20с…"; sleep 20
             done
             if [ "$STEP_OK" -ne 1 ]; then
-              echo "WARN: дистрибутив $PLATFORM_VERSION не скачан, пропускаем"
+              fail "дистрибутив не скачан"
               rm -rf "$OUTPUT_DIR" "$DISTR_DIR"; continue
             fi
 
@@ -171,7 +172,7 @@ jobs:
             else
               DEBS=$(find "$DISTR_DIR" -name '*.deb' | sort)
               if [ -z "$DEBS" ]; then
-                echo "ERROR: ни .run, ни .deb не найдены для $PLATFORM_VERSION"
+                fail "ни .run, ни .deb не найдены"
                 find "$DISTR_DIR" -type f | sed "s#$DISTR_DIR/##"
                 rm -rf "$OUTPUT_DIR" "$DISTR_DIR"; continue
               fi
@@ -184,7 +185,7 @@ jobs:
             IBCMD=$(find /opt/1cv8 /opt/1C -name 'ibcmd' -type f 2>/dev/null | sort -V | tail -1)
             IBSRV=$(find /opt/1cv8 /opt/1C -name 'ibsrv' -type f 2>/dev/null | sort -V | tail -1)
             if [ -z "$IBCMD" ] || [ -z "$IBSRV" ]; then
-              echo "ERROR: ibcmd/ibsrv не найдены после установки $PLATFORM_VERSION"
+              fail "ibcmd/ibsrv не найдены после установки"
               rm -rf "$OUTPUT_DIR" "$DISTR_DIR"; continue
             fi
 
@@ -213,7 +214,7 @@ jobs:
             kill "$IBSRV_PID" 2>/dev/null || true
             echo "HTTP /hs/xsd/dump: $HTTP_CODE ($(wc -c < "$JSON_OUT" 2>/dev/null || echo 0) байт)"
             if [ "$HTTP_CODE" != "200" ]; then
-              echo "ERROR: HTTP-сервис вернул $HTTP_CODE для $PLATFORM_VERSION"
+              fail "HTTP-сервис вернул $HTTP_CODE"
               head -c 500 "$JSON_OUT" 2>/dev/null; echo; cat /tmp/ibsrv.log
               rm -rf "$OUTPUT_DIR" "$DISTR_DIR" "$DB_DIR" "$DATA_DIR"; continue
             fi
@@ -223,7 +224,7 @@ jobs:
 
             XSD_COUNT=$(find "$OUTPUT_DIR" -name '*.xsd' | wc -l)
             if [ "$XSD_COUNT" -eq 0 ]; then
-              echo "ERROR: XSD не получены для $PLATFORM_VERSION"
+              fail "XSD не получены"
               rm -rf "$OUTPUT_DIR" "$DISTR_DIR" "$DB_DIR" "$DATA_DIR"; continue
             fi
 
@@ -231,7 +232,7 @@ jobs:
             SCHEMA_VERSION=$(grep -o '<xs:enumeration value="[0-9.]*"' "$ENUMS_XSD" \
               | grep -o '"[0-9.]*"' | tr -d '"' | sort -V | tail -1)
             if [ -z "$SCHEMA_VERSION" ]; then
-              echo "ERROR: FormatVersion не определён для $PLATFORM_VERSION"
+              fail "FormatVersion не определён"
               rm -rf "$OUTPUT_DIR" "$DISTR_DIR" "$DB_DIR" "$DATA_DIR"; continue
             fi
             SCHEMA_DIR="$REPO_DIR/schemas/designer/$SCHEMA_VERSION"
@@ -273,3 +274,22 @@ jobs:
           else
             echo "Все коммиты уже на origin."
           fi
+
+          if [ -s /tmp/failed-versions.txt ]; then
+            echo "::error::Не извлечены: $(paste -sd ' ' /tmp/failed-versions.txt)"
+            exit 1
+          fi
+
+  keepalive:
+    if: github.event_name == 'schedule'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+
+    permissions:
+      actions: write
+
+    steps:
+      - name: Продлить расписание
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh api -X PUT "repos/$GITHUB_REPOSITORY/actions/workflows/update-schemas.yml/enable"
