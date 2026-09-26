@@ -70,7 +70,7 @@ jobs:
               --app-filter "1C:Enterprise Development Tools" \
               --output-file /tmp/edt-versions.json
             # Версии вида 2026.1.x: берём все, старшие первыми
-            CANDIDATES=$(jq -r '[.. | strings | select(test("^[0-9]{4}[.][0-9]"))] | unique | reverse | .[]' /tmp/edt-versions.json)
+            CANDIDATES=$(jq -r '[.. | strings | select(test("^[0-9]{4}[.][0-9]"))] | unique | .[]' /tmp/edt-versions.json | sort -rV)
             echo "Доступно релизов EDT: $(echo $CANDIDATES | wc -w)"
           fi
 
