@@ -1,4 +1,4 @@
-name: Обновление схем 1С:EDT
+name: Обновление Ecore-схем 1С:EDT
 
 on:
   schedule:
@@ -272,7 +272,7 @@ jobs:
             echo "Схемы не изменились"
             exit 0
           fi
-          git commit -m "chore(schemas): схемы 1С:EDT $DONE"
+          git commit -m "chore(schemas): Ecore-схемы 1С:EDT $DONE"
           git push origin "HEAD:${GITHUB_REF_NAME}"
 
   keepalive:

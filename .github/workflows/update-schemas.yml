@@ -1,4 +1,4 @@
-name: Обновление XSD-схем платформы 1С
+name: Обновление XSD-схем 1С:Предприятие
 
 on:
   schedule:
@@ -96,7 +96,7 @@ jobs:
         if: steps.versions.outputs.count == '0'
         run: echo "Новых версий не найдено."
 
-      - name: Установить зависимости платформы 1С
+      - name: Установить зависимости 1С:Предприятие
         if: steps.versions.outputs.count != '0'
         run: |
           sudo apt-get update
@@ -247,7 +247,7 @@ jobs:
             if git diff --cached --quiet; then
               echo "Схемы формата $SCHEMA_VERSION не изменились."
             else
-              git commit -m "chore: XSD-схемы платформы 1С формата ${SCHEMA_VERSION} (из ${PLATFORM_VERSION})"
+              git commit -m "chore(schemas): XSD-схемы 1С:Предприятие формата ${SCHEMA_VERSION} (из ${PLATFORM_VERSION})"
               git push origin "HEAD:$GITHUB_REF_NAME" || echo "WARN: push не прошёл, повторим в финале"
             fi
           done
