@@ -27,7 +27,7 @@ concurrency:
 jobs:
   versions:
     runs-on: ubuntu-latest
-    timeout-minutes: 20
+    timeout-minutes: 45
 
     permissions:
       contents: read
