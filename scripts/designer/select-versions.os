@@ -1,7 +1,7 @@
 // Отбирает версии платформы из JSON yard: >= MIN_VERSION и еще не обработаны.
 // Параметры через переменные среды:
 //   YARD_JSON   - JSON от yard releases list
-//   PROCESSED   - schemas/processed-versions.json
+//   PROCESSED   - schemas/designer/processed-versions.json
 //   MIN_VERSION - нижняя граница (X.Y.Z)
 //   LIMIT       - максимум версий за прогон (0 - без ограничения)
 //   OUT_FILE    - куда записать отобранные версии (по строке)

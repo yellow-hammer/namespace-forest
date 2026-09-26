@@ -1,0 +1,32 @@
+---
+description: Конвейер метамодели 1С:EDT — update-edt-schemas.yml, scripts/edt
+globs: ".github/workflows/update-edt-schemas.yml,scripts/edt/**,schemas/edt/**"
+alwaysApply: false
+---
+
+# Конвейер метамодели EDT
+
+`.github/workflows/update-edt-schemas.yml` — cron по средам и ручной запуск: `versions`, `redump`, `batch_size`. Job'ы на `ubuntu-24.04`:
+
+1. `versions` — `yard releases list` приложения `1C:Enterprise Development Tools`; релизы по убыванию (`sort -rV`), на каждую линейку `ГГГГ.N` — старший. Без `redump` линейки из `schemas/edt/processed-versions.json` пропускаются.
+2. `build` — матрица по версиям, до 3 параллельно: Linux-дистрибутив через `yard releases get`, фильтры от оффлайн-дистрибутива к любому `Linux` → `1ce-installer-cli install all` → `bash scripts/edt/extract.sh <ГГГГ.N> <каталог установки>` → артефакт.
+3. `commit` — артефакты в `schemas/edt/<ГГГГ.N>/`, дата в реестр, один коммит в ветку запуска. Работает и при частично упавшей матрице.
+
+## extract.sh
+
+- Состав плагинов — из `configuration/org.eclipse.equinox.simpleconfigurator/bundles.info` установки: общий пул p2 содержит несколько версий EDT.
+- `xcore/<плагин>/` — `model/*.xcore` из jar. `ecore/` — `eINSTANCE` пакета из `plugin.xml`, сохранённый как XMI; имя файла — nsURI без схемы, `/` заменён на `.`: `g5.1c.ru.v8.dt.metadata.mdclass.ecore`; EMF и пакеты грузятся одним загрузчиком через рефлексию.
+- Пакет, класс которого не загрузился, пропускается с `Пакет … пропущен`. Ошибка — только если нет ни одной модели или ни одного пакета.
+- Результат собирается во временном каталоге и заменяет `schemas/edt/<версия>` целиком.
+- Локально: `scripts/edt/extract.sh 2026.1 "$LOCALAPPDATA/1C/1cedtstart/installations/1C_EDT 2026.1/1cedt"`.
+
+## Правила
+
+- Реестр: `ГГГГ.N` → дата извлечения. Патч-релиз уже обработанной линейки не пересобирается, хотя метамодель в патчах меняется: 2026.1.3 добавил литерал `CommandBarInGrid`. Обновление — ручной запуск с `versions=<полная версия>` и `redump`.
+- `versions` — полные номера: фильтр yard — регулярное выражение без якорей, по `2026.1` скачается самый ранний `2026.1.x`.
+- Версия без скачанного или установленного дистрибутива пропускается с `ready=false`, прогон зелёный, в реестр не пишется.
+- При недоступном hub.oscript.io `opm install` уходит на hub.oscript.ru после своего таймаута, около 15 минут. На это рассчитаны лимиты job'ов: `versions` — 45 минут, `build` — 90.
+
+## Секреты
+
+`ONEC_LOGIN`, `ONEC_PASSWORD` — учётная запись releases.1c.ru.

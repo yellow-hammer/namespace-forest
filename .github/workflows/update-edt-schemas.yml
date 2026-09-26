@@ -26,8 +26,8 @@ concurrency:
 
 jobs:
   versions:
-    runs-on: ubuntu-latest
-    timeout-minutes: 20
+    runs-on: ubuntu-24.04
+    timeout-minutes: 45
 
     permissions:
       contents: read
@@ -70,7 +70,7 @@ jobs:
               --app-filter "1C:Enterprise Development Tools" \
               --output-file /tmp/edt-versions.json
             # Версии вида 2026.1.x: берём все, старшие первыми
-            CANDIDATES=$(jq -r '[.. | strings | select(test("^[0-9]{4}[.][0-9]"))] | unique | reverse | .[]' /tmp/edt-versions.json)
+            CANDIDATES=$(jq -r '[.. | strings | select(test("^[0-9]{4}[.][0-9]"))] | unique | .[]' /tmp/edt-versions.json | sort -rV)
             echo "Доступно релизов EDT: $(echo $CANDIDATES | wc -w)"
           fi
 
@@ -98,7 +98,7 @@ jobs:
   build:
     needs: versions
     if: needs.versions.outputs.count != '0'
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     timeout-minutes: 90
 
     permissions:
@@ -209,7 +209,7 @@ jobs:
           INSTALLATION=$(dirname "$(dirname "$(dirname "$BUNDLES")")")
           # Чтение файлов мало: без +x на каталогах путь до jar не открывается
           sudo chmod -R a+rX "$INSTALLATION"
-          bash tools/edt-schemas/extract.sh "$SHORT" "$INSTALLATION"
+          bash scripts/edt/extract.sh "$SHORT" "$INSTALLATION"
           echo "ready=true" >> "$GITHUB_OUTPUT"
 
       - name: Передать схемы дальше
@@ -223,7 +223,7 @@ jobs:
   commit:
     needs: [versions, build]
     if: always() && needs.versions.outputs.count != '0'
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     timeout-minutes: 20
 
     permissions:

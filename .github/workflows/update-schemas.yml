@@ -78,14 +78,14 @@ jobs:
           elif [ "$REDUMP" = "true" ]; then
             PROCESSED=schemas/designer/processed-versions.json \
             OUT_FILE=/tmp/new-versions.txt \
-              oscript scripts/select-processed.os
+              oscript scripts/designer/select-processed.os
           else
             YARD_JSON=/tmp/yard-versions.json \
             PROCESSED=schemas/designer/processed-versions.json \
             MIN_VERSION="$MIN_VERSION" \
             LIMIT="$BATCH_SIZE" \
             OUT_FILE=/tmp/new-versions.txt \
-              oscript scripts/select-versions.os
+              oscript scripts/designer/select-versions.os
           fi
           VERSIONS=$(tr '\n' ' ' < /tmp/new-versions.txt)
           echo "Новые версии: $VERSIONS"
@@ -218,7 +218,7 @@ jobs:
               rm -rf "$OUTPUT_DIR" "$DISTR_DIR" "$DB_DIR" "$DATA_DIR"; continue
             fi
 
-            JSON_IN="$JSON_OUT" OUT_DIR="$OUTPUT_DIR" oscript scripts/json-to-files.os
+            JSON_IN="$JSON_OUT" OUT_DIR="$OUTPUT_DIR" oscript scripts/designer/json-to-files.os
             rm -f "$JSON_OUT"
 
             XSD_COUNT=$(find "$OUTPUT_DIR" -name '*.xsd' | wc -l)
@@ -261,7 +261,7 @@ jobs:
           if [ -s /tmp/processed-map.txt ]; then
             MAP_FILE=/tmp/processed-map.txt \
             PROCESSED=schemas/designer/processed-versions.json \
-              oscript scripts/update-processed.os
+              oscript scripts/designer/update-processed.os
             git add schemas/designer/processed-versions.json
             if ! git diff --cached --quiet; then
               git commit -m "chore: обновление processed-versions.json"

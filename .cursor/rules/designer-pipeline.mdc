@@ -1,0 +1,35 @@
+---
+description: Конвейер XSD конфигуратора — update-schemas.yml, scripts/designer, src
+globs: ".github/workflows/update-schemas.yml,scripts/designer/**,src/**,schemas/designer/**"
+alwaysApply: false
+---
+
+# Конвейер XSD конфигуратора
+
+`.github/workflows/update-schemas.yml` — cron по понедельникам и ручной запуск: `min_version`, `only_version`, `redump`, `batch_size`. Один job на `ubuntu-22.04`, лимит 340 минут.
+
+1. `yard releases list` — приложения `Технологическая платформа 8\.[35]$` с releases.1c.ru.
+2. `scripts/designer/select-versions.os` — версии не ниже `min_version` (8.3.17), не бета, без записи в реестре; по возрастанию, не больше `batch_size`. `only_version` — одна версия без этих проверок. `redump` — `select-processed.os`: старшая платформа каждого формата, все форматы за прогон.
+3. На версию: `yard releases get` (серверный DEB, иначе `setup-full*.run`) → установка → `ibcmd` создаёт файловую ИБ, `config import src/`, `config apply --force` → `ibsrv` с `src/publication.yaml` → `GET /hs/xsd/dump` → `json-to-files.os` раскладывает JSON по `*.xsd`.
+4. Каталог `schemas/designer/<X>`, `<X>` — максимум `FormatVersion` из `…-xcf-enums.xsd`. XSD копируются поверх каталога: файлы пакетов, выпавших из выгрузки, остаются. Коммит и push после каждой версии, если схемы изменились.
+5. В конце `update-processed.os` пишет `schemas/designer/processed-versions.json` отдельным коммитом.
+
+## Правила
+
+- Извлечение только через `ibcmd` + `ibsrv`. `DESIGNER`/`ENTERPRISE` в CI не использовать.
+- Версию формата не выводить из номера платформы.
+- `min_version` не ниже 8.3.17: на более ранних `config apply` на файловой ИБ не завершается, ibsrv не стартует.
+- Перед каждой установкой удалять `/opt/1cv8` и `/opt/1C`; `ibcmd`/`ibsrv` брать через `sort -V | tail -1`.
+- Фильтры дистрибутива — с якорем `$`. Сервер — `[CС]ервер`: на портале первая буква латинская.
+- `.run`: компоненты `server,client_full,v8_install_deps`, при отказе — `server,client_full`. Установщику нужен `libenchant1c2a`: в ubuntu-22.04 его нет, `.deb` берётся из `archive.ubuntu.com/ubuntu/pool/universe/e/enchant/`.
+- `ibcmd infobase` у части версий (8.3.20) требует `--data`: он добавляется, если `create` без него упал. `config apply` — с `--force`.
+- Долгие операции — под `timeout`, `curl` — с `-m`. Без ограничения пока `opm install`, `yard releases list`, `curl` ожидания ibsrv.
+- Шаг обработки — `set +e` и `exit 0`: упавшая версия пропускается, в реестр не пишется и выбирается в следующем прогоне. Прогон остаётся зелёным, сбои видны только как `ERROR`/`WARN` в логе.
+- Версия, которая не извлекается никогда, вносится в реестр вручную с истинным форматом: 8.3.23.1688 → 2.16, ibsrv этой сборки не отдаёт HTTP.
+- Реестр: ключ — версия платформы, значение — формат, `_comment` первым, порядок по номеру версии, без BOM. Писать через `update-processed.os`.
+- Изменился набор корневых пакетов в модуле `ВыгрузкаСхем` — ручной запуск с `redump`.
+- Схемы коммитятся как есть, без нормализации.
+
+## Секреты
+
+`ONEC_LOGIN`, `ONEC_PASSWORD` — учётная запись releases.1c.ru.

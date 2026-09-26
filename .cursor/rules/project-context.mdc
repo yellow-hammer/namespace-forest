@@ -1,27 +1,35 @@
 ---
-description: Контекст namespace-forest — XSD 1С и потребители
+description: Контекст namespace-forest — схемы исходников 1С и их потребители
 alwaysApply: true
 ---
 
 # Контекст проекта namespace-forest
 
-Репозиторий хранит **набор XSD** платформы **1С:Предприятие 8** (метаданные конфигурации в XML). Структура: **`schemas/<версия>/`** (например `2.10`) — в каждой полный комплект связанных `*.xsd`. Здесь **`<версия>` — это версия формата выгрузки конфигуратора** (max `FormatVersion` из `…-xcf-enums.xsd`), а не номер релиза платформы.
+Схемы форматов исходников **1С:Предприятие 8**, каталог на формат:
 
-Извлечение схем — см. `.cursor/rules/schema-extraction-pipeline.mdc`.
+- **`schemas/designer/<версия формата>/`** — XSD выгрузки конфигуратора, полный набор `*.xsd` в каждом каталоге. `<версия формата>` — максимум `FormatVersion` из `…-xcf-enums.xsd` (2.10…2.21), не номер релиза платформы. Цифры 8.1 / 8.2 / 8.3 в именах файлов — часть namespace.
+- **`schemas/edt/<версия EDT>/`** — метамодель 1С:EDT, `<версия EDT>` = `ГГГГ.N` (`2026.1`). `ecore/` — пакет EMF на файл, имя из nsURI; `xcore/<плагин>/` — исходные `.xcore` из jar плагинов.
+- **`schemas/<формат>/processed-versions.json`** — реестр обработанных версий.
 
-Цифры **8.1 / 8.2 / 8.3** в именах файлов — часть **target namespace** / разбиения схем, не обязательно уровни каталогов.
+Схемы извлекает CI: `.cursor/rules/designer-pipeline.mdc`, `.cursor/rules/edt-pipeline.mdc`. Правила для `schemas/` — `.cursor/rules/schemas.mdc`.
+
+## Каталоги
+
+- `scripts/designer/` — oscript-скрипты конвейера конфигуратора.
+- `scripts/edt/` — извлечение метамодели EDT: `extract.sh`, `ExtractEdtSchemas.java`.
+- `src/` — конфигурация 1С с HTTP-сервисом `ВыгрузкаСхем` для извлечения XSD, не часть схем.
 
 ## Потребители
 
-- Основной потребитель генерации JAXB — **`yellow-hammer/md-sparrow`** (`xsd.root` → этот репозиторий, задачи XJC, `xjb` в md-sparrow).
-- Изменения в схемах или в OASIS **catalog** нужно **согласовывать** с md-sparrow: `SchemaVersion`, привязки `xjb`, перегенерация классов и тесты.
+- **`yellow-hammer/md-sparrow`** — submodule `resources/namespace-forest`. XJC по `schemas/designer/<формат>`, bindings и catalog генерирует его сборка. Схемы EDT — из самой свежей `schemas/edt/<версия>/ecore`.
+- **`yellow-hammer/vscode-1c-platform-tools`** — через md-sparrow.
 
-## Лицензия и право
+## Лицензия
 
-- `*.xsd` — авторские права **ООО «1С-Софт»**; не путать с MIT. См. **`LICENSE`** в корне репозитория и условия вашей поставки.
+`*.xsd`, `*.ecore`, `*.xcore` — ООО «1С-Софт», не MIT: `LICENSE`.
 
 ## Соглашения
 
-- Коммиты: [Conventional Commits](https://www.conventionalcommits.org/), при принятом в команде стиле — сообщения на русском.
-- Не дублировать в комментариях к каждому файлу длинное описание всего репозитория — достаточно точечных пояснений к неочевидным правкам.
-- **Эволюция без самодельной совместимости**: см. `.cursor/rules/evolution-no-legacy.mdc`.
+- Коммиты — Conventional Commits на русском.
+- `git add` — точечно по путям.
+- Эволюция без самодельной совместимости: `.cursor/rules/evolution-no-legacy.mdc`.
