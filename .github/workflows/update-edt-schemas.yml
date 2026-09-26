@@ -178,18 +178,16 @@ jobs:
           if ! find "$DISTR_DIR" -name '1ce-installer-cli' | grep -q .; then
             ARCHIVE=$(find "$DISTR_DIR" -name '*.tar.gz' | head -1)
             if [ -z "$ARCHIVE" ]; then
-              echo "Дистрибутив $VERSION не получен: версия пропущена"
-              echo "ready=false" >> "$GITHUB_OUTPUT"
-              exit 0
+              echo "::error::Дистрибутив $VERSION не получен"
+              exit 1
             fi
             tar -xzf "$ARCHIVE" -C "$DISTR_DIR"
           fi
 
           INSTALLER=$(find "$DISTR_DIR" -name '1ce-installer-cli' | head -1)
           if [ -z "$INSTALLER" ]; then
-            echo "В дистрибутиве $VERSION нет 1ce-installer-cli: версия пропущена"
-            echo "ready=false" >> "$GITHUB_OUTPUT"
-            exit 0
+            echo "::error::В дистрибутиве $VERSION нет 1ce-installer-cli"
+            exit 1
           fi
           (cd "$(dirname "$INSTALLER")" && chmod -R +x . && sudo ./1ce-installer-cli install all \
             --ignore-hardware-checks --ignore-signature-warnings)
@@ -199,21 +197,18 @@ jobs:
           # у него свой bundles.info на три плагина
           BUNDLES=$(sudo find /opt/1C -path "*1c-edt-$SHORT*/configuration/org.eclipse.equinox.simpleconfigurator/bundles.info" 2>/dev/null | head -1)
           if [ -z "$BUNDLES" ]; then
-            echo "EDT $SHORT не установилась: версия пропущена"
+            echo "::error::EDT $VERSION не установилась"
             echo "Что стоит в /opt/1C:"
             sudo ls /opt/1C/1CE/components 2>/dev/null || true
-            echo "ready=false" >> "$GITHUB_OUTPUT"
-            exit 0
+            exit 1
           fi
 
           INSTALLATION=$(dirname "$(dirname "$(dirname "$BUNDLES")")")
           # Чтение файлов мало: без +x на каталогах путь до jar не открывается
           sudo chmod -R a+rX "$INSTALLATION"
           bash scripts/edt/extract.sh "$SHORT" "$INSTALLATION"
-          echo "ready=true" >> "$GITHUB_OUTPUT"
 
       - name: Передать схемы дальше
-        if: steps.extract.outputs.ready == 'true'
         uses: actions/upload-artifact@v4
         with:
           name: edt-schemas-${{ matrix.version }}
