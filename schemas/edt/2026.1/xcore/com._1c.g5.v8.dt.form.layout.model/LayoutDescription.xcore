@@ -1346,7 +1346,8 @@ enum HippoLayouterCategory
     FABCommandBar as "FABCommandBar" = 65, // eHLCFABCommandBar // Командная панель для float action button в интерфейсе Версия85.
     CollapsibleGroupCollapseButton as "CollapsibleGroupCollapseButton" = 66, // eHLCCollapsibleGroupCollapseButton // Кнопка "Свернуть" внизу свертываемой группы в интерфейсе "Версия 8.5", когда родительская группа горизонтальная.
     EditInCommandBar as "EditInCommandBar" = 67 // eHLCEditInCommandBar // Поле ввода внутри командной панели.
-    Last = 68
+    CommandBarInGrid as "CommandBarInGrid" = 68 // eHLCCommandBarInGrid // Командная панель в таблице.
+    Last = 69
 }
 
 enum ColumnMode

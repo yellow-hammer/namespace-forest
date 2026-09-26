@@ -1989,7 +1989,8 @@
     <eLiterals name="FABCommandBar" value="65"/>
     <eLiterals name="CollapsibleGroupCollapseButton" value="66"/>
     <eLiterals name="EditInCommandBar" value="67"/>
-    <eLiterals name="Last" value="68"/>
+    <eLiterals name="CommandBarInGrid" value="68"/>
+    <eLiterals name="Last" value="69"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EEnum" name="ColumnMode">
     <eLiterals name="TextField" literal="Text"/>
