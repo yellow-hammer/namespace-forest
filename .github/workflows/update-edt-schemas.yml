@@ -74,15 +74,15 @@ jobs:
             echo "Доступно релизов EDT: $(echo $CANDIDATES | wc -w)"
           fi
 
-          # Каталог схем называется по релизу EDT: 2026.1.3+7 хранится как 2026.1.
-          # На каталог хватает старшего релиза, поэтому дубли отбрасываем.
+          # Каталог схем называется по линейке EDT: 2026.1.3 хранится как 2026.1.
+          # Линейку собираем из старшего релиза, если в реестре записан другой.
           TODO=""
           SEEN=""
           for VERSION in $CANDIDATES; do
             SHORT=$(echo "$VERSION" | cut -d. -f1,2)
             case " $SEEN " in *" $SHORT "*) continue;; esac
             SEEN="$SEEN $SHORT"
-            if [ "$REDUMP" != "true" ] && jq -e --arg v "$SHORT" 'has($v)' schemas/edt/processed-versions.json > /dev/null; then
+            if [ "$REDUMP" != "true" ] && [ "$(jq -r --arg v "$SHORT" '.[$v] // ""' schemas/edt/processed-versions.json)" = "$VERSION" ]; then
               continue
             fi
             TODO="$TODO $VERSION"
@@ -216,7 +216,7 @@ jobs:
         if: steps.extract.outputs.ready == 'true'
         uses: actions/upload-artifact@v4
         with:
-          name: edt-schemas-${{ steps.extract.outputs.short }}
+          name: edt-schemas-${{ matrix.version }}
           path: schemas/edt/${{ steps.extract.outputs.short }}
           retention-days: 1
 
@@ -243,18 +243,18 @@ jobs:
         id: collect
         run: |
           set -eo pipefail
-          TODAY=$(date -u +%Y-%m-%d)
           DONE=""
 
           for DIR in /tmp/edt-schemas/edt-schemas-*; do
             [ -d "$DIR" ] || continue
-            SHORT=$(basename "$DIR" | sed 's/^edt-schemas-//')
+            VERSION=$(basename "$DIR" | sed 's/^edt-schemas-//')
+            SHORT=$(echo "$VERSION" | cut -d. -f1,2)
             rm -rf "schemas/edt/$SHORT"
             mkdir -p "schemas/edt/$SHORT"
             cp -r "$DIR/." "schemas/edt/$SHORT/"
-            jq --arg v "$SHORT" --arg d "$TODAY" '. + {($v): $d}' schemas/edt/processed-versions.json > /tmp/processed.json
+            jq --arg v "$SHORT" --arg r "$VERSION" '. + {($v): $r}' schemas/edt/processed-versions.json > /tmp/processed.json
             mv /tmp/processed.json schemas/edt/processed-versions.json
-            DONE="$DONE $SHORT"
+            DONE="$DONE $VERSION"
           done
 
           echo "Собрано версий: ${DONE:-нет}"
