@@ -63,7 +63,7 @@ Workflow [`.github/workflows/update-schemas.yml`](.github/workflows/update-schem
 
 ## Для разработчиков и ИИ
 
-Правила Cursor: **`.cursor/rules/*.mdc`** (контекст XSD, связь с md-sparrow).
+Правила Cursor: **`.cursor/rules/*.mdc`**.
 
 ## Автор
 

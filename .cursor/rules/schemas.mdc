@@ -1,0 +1,12 @@
+---
+description: Правки файлов в schemas/
+globs: "schemas/**"
+alwaysApply: false
+---
+
+# Схемы
+
+- Файлы в `schemas/` пишет CI. Вручную не править, не переформатировать, префиксы `nsN` не нормализовывать.
+- Ручная правка допустима только в `processed-versions.json`: запись для версии, которая не извлекается.
+- XSD одной версии импортируют друг друга по namespace без `schemaLocation`; `.ecore` ссылаются друг на друга по имени файла или по nsURI.
+- md-sparrow завязан на каталоги `schemas/designer/<X.Y>` и `schemas/edt/<ГГГГ.N>/ecore`, имена файлов и nsURI. Из EDT он берёт только старший каталог и в нём схемы, достижимые от `g5.1c.ru.v8.dt.metadata.mdclass`, `…mdclass.extension`, `…form`, `…distribution.model`. Изменения раскладки — вместе с md-sparrow; проверка — `./gradlew build` в md-sparrow с этой веткой в `resources/namespace-forest`.

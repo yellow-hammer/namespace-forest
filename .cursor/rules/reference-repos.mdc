@@ -1,13 +1,13 @@
 ---
-description: Связанные репозитории для namespace-forest
+description: Связанные репозитории и инструменты namespace-forest
 alwaysApply: true
 ---
 
 # Связанные репозитории
 
-- **`yellow-hammer/md-sparrow`** — основной потребитель: XJC из этого леса схем, `SchemaVersion`, валидация и запись Designer XML.
-- При необходимости общих правок «схема + Java» — планировать **два PR** или один монорепозиторий workspace с двумя корнями, чтобы не оставить md-sparrow в несобираемом состоянии.
-
-Документация XSD/XML в контексте 1С — официальные материалы 1С и внутренняя документация команды; этот репозиторий не дублирует учебники по платформе.
+- **`yellow-hammer/md-sparrow`** — потребитель схем. Правка «схема + Java» — два PR, md-sparrow не оставлять несобираемым.
+- **`yellow-hammer/vscode-1c-platform-tools`** — метаданные через md-sparrow.
+- **`ArKuznetsov/yard`** — список и загрузка релизов releases.1c.ru.
+- **`oscript-library/opm`**, **`otymko/setup-onescript`** — OneScript и пакеты в CI.
 
 **Эволюция:** `.cursor/rules/evolution-no-legacy.mdc`.
