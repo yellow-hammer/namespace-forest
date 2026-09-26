@@ -5,7 +5,7 @@
 # несколько версий EDT, и смешивать их нельзя.
 #
 # Использование:
-#   tools/edt-schemas/extract.sh <версия> <каталог установки EDT>
+#   scripts/edt/extract.sh <версия> <каталог установки EDT>
 #
 # Каталог установки - тот, где лежит configuration/org.eclipse.equinox.simpleconfigurator.
 set -euo pipefail
@@ -30,7 +30,7 @@ CLASSES="$(mktemp -d)"
 STAGE="$(mktemp -d)"
 trap 'rm -rf "$CLASSES" "$STAGE"' EXIT
 
-javac -d "$CLASSES" "$ROOT/tools/edt-schemas/ExtractEdtSchemas.java"
+javac -d "$CLASSES" "$ROOT/scripts/edt/ExtractEdtSchemas.java"
 
 # Извлекаем во временный каталог: неудачная попытка не должна стирать схемы,
 # которые уже лежат в репозитории

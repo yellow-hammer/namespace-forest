@@ -25,10 +25,10 @@ schemas/
 
 Как схемы добываются: файлы `.xcore` лежат внутри jar плагинов EDT в каталоге `model/`, а рядом в `plugin.xml` каждый пакет объявлен тройкой «nsURI, класс пакета, xcore». Отсюда и берётся `.ecore`: класс загружается, у него читается `eINSTANCE` и сохраняется как XMI. Xcore-тулинг для этого не нужен.
 
-Извлечение — [`tools/edt-schemas/extract.sh`](tools/edt-schemas/extract.sh):
+Извлечение — [`scripts/edt/extract.sh`](scripts/edt/extract.sh):
 
 ```sh
-tools/edt-schemas/extract.sh 2026.1 "$LOCALAPPDATA/1C/1cedtstart/installations/1C_EDT 2026.1/1cedt"
+scripts/edt/extract.sh 2026.1 "$LOCALAPPDATA/1C/1cedtstart/installations/1C_EDT 2026.1/1cedt"
 ```
 
 Состав плагинов берётся из `bundles.info` конкретной установки: в общем пуле p2 лежат сразу несколько версий EDT, и смешивать их нельзя. Обработанные версии перечислены в [`schemas/edt/processed-versions.json`](schemas/edt/processed-versions.json).

@@ -209,7 +209,7 @@ jobs:
           INSTALLATION=$(dirname "$(dirname "$(dirname "$BUNDLES")")")
           # Чтение файлов мало: без +x на каталогах путь до jar не открывается
           sudo chmod -R a+rX "$INSTALLATION"
-          bash tools/edt-schemas/extract.sh "$SHORT" "$INSTALLATION"
+          bash scripts/edt/extract.sh "$SHORT" "$INSTALLATION"
           echo "ready=true" >> "$GITHUB_OUTPUT"
 
       - name: Передать схемы дальше
