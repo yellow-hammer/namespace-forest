@@ -72,6 +72,10 @@ jobs:
             # Версии вида 2026.1.x: берём все, старшие первыми
             CANDIDATES=$(jq -r '[.. | strings | select(test("^[0-9]{4}[.][0-9]"))] | unique | .[]' /tmp/edt-versions.json | sort -rV)
             echo "Доступно релизов EDT: $(echo $CANDIDATES | wc -w)"
+            if [ -z "$CANDIDATES" ]; then
+              echo "::error::В списке релизов нет версий EDT"
+              exit 1
+            fi
           fi
 
           # Каталог схем называется по линейке EDT: 2026.1.3 хранится как 2026.1.
