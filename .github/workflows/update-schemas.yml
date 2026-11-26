@@ -57,6 +57,7 @@ jobs:
           echo "YARD_OS=$YARD_OS" >> "$GITHUB_ENV"
 
       - name: Получить список версий с releases.1c.ru
+        if: ${{ !inputs.only_version && !inputs.redump }}
         env:
           YARD_RELEASES_USER: ${{ secrets.ONEC_LOGIN }}
           YARD_RELEASES_PWD: ${{ secrets.ONEC_PASSWORD }}
